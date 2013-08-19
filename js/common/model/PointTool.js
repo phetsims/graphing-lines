@@ -1,0 +1,74 @@
+// Copyright 2002-2013, University of Colorado
+
+/**
+ * Model of the point tool. Highlights when it is placed on one of the lines.
+ *
+ * @author Chris Malley (cmalley@pixelzoom.com)
+ */
+define( function( require ) {
+
+  /**
+   * @param {Vector} location location of the tool, in model coordinate frame
+   * @param {String} orientation, 'up' or 'down'
+   * @param {ObservableArray} lines lines that the tool might intersect, provided in the order that they would be rendered
+   * @constructor
+   */
+  function PointTool( location, orientation, lines ) {
+
+    var thisTool = this;
+
+    thisTool.location = new Property( location );
+    thisTool.orientation = orientation;
+    thisTool.onLine = new Property( null ); // line that the tool is on, null if it's not on a line
+
+    // Update when the point tool moves or the lines change.
+    thisTool.location.link( thisTool._updateOnLine() );
+    lines.addListener( thisTool._updateOnLine() );
+  }
+
+  PointTool.prototype = {
+
+    reset: function() {
+      this.location.reset();
+      this.onLine.reset();
+    },
+
+    /**
+     * Determines if the point tool is on the specified line.
+     * @param {Line} line
+     * @returns {boolean}
+     */
+    isOnLine: function( line ) {
+      if ( line.run === 0 && this.location.get().x === line.x1 ) {
+        // slope is undefined, tool is on the line
+        return true;
+      }
+      else if ( line.rise === 0 && this.location.get().y === line.y1 ) {
+        // slope is zero, tool is on the line
+        return true;
+      }
+      else if ( line.run !== 0 && line.rise !== 0 && this.location.get().y === line.solveY( this.location.get().x ) ) {
+        // not one of the 2 special cases above, and the tool is on the line
+        return true;
+      }
+      return false;
+    },
+
+    // Determine which line (if any) the tool is placed on.
+    _updateOnLine: function() {
+      var line;
+      // Lines are in rendering order, reverse iterate so we get the one that's on top.
+      for ( var i = lines.size() - 1; i >= 0; i-- ) {
+        line = lines.get( i );
+        if ( this.isOnLine( line ) ) {
+          this.onLine.set( line );
+          return;
+        }
+      }
+      this.onLine.set( null );
+    }
+  };
+
+  return PointTool;
+} );
+

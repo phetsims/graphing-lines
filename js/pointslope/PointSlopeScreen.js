@@ -20,7 +20,7 @@ define( function( require ) {
   function PointSlopeScreen() {
 
     this.name = GLStrings[ "tab.pointSlope" ];
-    this.icon = new Image( GLImages.getImage( 'PointSlope-icon.jpg' ) );
+    this.icon = new Image( GLImages.getImage( 'PointSlope-icon.png' ) );
     this.backgroundColor = 'white';
 
     var mvt = ModelViewTransform2.createIdentity();

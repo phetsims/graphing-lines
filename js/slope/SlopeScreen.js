@@ -20,7 +20,7 @@ define( function( require ) {
   function SlopeScreen() {
 
     this.name = GLStrings[ "tab.slope" ];
-    this.icon = new Image( GLImages.getImage( 'Slope-icon.jpg' ) );
+    this.icon = new Image( GLImages.getImage( 'Slope-icon.png' ) );
     this.backgroundColor = 'white';
 
     var mvt = ModelViewTransform2.createIdentity();

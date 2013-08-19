@@ -20,7 +20,7 @@ define( function( require ) {
   function SlopeInterceptScreen() {
 
     this.name = GLStrings[ "tab.slopeIntercept" ];
-    this.icon = new Image( GLImages.getImage( 'SlopeIntercept-icon.jpg' ) );
+    this.icon = new Image( GLImages.getImage( 'SlopeIntercept-icon.png' ) );
     this.backgroundColor = 'white';
 
     var mvt = ModelViewTransform2.createIdentity();

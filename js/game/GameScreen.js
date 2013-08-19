@@ -20,7 +20,7 @@ define( function( require ) {
   function GameScreen() {
 
     this.name = GLStrings[ "tab.game" ];
-    this.icon = new Image( GLImages.getImage( 'Game-icon.jpg' ) );
+    this.icon = new Image( GLImages.getImage( 'Game-icon.png' ) );
     this.backgroundColor = 'white';
 
     var mvt = ModelViewTransform2.createIdentity();

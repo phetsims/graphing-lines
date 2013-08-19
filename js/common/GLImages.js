@@ -14,14 +14,17 @@ define( function() {
   return {
     imageNames: [
       'Check-Mark-u2713.png',
+      'Game-icon.png',
       'Heavy-Ballot-X-u2718.png',
       'point_tool_body.png',
       'point_tool_tip.png',
+      'PointSlope-icon.png',
       'reset_button_disabled.png',
       'reset_button_down.png',
       'reset_button_over.png',
       'reset_button_up.png',
-      'Slope-icon.png'
+      'Slope-icon.png',
+      'SlopeIntercept-icon.png'
     ]
   };
 } );

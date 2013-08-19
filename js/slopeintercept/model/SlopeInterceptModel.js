@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Model container for the 'Slope' screen.
+ * Model container for the 'Slope-Intercept' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,11 +10,11 @@ define( function( require ) {
 
   // imports
 
-  function SlopeModel() {
-    //TODO
+  function SlopeInterceptModel() {
+     //TODO
   }
 
-  SlopeModel.prototype = {
+  SlopeInterceptModel.prototype = {
 
     // Resets all model elements
     reset: function() {
@@ -30,5 +30,5 @@ define( function( require ) {
     }
   };
 
-  return SlopeModel;
+  return SlopeInterceptModel;
 } );

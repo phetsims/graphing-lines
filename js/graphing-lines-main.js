@@ -5,8 +5,16 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-require( [ 'JOIST/SimLauncher', 'JOIST/Sim', 'slope/SlopeScreen', 'common/GLStrings', 'common/GLImages' ],
-  function( SimLauncher, Sim, SlopeScreen, GLStrings, GLImages ) {
+require( [
+  'JOIST/SimLauncher',
+  'JOIST/Sim',
+  'slope/SlopeScreen',
+  'slopeIntercept/SlopeInterceptScreen',
+  'pointSlope/PointSlopeScreen',
+  'game/GameScreen',
+  'common/GLStrings',
+  'common/GLImages' ],
+  function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, GameScreen, GLStrings, GLImages ) {
     'use strict';
 
     //TODO i18n?
@@ -25,7 +33,9 @@ require( [ 'JOIST/SimLauncher', 'JOIST/Sim', 'slope/SlopeScreen', 'common/GLStri
     }
 
     SimLauncher.launch( GLImages, function() {
-      var sim = new Sim( GLStrings[ "tab.slope" ], [ new SlopeScreen() ], simOptions );
+      var sim = new Sim( GLStrings[ "tab.slope" ], [
+        new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new GameScreen() ],
+        simOptions );
       sim.start();
     } );
   } );

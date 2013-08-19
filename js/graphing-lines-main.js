@@ -33,7 +33,7 @@ require( [
     }
 
     SimLauncher.launch( GLImages, function() {
-      var sim = new Sim( GLStrings[ "tab.slope" ], [
+      var sim = new Sim( GLStrings[ "graphing-lines.name" ], [
         new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new GameScreen() ],
         simOptions );
       sim.start();

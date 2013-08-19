@@ -1,0 +1,3 @@
+8/19/13 populated skeleton for "Slope" screen
+8/19/13 set up framework (html, config, main, strings, images,...)
+8/19/13 created GitHub repo

@@ -1,2 +1,13 @@
 TODO list for graphing-lines (HTML port)
 
+DESIGN
+
+HIGH
+
+MEDIUM
+- consider making Line mutable, to reduce affects of garbage collection
+
+LOW
+
+MIGRATE TO COMMON
+

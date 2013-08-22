@@ -13,7 +13,7 @@ define( function( require ) {
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Color = require( 'SCENERY/util/Color' );
   var Fraction = require( 'common/model/Fraction' );
-  var LGColors = require( 'common/LGColors' );
+  var GLColors = require( 'common/GLColors' );
   var Util = require( 'DOT/Util' );
 
   // Euclid's algorithm for computing the greatest common divisor (GCD) of two integers
@@ -28,7 +28,7 @@ define( function( require ) {
   };
 
   function Line( x1, y1, x2, y2, color ) {
-    assert && assert( x1 != x2 || y1 != y2 ); // 2 different points are required
+    assert && assert( x1 !== x2 || y1 !== y2 ); // 2 different points are required
     this.x1 = x1;
     this.y1 = y1;
     this.x2 = x2;
@@ -52,12 +52,12 @@ define( function( require ) {
 
     // Returns true if 2 points on the specified line are also on this line.
     same: function( line ) {
-      return ( line != null ) && this.onLine( line.x1, line.y1 ) && this.onLine( line.x2, line.y2 );
+      return ( line !== null ) && this.onLine( line.x1, line.y1 ) && this.onLine( line.x2, line.y2 );
     },
 
     // Returns true if the slope is undefined.
     undefinedSlope: function() {
-      return run == 0;
+      return this.run === 0;
     },
 
     // Gets the slope. Returns NaN if slope is undefined.
@@ -89,7 +89,7 @@ define( function( require ) {
      * Returns NaN if the solution is not unique (horizontal line) or the slope is undefined (vertical line).
      */
     solveX: function( y ) {
-      if ( this.rise == 0 || this.run == 0 ) {
+      if ( this.rise === 0 || this.run === 0 ) {
         return Number.NaN;
       }
       else {
@@ -113,7 +113,7 @@ define( function( require ) {
         return ( this.run / getGreatestCommonDivisor( Math.floor( this.rise ), Math.floor( this.run ) ) );
       }
       else {
-        return run;
+        return this.run;
       }
     },
 
@@ -122,19 +122,19 @@ define( function( require ) {
      * so slope can be simplified only if the rise and run meet that criteria.
      */
     slopeIsSimplifiable: function() {
-      return ( this.rise != 0 ) && ( this.run != 0 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run );
+      return ( this.rise !== 0 ) && ( this.run !== 0 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run );
     },
 
     // Returns true if point (x,y) is on this line.
     onLine: function( x, y ) {
-      if ( this.rise == 0 ) {
-        return ( y == this.y1 );
+      if ( this.rise === 0 ) {
+        return ( y === this.y1 );
       }
-      else if ( this.run == 0 ) {
-        return ( x == this.x1 );
+      else if ( this.run === 0 ) {
+        return ( x === this.x1 );
       }
       else {
-        return ( x == this.solveX( y ) );
+        return ( x === this.solveX( y ) );
       }
     },
 
@@ -144,19 +144,19 @@ define( function( require ) {
      */
     getYIntercept: function() {
       assert && assert( Util.isInteger( this.x1 ) && Util.isInteger( this.y1 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run ) );
-      if ( this.rise == 0 || this.run == 0 ) {
-        return new Fraction( Math.floor( this.y1 ), 1 ); // not technically correct for run==0, but gives the desired result in slope-intercept equations
+      if ( this.rise === 0 || this.run === 0 ) {
+        return new Fraction( Math.floor( this.y1 ), 1 ); // not technically correct for run===0, but gives the desired result in slope-intercept equations
       }
       var numerator = Math.floor( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
-      var denominator = Math.floor( run );
+      var denominator = Math.floor( this.run );
       var gcd = getGreatestCommonDivisor( numerator, denominator );
       return new Fraction( numerator / gcd, denominator / gcd );
     }
   };
 
   // standard lines
-  Line.Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, LGColors.Y_EQUALS_X );  // y = x
-  Line.Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, LGColors.Y_EQUALS_NEGATIVE_X ); // y = -x
+  Line.Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.Y_EQUALS_X );  // y = x
+  Line.Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.Y_EQUALS_NEGATIVE_X ); // y = -x
 
   /*
    * Creates a line by describing it in point-slope form: (y - y1) = m(x - x1)

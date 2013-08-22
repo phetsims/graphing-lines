@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Model container for the 'Slope' screen.
+ * Model for the 'Slope' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,26 +9,26 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var GLColors = require( 'common/GLColors' );
+  var Line = require( 'common/model/Line' );
+  var LineFormsModel = require( 'common/model/LineFormsModel' );
+  var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
 
   function SlopeModel() {
-    //TODO
+    LineFormsModel.call( this, new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
+
+    // ranges
+    this.x1Range = new Property( new Range( this.graph.xRange ) );
+    this.y1Range = new Property( new Range( this.graph.yRange ) );
+    this.x2Range = new Property( new Range( this.graph.xRange ) );
+    this.y2Range = new Property( new Range( this.graph.yRange ) );
+
+    //NOTE: Unlike slope-intercept and point-slope, ranges do not need to be dynamically adjusted, because the points are free ranging.
   }
 
-  SlopeModel.prototype = {
-
-    // Resets all model elements
-    reset: function() {
-      //TODO
-    },
-
-    /*
-     * Moves time forward by the specified amount.
-     * @param deltaSeconds clock time change, in seconds.
-     */
-    step: function( deltaSeconds ) {
-      //TODO
-    }
-  };
-
-  return SlopeModel;
+  return( LineFormsModel, SlopeModel, {
+    reset: function() { /* do nothing */ }, //TODO needed?
+    step: function( deltaSeconds ) { /* do nothing */ } //TODO needed?
+  });
 } );

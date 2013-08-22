@@ -33,7 +33,7 @@ define( function( require ) {
      * @returns {Boolean}
      */
     contains: function( point ) {
-      return return this.xRange.contains( point.x ) && this.yRange.contains( point.y );
+      return this.xRange.contains( point.x ) && this.yRange.contains( point.y );
     }
   };
 

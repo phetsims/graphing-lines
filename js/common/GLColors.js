@@ -35,5 +35,5 @@ define( function( require ) {
     STATIC_EQUATION_ELEMENT: Color.BLACK,
     EQUATION_CONTROL_PANEL: new Color( 238, 238, 238 ),
     GRAPH_CONTROL_PANEL: new Color( 238, 238, 238 )
-  }
+  };
 } );

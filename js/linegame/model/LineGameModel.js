@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Model container for the 'Line Game' screen.
+ * Model for the 'Line Game' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

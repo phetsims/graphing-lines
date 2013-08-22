@@ -19,7 +19,7 @@ define( function( require ) {
 
   function GameScreen() {
 
-    this.name = GLStrings[ "tab.game" ];
+    this.name = GLStrings[ "tab.lineGame" ];
     this.icon = new Image( GLImages.getImage( 'Game-icon.png' ) );
     this.backgroundColor = 'white';
 

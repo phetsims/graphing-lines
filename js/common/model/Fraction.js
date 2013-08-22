@@ -5,8 +5,11 @@
  *
  * @author Chris Malley (cmalley@pixelzoom.com)
  */
-define( function() {
+define( function( require ) {
   'use strict';
+
+  // imports
+  var Util = require( 'DOT/Util' );
 
   /**
    * @param {Number} numerator
@@ -25,7 +28,7 @@ define( function() {
     },
 
     isInteger: function() {
-      return Math.floor( this.valueOf() ) == this.valueOf();
+      return Util.isInteger( this.valueOf() );
     },
 
     toString: function() {

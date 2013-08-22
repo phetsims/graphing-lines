@@ -3,6 +3,7 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
+- fix startup exception in PointTool involving ObservableArray
 
 MEDIUM
 - consider making Line mutable, to reduce affects of garbage collection

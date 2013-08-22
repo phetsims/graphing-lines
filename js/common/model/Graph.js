@@ -20,6 +20,7 @@ define( function( require ) {
     this.xRange = xRange;
     this.yRange = yRange;
     this.lines = new ObservableArray();
+    console.log( "this.lines.length = " + this.lines.length );//XXX
   }
 
   Graph.prototype = {

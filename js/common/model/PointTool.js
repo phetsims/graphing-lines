@@ -6,14 +6,21 @@
  * @author Chris Malley (cmalley@pixelzoom.com)
  */
 define( function( require ) {
+  'use strict';
+
+  // imports
+  var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @param {Vector} location location of the tool, in model coordinate frame
    * @param {String} orientation, 'up' or 'down'
-   * @param {ObservableArray} lines lines that the tool might intersect, provided in the order that they would be rendered
+   * @param {ObservableArray} lines Lines that the tool might intersect, provided in the order that they would be rendered
    * @constructor
    */
   function PointTool( location, orientation, lines ) {
+
+    assert && assert( orientation === 'up' || orientation === 'down' );
 
     var thisTool = this;
 
@@ -22,8 +29,20 @@ define( function( require ) {
     thisTool.onLine = new Property( null ); // line that the tool is on, null if it's not on a line
 
     // Update when the point tool moves or the lines change.
-    thisTool.location.link( thisTool._updateOnLine() );
-    lines.addListener( thisTool._updateOnLine() );
+    var updateOnLine = function() {
+      var line;
+      // Lines are in rendering order, reverse iterate so we get the one that's on top.
+      for ( var i = thisTool.lines.length - 1; i >= 0; i-- ) {
+        line = thisTool.lines.get( i );
+        if ( thisTool.isOnLine( line ) ) {
+          thisTool.onLine.set( line );
+          return;
+        }
+      }
+      thisTool.onLine.set( null );
+    };
+    thisTool.location.link( updateOnLine() );
+    lines.addListener( updateOnLine() );
   }
 
   PointTool.prototype = {
@@ -52,20 +71,6 @@ define( function( require ) {
         return true;
       }
       return false;
-    },
-
-    // Determine which line (if any) the tool is placed on.
-    _updateOnLine: function() {
-      var line;
-      // Lines are in rendering order, reverse iterate so we get the one that's on top.
-      for ( var i = lines.size() - 1; i >= 0; i-- ) {
-        line = lines.get( i );
-        if ( this.isOnLine( line ) ) {
-          this.onLine.set( line );
-          return;
-        }
-      }
-      this.onLine.set( null );
     }
   };
 

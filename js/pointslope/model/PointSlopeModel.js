@@ -15,7 +15,6 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
 
-
   /**
    * @param {Line} interactiveLine
    * @param {PointSlopeParameterRange} parameterRange optional
@@ -45,6 +44,6 @@ define( function( require ) {
   }
 
   return inherit( LineFormsModel, PointSlopeModel, {
-    step: function( deltaSeconds ) { /* do nothing */ } //TODO needed?
+    step: function( deltaSeconds ) { /* do nothing */ }
   });
 } );

@@ -30,6 +30,6 @@ define( function( require ) {
   }
 
   return inherit( LineFormsModel, SlopeModel, {
-    step: function( deltaSeconds ) { /* do nothing */ } //TODO needed?
+    step: function( deltaSeconds ) { /* do nothing */ }
   });
 } );

@@ -10,6 +10,7 @@ MEDIUM
 - convert models to PropertySet and axon style
 
 LOW
+- change 'tab.*' string keys to 'screen.*'
 
 MIGRATE TO COMMON
 

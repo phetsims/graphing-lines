@@ -41,8 +41,8 @@ define( function( require ) {
       }
       thisTool.onLine.set( null );
     };
-    thisTool.location.link( updateOnLine() );
-    lines.addListener( updateOnLine() );
+    thisTool.location.link( updateOnLine );
+    lines.addListener( updateOnLine );
   }
 
   PointTool.prototype = {

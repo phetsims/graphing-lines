@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * The 'Slope' screen. Conforms to the contract specified in joist/Tab
+ * The 'Slope' screen. Conforms to the contract specified in joist/Screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

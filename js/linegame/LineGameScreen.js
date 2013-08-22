@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * The 'Game' screen. Conforms to the contract specified in joist/Tab
+ * The 'Game' screen. Conforms to the contract specified in joist/Screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

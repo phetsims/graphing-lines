@@ -3,7 +3,7 @@
 /**
  * Data structure for a fraction (possibly improper).
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

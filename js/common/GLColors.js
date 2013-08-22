@@ -3,7 +3,7 @@
 /**
  * Colors used throughout this project.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -17,14 +17,14 @@ define( function( require ) {
     SAVED_LINE_NORMAL: new Color( 160, 160, 160 ),
     SAVED_LINE_HIGHLIGHT: new Color( 0, 0, 255 ),
     Y_EQUALS_X: new Color( 16, 178, 15 ),
-    Y_EQUALS_NEGATIVE_X: this.Y_EQUALS_X,
+    Y_EQUALS_NEGATIVE_X: new Color( 16, 178, 15 ),
     SLOPE: new Color( 117, 217, 255 ),
     POINT_X1_Y1: new Color( 200, 0, 200 ),
     POINT_X2_Y2: new Color( 210, 255, 0 ),
-    POINT_1: this.POINT_X1_Y1,
-    POINT_2: this.POINT_1,
-    POINT_3: this.POINT_1,
-    INTERCEPT: this.POINT_X1_Y1,
+    POINT_1: new Color( 200, 0, 200 ),
+    POINT_2: new Color( 200, 0, 200 ),
+    POINT_3: new Color( 200, 0, 200 ),
+    INTERCEPT: new Color( 200, 0, 200 ),
     SAVE_LINE_BUTTON: Color.WHITE,
     ERASE_LINES_BUTTON: Color.WHITE,
     SPINNER_BUTTON_DISABLED: new Color( 190, 190, 190 ),

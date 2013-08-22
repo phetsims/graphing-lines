@@ -4,7 +4,7 @@
  * An immutable line, described by 2 points, (x1,y1) and (x2,y2).
  * Slope components (rise and run) are signed relative to (x1,y1).
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -174,4 +174,5 @@ define( function( require ) {
     return Line.createPointSlope( 0, yIntercept, rise, run, color );
   };
 
+  return Line;
 } );

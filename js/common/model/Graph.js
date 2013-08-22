@@ -3,7 +3,7 @@
 /**
  * Model of a simple 2D graph.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -19,7 +19,9 @@ define( function( require ) {
   function Graph( xRange, yRange ) {
     this.xRange = xRange;
     this.yRange = yRange;
+    debugger;
     this.lines = new ObservableArray();
+    debugger;
   }
 
   Graph.prototype = {

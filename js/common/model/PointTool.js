@@ -3,7 +3,7 @@
 /**
  * Model of the point tool. Highlights when it is placed on one of the lines.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -20,6 +20,7 @@ define( function( require ) {
    */
   function PointTool( location, orientation, lines ) {
 
+    debugger;
     assert && assert( orientation === 'up' || orientation === 'down' );
 
     var thisTool = this;
@@ -32,8 +33,8 @@ define( function( require ) {
     var updateOnLine = function() {
       var line;
       // Lines are in rendering order, reverse iterate so we get the one that's on top.
-      for ( var i = thisTool.lines.length - 1; i >= 0; i-- ) {
-        line = thisTool.lines.get( i );
+      for ( var i = lines.length - 1; i >= 0; i-- ) {
+        line = lines.get( i );
         if ( thisTool.isOnLine( line ) ) {
           thisTool.onLine.set( line );
           return;

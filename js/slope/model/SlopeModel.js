@@ -10,12 +10,14 @@ define( function( require ) {
 
   // imports
   var GLColors = require( 'common/GLColors' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'common/model/Line' );
   var LineFormsModel = require( 'common/model/LineFormsModel' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
 
   function SlopeModel() {
+
     LineFormsModel.call( this, new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
 
     // ranges
@@ -27,8 +29,7 @@ define( function( require ) {
     //NOTE: Unlike slope-intercept and point-slope, ranges do not need to be dynamically adjusted, because the points are free ranging.
   }
 
-  return( LineFormsModel, SlopeModel, {
-    reset: function() { /* do nothing */ }, //TODO needed?
+  return inherit( LineFormsModel, SlopeModel, {
     step: function( deltaSeconds ) { /* do nothing */ } //TODO needed?
   });
 } );

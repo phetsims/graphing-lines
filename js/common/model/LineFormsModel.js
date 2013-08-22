@@ -3,9 +3,9 @@
 /**
  * Base class for the 'Slope', 'Slope-Intercept' and 'Point-Slope' models.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function() {
+define( function( require ) {
   'use strict';
 
   // imports
@@ -35,7 +35,7 @@ define( function() {
     thisModel.graph = new Graph( X_RANGE, Y_RANGE );
 
     // model-view transform, created in the model because it's dependent on graph axes ranges
-    var mvtScale = GRID_VIEW_UNITS / Math.max( thisModel.graph.xRange.getLength(), thisModel.thisModel.graph.yRange.getLength() ); // view units / model units
+    var mvtScale = GRID_VIEW_UNITS / Math.max( thisModel.graph.xRange.getLength(), thisModel.graph.yRange.getLength() ); // view units / model units
     thisModel.mvt = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, mvtScale, -mvtScale ); // y is inverted
 
     // lines
@@ -60,6 +60,7 @@ define( function() {
     thisModel.standardLines.addListener( updateGraphLines );
 
     // point tools
+    debugger;
     var initialPosition1 = new Vector2( thisModel.graph.xRange.min + ( 0.35 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 0.25 );
     var initialPosition2 = new Vector2( thisModel.graph.xRange.min + ( 0.65 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 2.75 );
     thisModel.pointTool1 = new PointTool( initialPosition1, 'up', thisModel.graph.lines );

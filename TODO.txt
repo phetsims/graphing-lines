@@ -11,6 +11,7 @@ MEDIUM
 
 LOW
 - change 'tab.*' string keys to 'screen.*'
+- import all string files from Java sim
 
 MIGRATE TO COMMON
 

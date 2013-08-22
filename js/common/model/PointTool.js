@@ -20,7 +20,6 @@ define( function( require ) {
    */
   function PointTool( location, orientation, lines ) {
 
-    debugger;
     assert && assert( orientation === 'up' || orientation === 'down' );
 
     var thisTool = this;

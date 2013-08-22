@@ -19,9 +19,7 @@ define( function( require ) {
   function Graph( xRange, yRange ) {
     this.xRange = xRange;
     this.yRange = yRange;
-    debugger;
     this.lines = new ObservableArray();
-    debugger;
   }
 
   Graph.prototype = {

@@ -60,7 +60,6 @@ define( function( require ) {
     thisModel.standardLines.addListener( updateGraphLines );
 
     // point tools
-    debugger;
     var initialPosition1 = new Vector2( thisModel.graph.xRange.min + ( 0.35 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 0.25 );
     var initialPosition2 = new Vector2( thisModel.graph.xRange.min + ( 0.65 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 2.75 );
     thisModel.pointTool1 = new PointTool( initialPosition1, 'up', thisModel.graph.lines );

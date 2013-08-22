@@ -12,7 +12,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ResetAllButton = require( 'common/view/ResetAllButton' );
-  var TabView = require( 'JOIST/TabView' );
+  var ScreenView = require( 'JOIST/ScreenView' );
 
   /**
    * @param {SlopeInterceptModel} model
@@ -22,7 +22,7 @@ define( function( require ) {
   function SlopeInterceptView( model, mvt ) {
 
     var thisView = this;
-    TabView.call( thisView, { renderer: 'svg' } );
+    ScreenView.call( thisView, { renderer: 'svg' } );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( function() {
@@ -37,5 +37,5 @@ define( function( require ) {
     resetAllButton.top = 100;
   }
 
-  return inherit( TabView, SlopeInterceptView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );
+  return inherit( ScreenView, SlopeInterceptView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );
 } );

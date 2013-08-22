@@ -13,8 +13,8 @@ define( function( require ) {
   var GLStrings = require( 'common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var GameModel = require( 'game/model/GameModel' );
-  var GameView = require( 'game/view/GameView' );
+  var LineGameModel = require( 'linegame/model/LineGameModel' );
+  var LineGameView = require( 'linegame/view/LineGameView' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function GameScreen() {
@@ -26,11 +26,11 @@ define( function( require ) {
     var mvt = ModelViewTransform2.createIdentity();
 
     this.createModel = function() {
-      return new GameModel();
+      return new LineGameModel();
     };
 
     this.createView = function( model ) {
-      return new GameView( model, mvt );
+      return new LineGameView( model, mvt );
     };
   }
 

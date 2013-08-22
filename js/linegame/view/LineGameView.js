@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * View for the 'Game' screen.
+ * View for the 'Line Game' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,7 +15,7 @@ define( function( require ) {
   var TabView = require( 'JOIST/TabView' );
 
   /**
-   * @param {GameModel} model
+   * @param {LineGameModel} model
    * @param {ModelViewTransform2} mvt
    * @constructor
    */

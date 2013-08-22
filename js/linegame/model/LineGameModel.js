@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Model container for the 'Game' screen.
+ * Model container for the 'Line Game' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -10,11 +10,11 @@ define( function( require ) {
 
   // imports
 
-  function GameModel() {
+  function LineGameModel() {
      //TODO
   }
 
-  GameModel.prototype = {
+  LineGameModel.prototype = {
 
     // Resets all model elements
     reset: function() {
@@ -30,5 +30,5 @@ define( function( require ) {
     }
   };
 
-  return GameModel;
+  return LineGameModel;
 } );

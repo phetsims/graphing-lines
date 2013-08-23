@@ -10,6 +10,8 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
+  var GLColors = require( 'common/GLColors' );
+  var Line = require( 'common/model/Line' );
   var LineFormsModel = require( 'common/model/LineFormsModel' );
   var PointSlopeParameterRange = require( 'pointslope/model/PointSlopeParameterRange' );
   var Property = require( 'AXON/Property' );
@@ -22,6 +24,7 @@ define( function( require ) {
    */
   function PointSlopeModel( interactiveLine, parameterRange ) {
 
+    interactiveLine = interactiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
     parameterRange = parameterRange || new PointSlopeParameterRange();
 
     var thisModel = this;

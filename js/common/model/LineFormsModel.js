@@ -62,7 +62,6 @@ define( function( require ) {
     // point tools
     var initialPosition1 = new Vector2( thisModel.graph.xRange.min + ( 0.35 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 0.25 );
     var initialPosition2 = new Vector2( thisModel.graph.xRange.min + ( 0.65 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 2.75 );
-    console.log( "thisModel.graph.lines.length = " + thisModel.graph.lines );//XXX
     thisModel.pointTool1 = new PointTool( initialPosition1, 'up', thisModel.graph.lines );
     thisModel.pointTool2 = new PointTool( initialPosition2, 'down', thisModel.graph.lines );
   }

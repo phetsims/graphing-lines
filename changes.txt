@@ -1,3 +1,4 @@
+8/23/13 fix PointSlopeModel to support subtyping by SlopeInterceptModel
 8/22/13 joist#35, terminology change: tab -> screen
 8/21/13 port more of the common.model
 8/19/13 port some of the common.model package from Java version

@@ -15,9 +15,10 @@ define( function( require ){
   var inherit = require( 'PHET_CORE/inherit' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
-  function MinusNode( width, height, fill ) {
+  function MinusNode( width, height, options ) {
     assert && assert( width > height );
-    Rectangle.call( this, 0, 0, width, height, { fill: fill } );
+    options = _.extend( { fill: 'black' }, options );
+    Rectangle.call( this, 0, 0, width, height, options );
   }
 
   return inherit( Rectangle, MinusNode );

@@ -14,7 +14,8 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
-  function PlusNode( width, height, fill ) {
+  function PlusNode( width, height, options ) {
+
     // + shape, starting from top left and moving clockwise
     var c1 = ( width / 2 ) - ( height / 2 );
     var c2 = ( width / 2 ) + ( height / 2 );
@@ -32,7 +33,11 @@ define( function( require ) {
       .lineTo( 0, c1 )
       .lineTo( c1, c1 )
       .close();
-    Path.call( this, { shape: shape, fill: fill } );
+
+    options = _.extend( { fill: 'black' }, options );
+    options.shape = shape; // don't allow this to be set by client
+
+    Path.call( this, options );
   }
 
   return inherit( Path, PlusNode );

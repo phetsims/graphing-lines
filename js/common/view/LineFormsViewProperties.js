@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
 
   function LineFormsViewProperties() {
@@ -20,5 +21,5 @@ define( function( require ) {
     } );
   }
 
-  return LineFormsViewProperties;
+  return inherit( PropertySet, LineFormsViewProperties );
 } );

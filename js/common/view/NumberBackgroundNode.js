@@ -24,30 +24,35 @@ define( function( require ) {
    */
   function NumberBackgroundNode( value, options ) {
 
-    options = _.extend( {
+    options = _.extend( {}, options );
+    // options that are specific to the text
+    options.textOptions = _.extend( {
+      fill: 'black',
       decimalPlaces: 0,
-      textFill: 'black',
-      backgroundFill: 'white',
-      backgroundStroke: 'black',
-      backgroundWidth: 0,
-      font: new PhetFont( 12 ),
+      font: new PhetFont( 12 )
+    }, options.textOptions );
+    // options that are specific to the background
+    options.backgroundOptions = _.extend( {
+      fill: 'white',
+      stroke: 'black',
+      width: 0,
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 3
-    }, options );
+    }, options.backgroundOptions );
 
     Node.call( this );
 
-    var textNode = new Text( Util.toFixed( value, options.decimalPlaces ), {
-      fill: options.textFill,
-      font: options.font
+    var textNode = new Text( Util.toFixed( value, options.textOptions.decimalPlaces ), {
+      fill: options.textOptions.fill,
+      font: options.textOptions.font
     } );
 
-    var backgroundWidth = Math.max( options.backgroundWidth, textNode.width + options.xMargin + options.xMargin );
-    var backgroundHeight = textNode.width + options.yMargin + options.yMargin;
-    var backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.cornerRadius, options.cornerRadius, {
-      fill: options.backgroundFill,
-      stroke: options.backgroundStroke
+    var backgroundWidth = Math.max( options.backgroundOptions.width, textNode.width + options.backgroundOptions.xMargin + options.backgroundOptions.xMargin );
+    var backgroundHeight = textNode.width + options.backgroundOptions.yMargin + options.backgroundOptions.yMargin;
+    var backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.backgroundOptions.cornerRadius, options.backgroundOptions.cornerRadius, {
+      fill: options.backgroundOptions.fill,
+      stroke: options.backgroundOptions.stroke
     } );
 
     // rendering order
@@ -58,7 +63,8 @@ define( function( require ) {
     textNode.centerX = backgroundNode.centerX;
     textNode.centerY = backgroundNode.centerY;
 
-    this.mutate( options );
+    // remove subtype-specific options before passing to supertype
+    this.mutate( _.omit( options, [ 'textOptions', 'backgroundOptions' ] ) );
   }
 
   return inherit( Node, NumberBackgroundNode );

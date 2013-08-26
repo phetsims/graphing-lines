@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Color = require( 'SCENERY/util/Color' );
   var GLImages = require( 'common/GLImages' );
   var GLStrings = require( 'common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
@@ -21,7 +22,7 @@ define( function( require ) {
 
     this.name = GLStrings[ "tab.lineGame" ];
     this.icon = new Image( GLImages.getImage( 'Game-icon.png' ) );
-    this.backgroundColor = 'white';
+    this.backgroundColor = new Color( 255, 255, 214 );
 
     this.createModel = function() {
       return new LineGameModel();

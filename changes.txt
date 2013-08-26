@@ -1,3 +1,5 @@
+8/26/13 specify backgroundColor for all Screens
+8/26/13 port more of the common.view
 8/23/13 port some of the common.view
 8/23/13 fix PointSlopeModel to support subtyping by SlopeInterceptModel
 8/22/13 joist#35, terminology change: tab -> screen

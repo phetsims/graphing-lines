@@ -16,10 +16,9 @@ define( function( require ) {
 
   /**
    * @param {LineGameModel} model
-   * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function GameView( model, mvt ) {
+  function GameView( model ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );

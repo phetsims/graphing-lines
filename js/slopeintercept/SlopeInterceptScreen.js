@@ -23,14 +23,12 @@ define( function( require ) {
     this.icon = new Image( GLImages.getImage( 'SlopeIntercept-icon.png' ) );
     this.backgroundColor = 'white';
 
-    var mvt = ModelViewTransform2.createIdentity();
-
     this.createModel = function() {
       return new SlopeInterceptModel();
     };
 
     this.createView = function( model ) {
-      return new SlopeInterceptView( model, mvt );
+      return new SlopeInterceptView( model );
     };
   }
 

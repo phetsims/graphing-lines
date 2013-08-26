@@ -23,14 +23,12 @@ define( function( require ) {
     this.icon = new Image( GLImages.getImage( 'Game-icon.png' ) );
     this.backgroundColor = 'white';
 
-    var mvt = ModelViewTransform2.createIdentity();
-
     this.createModel = function() {
       return new LineGameModel();
     };
 
     this.createView = function( model ) {
-      return new LineGameView( model, mvt );
+      return new LineGameView( model );
     };
   }
 

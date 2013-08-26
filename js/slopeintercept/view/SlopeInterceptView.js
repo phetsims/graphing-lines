@@ -16,10 +16,9 @@ define( function( require ) {
 
   /**
    * @param {SlopeInterceptModel} model
-   * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SlopeInterceptView( model, mvt ) {
+  function SlopeInterceptView( model ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );

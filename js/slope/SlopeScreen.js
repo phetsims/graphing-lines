@@ -23,14 +23,12 @@ define( function( require ) {
     this.icon = new Image( GLImages.getImage( 'Slope-icon.png' ) );
     this.backgroundColor = 'white';
 
-    var mvt = ModelViewTransform2.createIdentity();
-
     this.createModel = function() {
       return new SlopeModel();
     };
 
     this.createView = function( model ) {
-      return new SlopeView( model, mvt );
+      return new SlopeView( model );
     };
   }
 

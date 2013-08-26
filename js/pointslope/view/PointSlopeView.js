@@ -15,11 +15,10 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
 
   /**
-   * @param {PointSlopeModel;} model
-   * @param {ModelViewTransform2} mvt
+   * @param {PointSlopeModel} model
    * @constructor
    */
-  function PointSlopeView( model, mvt ) {
+  function PointSlopeView( model ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );
@@ -35,6 +34,12 @@ define( function( require ) {
     // layout
     resetAllButton.left = 100;
     resetAllButton.top = 100;
+
+    //XXX tests
+    var GraphNode = require( 'common/view/GraphNode' );
+    var Graph = require( 'common/model/Graph' );
+    var Range = require( 'DOT/Range' );
+    thisView.addChild( new GraphNode( new Graph( new Range( -10, 10 ), new Range( -10, 10 ) ), model.mvt ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

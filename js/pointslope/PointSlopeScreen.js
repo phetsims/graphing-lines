@@ -23,14 +23,12 @@ define( function( require ) {
     this.icon = new Image( GLImages.getImage( 'PointSlope-icon.png' ) );
     this.backgroundColor = 'white';
 
-    var mvt = ModelViewTransform2.createIdentity();
-
     this.createModel = function() {
       return new PointSlopeModel();
     };
 
     this.createView = function( model ) {
-      return new PointSlopeView( model, mvt );
+      return new PointSlopeView( model );
     };
   }
 

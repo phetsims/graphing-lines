@@ -16,10 +16,9 @@ define( function( require ) {
 
   /**
    * @param {SlopeModel} model
-   * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SlopeView( model, mvt ) {
+  function SlopeView( model ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );

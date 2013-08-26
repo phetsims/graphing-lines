@@ -24,6 +24,7 @@ define( function( require ) {
    */
   function NumberBackgroundNode( value, options ) {
 
+    //TODO uses hierarchical options, keep this approach?
     options = _.extend( {}, options );
     // options that are specific to the text
     options.textOptions = _.extend( {

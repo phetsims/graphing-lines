@@ -39,14 +39,20 @@ define( function( require ) {
     var GraphNode = require( 'common/view/GraphNode' );
     var Graph = require( 'common/model/Graph' );
     var Range = require( 'DOT/Range' );
-    thisView.addChild( new GraphNode( new Graph( new Range( -10, 10 ), new Range( -10, 10 ) ), model.mvt ) );
+    var graph = new Graph( new Range( -10, 10 ), new Range( -10, 10 ) );
+    thisView.addChild( new GraphNode( graph, model.mvt ) );
 
     //XXX test
     var SlopeToolNode = require( 'common/view/SlopeToolNode' );
     var Property = require( 'AXON/Property' );
     var Line = require( 'common/model/Line');
-    var lineProperty = new Property( new Line( 0, 0, 5, -5 ) );
+    var line = new Line( 0, 0, 5, 5 );
+    var lineProperty = new Property( line );
     thisView.addChild( new SlopeToolNode( lineProperty, model.mvt ) );
+
+    //XXX test
+    var LineNode = require( 'common/view/LineNode' );
+    thisView.addChild( new LineNode( line, graph, model.mvt ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

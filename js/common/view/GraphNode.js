@@ -290,7 +290,7 @@ define( function( require ) {
    */
   function GraphNode( graph, mvt ) {
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
-    Node.call( this );
+    Node.call( this, { pickable: false } );
     this.addChild( new GridNode( graph, mvt ) );
     this.addChild( new XAxisNode( graph, mvt ) );
     this.addChild( new YAxisNode( graph, mvt ) );

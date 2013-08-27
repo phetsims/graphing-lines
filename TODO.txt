@@ -3,10 +3,14 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
+- port common.view package from Java
+- port pointslope.view package from Java
 
 MEDIUM
 - consider making Line mutable, to reduce affects of garbage collection
 - convert models to PropertySet and axon style
+- Slope Tool icon, for control panel
+- Graph icons, for control panel
 
 LOW
 - change 'tab.*' string keys to 'screen.*'

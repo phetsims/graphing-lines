@@ -35,11 +35,18 @@ define( function( require ) {
     resetAllButton.left = 100;
     resetAllButton.top = 100;
 
-    //XXX tests
+    //XXX test
     var GraphNode = require( 'common/view/GraphNode' );
     var Graph = require( 'common/model/Graph' );
     var Range = require( 'DOT/Range' );
     thisView.addChild( new GraphNode( new Graph( new Range( -10, 10 ), new Range( -10, 10 ) ), model.mvt ) );
+
+    //XXX test
+    var SlopeToolNode = require( 'common/view/SlopeToolNode' );
+    var Property = require( 'AXON/Property' );
+    var Line = require( 'common/model/Line');
+    var lineProperty = new Property( new Line( 0, 0, 5, -5 ) );
+    thisView.addChild( new SlopeToolNode( lineProperty, model.mvt ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

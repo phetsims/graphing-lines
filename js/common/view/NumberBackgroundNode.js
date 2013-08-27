@@ -35,7 +35,7 @@ define( function( require ) {
     // options that are specific to the background
     options.backgroundOptions = _.extend( {
       fill: 'white',
-      stroke: 'black',
+      stroke: null,
       width: 0,
       xMargin: 5,
       yMargin: 5,

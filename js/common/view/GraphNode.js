@@ -94,7 +94,7 @@ define( function( require ) {
     if ( isVertical ) {
       // center label under line, compensate for minus sign
       var signXOffset = ( value < 0 ) ? -( MINUS_SIGN_WIDTH / 2 ) : 0;
-      tickLabelNode.left = tickLineNode.centerX - ( tickLabelNode.width / 2 ) + signXOffset
+      tickLabelNode.left = tickLineNode.centerX - ( tickLabelNode.width / 2 ) + signXOffset;
       tickLabelNode.top = tickLineNode.bottom + TICK_LABEL_SPACING;
     }
     else {
@@ -161,10 +161,10 @@ define( function( require ) {
     var numberOfTicks = graph.getWidth() + 1;
     for ( var i = 0; i < numberOfTicks; i++ ) {
       var modelX = graph.xRange.min + i;
-      if ( modelX != 0 ) { // skip the origin
+      if ( modelX !== 0 ) { // skip the origin
         var x = mvt.modelToViewX( modelX );
         var y = mvt.modelToViewY( 0 );
-        if ( Math.abs( modelX ) % MAJOR_TICK_SPACING == 0 ) {
+        if ( Math.abs( modelX ) % MAJOR_TICK_SPACING === 0 ) {
           // major tick
           this.addChild( new MajorTickNode( x, y, modelX, true ) );
         }
@@ -217,10 +217,10 @@ define( function( require ) {
     var numberOfTicks = graph.getHeight() + 1;
     for ( var i = 0; i < numberOfTicks; i++ ) {
       var modelY = graph.yRange.min + i;
-      if ( modelY != 0 ) { // skip the origin
+      if ( modelY !== 0 ) { // skip the origin
         var x = mvt.modelToViewX( 0 );
         var y = mvt.modelToViewY( modelY );
-        if ( Math.abs( modelY ) % MAJOR_TICK_SPACING == 0 ) {
+        if ( Math.abs( modelY ) % MAJOR_TICK_SPACING === 0 ) {
           // major tick
           this.addChild( new MajorTickNode( x, y, modelY, false ) );
         }
@@ -256,9 +256,9 @@ define( function( require ) {
     var maxX = mvt.modelToViewX( graph.xRange.max );
     for ( var i = 0; i < numberOfHorizontalGridLines; i++ ) {
       var modelY = graph.yRange.min + i;
-      if ( modelY != 0 ) { // skip origin, x axis will live here
+      if ( modelY !== 0 ) { // skip origin, x axis will live here
         var yOffset = mvt.modelToViewY( modelY );
-        var isMajorX = Math.abs( modelY ) % MAJOR_TICK_SPACING == 0;
+        var isMajorX = Math.abs( modelY ) % MAJOR_TICK_SPACING === 0;
         horizontalGridLinesNode.addChild( new GridLineNode( minX, yOffset, maxX, yOffset, isMajorX ) );
       }
     }
@@ -271,9 +271,9 @@ define( function( require ) {
     var maxY = mvt.modelToViewY( graph.yRange.min );
     for ( var j = 0; j < numberOfVerticalGridLines; j++ ) {
       var modelX = graph.xRange.min + j;
-      if ( modelX != 0 ) { // skip origin, y axis will live here
+      if ( modelX !== 0 ) { // skip origin, y axis will live here
         var xOffset = mvt.modelToViewX( modelX );
-        var isMajorY = Math.abs( modelX ) % MAJOR_TICK_SPACING == 0;
+        var isMajorY = Math.abs( modelX ) % MAJOR_TICK_SPACING === 0;
         verticalGridLinesNode.addChild( new GridLineNode( xOffset, minY, xOffset, maxY, isMajorY ) );
       }
     }

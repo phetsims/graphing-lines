@@ -3,6 +3,8 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
+- implement DoubleArrowNode, use in LineNode and GraphNode (for axes)
+- replace Shape.lineSegment with scenery.Line
 - port common.view package from Java
 - port pointslope.view package from Java
 

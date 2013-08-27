@@ -14,6 +14,7 @@ MEDIUM
 
 LOW
 - change 'tab.*' string keys to 'screen.*'
+- remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
 - import all string files from Java sim
 
 MIGRATE TO COMMON

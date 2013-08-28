@@ -129,45 +129,47 @@ define( function( require ) {
       this._equationParentNode.addChild( equationNode );
 
       // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
+      var X_OFFSET = 30;
+      var Y_OFFSET = 5;
       if ( line.undefinedSlope() ) {
         // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
         if ( line.rise < 0 ) {
           this._equationParentNode.translation = this.tipLocation;
-          equationNode.x = -equationNode.width - 30;
-          equationNode.y = -equationNode.height - 12;
+          equationNode.right = -X_OFFSET;
+          equationNode.bottom = -Y_OFFSET;
         }
         else {
           this._equationParentNode.translation = this.tailLocation;
-          equationNode.x = 30;
-          equationNode.y = -equationNode.height - 12;
+          equationNode.left = X_OFFSET;
+          equationNode.bottom = -Y_OFFSET;
         }
       }
       else if ( line.rise <= 0 ) {
         if ( line.run >= 0 ) {
           // equation above the line, at tip
           this._equationParentNode.translation = this.tipLocation
-          equationNode.x = -equationNode.width - 30;
-          equationNode.y = -equationNode.height - 12;
+          equationNode.right = -X_OFFSET;
+          equationNode.bottom = -Y_OFFSET;
         }
         else {
           // equation above the line, at tail
           this._equationParentNode.translation = this.tailLocation;
-          equationNode.x = -equationNode.width - 30;
-          equationNode.y = -equationNode.height - 12;
+          equationNode.left = X_OFFSET;
+          equationNode.bottom = -Y_OFFSET;
         }
       }
       else {
         if ( line.run > 0 ) {
           // equation below the line, at tip
           this._equationParentNode.translation = this.tipLocation;
-          equationNode.x = -equationNode.width - 30;
-          equationNode.y = 10;
+          equationNode.right = -X_OFFSET;
+          equationNode.bottom = equationNode.height + Y_OFFSET;
         }
         else {
           // equation below the line, at tail
           this._equationParentNode.translation = this.tailLocation;
-          equationNode.x = 30;
-          equationNode.y = 10;
+          equationNode.left = X_OFFSET;
+          equationNode.bottom = equationNode.height + Y_OFFSET;
         }
       }
     }

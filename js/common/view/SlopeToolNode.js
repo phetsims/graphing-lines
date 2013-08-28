@@ -34,7 +34,7 @@ define( function( require ) {
   var VALUE_X_SPACING = 6;
   var VALUE_Y_SPACING = 6;
   var VALUE_NUMBER_OF_DECIMAL_PLACES = 0;
-  var VALUE_FONT = new PhetFont( 16, 'bold' );
+  var VALUE_FONT = new PhetFont( { size: 16, weight: 'bold' } );
   var VALUE_TEXT_COLOR = Color.BLACK;
   var VALUE_X_MARGIN = 3;
   var VALUE_Y_MARGIN = 6;

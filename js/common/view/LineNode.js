@@ -25,7 +25,7 @@ define( function( require ) {
   var ARROW_HEAD_SIZE = new Dimension2( 10, 10 );
   var LINE_WIDTH = 3;
   var LINE_EXTENT = 25; // how far the line extends past the grid
-  var EQUATION_FONT = new PhetFont( 18, 'bold' );
+  var EQUATION_FONT = new PhetFont( { size: 18, weight: 'bold' } );
 
   /**
    * @param {Line} line

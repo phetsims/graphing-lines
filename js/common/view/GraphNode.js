@@ -39,7 +39,7 @@ define( function( require ) {
   var AXIS_THICKNESS = 1;
   var AXIS_COLOR = Color.BLACK;
   var AXIS_EXTENT = 1.0; // how far the arrow extends past the min/max ticks, in model coordinates
-  var AXIS_LABEL_FONT = new PhetFont( 16, 'bold' );
+  var AXIS_LABEL_FONT = new PhetFont( { size: 16, weight: 'bold' } );
   var AXIS_LABEL_SPACING = 2; // space between end of axis and label
 
   // ticks

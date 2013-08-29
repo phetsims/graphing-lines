@@ -13,9 +13,9 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
@@ -85,12 +85,8 @@ define( function( require ) {
     // double-headed arrow
     this.tailLocation = new Vector2( mvt.modelToViewX( tailX ), mvt.modelToViewY( tailY ) );
     this.tipLocation = new Vector2( mvt.modelToViewX( tipX ), mvt.modelToViewY( tipY ) );
-
-    //TODO replace with double-headed arrow
-    this._arrowNode = new Line( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y, {
-      stroke: line.color,
-      lineWidth: LINE_WIDTH
-    } );
+    this._arrowNode = new ArrowNode( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y,
+      { doubleHead: true, tailWidth: 3, headWidth: 10, headHeight: 10, fill: line.color, stroke: null } );
     this.addChild( this._arrowNode );
 
     // equation

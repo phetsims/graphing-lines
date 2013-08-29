@@ -3,8 +3,7 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- implement DoubleArrowNode, use in LineNode and GraphNode (for axes)
-- replace Shape.lineSegment with scenery.Line
+- use scenery-phet.ArrowNode for axes in GraphNode
 - port common.view package from Java
 - port pointslope.view package from Java
 

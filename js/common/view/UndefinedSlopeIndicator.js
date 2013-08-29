@@ -11,8 +11,8 @@ define( function( require ) {
   // imports
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
   // constants
@@ -23,8 +23,8 @@ define( function( require ) {
     options = _.extend( { pickable: false }, options );
     Node.call( this );
     var lineOptions = { stroke: LINE_COLOR, lineWidth: LINE_WIDTH };
-    this.addChild( new Path( _.extend( { shape: Shape.lineSegment( 0, 0, width, height ) }, lineOptions ) ) );
-    this.addChild( new Path( _.extend( { shape: Shape.lineSegment( 0, height, width, 0 ) }, lineOptions ) ) );
+    this.addChild( new Line( 0, 0, width, height, lineOptions ) );
+    this.addChild( new Line( 0, height, width, 0, lineOptions ) );
     this.mutate( options );
   }
 

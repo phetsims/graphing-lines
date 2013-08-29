@@ -15,6 +15,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var GLStrings = require( 'common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -59,14 +60,13 @@ define( function( require ) {
   //----------------------------------------------------------------------------------------
 
   function GridLineNode( x1, y1, x2, y2, isMajor ) {
-    Path.call( this, {
-      shape: Shape.lineSegment( x1, y1, x2, y2 ),
+    Line.call( this, x1, y1, x2, y2, {
       lineWidth: isMajor ? MAJOR_GRID_LINEWIDTH : MINOR_GRID_LINEWIDTH,
       stroke: isMajor ? MAJOR_GRID_LINE_COLOR : MINOR_GRID_LINE_COLOR
     } );
   }
 
-  inherit( Path, GridLineNode );
+  inherit( Line, GridLineNode );
 
   //----------------------------------------------------------------------------------------
   // major tick with label, orientation is vertical or horizontal

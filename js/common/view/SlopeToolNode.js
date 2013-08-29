@@ -15,6 +15,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var GLColors = require( 'common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'common/view/NumberBackgroundNode' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -48,14 +49,13 @@ define( function( require ) {
   //----------------------------------------------------------------------------------------
 
   function DimensionalDelimiterNode( x1, y1, x2, y2 ) {
-    Path.call( this, {
-      shape: Shape.lineSegment( x1, y1, x2, y2 ),
+    Line.call( this, x1, y1, x2, y2, {
       stroke: LINE_COLOR,
       lineWidth: LINE_WIDTH
     } );
   }
 
-  inherit( Path, DimensionalDelimiterNode );
+  inherit( Line, DimensionalDelimiterNode );
 
   //----------------------------------------------------------------------------------------
   // Arrow with a very specific tip style.
@@ -65,7 +65,7 @@ define( function( require ) {
 
     Node.call( this );
 
-    var lineNode = new Path( { shape: Shape.lineSegment( tailX, tailY, tipX, tipY ), lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );
+    var lineNode = new Line( tailX, tailY, tipX, tipY, { lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );
     this.addChild( lineNode );
 
     var tipShape = new Shape();

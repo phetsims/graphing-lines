@@ -15,8 +15,8 @@ define( function( require ) {
   // imports
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -87,8 +87,7 @@ define( function( require ) {
     this.tipLocation = new Vector2( mvt.modelToViewX( tipX ), mvt.modelToViewY( tipY ) );
 
     //TODO replace with double-headed arrow
-    this._arrowNode = new Path( {
-      shape: Shape.lineSegment( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y ),
+    this._arrowNode = new Line( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y, {
       stroke: line.color,
       lineWidth: LINE_WIDTH
     } );

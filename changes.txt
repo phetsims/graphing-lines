@@ -1,3 +1,4 @@
+8/28/13 use scenery.Line
 8/28/13 debugged location of equation in LineNode
 8/27/13 port more of the common.view
 8/26/13 specify backgroundColor for all Screens

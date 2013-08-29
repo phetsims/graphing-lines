@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
@@ -131,25 +132,16 @@ define( function( require ) {
     Node.call( this );
 
     // horizontal line with arrows at both ends
-    var axisLength = Math.abs( mvt.modelToViewX( graph.xRange.max + AXIS_EXTENT ) - mvt.modelToViewX( graph.xRange.min - AXIS_EXTENT ) );
-    assert && assert( AXIS_ARROW_SIZE.width > AXIS_THICKNESS );
-    assert && assert( axisLength > 2 * AXIS_ARROW_SIZE.height );
-    // shape definition is relative to (0,0), starts at left tip and moves clockwise.
-    var shape = new Shape()
-      .moveTo( -axisLength / 2, 0 )
-      .lineTo( -axisLength / 2 + AXIS_ARROW_SIZE.height, -AXIS_ARROW_SIZE.width / 2 )
-      .lineTo( -axisLength / 2 + AXIS_ARROW_SIZE.height, -AXIS_THICKNESS / 2 )
-      .lineTo( axisLength / 2 - AXIS_ARROW_SIZE.height, -AXIS_THICKNESS / 2 )
-      .lineTo( axisLength / 2 - AXIS_ARROW_SIZE.height, -AXIS_ARROW_SIZE.width / 2 )
-      .lineTo( axisLength / 2, 0 )
-      .lineTo( axisLength / 2 - AXIS_ARROW_SIZE.height, AXIS_ARROW_SIZE.width / 2 )
-      .lineTo( axisLength / 2 - AXIS_ARROW_SIZE.height, AXIS_THICKNESS / 2 )
-      .lineTo( -axisLength / 2 + AXIS_ARROW_SIZE.height, AXIS_THICKNESS / 2 )
-      .lineTo( -axisLength / 2 + AXIS_ARROW_SIZE.height, AXIS_ARROW_SIZE.width / 2 )
-      .close();
-    var lineNode = new Path( { shape: shape, fill: AXIS_COLOR } );
+    var tailLocation = new Vector2( mvt.modelToViewX( graph.xRange.min - AXIS_EXTENT ), mvt.modelToViewY( 0 ) );
+    var tipLocation = new Vector2( mvt.modelToViewX( graph.xRange.max + AXIS_EXTENT ), mvt.modelToViewY( 0 ) );
+    var lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
+      doubleHead: true,
+      headHeight: AXIS_ARROW_SIZE.height,
+      headWidth: AXIS_ARROW_SIZE.width,
+      tailWidth: AXIS_THICKNESS,
+      fill: AXIS_COLOR,
+      stroke: null } );
     this.addChild( lineNode );
-    lineNode.translation = mvt.modelToViewPosition( new Vector2( 0, 0 ) );
 
     // label at positive (right) end
     var labelNode = new Text( GLStrings["symbol.x"], { font: AXIS_LABEL_FONT } );
@@ -187,25 +179,16 @@ define( function( require ) {
     Node.call( this );
 
     // vertical line with arrows at both ends
-    var axisLength = Math.abs( mvt.modelToViewY( graph.yRange.max + AXIS_EXTENT ) - mvt.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
-    assert && assert( AXIS_ARROW_SIZE.width > AXIS_THICKNESS );
-    assert && assert( axisLength > 2 * AXIS_ARROW_SIZE.height );
-    // shape definition is relative to (0,0), starts at top tip and moves clockwise.
-    var shape = new Shape()
-      .moveTo( 0, -axisLength / 2 )
-      .lineTo( -AXIS_ARROW_SIZE.width / 2, -axisLength / 2 + AXIS_ARROW_SIZE.height )
-      .lineTo( -AXIS_THICKNESS / 2, -axisLength / 2 + AXIS_ARROW_SIZE.height )
-      .lineTo( -AXIS_THICKNESS / 2, axisLength / 2 - AXIS_ARROW_SIZE.height )
-      .lineTo( -AXIS_ARROW_SIZE.width / 2, axisLength / 2 - AXIS_ARROW_SIZE.height )
-      .lineTo( 0, axisLength / 2 )
-      .lineTo( AXIS_ARROW_SIZE.width / 2, axisLength / 2 - AXIS_ARROW_SIZE.height )
-      .lineTo( AXIS_THICKNESS / 2, axisLength / 2 - AXIS_ARROW_SIZE.height )
-      .lineTo( AXIS_THICKNESS / 2, -axisLength / 2 + AXIS_ARROW_SIZE.height )
-      .lineTo( AXIS_ARROW_SIZE.width / 2, -axisLength / 2 + AXIS_ARROW_SIZE.height )
-      .close();
-    var lineNode = new Path( { shape: shape, fill: AXIS_COLOR } );
+    var tailLocation = new Vector2( mvt.modelToViewX( 0 ), mvt.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
+    var tipLocation = new Vector2( mvt.modelToViewX( 0 ), mvt.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
+    var lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
+      doubleHead: true,
+      headHeight: AXIS_ARROW_SIZE.height,
+      headWidth: AXIS_ARROW_SIZE.width,
+      tailWidth: AXIS_THICKNESS,
+      fill: AXIS_COLOR,
+      stroke: null } );
     this.addChild( lineNode );
-    lineNode.translation = mvt.modelToViewPosition( new Vector2( 0, 0 ) );
 
     // label at positive (top) end
     var labelNode = new Text( GLStrings["symbol.y"], { font: AXIS_LABEL_FONT } );

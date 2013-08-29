@@ -1,4 +1,5 @@
-8/28/13 use scenery.ArrowNode({doubleHead:true}) for lines
+8/28/13 use scenery-phet.ArrowNode({doubleHead:true}) for axes in GraphNode
+8/28/13 use scenery-phet.ArrowNode({doubleHead:true}) for line in LineNode
 8/28/13 use scenery.Line
 8/28/13 debugged location of equation in LineNode
 8/27/13 port more of the common.view

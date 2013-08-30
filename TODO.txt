@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- CheckBox.createTextCheckBox layout isn't working with an icon, scenery 'loop' branch issue?
 - implement create* methods in SlopeToolNode and GraphNode, add setEnabled to what's returned
 - port common.view package from Java
 - port pointslope.view package from Java

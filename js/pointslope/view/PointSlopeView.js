@@ -53,6 +53,15 @@ define( function( require ) {
     //XXX test
     var LineNode = require( 'common/view/LineNode' );
     thisView.addChild( new LineNode( line, graph, model.mvt ) );
+
+    //XXX test
+    var GraphControls = require( 'common/view/GraphControls' );
+    var LineFormsViewProperties = require( 'common/view/LineFormsViewProperties' );
+    var ObservableArray = require( 'AXON/ObservableArray' );
+    var viewProperties = new LineFormsViewProperties();
+    var standardLines = new ObservableArray( [ Line.X_EQUALS_Y, Line.X_EQUALS_NEGATIVE_Y ] );
+    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
+      { x: 200, y: 100 } ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

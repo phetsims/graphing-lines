@@ -14,6 +14,7 @@ define( function( require ) {
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var GLColors = require( 'common/GLColors' );
   var GLStrings = require( 'common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -278,6 +279,20 @@ define( function( require ) {
     this.addChild( new XAxisNode( graph, mvt ) );
     this.addChild( new YAxisNode( graph, mvt ) );
   }
+
+  // Creates an image for the "y = +x" feature
+  GraphNode.createYEqualsXImage = function( width ) {
+    //TODO placeholder, port this from java
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    return new Rectangle( 0, 0, width, width, { fill: GLColors.Y_EQUALS_X, stroke: 'black' } );
+  };
+
+  // Creates an image for the "y = -x" feature
+  GraphNode.createYEqualsNegativeXImage = function( width ) {
+    //TODO placeholder, port this from java
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    return new Rectangle( 0, 0, width, width, { fill: GLColors.Y_EQUALS_NEGATIVE_X, stroke: 'black' } );
+  };
 
   return inherit( Node, GraphNode );
 } );

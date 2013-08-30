@@ -1,3 +1,4 @@
+8/29/13 first attempt at GraphControls, has problems, lots of work on CheckBox was required
 8/28/13 use scenery-phet.ArrowNode({doubleHead:true}) for axes in GraphNode
 8/28/13 use scenery-phet.ArrowNode({doubleHead:true}) for line in LineNode
 8/28/13 use scenery.Line

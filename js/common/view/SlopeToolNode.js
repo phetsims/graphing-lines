@@ -123,6 +123,13 @@ define( function( require ) {
     } );
   }
 
+  // Return an image that represents this feature.
+  SlopeToolNode.createImage = function( width ) {
+    //TODO placeholder, port this from java
+    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+    return new Rectangle( 0, 0, width, width, { fill: 'blue', stroke: 'black' } );
+  };
+
   return inherit( Node, SlopeToolNode, {
 
     _update: function( line, mvt ) {

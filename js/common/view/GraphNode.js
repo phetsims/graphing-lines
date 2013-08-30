@@ -280,19 +280,5 @@ define( function( require ) {
     this.addChild( new YAxisNode( graph, mvt ) );
   }
 
-  // Creates an image for the "y = +x" feature
-  GraphNode.createYEqualsXImage = function( width ) {
-    //TODO placeholder, port this from java
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    return new Rectangle( 0, 0, width, width, { fill: GLColors.Y_EQUALS_X, stroke: 'black' } );
-  };
-
-  // Creates an image for the "y = -x" feature
-  GraphNode.createYEqualsNegativeXImage = function( width ) {
-    //TODO placeholder, port this from java
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    return new Rectangle( 0, 0, width, width, { fill: GLColors.Y_EQUALS_NEGATIVE_X, stroke: 'black' } );
-  };
-
   return inherit( Node, GraphNode );
 } );

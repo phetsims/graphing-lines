@@ -11,14 +11,13 @@ define( function( require ) {
   // imports
   var CheckBox = require( 'SUN/CheckBox' );
   var GLStrings = require( 'common/GLStrings' );
-  var GraphNode = require( 'common/view/GraphNode' );
+  var IconFactory = require( 'common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'common/model/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
-  var SlopeToolNode = require( 'common/view/SlopeToolNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // constants
@@ -50,9 +49,9 @@ define( function( require ) {
     var TEXT_OPTIONS = { font: CONTROL_FONT };
     var ICON_SIZE = 60;
     var hideLinesCheckBox = CheckBox.createTextCheckBox( GLStrings.hideLines, TEXT_OPTIONS, notLinesVisible );
-    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisible, { icon: GraphNode.createYEqualsXImage( ICON_SIZE ) } );
-    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisible, { icon: GraphNode.createYEqualsNegativeXImage( ICON_SIZE ) } );
-    var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisible, { icon: SlopeToolNode.createImage( ICON_SIZE ) } );
+    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisible, { icon: IconFactory.createYEqualsXIcon( ICON_SIZE ) } );
+    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisible, { icon: IconFactory.createYEqualsNegativeXIcon( ICON_SIZE ) } );
+    var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisible, { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
     var contentNode = new Node();

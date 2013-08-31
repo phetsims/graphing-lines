@@ -1,3 +1,5 @@
+8/30/13 first pass at PointToolNode, test case in PointSlopeView is commented out because it fails
+8/30/13 completed GraphControls
 8/29/13 first attempt at GraphControls, has problems, lots of work on CheckBox was required
 8/28/13 use scenery-phet.ArrowNode({doubleHead:true}) for axes in GraphNode
 8/28/13 use scenery-phet.ArrowNode({doubleHead:true}) for line in LineNode

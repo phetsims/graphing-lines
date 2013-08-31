@@ -3,11 +3,13 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- implement create* methods in SlopeToolNode and GraphNode, add setEnabled to what's returned
+- debug PointToolNode test case in PointSlopeView
+- write DecimalFormat
 - port common.view package from Java
 - port pointslope.view package from Java
 
 MEDIUM
+- implement IconFactory
 - consider making Line mutable, to reduce affects of garbage collection
 - convert models to PropertySet and axon style
 - Slope Tool icon, for control panel

@@ -61,7 +61,14 @@ define( function( require ) {
     var viewProperties = new LineFormsViewProperties();
     var standardLines = new ObservableArray( [ Line.X_EQUALS_Y, Line.X_EQUALS_NEGATIVE_Y ] );
     thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
-      { x: 200, y: 100 } ) );
+      { x: 800, y: 350 } ) );
+
+    //XXX test
+//    var PointToolNode = require( 'common/view/PointToolNode' );
+//    var PointTool = require( 'common/model/PointTool' );
+//    var Vector2 = require( 'DOT/Vector2' );
+//    var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
+//    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, null, viewProperties.linesVisibleProperty ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

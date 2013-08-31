@@ -15,7 +15,7 @@ define( function( require ) {
   /**
    * @param {Vector} location location of the tool, in model coordinate frame
    * @param {String} orientation, 'up' or 'down'
-   * @param {ObservableArray} lines Lines that the tool might intersect, provided in the order that they would be rendered
+   * @param {ObservableArray<Line>} lines Lines that the tool might intersect, provided in the order that they would be rendered
    * @constructor
    */
   function PointTool( location, orientation, lines ) {

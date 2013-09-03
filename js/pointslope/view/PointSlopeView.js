@@ -59,16 +59,16 @@ define( function( require ) {
     var LineFormsViewProperties = require( 'common/view/LineFormsViewProperties' );
     var ObservableArray = require( 'AXON/ObservableArray' );
     var viewProperties = new LineFormsViewProperties();
-    var standardLines = new ObservableArray( [ Line.Y_EQUALS_X, Line.Y_EQUALS_NEGATIVE_X ] );
-    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
-      { x: 800, y: 350 } ) );
+    var standardLines = new ObservableArray( [ Line.Y_EQUALS_X_LINE, Line.Y_EQUALS_NEGATIVE_X_LINE ] );
+//    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
+//      { x: 800, y: 350 } ) );
 
     //XXX test
-//    var PointToolNode = require( 'common/view/PointToolNode' );
-//    var PointTool = require( 'common/model/PointTool' );
-//    var Vector2 = require( 'DOT/Vector2' );
-//    var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
-//    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, null, viewProperties.linesVisibleProperty ) );
+    var PointToolNode = require( 'common/view/PointToolNode' );
+    var PointTool = require( 'common/model/PointTool' );
+    var Vector2 = require( 'DOT/Vector2' );
+    var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
+    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, null, viewProperties.linesVisibleProperty ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

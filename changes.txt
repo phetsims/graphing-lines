@@ -1,3 +1,4 @@
+9/3/13 debugged PointToolNode, no drag handler yet
 8/30/13 first pass at PointToolNode, test case in PointSlopeView is commented out because it fails
 8/30/13 completed GraphControls
 8/29/13 first attempt at GraphControls, has problems, lots of work on CheckBox was required

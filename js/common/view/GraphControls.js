@@ -94,24 +94,23 @@ define( function( require ) {
        linesVisible.set( !visible );
     });
 
+    var setStandardLineVisible = function( visible, line ) {
+      if ( visible && !standardLines.get( line ) ) {
+        standardLines.add( line );
+      }
+      else if ( !visible && standardLines.get( line ) ) {
+        standardLines.remove( line );
+      }
+    };
+
     // Add/remove standard line "y = x"
     yEqualsXVisible.link( function( visible ) {
-      if ( visible ) {
-        standardLines.add( Line.Y_EQUALS_X_LINE );
-      }
-      else {
-        standardLines.remove( Line.Y_EQUALS_X_LINE );
-      }
+      setStandardLineVisible( visible, Line.Y_EQUALS_X_LINE );
     } );
 
     // Add/remove standard line "y = -x"
     yEqualsNegativeXVisible.link( function( visible ) {
-      if ( visible ) {
-        standardLines.add( Line.Y_EQUALS_NEGATIVE_X_LINE );
-      }
-      else {
-        standardLines.remove( Line.Y_EQUALS_NEGATIVE_X_LINE );
-      }
+      setStandardLineVisible( visible, Line.Y_EQUALS_NEGATIVE_X_LINE );
     } );
 
     // Select/deselect appropriate check boxes when standard lines are added/removed.

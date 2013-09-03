@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- debug PointToolNode test case in PointSlopeView
 - write DecimalFormat
 - port common.view package from Java
 - port pointslope.view package from Java

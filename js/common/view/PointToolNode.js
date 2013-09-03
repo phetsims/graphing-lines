@@ -40,7 +40,7 @@ define( function( require ) {
     Node.call( thisNode );
 
      // tool body
-    var bodyNode = new Image( GLImages.get( "point_tool_body.png" ) );
+    var bodyNode = new Image( GLImages.getImage( "point_tool_body.png" ) );
 
     /*
      * Pointy tip, separate from the body and not pickable.
@@ -48,11 +48,11 @@ define( function( require ) {
      * to pick a line manipulator when the tip and manipulator were on the same grid point.
      * Making the tip non-pickable was determined to be an acceptable and "natural feeling" solution.
      */
-    var tipNode = new Image( GLImages.get( "point_tool_tip.png" ), { pickable: false } );
+    var tipNode = new Image( GLImages.getImage( "point_tool_tip.png" ), { pickable: false } );
 
     // background behind the displayed value, shows through a transparent hole in the display area portion of the body image
     var BACKGROUND_MARGIN = 5;
-    var backgroundNode = new Rectangle( 0, 0, thisNode._bodyNode.width - ( 2 * BACKGROUND_MARGIN ), thisNode._bodyNode.height - ( 2 * BACKGROUND_MARGIN ), { pickable: false } );
+    var backgroundNode = new Rectangle( 0, 0, bodyNode.width - ( 2 * BACKGROUND_MARGIN ), bodyNode.height - ( 2 * BACKGROUND_MARGIN ), { pickable: false } );
 
     // displayed value
     var valueNode = new Text( "?", { font: new PhetFont( { size: 15, weight: 'bold' } ), pickable: false } );
@@ -74,7 +74,7 @@ define( function( require ) {
       valueNode.centerX = backgroundNode.centerX;
       valueNode.centerY = backgroundNode.centerY;
     }
-    else if ( pointTool.location === 'up' ) {
+    else if ( pointTool.orientation === 'up' ) {
       tipNode.rotation = Math.PI;
       tipNode.centerX = 0;
       tipNode.top = 0;
@@ -88,8 +88,6 @@ define( function( require ) {
     else {
       throw new Error( 'unsupported point tool orientation: ' + pointTool.orientation );
     }
-
-    thisNode.mutate( options );
 
     // things needed by prototype functions
     this._bodyNode = bodyNode;
@@ -105,7 +103,7 @@ define( function( require ) {
 
       // move to location
       var location = pointTool.location.get();
-      thisNode.translation = mvt.modelToView( location );
+      thisNode.translation = mvt.modelToViewPosition( location );
 
       // display value and highlighting
       if ( graph.contains( location ) ) {
@@ -149,7 +147,7 @@ define( function( require ) {
 
     // Sets the foreground, the color of the displayed value
     _setForeground: function( color ) {
-      this._valueNode.stroke = color;
+      this._valueNode.fill = color;
     },
 
     // Sets the background, the color of the display area behind the value

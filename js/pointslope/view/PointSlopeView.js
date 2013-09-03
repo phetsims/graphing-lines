@@ -59,7 +59,7 @@ define( function( require ) {
     var LineFormsViewProperties = require( 'common/view/LineFormsViewProperties' );
     var ObservableArray = require( 'AXON/ObservableArray' );
     var viewProperties = new LineFormsViewProperties();
-    var standardLines = new ObservableArray( [ Line.X_EQUALS_Y, Line.X_EQUALS_NEGATIVE_Y ] );
+    var standardLines = new ObservableArray( [ Line.Y_EQUALS_X, Line.Y_EQUALS_NEGATIVE_X ] );
     thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
       { x: 800, y: 350 } ) );
 

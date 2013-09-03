@@ -102,7 +102,7 @@ define( function( require ) {
     else {
       throw new Error( "this implementation supports only horizontal and vertical arrows" );
     }
-    var tipNode = new Path( { shape: tipShape, lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );
+    var tipNode = new Path( tipShape, { lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );
     this.addChild( tipNode );
   }
 

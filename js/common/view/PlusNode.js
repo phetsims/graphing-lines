@@ -35,9 +35,8 @@ define( function( require ) {
       .close();
 
     options = _.extend( { fill: 'black' }, options );
-    options.shape = shape; // don't allow this to be set by client
 
-    Path.call( this, options );
+    Path.call( this, shape, options );
   }
 
   return inherit( Path, PlusNode );

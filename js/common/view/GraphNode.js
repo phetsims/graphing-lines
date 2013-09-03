@@ -79,10 +79,9 @@ define( function( require ) {
     Node.call( this );
 
     // tick line
-    var tickLineNode = new Path( {
-      shape: isVertical ?
-             Shape.lineSegment( x, y - MAJOR_TICK_LENGTH, x, y + MAJOR_TICK_LENGTH ) :
-             Shape.lineSegment( x - MAJOR_TICK_LENGTH, y, x + MAJOR_TICK_LENGTH, y ),
+    var tickLineNode = new Path( isVertical ?
+                                 Shape.lineSegment( x, y - MAJOR_TICK_LENGTH, x, y + MAJOR_TICK_LENGTH ) :
+                                 Shape.lineSegment( x - MAJOR_TICK_LENGTH, y, x + MAJOR_TICK_LENGTH, y ), {
       stroke: MAJOR_TICK_COLOR,
       lineWidth: MAJOR_TICK_LINEWIDTH
     } );
@@ -113,10 +112,9 @@ define( function( require ) {
   //----------------------------------------------------------------------------------------
 
   function MinorTickNode( x, y, isVertical ) {
-    Path.call( this, {
-      shape: isVertical ?
-             Shape.lineSegment( x, y - MINOR_TICK_LENGTH, x, y + MINOR_TICK_LENGTH ) :
-             Shape.lineSegment( x - MINOR_TICK_LENGTH, y, x + MINOR_TICK_LENGTH, y ),
+    Path.call( this, isVertical ?
+                     Shape.lineSegment( x, y - MINOR_TICK_LENGTH, x, y + MINOR_TICK_LENGTH ) :
+                     Shape.lineSegment( x - MINOR_TICK_LENGTH, y, x + MINOR_TICK_LENGTH, y ), {
       lineWidth: MINOR_TICK_LINEWIDTH,
       stroke: MINOR_TICK_COLOR
     } );

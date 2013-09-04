@@ -56,8 +56,8 @@ define( function( require ) {
       } );
     };
     thisModel.interactiveLine.link( updateGraphLines );
-    thisModel.savedLines.addListener( updateGraphLines );
-    thisModel.standardLines.addListener( updateGraphLines );
+    thisModel.savedLines.addListeners( updateGraphLines, updateGraphLines );
+    thisModel.standardLines.addListeners( updateGraphLines, updateGraphLines );
 
     // point tools
     var initialPosition1 = new Vector2( thisModel.graph.xRange.min + ( 0.35 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 0.25 );

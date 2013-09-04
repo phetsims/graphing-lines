@@ -1,3 +1,4 @@
+9/4/13 axon#5, rework ObservableArray
 9/4/13 add drag handler for point tool
 9/3/13 debugged PointToolNode, no drag handler yet
 8/30/13 first pass at PointToolNode, test case in PointSlopeView is commented out because it fails

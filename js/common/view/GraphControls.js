@@ -95,10 +95,10 @@ define( function( require ) {
     });
 
     var setStandardLineVisible = function( visible, line ) {
-      if ( visible && !standardLines.get( line ) ) {
+      if ( visible && !standardLines.contains( line ) ) {
         standardLines.add( line );
       }
-      else if ( !visible && standardLines.get( line ) ) {
+      else if ( !visible && standardLines.contains( line ) ) {
         standardLines.remove( line );
       }
     };
@@ -113,28 +113,24 @@ define( function( require ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_NEGATIVE_X_LINE );
     } );
 
-    // Select/deselect appropriate check boxes when standard lines are added/removed.
-    standardLines.addListener( function( added, removed, list ) {
+    // Select appropriate check boxes when standard lines are added.
+    standardLines.addItemAddedListener( function( line ) {
+      if ( line === Line.Y_EQUALS_X_LINE ) {
+        yEqualsXVisible.set( true );
+      }
+      else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
+        yEqualsNegativeXVisible.set( true );
+      }
+    } );
 
-      // select
-      added.forEach( function( line ) {
-        if ( line === Line.Y_EQUALS_X_LINE ) {
-          yEqualsXVisible.set( true );
-        }
-        else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
-          yEqualsNegativeXVisible.set( true );
-        }
-      } );
-
-      // deselect
-      removed.forEach( function( line ) {
-        if ( line === Line.Y_EQUALS_X_LINE ) {
-          yEqualsXVisible.set( false );
-        }
-        else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
-          yEqualsNegativeXVisible.set( false );
-        }
-      } );
+    // Deselect appropriate check boxes when standard lines are removed.
+    standardLines.addItemRemovedListener( function( line ) {
+      if ( line === Line.Y_EQUALS_X_LINE ) {
+        yEqualsXVisible.set( false );
+      }
+      else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
+        yEqualsNegativeXVisible.set( false );
+      }
     } );
   }
 

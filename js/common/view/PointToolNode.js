@@ -19,11 +19,64 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
+
+  /**
+   * Drag handler for the pointer tool.
+   * @param {PointTool} pointTool
+   * @param {Graph} graph
+   * @param {ModelViewTransform2} mvt
+   * @param {Bounds2} dragBounds
+   * @constructor
+   */
+  function PointToolDragHandler( pointTool, graph, mvt, dragBounds ) {
+
+    var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
+
+    var constrainBounds = function( point, bounds ) {
+      if ( !bounds || bounds.containsPoint( point ) ) {
+        return point;
+      }
+      else {
+        return new Vector2( Util.clamp( point.x, bounds.minX, bounds.maxX ), Util.clamp( point.y, bounds.minY, bounds.maxY ) );
+      }
+    };
+
+    SimpleDragHandler.call( this, {
+
+      allowTouchSnag: true,
+
+      // note where the drag started
+      start: function( event ) {
+        // Note the mouse-click offset when dragging starts.
+        var location = mvt.modelToViewPosition( pointTool.location.get() );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
+        // Move the tool that we're dragging to the foreground.
+        event.currentTarget.moveToFront();
+      },
+
+      drag: function( event ) {
+        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        var location = mvt.viewToModelPosition( parentPoint );
+        location = constrainBounds( location, dragBounds );
+        if ( graph.contains( location ) ) {
+          // snap to the graph's grid
+          location = new Vector2( Util.toFixed( location.x, 0 ), Util.toFixed( location.y, 0 ) );
+        }
+        pointTool.location.set( location );
+      },
+
+      translate: function() { /* override default behavior, do nothing. */ }
+    } );
+  }
+
+  inherit( SimpleDragHandler, PointToolDragHandler );
 
   /**
    * @param {PointTool} pointTool
@@ -128,7 +181,9 @@ define( function( require ) {
     pointTool.onLine.link( update );
     linesVisible.link( update );
 
-    //TODO addInputListener( new PointToolDragHandler ), see below
+    // interactivity
+    thisNode.cursor = 'pointer';
+    thisNode.addInputListener( new PointToolDragHandler( pointTool, graph, mvt, dragBounds ) );
   }
 
   return inherit( Node, PointToolNode, {
@@ -155,71 +210,3 @@ define( function( require ) {
     }
   } );
 } );
-
-//
-//
-//    // Drag handler for the point tool, constrained to the range of the graph, snaps to integer grid.
-//    private static class PointToolDragHandler extends SimSharingDragHandler {
-//
-//        private final PNode dragNode;
-//        private final Property<Vector2D> point;
-//        private final ModelViewTransform mvt;
-//        private final Graph graph;
-//        private final Rectangle2D dragBounds; // drag bounds, in view coordinate frame
-//        private double clickXOffset, clickYOffset; // offset of mouse click from dragNode's origin, in parent's coordinate frame
-//
-//        public PointToolDragHandler( PNode dragNode, Property<Vector2D> point, ModelViewTransform mvt, Graph graph, Rectangle2D dragBounds ) {
-//            super( UserComponents.pointTool, UserComponentTypes.sprite, true );
-//            this.dragNode = dragNode;
-//            this.point = point;
-//            this.mvt = mvt;
-//            this.graph = graph;
-//            this.dragBounds = dragBounds;
-//        }
-//
-//        @Override protected void startDrag( PInputEvent event ) {
-//            super.startDrag( event );
-//            // Note the mouse-click offset when dragging starts.
-//            Point2D pMouse = event.getPositionRelativeTo( dragNode.getParent() );
-//            clickXOffset = pMouse.getX() - mvt.modelToViewX( point.get().getX() );
-//            clickYOffset = pMouse.getY() - mvt.modelToViewY( point.get().getY() );
-//            // Move the tool that we're dragging to the foreground.
-//            dragNode.moveToFront();
-//        }
-//
-//        // Translate the model's location. Snap to integer grid if the location is inside the bounds of the graph.
-//        @Override protected void drag( final PInputEvent event ) {
-//            super.drag( event );
-//            Point2D pMouse = event.getPositionRelativeTo( dragNode.getParent() );
-//            final double viewX = pMouse.getX() - clickXOffset;
-//            final double viewY = pMouse.getY() - clickYOffset;
-//            Vector2D pView = constrainToBounds( viewX, viewY );
-//            point.set( mvt.viewToModel( pView ) );
-//            Vector2D pModel = mvt.viewToModel( pView );
-//            if ( graph.contains( point.get() ) ) {
-//                // snap to the grid
-//                point.set( new Vector2D( MathUtil.roundHalfUp( pModel.getX() ), MathUtil.roundHalfUp( pModel.getY() ) ) );
-//            }
-//            else {
-//                point.set( pModel );
-//            }
-//        }
-//
-//        // Sim-sharing parameters
-//        @Override public ParameterSet getParametersForAllEvents( PInputEvent event ) {
-//            return new ParameterSet().
-//                    with( ParameterKeys.x, COORDINATES_FORMAT.format( point.get().getX() ) ).
-//                    with( ParameterKeys.y, COORDINATES_FORMAT.format( point.get().getY() ) ).
-//                    with( super.getParametersForAllEvents( event ) );
-//        }
-//
-//        /*
-//         * Constrains xy view coordinates to be within some view bounds.
-//         * Assumes the origin is at the bottom center of the drag node.
-//         */
-//        private Vector2D constrainToBounds( double x, double y ) {
-//            return new Vector2D( MathUtil.clamp( dragBounds.getMinX(), x, dragBounds.getMaxX() ),
-//                                 MathUtil.clamp( dragBounds.getMinY(), y, dragBounds.getMaxY() ) );
-//        }
-//    }
-

@@ -68,7 +68,8 @@ define( function( require ) {
     var PointTool = require( 'common/model/PointTool' );
     var Vector2 = require( 'DOT/Vector2' );
     var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
-    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, null, viewProperties.linesVisibleProperty ) );
+    var stageBounds = model.mvt.viewToModelBounds( this.layoutBounds );
+    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

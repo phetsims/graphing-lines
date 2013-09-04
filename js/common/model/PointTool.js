@@ -42,7 +42,7 @@ define( function( require ) {
       thisTool.onLine.set( null );
     };
     thisTool.location.link( updateOnLine );
-    lines.addListeners( updateOnLine, updateOnLine );
+    lines.lengthProperty.link( updateOnLine );
   }
 
   PointTool.prototype = {

@@ -4,7 +4,7 @@
  * Tool that displays the (x,y) coordinates of a grid-point on the graph.
  * Origin is at the tip of the tool (bottom center.)
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

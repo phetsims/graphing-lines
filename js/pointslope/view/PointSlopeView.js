@@ -60,8 +60,8 @@ define( function( require ) {
     var ObservableArray = require( 'AXON/ObservableArray' );
     var viewProperties = new LineFormsViewProperties();
     var standardLines = new ObservableArray( [ Line.Y_EQUALS_X_LINE, Line.Y_EQUALS_NEGATIVE_X_LINE ] );
-//    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
-//      { x: 800, y: 350 } ) );
+    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
+      { x: 800, y: 350 } ) );
 
     //XXX test
     var PointToolNode = require( 'common/view/PointToolNode' );

@@ -24,7 +24,6 @@ define( function( require ) {
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
-  var COORDINATES_Y_CENTER = 21; // center of the display area, measured from the top of the unscaled image file  //TODO used where?
 
   /**
    * @param {PointTool} pointTool

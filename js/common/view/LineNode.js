@@ -142,7 +142,7 @@ define( function( require ) {
       else if ( line.rise <= 0 ) {
         if ( line.run >= 0 ) {
           // equation above the line, at tip
-          this._equationParentNode.translation = this.tipLocation
+          this._equationParentNode.translation = this.tipLocation;
           equationNode.right = -X_OFFSET;
           equationNode.bottom = -Y_OFFSET;
         }

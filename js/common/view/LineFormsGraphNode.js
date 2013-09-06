@@ -46,6 +46,7 @@ define( function( require ) {
     thisNode.standardLinesParentNode = new Node();
     thisNode.savedLinesParentNode = new Node();
     thisNode.interactiveLineParentNode = new Node();
+    thisNode.interactiveLineNode = null;
 
     // Slope tool
     thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt );
@@ -123,7 +124,7 @@ define( function( require ) {
       this.interactiveLineParentNode.removeAllChildren();
       this.interactiveLineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
       this.interactiveLineNode.setEquationVisible( this.viewProperties.interactiveEquationVisible );
-      this.interactiveLineParentNode.addChild( interactiveLineNode );
+      this.interactiveLineParentNode.addChild( this.interactiveLineNode );
     },
 
     // Called when a standard line is added to the model.

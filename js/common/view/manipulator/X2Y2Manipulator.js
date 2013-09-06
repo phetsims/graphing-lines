@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Manipulator for changing a line's slope.
+ * Manipulator for changing a line's (x2,y2) point.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,14 +18,14 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * Drag handler for slope manipulator.
+   * Drag handler for (x2,y2) manipulator.
    * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} riseRangeProperty
-   * @param {Property<Range>} runRangeProperty
+   * @param {Property<Range>} x2RangeProperty
+   * @param {Property<Range>} y2RangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
+  function X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
     var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
@@ -41,15 +41,19 @@ define( function( require ) {
       },
 
       drag: function( event ) {
+        var line = lineProperty.get();
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
         var location = mvt.viewToModelPosition( parentPoint );
-        // constrain to dynamic range, snap to grid
-        var line = lineProperty.get();
-        var run = Math.round( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
-        var rise = Math.round( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
-        // don't allow slope=0/0, undefined line
-        if ( rise !== 0 || run !== 0 ) {
-          lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );
+        // constrain to range, snap to grid
+        var x2 = Math.round( Util.clamp( mvt.viewToModelDeltaX( location.x ), x2RangeProperty.get().min, x2RangeProperty.get().max ) );
+        var y2 = Math.round( Util.clamp( mvt.viewToModelDeltaY( location.y ), y2RangeProperty.get().min, y2RangeProperty.get().max ) );
+        console.log( "x2Range=" + x2RangeProperty.get().toString() );
+        console.log( "y2Range=" + y2RangeProperty.get().toString() );
+        console.log( "x2,y2 = " + x2 + "," + y2 );//XXX
+        // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
+        if ( x2 !== line.x1 || y2 !== line.y1 ) {
+          // Keep (x1,y1) constant, change (x2,y2) and slope.
+          lineProperty.set( new Line( line.x1, line.y1, x2, y2, line.color ) );
         }
       },
 
@@ -57,28 +61,28 @@ define( function( require ) {
     } );
   }
 
-  inherit( SimpleDragHandler, SlopeDragHandler );
+  inherit( SimpleDragHandler, X2Y2DragHandler );
 
   /**
    * @param {Number} diameter
    * @param {Property<Line>} interactiveLineProperty
-   * @param {Property<Range>} riseRangeProperty
-   * @param {Property<Range>} runRangeProperty
+   * @param {Property<Range>} x2RangeProperty
+   * @param {Property<Range>} y2RangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SlopeManipulator( diameter, interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) {
+  function X2Y2Manipulator( diameter, interactiveLineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
     var thisNode = this;
-    LineManipulator.call( thisNode, diameter, GLColors.SLOPE );
+    LineManipulator.call( thisNode, diameter, GLColors.POINT_X2_Y2 );
 
-    // move the manipulator to match the line's slope
+    // move the manipulator to match the line's (x2,y2) point
     interactiveLineProperty.link( function( line ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    this.addInputListener( new SlopeDragHandler( interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) );
+    this.addInputListener( new X2Y2DragHandler( interactiveLineProperty, x2RangeProperty, y2RangeProperty, mvt ) );
   }
 
-  return inherit( LineManipulator, SlopeManipulator );
+  return inherit( LineManipulator, X2Y2Manipulator );
 } );

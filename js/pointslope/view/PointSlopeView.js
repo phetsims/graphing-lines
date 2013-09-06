@@ -72,12 +72,12 @@ define( function( require ) {
     thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
 
     //XXX test
-    var SlopeManipulatorNode = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulatorNode' );
+    var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
     var Range = require( 'DOT/Range' );
     var riseRangeProperty = new Property( new Range( -5, 5 ) );
     var runRangeProperty = new Property( new Range( -5, 5 ) );
     var manipulatorDiameter = model.mvt.modelToViewDeltaX( 0.85 );
-    thisView.addChild( new SlopeManipulatorNode( manipulatorDiameter, lineProperty, riseRangeProperty, runRangeProperty, model.mvt ) );
+    thisView.addChild( new SlopeManipulator( manipulatorDiameter, lineProperty, riseRangeProperty, runRangeProperty, model.mvt ) );
 
   }
 

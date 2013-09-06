@@ -18,7 +18,7 @@ define( function( require ) {
    * @param {Color} color base color used to shade the sphere
    * @constructor
    */
-  function LineManipulatorNode( diameter, color, options ) {
+  function LineManipulator( diameter, color, options ) {
 
     options = _.extend( {
       mainColor: color,
@@ -32,5 +32,5 @@ define( function( require ) {
     ShadedSphereNode.call( this, diameter, options );
   }
 
-  return inherit( ShadedSphereNode, LineManipulatorNode );
+  return inherit( ShadedSphereNode, LineManipulator );
 } );

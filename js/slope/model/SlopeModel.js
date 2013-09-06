@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLColors = require( 'common/GLColors' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'common/model/Line' );
-  var LineFormsModel = require( 'common/model/LineFormsModel' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
 

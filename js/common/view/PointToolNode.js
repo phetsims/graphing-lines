@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLColors = require( 'common/GLColors' );
-  var GLImages = require( 'common/GLImages' );
-  var GLStrings = require( 'common/GLStrings' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );

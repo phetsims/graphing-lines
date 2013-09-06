@@ -10,12 +10,12 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLImages = require( 'common/GLImages' );
-  var GLStrings = require( 'common/GLStrings' );
+  var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var SlopeModel = require( 'slope/model/SlopeModel' );
-  var SlopeView = require( 'slope/view/SlopeView' );
+  var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
+  var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function SlopeScreen() {

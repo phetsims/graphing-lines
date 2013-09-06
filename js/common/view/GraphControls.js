@@ -10,10 +10,10 @@ define( function( require ) {
 
   // imports
   var CheckBox = require( 'SUN/CheckBox' );
-  var GLStrings = require( 'common/GLStrings' );
-  var IconFactory = require( 'common/view/IconFactory' );
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
+  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'common/model/Line' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

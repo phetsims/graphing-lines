@@ -10,12 +10,12 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLImages = require( 'common/GLImages' );
-  var GLStrings = require( 'common/GLStrings' );
+  var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var PointSlopeModel = require( 'pointSlope/model/PointSlopeModel' );
-  var PointSlopeView = require( 'pointSlope/view/PointSlopeView' );
+  var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
+  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function PointSlopeScreen() {

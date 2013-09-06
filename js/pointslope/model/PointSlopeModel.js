@@ -10,10 +10,10 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var GLColors = require( 'common/GLColors' );
-  var Line = require( 'common/model/Line' );
-  var LineFormsModel = require( 'common/model/LineFormsModel' );
-  var PointSlopeParameterRange = require( 'pointslope/model/PointSlopeParameterRange' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
+  var PointSlopeParameterRange = require( 'GRAPHING_LINES/pointslope/model/PointSlopeParameterRange' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
 

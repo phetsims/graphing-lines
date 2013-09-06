@@ -1,3 +1,4 @@
+9/5/13 smorgasbord#1, use GRAPHING_LINES namespace in requirejs imports
 9/4/13 axon#5, rework ObservableArray
 9/4/13 add drag handler for point tool
 9/3/13 debugged PointToolNode, no drag handler yet

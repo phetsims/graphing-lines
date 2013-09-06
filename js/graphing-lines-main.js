@@ -8,12 +8,12 @@
 require( [
   'JOIST/SimLauncher',
   'JOIST/Sim',
-  'slope/SlopeScreen',
-  'slopeIntercept/SlopeInterceptScreen',
-  'pointSlope/PointSlopeScreen',
-  'linegame/LineGameScreen',
-  'common/GLStrings',
-  'common/GLImages' ],
+  'GRAPHING_LINES/slope/SlopeScreen',
+  'GRAPHING_LINES/slopeIntercept/SlopeInterceptScreen',
+  'GRAPHING_LINES/pointSlope/PointSlopeScreen',
+  'GRAPHING_LINES/linegame/LineGameScreen',
+  'GRAPHING_LINES/common/GLStrings',
+  'GRAPHING_LINES/common/GLImages' ],
   function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, LineGameScreen, GLStrings, GLImages ) {
     'use strict';
 

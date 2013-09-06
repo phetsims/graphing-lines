@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var PointSlopeParameterRange = require( 'pointslope/model/PointSlopeParameterRange' );
+  var PointSlopeParameterRange = require( 'GRAPHING_LINES/pointslope/model/PointSlopeParameterRange' );
   var Range = require( 'DOT/Range' );
 
   function SlopeInterceptParameterRange() {

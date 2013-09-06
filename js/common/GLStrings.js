@@ -8,5 +8,5 @@
  */
 define( function( require ) {
   'use strict';
-  return require( 'i18n!../../nls/graphing-lines-strings' );
+  return require( 'i18n!GRAPHING_LINES/../nls/graphing-lines-strings' );
 } );

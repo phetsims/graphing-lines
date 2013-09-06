@@ -8,7 +8,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var imageLoader = require( 'common/GLImages' );
+  var imageLoader = require( 'GRAPHING_LINES/common/GLImages' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PushButton = require( 'SUN/PushButton' );

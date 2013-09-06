@@ -9,10 +9,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Graph = require( 'common/model/Graph' );
+  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var ObservableArray = require( 'AXON/ObservableArray' );
-  var PointTool = require( 'common/model/PointTool' );
+  var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );

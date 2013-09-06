@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLColors = require( 'common/GLColors' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
 
   //TODO this should go away
   var createRectangleIcon = function( width, fill, stroke ) {

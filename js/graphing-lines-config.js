@@ -32,7 +32,10 @@ require.config( {
     PHETCOMMON: '../../phetcommon/js',
     SCENERY: '../../scenery/js',
     SCENERY_PHET: '../../scenery-phet/js',
-    SUN: '../../sun/js'
+    SUN: '../../sun/js',
+
+    // sim code
+    GRAPHING_LINES: '.'
   },
 
   urlArgs: new Date().getTime()  // cache buster to make browser refresh load all included scripts

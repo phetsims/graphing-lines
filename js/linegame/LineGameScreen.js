@@ -10,12 +10,12 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLImages = require( 'common/GLImages' );
-  var GLStrings = require( 'common/GLStrings' );
+  var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var LineGameModel = require( 'linegame/model/LineGameModel' );
-  var LineGameView = require( 'linegame/view/LineGameView' );
+  var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
+  var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function GameScreen() {

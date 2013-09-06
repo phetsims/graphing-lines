@@ -13,11 +13,11 @@ define( function( require ) {
   // imports
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var GLColors = require( 'common/GLColors' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var NumberBackgroundNode = require( 'common/view/NumberBackgroundNode' );
+  var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Shape = require( 'KITE/Shape' );

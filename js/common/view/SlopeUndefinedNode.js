@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLStrings = require( 'common/GLStrings' );
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );

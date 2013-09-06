@@ -11,7 +11,7 @@ define( function( require ) {
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ResetAllButton = require( 'common/view/ResetAllButton' );
+  var ResetAllButton = require( 'GRAPHING_LINES/common/view/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
 
   /**

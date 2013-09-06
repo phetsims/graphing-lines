@@ -12,8 +12,8 @@ define( function( require ) {
   // imports
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Color = require( 'SCENERY/util/Color' );
-  var Fraction = require( 'common/model/Fraction' );
-  var GLColors = require( 'common/GLColors' );
+  var Fraction = require( 'GRAPHING_LINES/common/model/Fraction' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Util = require( 'DOT/Util' );
 
   // Euclid's algorithm for computing the greatest common divisor (GCD) of two integers

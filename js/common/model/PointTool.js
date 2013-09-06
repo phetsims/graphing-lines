@@ -10,7 +10,8 @@ define( function( require ) {
 
   // imports
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
-  var Property = require( 'AXON/Property' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var PropertySet = require( 'AXON/PropertySet' );
 
   /**
    * @param {Vector} location location of the tool, in model coordinate frame
@@ -23,10 +24,12 @@ define( function( require ) {
     assert && assert( orientation === 'up' || orientation === 'down' );
 
     var thisTool = this;
+    PropertySet.call( thisTool, {
+      location: location,
+      onLine: null // line that the tool is on, null if it's not on a line
+    } );
 
-    thisTool.location = new Property( location );
     thisTool.orientation = orientation;
-    thisTool.onLine = new Property( null ); // line that the tool is on, null if it's not on a line
 
     // Update when the point tool moves or the lines change.
     var updateOnLine = function() {
@@ -35,22 +38,17 @@ define( function( require ) {
       for ( var i = lines.length - 1; i >= 0; i-- ) {
         line = lines.get( i );
         if ( thisTool.isOnLine( line ) ) {
-          thisTool.onLine.set( line );
+          thisTool.onLine = line;
           return;
         }
       }
-      thisTool.onLine.set( null );
+      thisTool.onLine = null;
     };
-    thisTool.location.link( updateOnLine );
+    thisTool.locationProperty.link( updateOnLine );
     lines.lengthProperty.link( updateOnLine );
   }
 
-  PointTool.prototype = {
-
-    reset: function() {
-      this.location.reset();
-      this.onLine.reset();
-    },
+  return inherit( PropertySet, PointTool, {
 
     /**
      * Determines if the point tool is on the specified line.
@@ -58,22 +56,20 @@ define( function( require ) {
      * @returns {boolean}
      */
     isOnLine: function( line ) {
-      if ( line.run === 0 && this.location.get().x === line.x1 ) {
+      if ( line.run === 0 && this.location.x === line.x1 ) {
         // slope is undefined, tool is on the line
         return true;
       }
-      else if ( line.rise === 0 && this.location.get().y === line.y1 ) {
+      else if ( line.rise === 0 && this.location.y === line.y1 ) {
         // slope is zero, tool is on the line
         return true;
       }
-      else if ( line.run !== 0 && line.rise !== 0 && this.location.get().y === line.solveY( this.location.get().x ) ) {
+      else if ( line.run !== 0 && line.rise !== 0 && this.location.y === line.solveY( this.location.x ) ) {
         // not one of the 2 special cases above, and the tool is on the line
         return true;
       }
       return false;
     }
-  };
-
-  return PointTool;
+  } );
 } );
 

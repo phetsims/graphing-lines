@@ -55,7 +55,7 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         // Note the mouse-click offset when dragging starts.
-        var location = mvt.modelToViewPosition( pointTool.location.get() );
+        var location = mvt.modelToViewPosition( pointTool.location );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
         // Move the tool that we're dragging to the foreground.
         event.currentTarget.moveToFront();
@@ -69,7 +69,7 @@ define( function( require ) {
           // snap to the graph's grid
           location = new Vector2( Util.toFixed( location.x, 0 ), Util.toFixed( location.y, 0 ) );
         }
-        pointTool.location.set( location );
+        pointTool.location = location;
       },
 
       translate: function() { /* override default behavior, do nothing. */ }
@@ -83,10 +83,10 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @param {Graph} graph
    * @param {Bounds2} dragBounds
-   * @param {Property<Boolean>} linesVisible
+   * @param {Property<Boolean>} linesVisibleProperty
    * @constructor
    */
-  function PointToolNode( pointTool, mvt, graph, dragBounds, linesVisible ) {
+  function PointToolNode( pointTool, mvt, graph, dragBounds, linesVisibleProperty ) {
 
     var thisNode = this;
     Node.call( thisNode );
@@ -147,24 +147,23 @@ define( function( require ) {
     this._valueNode = valueNode;
 
     // initial state
-    this._setCoordinatesVector2( pointTool.location.get() );
+    this._setCoordinatesVector2( pointTool.location );
     this._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
 
     // location and display
     var update = function() {
 
       // move to location
-      var location = pointTool.location.get();
+      var location = pointTool.location;
       thisNode.translation = mvt.modelToViewPosition( location );
 
       // display value and highlighting
       if ( graph.contains( location ) ) {
         thisNode._setCoordinatesVector2( location );
-        if ( linesVisible.get() ) {
+        if ( linesVisibleProperty.get() ) {
           // use the line's color to highlight
-          var onLine = pointTool.onLine.get();
-          thisNode._setForeground( !onLine ? GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR : GLColors.POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR );
-          thisNode._setBackground( !onLine ? GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR : onLine.color );
+          thisNode._setForeground( !pointTool.onLine ? GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR : GLColors.POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR );
+          thisNode._setBackground( !pointTool.onLine ? GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
         }
         else {
           thisNode._setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
@@ -177,9 +176,9 @@ define( function( require ) {
         thisNode._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
       }
     };
-    pointTool.location.link( update );
-    pointTool.onLine.link( update );
-    linesVisible.link( update );
+    pointTool.locationProperty.link( update );
+    pointTool.onLineProperty.link( update );
+    linesVisibleProperty.link( update );
 
     // interactivity
     thisNode.cursor = 'pointer';

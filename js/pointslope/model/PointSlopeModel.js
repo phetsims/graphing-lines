@@ -38,7 +38,7 @@ define( function( require ) {
     thisModel.runRange = new Property( new Range( thisModel.graph.xRange ) );
 
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
-    thisModel.interactiveLine.link( function( line ) {
+    thisModel.interactiveLineProperty.link( function( line ) {
       thisModel.x1Range.set( parameterRange.x1( line, thisModel.graph ) );
       thisModel.y1Range.set( parameterRange.y1( line, thisModel.graph ) );
       thisModel.riseRange.set( parameterRange.rise( line, thisModel.graph ) );

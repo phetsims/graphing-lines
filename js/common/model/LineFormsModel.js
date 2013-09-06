@@ -39,7 +39,7 @@ define( function( require ) {
     thisModel.mvt = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, mvtScale, -mvtScale ); // y is inverted
 
     // lines
-    thisModel.interactiveLine = new Property( interactiveLine );
+    thisModel.interactiveLineProperty = new Property( interactiveLine );
     thisModel.savedLines = new ObservableArray();
     thisModel.standardLines = new ObservableArray();
 
@@ -47,7 +47,7 @@ define( function( require ) {
     var updateGraphLines = function() {
       thisModel.graph.lines.clear();
       // add lines in the order that they would be rendered
-      thisModel.graph.lines.add( thisModel.interactiveLine.get() );
+      thisModel.graph.lines.add( thisModel.interactiveLineProperty.get() );
       thisModel.savedLines.forEach( function( line ) {
         thisModel.graph.lines.add( line );
       } );
@@ -55,7 +55,7 @@ define( function( require ) {
         thisModel.graph.lines.add( line );
       } );
     };
-    thisModel.interactiveLine.link( updateGraphLines );
+    thisModel.interactiveLineProperty.link( updateGraphLines );
     thisModel.savedLines.lengthProperty.link( updateGraphLines );
     thisModel.standardLines.lengthProperty.link( updateGraphLines );
 
@@ -69,7 +69,7 @@ define( function( require ) {
   LineFormsModel.prototype = {
 
     reset: function() {
-      this.interactiveLine.reset();
+      this.interactiveLineProperty.reset();
       this.savedLines.clear();
       this.standardLines.clear();
       this.pointTool1.reset();

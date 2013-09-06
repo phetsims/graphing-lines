@@ -72,13 +72,16 @@ define( function( require ) {
     thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
 
     //XXX test
+    var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
     var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
     var Range = require( 'DOT/Range' );
+    var x1RangeProperty = new Property( new Range( -5, 5 ) );
+    var y1RangeProperty = new Property( new Range( -5, 5 ) );
     var riseRangeProperty = new Property( new Range( -5, 5 ) );
     var runRangeProperty = new Property( new Range( -5, 5 ) );
     var manipulatorDiameter = model.mvt.modelToViewDeltaX( 0.85 );
+    thisView.addChild( new X1Y1Manipulator( manipulatorDiameter, lineProperty, x1RangeProperty, y1RangeProperty, model.mvt, true ) );
     thisView.addChild( new SlopeManipulator( manipulatorDiameter, lineProperty, riseRangeProperty, runRangeProperty, model.mvt ) );
-
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

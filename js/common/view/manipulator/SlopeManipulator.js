@@ -35,19 +35,21 @@ define( function( require ) {
 
       // note where the drag started
       start: function( event ) {
-        var location = mvt.modelToViewPosition( new Vector2( lineProperty.get().x2, lineProperty.get().y2 ) );
+        var line = lineProperty.get();
+        var location = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
+        var line = lineProperty.get();
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
         var location = mvt.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
-        var run = Math.round( Util.clamp( location.x - lineProperty.get().x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
-        var rise = Math.round( Util.clamp( location.y - lineProperty.get().y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
+        var run = Math.round( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
+        var rise = Math.round( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
-          lineProperty.set( Line.createPointSlope( lineProperty.get().x1, lineProperty.get().y1, rise, run, lineProperty.get().color ) );
+          lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );
         }
       }
     } );

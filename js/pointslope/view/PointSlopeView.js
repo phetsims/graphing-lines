@@ -87,6 +87,16 @@ define( function( require ) {
 //    thisView.addChild( new X2Y2Manipulator( manipulatorDiameter, lineProperty, x2RangeProperty, y2RangeProperty, model.mvt ) );
 //    thisView.addChild( new SlopeManipulator( manipulatorDiameter, lineProperty, riseRangeProperty, runRangeProperty, model.mvt ) );
     thisView.addChild( new YInterceptManipulator( manipulatorDiameter, lineProperty, y1RangeProperty, model.mvt ) );
+
+    //XXX test
+    var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
+    var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+    var pointProperty = new Property( new Vector2( 1, -1 ) );
+    var otherPointProperties = [
+      new Property( new Vector2( 2, -2 ) ),
+      new Property( new Vector2( 3, -3 ) )
+    ];
+    thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

@@ -70,6 +70,11 @@ define( function( require ) {
     var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
     var stageBounds = model.mvt.viewToModelBounds( this.layoutBounds );
     thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
+
+    //XXX test
+    var LineManipulatorNode = require( 'GRAPHING_LINES/common/view/manipulator/LineManipulatorNode' );
+    var Color = require( 'SCENERY/util/Color' );
+    thisView.addChild( new LineManipulatorNode( 50, Color.RED, { x: 100, y: 100 } ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

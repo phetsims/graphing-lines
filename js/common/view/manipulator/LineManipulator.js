@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado
 
 /**
- * Manipulator for interacting directly with a line.
+ * Base type for all line manipulators.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

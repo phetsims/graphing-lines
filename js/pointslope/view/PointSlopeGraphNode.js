@@ -2,7 +2,7 @@
 
 /**
  * Graph that provides direct manipulation of a line in point-slope form.
- * Adds manipulators for point and slope to the base class functionality.
+ * Extends the base type by adding manipulators for point and slope.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

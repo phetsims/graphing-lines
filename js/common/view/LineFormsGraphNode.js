@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado
 
 /**
- * Base class for the 'Slope', 'Slope-Intercept' and 'Point-Slope' graphs.
+ * Base type for the 'Slope', 'Slope-Intercept' and 'Point-Slope' graphs.
  * <p>
  * Displays the following:
  * <ul>

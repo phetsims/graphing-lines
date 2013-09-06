@@ -3,7 +3,7 @@
 /**
  * Visual representation of a line.
  * <p>
- * By default, a line is not labeled with an equation. Subclasses are responsible for decorating the line
+ * By default, a line is not labeled with an equation. Subtypes are responsible for decorating the line
  * with an equation in the correct form (slope, slope-intercept, point-slope.) The line's equation is
  * positioned towards the tip, parallel with the line.
  *
@@ -101,7 +101,7 @@ define( function( require ) {
 
     /*
      * By default, a line does not display an equation.
-     * Subclasses must override this method to return an equation in the correct form.
+     * Subtypes must override this method to return an equation in the correct form.
      */
     _createEquationNode: function( line, font, color ) {
       return new Node();

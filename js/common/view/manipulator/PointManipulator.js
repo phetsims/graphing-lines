@@ -14,7 +14,7 @@ define( function( require ) {
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' )
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * Drag handler for arbitrary point.

@@ -106,7 +106,7 @@ define( function( require ) {
     // Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
       // interactive line
-      if ( this.interactiveLineParentNode != null ) {
+      if ( this.interactiveLineParentNode !== null ) {
         this.interactiveLineParentNode.setVisible( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
       }
 

@@ -4,7 +4,7 @@
  * Base class for graphs, displays a 2D grid and axes.
  * The node's origin is at model coordinate (0,0).
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

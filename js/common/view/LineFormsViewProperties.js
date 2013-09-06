@@ -3,7 +3,7 @@
 /**
  * Properties that are specific to the view for the "Slope", "Slope-Intercept" and "Point-Slope" tabs.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

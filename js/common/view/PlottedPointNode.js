@@ -3,7 +3,7 @@
 /**
  * A plotted point on a graph, not interactive.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

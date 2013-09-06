@@ -7,7 +7,7 @@
  * with an equation in the correct form (slope, slope-intercept, point-slope.) The line's equation is
  * positioned towards the tip, parallel with the line.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

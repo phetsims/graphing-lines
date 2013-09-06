@@ -4,7 +4,7 @@
  * Text node that stays synchronized with a dynamic value. This is used in interactive equations,
  * to keep non-interactive parts of the equation synchronized with the model.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

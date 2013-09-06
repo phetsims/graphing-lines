@@ -5,7 +5,7 @@
  * It displays the rise and run values of the slope.
  * Drawn in the global coordinate frame of the view.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

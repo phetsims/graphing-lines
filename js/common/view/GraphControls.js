@@ -3,7 +3,7 @@
 /**
  * Controls for various features related to the graph.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

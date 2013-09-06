@@ -1,3 +1,4 @@
+9/5/13 port and test slope manipulator
 9/5/13 port and test of LineManipulatorNode
 9/5/13 port LineFormsGraphNode and PointSlopeGraphNode (untested, require other things yet to be ported)
 9/5/13 use 'Property' suffix for fields that are of type Property, to differentiate from PropertySet fields

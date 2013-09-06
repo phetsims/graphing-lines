@@ -1,3 +1,4 @@
+9/6/13 port and test y-intercept manipulator
 9/6/13 port and test (x2,y2) manipulator
 9/5/13 port and test slope manipulator
 9/5/13 port and test (x1,y1) manipulator

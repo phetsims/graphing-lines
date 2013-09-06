@@ -28,7 +28,7 @@ define( function( require ) {
    */
   function X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
 
-    var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    var startOffset; // where the drag started, relative to (x1,y1), in parent view coordinates
 
     SimpleDragHandler.call( this, {
 

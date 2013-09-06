@@ -27,7 +27,7 @@ define( function( require ) {
    */
   function YInterceptDragHandler( lineProperty, y1RangeProperty, mvt ) {
 
-    var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    var startOffset; // where the drag started, relative to the y-intercept, in parent view coordinates
 
     SimpleDragHandler.call( this, {
 

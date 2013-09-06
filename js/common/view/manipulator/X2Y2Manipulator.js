@@ -27,7 +27,7 @@ define( function( require ) {
    */
   function X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
-    var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    var startOffset; // where the drag started, relative to (x2,y2), in parent view coordinates
 
     SimpleDragHandler.call( this, {
 

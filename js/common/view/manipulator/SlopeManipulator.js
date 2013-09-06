@@ -12,7 +12,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineManipulator = require( 'GRAPHING_LINES/common/view/manipulator/LineManipulator' );
+  var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -70,7 +70,7 @@ define( function( require ) {
   function SlopeManipulator( diameter, interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) {
 
     var thisNode = this;
-    LineManipulator.call( thisNode, diameter, GLColors.SLOPE );
+    Manipulator.call( thisNode, diameter, GLColors.SLOPE );
 
     // move the manipulator to match the line's slope
     interactiveLineProperty.link( function( line ) {
@@ -80,5 +80,5 @@ define( function( require ) {
     this.addInputListener( new SlopeDragHandler( interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) );
   }
 
-  return inherit( LineManipulator, SlopeManipulator );
+  return inherit( Manipulator, SlopeManipulator );
 } );

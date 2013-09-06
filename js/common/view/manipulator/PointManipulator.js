@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var LineManipulator = require( 'GRAPHING_LINES/common/view/manipulator/LineManipulator' );
+  var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' )
@@ -83,7 +83,7 @@ define( function( require ) {
   function PointManipulator( diameter, color, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) {
 
     var thisNode = this;
-    LineManipulator.call( thisNode, diameter, color );
+    Manipulator.call( thisNode, diameter, color );
 
     // move the manipulator to match the point
     pointProperty.link( function( point ) {
@@ -93,5 +93,5 @@ define( function( require ) {
     this.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) );
   }
 
-  return inherit( LineManipulator, PointManipulator );
+  return inherit( Manipulator, PointManipulator );
 } );

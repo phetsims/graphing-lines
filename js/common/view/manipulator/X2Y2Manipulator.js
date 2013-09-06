@@ -12,7 +12,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineManipulator = require( 'GRAPHING_LINES/common/view/manipulator/LineManipulator' );
+  var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -71,7 +71,7 @@ define( function( require ) {
   function X2Y2Manipulator( diameter, interactiveLineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
     var thisNode = this;
-    LineManipulator.call( thisNode, diameter, GLColors.POINT_X2_Y2 );
+    Manipulator.call( thisNode, diameter, GLColors.POINT_X2_Y2 );
 
     // move the manipulator to match the line's (x2,y2) point
     interactiveLineProperty.link( function( line ) {
@@ -81,5 +81,5 @@ define( function( require ) {
     this.addInputListener( new X2Y2DragHandler( interactiveLineProperty, x2RangeProperty, y2RangeProperty, mvt ) );
   }
 
-  return inherit( LineManipulator, X2Y2Manipulator );
+  return inherit( Manipulator, X2Y2Manipulator );
 } );

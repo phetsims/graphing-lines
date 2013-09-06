@@ -56,20 +56,20 @@ define( function( require ) {
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
     var contentNode = new Node();
     var previousNode = hideLinesCheckBox;
-    var ySpacing = 15;
+    var Y_SPACING = 15;
     contentNode.addChild( hideLinesCheckBox );
     if ( options.includeStandardLines ) {
       contentNode.addChild( positiveCheckBox );
       positiveCheckBox.left = hideLinesCheckBox.left;
-      positiveCheckBox.top = hideLinesCheckBox.bottom + ySpacing;
+      positiveCheckBox.top = hideLinesCheckBox.bottom + Y_SPACING;
       negativeCheckBox.left = hideLinesCheckBox.left;
-      negativeCheckBox.top = positiveCheckBox.bottom + ySpacing;
+      negativeCheckBox.top = positiveCheckBox.bottom + Y_SPACING;
       contentNode.addChild( negativeCheckBox );
       previousNode = negativeCheckBox;
     }
     contentNode.addChild( slopeCheckBox );
     slopeCheckBox.left = hideLinesCheckBox.left;
-    slopeCheckBox.top = previousNode.bottom + ySpacing;
+    slopeCheckBox.top = previousNode.bottom + Y_SPACING;
 
     Panel.call( thisNode, contentNode, {
       fill: 'white',

@@ -5,16 +5,16 @@ DESIGN
 HIGH
 - write DecimalFormat
 - port common.view package from Java
+- port common.view.manipulator package from Java
+- port common.view.spinner package from Java
 - port pointslope.view package from Java
 
 MEDIUM
 - implement IconFactory
-- consider making Line mutable, to reduce affects of garbage collection
-- convert models to PropertySet and axon style
-- Slope Tool icon, for control panel
-- Graph icons, for control panel
 
 LOW
+- convert models to PropertySet and axon style
+- consider making Line mutable, to reduce affects of garbage collection
 - change 'tab.*' string keys to 'screen.*'
 - remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
 - import all string files from Java sim

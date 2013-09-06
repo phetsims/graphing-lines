@@ -13,9 +13,16 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   function PlottedPointNode( diameter, color, options ) {
-    options = _.extend( { lineWidth: 1, pickable: false }, options );
-    options.outerColor = color;
-    options.stroke = options.outerColor;
+
+    options = _.extend( {
+      pickable: false,
+      highlightColor: 'white',
+      mainColor: color,
+      shadowColor: color.darkerColor(),
+      stroke: color.darkerColor().darkerColor(),
+      lineWidth: 1
+    }, options );
+
     ShadedSphereNode.call( this, diameter, options );
   }
 

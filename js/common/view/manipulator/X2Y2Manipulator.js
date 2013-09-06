@@ -45,11 +45,8 @@ define( function( require ) {
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
         var location = mvt.viewToModelPosition( parentPoint );
         // constrain to range, snap to grid
-        var x2 = Math.round( Util.clamp( mvt.viewToModelDeltaX( location.x ), x2RangeProperty.get().min, x2RangeProperty.get().max ) );
-        var y2 = Math.round( Util.clamp( mvt.viewToModelDeltaY( location.y ), y2RangeProperty.get().min, y2RangeProperty.get().max ) );
-        console.log( "x2Range=" + x2RangeProperty.get().toString() );
-        console.log( "y2Range=" + y2RangeProperty.get().toString() );
-        console.log( "x2,y2 = " + x2 + "," + y2 );//XXX
+        var x2 = Math.round( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
+        var y2 = Math.round( Util.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
         // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
           // Keep (x1,y1) constant, change (x2,y2) and slope.

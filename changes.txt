@@ -1,3 +1,4 @@
+9/5/13 port LineFormsGraphNode and PointSlopeGraphNode (untested, require other things yet to be ported)
 9/5/13 use 'Property' suffix for fields that are of type Property, to differentiate from PropertySet fields
 9/5/13 convert PointTool to PropertySet
 9/5/13 smorgasbord#1, use GRAPHING_LINES namespace in requirejs imports

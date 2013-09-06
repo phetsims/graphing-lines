@@ -1,0 +1,171 @@
+// Copyright 2002-2013, University of Colorado
+
+/**
+ * Base class for the 'Slope', 'Slope-Intercept' and 'Point-Slope' graphs.
+ * <p>
+ * Displays the following:
+ * <ul>
+ * <li>one interactive line</li>
+ * <li>slope tool for interactive line</li>
+ * <li>zero or more 'saved' lines</li>
+ * <li>zero or more 'standard' lines</li>
+ * </ul>
+ * <p>
+ * Note: All properties of this type should be considered private.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
+define( function( require ) {
+  'use strict';
+
+  // imports
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GraphNode = require( 'PATH/GraphNode' );
+  var HighlightListener = require( 'SCENERY_PHET/input/HighlightListener' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
+  var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
+
+  // constants
+  var MANIPULATOR_DIAMETER = 0.85; // diameter of the manipulators, in model units
+
+  /**
+   * @param {LineFormsModel } model
+   * @param {LineFormsViewProperties} viewProperties
+   * @constructor
+   */
+  function LineFormsGraphNode( model, viewProperties ) {
+
+    var thisNode = this;
+    GraphNode.call( thisNode, model.graph, model.mvt );
+
+    thisNode.model = model;
+    thisNode.viewProperties = viewProperties;
+
+    // Parent nodes for each category of line (standard, saved, interactive) to maintain rendering order
+    thisNode.standardLinesParentNode = new Node();
+    thisNode.savedLinesParentNode = new Node();
+    thisNode.interactiveLineParentNode = new Node();
+
+    // Slope tool
+    thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt );
+
+    // Rendering order
+    thisNode.addChild( this.interactiveLineParentNode );
+    thisNode.addChild( this.savedLinesParentNode );
+    thisNode.addChild( this.standardLinesParentNode );
+    thisNode.addChild( this.slopeToolNode );
+
+    // Add/remove standard lines
+    model.standardLines.addListeners(
+      function( line ) { thisNode.standardLineAdded( line ); },
+      function( line ) { thisNode.standardLineRemoved( line ); }
+    );
+
+    // Add/remove saved lines
+    model.savedLines.addListeners(
+      function( line ) { thisNode.savedLineAdded( line ); },
+      function( line ) { thisNode.savedLineRemoved( line ); } );
+
+    // When the interactive line changes, update the graph.
+    model.interactiveLineProperty.link( function( line ) {
+      thisNode.updateInteractiveLine( line );
+    } );
+
+    // Visibility of lines
+    viewProperties.linesVisibleProperty.link( thisNode.updateLinesVisibility );
+    viewProperties.interactiveLineVisibleProperty.link( thisNode.updateLinesVisibility );
+    viewProperties.slopeVisibleProperty.link( thisNode.updateLinesVisibility );
+
+    // Visibility of the equation on the interactive line
+    thisNode.viewProperties.interactiveEquationVisibleProperty.link( function( visible ) {
+      if ( thisNode.interactiveLineNode ) {
+        thisNode.interactiveLineNode.setEquationVisible( visible );
+      }
+    } );
+  }
+
+  return inherit( GraphNode, LineFormsGraphNode, {
+
+    /**
+     * Creates a line node of the proper form.
+     * @param {Line} line
+     * @param {Graph} graph
+     * @param {ModelViewTransform2} mvt
+     */
+    createLineNode: function( line, graph, mvt ) {
+      throw new Error( "createLineNode must be provided by subtype" );
+    },
+
+    // Gets the diameter of manipulators, in view coordinate frame.
+    getManipulatorDiameter: function() {
+      return this.model.mvt.modelToViewDeltaX( MANIPULATOR_DIAMETER );
+    },
+
+    // Updates the visibility of lines and associated decorations
+    updateLinesVisibility: function() {
+      // interactive line
+      if ( this.interactiveLineParentNode != null ) {
+        this.interactiveLineParentNode.setVisible( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
+      }
+
+      // saved & standard lines
+      this.savedLinesParentNode.setVisible( this.viewProperties.linesVisible );
+      this.standardLinesParentNode.setVisible( this.viewProperties.linesVisible );
+
+      // slope tool
+      this.slopeToolNode.setVisible( this.viewProperties.slopeVisible && this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
+    },
+
+    // Updates the line and its associated decorations
+    updateInteractiveLine: function( line ) {
+      // replace the line node
+      this.interactiveLineParentNode.removeAllChildren();
+      this.interactiveLineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
+      this.interactiveLineNode.setEquationVisible( this.viewProperties.interactiveEquationVisible );
+      this.interactiveLineParentNode.addChild( interactiveLineNode );
+    },
+
+    // Called when a standard line is added to the model.
+    standardLineAdded: function( line ) {
+      this.standardLinesParentNode.addChild( this.createLineNode( line, this.model.graph, this.model.mvt ) );
+    },
+
+    // Called when a standard line is removed from the model.
+    standardLineRemoved: function( line ) {
+      this.removeLineNode( line, this.standardLinesParentNode );
+    },
+
+    // Called when a saved line is added to the model.
+    savedLineAdded: function( line ) {
+      var lineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
+      this.savedLinesParentNode.addChild( lineNode );
+      // highlight on mouseOver
+      lineNode.addInputListener( new HighlightListener( function( highlighted ) {
+        lineNode.updateColor( highlighted ? GLColors.SAVED_LINE_HIGHLIGHT : line.color );
+      } ) );
+    },
+
+    // Called when a saved line is removed from the model.
+    savedLineRemoved: function( line ) {
+      this.removeLineNode( line, this.savedLinesParentNode );
+    },
+
+     // Removes the node that corresponds to the specified line.
+    removeLineNode: function( line, parentNode ) {
+      for ( var i = 0; i < parentNode.getChildrenCount(); i++ ) {
+        var node = parentNode.getChildAt( i );
+        if ( node.line === line ) {
+          parentNode.removeChild( node );
+          break;
+        }
+      }
+    }
+  } );
+} );
+
+
+
+
+
+

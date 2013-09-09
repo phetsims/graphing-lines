@@ -5,10 +5,10 @@ DESIGN
 HIGH
 - write DecimalFormat
 - port common.view package from Java
-- port common.view.spinner package from Java
 - port pointslope.view package from Java
 
 MEDIUM
+- add press-&-hold feature to Spinner
 - implement IconFactory
 
 LOW

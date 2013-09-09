@@ -16,6 +16,7 @@ define( function( require ) {
 
   //XXX test imports
   var Color = require( 'SCENERY/util/Color' );
+  var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
@@ -29,10 +30,12 @@ define( function( require ) {
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
   var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
   var X2Y2Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X2Y2Manipulator' );
@@ -124,6 +127,15 @@ define( function( require ) {
     runSpinner.top = riseSpinner.bottom + 10;
     thisView.addChild( riseSpinner );
     thisView.addChild( runSpinner );
+
+    //XXX test
+    var titleNode = new Text( "control panel title", { stroke: 'black' } );
+    var savedLinesProperty = new ObservableArray();
+    var maximizedProperty = new Property( true );
+    var interactiveEquationNode = new Rectangle( 0, 0, 200, 30, { fill: 'blue' } );
+    var equationControls = new EquationControls( titleNode, lineProperty, savedLinesProperty,
+      maximizedProperty, viewProperties.linesVisibleProperty, interactiveEquationNode, { x: 100, y: 100 } );
+    thisView.addChild( equationControls );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

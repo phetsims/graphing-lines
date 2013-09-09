@@ -22,11 +22,12 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
 
-  var createBackgroundGradient = function( color, height ) {
+  // creates a vertical gradient where with color1 at the top and bottom, color2 in the center
+  var createBackgroundGradient = function( color1, color2, height ) {
     return new LinearGradient( 0, 0, 0, height )
-      .addColorStop( 0, color )
-      .addColorStop( 0.5, 'white' )
-      .addColorStop( 1, color );
+      .addColorStop( 0, color1 )
+      .addColorStop( 0.5, color2 )
+      .addColorStop( 1, color1 );
   };
 
   //-------------------------------------------------------------------------------------------
@@ -136,10 +137,11 @@ define( function( require ) {
       out: color,
       disabled: 'gray'
     };
+    var centerColor = 'white';
     var backgroundColors = {
-      up: createBackgroundGradient( color, backgroundHeight ),
-      over: createBackgroundGradient( color, backgroundHeight ),
-      down: createBackgroundGradient( color.darkerColor(), backgroundHeight ),
+      up: createBackgroundGradient( color, centerColor, backgroundHeight ),
+      over: createBackgroundGradient( color, centerColor, backgroundHeight ),
+      down: createBackgroundGradient( color.darkerColor(), centerColor, backgroundHeight ),
       out: 'white',
       disabled: 'white'
     };

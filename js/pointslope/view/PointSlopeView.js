@@ -107,8 +107,8 @@ define( function( require ) {
     var spinnerValueProperty = new Property( 3 );
     var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
     thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty,
-      function() { spinnerValueProperty.set( spinnerValueProperty.get() + 1 ); },
-      function() { spinnerValueProperty.set( spinnerValueProperty.get() - 1 ); },
+      function() { return spinnerValueProperty.get() + 1; },
+      function() { return spinnerValueProperty.get() - 1; },
       { x: 700, y: 100, font: new PhetFont( 80 ), color: Color.BLUE }
     ) );
   }

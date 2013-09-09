@@ -62,22 +62,17 @@ define( function( require ) {
     ButtonListener.call( this, {
       up: function() {
         stateProperty.set( 'up' );
-        console.log( 'up' );//XXX
       },
       over: function() {
         stateProperty.set( 'over' );
-        console.log( 'over' );//XXX
       },
       down: function() {
         stateProperty.set( 'down' );
-        console.log( 'down' );//XXX
       },
       out: function() {
         stateProperty.set( 'out' );
-        console.log( 'out' );//XXX
       },
       fire: function() {
-        console.log( 'fire' );//XXX
         if ( enabledProperty.get() ) {
           fireFunction();
         }
@@ -92,12 +87,12 @@ define( function( require ) {
   /**
    * @param {Property<Number>} valueProperty
    * @param {Property<Range>} rangeProperty
-   * @param {Function} upFunction
-   * @param {Function} downFunction
+   * @param {Function} upFunction returns the value for 'up' button
+   * @param {Function} downFunction return the value for 'down' button
    * @param {*} options
    * @constructor
    */
-  function Spinner( valueProperty ,rangeProperty, upFunction, downFunction, options ) {
+  function Spinner( valueProperty, rangeProperty, upFunction, downFunction, options ) {
 
     options = _.extend( {
       color: 'blue',
@@ -155,24 +150,32 @@ define( function( require ) {
       disabled: 'white'
     };
 
+    // callbacks for changing the value
+    var fireUp = function() {
+      valueProperty.set( upFunction() );
+    };
+    var fireDown = function() {
+      valueProperty.set( downFunction() );
+    };
+
     // top half of the background, for "up"
-    var upBackground = new Path( Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight/2 ) ); //TODO use CAG to round top corners
-    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, upFunction ) );
+    var upBackground = new Path( Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight / 2 ) ); //TODO use CAG to round top corners
+    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp ) );
 
     // bottom half of the background, for "down"
-    var downBackground = new Path( Shape.rectangle( 0, backgroundHeight / 2, backgroundWidth, backgroundHeight/2 ) ); //TODO use CAG to round top corners
-    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, downFunction ) );
+    var downBackground = new Path( Shape.rectangle( 0, backgroundHeight / 2, backgroundWidth, backgroundHeight / 2 ) ); //TODO use CAG to round top corners
+    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown ) );
 
     // compute size of arrows
     var arrowButtonSize = new Dimension2( 0.5 * backgroundWidth, 0.1 * backgroundWidth );
 
     // up (increment) arrow
     var upArrow = new ArrowButton( arrowButtonSize, 'up' );
-    upArrow.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, upFunction ) );
+    upArrow.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp ) );
 
     // down (decrement) arrow
     var downArrow = new ArrowButton( arrowButtonSize, 'down' );
-    downArrow.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, downFunction ) );
+    downArrow.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown ) );
 
     // rendering order
     thisNode.addChild( upBackground );
@@ -181,7 +184,7 @@ define( function( require ) {
     thisNode.addChild( downArrow );
     thisNode.addChild( textNode );
 
-     // layout, background nodes are already drawn in the local coordinate frame
+    // layout, background nodes are already drawn in the local coordinate frame
     var ySpacing = 3;
     textNode.x = 0;
     textNode.centerY = backgroundHeight / 2;

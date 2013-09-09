@@ -14,6 +14,28 @@ define( function( require ) {
   var ResetAllButton = require( 'GRAPHING_LINES/common/view/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
 
+  //XXX test imports
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
+  var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
+  var ObservableArray = require( 'AXON/ObservableArray' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
+  var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
+  var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
+  var Property = require( 'AXON/Property' );
+  var Range = require( 'DOT/Range' );
+  var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
+  var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
+//  var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
+  var Vector2 = require( 'DOT/Vector2' );
+  var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
+  var X2Y2Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X2Y2Manipulator' );
+  var YInterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/YInterceptManipulator' );
+
   /**
    * @param {PointSlopeModel} model
    * @constructor
@@ -36,16 +58,10 @@ define( function( require ) {
     resetAllButton.top = 100;
 
     //XXX test
-    var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
-    var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
-    var Range = require( 'DOT/Range' );
     var graph = new Graph( new Range( -10, 10 ), new Range( -10, 10 ) );
     thisView.addChild( new GraphNode( graph, model.mvt ) );
 
     //XXX test
-    var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-    var Property = require( 'AXON/Property' );
-    var Line = require( 'GRAPHING_LINES/common/model/Line');
     var line = new Line( 0, 0, 5, 5 );
     var lineProperty = new Property( line );
     thisView.addChild( new SlopeToolNode( lineProperty, model.mvt ) );
@@ -55,27 +71,17 @@ define( function( require ) {
     thisView.addChild( new LineNode( line, graph, model.mvt ) );
 
     //XXX test
-    var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
-    var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
-    var ObservableArray = require( 'AXON/ObservableArray' );
     var viewProperties = new LineFormsViewProperties();
     var standardLines = new ObservableArray( [ Line.Y_EQUALS_X_LINE, Line.Y_EQUALS_NEGATIVE_X_LINE ] );
     thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
       { x: 800, y: 350 } ) );
 
     //XXX test
-    var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
-    var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-    var Vector2 = require( 'DOT/Vector2' );
     var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
     var stageBounds = model.mvt.viewToModelBounds( this.layoutBounds );
     thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
 
     //XXX test
-    var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
-    var X2Y2Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X2Y2Manipulator' );
-    var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
-    var YInterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/YInterceptManipulator' );
     var x1RangeProperty = new Property( new Range( -5, 5 ) );
     var y1RangeProperty = new Property( new Range( -5, 5 ) );
     var x2RangeProperty = new Property( new Range( -10, 10 ) );
@@ -89,14 +95,22 @@ define( function( require ) {
     thisView.addChild( new YInterceptManipulator( manipulatorDiameter, lineProperty, y1RangeProperty, model.mvt ) );
 
     //XXX test
-    var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
-    var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
     var pointProperty = new Property( new Vector2( 1, -1 ) );
     var otherPointProperties = [
       new Property( new Vector2( 2, -2 ) ),
       new Property( new Vector2( 3, -3 ) )
     ];
     thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
+
+    //XXX
+//    var spinnerValueProperty = new Property( 3 );
+//    var spinnerRangeProperty = new Range( -10, 10 );
+//    var spinnerColors = { inactive: 'red', highlighted: 'yellow', pressed: 'green', disabled: 'gray' };
+//    var spinnerFont = new PhetFont( 30 );
+//    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, spinnerColors, spinnerFont, 0,
+//      function() { console.log( 'spinner.upFunction' ); },
+//      function() { console.log( 'spinner.downFunction' ); }
+//    ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

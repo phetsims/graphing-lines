@@ -147,13 +147,11 @@ define( function( require ) {
     };
 
     // top half of the background, for "up"
-    var upBackground = new Path( Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight/2 ), //TODO use CAG to round top corners
-      { fill: 'white' } );
+    var upBackground = new Path( Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight/2 ) ); //TODO use CAG to round top corners
     upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, upFunction ) );
 
     // bottom half of the background, for "down"
-    var downBackground = new Path( Shape.rectangle( 0, backgroundHeight / 2, backgroundWidth, backgroundHeight/2 ), //TODO use CAG to round top corners
-      { fill: 'white' } );
+    var downBackground = new Path( Shape.rectangle( 0, backgroundHeight / 2, backgroundWidth, backgroundHeight/2 ) ); //TODO use CAG to round top corners
     downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, downFunction ) );
 
     // compute size of arrows

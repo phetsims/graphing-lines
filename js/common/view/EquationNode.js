@@ -15,10 +15,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
-  var RiseSpinner = require( 'GRAPHING_LINES/common/view/spinner/RiseSpinner' );
-  var RunSpinner = require( 'GRAPHING_LINES/common/view/spinner/RunSpinner' );
   var Shape = require( 'KITE/Shape' );
-  var SpinnerStateIndicator = require( 'GRAPHING_LINES/common/view/spinner/SpinnerStateIndicator' );
+  var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
 
   /**
    * @param {Number} pointSize point size of the font used to render the equation
@@ -82,14 +80,10 @@ define( function( require ) {
     computeMaxSlopeSpinnerWidth: function( riseRange, runRange, font, decimalPlaces ) {
 
       // Create prototypical spinners.
-      var maxRiseNode = new RiseSpinner( new Property( riseRange.get().max ), new Property( runRange.get().max ), riseRange,
-        SpinnerStateIndicator.SLOPE_COLORS, font, decimalPlaces );
-      var minRiseNode = new RiseSpinner( new Property( riseRange.get().min ), new Property( runRange.get().max ), riseRange,
-        SpinnerStateIndicator.SLOPE_COLORS, font, decimalPlaces );
-      var maxRunNode = new RunSpinner( new Property( riseRange.get().min ), new Property( runRange.get().max ), runRange,
-        SpinnerStateIndicator.SLOPE_COLORS, font, decimalPlaces );
-      var minRunNode = new RunSpinner( new Property( riseRange.get().min ), new Property( runRange.get().min ), runRange,
-        SpinnerStateIndicator.SLOPE_COLORS, font, decimalPlaces );
+      var maxRiseNode = new SlopeSpinner( new Property( riseRange.get().max ), new Property( runRange.get().max ), riseRange );
+      var minRiseNode = new SlopeSpinner( new Property( riseRange.get().min ), new Property( runRange.get().max ), riseRange );
+      var maxRunNode = new SlopeSpinner( new Property( runRange.get().max ), new Property( riseRange.get().max ), runRange );
+      var minRunNode = new SlopeSpinner( new Property( runRange.get().min ), new Property( riseRange.get().min ), runRange );
 
       // Compute the max
       var maxRiseWidth = Math.max( maxRiseNode.with, minRiseNode.width );

@@ -30,6 +30,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
+  var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -103,7 +104,7 @@ define( function( require ) {
     ];
     thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
 
-    //XXX
+    //XXX test
     var spinnerValueProperty = new Property( 3 );
     var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
     thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty,
@@ -111,6 +112,18 @@ define( function( require ) {
       function() { return spinnerValueProperty.get() - 1; },
       { x: 700, y: 100, font: new PhetFont( 80 ), color: Color.BLUE }
     ) );
+
+    //XXX test
+    var riseProperty = new Property( 1 );
+    var runProperty = new Property( 5 );
+    var riseRangeProperty = new Property( new Range( -10, 10 ) );
+    var runRangeProperty = new Property( new Range( -10, 10 ) );
+    var riseSpinner = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { x: 900, y: 100, font: new PhetFont( 80 ) } );
+    var runSpinner = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: new PhetFont( 80 ) } );
+    runSpinner.centerX = riseSpinner.centerX;
+    runSpinner.top = riseSpinner.bottom + 10;
+    thisView.addChild( riseSpinner );
+    thisView.addChild( runSpinner );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

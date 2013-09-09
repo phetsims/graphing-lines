@@ -1,3 +1,4 @@
+9/9/13 first pass at Spinner, does not fire, greatly simplified from Java implementation
 9/6/13 port PointSlopeLineNode, untested
 9/6/13 port and test arbitrary point manipulator
 9/6/13 port and test y-intercept manipulator

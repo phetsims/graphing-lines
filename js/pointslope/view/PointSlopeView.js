@@ -15,6 +15,7 @@ define( function( require ) {
   var ScreenView = require( 'JOIST/ScreenView' );
 
   //XXX test imports
+  var Color = require( 'SCENERY/util/Color' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
@@ -30,7 +31,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-//  var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
+  var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
   var Vector2 = require( 'DOT/Vector2' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
   var X2Y2Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X2Y2Manipulator' );
@@ -103,14 +104,14 @@ define( function( require ) {
     thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
 
     //XXX
-//    var spinnerValueProperty = new Property( 3 );
-//    var spinnerRangeProperty = new Range( -10, 10 );
-//    var spinnerColors = { inactive: 'red', highlighted: 'yellow', pressed: 'green', disabled: 'gray' };
-//    var spinnerFont = new PhetFont( 30 );
-//    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, spinnerColors, spinnerFont, 0,
-//      function() { console.log( 'spinner.upFunction' ); },
-//      function() { console.log( 'spinner.downFunction' ); }
-//    ) );
+    var spinnerValueProperty = new Property( 3 );
+    var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
+    var spinnerFont = new PhetFont( 80 );
+    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, Color.BLUE, spinnerFont, 0,
+      function() { console.log( 'spinner.upFunction' ); },
+      function() { console.log( 'spinner.downFunction' ); },
+      { x: 700, y: 100 }
+    ) );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

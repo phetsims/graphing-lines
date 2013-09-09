@@ -106,11 +106,10 @@ define( function( require ) {
     //XXX
     var spinnerValueProperty = new Property( 3 );
     var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
-    var spinnerFont = new PhetFont( 80 );
-    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, Color.BLUE, spinnerFont, 0,
-      function() { console.log( 'spinner.upFunction' ); },
-      function() { console.log( 'spinner.downFunction' ); },
-      { x: 700, y: 100 }
+    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty,
+      function() { spinnerValueProperty.set( spinnerValueProperty.get() + 1 ); },
+      function() { spinnerValueProperty.set( spinnerValueProperty.get() - 1 ); },
+      { x: 700, y: 100, font: new PhetFont( 80 ), color: Color.BLUE }
     ) );
   }
 

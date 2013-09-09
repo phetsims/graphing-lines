@@ -17,6 +17,7 @@ define( function( require ) {
   var LinearGradient = require( 'SCENERY/util/LinearGradient' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -58,91 +59,99 @@ define( function( require ) {
   //-------------------------------------------------------------------------------------------
 
   function SpinnerListener( stateProperty, enabledProperty, fireFunction ) {
-    this.stateProperty = stateProperty;
-    this.enabledProperty = enabledProperty;
-    this.fireFunction = fireFunction;
+    ButtonListener.call( this, {
+      up: function() {
+        stateProperty.set( 'up' );
+        console.log( 'up' );//XXX
+      },
+      over: function() {
+        stateProperty.set( 'over' );
+        console.log( 'over' );//XXX
+      },
+      down: function() {
+        stateProperty.set( 'down' );
+        console.log( 'down' );//XXX
+      },
+      out: function() {
+        stateProperty.set( 'out' );
+        console.log( 'out' );//XXX
+      },
+      fire: function() {
+        console.log( 'fire' );//XXX
+        if ( enabledProperty.get() ) {
+          fireFunction();
+        }
+      }
+    } );
   }
 
-  inherit( ButtonListener, SpinnerListener, {
-    up: function() {
-      this.stateProperty.set( 'up' );
-      console.log( 'up' );//XXX
-    },
-    over: function() {
-      this.stateProperty.set( 'over' );
-      console.log( 'over' );//XXX
-    },
-    down: function() {
-      this.stateProperty.set( 'down' );
-      console.log( 'down' );//XXX
-    },
-    out: function() {
-      this.stateProperty.set( 'out' );
-      console.log( 'out' );//XXX
-    },
-    fire: function() {
-      console.log( 'fire' );//XXX
-      if ( this.enabledProperty.get() ) {
-        this.fireFunction();
-      }
-    }
-  } );
+  inherit( ButtonListener, SpinnerListener );
 
   //-------------------------------------------------------------------------------------------
 
   /**
    * @param {Property<Number>} valueProperty
    * @param {Property<Range>} rangeProperty
-   * @param {Color} color
-   * @param {Font} font
-   * @param {Number} decimalPlaces
    * @param {Function} upFunction
    * @param {Function} downFunction
    * @param {*} options
    * @constructor
    */
-  function Spinner( valueProperty ,rangeProperty, color, font, decimalPlaces, upFunction, downFunction, options ) {
+  function Spinner( valueProperty ,rangeProperty, upFunction, downFunction, options ) {
+
+    options = _.extend( {
+      color: 'blue',
+      decimalPlaces: 0,
+      font: new PhetFont( 24 )
+    }, options );
 
     var thisNode = this;
     Node.call( thisNode );
 
     // properties for the "up" (increment) control
-    var upStateProperty = new Property( 'out' );
+    var upStateProperty = new Property( 'up' );
     var upEnabledProperty = new DerivedProperty( [ valueProperty, rangeProperty ], function( value, range ) {
       return value < range.max;
     } );
 
     // properties for the "down" (decrement) control
-    var downStateProperty = new Property( 'out' );
+    var downStateProperty = new Property( 'up' );
     var downEnabledProperty = new DerivedProperty( [ valueProperty, rangeProperty ], function( value, range ) {
       return value > range.min;
     } );
 
-    var textNode = new Text( "-20", { font: font, pickable: false } );
+    var textNode = new Text( "", { font: options.font, pickable: false } );
+
+    // compute max width of text based on value range
+    textNode.text = Util.toFixed( rangeProperty.get().min, options.decimalPlaces );
+    var maxWidth = textNode.width;
+    textNode.text = Util.toFixed( rangeProperty.get().max, options.decimalPlaces );
+    maxWidth = Math.max( maxWidth, textNode.width );
 
     // compute shape of the background behind the numeric value
-    textNode.text = "-20"; //TODO get this from rangeProperty
     var xMargin = 3;
     var yMargin = 3;
-    var backgroundWidth = textNode.width + ( 2 * xMargin );
+    var backgroundWidth = maxWidth + ( 2 * xMargin );
     var backgroundHeight = textNode.height + ( 2 * yMargin );
     var backgroundOverlap = 0.5;
     var backgroundCornerRadius = 10;
 
     // compute colors
     var arrowColors = {
-      up: color,
-      over: color,
-      down: color.darkerColor(),
-      out: color,
-      disabled: 'gray'
+      up: options.color,
+      over: options.color,
+      down: options.color.darkerColor(),
+      out: options.color,
+      disabled: 'rgb(176,176,176)'
     };
     var centerColor = 'white';
+    var highlightGradient = createBackgroundGradient( options.color, centerColor, backgroundHeight );
+    var pressedGradient = createBackgroundGradient( options.color.darkerColor(), centerColor, backgroundHeight );
     var backgroundColors = {
-      up: createBackgroundGradient( color, centerColor, backgroundHeight ),
-      over: createBackgroundGradient( color, centerColor, backgroundHeight ),
-      down: createBackgroundGradient( color.darkerColor(), centerColor, backgroundHeight ),
-      out: 'white',
+      up: 'white',
+      over: highlightGradient,
+      down: pressedGradient,
+      out: pressedGradient,
       disabled: 'white'
     };
 
@@ -184,7 +193,7 @@ define( function( require ) {
     // Update text to match the value
     valueProperty.link( function( value ) {
       // displayed value
-      textNode.text = Util.toFixed( value, decimalPlaces );
+      textNode.text = Util.toFixed( value, options.decimalPlaces );
       // horizontally centered
       textNode.x = ( backgroundWidth - textNode.width ) / 2;
     } );
@@ -234,7 +243,5 @@ define( function( require ) {
     thisNode.mutate( options );
   }
 
-  return inherit( Node, Spinner, {
-    //TODO prototype functions
-  } );
+  return inherit( Node, Spinner );
 } );

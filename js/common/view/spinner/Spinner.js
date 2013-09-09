@@ -34,30 +34,11 @@ define( function( require ) {
   //-------------------------------------------------------------------------------------------
 
   /**
-   * Arrow buttons that appear at the top and bottom of the spinner.
-   * @param {Dimension2} size
-   * @param {String} orientation 'up' or 'down'
+   * @param {Property<Boolean>} stateProperty
+   * @param {Property<Boolean>} enabledProperty
+   * @param {Function} fireFunction
    * @constructor
    */
-  function ArrowButton( size, orientation ) {
-    assert && assert( orientation === 'up' || orientation === 'down' );
-
-    // start at tip, move clockwise, origin at upper-left of bounding box
-    var shape = new Shape();
-    if ( orientation === 'up' ) {
-      shape.moveTo( size.width / 2, 0 ).lineTo( size.width, size.height ).lineTo( 0, size.height ).close();
-    }
-    else {
-      shape.moveTo( size.width / 2, size.height ).lineTo( 0, 0 ).lineTo( size.width, 0 ).close();
-    }
-
-    Path.call( this, shape, { fill: 'white', stroke: 'black', lineWidth: 0.25 } );
-  }
-
-  inherit( Path, ArrowButton );
-
-  //-------------------------------------------------------------------------------------------
-
   function SpinnerListener( stateProperty, enabledProperty, fireFunction ) {
     ButtonListener.call( this, {
       up: function() {
@@ -169,12 +150,23 @@ define( function( require ) {
     // compute size of arrows
     var arrowButtonSize = new Dimension2( 0.5 * backgroundWidth, 0.1 * backgroundWidth );
 
-    // up (increment) arrow
-    var upArrow = new ArrowButton( arrowButtonSize, 'up' );
+    // 'up' arrow
+    var arrowOptions = { fill: 'white', stroke: 'black', lineWidth: 0.25 };
+    var upArrowShape = new Shape()
+      .moveTo( arrowButtonSize.width / 2, 0 )
+      .lineTo( arrowButtonSize.width, arrowButtonSize.height )
+      .lineTo( 0, arrowButtonSize.height )
+      .close();
+    var upArrow = new Path( upArrowShape, arrowOptions );
     upArrow.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp ) );
 
-    // down (decrement) arrow
-    var downArrow = new ArrowButton( arrowButtonSize, 'down' );
+    // 'down' arrow
+    var downArrowShape = new Shape()
+      .moveTo( arrowButtonSize.width / 2, arrowButtonSize.height )
+      .lineTo( 0, 0 )
+      .lineTo( arrowButtonSize.width, 0 )
+      .close();
+    var downArrow = new Path( downArrowShape, arrowOptions );
     downArrow.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown ) );
 
     // rendering order

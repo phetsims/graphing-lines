@@ -4,7 +4,6 @@ DESIGN
 
 HIGH
 - write DecimalFormat
-- port common.view package from Java
 - port pointslope.view package from Java
 
 MEDIUM

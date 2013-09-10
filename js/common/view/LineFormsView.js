@@ -30,7 +30,14 @@ define( function( require ) {
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );
 
-    this.viewProperties = viewProperties;
+    thisView.viewProperties = viewProperties;
+
+    // Create point tool nodes
+    var pointTool1 = new PointToolNode( model.pointTool1, model.mvt, model.graph, viewProperties.linesVisibleProperty );
+    var pointTool2 = new PointToolNode( model.pointTool2, model.mvt, model.graph, viewProperties.linesVisibleProperty );
+    var pointToolParent = new Node(); // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order.
+    pointToolParent.addChild( pointTool1 );
+    pointToolParent.addChild( pointTool2 );
 
     // Reset All button
     var resetAllButton = new ResetAllButton( function() {
@@ -38,10 +45,11 @@ define( function( require ) {
     } );
 
     // rendering order
-    this.addChild( equationControls );
-    this.addChild( graphControls );
-    this.addChild( resetAllButton );
-    this.addChild( graphNode );
+    thisView.addChild( equationControls );
+    thisView.addChild( graphControls );
+    thisView.addChild( resetAllButton );
+    thisView.addChild( graphNode );
+    thisView.addChild( pointToolParent );
 
     // layout
     {
@@ -71,27 +79,6 @@ define( function( require ) {
       // centered below graph controls
       resetAllButton.centerX = graphControls.centerX;
       resetAllButton.top = graphControls.bottom + ySpacing;
-    }
-
-    // Point tools, added after centering root node, so that we can compute drag bounds.
-    {
-      var stageBounds = thisView.layoutBounds;
-
-      // Create a dummy point tool, so we know its height for the purposes of computing drag bounds.
-      var height = new PointToolNode( model.pointTool1, model.mvt, model.graph, stageBounds, viewProperties.linesVisibleProperty ).height;
-
-      // Compute drag bounds such that 50% of the point tool node is always inside the stage.
-      var dragBounds = Bounds2.rect( stageBounds.x1, stageBounds.y1 - ( height / 2 ), stageBounds.width, stageBounds.height - height );
-
-      // Create point tool nodes
-      var pointTool1 = new PointToolNode( model.pointTool1, model.mvt, model.graph, dragBounds, viewProperties.linesVisibleProperty );
-      var pointTool2 = new PointToolNode( model.pointTool2, model.mvt, model.graph, dragBounds, viewProperties.linesVisibleProperty );
-
-      // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
-      var pointToolParent = new Node();
-      pointToolParent.addChild( pointTool1 );
-      pointToolParent.addChild( pointTool2 );
-      thisView.addChild( pointToolParent );
     }
   }
 

@@ -17,9 +17,10 @@ define( function( require ) {
    * @param {Vector} location location of the tool, in model coordinate frame
    * @param {String} orientation, 'up' or 'down'
    * @param {ObservableArray<Line>} lines Lines that the tool might intersect, provided in the order that they would be rendered
+   * @param {Bounds2} dragBounds tool can be dragged within these bounds
    * @constructor
    */
-  function PointTool( location, orientation, lines ) {
+  function PointTool( location, orientation, lines, dragBounds ) {
 
     assert && assert( orientation === 'up' || orientation === 'down' );
 
@@ -30,6 +31,7 @@ define( function( require ) {
     } );
 
     thisTool.orientation = orientation;
+    this.dragBounds = dragBounds;
 
     // Update when the point tool moves or the lines change.
     var updateOnLine = function() {

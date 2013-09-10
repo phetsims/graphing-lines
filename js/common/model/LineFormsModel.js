@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var ObservableArray = require( 'AXON/ObservableArray' );
@@ -21,7 +22,7 @@ define( function( require ) {
   var X_RANGE = new Range( -10, 10 ); // x-axis range
   var Y_RANGE = X_RANGE; // y-axis range
   var GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
-  var ORIGIN_OFFSET = new Vector2( 305, 320 ); // offset of the graph's origin in view coordinates
+  var ORIGIN_OFFSET = new Vector2( 305, 340 ); // offset of the graph's origin in view coordinates
 
   /**
    * @param {Line} interactiveLine
@@ -65,8 +66,10 @@ define( function( require ) {
     // point tools
     var initialPosition1 = new Vector2( thisModel.graph.xRange.min + ( 0.35 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 0.25 );
     var initialPosition2 = new Vector2( thisModel.graph.xRange.min + ( 0.65 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 2.75 );
-    thisModel.pointTool1 = new PointTool( initialPosition1, 'up', thisModel.graph.lines );
-    thisModel.pointTool2 = new PointTool( initialPosition2, 'down', thisModel.graph.lines );
+    thisModel.pointTool1 = new PointTool( initialPosition1, 'up', thisModel.graph.lines,
+      new Bounds2( thisModel.graph.xRange.min - 1, thisModel.graph.yRange.min - 1, thisModel.graph.xRange.max + 3, thisModel.graph.yRange.max + 3 ) );
+    thisModel.pointTool2 = new PointTool( initialPosition2, 'down', thisModel.graph.lines,
+      new Bounds2( thisModel.graph.xRange.min - 1, thisModel.graph.yRange.min - 3, thisModel.graph.xRange.max + 3, thisModel.graph.yRange.max + 1 ) );
   }
 
   LineFormsModel.prototype = {

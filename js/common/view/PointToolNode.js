@@ -32,14 +32,14 @@ define( function( require ) {
    * @param {PointTool} pointTool
    * @param {Graph} graph
    * @param {ModelViewTransform2} mvt
-   * @param {Bounds2} dragBounds
    * @constructor
    */
-  function PointToolDragHandler( pointTool, graph, mvt, dragBounds ) {
+  function PointToolDragHandler( pointTool, graph, mvt ) {
 
     var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
 
     var constrainBounds = function( point, bounds ) {
+      console.log( "constraining " + point + " to " + bounds );//XXX
       if ( !bounds || bounds.containsPoint( point ) ) {
         return point;
       }
@@ -64,7 +64,7 @@ define( function( require ) {
       drag: function( event ) {
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
         var location = mvt.viewToModelPosition( parentPoint );
-        location = constrainBounds( location, dragBounds );
+        location = constrainBounds( location, pointTool.dragBounds );
         if ( graph.contains( location ) ) {
           // snap to the graph's grid
           location = new Vector2( Util.toFixed( location.x, 0 ), Util.toFixed( location.y, 0 ) );
@@ -82,11 +82,10 @@ define( function( require ) {
    * @param {PointTool} pointTool
    * @param {ModelViewTransform2} mvt
    * @param {Graph} graph
-   * @param {Bounds2} dragBounds
    * @param {Property<Boolean>} linesVisibleProperty
    * @constructor
    */
-  function PointToolNode( pointTool, mvt, graph, dragBounds, linesVisibleProperty ) {
+  function PointToolNode( pointTool, mvt, graph, linesVisibleProperty ) {
 
     var thisNode = this;
     Node.call( thisNode );
@@ -182,7 +181,7 @@ define( function( require ) {
 
     // interactivity
     thisNode.cursor = 'pointer';
-    thisNode.addInputListener( new PointToolDragHandler( pointTool, graph, mvt, dragBounds ) );
+    thisNode.addInputListener( new PointToolDragHandler( pointTool, graph, mvt ) );
   }
 
   return inherit( Node, PointToolNode, {

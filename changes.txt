@@ -1,3 +1,5 @@
+9/10/13 move dragBounds to point tool model, adjust
+9/10/13 fix layout of equation control panel, increase margins
 9/10/13 move manipulatorDiameter to model
 9/9/13 use 'Property' suffix for more variables of type Property
 9/9/13 port remainder of pointslope package

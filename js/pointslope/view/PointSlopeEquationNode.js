@@ -9,7 +9,7 @@
  * Non-interactive parts of the equation are expressed in a form that is typical of how the equation
  * would normally be written. For example, if the slope is -1, then only the sign is written, not "-1".
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

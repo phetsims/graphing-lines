@@ -45,6 +45,7 @@ define( function( require ) {
     minimizeMaximizeButtonNode.addInputListener( {
       down: function() {
         maximizedProperty.set( !maximizedProperty.get() );
+        minimizeMaximizeButtonNode.fill = maximizedProperty.get() ? 'red' : 'green';
       }
     } );
 

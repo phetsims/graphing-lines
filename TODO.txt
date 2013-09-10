@@ -13,6 +13,7 @@ MEDIUM
 - implement IconFactory
 
 LOW
+- use 'Property' suffix for all variables of type Property
 - convert models to PropertySet and axon style
 - consider making Line mutable, to reduce affects of garbage collection
 - change 'tab.*' string keys to 'screen.*'

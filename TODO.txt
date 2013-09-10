@@ -11,6 +11,7 @@ HIGH
 MEDIUM
 - DecimalFormat
 - implement IconFactory
+- rounded corners on spinners
 
 LOW
 - use 'Property' suffix for all variables of type Property

@@ -13,10 +13,8 @@ define( function( require ) {
   var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
-  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeTests' );//TODO replace PointSlopeTests
-  var Vector2 = require( 'DOT/Vector2' );
+  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeTests' );
 
   function PointSlopeScreen() {
 

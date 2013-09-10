@@ -31,6 +31,9 @@ define( function( require ) {
 
     var thisModel = this;
 
+    // diameter of the manipulators
+    this.manipulatorDiameter = 0.85;
+
     // graph
     thisModel.graph = new Graph( X_RANGE, Y_RANGE );
 

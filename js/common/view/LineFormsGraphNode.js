@@ -20,14 +20,11 @@ define( function( require ) {
 
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GraphNode = require( 'PATH/GraphNode' );
+  var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var HighlightListener = require( 'SCENERY_PHET/input/HighlightListener' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-
-  // constants
-  var MANIPULATOR_DIAMETER = 0.85; // diameter of the manipulators, in model units
 
   /**
    * @param {LineFormsModel } model
@@ -35,6 +32,8 @@ define( function( require ) {
    * @constructor
    */
   function LineFormsGraphNode( model, viewProperties ) {
+
+    debugger;//XXX
 
     var thisNode = this;
     GraphNode.call( thisNode, model.graph, model.mvt );
@@ -66,7 +65,8 @@ define( function( require ) {
     // Add/remove saved lines
     model.savedLines.addListeners(
       function( line ) { thisNode.savedLineAdded( line ); },
-      function( line ) { thisNode.savedLineRemoved( line ); } );
+      function( line ) { thisNode.savedLineRemoved( line ); }
+    );
 
     // When the interactive line changes, update the graph.
     model.interactiveLineProperty.link( function( line ) {
@@ -98,24 +98,18 @@ define( function( require ) {
       throw new Error( "createLineNode must be provided by subtype" );
     },
 
-    // Gets the diameter of manipulators, in view coordinate frame.
-    getManipulatorDiameter: function() {
-      return this.model.mvt.modelToViewDeltaX( MANIPULATOR_DIAMETER );
-    },
-
     // Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
+      debugger;//XXX
       // interactive line
-      if ( this.interactiveLineParentNode !== null ) {
-        this.interactiveLineParentNode.setVisible( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
-      }
+      this.interactiveLineParentNode.visible = ( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
 
       // saved & standard lines
-      this.savedLinesParentNode.setVisible( this.viewProperties.linesVisible );
-      this.standardLinesParentNode.setVisible( this.viewProperties.linesVisible );
+      this.savedLinesParentNode.visible = this.viewProperties.linesVisible;
+      this.standardLinesParentNode.visible = this.viewProperties.linesVisible;
 
       // slope tool
-      this.slopeToolNode.setVisible( this.viewProperties.slopeVisible && this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
+      this.slopeToolNode.visible = ( this.viewProperties.slopeVisible && this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
     },
 
     // Updates the line and its associated decorations

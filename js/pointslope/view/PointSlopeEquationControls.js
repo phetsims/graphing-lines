@@ -11,7 +11,7 @@ define( function( require ) {
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var EquationControls = require( 'PATH/EquationControls' );
+  var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
 
   /**

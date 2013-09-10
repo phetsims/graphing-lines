@@ -36,7 +36,9 @@ define( function( require ) {
   function EquationControls( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
 
     options = _.extend( {
-      fill: GLColors.EQUATION_CONTROL_PANEL
+      fill: GLColors.EQUATION_CONTROL_PANEL,
+      xMargin: 10,
+      yMargin: 10
     }, options );
 
     //TODO replace with sun.ExpandCollapseButton, sync initial state to maximizedProperty
@@ -105,7 +107,7 @@ define( function( require ) {
     titleSeparator.x = 0;
     titleSeparator.top = titleHeight + ySpacing;
     interactiveEquationNode.x = 0;
-    interactiveEquationNode.y = titleSeparator.bottom + ySpacing;
+    interactiveEquationNode.top = titleSeparator.bottom + ySpacing;
     buttonsSeparator.x = 0;
     buttonsSeparator.top = interactiveEquationNode.bottom + ySpacing;
     saveLineButton.x = 0;

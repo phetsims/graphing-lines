@@ -13,10 +13,8 @@ define( function( require ) {
   var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeIntercept/model/SlopeInterceptModel' );
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeIntercept/view/SlopeInterceptView' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   function SlopeInterceptScreen() {
 

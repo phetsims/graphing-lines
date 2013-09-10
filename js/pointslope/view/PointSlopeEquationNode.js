@@ -43,24 +43,25 @@ define( function( require ) {
    * @param {Property<Number>} y1Range
    * @param {Property<Number>} riseRange
    * @param {Property<Number>} runRange
-   * @param {Boolean} interactiveX1
-   * @param {Boolean} interactiveX2
-   * @param {Boolean} interactiveSlope
-   * @param {Number} interactiveFontSize
-   * @param {Number} staticFontSize
-   * @param {Color} staticColor
    * @param {*} options
    * @constructor
    */
-  function PointSlopeEquationNode( interactiveLine, x1Range, y1Range, riseRange, runRange, interactiveX1, interactiveY1, interactiveSlope, interactiveFontSize, staticFontSize, staticColor, options ) {
+  function PointSlopeEquationNode( interactiveLine, x1Range, y1Range, riseRange, runRange, options ) {
 
-    options = _.extend( {}, options );
+    options = _.extend( {
+      interactiveX1: true,
+      interactiveY1: true,
+      interactiveSlope: true,
+      interactiveFontSize: 28,
+      staticFontSize: 28,
+      staticColor: 'black'
+    }, options );
 
-    var interactiveFont = new PhetFont( { size: interactiveFontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: staticFontSize } );
+    var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
+    var staticFont = new PhetFont( { size: options.staticFontSize } );
 
     var thisNode = this;
-    EquationNode.call( thisNode, staticFontSize );
+    EquationNode.call( thisNode, options.staticFontSize );
 
     // internal properties that are connected to spinners
     var x1 = new Property( interactiveLine.get().x1 );
@@ -81,38 +82,38 @@ define( function( require ) {
     var fractionLineNode;
 
     // nodes: (y-y1) = m(x-x1)
-    yLeftParenNode = new Text( "(", staticFont, staticColor );
-    yNode = new Text( GLStrings["symbol.y"], staticFont, staticColor );
+    yLeftParenNode = new Text( "(", staticFont, options.staticColor );
+    yNode = new Text( GLStrings["symbol.y"], staticFont, options.staticColor );
     yOperatorNode = new Node(); // parent for + or - node
-    if ( interactiveY1 ) {
+    if ( options.interactiveY1 ) {
       y1Node = new Spinner( y1, y1Range, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
-      y1Node = new DynamicValueNode( y1, { font: staticFont, fill: staticColor, absoluteValue: true } );
+      y1Node = new DynamicValueNode( y1, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
-    yRightParenNode = new Text( ")", { font: staticFont, stroke: staticColor } );
-    y1MinusSignNode = new MinusNode( thisNode.signLineSize, { fill: staticColor } ); // for y=-y1 case
-    equalsNode = new Text( "=", { font: staticFont, stroke: staticColor } );
-    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: staticColor } );
-    if ( interactiveSlope ) {
+    yRightParenNode = new Text( ")", { font: staticFont, stroke: options.staticColor } );
+    y1MinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } ); // for y=-y1 case
+    equalsNode = new Text( "=", { font: staticFont, stroke: options.staticColor } );
+    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } );
+    if ( options.interactiveSlope ) {
       riseNode = new SlopeSpinner( rise, run, riseRange, { font: interactiveFont } );
       runNode = new SlopeSpinner( run, rise, runRange, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( rise, { font: staticFont, fill: staticColor, absoluteValue: true } );
-      runNode = new DynamicValueNode( run, { font: staticFont, fill: staticColor, absoluteValue: true } );
+      riseNode = new DynamicValueNode( rise, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      runNode = new DynamicValueNode( run, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
-    fractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: staticColor } );
-    xLeftParenNode = new Text( "(", { font: staticFont, fill: staticColor } );
-    xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: staticColor } );
+    fractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
+    xLeftParenNode = new Text( "(", { font: staticFont, fill: options.staticColor } );
+    xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: options.staticColor } );
     xOperatorNode = new Node(); // parent for + or - node
-    if ( interactiveX1 ) {
+    if ( options.interactiveX1 ) {
       x1Node = new Spinner( x1, x1Range, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
-      x1Node = new DynamicValueNode( x1, { font: staticFont, fill: staticColor, absoluteValue: true } );
+      x1Node = new DynamicValueNode( x1, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
-    xRightParenNode = new Text( ")", { font: staticFont, fill: staticColor } );
+    xRightParenNode = new Text( ")", { font: staticFont, fill: options.staticColor } );
 
     //TODO can we update less? move this to prototype?
     /*
@@ -344,24 +345,25 @@ define( function( require ) {
       {
         x1.set( line.x1 );
         y1.set( line.y1 );
-        rise.set( interactiveSlope ? line.rise : line.getSimplifiedRise() );
-        run.set( interactiveSlope ? line.run : line.getSimplifiedRun() );
+        rise.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
+        run.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
       }
       updatingControls = false;
 
       // Update the layout
-      updateLayout( line, interactiveX1, interactiveY1, interactiveSlope, staticFont, staticColor );
+      updateLayout( line, options.interactiveX1, options.interactiveY1, options.interactiveSlope, staticFont, options.staticColor );
     } );
 
     thisNode.mutate( options );
   }
 
-  // Creates a node that displays the general form of this equation.
-  PointSlopeEquationNode.createGeneralFormNode = function( font ) {
-        //NOTE: <font> tag is deprecated in HTML4 and unsupported in HTML5. But as of Java 1.7, Swing (supposedly) implements a subset of HTML3.
-        var html = StringUtils.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>", /* (y - y1) = m(x - x1) */
-                                            GLStrings["symbol.y"], GLStrings["symbol.y"], GLStrings["symbol.slope"], GLStrings["symbol.x"], GLStrings["symbol.x"] );
-        return new HTMLText( html, { font: font } );
+  // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
+  PointSlopeEquationNode.createGeneralFormNode = function( options ) {
+    options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
+    //TODO Is this OK? <font> tag is deprecated in HTML4 and unsupported in HTML5.
+    var html = StringUtils.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>",
+      GLStrings["symbol.y"], GLStrings["symbol.y"], GLStrings["symbol.slope"], GLStrings["symbol.x"], GLStrings["symbol.x"] );
+    return new HTMLText( html, { font: options.font } );
   };
 
   return inherit( EquationNode, PointSlopeEquationNode );

@@ -139,7 +139,7 @@ define( function( require ) {
 //    thisView.addChild( runSpinner );
 
     //XXX test
-    var titleNode = PointSlopeEquationNode.createGeneralFormNode( new PhetFont( { size: 18, weight: 'bold' } ) );
+    var titleNode = PointSlopeEquationNode.createGeneralFormNode();
     var savedLinesProperty = new ObservableArray();
     var maximizedProperty = new Property( true );
     var interactiveEquationNode = new Rectangle( 0, 0, 200, 30, { fill: 'blue' } );
@@ -148,8 +148,7 @@ define( function( require ) {
 //    thisView.addChild( equationControls );
 
     //XXX test
-    var equationNode = new PointSlopeEquationNode( lineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty,
-      true, true, true, 60, 60, Color.BLACK, { x: 200, y: 200 } );
+    var equationNode = new PointSlopeEquationNode( lineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty, { x: 200, y: 200 } );
     thisView.addChild( equationNode );
   }
 

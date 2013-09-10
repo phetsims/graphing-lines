@@ -1,3 +1,4 @@
+9/9/13 port remainder of pointslope package
 9/9/13 render general form of point-slope equation, for control panel title
 9/9/13 minor interface changes to view types
 9/9/13 use 'Property' suffix for all variables of type Property

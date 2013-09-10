@@ -3,11 +3,13 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- write DecimalFormat
-- port pointslope.view package from Java
+- LineFormsView
+- PointSlopeView
+- SlopeInterceptEquationNode
+- add press-&-hold feature to Spinner
 
 MEDIUM
-- add press-&-hold feature to Spinner
+- DecimalFormat
 - implement IconFactory
 
 LOW

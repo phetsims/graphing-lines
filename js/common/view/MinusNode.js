@@ -16,7 +16,7 @@ define( function( require ){
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function MinusNode( width, height, options ) {
-    assert && assert( width > height );
+    assert && assert( width >= height );
     options = _.extend( { fill: 'black' }, options );
     Rectangle.call( this, 0, 0, width, height, options );
   }

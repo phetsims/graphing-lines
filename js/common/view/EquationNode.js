@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -24,6 +25,8 @@ define( function( require ) {
    * @constructor
    */
   function EquationNode( pointSize ) {
+
+    assert && assert( typeof pointSize === 'number' );
 
     Node.call( this );
 

@@ -26,6 +26,7 @@ define( function( require ) {
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
@@ -59,32 +60,32 @@ define( function( require ) {
     thisView.addChild( resetAllButton );
 
     // layout
-    resetAllButton.left = 100;
-    resetAllButton.top = 100;
+    resetAllButton.left = 900;
+    resetAllButton.top = 600;
 
     //XXX test
     var graph = new Graph( new Range( -10, 10 ), new Range( -10, 10 ) );
-    thisView.addChild( new GraphNode( graph, model.mvt ) );
+//    thisView.addChild( new GraphNode( graph, model.mvt ) );
 
     //XXX test
-    var line = new Line( 0, 0, 5, 5 );
+    var line = Line.createPointSlope( 1, 2, 3, 4 );
     var lineProperty = new Property( line );
-    thisView.addChild( new SlopeToolNode( lineProperty, model.mvt ) );
+//    thisView.addChild( new SlopeToolNode( lineProperty, model.mvt ) );
 
     //XXX test
     var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
-    thisView.addChild( new LineNode( line, graph, model.mvt ) );
+//    thisView.addChild( new LineNode( line, graph, model.mvt ) );
 
     //XXX test
     var viewProperties = new LineFormsViewProperties();
     var standardLines = new ObservableArray( [ Line.Y_EQUALS_X_LINE, Line.Y_EQUALS_NEGATIVE_X_LINE ] );
-    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
-      { x: 800, y: 350 } ) );
+//    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
+//      { x: 800, y: 350 } ) );
 
     //XXX test
     var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
     var stageBounds = model.mvt.viewToModelBounds( this.layoutBounds );
-    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
+//    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
 
     //XXX test
     var x1RangeProperty = new Property( new Range( -5, 5 ) );
@@ -97,7 +98,7 @@ define( function( require ) {
 //    thisView.addChild( new X1Y1Manipulator( manipulatorDiameter, lineProperty, x1RangeProperty, y1RangeProperty, model.mvt, true ) );
 //    thisView.addChild( new X2Y2Manipulator( manipulatorDiameter, lineProperty, x2RangeProperty, y2RangeProperty, model.mvt ) );
 //    thisView.addChild( new SlopeManipulator( manipulatorDiameter, lineProperty, riseRangeProperty, runRangeProperty, model.mvt ) );
-    thisView.addChild( new YInterceptManipulator( manipulatorDiameter, lineProperty, y1RangeProperty, model.mvt ) );
+//    thisView.addChild( new YInterceptManipulator( manipulatorDiameter, lineProperty, y1RangeProperty, model.mvt ) );
 
     //XXX test
     var pointProperty = new Property( new Vector2( 1, -1 ) );
@@ -105,7 +106,7 @@ define( function( require ) {
       new Property( new Vector2( 2, -2 ) ),
       new Property( new Vector2( 3, -3 ) )
     ];
-    thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
+//    thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
 
     //XXX test
     var spinnerValueProperty = new Property( 3 );
@@ -135,8 +136,14 @@ define( function( require ) {
     var maximizedProperty = new Property( true );
     var interactiveEquationNode = new Rectangle( 0, 0, 200, 30, { fill: 'blue' } );
     var equationControls = new EquationControls( titleNode, lineProperty, savedLinesProperty,
-      maximizedProperty, viewProperties.linesVisibleProperty, interactiveEquationNode, { x: 100, y: 100 } );
-    thisView.addChild( equationControls );
+      maximizedProperty, viewProperties.linesVisibleProperty, interactiveEquationNode, { x: 300, y: 200 } );
+//    thisView.addChild( equationControls );
+
+    //XXX test
+    // interactiveLine, x1Range, y1Range, riseRange, runRange, interactiveX1, interactiveY1, interactiveSlope, interactiveFont, staticFont, staticColor,
+    var equationNode = new PointSlopeEquationNode( lineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty,
+      true, true, true, 40, 40, Color.BLACK, { x: 200, y: 200 } );
+    thisView.addChild( equationNode );
   }
 
   return inherit( ScreenView, PointSlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );

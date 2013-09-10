@@ -1,3 +1,4 @@
+9/9/13 first attempt at point-slope equation, layout is very messed up
 9/9/13 port EquationControls, base type for control panels
 9/9/13 added spinners for slope and coordinates
 9/9/13 completed Spinner

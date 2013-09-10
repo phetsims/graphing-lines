@@ -15,10 +15,9 @@ define( function( require ) {
   var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
 
   /**
-   * @param {Property<Number>} variableComponent
-   * @param {Property<Number>} fixedComponent
-   * @param {Property<Range>} variableRange
-   * @param {Color} color
+   * @param {Property<Number>} variableComponent the part of the slope we're manipulating
+   * @param {Property<Number>} fixedComponent the part of the slope we're not manipulating
+   * @param {Property<Range>} variableRange the range of variableComponent
    * @param {*} options
    * @constructor
    */

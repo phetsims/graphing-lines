@@ -19,6 +19,12 @@ define( function( require ) {
   var LINE_COLOR = new Color( 255, 0, 0, 0.3 );
   var LINE_WIDTH = 4;
 
+  /**
+   * @param width
+   * @param height
+   * @param options
+   * @constructor
+   */
   function UndefinedSlopeIndicator( width, height, options ) {
     options = _.extend( { pickable: false }, options );
     Node.call( this );

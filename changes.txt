@@ -1,3 +1,5 @@
+9/9/13 minor interface changes to view types
+9/9/13 use 'Property' suffix for all variables of type Property
 9/9/13 fixed layout of point-slope equation
 9/9/13 first attempt at point-slope equation, layout is very messed up
 9/9/13 port EquationControls, base type for control panels

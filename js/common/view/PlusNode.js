@@ -14,20 +14,25 @@ define( function( require ) {
   var Path = require( 'SCENERY/nodes/Path' );
   var Shape = require( 'KITE/Shape' );
 
-  function PlusNode( width, height, options ) {
+  /**
+   * @param {Dimension2} size
+   * @param {*} options
+   * @constructor
+   */
+  function PlusNode( size, options ) {
 
     // + shape, starting from top left and moving clockwise
-    var c1 = ( width / 2 ) - ( height / 2 );
-    var c2 = ( width / 2 ) + ( height / 2 );
+    var c1 = ( size.width / 2 ) - ( size.height / 2 );
+    var c2 = ( size.width / 2 ) + ( size.height / 2 );
     var shape = new Shape()
       .moveTo( c1, 0 )
       .lineTo( c2, 0 )
       .lineTo( c2, c1 )
-      .lineTo( width, c1 )
-      .lineTo( width, c2 )
+      .lineTo( size.width, c1 )
+      .lineTo( size.width, c2 )
       .lineTo( c2, c2 )
-      .lineTo( c2, width )/* yes, use width for y param */
-      .lineTo( c1, width )/* yes, use width for y param */
+      .lineTo( c2, size.width )/* yes, use width for y param */
+      .lineTo( c1, size.width )/* yes, use width for y param */
       .lineTo( c1, c2 )
       .lineTo( 0, c2 )
       .lineTo( 0, c1 )

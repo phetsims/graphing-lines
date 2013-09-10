@@ -26,14 +26,14 @@ define( function( require ) {
   /**
    * @param {Node} titleNode
    * @param {Property<Line>} interactiveLineProperty
-   * @param {ObservableArray<Line>} savedLinesProperty
+   * @param {ObservableArray<Line>} savedLines
    * @param {Property<Boolean>} maximizedProperty
    * @param {Property<Boolean>} linesVisibleProperty
    * @param {Node} interactiveEquationNode
    * @param {*} options
    * @constructor
    */
-  function EquationControls( titleNode, interactiveLineProperty, savedLinesProperty, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
+  function EquationControls( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
 
     options = _.extend( {
       fill: GLColors.EQUATION_CONTROL_PANEL
@@ -50,7 +50,7 @@ define( function( require ) {
 
     // Save Line button
     var saveLineButton = new TextButton( GLStrings.saveLine, function() {
-      savedLinesProperty.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) );
+      savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) );
     }, {
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.SAVE_LINE_BUTTON,
@@ -59,7 +59,7 @@ define( function( require ) {
 
     // Erase Lines button
     var eraseLinesButton = new TextButton( GLStrings.eraseLines, function() {
-      savedLinesProperty.clear();
+      savedLines.clear();
     }, {
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.ERASE_LINES_BUTTON,
@@ -69,9 +69,9 @@ define( function( require ) {
     // Sets the enabled states of the Save and Erase buttons
     var enableButtons = function() {
       saveLineButton.enabled = linesVisibleProperty.get();
-      eraseLinesButton.enabled = ( linesVisibleProperty.get() && ( savedLinesProperty.length > 0 ) );
+      eraseLinesButton.enabled = ( linesVisibleProperty.get() && ( savedLines.length > 0 ) );
     };
-    savedLinesProperty.lengthProperty.link( enableButtons );
+    savedLines.lengthProperty.link( enableButtons );
     linesVisibleProperty.link( enableButtons );
 
     // Top-level content

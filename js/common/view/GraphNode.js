@@ -61,6 +61,7 @@ define( function( require ) {
   // A major or minor line in the grid
   //----------------------------------------------------------------------------------------
 
+  // Line goes from (x1,y1) to (x2,y2), and is either a major or minor grid line.
   function GridLineNode( x1, y1, x2, y2, isMajor ) {
     Line.call( this, x1, y1, x2, y2, {
       lineWidth: isMajor ? MAJOR_GRID_LINEWIDTH : MINOR_GRID_LINEWIDTH,
@@ -74,6 +75,7 @@ define( function( require ) {
   // major tick with label, orientation is vertical or horizontal
   //----------------------------------------------------------------------------------------
 
+  // Tick is placed at (x,y) and is either vertical or horizontal.
   function MajorTickNode( x, y, value, isVertical ) {
 
     Node.call( this );
@@ -111,6 +113,7 @@ define( function( require ) {
   // minor tick mark, no label, orientation is vertical or horizontal
   //----------------------------------------------------------------------------------------
 
+  // Tick is placed at (x,y) and is either vertical or horizontal
   function MinorTickNode( x, y, isVertical ) {
     Path.call( this, isVertical ?
                      Shape.lineSegment( x, y - MINOR_TICK_LENGTH, x, y + MINOR_TICK_LENGTH ) :
@@ -126,6 +129,11 @@ define( function( require ) {
   // x-axis (horizontal)
   //----------------------------------------------------------------------------------------
 
+  /**
+   * @param {Graph} graph
+   * @param {ModelViewTransform2} mvt
+   * @constructor
+   */
   function XAxisNode( graph, mvt ) {
 
     Node.call( this );
@@ -173,6 +181,11 @@ define( function( require ) {
   // y-axis (vertical)
   //----------------------------------------------------------------------------------------
 
+  /**
+   * @param {Graph} graph
+   * @param {ModelViewTransform2} mvt
+   * @constructor
+   */
   function YAxisNode( graph, mvt ) {
 
     Node.call( this );
@@ -220,6 +233,11 @@ define( function( require ) {
   // 2D grid
   //----------------------------------------------------------------------------------------
 
+  /**
+   * @param {Graph} graph
+   * @param {ModelViewTransform2} mvt
+   * @constructor
+   */
   function GridNode( graph, mvt ) {
     Node.call( this );
 

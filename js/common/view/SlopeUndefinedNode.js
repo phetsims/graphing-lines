@@ -14,6 +14,11 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
 
+  /**
+   * @param {Line} line
+   * @param {*} options
+   * @constructor
+   */
   function SlopeUndefinedNode( line, options ) {
     options = _.extend( { pickable: false }, options );
     Text.call( this, StringUtils.format( GLStrings.slopeUndefined, GLStrings["symbol.x"], line.x1 ), options );

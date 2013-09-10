@@ -77,18 +77,18 @@ define( function( require ) {
 
     /**
      * Gets the max width for the rise and run spinners used in an interactive equation.
-     * @param {Property<Range>} riseRange
-     * @param {Property<Range>} runRange
+     * @param {Property<Range>} riseRangeProperty
+     * @param {Property<Range>} runRangeProperty
      * @param {PhetFont} font
      * @param {Number} decimalPlaces
      */
-    computeMaxSlopeSpinnerWidth: function( riseRange, runRange, font, decimalPlaces ) {
+    computeMaxSlopeSpinnerWidth: function( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {
 
       // Create prototypical spinners.
-      var maxRiseNode = new SlopeSpinner( new Property( riseRange.get().max ), new Property( runRange.get().max ), riseRange, { font: font, decimalPlaces: decimalPlaces } );
-      var minRiseNode = new SlopeSpinner( new Property( riseRange.get().min ), new Property( runRange.get().max ), riseRange, { font: font, decimalPlaces: decimalPlaces } );
-      var maxRunNode = new SlopeSpinner( new Property( runRange.get().max ), new Property( riseRange.get().max ), runRange, { font: font, decimalPlaces: decimalPlaces } );
-      var minRunNode = new SlopeSpinner( new Property( runRange.get().min ), new Property( riseRange.get().min ), runRange, { font: font, decimalPlaces: decimalPlaces } );
+      var maxRiseNode = new SlopeSpinner( new Property( riseRangeProperty.get().max ), new Property( runRangeProperty.get().max ), riseRangeProperty, { font: font, decimalPlaces: decimalPlaces } );
+      var minRiseNode = new SlopeSpinner( new Property( riseRangeProperty.get().min ), new Property( runRangeProperty.get().max ), riseRangeProperty, { font: font, decimalPlaces: decimalPlaces } );
+      var maxRunNode = new SlopeSpinner( new Property( runRangeProperty.get().max ), new Property( riseRangeProperty.get().max ), runRangeProperty, { font: font, decimalPlaces: decimalPlaces } );
+      var minRunNode = new SlopeSpinner( new Property( runRangeProperty.get().min ), new Property( riseRangeProperty.get().min ), runRangeProperty, { font: font, decimalPlaces: decimalPlaces } );
 
       // Compute the max
       var maxRiseWidth = Math.max( maxRiseNode.width, minRiseNode.width );

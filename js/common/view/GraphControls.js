@@ -26,13 +26,13 @@ define( function( require ) {
   var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", GLStrings["symbol.y"], GLStrings["symbol.x"] );
 
   /**
-   * @param {Property<Boolean>} linesVisible are lines visible on the graph?
-   * @param {Property<Boolean>} slopeVisible are the slope (rise/run) brackets visible on the graphed line?
+   * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?
+   * @param {Property<Boolean>} slopeVisibleProperty are the slope (rise/run) brackets visible on the graphed line?
    * @param {ObservableArray<Lines>} standardLines standard lines (eg, y=x) that are available for viewing
    * @param {*} options should check boxes for standard lines be accessible?
    * @constructor
    */
-  function GraphControls( linesVisible, slopeVisible, standardLines, options ) {
+  function GraphControls( linesVisibleProperty, slopeVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
       includeStandardLines: true //TODO is this necessary? How about false if !standardLines?
@@ -41,7 +41,7 @@ define( function( require ) {
     var thisNode = this;
 
     // private properties for standard-line check boxes
-    var notLinesVisible = new Property( !linesVisible.get() );
+    var notLinesVisible = new Property( !linesVisibleProperty.get() );
     var yEqualsXVisible = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisible = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
@@ -51,7 +51,7 @@ define( function( require ) {
     var hideLinesCheckBox = CheckBox.createTextCheckBox( GLStrings.hideLines, TEXT_OPTIONS, notLinesVisible );
     var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisible, { icon: IconFactory.createYEqualsXIcon( ICON_SIZE ) } );
     var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisible, { icon: IconFactory.createYEqualsNegativeXIcon( ICON_SIZE ) } );
-    var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisible, { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
+    var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisibleProperty, { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
     var contentNode = new Node();
@@ -83,7 +83,7 @@ define( function( require ) {
     thisNode.mutate( options );
 
     // when lines are not visible, hide related controls
-    linesVisible.link( function( visible ) {
+    linesVisibleProperty.link( function( visible ) {
       notLinesVisible.set( !visible );
       slopeCheckBox.enabled = visible;
       positiveCheckBox.enabled = visible;
@@ -91,7 +91,7 @@ define( function( require ) {
     } );
 
     notLinesVisible.link( function( visible ) {
-       linesVisible.set( !visible );
+       linesVisibleProperty.set( !visible );
     });
 
     var setStandardLineVisible = function( visible, line ) {

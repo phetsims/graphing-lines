@@ -89,9 +89,9 @@ define( function( require ) {
       y1Node = new DynamicValueNode( y1, { font: staticFont, fill: staticColor, absoluteValue: true } );
     }
     yRightParenNode = new Text( ")", { font: staticFont, stroke: staticColor } );
-    y1MinusSignNode = new MinusNode( thisNode.signLineSize.width, thisNode.signLineSize.height, { fill: staticColor } ); // for y=-y1 case
+    y1MinusSignNode = new MinusNode( thisNode.signLineSize, { fill: staticColor } ); // for y=-y1 case
     equalsNode = new Text( "=", { font: staticFont, stroke: staticColor } );
-    slopeMinusSignNode = new MinusNode( thisNode.signLineSize.width, thisNode.signLineSize.height, { fill: staticColor } );
+    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: staticColor } );
     if ( interactiveSlope ) {
       riseNode = new SlopeSpinner( rise, run, riseRange, { font: interactiveFont } );
       runNode = new SlopeSpinner( run, rise, runRange, { font: interactiveFont } );
@@ -140,18 +140,18 @@ define( function( require ) {
 
       // Change the x operator to account for the signs of x1.
       if ( interactiveX1 || line.x1 >= 0 ) {
-        xOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize.width, thisNode.operatorLineSize.height, staticColor ) );
+        xOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticColor ) );
       }
       else {
-        xOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize.width, thisNode.operatorLineSize.height, staticColor ) );
+        xOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticColor ) );
       }
 
       // Change the y operator to account for the signs of y1.
       if ( interactiveY1 || line.y1 >= 0 ) {
-        yOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize.width, thisNode.operatorLineSize.height, staticColor ) );
+        yOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticColor ) );
       }
       else {
-        yOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize.width, thisNode.operatorLineSize.height, staticColor ) );
+        yOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticColor ) );
       }
 
       if ( line.rise === 0 && !interactiveSlope && !interactiveX1 ) {

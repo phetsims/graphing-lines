@@ -12,6 +12,12 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
+  /**
+   * @param {Number} diameter
+   * @param {Color} color
+   * @param {*} options
+   * @constructor
+   */
   function PlottedPointNode( diameter, color, options ) {
 
     options = _.extend( {

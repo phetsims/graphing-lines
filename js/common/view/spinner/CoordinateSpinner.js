@@ -31,7 +31,7 @@ define( function( require ) {
     }, options );
 
     // computes value when 'up' button is pressed
-    var upFunction = function() {
+    options.upFunction = function() {
       var x1New = a1.get() + 1;
       if ( x1New === a2.get() && b1.get() == b2.get() ) { // will points be the same?
         x1New++;
@@ -43,7 +43,7 @@ define( function( require ) {
     };
 
     // computes value when 'down' button is pressed
-    var downFunction = function() {
+    options.downFunction = function() {
       var x1New = a1.get() - 1;
       if ( x1New === a2.get() && b1.get() === b2.get() ) { // will points be the same?
         x1New--;
@@ -54,7 +54,7 @@ define( function( require ) {
       return x1New;
     };
 
-    Spinner.call( this, a1, range, upFunction, downFunction );
+    Spinner.call( this, a1, range, options );
   }
 
   return inherit( Spinner, CoordinateSpinner );

@@ -29,16 +29,16 @@ define( function( require ) {
     }, options );
 
     // "up" function, skips over undefined line condition (slope=0/0)
-    var upFunction = function() {
+    options.upFunction = function() {
       return ( variableComponent.get() === -1 && fixedComponent.get() === 0 ) ? 1 : variableComponent.get() + 1;
     };
 
     // "down" function, skips over undefined line condition (slope=0/0)
-    var downFunction = function() {
+    options.downFunction = function() {
       return ( variableComponent.get() === 1 && fixedComponent.get() === 0 ) ? -1 : variableComponent.get() - 1;
     };
 
-    Spinner.call( this, variableComponent, variableRange, upFunction, downFunction, options );
+    Spinner.call( this, variableComponent, variableRange, options );
   }
 
   return inherit( Spinner, SlopeSpinner );

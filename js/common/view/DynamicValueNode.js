@@ -25,14 +25,15 @@ define( function( require ) {
     options = _.extend( {
       fill: 'black',
       font: new PhetFont( 12 ),
-      decimalPlaces: 0
+      decimalPlaces: 0,
+      absoluteValue: false
     }, options );
 
     var thisNode = this;
     Text.call( this, "", options );
 
     valueProperty.link( function( value ) {
-      thisNode.text = Util.toFixed( value, options.decimalPlaces );
+      thisNode.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
     } );
   }
 

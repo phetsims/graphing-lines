@@ -68,17 +68,17 @@ define( function( require ) {
   /**
    * @param {Property<Number>} valueProperty
    * @param {Property<Range>} rangeProperty
-   * @param {Function} upFunction returns the value for 'up' button
-   * @param {Function} downFunction return the value for 'down' button
    * @param {*} options
    * @constructor
    */
-  function Spinner( valueProperty, rangeProperty, upFunction, downFunction, options ) {
+  function Spinner( valueProperty, rangeProperty, options ) {
 
     options = _.extend( {
       color: 'blue',
       decimalPlaces: 0,
-      font: new PhetFont( 24 )
+      font: new PhetFont( 24 ),
+      upFunction: function() { return valueProperty.get() + 1; },
+      downFunction: function() { return valueProperty.get() - 1; }
     }, options );
 
     var thisNode = this;
@@ -133,10 +133,10 @@ define( function( require ) {
 
     // callbacks for changing the value
     var fireUp = function() {
-      valueProperty.set( upFunction() );
+      valueProperty.set( options.upFunction() );
     };
     var fireDown = function() {
-      valueProperty.set( downFunction() );
+      valueProperty.set( options.downFunction() );
     };
 
     // top half of the background, for "up"

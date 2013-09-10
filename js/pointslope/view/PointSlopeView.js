@@ -110,10 +110,13 @@ define( function( require ) {
     //XXX test
     var spinnerValueProperty = new Property( 3 );
     var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
-    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty,
-      function() { return spinnerValueProperty.get() + 1; },
-      function() { return spinnerValueProperty.get() - 1; },
-      { x: 700, y: 100, font: new PhetFont( 80 ), color: Color.BLUE }
+    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, {
+        x: 700, y: 100,
+        font: new PhetFont( 80 ),
+        color: Color.BLUE,
+        upFunction: function() { return spinnerValueProperty.get() + 1; },
+        downFunction: function() { return spinnerValueProperty.get() - 1; }
+      }
     ) );
 
     //XXX test

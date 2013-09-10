@@ -85,9 +85,9 @@ define( function( require ) {
     // when lines are not visible, hide related controls
     linesVisibleProperty.link( function( visible ) {
       notLinesVisible.set( !visible );
-      slopeCheckBox.enabled = visible;
       positiveCheckBox.enabled = visible;
       negativeCheckBox.enabled = visible;
+      slopeCheckBox.enabled = visible;
     } );
 
     notLinesVisible.link( function( visible ) {

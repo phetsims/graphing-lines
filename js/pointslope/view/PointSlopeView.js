@@ -23,6 +23,7 @@ define( function( require ) {
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
+  var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
@@ -65,27 +66,31 @@ define( function( require ) {
 
     //XXX test
     var graph = new Graph( new Range( -10, 10 ), new Range( -10, 10 ) );
-//    thisView.addChild( new GraphNode( graph, model.mvt ) );
+    var graphNode = new GraphNode( graph, model.mvt );
+//    thisView.addChild( graphNode );
 
     //XXX test
     var line = Line.createPointSlope( 1, 2, 3, 4 );
     var lineProperty = new Property( line );
-//    thisView.addChild( new SlopeToolNode( lineProperty, model.mvt ) );
+    var slopeToolNode = new SlopeToolNode( lineProperty, model.mvt );
+//    thisView.addChild( slopeToolNode );
 
     //XXX test
-    var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
-//    thisView.addChild( new LineNode( line, graph, model.mvt ) );
+    var lineNode = new LineNode( line, graph, model.mvt );
+//    thisView.addChild( lineNode );
 
     //XXX test
     var viewProperties = new LineFormsViewProperties();
     var standardLines = new ObservableArray( [ Line.Y_EQUALS_X_LINE, Line.Y_EQUALS_NEGATIVE_X_LINE ] );
-//    thisView.addChild( new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
-//      { x: 800, y: 350 } ) );
+    var graphControls = new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, standardLines,
+      { x: 800, y: 350 } );
+//    thisView.addChild( graphControls );
 
     //XXX test
     var pointTool = new PointTool( new Vector2( 0, 0 ), 'up', standardLines );
     var stageBounds = model.mvt.viewToModelBounds( this.layoutBounds );
-//    thisView.addChild( new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty ) );
+    var pointToolNode = new PointToolNode( pointTool, model.mvt, graph, stageBounds, viewProperties.linesVisibleProperty );
+//    thisView.addChild( pointToolNode );
 
     //XXX test
     var x1RangeProperty = new Property( new Range( -5, 5 ) );
@@ -106,19 +111,21 @@ define( function( require ) {
       new Property( new Vector2( 2, -2 ) ),
       new Property( new Vector2( 3, -3 ) )
     ];
-//    thisView.addChild( new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt ) );
+    var pointManipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_1, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, model.mvt );
+//    thisView.addChild( pointManipulator );
 
     //XXX test
     var spinnerValueProperty = new Property( 3 );
     var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
-//    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, {
-//        x: 700, y: 100,
-//        font: new PhetFont( 80 ),
-//        color: Color.BLUE,
-//        upFunction: function() { return spinnerValueProperty.get() + 1; },
-//        downFunction: function() { return spinnerValueProperty.get() - 1; }
-//      }
-//    ) );
+    var spinner = new Spinner( spinnerValueProperty, spinnerRangeProperty, {
+        x: 700, y: 100,
+        font: new PhetFont( 80 ),
+        color: Color.BLUE,
+        upFunction: function() { return spinnerValueProperty.get() + 1; },
+        downFunction: function() { return spinnerValueProperty.get() - 1; }
+      }
+    );
+//    thisView.addChild( spinner );
 
     //XXX test
     var riseProperty = new Property( 1 );
@@ -131,7 +138,7 @@ define( function( require ) {
 //    thisView.addChild( runSpinner );
 
     //XXX test
-    var titleNode =PointSlopeEquationNode.createGeneralFormNode( new PhetFont( { size: 18, weight: 'bold' } ));
+    var titleNode = PointSlopeEquationNode.createGeneralFormNode( new PhetFont( { size: 18, weight: 'bold' } ) );
     var savedLinesProperty = new ObservableArray();
     var maximizedProperty = new Property( true );
     var interactiveEquationNode = new Rectangle( 0, 0, 200, 30, { fill: 'blue' } );

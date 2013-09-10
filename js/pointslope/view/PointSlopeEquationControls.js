@@ -26,7 +26,8 @@ define( function( require ) {
       model.savedLines,
       viewProperties.interactiveEquationVisibleProperty,
       viewProperties.linesVisibleProperty,
-      new PointSlopeEquationNode( model.interactiveLineProperty, model.x1Range, model.y1Range, model.riseRange, model.runRange )
+      new PointSlopeEquationNode( model.interactiveLineProperty,
+        model.x1RangeProperty, model.y1RangeProperty, model.riseRangeProperty, model.runRangeProperty )
     )
   }
 

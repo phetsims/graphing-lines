@@ -30,11 +30,11 @@ define( function( require ) {
 
     // (x1,y1) point manipulator
     var x1y1Manipulator = new X1Y1Manipulator(
-      thisNode.getManipulatorDiameter(), model.interactiveLineProperty, model.x1Range, model.y1Range, model.mvt, true /* constantSlope */ );
+      thisNode.getManipulatorDiameter(), model.interactiveLineProperty, model.x1RangeProperty, model.y1RangeProperty, model.mvt, true /* constantSlope */ );
 
     // slope manipulator
     var slopeManipulator = new SlopeManipulator(
-      thisNode.getManipulatorDiameter(), model.interactiveLineProperty, model.riseRange, model.runRange, model.mvt );
+      thisNode.getManipulatorDiameter(), model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.mvt );
 
     // rendering order
     thisNode.addChild( x1y1Manipulator );

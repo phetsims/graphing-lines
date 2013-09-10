@@ -1,3 +1,4 @@
+9/10/13 handle reset of view properties
 9/10/13 move dragBounds to point tool model, adjust
 9/10/13 fix layout of equation control panel, increase margins
 9/10/13 move manipulatorDiameter to model

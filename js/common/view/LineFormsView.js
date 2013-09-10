@@ -42,6 +42,7 @@ define( function( require ) {
     // Reset All button
     var resetAllButton = new ResetAllButton( function() {
       model.reset();
+      viewProperties.reset();
     } );
 
     // rendering order

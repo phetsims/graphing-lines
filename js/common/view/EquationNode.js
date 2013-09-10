@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
@@ -45,10 +46,10 @@ define( function( require ) {
     this.fractionLineThickness = 0.06 * pointSize;
 
     // size of the lines used to create + and - operators
-    this.operatorLineSize = new PDimension( 0.54 * pointSize, 0.07 * pointSize );
+    this.operatorLineSize = new Dimension2( 0.54 * pointSize, 0.07 * pointSize );
 
     // size of the lines used to create + and - signs
-    this.signLineSize = new PDimension( 0.54 * pointSize, 0.11 * pointSize );
+    this.signLineSize = new Dimension2( 0.54 * pointSize, 0.11 * pointSize );
 
     // spacing between components of an equation (set by visual inspection)
     this.integerSignXSpacing = 0.18 * pointSize; // spacing between a sign and the integer to the right of it

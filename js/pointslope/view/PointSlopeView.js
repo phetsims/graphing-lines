@@ -91,8 +91,8 @@ define( function( require ) {
     var y1RangeProperty = new Property( new Range( -5, 5 ) );
     var x2RangeProperty = new Property( new Range( -10, 10 ) );
     var y2RangeProperty = new Property( new Range( -10, 10 ) );
-    var riseRangeProperty = new Property( new Range( -5, 5 ) );
-    var runRangeProperty = new Property( new Range( -5, 5 ) );
+    var riseRangeProperty = new Property( new Range( -10, 10 ) );
+    var runRangeProperty = new Property( new Range( -10, 10 ) );
     var manipulatorDiameter = model.mvt.modelToViewDeltaX( 0.85 );
 //    thisView.addChild( new X1Y1Manipulator( manipulatorDiameter, lineProperty, x1RangeProperty, y1RangeProperty, model.mvt, true ) );
 //    thisView.addChild( new X2Y2Manipulator( manipulatorDiameter, lineProperty, x2RangeProperty, y2RangeProperty, model.mvt ) );
@@ -122,8 +122,6 @@ define( function( require ) {
     //XXX test
     var riseProperty = new Property( 1 );
     var runProperty = new Property( 5 );
-    var riseRangeProperty = new Property( new Range( -10, 10 ) );
-    var runRangeProperty = new Property( new Range( -10, 10 ) );
     var riseSpinner = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { x: 900, y: 100, font: new PhetFont( 80 ) } );
     var runSpinner = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: new PhetFont( 80 ) } );
     runSpinner.centerX = riseSpinner.centerX;

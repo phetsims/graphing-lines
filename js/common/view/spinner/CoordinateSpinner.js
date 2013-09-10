@@ -33,13 +33,13 @@ define( function( require ) {
     // computes value when 'up' button is pressed
     options.upFunction = function() {
       var x1New = a1.get() + 1;
-      if ( x1New === a2.get() && b1.get() == b2.get() ) { // will points be the same?
+      if ( x1New === a2.get() && b1.get() === b2.get() ) { // will points be the same?
         x1New++;
         if ( x1New > range.get().max ) { // did we skip too far?
           x1New = a1.get();
         }
       }
-      return x1New
+      return x1New;
     };
 
     // computes value when 'down' button is pressed

@@ -15,7 +15,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
-  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
+  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeTests' );//TODO replace PointSlopeTests
   var Vector2 = require( 'DOT/Vector2' );
 
   function PointSlopeScreen() {

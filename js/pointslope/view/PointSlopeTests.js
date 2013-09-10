@@ -2,7 +2,7 @@
 
 //TODO delete this when tests are no longer needed
 /**
- * View for the 'Point-Slope' screen.
+ * Tests for the 'Point-Slope' screen. Use this in place of PointSlopeView.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

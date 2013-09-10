@@ -97,6 +97,8 @@ define( function( require ) {
 
   return inherit( ScreenView, LineFormsView, {
 
+    layoutBounds: new Bounds2( 0, 0, 1100, 700 ),
+
     reset: function() {
       callSuper( ScreenView, "reset", this );
       this.viewProperties.reset();

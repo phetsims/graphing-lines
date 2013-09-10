@@ -20,6 +20,7 @@ define( function( require ) {
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
+  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -31,6 +32,7 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
@@ -354,16 +356,13 @@ define( function( require ) {
     thisNode.mutate( options );
   }
 
+  // Creates a node that displays the general form of this equation.
+  PointSlopeEquationNode.createGeneralFormNode = function( font ) {
+        //NOTE: <font> tag is deprecated in HTML4 and unsupported in HTML5. But as of Java 1.7, Swing (supposedly) implements a subset of HTML3.
+        var html = StringUtils.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>", /* (y - y1) = m(x - x1) */
+                                            GLStrings["symbol.y"], GLStrings["symbol.y"], GLStrings["symbol.slope"], GLStrings["symbol.x"], GLStrings["symbol.x"] );
+        return new HTMLText( html, { font: font } );
+  };
+
   return inherit( EquationNode, PointSlopeEquationNode );
 } );
-
-
-//TODO
-//
-//    // Creates a node that displays the general form of this equation.
-//    public static PNode createGeneralFormNode() {
-//        //NOTE: <font> tag is deprecated in HTML4 and unsupported in HTML5. But as of Java 1.7, Swing (supposedly) implements a subset of HTML3.
-//        String html = MessageFormat.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>", /* (y - y1) = m(x - x1) */
-//                                            Strings.SYMBOL_Y, Strings.SYMBOL_Y, Strings.SYMBOL_SLOPE, Strings.SYMBOL_X, Strings.SYMBOL_X );
-//        return new HTMLNode( html, LGColors.INTERACTIVE_LINE, new PhetFont( Font.BOLD, 18 ) );
-//    }

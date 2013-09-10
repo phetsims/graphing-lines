@@ -131,7 +131,7 @@ define( function( require ) {
 //    thisView.addChild( runSpinner );
 
     //XXX test
-    var titleNode = new Text( "control panel title", { stroke: 'black' } );
+    var titleNode =PointSlopeEquationNode.createGeneralFormNode( new PhetFont( { size: 18, weight: 'bold' } ));
     var savedLinesProperty = new ObservableArray();
     var maximizedProperty = new Property( true );
     var interactiveEquationNode = new Rectangle( 0, 0, 200, 30, { fill: 'blue' } );

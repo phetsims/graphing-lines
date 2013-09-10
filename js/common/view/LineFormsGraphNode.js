@@ -33,8 +33,6 @@ define( function( require ) {
    */
   function LineFormsGraphNode( model, viewProperties ) {
 
-    debugger;//XXX
-
     var thisNode = this;
     GraphNode.call( thisNode, model.graph, model.mvt );
 
@@ -74,9 +72,9 @@ define( function( require ) {
     } );
 
     // Visibility of lines
-    viewProperties.linesVisibleProperty.link( thisNode.updateLinesVisibility );
-    viewProperties.interactiveLineVisibleProperty.link( thisNode.updateLinesVisibility );
-    viewProperties.slopeVisibleProperty.link( thisNode.updateLinesVisibility );
+    viewProperties.linesVisibleProperty.link( thisNode.updateLinesVisibility.bind( thisNode ) );
+    viewProperties.interactiveLineVisibleProperty.link( thisNode.updateLinesVisibility.bind( thisNode ) );
+    viewProperties.slopeVisibleProperty.link( thisNode.updateLinesVisibility.bind( thisNode ) );
 
     // Visibility of the equation on the interactive line
     thisNode.viewProperties.interactiveEquationVisibleProperty.link( function( visible ) {
@@ -100,7 +98,6 @@ define( function( require ) {
 
     // Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
-      debugger;//XXX
       // interactive line
       this.interactiveLineParentNode.visible = ( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
 

@@ -14,7 +14,7 @@ define( function( require ) {
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
-  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeTests' );
+  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
 
   function PointSlopeScreen() {
 

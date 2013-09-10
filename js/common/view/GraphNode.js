@@ -136,7 +136,7 @@ define( function( require ) {
    */
   function XAxisNode( graph, mvt ) {
 
-    Node.call( this );
+    Node.call( this, { pickable: false } );
 
     // horizontal line with arrows at both ends
     var tailLocation = new Vector2( mvt.modelToViewX( graph.xRange.min - AXIS_EXTENT ), mvt.modelToViewY( 0 ) );
@@ -188,7 +188,7 @@ define( function( require ) {
    */
   function YAxisNode( graph, mvt ) {
 
-    Node.call( this );
+    Node.call( this, { pickable: false } );
 
     // vertical line with arrows at both ends
     var tailLocation = new Vector2( mvt.modelToViewX( 0 ), mvt.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
@@ -239,7 +239,7 @@ define( function( require ) {
    * @constructor
    */
   function GridNode( graph, mvt ) {
-    Node.call( this );
+    Node.call( this, { pickable: false } );
 
     // background
     var backgroundNode = new Rectangle(
@@ -290,7 +290,7 @@ define( function( require ) {
    */
   function GraphNode( graph, mvt ) {
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
-    Node.call( this, { pickable: false } );
+    Node.call( this );
     this.addChild( new GridNode( graph, mvt ) );
     this.addChild( new XAxisNode( graph, mvt ) );
     this.addChild( new YAxisNode( graph, mvt ) );

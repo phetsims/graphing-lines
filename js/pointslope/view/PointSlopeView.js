@@ -111,14 +111,14 @@ define( function( require ) {
     //XXX test
     var spinnerValueProperty = new Property( 3 );
     var spinnerRangeProperty = new Property( new Range( -10, 10 ) );
-    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, {
-        x: 700, y: 100,
-        font: new PhetFont( 80 ),
-        color: Color.BLUE,
-        upFunction: function() { return spinnerValueProperty.get() + 1; },
-        downFunction: function() { return spinnerValueProperty.get() - 1; }
-      }
-    ) );
+//    thisView.addChild( new Spinner( spinnerValueProperty, spinnerRangeProperty, {
+//        x: 700, y: 100,
+//        font: new PhetFont( 80 ),
+//        color: Color.BLUE,
+//        upFunction: function() { return spinnerValueProperty.get() + 1; },
+//        downFunction: function() { return spinnerValueProperty.get() - 1; }
+//      }
+//    ) );
 
     //XXX test
     var riseProperty = new Property( 1 );
@@ -127,8 +127,8 @@ define( function( require ) {
     var runSpinner = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: new PhetFont( 80 ) } );
     runSpinner.centerX = riseSpinner.centerX;
     runSpinner.top = riseSpinner.bottom + 10;
-    thisView.addChild( riseSpinner );
-    thisView.addChild( runSpinner );
+//    thisView.addChild( riseSpinner );
+//    thisView.addChild( runSpinner );
 
     //XXX test
     var titleNode = new Text( "control panel title", { stroke: 'black' } );
@@ -140,9 +140,8 @@ define( function( require ) {
 //    thisView.addChild( equationControls );
 
     //XXX test
-    // interactiveLine, x1Range, y1Range, riseRange, runRange, interactiveX1, interactiveY1, interactiveSlope, interactiveFont, staticFont, staticColor,
     var equationNode = new PointSlopeEquationNode( lineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty,
-      true, true, true, 40, 40, Color.BLACK, { x: 200, y: 200 } );
+      true, true, true, 60, 60, Color.BLACK, { x: 200, y: 200 } );
     thisView.addChild( equationNode );
   }
 

@@ -191,16 +191,16 @@ define( function( require ) {
         yNode.left = yLeftParenNode.right + thisNode.parenXSpacing;
         yNode.y = yLeftParenNode.y;
         yOperatorNode.left = yNode.right + thisNode.operatorXSpacing;
-        yOperatorNode.y = yNode.y + thisNode.operatorYFudgeFactor;
+        yOperatorNode.centerY = yNode.centerY + thisNode.operatorYFudgeFactor;
         y1Node.left = yOperatorNode.right + thisNode.operatorXSpacing;
-        y1Node.y = yNode.y;
+        y1Node.centerY = yNode.centerY;
         yRightParenNode.left = y1Node.right + thisNode.parenXSpacing;
         yRightParenNode.y = yNode.y;
 
         // =
         thisNode.addChild( equalsNode );
         equalsNode.left = yRightParenNode.right + thisNode.relationalOperatorXSpacing;
-        equalsNode.y = yNode.y;
+        equalsNode.y = yNode.y + thisNode.equalsSignFudgeFactor;
 
         // slope
         var previousXOffset;
@@ -300,9 +300,9 @@ define( function( require ) {
           xNode.left = xLeftParenNode.right + thisNode.parenXSpacing;
           xNode.y = yNode.y;
           xOperatorNode.left = xNode.right + thisNode.operatorXSpacing;
-          xOperatorNode.y = xNode.y + thisNode.operatorYFudgeFactor;
+          xOperatorNode.centerY = xNode.centerY + thisNode.operatorYFudgeFactor;
           x1Node.left = xOperatorNode.right + thisNode.operatorXSpacing;
-          x1Node.y = yNode.y;
+          x1Node.centerY = yNode.centerY;
           xRightParenNode.left = x1Node.right + thisNode.parenXSpacing;
           xRightParenNode.y = yNode.y;
         }

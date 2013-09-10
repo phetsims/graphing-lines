@@ -44,6 +44,7 @@ define( function( require ) {
     this.operatorYFudgeFactor = 0.07 * pointSize;
     this.fractionLineYFudgeFactor = 0.07 * pointSize;
     this.undefinedSlopeYFudgeFactor = 0.07 * pointSize;
+    this.equalsSignFudgeFactor = 0.1 * pointSize;
 
     // thickness of the fraction divisor line
     this.fractionLineThickness = 0.06 * pointSize;
@@ -84,13 +85,13 @@ define( function( require ) {
     computeMaxSlopeSpinnerWidth: function( riseRange, runRange, font, decimalPlaces ) {
 
       // Create prototypical spinners.
-      var maxRiseNode = new SlopeSpinner( new Property( riseRange.get().max ), new Property( runRange.get().max ), riseRange );
-      var minRiseNode = new SlopeSpinner( new Property( riseRange.get().min ), new Property( runRange.get().max ), riseRange );
-      var maxRunNode = new SlopeSpinner( new Property( runRange.get().max ), new Property( riseRange.get().max ), runRange );
-      var minRunNode = new SlopeSpinner( new Property( runRange.get().min ), new Property( riseRange.get().min ), runRange );
+      var maxRiseNode = new SlopeSpinner( new Property( riseRange.get().max ), new Property( runRange.get().max ), riseRange, { font: font, decimalPlaces: decimalPlaces } );
+      var minRiseNode = new SlopeSpinner( new Property( riseRange.get().min ), new Property( runRange.get().max ), riseRange, { font: font, decimalPlaces: decimalPlaces } );
+      var maxRunNode = new SlopeSpinner( new Property( runRange.get().max ), new Property( riseRange.get().max ), runRange, { font: font, decimalPlaces: decimalPlaces } );
+      var minRunNode = new SlopeSpinner( new Property( runRange.get().min ), new Property( riseRange.get().min ), runRange, { font: font, decimalPlaces: decimalPlaces } );
 
       // Compute the max
-      var maxRiseWidth = Math.max( maxRiseNode.with, minRiseNode.width );
+      var maxRiseWidth = Math.max( maxRiseNode.width, minRiseNode.width );
       var maxRunWidth = Math.max( maxRunNode.width, minRunNode.width );
       return Math.max( maxRiseWidth, maxRunWidth );
     }

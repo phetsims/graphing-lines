@@ -15,7 +15,12 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
 
-  function DynamicValueNode( value, options ) {
+  /**
+   * @param {Property<Number>} valueProperty
+   * @param options
+   * @constructor
+   */
+  function DynamicValueNode( valueProperty, options ) {
 
     options = _.extend( {
       fill: 'black',
@@ -26,7 +31,7 @@ define( function( require ) {
     var thisNode = this;
     Text.call( this, "", options );
 
-    value.link( function( value ) {
+    valueProperty.link( function( value ) {
       thisNode.text = Util.toFixed( value, options.decimalPlaces );
     } );
   }

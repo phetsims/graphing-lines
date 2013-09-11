@@ -3,16 +3,20 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- SlopeInterceptEquationNode, for labeling standard lines
+- SlopeEquationNode
+- SlopeInterceptEquationNode
 
 MEDIUM
+- minimize/maximize button on equation control panel
+- collapse equation control panel when minimized
 - line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
-- pass font properties instead of just size to various UI components (especially equations)
-- DecimalFormat
 - implement IconFactory
 - rounded corners on spinners
+- Game
 
 LOW
+- DecimalFormat instead of decimalPlaces
+- pass font properties instead of just size to various UI components (especially equations)
 - delete PointSlopeViewTests
 - convert models to PropertySet and axon style
 - consider making Line mutable, to reduce affects of garbage collection

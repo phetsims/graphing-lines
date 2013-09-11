@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Control panel for interacting with a line's equation in point-slope form.
+ * Control panel for interacting with a line's equation in slope form.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -11,25 +11,22 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
 
   /**
-   * @param {PointSlopeModel} model
+   * @param {SlopeModel} model
    * @param {LineFormsViewProperties} viewProperties
    * @constructor
    */
-  function PointSlopeEquationControls( model, viewProperties ) {
+  function SlopeInterceptEquationControls( model, viewProperties ) {
     EquationControls.call( this,
-      PointSlopeEquationNode.createGeneralFormNode(),
+      SlopeInterceptEquationNode.createGeneralFormNode(),
       model.interactiveLineProperty,
       model.savedLines,
       viewProperties.interactiveEquationVisibleProperty,
       viewProperties.linesVisibleProperty,
-      new PointSlopeEquationNode( model.interactiveLineProperty,
-        model.x1RangeProperty, model.y1RangeProperty, model.riseRangeProperty, model.runRangeProperty )
-    )
+      new SlopeInterceptEquationNode( model.interactiveLineProperty, model.riseRange, model.runRange, model.y1Range ) );
   }
 
-  return inherit( EquationControls, PointSlopeEquationControls );
+  return inherit( EquationControls, SlopeInterceptEquationControls );
 } );
-

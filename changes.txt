@@ -1,3 +1,4 @@
+9/10/13 add game stub
 9/10/13 fix layout of top part of equation control panel
 9/10/13 wire up Slope and Slope-Intercept screens, debug, equation not implemented yet
 9/10/13 port SlopeView and SlopeInterceptView (untested)

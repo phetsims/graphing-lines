@@ -18,9 +18,13 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
+  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
@@ -40,7 +44,11 @@ define( function( require ) {
 
   // Creates a node that displays the general form of this equation: y = mx + b
   SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
-    return new Text( "y = mx + b", { fontSize: 18 }  ); //TODO this is a placeholder
+    options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
+    var html = StringUtils.format( "{0} = {1}{2} + {3}",
+      GLStrings["symbol.y"], GLStrings["symbol.slope"], GLStrings["symbol.x"], GLStrings["symbol.intercept"] );
+    return new HTMLText( html, { font: options.font } );
+
   };
 
   SlopeInterceptEquationNode.createStaticEquation = function( line, fontSize, color ) {

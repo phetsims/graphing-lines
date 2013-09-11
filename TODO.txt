@@ -5,7 +5,6 @@ DESIGN
 HIGH
 - standard and saved lines are not removed from the graph
 - SlopeInterceptEquationNode, for labeling standard lines
-- add press-&-hold feature to Spinner
 
 MEDIUM
 - pass font properties instead of just size to various UI components (especially equations)

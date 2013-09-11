@@ -37,24 +37,59 @@ define( function( require ) {
    * @param {Property<Boolean>} stateProperty
    * @param {Property<Boolean>} enabledProperty
    * @param {Function} fireFunction
+   * @param {Number} timerDelay start to fire continuously after pressing for this long (milliseconds)
+   * @param {Number} intervalDelay // fire continuously at this frequency (milliseconds)
    * @constructor
    */
-  function SpinnerListener( stateProperty, enabledProperty, fireFunction ) {
+  function SpinnerListener( stateProperty, enabledProperty, fireFunction, timerDelay, intervalDelay ) {
+
+    // stuff related to press-&-hold feature
+    var fired = false;
+    var timeoutID = null;
+    var intervalID = null;
+    var cleanupTimer = function() {
+      if ( timeoutID ) {
+        window.clearTimeout( timeoutID );
+        timeoutID = null;
+      }
+      if ( intervalID ) {
+        window.clearInterval( intervalID );
+        intervalID = null;
+      }
+    };
+
     ButtonListener.call( this, {
+
       up: function() {
         stateProperty.set( 'up' );
+        cleanupTimer();
       },
+
       over: function() {
         stateProperty.set( 'over' );
       },
+
       down: function() {
         stateProperty.set( 'down' );
+        fired = false;
+        timeoutID = window.setTimeout( function() {
+          timeoutID = null;
+          fired = true;
+          intervalID = window.setInterval( function() {
+            if ( enabledProperty.get() ) {
+              fireFunction();
+            }
+          }, intervalDelay );
+        }, timerDelay );
       },
+
       out: function() {
         stateProperty.set( 'out' );
       },
+
       fire: function() {
-        if ( enabledProperty.get() ) {
+        cleanupTimer();
+        if ( !fired && enabledProperty.get() ) {
           fireFunction();
         }
       }
@@ -78,7 +113,9 @@ define( function( require ) {
       decimalPlaces: 0,
       font: new PhetFont( 24 ),
       upFunction: function() { return valueProperty.get() + 1; },
-      downFunction: function() { return valueProperty.get() - 1; }
+      downFunction: function() { return valueProperty.get() - 1; },
+      timerDelay: 400, // start to fire continuously after pressing for this long (milliseconds)
+      intervalDelay: 100 // fire continuously at this frequency (milliseconds)
     }, options );
 
     var thisNode = this;
@@ -141,11 +178,11 @@ define( function( require ) {
 
     // top half of the background, for "up"
     var upBackground = new Path( Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight / 2 ) ); //TODO use CAG to round top corners
-    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp ) );
+    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
 
     // bottom half of the background, for "down"
     var downBackground = new Path( Shape.rectangle( 0, backgroundHeight / 2, backgroundWidth, backgroundHeight / 2 ) ); //TODO use CAG to round top corners
-    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown ) );
+    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // compute size of arrows
     var arrowButtonSize = new Dimension2( 0.5 * backgroundWidth, 0.1 * backgroundWidth );
@@ -158,7 +195,7 @@ define( function( require ) {
       .lineTo( 0, arrowButtonSize.height )
       .close();
     var upArrow = new Path( upArrowShape, arrowOptions );
-    upArrow.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp ) );
+    upArrow.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
 
     // 'down' arrow
     var downArrowShape = new Shape()
@@ -167,7 +204,7 @@ define( function( require ) {
       .lineTo( arrowButtonSize.width, 0 )
       .close();
     var downArrow = new Path( downArrowShape, arrowOptions );
-    downArrow.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown ) );
+    downArrow.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // rendering order
     thisNode.addChild( upBackground );

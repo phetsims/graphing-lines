@@ -1,3 +1,4 @@
+9/11/13 fix crash when removing UndefinedSlopeIndicator from interactive slope equation
 9/11/13 implement non-interactive form of SlopeEquationNode
 9/11/13 use options.staticFontSize to compute layout metrics for slope equation
 9/11/13 use MinusNode for '-' operator in SlopeEquationNode

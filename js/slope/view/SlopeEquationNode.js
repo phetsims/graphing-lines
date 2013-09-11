@@ -211,6 +211,7 @@ define( function( require ) {
       // undefined-slope indicator
       if ( undefinedSlopeIndicator !== null ) {
         thisNode.removeChild( undefinedSlopeIndicator );
+        undefinedSlopeIndicator = null;
       }
       if ( line.undefinedSlope() ) {
         undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.getWidth(), thisNode.getHeight() );

@@ -3,7 +3,7 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- call separate factory functions from SlopeEquationNode constructor, depending on whether equation is interactive
+- Slope screen manipulators crash when x1 <= x2
 - SlopeInterceptEquationNode constructor
 
 MEDIUM

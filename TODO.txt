@@ -13,6 +13,7 @@ MEDIUM
 - rounded corners on spinners
 
 LOW
+- delete PointSlopeViewTests
 - convert models to PropertySet and axon style
 - consider making Line mutable, to reduce affects of garbage collection
 - change 'tab.*' string keys to 'screen.*'

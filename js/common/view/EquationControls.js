@@ -97,12 +97,12 @@ define( function( require ) {
     subContent.addChild( buttonsSeparator );
 
     // do vertical layout first, don't care about horizontal positions here
-    var buttonsXSpacing = 10;
+    var xSpacing = 10;
     var ySpacing = 10;
     var titleHeight = Math.max( titleNode.height, minimizeMaximizeButtonNode.height );
     minimizeMaximizeButtonNode.x = 0;
     minimizeMaximizeButtonNode.centerY = titleHeight / 2;
-    titleNode.left = minimizeMaximizeButtonNode.right + buttonsXSpacing;
+    titleNode.left = minimizeMaximizeButtonNode.right + xSpacing;
     titleNode.centerY = titleHeight / 2;
     titleSeparator.x = 0;
     titleSeparator.top = titleHeight + ySpacing;
@@ -127,11 +127,13 @@ define( function( require ) {
 
     // now do horizontal layout
     var centerX = panelWidth / 2;
-    minimizeMaximizeButtonNode.x = 5;
     titleNode.centerX = content.centerX;
+    if ( titleNode.left <= minimizeMaximizeButtonNode.right ) {
+      titleNode.left = minimizeMaximizeButtonNode.right + xSpacing;
+    }
     interactiveEquationNode.centerX = content.centerX;
-    saveLineButton.right = content.centerX - ( buttonsXSpacing / 2 );
-    eraseLinesButton.left = content.centerX + ( buttonsXSpacing / 2 );
+    saveLineButton.right = content.centerX - ( xSpacing / 2 );
+    eraseLinesButton.left = content.centerX + ( xSpacing / 2 );
 
     maximizedProperty.link( function( maximized ) {
       subContent.visible = maximized;

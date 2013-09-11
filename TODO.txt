@@ -17,7 +17,7 @@ MEDIUM
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
 - horizontal space between text and icons is wrong in check boxes, problem with scenery.Text bounds?
 - flatten the nested options parameter for NumberBackgroundNode
-- replace NumberBackgroundNode(value) with more general BackgroundNode(childNode)
+- replace NumberBackgroundNode(value) with more general BackgroundNode(childNode), or use sun.Panel?
 
 LOW
 - DecimalFormat instead of decimalPlaces

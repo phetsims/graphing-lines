@@ -70,7 +70,7 @@ define( function( require ) {
     var mNode = new Text( GLStrings["symbol.slope"], staticTextOptions );
     var interactiveEqualsNode = new Text( "=", staticTextOptions );
     // y2 - y2
-    var y2Node = new CoordinateSpinner( y2, x2, y1, x1, yRange, { color: GLColors.POINT_X2_Y2 } );
+    var y2Node = new CoordinateSpinner( y2, x2, y1, x1, yRange, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var numeratorOperatorNode = new Text( "-", staticTextOptions );
     var y1Node = new CoordinateSpinner( y1, x1, y2, x2, yRange, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line
@@ -87,7 +87,8 @@ define( function( require ) {
 
     // Compute the max width needed to display the unsimplified rise and run values.
     var maxRangeLength = Math.max( xRange.get().getLength(), yRange.get().getLength() );
-    var maxUnsimplifiedWidth = new Text( Util.toFixed( -maxRangeLength, 0 ), { font: interactiveFont, color: 'black' } ).width;
+    var maxUnsimplifiedWidth = y2Node.width;
+    var maxUnsimplifiedHeight = y2Node.height - 20;
 
     // rendering order
     var parentNode = new Node();
@@ -186,7 +187,10 @@ define( function( require ) {
       {
         var margin = 3;
         var cornerRadius = 10;
-        var unsimplifiedSlopeOptions = { textOptions: { font: staticFont }, backgroundOptions: { fill: GLColors.SLOPE, width: maxUnsimplifiedWidth } }; //TODO yuck
+        var unsimplifiedSlopeOptions = {
+          textOptions: { font: staticFont },
+          backgroundOptions: { fill: GLColors.SLOPE, width: maxUnsimplifiedWidth, height: maxUnsimplifiedHeight }
+        }; //TODO yuck
 
         // rise
         parentNode.removeChild( unsimplifiedRiseNode );

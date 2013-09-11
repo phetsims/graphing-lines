@@ -21,10 +21,10 @@ define( function( require ) {
     LineFormsModel.call( this, new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
 
     // ranges
-    this.x1RangeProperty = new Property( new Range( this.graph.xRange ) );
-    this.y1RangeProperty = new Property( new Range( this.graph.yRange ) );
-    this.x2RangeProperty = new Property( new Range( this.graph.xRange ) );
-    this.y2RangeProperty = new Property( new Range( this.graph.yRange ) );
+    this.x1RangeProperty = new Property( this.graph.xRange );
+    this.y1RangeProperty = new Property( this.graph.yRange );
+    this.x2RangeProperty = new Property( this.graph.xRange );
+    this.y2RangeProperty = new Property( this.graph.yRange );
 
     //NOTE: Unlike slope-intercept and point-slope, ranges do not need to be dynamically adjusted, because the points are free ranging.
   }

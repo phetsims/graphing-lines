@@ -32,10 +32,10 @@ define( function( require ) {
     LineFormsModel.call( thisModel, interactiveLine );
 
     // ranges
-    thisModel.x1RangeProperty = new Property( new Range( thisModel.graph.xRange ) );
-    thisModel.y1RangeProperty = new Property( new Range( thisModel.graph.yRange ) );
-    thisModel.riseRangeProperty = new Property( new Range( thisModel.graph.yRange ) );
-    thisModel.runRangeProperty = new Property( new Range( thisModel.graph.xRange ) );
+    thisModel.x1RangeProperty = new Property( this.graph.xRange );
+    thisModel.y1RangeProperty = new Property( this.graph.yRange );
+    thisModel.riseRangeProperty = new Property( this.graph.yRange );
+    thisModel.runRangeProperty = new Property( this.graph.xRange );
 
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
     thisModel.interactiveLineProperty.link( function( line ) {

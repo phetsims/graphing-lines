@@ -9,32 +9,24 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Bounds2 = require( 'DOT/Bounds2' );
+  var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var ResetAllButton = require( 'GRAPHING_LINES/common/view/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
+  var LineFormsView = require( 'GRAPHING_LINES/common/view/LineFormsView' );
+  var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
+  var SlopeEquationControls = require( 'GRAPHING_LINES/slope/view/SlopeEquationControls' );
+  var SlopeGraphNode = require( 'GRAPHING_LINES/slope/view/SlopeGraphNode' );
 
   /**
    * @param {SlopeModel} model
    * @constructor
    */
   function SlopeView( model ) {
-
-    var thisView = this;
-    ScreenView.call( thisView, { renderer: 'svg' } );
-
-    // Reset All button
-    var resetAllButton = new ResetAllButton( function() {
-      model.reset();
-    } );
-
-    // rendering order
-    thisView.addChild( resetAllButton );
-
-    // layout
-    resetAllButton.left = 100;
-    resetAllButton.top = 100;
+    var viewProperties = new LineFormsViewProperties();
+    LineFormsView.call( this, model, viewProperties,
+      new SlopeGraphNode( model, viewProperties ),
+      new SlopeEquationControls( model, viewProperties ),
+      new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, model.standardLines ) );
   }
 
-  return inherit( ScreenView, SlopeView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );
+  return inherit( ScreenView, SlopeView );
 } );

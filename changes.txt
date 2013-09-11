@@ -1,3 +1,4 @@
+9/10/13 port SlopeView and SlopeInterceptView (untested)
 9/10/13 port line nodes for Slope and Slope-Intercept screens (untested)
 9/10/13 stubs for Slope and Slope-Intercept equations
 9/10/13 port graphs for Slope and Slope-Intercept screens (untested)

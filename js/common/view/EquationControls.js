@@ -43,7 +43,7 @@ define( function( require ) {
 
     //TODO replace with sun.ExpandCollapseButton, sync initial state to maximizedProperty
     // Minimize/maximize button
-    var minimizeMaximizeButtonNode = new Rectangle( 0, 0, 30, 30, { fill: 'red' } );
+    var minimizeMaximizeButtonNode = new Rectangle( 0, 0, 30, 30, 5, 5, { fill: 'red' } );
     minimizeMaximizeButtonNode.addInputListener( {
       down: function() {
         maximizedProperty.set( !maximizedProperty.get() );

@@ -19,7 +19,6 @@ define( function( require ) {
    * @constructor
    */
   function SlopeEquationControls( model, viewProperties ) {
-    debugger;
     EquationControls.call( this,
       SlopeEquationNode.createGeneralFormNode(),
       model.interactiveLineProperty,

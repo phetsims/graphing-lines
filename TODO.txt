@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- SlopeEquationNode.createGeneralFormNode
 - SlopeEquationNode constructor
 - SlopeInterceptEquationNode constructor
 
@@ -14,6 +13,7 @@ MEDIUM
 - implement IconFactory
 - rounded corners on spinners
 - Game
+- use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText.height is fixed
 
 LOW
 - DecimalFormat instead of decimalPlaces

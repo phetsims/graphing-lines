@@ -83,8 +83,8 @@ define( function( require ) {
     }
 
     // double-headed arrow
-    this.tailLocation = new Vector2( mvt.modelToViewX( tailX ), mvt.modelToViewY( tailY ) );
-    this.tipLocation = new Vector2( mvt.modelToViewX( tipX ), mvt.modelToViewY( tipY ) );
+    this.tailLocation = mvt.modelToViewPosition( new Vector2( tailX, tailY ) );
+    this.tipLocation = mvt.modelToViewPosition( new Vector2( tipX, tipY ) );
     this._arrowNode = new ArrowNode( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y,
       { doubleHead: true, tailWidth: 3, headWidth: 10, headHeight: 10, fill: line.color, stroke: null } );
     this.addChild( this._arrowNode );

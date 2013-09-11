@@ -13,7 +13,7 @@ MEDIUM
 - implement IconFactory
 - rounded corners on spinners
 - Game
-- use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText.height is fixed
+- use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
 
 LOW
 - DecimalFormat instead of decimalPlaces

@@ -99,6 +99,7 @@ define( function( require ) {
 
   return inherit( Node, LineNode, {
 
+    //TODO get rid of this, replace it with optional factory function passed to constructor
     /*
      * By default, a line does not display an equation.
      * Subtypes must override this method to return an equation in the correct form.

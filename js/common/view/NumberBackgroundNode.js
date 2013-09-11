@@ -37,6 +37,7 @@ define( function( require ) {
       fill: 'white',
       stroke: null,
       width: 0,
+      height: 0,
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 3
@@ -50,7 +51,7 @@ define( function( require ) {
     } );
 
     var backgroundWidth = Math.max( options.backgroundOptions.width, textNode.width + options.backgroundOptions.xMargin + options.backgroundOptions.xMargin );
-    var backgroundHeight = textNode.width + options.backgroundOptions.yMargin + options.backgroundOptions.yMargin;
+    var backgroundHeight = Math.max( options.backgroundOptions.height, textNode.height + options.backgroundOptions.yMargin + options.backgroundOptions.yMargin );
     var backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.backgroundOptions.cornerRadius, options.backgroundOptions.cornerRadius, {
       fill: options.backgroundOptions.fill,
       stroke: options.backgroundOptions.stroke

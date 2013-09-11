@@ -1,3 +1,4 @@
+9/11/13 add height option to NumberBackgroundNode
 9/11/13 first pass at interactive Slope equation, has many problems
 9/11/13 move equation a little further away from the line that it's labeling
 9/11/13 implement SlopeEquationNode.createGeneralFormNode

@@ -3,8 +3,9 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- SlopeEquationNode
-- SlopeInterceptEquationNode
+- SlopeEquationNode.createGeneralFormNode
+- SlopeEquationNode constructor
+- SlopeInterceptEquationNode constructor
 
 MEDIUM
 - minimize/maximize button on equation control panel

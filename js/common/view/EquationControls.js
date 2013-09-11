@@ -10,6 +10,7 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
+  var ExpandCollapseButton = require( 'GRAPHING_LINES/common/view/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -41,15 +42,8 @@ define( function( require ) {
       yMargin: 10
     }, options );
 
-    //TODO replace with sun.ExpandCollapseButton, sync initial state to maximizedProperty
-    // Minimize/maximize button
-    var minimizeMaximizeButtonNode = new Rectangle( 0, 0, 30, 30, 5, 5, { fill: 'red' } );
-    minimizeMaximizeButtonNode.addInputListener( {
-      down: function() {
-        maximizedProperty.set( !maximizedProperty.get() );
-        minimizeMaximizeButtonNode.fill = maximizedProperty.get() ? 'red' : 'green';
-      }
-    } );
+    // Expand/collapse button
+    var expandCollapseButton = new ExpandCollapseButton( 30, maximizedProperty );
 
     // Save Line button
     var saveLineButton = new TextButton( GLStrings.saveLine, function() {
@@ -80,7 +74,7 @@ define( function( require ) {
     // Top-level content
     var content = new Node();
     content.addChild( titleNode );
-    content.addChild( minimizeMaximizeButtonNode );
+    content.addChild( expandCollapseButton );
 
     // Stuff that is hidden when minimized must be attached to this node.
     var subContent = new Node();
@@ -99,10 +93,10 @@ define( function( require ) {
     // do vertical layout first, don't care about horizontal positions here
     var xSpacing = 10;
     var ySpacing = 10;
-    var titleHeight = Math.max( titleNode.height, minimizeMaximizeButtonNode.height );
-    minimizeMaximizeButtonNode.x = 0;
-    minimizeMaximizeButtonNode.centerY = titleHeight / 2;
-    titleNode.left = minimizeMaximizeButtonNode.right + xSpacing;
+    var titleHeight = Math.max( titleNode.height, expandCollapseButton.height );
+    expandCollapseButton.x = 0;
+    expandCollapseButton.centerY = titleHeight / 2;
+    titleNode.left = expandCollapseButton.right + xSpacing;
     titleNode.centerY = titleHeight / 2;
     titleSeparator.x = 0;
     titleSeparator.top = titleHeight + ySpacing;
@@ -128,8 +122,8 @@ define( function( require ) {
     // now do horizontal layout
     var centerX = panelWidth / 2;
     titleNode.centerX = content.centerX;
-    if ( titleNode.left <= minimizeMaximizeButtonNode.right ) {
-      titleNode.left = minimizeMaximizeButtonNode.right + xSpacing;
+    if ( titleNode.left <= expandCollapseButton.right ) {
+      titleNode.left = expandCollapseButton.right + xSpacing;
     }
     interactiveEquationNode.centerX = content.centerX;
     saveLineButton.right = content.centerX - ( xSpacing / 2 );

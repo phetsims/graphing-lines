@@ -21,4 +21,6 @@ LOW
 - import all string files from Java sim
 
 MIGRATE TO COMMON
+- Spinner
+- generalize timer code used in Spinner, borrowed from ArrowButton
 

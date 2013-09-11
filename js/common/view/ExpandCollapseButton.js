@@ -1,5 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
+//TODO add button color change for 'over' and 'down'
+//TODO add enabled/disabled, probably via options.enabledProperty
 /**
  * Button for expanding/collapsing something.
  *
@@ -64,7 +66,6 @@ define( function( require ) {
     // click to toggle
     thisButton.cursor = 'pointer';
     thisButton.addInputListener( new ButtonListener( {
-      //TODO add button color change for 'over' and 'down'
       fire: function() {
         expandedProperty.set( !expandedProperty.get() );
       }

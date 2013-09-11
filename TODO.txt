@@ -8,6 +8,7 @@ HIGH
 - SlopeInterceptEquationNode constructor
 
 MEDIUM
+- better placeholder icons for screens
 - minimize/maximize button on equation control panel
 - line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
 - implement IconFactory

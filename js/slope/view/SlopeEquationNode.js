@@ -55,7 +55,7 @@ define( function( require ) {
     var staticTextOptions = { font: staticFont, fill: options.staticColor };
 
     var thisNode = this;
-    EquationNode.call( this, 20 );
+    EquationNode.call( this, options.staticFontSize );
 
     // internal properties that are connected to spinners
     var x1 = new Property( interactiveLine.get().x1 );

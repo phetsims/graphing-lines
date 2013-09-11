@@ -1,3 +1,4 @@
+9/11/13 use options.staticFontSize to compute layout metrics for slope equation
 9/11/13 use MinusNode for '-' operator in SlopeEquationNode
 9/11/13 move common configuration stuff to GLConfig.js
 9/11/13 fix range properties that are passed to SlopeEquationNode constructor

@@ -3,7 +3,7 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- Slope screen manipulators crash when x1 <= x2
+- Slope screen manipulators crash when x1 <= x2, in Trail.previous: "Cannot read property '_children' of undefined"
 - SlopeInterceptEquationNode constructor
 
 MEDIUM

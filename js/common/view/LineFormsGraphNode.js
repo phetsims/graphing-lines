@@ -55,21 +55,13 @@ define( function( require ) {
     thisNode.addChild( this.slopeToolNode );
 
     // Add/remove standard lines
-    model.standardLines.addListeners(
-      function( line ) { thisNode.standardLineAdded( line ); },
-      function( line ) { thisNode.standardLineRemoved( line ); }
-    );
+    model.standardLines.addListeners( thisNode.standardLineAdded.bind( thisNode ), thisNode.standardLineRemoved.bind( thisNode ) );
 
     // Add/remove saved lines
-    model.savedLines.addListeners(
-      function( line ) { thisNode.savedLineAdded( line ); },
-      function( line ) { thisNode.savedLineRemoved( line ); }
-    );
+    model.savedLines.addListeners( thisNode.savedLineAdded.bind( thisNode ), thisNode.savedLineRemoved.bind( thisNode ) );
 
     // When the interactive line changes, update the graph.
-    model.interactiveLineProperty.link( function( line ) {
-      thisNode.updateInteractiveLine( line );
-    } );
+    model.interactiveLineProperty.link( thisNode.updateInteractiveLine.bind( thisNode ) );
 
     // Visibility of lines
     viewProperties.linesVisibleProperty.link( thisNode.updateLinesVisibility.bind( thisNode ) );

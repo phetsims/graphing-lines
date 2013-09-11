@@ -12,6 +12,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @param {Line} line
@@ -26,8 +27,8 @@ define( function( require ) {
   return inherit( LineNode, PointSlopeLineNode, {
 
     // Creates the line's equation in point-slope form.
-    createEquationNode: function( line, font, color ) {
-      return new PointSlopeEquationNode( line, font, color );
+    createEquationNode: function( line, fontSize, color ) {
+      return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
     }
   } );
 } );

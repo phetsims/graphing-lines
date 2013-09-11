@@ -25,7 +25,7 @@ define( function( require ) {
   var ARROW_HEAD_SIZE = new Dimension2( 10, 10 );
   var LINE_WIDTH = 3;
   var LINE_EXTENT = 25; // how far the line extends past the grid
-  var EQUATION_FONT = new PhetFont( { size: 18, weight: 'bold' } );
+  var EQUATION_FONT_SIZE = 18;
 
   /**
    * @param {Line} line
@@ -94,7 +94,7 @@ define( function( require ) {
     this.addChild( this._equationParentNode );
     this._equationParentNode.translation = this.tipLocation;
     this._equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
-    this._updateEquation( line, EQUATION_FONT, line.color );
+    this._updateEquation( line, EQUATION_FONT_SIZE, line.color );
   }
 
   return inherit( Node, LineNode, {
@@ -103,7 +103,7 @@ define( function( require ) {
      * By default, a line does not display an equation.
      * Subtypes must override this method to return an equation in the correct form.
      */
-    _createEquationNode: function( line, font, color ) {
+    createEquationNode: function( line, fontSize, color ) {
       return new Node();
     },
 
@@ -113,14 +113,14 @@ define( function( require ) {
 
     updateColor: function( color ) {
       this._arrowNode.fill = color;
-      this._updateEquation( this._line, EQUATION_FONT, color );
+      this._updateEquation( this._line, EQUATION_FONT_SIZE, color );
     },
 
-    _updateEquation: function( line, font, color ) {
+    _updateEquation: function( line, fontSize, color ) {
 
       this._equationParentNode.removeAllChildren();
 
-      var equationNode = this._createEquationNode( line, font, color );
+      var equationNode = this.createEquationNode( line, fontSize, color );
       this._equationParentNode.addChild( equationNode );
 
       // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.

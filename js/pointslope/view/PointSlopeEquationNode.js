@@ -366,5 +366,20 @@ define( function( require ) {
     return new HTMLText( html, { font: options.font } );
   };
 
+  PointSlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
+    return new PointSlopeEquationNode( new Property( line ),
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ), {
+        interactiveX1: false,
+        interactiveY1: false,
+        interactiveSlope: false,
+        interactiveFontSize: fontSize,
+        staticFontSize: fontSize,
+        staticColor: color
+      } );
+  };
+
   return inherit( EquationNode, PointSlopeEquationNode );
 } );

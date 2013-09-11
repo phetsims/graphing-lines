@@ -1,3 +1,4 @@
+9/10/13 port graphs for Slope and Slope-Intercept screens (untested)
 9/10/13 port equation control panels for Slope and Slope-Intercept screens (untested)
 9/10/13 remove standard and saved lines from graph when Reset All button is pressed
 9/10/13 erase lines when "Erase lines" button is pressed

@@ -15,7 +15,6 @@ define( function( require ) {
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
   var PointSlopeLineNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeLineNode' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
-  var Vector2 = require( 'DOT/Vector2' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
 
   /**
@@ -47,9 +46,7 @@ define( function( require ) {
 
     // visibility of manipulators
     var updateVisibility = function() {
-      var visible = viewProperties.linesVisible && viewProperties.interactiveLineVisible;
-      x1y1Manipulator.setVisible( visible );
-      slopeManipulator.setVisible( visible );
+      x1y1Manipulator.visible = slopeManipulator.visible = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
     };
     viewProperties.linesVisibleProperty.link( updateVisibility );
     viewProperties.interactiveLineVisibleProperty.link( updateVisibility );

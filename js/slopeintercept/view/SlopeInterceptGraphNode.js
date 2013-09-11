@@ -1,0 +1,56 @@
+// Copyright 2002-2013, University of Colorado
+
+/**
+ * Graph that provides direct manipulation of a line in slope-intercept form.
+ * Adds manipulators for slope and intercept to the base class functionality.
+ *
+ * @author Chris Malley (cmalley@pixelzoom.com)
+ */
+define( function( require ) {
+  'use strict';
+
+  // imports
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var InterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/InterceptManipulator' );
+  var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
+  var SlopeInterceptLineNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptLineNode' );
+  var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
+
+  /**
+   * @param {SlopeInterceptModel} model
+   * @param {LineFormsViewProperties} viewProperties
+   * @constructor
+   */
+  function SlopeInterceptGraphNode( model, viewProperties ) {
+
+    var thisNode = this;
+    LineFormsGraphNode.call( thisNode, model, viewProperties,
+      function( line, graph, mvt ) {
+        return new SlopeInterceptLineNode( line, graph, mvt );
+      } );
+
+    var manipulatorDiameter = model.mvt.modelToViewDeltaX( model.manipulatorDiameter );
+
+    // slope manipulator
+    var slopeManipulatorNode = new SlopeManipulator(
+      manipulatorDiameter, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.mvt );
+
+    // intercept manipulator
+    var interceptManipulatorNode = new InterceptManipulator(
+      getManipulatorDiameter, model.interactiveLineProperty, model.y1RangeProperty, model.mvt );
+
+    // rendering order
+    thisNode.addChild( slopeManipulatorNode );
+    thisNode.addChild( interceptManipulatorNode );
+
+    // visibility of manipulators
+    var updateVisibility = function() {
+      slopeManipulatorNode.visible = interceptManipulatorNode.visibile = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
+    };
+    viewProperties.linesVisibleProperty.link( updateVisibility );
+    viewProperties.interactiveLineVisibleProperty.link( updateVisibility );
+  }
+
+  return inherit( LineFormsGraphNode, SlopeInterceptGraphNode );
+} );

@@ -125,7 +125,7 @@ define( function( require ) {
 
       // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
       var X_OFFSET = 30;
-      var Y_OFFSET = 5;
+      var Y_OFFSET = 12;
       if ( line.undefinedSlope() ) {
         // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
         if ( line.rise < 0 ) {

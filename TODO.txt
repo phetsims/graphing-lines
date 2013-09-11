@@ -7,7 +7,6 @@ HIGH
 - SlopeInterceptEquationNode constructor
 
 MEDIUM
-- equation is a little too close to line, especially for "slope undefined"
 - better placeholder icons for screens
 - line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
 - implement IconFactory

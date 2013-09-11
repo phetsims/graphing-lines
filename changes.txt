@@ -1,3 +1,6 @@
+9/10/13 remove standard and saved lines from graph when Reset All button is pressed
+9/10/13 erase lines when "Erase lines" button is pressed
+9/10/13 hide standard lines when check boxes are unselected
 9/10/13 add press-&-hold feature to Spinner
 9/10/13 instead of overriding LineFormsGraphNode.createLineNode, pass a factory function to LineFormsGraphNode constructor
 9/10/13 add static equation to graphed lines

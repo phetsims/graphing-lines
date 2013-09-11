@@ -36,7 +36,7 @@ define( function( require ) {
   function LineNode( line, graph, mvt ) {
     Node.call( this );
 
-    this._line = line;
+    this.line = line;
 
     var xExtent = mvt.viewToModelDeltaX( LINE_EXTENT );
     var yExtent = Math.abs( mvt.viewToModelDeltaY( LINE_EXTENT ) );
@@ -113,7 +113,7 @@ define( function( require ) {
 
     updateColor: function( color ) {
       this._arrowNode.fill = color;
-      this._updateEquation( this._line, EQUATION_FONT_SIZE, color );
+      this._updateEquation( this.line, EQUATION_FONT_SIZE, color );
     },
 
     _updateEquation: function( line, fontSize, color ) {

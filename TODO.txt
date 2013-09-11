@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- standard and saved lines are not removed from the graph
 - SlopeInterceptEquationNode, for labeling standard lines
 
 MEDIUM

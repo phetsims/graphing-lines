@@ -19,6 +19,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   var Path = require( 'SCENERY/nodes/Path' );
@@ -71,13 +72,13 @@ define( function( require ) {
     var interactiveEqualsNode = new Text( "=", staticTextOptions );
     // y2 - y2
     var y2Node = new CoordinateSpinner( y2, x2, y1, x1, yRange, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
-    var numeratorOperatorNode = new Text( "-", staticTextOptions );
+    var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
     var y1Node = new CoordinateSpinner( y1, x1, y2, x2, yRange, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line
     var interactiveFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), { fill: options.staticColor } ); // correct length will be set later
     // x2 - x1
     var x2Node = new CoordinateSpinner( x2, y2, x1, y1, xRange, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
-    var denominatorOperatorNode = new Text( "-", staticTextOptions );
+    var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
     var x1Node = new CoordinateSpinner( x1, y1, x2, y2, xRange, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
     var unsimplifiedEqualsNode = new Text( "=", staticTextOptions );
@@ -227,7 +228,7 @@ define( function( require ) {
   SlopeEquationNode.createGeneralFormNode = function( options ) {
 
     options = _.extend( {
-      fontSize: 18,
+      fontSize: 20,
       fill: 'black'
     }, options );
 

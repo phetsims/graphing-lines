@@ -3,12 +3,12 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- LineFormsView
-- PointSlopeView
+- standard and saved lines are not removed from the graph
 - SlopeInterceptEquationNode
 - add press-&-hold feature to Spinner
 
 MEDIUM
+- pass font properties instead of just size to various UI components (especially equations)
 - DecimalFormat
 - implement IconFactory
 - rounded corners on spinners

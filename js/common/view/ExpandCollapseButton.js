@@ -62,6 +62,7 @@ define( function( require ) {
     thisButton.addChild( collapseButton );
 
     // click to toggle
+    thisButton.cursor = 'pointer';
     thisButton.addInputListener( new ButtonListener( {
       //TODO add button color change for 'over' and 'down'
       fire: function() {

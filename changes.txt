@@ -1,3 +1,4 @@
+9/10/13 instead of overriding LineFormsGraphNode.createLineNode, pass a factory function to LineFormsGraphNode constructor
 9/10/13 add static equation to graphed lines
 9/10/13 handle reset of view properties
 9/10/13 move dragBounds to point tool model, adjust

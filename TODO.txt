@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- instead of overriding LineFormsGraphNode.createLineNode, pass a factory function to LineFormsGraphNode constructor
 - standard and saved lines are not removed from the graph
 - SlopeInterceptEquationNode, for labeling standard lines
 - add press-&-hold feature to Spinner

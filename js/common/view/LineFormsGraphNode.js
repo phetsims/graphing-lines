@@ -29,15 +29,17 @@ define( function( require ) {
   /**
    * @param {LineFormsModel } model
    * @param {LineFormsViewProperties} viewProperties
+   * @param {Function} createLineNode function with parameters {Line} line, {Graph} graph, and {ModelViewTransform2} mvt
    * @constructor
    */
-  function LineFormsGraphNode( model, viewProperties ) {
+  function LineFormsGraphNode( model, viewProperties, createLineNode ) {
 
     var thisNode = this;
     GraphNode.call( thisNode, model.graph, model.mvt );
 
     thisNode.model = model;
     thisNode.viewProperties = viewProperties;
+    this.createLineNode = createLineNode;
 
     // Parent nodes for each category of line (standard, saved, interactive) to maintain rendering order
     thisNode.standardLinesParentNode = new Node();
@@ -77,16 +79,6 @@ define( function( require ) {
   }
 
   return inherit( GraphNode, LineFormsGraphNode, {
-
-    /**
-     * Creates a line node of the proper form.
-     * @param {Line} line
-     * @param {Graph} graph
-     * @param {ModelViewTransform2} mvt
-     */
-    createLineNode: function( line, graph, mvt ) {
-      throw new Error( "createLineNode must be provided by subtype" );
-    },
 
     // Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {

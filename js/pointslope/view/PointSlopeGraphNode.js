@@ -26,7 +26,10 @@ define( function( require ) {
   function PointSlopeGraphNode( model, viewProperties ) {
 
     var thisNode = this;
-    LineFormsGraphNode.call( thisNode, model, viewProperties );
+    LineFormsGraphNode.call( thisNode, model, viewProperties,
+      function( line, graph, mvt ) {
+        return new PointSlopeLineNode( line, graph, mvt );
+      } );
 
     var manipulatorDiameter = model.mvt.modelToViewDeltaX( model.manipulatorDiameter );
 
@@ -52,11 +55,5 @@ define( function( require ) {
     viewProperties.interactiveLineVisibleProperty.link( updateVisibility );
   }
 
-  return inherit( LineFormsGraphNode, PointSlopeGraphNode, {
-
-    // Creates a line labeled with its point-slope equation.
-    createLineNode: function( line, graph, mvt ) {
-      return new PointSlopeLineNode( line, graph, mvt );
-    }
-  } );
+  return inherit( LineFormsGraphNode, PointSlopeGraphNode );
 } );

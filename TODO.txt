@@ -9,7 +9,6 @@ HIGH
 
 MEDIUM
 - minimize/maximize button on equation control panel
-- collapse equation control panel when minimized
 - line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
 - implement IconFactory
 - rounded corners on spinners

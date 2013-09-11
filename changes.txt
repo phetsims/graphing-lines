@@ -1,3 +1,4 @@
+9/10/13 resize equation control panel when it is expanded/collapsed
 9/10/13 implement node for displaying general form of slope-intercept equation
 9/10/13 add game stub
 9/10/13 fix layout of top part of equation control panel

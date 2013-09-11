@@ -136,7 +136,12 @@ define( function( require ) {
     eraseLinesButton.left = content.centerX + ( xSpacing / 2 );
 
     maximizedProperty.link( function( maximized ) {
-      subContent.visible = maximized;
+      if ( maximized && content.indexOfChild( subContent ) === -1 ) {
+        content.addChild( subContent );
+      }
+      else if ( !maximized && content.indexOfChild( subContent ) !== -1 ) {
+        content.removeChild( subContent );
+      }
     } );
 
     Panel.call( this, content, options );

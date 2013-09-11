@@ -6,6 +6,7 @@ HIGH
 - SlopeInterceptEquationNode, for labeling standard lines
 
 MEDIUM
+- line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
 - pass font properties instead of just size to various UI components (especially equations)
 - DecimalFormat
 - implement IconFactory

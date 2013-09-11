@@ -63,6 +63,7 @@ define( function( require ) {
 
     // click to toggle
     thisButton.addInputListener( new ButtonListener( {
+      //TODO add button color change for 'over' and 'down'
       fire: function() {
         expandedProperty.set( !expandedProperty.get() );
       }

@@ -42,9 +42,6 @@ define( function( require ) {
   function SlopeEquationNode( interactiveLine, xRange, yRange, options ) {
 
     options = _.extend( {
-      interactiveX1: true,
-      interactiveY1: true,
-      interactiveSlope: true,
       interactiveFontSize: 28,
       staticFontSize: 28,
       staticColor: 'black'
@@ -276,19 +273,84 @@ define( function( require ) {
     return parentNode;
   };
 
+  /**
+   * @param {Line} line
+   * @param {Number} fontSize
+   * @param {Color} color
+   */
   SlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
-    return new SlopeEquationNode( new Property( line ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ), {
-        interactiveX1: false,
-        interactiveY1: false,
-        interactiveSlope: false,
-        interactiveFontSize: fontSize,
-        staticFontSize: fontSize,
-        staticColor: color
-      } );
+
+    var equationNode = new EquationNode( fontSize );
+
+    var font = new PhetFont( { size: fontSize } );
+
+    // m is
+    var slopeIsNode = new Text( StringUtils.format( GLStrings.slopeIs, GLStrings["symbol.slope"] ), { font: font, fill: color } );
+    equationNode.addChild( slopeIsNode );
+    slopeIsNode.x = 0;
+    slopeIsNode.y = 0;
+
+    if ( line.undefinedSlope() ) {
+      // "undefined"
+      var undefined = new Text( GLStrings.undefined, { font: font, fill: color } );
+      equationNode.addChild( undefined );
+      undefined.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+      undefined.y = slopeIsNode.y;
+    }
+    else if ( line.getSlope() == 0 ) {
+      // 0
+      var zeroNode = new Text( "0", { font: font, fill: color } );
+      equationNode.addChild( zeroNode );
+      zeroNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+      zeroNode.y = slopeIsNode.y;
+    }
+    else {
+      var nextXOffset;
+      if ( line.getSlope() < 0 ) {
+        // minus sign
+        var minusSignNode = new MinusNode( equationNode.signLineSize, { fill: color } );
+        equationNode.addChild( minusSignNode );
+        minusSignNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+        minusSignNode.centerY = slopeIsNode.centerY + equationNode.slopeSignYFudgeFactor + equationNode.slopeSignYOffset;
+        nextXOffset = minusSignNode.right + equationNode.operatorXSpacing;
+      }
+      else {
+        // no sign
+        nextXOffset = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+      }
+
+      if ( Util.isInteger( line.getSlope() ) ) {
+        // integer slope
+        var slopeNode = new Text( Util.toFixed( line.getSlope(), 0 ), { font: font, fill: color } );
+        equationNode.addChild( slopeNode );
+        slopeNode.left = nextXOffset;
+        slopeNode.y = slopeIsNode.y;
+      }
+      else {
+        // fractional slope
+        var rise = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+        var riseNode = new Text( rise, { font: font, fill: color } );
+
+        var run = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+        var runNode = new Text( run, { font: font, fill: color } );
+
+        var lineLength = Math.max( riseNode.width, runNode.width );
+        var fractionLineNode = new Path( equationNode.createFractionLineShape( lineLength ), { fill: color } );
+
+        equationNode.addChild( fractionLineNode );
+        equationNode.addChild( riseNode );
+        equationNode.addChild( runNode );
+
+        // layout, values horizontally centered
+        fractionLineNode.left = nextXOffset;
+        fractionLineNode.centerY = slopeIsNode.centerY + equationNode.fractionLineYFudgeFactor;
+        riseNode.centerX = fractionLineNode.centerX;
+        riseNode.bottom = fractionLineNode.top - equationNode.ySpacing;
+        runNode.centerX = fractionLineNode.centerX;
+        runNode.top = fractionLineNode.bottom + equationNode.ySpacing;
+      }
+    }
+    return equationNode;
   };
 
   return inherit( EquationNode, SlopeEquationNode );

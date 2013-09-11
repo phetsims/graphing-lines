@@ -3,8 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- debug interactive form of SlopeEquationNode
-- implement non-interactive form of SlopeEquationNode
 - call separate factory functions from SlopeEquationNode constructor, depending on whether equation is interactive
 - SlopeInterceptEquationNode constructor
 

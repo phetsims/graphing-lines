@@ -39,7 +39,6 @@ define( function( require ) {
     var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
 
     var constrainBounds = function( point, bounds ) {
-      console.log( "constraining " + point + " to " + bounds );//XXX
       if ( !bounds || bounds.containsPoint( point ) ) {
         return point;
       }

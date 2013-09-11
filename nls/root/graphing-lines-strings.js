@@ -6,7 +6,7 @@ define( {
   "saveLine": "Save Line",
   "slope": "Slope",
   "hideLines": "Hide lines",
-  "slopeUndefined": "{0}:{1} (slope undefined)",
+  "slopeUndefined": "{0}={1} (slope undefined)",
   "graphTheLine": "Graph the Line",
   "makeTheEquation": "Make the Equation",
   "setTheSlope": "Set the Slope",

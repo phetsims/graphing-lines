@@ -70,6 +70,7 @@ define( function( require ) {
 
   return inherit( Node, EquationNode, {
 
+    //TODO get rid of this, use scenery.Line at call sites
     // Creates the shape for the fraction division line.
     createFractionLineShape: function( length ) {
       return new Shape.rectangle( 0, 0, length, this.fractionLineThickness );

@@ -28,5 +28,5 @@ define( function( require ) {
       new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, model.standardLines ) );
   }
 
-  return inherit( ScreenView, SlopeView );
+  return inherit( LineFormsView, SlopeView );
 } );

@@ -25,7 +25,7 @@ define( function( require ) {
 
   return inherit( LineNode, SlopeInterceptLineNode, {
 
-    // Creates the line's equation in point-slope form.
+    // Creates the line's equation in slope-intercept form.
     createEquationNode: function( line, fontSize, color ) {
       return SlopeInterceptEquationNode.createStaticEquation( line, fontSize, color );
     }

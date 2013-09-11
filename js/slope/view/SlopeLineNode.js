@@ -25,7 +25,7 @@ define( function( require ) {
 
   return inherit( LineNode, SlopeLineNode, {
 
-    // Creates the line's equation in point-slope form.
+    // Creates the line's equation in slope form.
     createEquationNode: function( line, fontSize, color ) {
       return SlopeEquationNode.createStaticEquation( line, fontSize, color );
     }

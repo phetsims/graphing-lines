@@ -41,8 +41,8 @@ define( function( require ) {
       manipulatorDiameter, model.interactiveLineProperty, model.x2RangeProperty, model.y2RangeProperty, model.mvt );
 
     // rendering order
-    thisNode.addChild( x1y1ManipulatorNode );
-    thisNode.addChild( x2y2ManipulatorNode );
+    thisNode.addChild( x1y1Manipulator );
+    thisNode.addChild( x2y2Manipulator );
 
     // visibility of manipulators
     var updateVisibility = function() {

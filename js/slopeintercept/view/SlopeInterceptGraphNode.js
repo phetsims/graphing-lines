@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var InterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/InterceptManipulator' );
+  var YInterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/YInterceptManipulator' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
   var SlopeInterceptLineNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptLineNode' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
@@ -33,20 +33,20 @@ define( function( require ) {
     var manipulatorDiameter = model.mvt.modelToViewDeltaX( model.manipulatorDiameter );
 
     // slope manipulator
-    var slopeManipulatorNode = new SlopeManipulator(
+    var slopeManipulator = new SlopeManipulator(
       manipulatorDiameter, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.mvt );
 
     // intercept manipulator
-    var interceptManipulatorNode = new InterceptManipulator(
-      getManipulatorDiameter, model.interactiveLineProperty, model.y1RangeProperty, model.mvt );
+    var yInterceptManipulator = new YInterceptManipulator(
+      manipulatorDiameter, model.interactiveLineProperty, model.y1RangeProperty, model.mvt );
 
     // rendering order
-    thisNode.addChild( slopeManipulatorNode );
-    thisNode.addChild( interceptManipulatorNode );
+    thisNode.addChild( slopeManipulator );
+    thisNode.addChild( yInterceptManipulator );
 
     // visibility of manipulators
     var updateVisibility = function() {
-      slopeManipulatorNode.visible = interceptManipulatorNode.visibile = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
+      slopeManipulator.visible = yInterceptManipulator.visibile = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
     };
     viewProperties.linesVisibleProperty.link( updateVisibility );
     viewProperties.interactiveLineVisibleProperty.link( updateVisibility );

@@ -64,7 +64,7 @@ define( function( require ) {
       // position of control panels:
       var xMargin = 10;
       var yMargin = 10;
-      var ySpacing = 25
+      var ySpacing = 25;
 
       // get the amount of canvas width that's available for the control panels
       var availableControlPanelWidth = thisView.layoutBounds.width - graphNode.right - ( 2 * xMargin );

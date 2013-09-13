@@ -27,7 +27,7 @@ define( function( require ) {
       viewProperties.linesVisibleProperty,
       new PointSlopeEquationNode( model.interactiveLineProperty,
         model.x1RangeProperty, model.y1RangeProperty, model.riseRangeProperty, model.runRangeProperty )
-    )
+    );
   }
 
   return inherit( EquationControls, PointSlopeEquationControls );

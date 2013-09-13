@@ -25,7 +25,7 @@ define( function( require ) {
     LineFormsView.call( this, model, viewProperties,
       new SlopeGraphNode( model, viewProperties ),
       new SlopeEquationControls( model, viewProperties ),
-      new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, model.standardLines ) );
+      new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, model.standardLines, { includeStandardLines: false } ) );
   }
 
   return inherit( LineFormsView, SlopeView );

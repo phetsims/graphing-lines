@@ -77,7 +77,7 @@ define( function( require ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    this.addInputListener( new SlopeDragHandler( interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) );
+    thisNode.addInputListener( new SlopeDragHandler( interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) );
   }
 
   return inherit( Manipulator, SlopeManipulator );

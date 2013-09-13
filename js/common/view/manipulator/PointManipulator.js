@@ -90,7 +90,7 @@ define( function( require ) {
       thisNode.translation = mvt.modelToViewPosition( point );
     } );
 
-    this.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) );
+    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) );
   }
 
   return inherit( Manipulator, PointManipulator );

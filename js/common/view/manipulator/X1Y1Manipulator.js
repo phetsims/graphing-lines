@@ -84,7 +84,7 @@ define( function( require ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    this.addInputListener( new X1Y1DragHandler( interactiveLineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) );
+    thisNode.addInputListener( new X1Y1DragHandler( interactiveLineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) );
   }
 
   return inherit( Manipulator, X1Y1Manipulator );

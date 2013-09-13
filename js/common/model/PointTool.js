@@ -31,7 +31,7 @@ define( function( require ) {
     } );
 
     thisTool.orientation = orientation;
-    this.dragBounds = dragBounds;
+    thisTool.dragBounds = dragBounds;
 
     // Update when the point tool moves or the lines change.
     var updateOnLine = function() {

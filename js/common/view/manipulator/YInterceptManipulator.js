@@ -73,7 +73,7 @@ define( function( require ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    this.addInputListener( new YInterceptDragHandler( interactiveLineProperty, y1RangeProperty, mvt ) );
+    thisNode.addInputListener( new YInterceptDragHandler( interactiveLineProperty, y1RangeProperty, mvt ) );
   }
 
   return inherit( Manipulator, YInterceptManipulator );

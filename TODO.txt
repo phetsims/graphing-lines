@@ -3,11 +3,11 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- SlopeInterceptEquationNode constructor
-
-MEDIUM
 - line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
 - implement IconFactory
+
+MEDIUM
+- clean up font vs fontSize usage
 - rounded corners on spinners
 - Game
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed

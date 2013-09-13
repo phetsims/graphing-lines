@@ -28,7 +28,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
+  var Range = require( 'DOT/Range')
   var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
@@ -138,7 +138,7 @@ define( function( require ) {
       }
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
         // use slope-intercept form for y=x and y=-x, using a line with the proper slope and (x1,y1)=(0,0)
-        thisNode.addChild( new SlopeInterceptEquationNode( Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), staticFont, staticColor ) );
+        thisNode.addChild( SlopeInterceptEquationNode.createStaticEquation( Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.staticFontSize, staticColor ) );
         return;
       }
 

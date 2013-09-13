@@ -1,3 +1,4 @@
+9/13/13 port slope-intercept equation
 9/11/13 ensure that controls will fit in the area to the right of the graph, scale if necessary, center horizontally and vertically
 9/11/13 new placeholder icons for home screen and navbar, with Gimp asset file (.xcf)
 9/11/13 fix crash when removing UndefinedSlopeIndicator from interactive slope equation

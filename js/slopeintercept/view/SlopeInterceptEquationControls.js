@@ -14,7 +14,7 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
 
   /**
-   * @param {SlopeModel} model
+   * @param {SlopeInterceptModel} model
    * @param {LineFormsViewProperties} viewProperties
    * @constructor
    */
@@ -25,7 +25,7 @@ define( function( require ) {
       model.savedLines,
       viewProperties.interactiveEquationVisibleProperty,
       viewProperties.linesVisibleProperty,
-      new SlopeInterceptEquationNode( model.interactiveLineProperty, model.riseRange, model.runRange, model.y1Range ) );
+      new SlopeInterceptEquationNode( model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.y1RangeProperty ) );
   }
 
   return inherit( EquationControls, SlopeInterceptEquationControls );

@@ -22,6 +22,7 @@ LOW
 - change 'tab.*' string keys to 'screen.*'
 - remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
 - import all string files from Java sim
+- omit subtype-specific options before passing them to supertype
 
 MIGRATE TO COMMON
 - Spinner

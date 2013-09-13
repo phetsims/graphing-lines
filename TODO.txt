@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- line highlighting isn't working correctly, line doesn't change color, parts of equation change color and stay that way
 - implement IconFactory
 
 MEDIUM

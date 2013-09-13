@@ -117,7 +117,7 @@ define( function( require ) {
       var lineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
       this.savedLinesParentNode.addChild( lineNode );
       // highlight on mouseOver
-      lineNode.addInputListener( new HighlightListener( function( highlighted ) {
+      lineNode.addInputListener( new HighlightListener( function( lineNode, highlighted ) {
         lineNode.updateColor( highlighted ? GLColors.SAVED_LINE_HIGHLIGHT : line.color );
       } ) );
     },

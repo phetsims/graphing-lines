@@ -1,3 +1,4 @@
+9/13/13 fix highlighting of saved lines
 ***** feature complete: Slope, Slope-Intercept, Point-Slope screens
 9/13/13 delete PointSlopeTests, ad hoc, no longer needed
 9/13/13 port slope-intercept equation

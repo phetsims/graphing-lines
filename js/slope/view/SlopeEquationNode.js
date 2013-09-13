@@ -292,13 +292,13 @@ define( function( require ) {
     slopeIsNode.y = 0;
 
     if ( line.undefinedSlope() ) {
-      // "undefined"
-      var undefined = new Text( GLStrings.undefined, { font: font, fill: color } );
-      equationNode.addChild( undefined );
-      undefined.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
-      undefined.y = slopeIsNode.y;
+      // "undefined slope"
+      var undefinedSlope = new Text( GLStrings.undefined, { font: font, fill: color } );
+      equationNode.addChild( undefinedSlope );
+      undefinedSlope.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+      undefinedSlope.y = slopeIsNode.y;
     }
-    else if ( line.getSlope() == 0 ) {
+    else if ( line.getSlope() === 0 ) {
       // 0
       var zeroNode = new Text( "0", { font: font, fill: color } );
       equationNode.addChild( zeroNode );

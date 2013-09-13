@@ -333,10 +333,10 @@ define( function( require ) {
         interactiveLine.set( Line.createPointSlope( x1.get(), y1.get(), rise.get(), run.get(), interactiveLine.get().color ) );
       }
     };
-    x1.link( lineUpdater );
-    y1.link( lineUpdater );
-    rise.link( lineUpdater );
-    run.link( lineUpdater );
+    x1.link( lineUpdater.bind( thisNode ) );
+    y1.link( lineUpdater.bind( thisNode ) );
+    rise.link( lineUpdater.bind( thisNode ) );
+    run.link( lineUpdater.bind( thisNode ) );
 
     // sync the controls and layout with the model
     interactiveLine.link( function( line ) {

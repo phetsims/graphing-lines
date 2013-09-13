@@ -68,8 +68,8 @@ define( function( require ) {
       saveLineButton.enabled = linesVisibleProperty.get();
       eraseLinesButton.enabled = ( linesVisibleProperty.get() && ( savedLines.length > 0 ) );
     };
-    savedLines.lengthProperty.link( enableButtons );
-    linesVisibleProperty.link( enableButtons );
+    savedLines.lengthProperty.link( enableButtons.bind( this ) );
+    linesVisibleProperty.link( enableButtons.bind( this ) );
 
     // Top-level content
     var content = new Node();

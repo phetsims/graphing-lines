@@ -48,8 +48,8 @@ define( function( require ) {
     var updateVisibility = function() {
       x1y1Manipulator.visible = slopeManipulator.visible = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
     };
-    viewProperties.linesVisibleProperty.link( updateVisibility );
-    viewProperties.interactiveLineVisibleProperty.link( updateVisibility );
+    viewProperties.linesVisibleProperty.link( updateVisibility.bind( thisNode ) );
+    viewProperties.interactiveLineVisibleProperty.link( updateVisibility.bind( thisNode ) );
   }
 
   return inherit( LineFormsGraphNode, PointSlopeGraphNode );

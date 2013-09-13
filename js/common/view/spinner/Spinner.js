@@ -267,10 +267,10 @@ define( function( require ) {
     var updateDownColors = function() {
       updateColors( downStateProperty, downEnabledProperty, downBackground, downArrow );
     };
-    upStateProperty.link( updateUpColors );
-    upEnabledProperty.link( updateUpColors );
-    downStateProperty.link( updateDownColors );
-    downEnabledProperty.link( updateDownColors );
+    upStateProperty.link( updateUpColors.bind( thisNode ) );
+    upEnabledProperty.link( updateUpColors.bind( thisNode ) );
+    downStateProperty.link( updateDownColors.bind( thisNode ) );
+    downEnabledProperty.link( updateDownColors.bind( thisNode ) );
 
     thisNode.mutate( options );
   }

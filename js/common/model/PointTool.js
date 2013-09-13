@@ -46,8 +46,8 @@ define( function( require ) {
       }
       thisTool.onLine = null;
     };
-    thisTool.locationProperty.link( updateOnLine );
-    lines.lengthProperty.link( updateOnLine );
+    thisTool.locationProperty.link( updateOnLine.bind( thisTool ) );
+    lines.lengthProperty.link( updateOnLine.bind( thisTool ) );
   }
 
   return inherit( PropertySet, PointTool, {

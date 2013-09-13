@@ -59,9 +59,9 @@ define( function( require ) {
         thisModel.graph.lines.add( line );
       } );
     };
-    thisModel.interactiveLineProperty.link( updateGraphLines );
-    thisModel.savedLines.lengthProperty.link( updateGraphLines );
-    thisModel.standardLines.lengthProperty.link( updateGraphLines );
+    thisModel.interactiveLineProperty.link( updateGraphLines.bind( thisModel ) );
+    thisModel.savedLines.lengthProperty.link( updateGraphLines.bind( thisModel ) );
+    thisModel.standardLines.lengthProperty.link( updateGraphLines.bind( thisModel ) );
 
     // point tools
     var initialPosition1 = new Vector2( thisModel.graph.xRange.min + ( 0.35 * thisModel.graph.xRange.getLength() ), thisModel.graph.yRange.min - 0.25 );

@@ -174,9 +174,9 @@ define( function( require ) {
         thisNode._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
       }
     };
-    pointTool.locationProperty.link( update );
-    pointTool.onLineProperty.link( update );
-    linesVisibleProperty.link( update );
+    pointTool.locationProperty.link( update.bind( thisNode ) );
+    pointTool.onLineProperty.link( update.bind( thisNode ) );
+    linesVisibleProperty.link( update.bind( thisNode ) );
 
     // interactivity
     thisNode.cursor = 'pointer';

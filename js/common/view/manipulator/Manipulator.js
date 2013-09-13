@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
@@ -22,7 +23,7 @@ define( function( require ) {
 
     options = _.extend( {
       mainColor: color,
-      highlightColor: 'white',
+      highlightColor: Color.WHITE,
       shadowColor: color.darkerColor(),
       cursor: 'pointer',  // all manipulators are interactive
       lineWidth: 1,

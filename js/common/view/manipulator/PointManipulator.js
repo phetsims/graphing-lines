@@ -19,7 +19,7 @@ define( function( require ) {
   /**
    * Drag handler for arbitrary point.
    * @param {Property<Vector2>} pointProperty
-   * @param {Array<Property<Vector2>>} otherPointProperties
+   * @param {Array<Property<Vector2>>} otherPointProperties points that the point can't be on
    * @param {Property<Range>} x1RangeProperty
    * @param {Property<Range>} y1RangeProperty
    * @param {ModelViewTransform2} mvt

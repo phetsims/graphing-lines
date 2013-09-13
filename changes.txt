@@ -1,3 +1,4 @@
+9/13/13 change order of graph controls to match Java version
 9/13/13 don't include standard-lines feature for Slope screen
 9/13/13 fix highlighting of saved lines
 ***** feature complete: Slope, Slope-Intercept, Point-Slope screens

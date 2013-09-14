@@ -55,10 +55,10 @@ define( function( require ) {
     EquationNode.call( this, options.staticFontSize );
 
     // internal properties that are connected to spinners
-    var x1 = new Property( interactiveLineProperty.get().x1 );
-    var y1 = new Property( interactiveLineProperty.get().y1 );
-    var x2 = new Property( interactiveLineProperty.get().x2 );
-    var y2 = new Property( interactiveLineProperty.get().y2 );
+    var x1Property = new Property( interactiveLineProperty.get().x1 );
+    var y1Property = new Property( interactiveLineProperty.get().y1 );
+    var x2Property = new Property( interactiveLineProperty.get().x2 );
+    var y2Property = new Property( interactiveLineProperty.get().y2 );
 
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
@@ -68,15 +68,15 @@ define( function( require ) {
     var mNode = new Text( GLStrings["symbol.slope"], staticTextOptions );
     var interactiveEqualsNode = new Text( "=", staticTextOptions );
     // y2 - y2
-    var y2Node = new CoordinateSpinner( y2, x2, y1, x1, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var y2Node = new CoordinateSpinner( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
-    var y1Node = new CoordinateSpinner( y1, x1, y2, x2, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var y1Node = new CoordinateSpinner( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line
     var interactiveFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), { fill: options.staticColor } ); // correct length will be set later
     // x2 - x1
-    var x2Node = new CoordinateSpinner( x2, y2, x1, y1, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var x2Node = new CoordinateSpinner( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
-    var x1Node = new CoordinateSpinner( x1, y1, x2, y2, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var x1Node = new CoordinateSpinner( x1Property, y1Property, x2Property, y2Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
     var unsimplifiedEqualsNode = new Text( "=", staticTextOptions );
     var unsimplifiedRiseNode = new Node(); // non-null for now, proper node created later
@@ -159,13 +159,13 @@ define( function( require ) {
     // sync the model with the controls
     var updateLine = function() {
       if ( !updatingControls ) {
-        interactiveLineProperty.set( new Line( x1.get(), y1.get(), x2.get(), y2.get(), interactiveLineProperty.get().color ) );
+        interactiveLineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), interactiveLineProperty.get().color ) );
       }
     };
-    x1.link( updateLine.bind( thisNode ) );
-    y1.link( updateLine.bind( thisNode ) );
-    x2.link( updateLine.bind( thisNode ) );
-    y2.link( updateLine.bind( thisNode ) );
+    x1Property.link( updateLine.bind( thisNode ) );
+    y1Property.link( updateLine.bind( thisNode ) );
+    x2Property.link( updateLine.bind( thisNode ) );
+    y2Property.link( updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
     var undefinedSlopeIndicator = null;
@@ -174,10 +174,10 @@ define( function( require ) {
       // Synchronize the controls atomically.
       updatingControls = true;
       {
-        x1.set( line.x1 );
-        y1.set( line.y1 );
-        x2.set( line.x2 );
-        y2.set( line.y2 );
+        x1Property.set( line.x1 );
+        y1Property.set( line.y1 );
+        x2Property.set( line.x2 );
+        y2Property.set( line.y2 );
       }
       updatingControls = false;
 

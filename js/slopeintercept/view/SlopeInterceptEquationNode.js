@@ -66,12 +66,12 @@ define( function( require ) {
     EquationNode.call( this, options.staticFontSize );
 
     // internal properties that are connected to spinners
-    var rise = new Property( interactiveLineProperty.get().rise );
-    var run = new Property( interactiveLineProperty.get().run );
-    var yIntercept = new Property( interactiveLineProperty.get().y1 );
+    var riseProperty = new Property( interactiveLineProperty.get().rise );
+    var runProperty = new Property( interactiveLineProperty.get().run );
+    var yInterceptProperty = new Property( interactiveLineProperty.get().y1 );
     var fractionalIntercept = interactiveLineProperty.get().getYIntercept();
-    var yInterceptNumerator = new Property( fractionalIntercept.numerator );
-    var yInterceptDenominator = new Property( fractionalIntercept.denominator );
+    var yInterceptNumeratorProperty = new Property( fractionalIntercept.numerator );
+    var yInterceptDenominatorProperty = new Property( fractionalIntercept.denominator );
 
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
@@ -91,20 +91,20 @@ define( function( require ) {
     equalsNode = new Text( "=", { font: staticFont, fill: options.staticColor } );
     slopeMinusSignNode = new MinusNode( thisNode.signLineSize, {fill: options.staticColor } );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopeSpinner( rise, run, riseRangeProperty, { font: interactiveFont } );
-      runNode = new SlopeSpinner( run, rise, runRangeProperty, { font: interactiveFont } );
+      riseNode = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( rise, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-      runNode = new DynamicValueNode( run, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      riseNode = new DynamicValueNode( riseProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      runNode = new DynamicValueNode( runProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
     slopeFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
     xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: options.staticColor } );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } );
-    yInterceptNode = new Spinner( yIntercept, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
-    yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumerator, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-    yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominator, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+    yInterceptNode = new Spinner( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
+    yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+    yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     yInterceptFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
 
     //TODO can we update less? move this to prototype?
@@ -325,17 +325,17 @@ define( function( require ) {
     var lineUpdater = function() {
       if ( !updatingControls ) {
         if ( options.interactiveIntercept ) {
-          interactiveLineProperty.set( Line.createSlopeIntercept( rise.get(), run.get(), yIntercept.get(), interactiveLineProperty.get().color ) );
+          interactiveLineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), interactiveLineProperty.get().color ) );
         }
         else {
           var line = interactiveLineProperty.get();
-          interactiveLineProperty.set( new Line( line.x1, line.y1, line.x1 + run.get(), line.y1 + rise.get(), interactiveLineProperty.get().color ) );
+          interactiveLineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), interactiveLineProperty.get().color ) );
         }
       }
     };
-    rise.link( lineUpdater.bind( thisNode ) );
-    run.link( lineUpdater.bind( thisNode ) );
-    yIntercept.link( lineUpdater.bind( thisNode ) );
+    riseProperty.link( lineUpdater.bind( thisNode ) );
+    runProperty.link( lineUpdater.bind( thisNode ) );
+    yInterceptProperty.link( lineUpdater.bind( thisNode ) );
 
     // sync the controls and layout with the model
     interactiveLineProperty.link( function( line ) {
@@ -346,16 +346,16 @@ define( function( require ) {
       // Synchronize the controls atomically.
       updatingControls = true;
       {
-        rise.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
-        run.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
+        riseProperty.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
+        runProperty.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
 
         if ( options.interactiveIntercept ) {
-          yIntercept.set( line.y1 );
+          yInterceptProperty.set( line.y1 );
         }
         else {
           var fractionalIntercept = interactiveLineProperty.get().getYIntercept();
-          yInterceptNumerator.set( fractionalIntercept.numerator );
-          yInterceptDenominator.set( fractionalIntercept.denominator );
+          yInterceptNumeratorProperty.set( fractionalIntercept.numerator );
+          yInterceptDenominatorProperty.set( fractionalIntercept.denominator );
         }
       }
       updatingControls = false;

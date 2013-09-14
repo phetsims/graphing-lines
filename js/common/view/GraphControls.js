@@ -41,16 +41,16 @@ define( function( require ) {
     var thisNode = this;
 
     // private properties for standard-line check boxes
-    var notLinesVisible = new Property( !linesVisibleProperty.get() );
-    var yEqualsXVisible = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
-    var yEqualsNegativeXVisible = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
+    var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
+    var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
+    var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // check boxes
     var TEXT_OPTIONS = { font: CONTROL_FONT };
     var ICON_SIZE = 60;
-    var hideLinesCheckBox = CheckBox.createTextCheckBox( GLStrings.hideLines, TEXT_OPTIONS, notLinesVisible );
-    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisible, { icon: IconFactory.createYEqualsXIcon( ICON_SIZE ) } );
-    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisible, { icon: IconFactory.createYEqualsNegativeXIcon( ICON_SIZE ) } );
+    var hideLinesCheckBox = CheckBox.createTextCheckBox( GLStrings.hideLines, TEXT_OPTIONS, notLinesVisibleProperty );
+    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty, { icon: IconFactory.createYEqualsXIcon( ICON_SIZE ) } );
+    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty, { icon: IconFactory.createYEqualsNegativeXIcon( ICON_SIZE ) } );
     var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisibleProperty, { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
@@ -84,13 +84,13 @@ define( function( require ) {
 
     // when lines are not visible, hide related controls
     linesVisibleProperty.link( function( visible ) {
-      notLinesVisible.set( !visible );
+      notLinesVisibleProperty.set( !visible );
       positiveCheckBox.enabled = visible;
       negativeCheckBox.enabled = visible;
       slopeCheckBox.enabled = visible;
     } );
 
-    notLinesVisible.link( function( visible ) {
+    notLinesVisibleProperty.link( function( visible ) {
        linesVisibleProperty.set( !visible );
     });
 
@@ -104,32 +104,32 @@ define( function( require ) {
     };
 
     // Add/remove standard line "y = x"
-    yEqualsXVisible.link( function( visible ) {
+    yEqualsXVisibleProperty.link( function( visible ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_X_LINE );
     } );
 
     // Add/remove standard line "y = -x"
-    yEqualsNegativeXVisible.link( function( visible ) {
+    yEqualsNegativeXVisibleProperty.link( function( visible ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_NEGATIVE_X_LINE );
     } );
 
     // Select appropriate check boxes when standard lines are added.
     standardLines.addItemAddedListener( function( line ) {
       if ( line === Line.Y_EQUALS_X_LINE ) {
-        yEqualsXVisible.set( true );
+        yEqualsXVisibleProperty.set( true );
       }
       else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
-        yEqualsNegativeXVisible.set( true );
+        yEqualsNegativeXVisibleProperty.set( true );
       }
     } );
 
     // Deselect appropriate check boxes when standard lines are removed.
     standardLines.addItemRemovedListener( function( line ) {
       if ( line === Line.Y_EQUALS_X_LINE ) {
-        yEqualsXVisible.set( false );
+        yEqualsXVisibleProperty.set( false );
       }
       else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
-        yEqualsNegativeXVisible.set( false );
+        yEqualsNegativeXVisibleProperty.set( false );
       }
     } );
   }

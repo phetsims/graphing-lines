@@ -51,7 +51,6 @@ define( function( require ) {
 
     // Creates an icon for a line between 2 points on a grid with fixed dimensions.
     createGraphIcon: function( width, color, x1, y1, x2, y2 ) {
-      debugger;//XXX
       var axisRange = new Range( -3, 3 );
       var graph = new Graph( axisRange, axisRange );
       var mvt = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );

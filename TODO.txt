@@ -3,6 +3,7 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
+- consolidate equation fontSize and fontWeight in GLConfig
 - clean up font vs fontSize usage
 
 MEDIUM

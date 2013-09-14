@@ -35,7 +35,7 @@ define( function( require ) {
   function GraphControls( linesVisibleProperty, slopeVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
-      includeStandardLines: true //TODO is this necessary? How about false if !standardLines?
+      includeStandardLines: true
     }, options );
 
     var thisNode = this;

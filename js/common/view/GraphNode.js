@@ -32,9 +32,9 @@ define( function( require ) {
 
   // grid
   var GRID_BACKGROUND = Color.WHITE;
-  var MINOR_GRID_LINEWIDTH = 0.25;
+  var MINOR_GRID_LINE_WIDTH = 0.25;
   var MINOR_GRID_LINE_COLOR = Color.LIGHT_GRAY;
-  var MAJOR_GRID_LINEWIDTH = 0.5;
+  var MAJOR_GRID_LINE_WIDTH = 0.5;
   var MAJOR_GRID_LINE_COLOR = Color.LIGHT_GRAY;
 
   // axes                                                                                                                                          n
@@ -48,10 +48,10 @@ define( function( require ) {
   // ticks
   var MAJOR_TICK_SPACING = 5; // model units
   var MINOR_TICK_LENGTH = 3; // how far a minor tick extends from the axis
-  var MINOR_TICK_LINEWIDTH = 0.5;
+  var MINOR_TICK_LINE_WIDTH = 0.5;
   var MINOR_TICK_COLOR = Color.BLACK;
   var MAJOR_TICK_LENGTH = 6; // how far a major tick extends from the axis
-  var MAJOR_TICK_LINEWIDTH = 1;
+  var MAJOR_TICK_LINE_WIDTH = 1;
   var MAJOR_TICK_COLOR = Color.BLACK;
   var MAJOR_TICK_FONT = new PhetFont( 16 );
   var TICK_LABEL_SPACING = 2;
@@ -64,7 +64,7 @@ define( function( require ) {
   // Line goes from (x1,y1) to (x2,y2), and is either a major or minor grid line.
   function GridLineNode( x1, y1, x2, y2, isMajor ) {
     Line.call( this, x1, y1, x2, y2, {
-      lineWidth: isMajor ? MAJOR_GRID_LINEWIDTH : MINOR_GRID_LINEWIDTH,
+      lineWidth: isMajor ? MAJOR_GRID_LINE_WIDTH : MINOR_GRID_LINE_WIDTH,
       stroke: isMajor ? MAJOR_GRID_LINE_COLOR : MINOR_GRID_LINE_COLOR
     } );
   }
@@ -85,7 +85,7 @@ define( function( require ) {
                                  Shape.lineSegment( x, y - MAJOR_TICK_LENGTH, x, y + MAJOR_TICK_LENGTH ) :
                                  Shape.lineSegment( x - MAJOR_TICK_LENGTH, y, x + MAJOR_TICK_LENGTH, y ), {
       stroke: MAJOR_TICK_COLOR,
-      lineWidth: MAJOR_TICK_LINEWIDTH
+      lineWidth: MAJOR_TICK_LINE_WIDTH
     } );
     this.addChild( tickLineNode );
 
@@ -118,7 +118,7 @@ define( function( require ) {
     Path.call( this, isVertical ?
                      Shape.lineSegment( x, y - MINOR_TICK_LENGTH, x, y + MINOR_TICK_LENGTH ) :
                      Shape.lineSegment( x - MINOR_TICK_LENGTH, y, x + MINOR_TICK_LENGTH, y ), {
-      lineWidth: MINOR_TICK_LINEWIDTH,
+      lineWidth: MINOR_TICK_LINE_WIDTH,
       stroke: MINOR_TICK_COLOR
     } );
   }

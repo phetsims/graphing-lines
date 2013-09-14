@@ -28,6 +28,7 @@ LOW
 - use scenery-phet.ResetAllButton
 
 PERFORMANCE
+- lousy on iPad
 - consider making Line mutable, to reduce affects of garbage collection
 - revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
 

@@ -22,7 +22,6 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // constants
-  var CONTROL_FONT = new PhetFont( 18 );
   var Y_EQUALS_X = StringUtils.format( "{0} = {1}", GLStrings["symbol.y"], GLStrings["symbol.x"] );
   var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", GLStrings["symbol.y"], GLStrings["symbol.x"] );
 
@@ -47,7 +46,7 @@ define( function( require ) {
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // check boxes
-    var TEXT_OPTIONS = { font: CONTROL_FONT };
+    var TEXT_OPTIONS = { font: new PhetFont( 18 ) };
     var ICON_SIZE = 60;
     var hideLinesCheckBox = CheckBox.createTextCheckBox( GLStrings.hideLines, TEXT_OPTIONS, notLinesVisibleProperty );
     var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,

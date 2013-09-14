@@ -22,8 +22,8 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var ARROW_HEAD_SIZE = new Dimension2( 10, 10 );
-  var LINE_WIDTH = 3;
+  var HEAD_SIZE = new Dimension2( 10, 10 );
+  var TAIL_WIDTH = 3;
   var LINE_EXTENT = 25; // how far the line extends past the grid
   var EQUATION_FONT_SIZE = 18;
 
@@ -86,7 +86,7 @@ define( function( require ) {
     this.tailLocation = mvt.modelToViewPosition( new Vector2( tailX, tailY ) );
     this.tipLocation = mvt.modelToViewPosition( new Vector2( tipX, tipY ) );
     this._arrowNode = new ArrowNode( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y,
-      { doubleHead: true, tailWidth: 3, headWidth: 10, headHeight: 10, fill: line.color, stroke: null } );
+      { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, fill: line.color, stroke: null } );
     this.addChild( this._arrowNode );
 
     // equation

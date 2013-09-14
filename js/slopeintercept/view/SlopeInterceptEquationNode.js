@@ -42,14 +42,14 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   /**
-   * @param {Property<Line>} interactiveLine
-   * @param {Property<Number>} riseRange
-   * @param {Property<Number>} runRange
-   * @param {Property<Number>} yInterceptRange
+   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Number>} riseRangeProperty
+   * @param {Property<Number>} runRangeProperty
+   * @param {Property<Number>} yInterceptRangeProperty
    * @param {*} options
    * @constructor
    */
-  function SlopeInterceptEquationNode( interactiveLine, riseRange, runRange, yInterceptRange, options ) {
+  function SlopeInterceptEquationNode( interactiveLineProperty, riseRangeProperty, runRangeProperty, yInterceptRangeProperty, options ) {
 
     options = _.extend( {
       interactiveSlope: true,
@@ -66,10 +66,10 @@ define( function( require ) {
     EquationNode.call( this, options.staticFontSize );
 
     // internal properties that are connected to spinners
-    var rise = new Property( interactiveLine.get().rise );
-    var run = new Property( interactiveLine.get().run );
-    var yIntercept = new Property( interactiveLine.get().y1 );
-    var fractionalIntercept = interactiveLine.get().getYIntercept();
+    var rise = new Property( interactiveLineProperty.get().rise );
+    var run = new Property( interactiveLineProperty.get().run );
+    var yIntercept = new Property( interactiveLineProperty.get().y1 );
+    var fractionalIntercept = interactiveLineProperty.get().getYIntercept();
     var yInterceptNumerator = new Property( fractionalIntercept.numerator );
     var yInterceptDenominator = new Property( fractionalIntercept.denominator );
 
@@ -84,15 +84,15 @@ define( function( require ) {
     var slopeFractionLineNode, yInterceptFractionLineNode;
 
     // Determine the max width of the rise and run spinners.
-    var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRange, runRange, interactiveFont, thisNode.DECIMAL_PLACES );
+    var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // nodes: y = -(rise/run)x + -b
     yNode = new Text( GLStrings["symbol.y"], { font: staticFont, fill: options.staticColor } );
     equalsNode = new Text( "=", { font: staticFont, fill: options.staticColor } );
     slopeMinusSignNode = new MinusNode( thisNode.signLineSize, {fill: options.staticColor } );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopeSpinner( rise, run, riseRange, { font: interactiveFont } );
-      runNode = new SlopeSpinner( run, rise, runRange, { font: interactiveFont } );
+      riseNode = new SlopeSpinner( rise, run, riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopeSpinner( run, rise, runRangeProperty, { font: interactiveFont } );
     }
     else {
       riseNode = new DynamicValueNode( rise, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
@@ -102,7 +102,7 @@ define( function( require ) {
     xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: options.staticColor } );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } );
-    yInterceptNode = new Spinner( yIntercept, yInterceptRange, { color: GLColors.INTERCEPT, font: interactiveFont } );
+    yInterceptNode = new Spinner( yIntercept, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumerator, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominator, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     yInterceptFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
@@ -325,11 +325,11 @@ define( function( require ) {
     var lineUpdater = function() {
       if ( !updatingControls ) {
         if ( options.interactiveIntercept ) {
-          interactiveLine.set( Line.createSlopeIntercept( rise.get(), run.get(), yIntercept.get(), interactiveLine.get().color ) );
+          interactiveLineProperty.set( Line.createSlopeIntercept( rise.get(), run.get(), yIntercept.get(), interactiveLineProperty.get().color ) );
         }
         else {
-          var line = interactiveLine.get();
-          interactiveLine.set( new Line( line.x1, line.y1, line.x1 + run.get(), line.y1 + rise.get(), interactiveLine.get().color ) );
+          var line = interactiveLineProperty.get();
+          interactiveLineProperty.set( new Line( line.x1, line.y1, line.x1 + run.get(), line.y1 + rise.get(), interactiveLineProperty.get().color ) );
         }
       }
     };
@@ -338,7 +338,7 @@ define( function( require ) {
     yIntercept.link( lineUpdater.bind( thisNode ) );
 
     // sync the controls and layout with the model
-    interactiveLine.link( function( line ) {
+    interactiveLineProperty.link( function( line ) {
 
       // If intercept is interactive, then (x1,y1) must be on a grid line on the y intercept.
       assert && assert( !options.interactiveIntercept || ( line.x1 === 0 && Util.isInteger( line.y1 ) ) );
@@ -353,7 +353,7 @@ define( function( require ) {
           yIntercept.set( line.y1 );
         }
         else {
-          var fractionalIntercept = interactiveLine.get().getYIntercept();
+          var fractionalIntercept = interactiveLineProperty.get().getYIntercept();
           yInterceptNumerator.set( fractionalIntercept.numerator );
           yInterceptDenominator.set( fractionalIntercept.denominator );
         }

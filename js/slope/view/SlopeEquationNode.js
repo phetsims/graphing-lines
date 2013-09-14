@@ -33,13 +33,13 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   /**
-   * @param {Property<Line>} interactiveLine
-   * @param {Property<Number>} xRange
-   * @param {Property<Number>} yRange
+   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Number>} xRangeProperty
+   * @param {Property<Number>} yRangeProperty
    * @param {*} options
    * @constructor
    */
-  function SlopeEquationNode( interactiveLine, xRange, yRange, options ) {
+  function SlopeEquationNode( interactiveLineProperty, xRangeProperty, yRangeProperty, options ) {
 
     options = _.extend( {
       interactiveFontSize: 28,
@@ -55,10 +55,10 @@ define( function( require ) {
     EquationNode.call( this, options.staticFontSize );
 
     // internal properties that are connected to spinners
-    var x1 = new Property( interactiveLine.get().x1 );
-    var y1 = new Property( interactiveLine.get().y1 );
-    var x2 = new Property( interactiveLine.get().x2 );
-    var y2 = new Property( interactiveLine.get().y2 );
+    var x1 = new Property( interactiveLineProperty.get().x1 );
+    var y1 = new Property( interactiveLineProperty.get().y1 );
+    var x2 = new Property( interactiveLineProperty.get().x2 );
+    var y2 = new Property( interactiveLineProperty.get().y2 );
 
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
@@ -68,15 +68,15 @@ define( function( require ) {
     var mNode = new Text( GLStrings["symbol.slope"], staticTextOptions );
     var interactiveEqualsNode = new Text( "=", staticTextOptions );
     // y2 - y2
-    var y2Node = new CoordinateSpinner( y2, x2, y1, x1, yRange, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var y2Node = new CoordinateSpinner( y2, x2, y1, x1, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
-    var y1Node = new CoordinateSpinner( y1, x1, y2, x2, yRange, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var y1Node = new CoordinateSpinner( y1, x1, y2, x2, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line
     var interactiveFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), { fill: options.staticColor } ); // correct length will be set later
     // x2 - x1
-    var x2Node = new CoordinateSpinner( x2, y2, x1, y1, xRange, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var x2Node = new CoordinateSpinner( x2, y2, x1, y1, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
-    var x1Node = new CoordinateSpinner( x1, y1, x2, y2, xRange, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var x1Node = new CoordinateSpinner( x1, y1, x2, y2, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
     var unsimplifiedEqualsNode = new Text( "=", staticTextOptions );
     var unsimplifiedRiseNode = new Node(); // non-null for now, proper node created later
@@ -84,7 +84,7 @@ define( function( require ) {
     var unsimplifiedFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), { fill: options.staticColor } ); // correct length will be set later
 
     // Compute the max width needed to display the unsimplified rise and run values.
-    var maxRangeLength = Math.max( xRange.get().getLength(), yRange.get().getLength() );
+    var maxRangeLength = Math.max( xRangeProperty.get().getLength(), yRangeProperty.get().getLength() );
     var maxUnsimplifiedWidth = y2Node.width;
     var maxUnsimplifiedHeight = y2Node.height - 20;
 
@@ -159,7 +159,7 @@ define( function( require ) {
     // sync the model with the controls
     var updateLine = function() {
       if ( !updatingControls ) {
-        interactiveLine.set( new Line( x1.get(), y1.get(), x2.get(), y2.get(), interactiveLine.get().color ) );
+        interactiveLineProperty.set( new Line( x1.get(), y1.get(), x2.get(), y2.get(), interactiveLineProperty.get().color ) );
       }
     };
     x1.link( updateLine.bind( thisNode ) );
@@ -169,7 +169,7 @@ define( function( require ) {
 
     // sync the controls and layout with the model
     var undefinedSlopeIndicator = null;
-    interactiveLine.link( function( line ) {
+    interactiveLineProperty.link( function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;

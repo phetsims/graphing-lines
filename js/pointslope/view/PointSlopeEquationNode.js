@@ -39,15 +39,15 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   /**
-   * @param {Property<Line>} interactiveLine
-   * @param {Property<Number>} x1Range
-   * @param {Property<Number>} y1Range
-   * @param {Property<Number>} riseRange
-   * @param {Property<Number>} runRange
+   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Number>} x1RangeProperty
+   * @param {Property<Number>} y1RangeProperty
+   * @param {Property<Number>} riseRangeProperty
+   * @param {Property<Number>} runRangeProperty
    * @param {*} options
    * @constructor
    */
-  function PointSlopeEquationNode( interactiveLine, x1Range, y1Range, riseRange, runRange, options ) {
+  function PointSlopeEquationNode( interactiveLineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty, options ) {
 
     options = _.extend( {
       interactiveX1: true,
@@ -65,16 +65,16 @@ define( function( require ) {
     EquationNode.call( thisNode, options.staticFontSize );
 
     // internal properties that are connected to spinners
-    var x1 = new Property( interactiveLine.get().x1 );
-    var y1 = new Property( interactiveLine.get().y1 );
-    var rise = new Property( interactiveLine.get().rise );
-    var run = new Property( interactiveLine.get().run );
+    var x1Property = new Property( interactiveLineProperty.get().x1 );
+    var y1Property = new Property( interactiveLineProperty.get().y1 );
+    var riseProperty = new Property( interactiveLineProperty.get().rise );
+    var runProperty = new Property( interactiveLineProperty.get().run );
 
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
 
     // Determine the max width of the rise and run spinners.
-    var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRange, runRange, interactiveFont, thisNode.DECIMAL_PLACES );
+    var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation "(y - y1) = m(x - x1)"
     var yLeftParenNode, yNode, yOperatorNode, y1Node, yRightParenNode, equalsNode;
@@ -87,32 +87,32 @@ define( function( require ) {
     yNode = new Text( GLStrings["symbol.y"], staticFont, options.staticColor );
     yOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveY1 ) {
-      y1Node = new Spinner( y1, y1Range, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
+      y1Node = new Spinner( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
-      y1Node = new DynamicValueNode( y1, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      y1Node = new DynamicValueNode( y1Property, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
     yRightParenNode = new Text( ")", { font: staticFont, stroke: options.staticColor } );
     y1MinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } ); // for y=-y1 case
     equalsNode = new Text( "=", { font: staticFont, stroke: options.staticColor } );
     slopeMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopeSpinner( rise, run, riseRange, { font: interactiveFont } );
-      runNode = new SlopeSpinner( run, rise, runRange, { font: interactiveFont } );
+      riseNode = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( rise, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-      runNode = new DynamicValueNode( run, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      riseNode = new DynamicValueNode( riseProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      runNode = new DynamicValueNode( runProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
     fractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
     xLeftParenNode = new Text( "(", { font: staticFont, fill: options.staticColor } );
     xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: options.staticColor } );
     xOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveX1 ) {
-      x1Node = new Spinner( x1, x1Range, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
+      x1Node = new Spinner( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
-      x1Node = new DynamicValueNode( x1, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      x1Node = new DynamicValueNode( x1Property, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
     }
     xRightParenNode = new Text( ")", { font: staticFont, fill: options.staticColor } );
 
@@ -330,24 +330,24 @@ define( function( require ) {
     // sync the model with the controls
     var lineUpdater = function() {
       if ( !updatingControls ) {
-        interactiveLine.set( Line.createPointSlope( x1.get(), y1.get(), rise.get(), run.get(), interactiveLine.get().color ) );
+        interactiveLineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), interactiveLineProperty.get().color ) );
       }
     };
-    x1.link( lineUpdater.bind( thisNode ) );
-    y1.link( lineUpdater.bind( thisNode ) );
-    rise.link( lineUpdater.bind( thisNode ) );
-    run.link( lineUpdater.bind( thisNode ) );
+    x1Property.link( lineUpdater.bind( thisNode ) );
+    y1Property.link( lineUpdater.bind( thisNode ) );
+    riseProperty.link( lineUpdater.bind( thisNode ) );
+    runProperty.link( lineUpdater.bind( thisNode ) );
 
     // sync the controls and layout with the model
-    interactiveLine.link( function( line ) {
+    interactiveLineProperty.link( function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;
       {
-        x1.set( line.x1 );
-        y1.set( line.y1 );
-        rise.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
-        run.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
+        x1Property.set( line.x1 );
+        y1Property.set( line.y1 );
+        riseProperty.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
+        runProperty.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
       }
       updatingControls = false;
 

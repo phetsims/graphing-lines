@@ -16,18 +16,19 @@ MEDIUM
 LOW
 - convert icons to images in IconFactory
 - DecimalFormat instead of decimalPlaces
-- pass font properties instead of just size to various UI components (especially equations)
 - convert models to PropertySet and axon style
-- consider making Line mutable, to reduce affects of garbage collection
 - change 'tab.*' string keys to 'screen.*'
 - remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
 - import all string files from Java sim
 - omit subtype-specific options before passing them to supertype
 - i18n of credits
 - replace EquationNode.createFractionLineShape with scenery.Line at call sites
-- revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
 - ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
-- use scenery-phet.RestAllButton
+- use scenery-phet.ResetAllButton
+
+PERFORMANCE
+- consider making Line mutable, to reduce affects of garbage collection
+- revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
 
 MIGRATE TO COMMON
 - Spinner

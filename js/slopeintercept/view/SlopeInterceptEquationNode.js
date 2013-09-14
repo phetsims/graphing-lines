@@ -126,8 +126,8 @@ define( function( require ) {
 
       // slope properties
       var slope = line.getSlope();
-      var zeroSlope = ( slope == 0 );
-      var unitySlope = ( Math.abs( slope ) == 1 );
+      var zeroSlope = ( slope === 0 );
+      var unitySlope = ( Math.abs( slope ) === 1 );
       var integerSlope = Util.isInteger( slope );
       var positiveSlope = ( slope > 0 );
       var fractionalSlope = ( !zeroSlope && !unitySlope && !integerSlope );

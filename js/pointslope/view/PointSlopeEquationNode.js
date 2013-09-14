@@ -28,7 +28,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range')
+  var Range = require( 'DOT/Range');
   var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );

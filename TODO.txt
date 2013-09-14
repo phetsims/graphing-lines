@@ -4,9 +4,10 @@ DESIGN
 
 HIGH
 - implement IconFactory
+- replace LineNode.createEquationNode with a factory function passed to constructor
+- clean up font vs fontSize usage
 
 MEDIUM
-- clean up font vs fontSize usage
 - rounded corners on spinners
 - Game
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
@@ -23,6 +24,11 @@ LOW
 - remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
 - import all string files from Java sim
 - omit subtype-specific options before passing them to supertype
+- i18n of credits
+- replace EquationNode.createFractionLineShape with scenery.Line at call sites
+- revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
+- ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
+- use scenery-phet.RestAllButton
 
 MIGRATE TO COMMON
 - Spinner

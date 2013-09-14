@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- replace LineNode.createEquationNode with a factory function passed to constructor
 - clean up font vs fontSize usage
 
 MEDIUM

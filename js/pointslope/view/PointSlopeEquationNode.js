@@ -59,7 +59,7 @@ define( function( require ) {
     }, options );
 
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: options.staticFontSize } );
+    var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
 
     var thisNode = this;
     EquationNode.call( thisNode, options.staticFontSize );

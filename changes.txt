@@ -1,4 +1,5 @@
 # 0.0.0-dev.1 9/13/13
+9/13/13 use weight:'bold' for static equations
 9/13/13 fix background color of graph control panel
 9/13/13 add icons for standard lines to graph control panel
 9/13/13 add icon for slope tool to control panel

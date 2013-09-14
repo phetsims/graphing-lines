@@ -48,7 +48,7 @@ define( function( require ) {
     }, options );
 
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: options.staticFontSize } );
+    var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
     var staticTextOptions = { font: staticFont, fill: options.staticColor };
 
     var thisNode = this;
@@ -227,10 +227,11 @@ define( function( require ) {
 
     options = _.extend( {
       fontSize: 20,
+      fontWeight: 'bold',
       fill: 'black'
     }, options );
 
-    var font = new PhetFont( { size: options.fontSize, weight: 'bold' } );
+    var font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // m =
     var htmlLeftSide = StringUtils.format( "{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{1} =", GLStrings.slope, GLStrings["symbol.slope"] );
@@ -283,7 +284,7 @@ define( function( require ) {
 
     var equationNode = new EquationNode( fontSize );
 
-    var font = new PhetFont( { size: fontSize } );
+    var font = new PhetFont( { size: fontSize, weight: 'bold' } );
 
     // m is
     var slopeIsNode = new Text( StringUtils.format( GLStrings.slopeIs, GLStrings["symbol.slope"] ), { font: font, fill: color } );

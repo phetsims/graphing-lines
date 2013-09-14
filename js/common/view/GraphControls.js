@@ -10,6 +10,7 @@ define( function( require ) {
 
   // imports
   var CheckBox = require( 'SUN/CheckBox' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -49,9 +50,12 @@ define( function( require ) {
     var TEXT_OPTIONS = { font: CONTROL_FONT };
     var ICON_SIZE = 60;
     var hideLinesCheckBox = CheckBox.createTextCheckBox( GLStrings.hideLines, TEXT_OPTIONS, notLinesVisibleProperty );
-    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty, { icon: IconFactory.createYEqualsXIcon( ICON_SIZE ) } );
-    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty, { icon: IconFactory.createYEqualsNegativeXIcon( ICON_SIZE ) } );
-    var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisibleProperty, { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
+    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
+      { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
+    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
+      { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
+    var slopeCheckBox = CheckBox.createTextCheckBox( GLStrings.slope, TEXT_OPTIONS, slopeVisibleProperty,
+      { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
     var contentNode = new Node();
@@ -72,7 +76,7 @@ define( function( require ) {
     hideLinesCheckBox.top = previousNode.bottom + Y_SPACING;
 
     Panel.call( thisNode, contentNode, {
-      fill: 'white',
+      fill: GLColors.EQUATION_CONTROL_PANEL,
       stroke: 'black',
       lineWidth: 1,
       xMargin: 10,

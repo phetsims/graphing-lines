@@ -3,7 +3,6 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- implement IconFactory
 - replace LineNode.createEquationNode with a factory function passed to constructor
 - clean up font vs fontSize usage
 
@@ -16,6 +15,7 @@ MEDIUM
 - replace NumberBackgroundNode(value) with more general BackgroundNode(childNode), or use sun.Panel?
 
 LOW
+- convert icons to images in IconFactory
 - DecimalFormat instead of decimalPlaces
 - pass font properties instead of just size to various UI components (especially equations)
 - convert models to PropertySet and axon style

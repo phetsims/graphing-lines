@@ -9,24 +9,18 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Range = require( 'DOT/Range' );
   var Shape = require( 'KITE/Shape' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-
-  //TODO this should go away
-  var createRectangleIcon = function( width, fill, stroke ) {
-    var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-    var icon = new Rectangle( 0, 0, width, width, { fill: fill, stroke: stroke } );
-    icon.setEnabled = function( enabled ) {
-      icon.fill = enabled ? fill : 'rgb(220,220,220)';
-      icon.stroke = enabled ? stroke : 'rgb(180,180,180)';
-    };
-    return icon;
-  };
+  var Vector2 = require( 'DOT/Vector2' );
 
   return {
 
@@ -55,16 +49,20 @@ define( function( require ) {
       return parentNode;//TODO convert to image
     },
 
-    // Creates an icon for the "y = +x" feature
-    createYEqualsXIcon: function( width ) {
-      //TODO placeholder, port this from java.GraphNode
-      return createRectangleIcon( width, GLColors.Y_EQUALS_X, 'black' );
-    },
-
-    // Creates an icon for the "y = -x" feature
-    createYEqualsNegativeXIcon: function( width ) {
-      //TODO placeholder, port this from java.GraphNode
-      return createRectangleIcon( width, GLColors.Y_EQUALS_NEGATIVE_X, 'black' );
+    // Creates an icon for a line between 2 points on a grid with fixed dimensions.
+    createGraphIcon: function( width, color, x1, y1, x2, y2 ) {
+      debugger;//XXX
+      var axisRange = new Range( -3, 3 );
+      var graph = new Graph( axisRange, axisRange );
+      var mvt = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
+      var graphNode = new GraphNode( graph, mvt );
+      var p1 = mvt.modelToViewPosition( new Vector2( x1, y1 ) );
+      var p2 = mvt.modelToViewPosition( new Vector2( x2, y2 ) );
+      graphNode.addChild( new Path( Shape.lineSegment( p1.x, p1.y, p2.x, p2.y ), {
+        stroke: color, lineWidth: 4
+      } ) );
+      graphNode.scale( width / graphNode.width );
+      return graphNode;
     }
   };
 } );

@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
@@ -22,7 +23,7 @@ define( function( require ) {
 
     options = _.extend( {
       pickable: false,
-      highlightColor: 'white',
+      highlightColor: Color.WHITE,
       mainColor: color,
       shadowColor: color.darkerColor(),
       stroke: color.darkerColor().darkerColor(),

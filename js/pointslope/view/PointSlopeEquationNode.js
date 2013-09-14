@@ -169,7 +169,7 @@ define( function( require ) {
         if ( interactiveY1 || line.y1 >= 0 ) {
           // y = y1
           y1Node.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
-          yNode.y = yNode.centerY - ( y1Node.height / 2 ); //TODO ??
+          y1Node.y = yNode.y;
         }
         else {
           // y = -y1
@@ -177,7 +177,7 @@ define( function( require ) {
           y1MinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           y1MinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           y1Node.left = y1MinusSignNode.right + thisNode.integerSignXSpacing;
-          y1Node.y = yNode.centerY - ( y1Node.height / 2 );  //TODO ??
+          y1Node.y = yNode.y;
         }
       }
       else {  // y1 is on the left side of the equation

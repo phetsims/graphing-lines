@@ -18,7 +18,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' ); //TODO delete if not used
   var TextButton = require( 'SUN/TextButton' );
 
   // constants

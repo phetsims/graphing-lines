@@ -116,6 +116,7 @@ define( function( require ) {
       this._updateEquation( this.line, EQUATION_FONT_SIZE, color );
     },
 
+    //TODO Only color can change, so we shouldn't have to redo the entire layout.
     _updateEquation: function( line, fontSize, color ) {
 
       this._equationParentNode.removeAllChildren();

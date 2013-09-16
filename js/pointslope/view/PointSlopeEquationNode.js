@@ -366,7 +366,7 @@ define( function( require ) {
     //TODO Is this OK? <font> tag is deprecated in HTML4 and unsupported in HTML5.
     var html = StringUtils.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>",
       GLStrings["symbol.y"], GLStrings["symbol.y"], GLStrings["symbol.slope"], GLStrings["symbol.x"], GLStrings["symbol.x"] );
-    return new HTMLText( html, { font: options.font } );
+    return new HTMLText( html, { font: options.font, pickable: false } );
   };
 
   PointSlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {

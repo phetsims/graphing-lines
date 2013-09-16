@@ -375,7 +375,7 @@ define( function( require ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
     var html = StringUtils.format( "{0} = {1}{2} + {3}",
       GLStrings["symbol.y"], GLStrings["symbol.slope"], GLStrings["symbol.x"], GLStrings["symbol.intercept"] );
-    return new HTMLText( html, { font: options.font } );
+    return new HTMLText( html, { font: options.font, pickable: false } );
 
   };
 

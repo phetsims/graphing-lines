@@ -254,7 +254,7 @@ define( function( require ) {
     var fractionLineNode = new Rectangle( 0, 0, length, 1, { fill: options.fill } );
 
     // rendering order
-    var parentNode = new Node();
+    var parentNode = new Node( { pickable: false } );
     parentNode.addChild( leftSideNode );
     parentNode.addChild( fractionLineNode );
     parentNode.addChild( numeratorNode );

@@ -115,12 +115,12 @@ define( function( require ) {
      * This is based on which parts of the equation are interactive, and what the
      * non-interactive parts of the equation should look like when written in simplified form.
      */
-    var updateLayout = function( line, interactiveSlope, interactiveIntercept ) {
+    var updateLayout = function( line ) {
 
       // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
       thisNode.removeAllChildren();
       operatorNode.removeAllChildren();
-      if ( line.undefinedSlope() && !interactiveSlope && !interactiveIntercept ) {
+      if ( line.undefinedSlope() && !options.interactiveSlope && !options.interactiveIntercept ) {
         // slope is undefined and nothing is interactive
         thisNode.addChild( new SlopeUndefinedNode( line, staticOptions ) );
         return;
@@ -145,7 +145,7 @@ define( function( require ) {
       equalsNode.y = yNode.y;
 
       // Layout the "mx" part of the equation.
-      if ( interactiveSlope ) {
+      if ( options.interactiveSlope ) {
 
         // slope is interactive, will be displayed as a fraction
 
@@ -226,9 +226,9 @@ define( function( require ) {
       }
 
       // Layout the "+ b" part of the equation.
-      if ( interactiveIntercept ) {
+      if ( options.interactiveIntercept ) {
         // intercept is interactive and will be an integer
-        if ( zeroSlope && !interactiveSlope ) {
+        if ( zeroSlope && !options.interactiveSlope ) {
           // y = b
           thisNode.addChild( yInterceptNode );
           yInterceptNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing,
@@ -255,7 +255,7 @@ define( function( require ) {
         var positiveIntercept = ( fractionalIntercept.valueOf() > 0 );
 
         if ( zeroIntercept ) {
-          if ( zeroSlope && !interactiveSlope ) {
+          if ( zeroSlope && !options.interactiveSlope ) {
             // y = 0
             thisNode.addChild( yInterceptNumeratorNode );
             yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
@@ -265,13 +265,13 @@ define( function( require ) {
             // no intercept
           }
         }
-        else if ( positiveIntercept && zeroSlope && !interactiveSlope ) {
+        else if ( positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = b
           thisNode.addChild( yInterceptNumeratorNode );
           yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
-        else if ( !positiveIntercept && zeroSlope && !interactiveSlope ) {
+        else if ( !positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = -b
           thisNode.addChild( yInterceptMinusSignNode );
           thisNode.addChild( yInterceptNumeratorNode );
@@ -365,7 +365,7 @@ define( function( require ) {
       updatingControls = false;
 
       // Update the layout.
-      updateLayout( line, options.interactiveSlope, options.interactiveIntercept );
+      updateLayout( line );
 
       thisNode.mutate( options );
     } );

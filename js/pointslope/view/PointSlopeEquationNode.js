@@ -124,9 +124,9 @@ define( function( require ) {
      * This is based on which parts of the equation are interactive, and what the
      * non-interactive parts of the equation should look like when written in simplified form.
      */
-    var updateLayout = function( line, interactiveX1, interactiveY1, interactiveSlope ) {
+    var updateLayout = function( line ) {
 
-      var interactive = interactiveX1 || interactiveY1 || interactiveSlope;
+      var interactive = options.interactiveX1 || options.interactiveY1 || options.interactiveSlope;
 
       // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
       thisNode.removeAllChildren();
@@ -146,7 +146,7 @@ define( function( require ) {
       }
 
       // Change the x operator to account for the signs of x1.
-      if ( interactiveX1 || line.x1 >= 0 ) {
+      if ( options.interactiveX1 || line.x1 >= 0 ) {
         xOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticOptions ) );
       }
       else {
@@ -154,14 +154,14 @@ define( function( require ) {
       }
 
       // Change the y operator to account for the signs of y1.
-      if ( interactiveY1 || line.y1 >= 0 ) {
+      if ( options.interactiveY1 || line.y1 >= 0 ) {
         yOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticOptions ) );
       }
       else {
         yOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
       }
 
-      if ( line.rise === 0 && !interactiveSlope && !interactiveX1 ) {
+      if ( line.rise === 0 && !options.interactiveSlope && !options.interactiveX1 ) {
         // y1 is on the right side of the equation
         thisNode.addChild( yNode );
         thisNode.addChild( equalsNode );
@@ -169,7 +169,7 @@ define( function( require ) {
         yNode.x = 0;
         yNode.y = 0;
         equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
-        if ( interactiveY1 || line.y1 >= 0 ) {
+        if ( options.interactiveY1 || line.y1 >= 0 ) {
           // y = y1
           y1Node.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           y1Node.y = yNode.y;
@@ -211,7 +211,7 @@ define( function( require ) {
 
         // slope
         var previousXOffset;
-        if ( interactiveSlope ) {
+        if ( options.interactiveSlope ) {
           // (rise/run), where rise and run are spinners, and the sign is integrated into the spinners
           thisNode.addChild( riseNode );
           thisNode.addChild( fractionLineNode );
@@ -295,7 +295,7 @@ define( function( require ) {
         }
 
         // x term
-        if ( interactiveX1 || interactiveSlope || line.rise !== 0 ) {
+        if ( options.interactiveX1 || options.interactiveSlope || line.rise !== 0 ) {
           // (x - x1)
           thisNode.addChild( xLeftParenNode );
           thisNode.addChild( xNode );
@@ -355,7 +355,7 @@ define( function( require ) {
       updatingControls = false;
 
       // Update the layout
-      updateLayout( line, options.interactiveX1, options.interactiveY1, options.interactiveSlope );
+      updateLayout( line );
     } );
 
     thisNode.mutate( options );

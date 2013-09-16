@@ -1,3 +1,4 @@
+9/16/13 change signature of update function in PointSlopeEquationNode and SlopeInterceptEquationNode
 9/16/13 broke PointSlopeEquationNode in earlier change
 9/16/13 replace EquationNode.createFractionLineShape with scenery.Line at call sites
 9/16/13 set pickable:false for non-interactive parts of equations

@@ -114,7 +114,7 @@ define( function( require ) {
      * This is based on which parts of the equation are interactive, and what the
      * non-interactive parts of the equation should look like when written in simplified form.
      */
-    var updateLayout = function( line, interactiveSlope, interactiveIntercept, staticFont, staticColor ) {
+    var updateLayout = function( line, interactiveSlope, interactiveIntercept ) {
 
       // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
       thisNode.removeAllChildren();
@@ -364,7 +364,7 @@ define( function( require ) {
       updatingControls = false;
 
       // Update the layout.
-      updateLayout( line, options.interactiveSlope, options.interactiveIntercept, staticFont, options.staticColor );
+      updateLayout( line, options.interactiveSlope, options.interactiveIntercept );
 
       thisNode.mutate( options );
     } );

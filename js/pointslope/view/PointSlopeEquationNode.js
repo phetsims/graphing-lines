@@ -60,6 +60,7 @@ define( function( require ) {
 
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
+    var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
 
     var thisNode = this;
     EquationNode.call( thisNode, options.staticFontSize );
@@ -83,38 +84,38 @@ define( function( require ) {
     var fractionLineNode;
 
     // nodes: (y-y1) = m(x-x1)
-    yLeftParenNode = new Text( "(", staticFont, options.staticColor );
-    yNode = new Text( GLStrings["symbol.y"], staticFont, options.staticColor );
+    yLeftParenNode = new Text( "(", staticOptions );
+    yNode = new Text( GLStrings["symbol.y"], staticOptions );
     yOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveY1 ) {
       y1Node = new Spinner( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
-      y1Node = new DynamicValueNode( y1Property, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    yRightParenNode = new Text( ")", { font: staticFont, stroke: options.staticColor } );
-    y1MinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } ); // for y=-y1 case
-    equalsNode = new Text( "=", { font: staticFont, stroke: options.staticColor } );
-    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } );
+    yRightParenNode = new Text( ")", staticOptions );
+    y1MinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions ); // for y=-y1 case
+    equalsNode = new Text( "=", staticOptions );
+    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
     if ( options.interactiveSlope ) {
       riseNode = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( riseProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-      runNode = new DynamicValueNode( runProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+      runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     fractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
-    xLeftParenNode = new Text( "(", { font: staticFont, fill: options.staticColor } );
-    xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: options.staticColor } );
+    xLeftParenNode = new Text( "(", staticOptions );
+    xNode = new Text( GLStrings["symbol.x"], staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveX1 ) {
       x1Node = new Spinner( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
-      x1Node = new DynamicValueNode( x1Property, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    xRightParenNode = new Text( ")", { font: staticFont, fill: options.staticColor } );
+    xRightParenNode = new Text( ")", staticOptions );
 
     //TODO can we update less? move this to prototype?
     /*
@@ -122,7 +123,7 @@ define( function( require ) {
      * This is based on which parts of the equation are interactive, and what the
      * non-interactive parts of the equation should look like when written in simplified form.
      */
-    var updateLayout = function( line, interactiveX1, interactiveY1, interactiveSlope, staticFont, staticColor ) {
+    var updateLayout = function( line, interactiveX1, interactiveY1, interactiveSlope ) {
 
       var interactive = interactiveX1 || interactiveY1 || interactiveSlope;
 
@@ -133,29 +134,30 @@ define( function( require ) {
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new SlopeUndefinedNode( line, { font: staticFont, fill: staticColor } ) );
+        thisNode.addChild( new SlopeUndefinedNode( line, staticOptions ) );
         return;
       }
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
         // use slope-intercept form for y=x and y=-x, using a line with the proper slope and (x1,y1)=(0,0)
-        thisNode.addChild( SlopeInterceptEquationNode.createStaticEquation( Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.staticFontSize, staticColor ) );
+        thisNode.addChild( SlopeInterceptEquationNode.createStaticEquation(
+          Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.staticFontSize, options.staticColor ) );
         return;
       }
 
       // Change the x operator to account for the signs of x1.
       if ( interactiveX1 || line.x1 >= 0 ) {
-        xOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticColor ) );
+        xOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticOptions ) );
       }
       else {
-        xOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticColor ) );
+        xOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
       }
 
       // Change the y operator to account for the signs of y1.
       if ( interactiveY1 || line.y1 >= 0 ) {
-        yOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticColor ) );
+        yOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticOptions ) );
       }
       else {
-        yOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticColor ) );
+        yOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
       }
 
       if ( line.rise === 0 && !interactiveSlope && !interactiveX1 ) {
@@ -352,7 +354,7 @@ define( function( require ) {
       updatingControls = false;
 
       // Update the layout
-      updateLayout( line, options.interactiveX1, options.interactiveY1, options.interactiveSlope, staticFont, options.staticColor );
+      updateLayout( line, options.interactiveX1, options.interactiveY1 );
     } );
 
     thisNode.mutate( options );

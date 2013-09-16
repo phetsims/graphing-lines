@@ -355,7 +355,7 @@ define( function( require ) {
       updatingControls = false;
 
       // Update the layout
-      updateLayout( line, options.interactiveX1, options.interactiveY1 );
+      updateLayout( line, options.interactiveX1, options.interactiveY1, options.interactiveSlope );
     } );
 
     thisNode.mutate( options );

@@ -61,6 +61,7 @@ define( function( require ) {
 
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
+    var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
 
     var thisNode = this;
     EquationNode.call( this, options.staticFontSize );
@@ -87,25 +88,25 @@ define( function( require ) {
     var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // nodes: y = -(rise/run)x + -b
-    yNode = new Text( GLStrings["symbol.y"], { font: staticFont, fill: options.staticColor } );
-    equalsNode = new Text( "=", { font: staticFont, fill: options.staticColor } );
-    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, {fill: options.staticColor } );
+    yNode = new Text( GLStrings["symbol.y"], staticOptions );
+    equalsNode = new Text( "=", staticOptions );
+    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
     if ( options.interactiveSlope ) {
       riseNode = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( riseProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-      runNode = new DynamicValueNode( runProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
+      riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+      runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    slopeFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
-    xNode = new Text( GLStrings["symbol.x"], { font: staticFont, fill: options.staticColor } );
+    slopeFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), _.extend( { absoluteValue: true }, staticOptions ) );
+    xNode = new Text( GLStrings["symbol.x"], _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
-    yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, { fill: options.staticColor } );
+    yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptNode = new Spinner( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
-    yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-    yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, { font: staticFont, fill: options.staticColor, absoluteValue: true } );
-    yInterceptFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
+    yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    yInterceptFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), staticOptions );
 
     //TODO can we update less? move this to prototype?
     /*
@@ -120,7 +121,7 @@ define( function( require ) {
       operatorNode.removeAllChildren();
       if ( line.undefinedSlope() && !interactiveSlope && !interactiveIntercept ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new SlopeUndefinedNode( line, { font: staticFont, fill: options.staticColor } ) );
+        thisNode.addChild( new SlopeUndefinedNode( line, staticOptions ) );
         return;
       }
 
@@ -236,7 +237,7 @@ define( function( require ) {
           // y = (rise/run)x + b
           thisNode.addChild( operatorNode );
           thisNode.addChild( yInterceptNode );
-          operatorNode.addChild( new PlusNode( thisNode.operatorLineSize, { fill: options.staticColor } ) );
+          operatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           yInterceptNode.left = operatorNode.right + thisNode.operatorXSpacing;
@@ -281,7 +282,9 @@ define( function( require ) {
         else {
           // y = mx +/- b
           thisNode.addChild( operatorNode );
-          operatorNode.addChild( positiveIntercept ? new PlusNode( thisNode.operatorLineSize, { fill: staticColor } ) : new MinusNode( thisNode.operatorLineSize, { fill: staticColor } ) );
+          operatorNode.addChild( positiveIntercept ?
+                                 new PlusNode( thisNode.operatorLineSize, staticOptions ) :
+                                 new MinusNode( thisNode.operatorLineSize, staticOptions ) );
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
 
@@ -312,7 +315,7 @@ define( function( require ) {
 
       // Add the undefined-slope indicator after layout has been done, so that it covers the entire equation.
       if ( line.undefinedSlope() ) {
-        var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height );
+        var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height, staticOptions );
         undefinedSlopeIndicator.centerX = thisNode.centerX;
         undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - thisNode.undefinedSlopeYFudgeFactor;
         thisNode.addChild( undefinedSlopeIndicator );

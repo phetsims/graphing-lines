@@ -182,12 +182,12 @@ define( function( require ) {
 
       // Update the unsimplified slope
       {
-        var margin = 3;
-        var cornerRadius = 10;
         var unsimplifiedSlopeOptions = {
-          textOptions: { font: staticFont },
-          backgroundOptions: { fill: GLColors.SLOPE, width: maxUnsimplifiedWidth, height: maxUnsimplifiedHeight }
-        }; //TODO yuck
+          font: staticFont,
+          decimalPlaces: 0,
+          backgroundFill: GLColors.SLOPE,
+          minWidth: maxUnsimplifiedWidth, minHeight: maxUnsimplifiedHeight
+        };
 
         // rise
         parentNode.removeChild( unsimplifiedRiseNode );

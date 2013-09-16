@@ -3,7 +3,7 @@ TODO list for graphing-lines (HTML port)
 DESIGN
 
 HIGH
-- set pickable:false wherever possible
+- equations on saved lines in Slope-Intercept and Point-Slope are not pickable, so no highlight on pointer over
 - consolidate equation fontSize and fontWeight in GLConfig
 - clean up font vs fontSize usage
 

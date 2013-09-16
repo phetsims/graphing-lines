@@ -49,7 +49,7 @@ define( function( require ) {
 
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
-    var staticTextOptions = { font: staticFont, fill: options.staticColor };
+    var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
 
     var thisNode = this;
     EquationNode.call( this, options.staticFontSize );
@@ -65,26 +65,25 @@ define( function( require ) {
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    var mNode = new Text( GLStrings["symbol.slope"], staticTextOptions );
-    var interactiveEqualsNode = new Text( "=", staticTextOptions );
+    var mNode = new Text( GLStrings["symbol.slope"], staticOptions );
+    var interactiveEqualsNode = new Text( "=", staticOptions );
     // y2 - y2
     var y2Node = new CoordinateSpinner( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
-    var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
+    var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
     var y1Node = new CoordinateSpinner( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line
-    var interactiveFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), { fill: options.staticColor } ); // correct length will be set later
+    var interactiveFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), staticOptions ); // correct length will be set later
     // x2 - x1
     var x2Node = new CoordinateSpinner( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
-    var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, { fill: options.staticColor } );
+    var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
     var x1Node = new CoordinateSpinner( x1Property, y1Property, x2Property, y2Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
-    var unsimplifiedEqualsNode = new Text( "=", staticTextOptions );
-    var unsimplifiedRiseNode = new Node(); // non-null for now, proper node created later
-    var unsimplifiedRunNode = new Node();  // non-null for now, proper node created later
-    var unsimplifiedFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), { fill: options.staticColor } ); // correct length will be set later
+    var unsimplifiedEqualsNode = new Text( "=", staticOptions );
+    var unsimplifiedRiseNode = new Node( staticOptions ); // non-null for now, proper node created later
+    var unsimplifiedRunNode = new Node( staticOptions );  // non-null for now, proper node created later
+    var unsimplifiedFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), staticOptions ); // correct length will be set later
 
-    // Compute the max width needed to display the unsimplified rise and run values.
-    var maxRangeLength = Math.max( xRangeProperty.get().getLength(), yRangeProperty.get().getLength() );
+    // Compute the size needed to display the unsimplified rise and run values.
     var maxUnsimplifiedWidth = y2Node.width;
     var maxUnsimplifiedHeight = y2Node.height - 20;
 

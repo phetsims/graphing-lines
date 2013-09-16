@@ -1,3 +1,4 @@
+9/16/13 set pickable:false for non-interactive parts of equations
 9/16/13 remove nested options experiment from NumberBackgroundNode
 # 0.0.0-dev.1 9/13/13
 9/13/13 use weight:'bold' for static equations

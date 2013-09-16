@@ -22,9 +22,9 @@ define( function( require ) {
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );
@@ -58,12 +58,13 @@ define( function( require ) {
       staticColor: 'black'
     }, options );
 
+    var thisNode = this;
+    EquationNode.call( thisNode, options.staticFontSize );
+
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
-
-    var thisNode = this;
-    EquationNode.call( thisNode, options.staticFontSize );
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
     // internal properties that are connected to spinners
     var x1Property = new Property( interactiveLineProperty.get().x1 );
@@ -105,7 +106,7 @@ define( function( require ) {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    fractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), { fill: options.staticColor } );
+    fractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
     xLeftParenNode = new Text( "(", staticOptions );
     xNode = new Text( GLStrings["symbol.x"], staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
@@ -237,7 +238,7 @@ define( function( require ) {
 
           // adjust fraction line width, use max width of rise or run
           var lineWidth = Math.max( riseNode.width, runNode.width );
-          fractionLineNode.shape = thisNode.createFractionLineShape( lineWidth );
+          fractionLineNode.setLine( 0, 0, lineWidth, 0 );
 
           // decide whether to include the slope minus sign
           if ( positiveSlope || zeroSlope ) {

@@ -19,14 +19,13 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -47,12 +46,13 @@ define( function( require ) {
       staticColor: 'black'
     }, options );
 
+    var thisNode = this;
+    EquationNode.call( this, options.staticFontSize );
+
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
-
-    var thisNode = this;
-    EquationNode.call( this, options.staticFontSize );
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
     // internal properties that are connected to spinners
     var x1Property = new Property( interactiveLineProperty.get().x1 );
@@ -71,8 +71,8 @@ define( function( require ) {
     var y2Node = new CoordinateSpinner( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
     var y1Node = new CoordinateSpinner( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
-    // fraction line
-    var interactiveFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), staticOptions ); // correct length will be set later
+    // fraction line, correct length will be set later
+    var interactiveFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions  );
     // x2 - x1
     var x2Node = new CoordinateSpinner( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
@@ -81,7 +81,7 @@ define( function( require ) {
     var unsimplifiedEqualsNode = new Text( "=", staticOptions );
     var unsimplifiedRiseNode = new Node( staticOptions ); // non-null for now, proper node created later
     var unsimplifiedRunNode = new Node( staticOptions );  // non-null for now, proper node created later
-    var unsimplifiedFractionLineNode = new Path( thisNode.createFractionLineShape( 1 ), staticOptions ); // correct length will be set later
+    var unsimplifiedFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
     // Compute the size needed to display the unsimplified rise and run values.
     var maxUnsimplifiedWidth = y2Node.width;
@@ -130,7 +130,7 @@ define( function( require ) {
       y1Node.y = y2Node.y;
       // fix fraction line length
       var fractionLineLength = y1Node.right - y2Node.left;
-      interactiveFractionLineNode.shape = thisNode.createFractionLineShape( fractionLineLength );
+      interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 1 );
       // x2 - x1
       x2Node.left = y2Node.left;
       x2Node.top = interactiveFractionLineNode.bottom + thisNode.spinnersYSpacing;
@@ -201,7 +201,7 @@ define( function( require ) {
 
         // fraction line length
         var unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );
-        unsimplifiedFractionLineNode.shape = thisNode.createFractionLineShape( unsimplifiedFractionLineLength  );
+        unsimplifiedFractionLineNode.setLine( 0, 0, unsimplifiedFractionLineLength, 1  );
       }
 
       // do layout before adding undefined-slope indicator
@@ -230,6 +230,8 @@ define( function( require ) {
       fill: 'black'
     }, options );
 
+    var equationNode = new EquationNode( options.fontSize, { pickable: false } );
+
     var font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // m =
@@ -251,14 +253,13 @@ define( function( require ) {
 
     // fraction line
     var length = Math.max( numeratorNode.width, denominatorNode.width );
-    var fractionLineNode = new Rectangle( 0, 0, length, 1, { fill: options.fill } );
+    var fractionLineNode = new LineNode( 0, 0, length, equationNode.fractionLineThickness, { stroke: options.fill } );
 
     // rendering order
-    var parentNode = new Node( { pickable: false } );
-    parentNode.addChild( leftSideNode );
-    parentNode.addChild( fractionLineNode );
-    parentNode.addChild( numeratorNode );
-    parentNode.addChild( denominatorNode );
+    equationNode.addChild( leftSideNode );
+    equationNode.addChild( fractionLineNode );
+    equationNode.addChild( numeratorNode );
+    equationNode.addChild( denominatorNode );
 
     // layout
     var ySpacing = 2;
@@ -271,7 +272,7 @@ define( function( require ) {
     denominatorNode.centerX = fractionLineNode.centerX;
     denominatorNode.top = fractionLineNode.bottom + ySpacing; //TODO this is wrong with HTMLText
 
-    return parentNode;
+    return equationNode;
   };
 
   /**
@@ -281,7 +282,7 @@ define( function( require ) {
    */
   SlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
 
-    var equationNode = new EquationNode( fontSize );
+    var equationNode = new EquationNode( fontSize, { pickable: false } );
 
     var font = new PhetFont( { size: fontSize, weight: 'bold' } );
 
@@ -336,7 +337,7 @@ define( function( require ) {
         var runNode = new Text( run, { font: font, fill: color } );
 
         var lineLength = Math.max( riseNode.width, runNode.width );
-        var fractionLineNode = new Path( equationNode.createFractionLineShape( lineLength ), { fill: color } );
+        var fractionLineNode = new LineNode( 0, 0, lineLength, 0, { stroke: color, lineWidth: equationNode.fractionLineThickness } );
 
         equationNode.addChild( fractionLineNode );
         equationNode.addChild( riseNode );

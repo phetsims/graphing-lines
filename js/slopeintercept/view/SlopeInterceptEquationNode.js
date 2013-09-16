@@ -26,9 +26,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );
@@ -59,12 +59,13 @@ define( function( require ) {
       staticColor: 'black'
     }, options );
 
+    var thisNode = this;
+    EquationNode.call( this, options.staticFontSize );
+
     var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
-
-    var thisNode = this;
-    EquationNode.call( this, options.staticFontSize );
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
     // internal properties that are connected to spinners
     var riseProperty = new Property( interactiveLineProperty.get().rise );
@@ -99,14 +100,14 @@ define( function( require ) {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    slopeFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), _.extend( { absoluteValue: true }, staticOptions ) );
+    slopeFractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
     xNode = new Text( GLStrings["symbol.x"], _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptNode = new Spinner( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-    yInterceptFractionLineNode = new Path( thisNode.createFractionLineShape( maxSlopeSpinnerWidth ), staticOptions );
+    yInterceptFractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
 
     //TODO can we update less? move this to prototype?
     /*
@@ -190,7 +191,7 @@ define( function( require ) {
           thisNode.addChild( xNode );
           // adjust fraction line width
           lineWidth = Math.max( riseNode.width, runNode.width );
-          slopeFractionLineNode.shape = thisNode.createFractionLineShape( lineWidth );
+          slopeFractionLineNode.setLine( 0, 0, lineWidth, 0 );
           // layout
           slopeFractionLineNode.left = previousNode.right + previousXOffset;
           slopeFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;
@@ -301,7 +302,7 @@ define( function( require ) {
             thisNode.addChild( yInterceptDenominatorNode );
             // adjust fraction line width
             lineWidth = Math.max( yInterceptNumeratorNode.width, yInterceptDenominatorNode.width );
-            yInterceptFractionLineNode.shape = thisNode.createFractionLineShape( lineWidth );
+            yInterceptFractionLineNode.setLine( 0, 0, lineWidth, 0 );
             // layout
             yInterceptFractionLineNode.left = operatorNode.right + thisNode.operatorXSpacing;
             yInterceptFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;

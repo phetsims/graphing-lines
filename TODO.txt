@@ -21,7 +21,6 @@ LOW
 - import all string files from Java sim
 - omit subtype-specific options before passing them to supertype
 - i18n of credits
-- replace EquationNode.createFractionLineShape with scenery.Line at call sites
 - ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
 - use scenery-phet.ResetAllButton
 

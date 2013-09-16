@@ -17,14 +17,14 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
-  var Shape = require( 'KITE/Shape' );
   var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
 
   /**
    * @param {Number} pointSize point size of the font used to render the equation
+   * @param {*} options
    * @constructor
    */
-  function EquationNode( pointSize ) {
+  function EquationNode( pointSize, options ) {
 
     assert && assert( typeof pointSize === 'number' );
 
@@ -66,15 +66,11 @@ define( function( require ) {
     this.spinnersYSpacing = 0.2 * pointSize; // y spacing between spinners and fraction line
     this.slopeYSpacing = 0.4 * pointSize; // y spacing between rise and run values (with blue backgrounds) and fraction line
     this.ySpacing = 0.1 * pointSize; // all other y spacing
+
+    this.mutate( options );
   }
 
   return inherit( Node, EquationNode, {
-
-    //TODO get rid of this, use scenery.Line at call sites
-    // Creates the shape for the fraction division line.
-    createFractionLineShape: function( length ) {
-      return new Shape.rectangle( 0, 0, length, this.fractionLineThickness );
-    },
 
     /**
      * Gets the max width for the rise and run spinners used in an interactive equation.

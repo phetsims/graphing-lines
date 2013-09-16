@@ -24,37 +24,32 @@ define( function( require ) {
    */
   function NumberBackgroundNode( value, options ) {
 
-    //TODO uses hierarchical options, keep this approach?
-    options = _.extend( {}, options );
-    // options that are specific to the text
-    options.textOptions = _.extend( {
-      fill: 'black',
+    var defaultOptions = {
       decimalPlaces: 0,
-      font: new PhetFont( 12 )
-    }, options.textOptions );
-    // options that are specific to the background
-    options.backgroundOptions = _.extend( {
-      fill: 'white',
-      stroke: null,
-      width: 0,
-      height: 0,
+      font: new PhetFont( 12 ),
+      textFill: 'black',
+      backgroundFill: 'white',
+      backgroundStroke: null,
+      minWidth: 0,
+      minHeight: 0,
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 3
-    }, options.backgroundOptions );
+    };
+    options = _.extend( defaultOptions, options );
 
     Node.call( this );
 
-    var textNode = new Text( Util.toFixed( value, options.textOptions.decimalPlaces ), {
-      fill: options.textOptions.fill,
-      font: options.textOptions.font
+    var textNode = new Text( Util.toFixed( value, options.decimalPlaces ), {
+      fill: options.textFill,
+      font: options.font
     } );
 
-    var backgroundWidth = Math.max( options.backgroundOptions.width, textNode.width + options.backgroundOptions.xMargin + options.backgroundOptions.xMargin );
-    var backgroundHeight = Math.max( options.backgroundOptions.height, textNode.height + options.backgroundOptions.yMargin + options.backgroundOptions.yMargin );
-    var backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.backgroundOptions.cornerRadius, options.backgroundOptions.cornerRadius, {
-      fill: options.backgroundOptions.fill,
-      stroke: options.backgroundOptions.stroke
+    var backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
+    var backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
+    var backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.cornerRadius, options.cornerRadius, {
+      fill: options.backgroundFill,
+      stroke: options.backgroundStroke
     } );
 
     // rendering order
@@ -66,7 +61,7 @@ define( function( require ) {
     textNode.centerY = backgroundNode.centerY;
 
     // remove subtype-specific options before passing to supertype
-    this.mutate( _.omit( options, [ 'textOptions', 'backgroundOptions' ] ) );
+    this.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
   }
 
   return inherit( Node, NumberBackgroundNode );

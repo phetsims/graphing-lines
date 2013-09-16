@@ -12,7 +12,6 @@ MEDIUM
 - Game
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
 - horizontal space between text and icons is wrong in check boxes, problem with scenery.Text bounds?
-- flatten the nested options parameter for NumberBackgroundNode
 
 LOW
 - convert icons to images in IconFactory

@@ -34,12 +34,6 @@ define( function( require ) {
   // values
   var VALUE_X_SPACING = 6;
   var VALUE_Y_SPACING = 6;
-  var VALUE_NUMBER_OF_DECIMAL_PLACES = 0;
-  var VALUE_FONT = new PhetFont( { size: 16, weight: 'bold' } );
-  var VALUE_TEXT_COLOR = Color.BLACK;
-  var VALUE_X_MARGIN = 3;
-  var VALUE_Y_MARGIN = 6;
-  var VALUE_CORNER_RADIUS = 5;
 
   // arrow
   var ARROW_TIP_SIZE = new Dimension2( 6, 8 ); // use even-number dimensions, or tip will look asymmetrical due to rounding
@@ -140,23 +134,21 @@ define( function( require ) {
       var p1View = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       var p2View = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
 
+      var numberOptions = {
+        font: new PhetFont( { size: 16, weight: 'bold' } ),
+        decimalPlaces: 0,
+        textFill: Color.BLACK,
+        backgroundFill: GLColors.SLOPE,
+        xMargin: 6,
+        yMargin: 6,
+        cornerRadius: 5
+      };
+
       // rise
       var offsetFactor = 0.6;
       var delimiterLengthFactor = 0.5;
       var riseLineNode, riseTailDelimiterNode, riseTipDelimiterNode;
-      var riseValueNode = new NumberBackgroundNode( line.rise, {
-        textOptions: {
-          font: VALUE_FONT,
-          decimalPlaces: VALUE_NUMBER_OF_DECIMAL_PLACES,
-          fill: VALUE_TEXT_COLOR
-        },
-        backgroundOptions: {
-          fill: GLColors.SLOPE,
-          xMargin: VALUE_X_MARGIN,
-          yMargin: VALUE_Y_MARGIN,
-          cornerRadius: VALUE_CORNER_RADIUS
-        }
-      } );
+      var riseValueNode = new NumberBackgroundNode( line.rise, numberOptions );
       var xOffset = offsetFactor * gridXSpacing;
       var riseDelimiterLength = delimiterLengthFactor * gridXSpacing;
       var tipFudgeY = ( line.rise > 0 ) ? LINE_WIDTH : -LINE_WIDTH;
@@ -180,19 +172,7 @@ define( function( require ) {
 
       // run
       var runLineNode, runTailDelimiterNode, runTipDelimiterNode, runValueNode;
-      runValueNode = new NumberBackgroundNode( line.run, {
-        textOptions: {
-          font: VALUE_FONT,
-          decimalPlaces: VALUE_NUMBER_OF_DECIMAL_PLACES,
-          fill: VALUE_TEXT_COLOR
-        },
-        backgroundOptions: {
-          fill: GLColors.SLOPE,
-          xMargin: VALUE_X_MARGIN,
-          yMargin: VALUE_Y_MARGIN,
-          cornerRadius: VALUE_CORNER_RADIUS
-        }
-      } );
+      runValueNode = new NumberBackgroundNode( line.run, numberOptions );
       var yOffset = offsetFactor * gridYSpacing;
       var runDelimiterLength = delimiterLengthFactor * gridYSpacing;
       var tipFudgeX = ( line.run > 0 ) ? -1 : 1;

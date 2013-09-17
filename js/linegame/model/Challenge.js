@@ -66,6 +66,8 @@ define( function( require ) {
 
     /**
      * Creates the view component for the challenge.
+     *
+     * @abstract
      * @param {LineGameModel} model the game model
      * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
      * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
@@ -74,7 +76,10 @@ define( function( require ) {
        throw new Error( 'must be implemented by subtype' );
     },
 
-    // Updates the graph lines, which is the collection of lines that are "seen" by the point tools.
+    /**
+     * Updates the graph lines, which is the collection of lines that are "seen" by the point tools.
+     * @abstract
+     */
     updateGraphLines: function() {
       throw new Error( 'must be implemented by subtype' );
     },

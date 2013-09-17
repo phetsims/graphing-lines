@@ -25,7 +25,13 @@ define( function( require ) {
 
   return inherit( LineNode, PointSlopeLineNode, {
 
-    // Creates the line's equation in point-slope form.
+    /*
+     * Creates the line's equation in point-slope form.
+     * @override
+     * @param {Line} line
+     * @param {Number} fontSize
+     * @param {Color} color
+     */
     createEquationNode: function( line, fontSize, color ) {
       return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
     }

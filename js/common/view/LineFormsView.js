@@ -100,6 +100,7 @@ define( function( require ) {
 
     layoutBounds: GLConstants.LAYOUT_BOUNDS,
 
+    /** @override */
     reset: function() {
       callSuper( ScreenView, "reset", this );
       this.viewProperties.reset();

@@ -168,6 +168,6 @@ define( function( require ) {
       this._equationNode = this.createEquationNode( this.line, EQUATION_FONT_SIZE, color );
       this._equationNode.translation = translation;
       this._equationParentNode.addChild( this._equationNode );
-    },
+    }
   } );
 } );

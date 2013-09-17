@@ -1,4 +1,4 @@
-TODO list for graphing-lines (HTML port)
+TODO list for graphing-lines (HTML5 port)
 
 DESIGN
 - drop highlighting of saved lines?

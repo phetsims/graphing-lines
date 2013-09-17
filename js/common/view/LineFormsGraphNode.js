@@ -44,7 +44,7 @@ define( function( require ) {
     // Parent nodes for each category of line (standard, saved, interactive) to maintain rendering order
     thisNode.standardLinesParentNode = new Node();
     thisNode.savedLinesParentNode = new Node();
-    thisNode.interactiveLineParentNode = new Node();
+    thisNode.interactiveLineParentNode = new Node( { pickable: false });
     thisNode.interactiveLineNode = null;
 
     // Slope tool

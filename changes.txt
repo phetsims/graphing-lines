@@ -1,3 +1,4 @@
+9/16/13 pickable:false for the interactive line on the graph, only the manipulators are actually interactive
 9/16/13 change signature of update function in PointSlopeEquationNode and SlopeInterceptEquationNode
 9/16/13 broke PointSlopeEquationNode in earlier change
 9/16/13 replace EquationNode.createFractionLineShape with scenery.Line at call sites

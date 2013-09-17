@@ -4,7 +4,7 @@
  * Results for the 'Line Game' screen.
  * Note that levels are numbered internally starting from zero, but presented to the user starting from 1.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

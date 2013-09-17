@@ -4,7 +4,7 @@
  * Graph that provides direct manipulation of a line in slope-intercept form.
  * Adds manipulators for slope and intercept to the base class functionality.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

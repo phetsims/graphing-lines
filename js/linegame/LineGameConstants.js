@@ -3,7 +3,7 @@
 /**
  * Constants that are specific to the 'Line Game' screen.
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';

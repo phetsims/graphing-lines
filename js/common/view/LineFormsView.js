@@ -11,7 +11,7 @@ define( function( require ) {
   // imports
   var Bounds2 = require( 'DOT/Bounds2');
   var callSuper = require( 'PHET_CORE/callSuper' );
-  var GLConfig = require( 'GRAPHING_LINES/common/GLConfig' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
@@ -29,7 +29,7 @@ define( function( require ) {
   function LineFormsView( model, viewProperties, graphNode, equationControls, graphControls ) {
 
     var thisView = this;
-    ScreenView.call( thisView, { renderer: GLConfig.RENDERER } );
+    ScreenView.call( thisView, { renderer: GLConstants.RENDERER } );
 
     thisView.viewProperties = viewProperties;
 
@@ -98,7 +98,7 @@ define( function( require ) {
 
   return inherit( ScreenView, LineFormsView, {
 
-    layoutBounds: GLConfig.LAYOUT_BOUNDS,
+    layoutBounds: GLConstants.LAYOUT_BOUNDS,
 
     reset: function() {
       callSuper( ScreenView, "reset", this );

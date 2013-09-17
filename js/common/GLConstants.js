@@ -1,7 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Global configuration of this sim.
+ * Constants that are global to this sim.
+ * Additional constants for the 'Line Game' screen are in LineGameConstants.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

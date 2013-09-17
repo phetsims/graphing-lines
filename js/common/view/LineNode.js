@@ -92,7 +92,6 @@ define( function( require ) {
     // equation
     this._equationParentNode = new Node();
     this.addChild( this._equationParentNode );
-    this._equationParentNode.translation = this.tipLocation;
     this._equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
     this._equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
     this._equationParentNode.addChild( this._equationNode );

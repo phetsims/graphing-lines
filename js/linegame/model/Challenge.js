@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {String} title title that is visible to the user
    * @param {String} description brief description of the challenge, visible in dev versions
    * @param {Line} answer the correct answer
-   * @param {EquationForm} equationForm specifies the form of the equations
+   * @param {EquationForm} equationForm specifies the form of the equation
    * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change
    * @param {Range} xRange range of the graph's x axis
    * @param {Range} yRange range of the graph's y axis

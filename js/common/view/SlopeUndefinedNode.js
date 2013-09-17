@@ -1,4 +1,4 @@
-// Copyright 2002-2013, University of Colorado
+// Copyright 2002-2013, University of Colorado Boulder
 
 /**
  * When a line's slope is undefined, we display "x = # (slope undefined)" in place of an equation.

@@ -1,4 +1,4 @@
-// Copyright 2002-2013, University of Colorado
+// Copyright 2002-2013, University of Colorado Boulder
 
 /**
  * Minus sign, created using scenery.Rectangle because scenery.Text("-") looks awful

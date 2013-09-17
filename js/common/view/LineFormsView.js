@@ -1,4 +1,4 @@
-// Copyright 2002-2013, University of Colorado
+// Copyright 2002-2013, University of Colorado Boulder
 
 /**
  * Base type view for the "Slope", "Slope-Intercept" and "Point-Slope" screens.

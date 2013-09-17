@@ -1,3 +1,4 @@
+9/17/13 port some of the Line Game model
 9/17/13 rename GLConfig to GLConstants
 9/16/13 fraction lineWidth for grid lines looks crappy, use integers and adjust colors to make grid look better
 9/16/13 make highlighting of saved lines more efficient, doesn't need to redo layout

@@ -21,7 +21,7 @@ LOW
 - change 'tab.*' string keys to 'screen.*'
 - remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
 - import all string files from Java sim
-- omit subtype-specific options before passing them to supertype
+- omit subtype-specific options before passing them to supertype, phet-core#3
 - i18n of credits
 - ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
 - use scenery-phet.ResetAllButton

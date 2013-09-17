@@ -90,7 +90,7 @@ define( function( require ) {
     this.addChild( this._arrowNode );
 
     // equation
-    this._equationParentNode = new Node();
+    this._equationParentNode = new Node(); // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
     this.addChild( this._equationParentNode );
     this._equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
     this._equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );

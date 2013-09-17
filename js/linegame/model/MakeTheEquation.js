@@ -1,8 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Model for "Graph the Line" challenges.
- * In this challenge, the user is given an equation and must graph the line.
+ * Model for "Make the Equation" challenges.
+ * In this challenge, the user is given a graphed line and must make the equation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -12,8 +12,8 @@ define( function( require ) {
   // imports
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
-  var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var MakeTheEquationNode = require( 'GRAPHING_LINES/linegame/view/MakeTheEquationNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -25,9 +25,9 @@ define( function( require ) {
    * @param {Range} yRange range of the graph's y axis
    * @constructor
    */
-  function GraphTheLine( description, answer, equationForm, manipulationMode, xRange, yRange ) {
+  function MakeTheEquation( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     Challenge.call( this,
-      Challenge.createTitle( GLStrings.graphTheLine, manipulationMode ),
+      Challenge.createTitle( GLStrings.makeTheEquation, manipulationMode ),
       description,
       answer,
       equationForm,
@@ -40,7 +40,7 @@ define( function( require ) {
     );
   }
 
-  return inherit( Challenge, GraphTheLine, {
+  return inherit( Challenge, MakeTheEquation, {
 
     /**
      * Creates the view for this challenge.
@@ -50,7 +50,7 @@ define( function( require ) {
      * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
      */
     createView: function( model, challengeSize, audioPlayer ) {
-      return new GraphTheLineNode( this, model, challengeSize, audioPlayer );
+      return new MakeTheEquationNode( this, model, challengeSize, audioPlayer );
     },
 
     /**
@@ -60,12 +60,11 @@ define( function( require ) {
     updateGraphLines: function() {
       this.graph.lines.clear();
       // add lines in the order that they would be rendered
-      if ( this.guess.get() ) {
+      if ( this.answerVisible ) {
         this.graph.lines.add( this.guess.get() );
       }
-      if ( this.answerVisible ) {
-        this.graph.lines.add( this.answer );
-      }
+      this.graph.lines.add( this.answer );
     }
   } );
 } );
+

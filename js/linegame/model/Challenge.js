@@ -77,7 +77,7 @@ define( function( require ) {
     },
 
     /**
-     * Updates the graph lines, which is the collection of lines that are "seen" by the point tools.
+     * Updates the collection of lines that are "seen" by the point tools.
      * @abstract
      */
     updateGraphLines: function() {

@@ -32,10 +32,10 @@ define( function( require ) {
 
   // grid
   var GRID_BACKGROUND = Color.WHITE;
-  var MINOR_GRID_LINE_WIDTH = 0.25;
-  var MINOR_GRID_LINE_COLOR = Color.LIGHT_GRAY;
-  var MAJOR_GRID_LINE_WIDTH = 0.5;
-  var MAJOR_GRID_LINE_COLOR = Color.LIGHT_GRAY;
+  var MINOR_GRID_LINE_WIDTH = 1.0;
+  var MINOR_GRID_LINE_COLOR = new Color( 230, 230, 230 );
+  var MAJOR_GRID_LINE_WIDTH = 1.0;
+  var MAJOR_GRID_LINE_COLOR = new Color( 192, 192, 192 );
 
   // axes                                                                                                                                          n
   var AXIS_ARROW_SIZE = new Dimension2( 10, 10 );

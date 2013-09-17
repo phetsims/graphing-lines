@@ -42,7 +42,7 @@ define( function( require ) {
     this.createLineNode = createLineNode;
 
     // Parent nodes for each category of line (standard, saved, interactive) to maintain rendering order
-    thisNode.standardLinesParentNode = new Node();
+    thisNode.standardLinesParentNode = new Node( {pickable: false } );
     thisNode.savedLinesParentNode = new Node();
     thisNode.interactiveLineParentNode = new Node( { pickable: false });
     thisNode.interactiveLineNode = null;

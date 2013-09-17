@@ -1,3 +1,4 @@
+9/16/13 make highlighting of saved lines more efficient, doesn't need to redo layout
 9/16/13 pickable:false for the standard lines on the graph, they are not interactive
 9/16/13 pickable:false for the interactive line on the graph, only the manipulators are actually interactive
 9/16/13 change signature of update function in PointSlopeEquationNode and SlopeInterceptEquationNode

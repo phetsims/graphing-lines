@@ -94,7 +94,53 @@ define( function( require ) {
     this.addChild( this._equationParentNode );
     this._equationParentNode.translation = this.tipLocation;
     this._equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
-    this._updateEquation( line, EQUATION_FONT_SIZE, line.color );
+    this._equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
+    this._equationParentNode.addChild( this._equationNode );
+
+    // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
+    var X_OFFSET = 30;
+    var Y_OFFSET = 12;
+    if ( line.undefinedSlope() ) {
+      // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
+      if ( line.rise < 0 ) {
+        this._equationParentNode.translation = this.tipLocation;
+        this._equationNode.right = -X_OFFSET;
+        this._equationNode.bottom = -Y_OFFSET;
+      }
+      else {
+        this._equationParentNode.translation = this.tailLocation;
+        this._equationNode.left = X_OFFSET;
+        this._equationNode.bottom = -Y_OFFSET;
+      }
+    }
+    else if ( line.rise <= 0 ) {
+      if ( line.run >= 0 ) {
+        // equation above the line, at tip
+        this._equationParentNode.translation = this.tipLocation;
+        this._equationNode.right = -X_OFFSET;
+        this._equationNode.bottom = -Y_OFFSET;
+      }
+      else {
+        // equation above the line, at tail
+        this._equationParentNode.translation = this.tailLocation;
+        this._equationNode.left = X_OFFSET;
+        this._equationNode.bottom = -Y_OFFSET;
+      }
+    }
+    else {
+      if ( line.run > 0 ) {
+        // equation below the line, at tip
+        this._equationParentNode.translation = this.tipLocation;
+        this._equationNode.right = -X_OFFSET;
+        this._equationNode.bottom = this._equationNode.height + Y_OFFSET;
+      }
+      else {
+        // equation below the line, at tail
+        this._equationParentNode.translation = this.tailLocation;
+        this._equationNode.left = X_OFFSET;
+        this._equationNode.bottom = this._equationNode.height + Y_OFFSET;
+      }
+    }
   }
 
   return inherit( Node, LineNode, {
@@ -111,63 +157,17 @@ define( function( require ) {
       this._equationParentNode.visible = visible;
     },
 
+    // Changes the line and equation color, used to support mouse-over highlighting of saved lines.
     updateColor: function( color ) {
+
       this._arrowNode.fill = color;
-      this._updateEquation( this.line, EQUATION_FONT_SIZE, color );
+
+       // same equation, same position, new color
+      var translation = this._equationNode.translation;
+      this._equationParentNode.removeChild( this._equationNode );
+      this._equationNode = this.createEquationNode( this.line, EQUATION_FONT_SIZE, color );
+      this._equationNode.translation = translation;
+      this._equationParentNode.addChild( this._equationNode );
     },
-
-    //TODO Only color can change, so we shouldn't have to redo the entire layout.
-    _updateEquation: function( line, fontSize, color ) {
-
-      this._equationParentNode.removeAllChildren();
-
-      var equationNode = this.createEquationNode( line, fontSize, color );
-      this._equationParentNode.addChild( equationNode );
-
-      // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
-      var X_OFFSET = 30;
-      var Y_OFFSET = 12;
-      if ( line.undefinedSlope() ) {
-        // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
-        if ( line.rise < 0 ) {
-          this._equationParentNode.translation = this.tipLocation;
-          equationNode.right = -X_OFFSET;
-          equationNode.bottom = -Y_OFFSET;
-        }
-        else {
-          this._equationParentNode.translation = this.tailLocation;
-          equationNode.left = X_OFFSET;
-          equationNode.bottom = -Y_OFFSET;
-        }
-      }
-      else if ( line.rise <= 0 ) {
-        if ( line.run >= 0 ) {
-          // equation above the line, at tip
-          this._equationParentNode.translation = this.tipLocation;
-          equationNode.right = -X_OFFSET;
-          equationNode.bottom = -Y_OFFSET;
-        }
-        else {
-          // equation above the line, at tail
-          this._equationParentNode.translation = this.tailLocation;
-          equationNode.left = X_OFFSET;
-          equationNode.bottom = -Y_OFFSET;
-        }
-      }
-      else {
-        if ( line.run > 0 ) {
-          // equation below the line, at tip
-          this._equationParentNode.translation = this.tipLocation;
-          equationNode.right = -X_OFFSET;
-          equationNode.bottom = equationNode.height + Y_OFFSET;
-        }
-        else {
-          // equation below the line, at tail
-          this._equationParentNode.translation = this.tailLocation;
-          equationNode.left = X_OFFSET;
-          equationNode.bottom = equationNode.height + Y_OFFSET;
-        }
-      }
-    }
   } );
 } );

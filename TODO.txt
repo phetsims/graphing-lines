@@ -1,9 +1,9 @@
 TODO list for graphing-lines (HTML port)
 
 DESIGN
+- drop highlighting of saved lines?
 
 HIGH
-- in LineNode, only color can change, so we shouldn't have to redo the entire layout
 - equations on saved lines are not pickable, so no highlight on 'pointer over'
 - consolidate equation fontSize and fontWeight in GLConfig
 

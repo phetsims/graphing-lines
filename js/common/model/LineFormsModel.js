@@ -10,6 +10,7 @@ define( function( require ) {
 
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var ObservableArray = require( 'AXON/ObservableArray' );
@@ -19,8 +20,6 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var X_RANGE = new Range( -10, 10 ); // x-axis range
-  var Y_RANGE = X_RANGE; // y-axis range
   var GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
   var ORIGIN_OFFSET = new Vector2( 305, 340 ); // offset of the graph's origin in view coordinates
 
@@ -36,7 +35,7 @@ define( function( require ) {
     thisModel.manipulatorDiameter = 0.85;
 
     // graph
-    thisModel.graph = new Graph( X_RANGE, Y_RANGE );
+    thisModel.graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
     // model-view transform, created in the model because it's dependent on graph axes ranges
     var mvtScale = GRID_VIEW_UNITS / Math.max( thisModel.graph.xRange.getLength(), thisModel.graph.yRange.getLength() ); // view units / model units

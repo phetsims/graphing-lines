@@ -18,11 +18,11 @@ define( function( require ) {
    * @constructor
    */
   function GameResults( numberOfLevels ) {
-    this.score = new Property( 0 ); // how many points the user has earned for the current game
+    this.scoreProperty = new Property( 0 ); // how many points the user has earned for the current game
     this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
     this.bestTimes = []; // best times for each level, in ms
     for ( var level = 0; level < numberOfLevels; level++ ) {
-      this.bestTimes.put( null ); // null if a level has no best time yet
+      this.bestTimes.push( null ); // null if a level has no best time yet
     }
   }
 

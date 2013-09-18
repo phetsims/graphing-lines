@@ -86,7 +86,7 @@ define( function( require ) {
 
     thisModel.initChallenges();
 
-    //TODO document why this has to (seemingly?) be done after initChallenges
+    // Do this after initChallenges, because this will fire immediately and we need to have an initial set of challenges.
     thisModel.playStateProperty.link( function( playState ) {
       if ( playState === PlayState.FIRST_CHECK ) {
         if ( thisModel.challengeIndex === thisModel.challenges.length ) {

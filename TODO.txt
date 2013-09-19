@@ -35,6 +35,6 @@ PERFORMANCE
 
 MIGRATE TO COMMON
 - Spinner
-- generalize timer code used in Spinner, borrowed from ArrowButton
+- generalize timer code used in Spinner, borrowed from scenery-phet.ArrowButton
 - ExpandCollapseButton
 

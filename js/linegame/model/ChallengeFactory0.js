@@ -25,6 +25,4 @@ define( function( require ) {
       return [];        //TODO
     }
   } );
-
-  return ChallengeFactory0();
 } );

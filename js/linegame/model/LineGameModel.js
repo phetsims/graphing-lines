@@ -8,7 +8,7 @@
  * <li>management of game results</li>
  * </ul>
  *
- * @author Chris Malley (cmalley@pixelzoom.com)
+ * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {
   'use strict';
@@ -16,6 +16,13 @@ define( function( require ) {
   // imports
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var callSuper = require( 'PHET_CORE/callSuper' );
+  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+//  var ChallengeFactory0 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory0' );
+//  var ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
+//  var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
+//  var ChallengeFactory3 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory3' );
+//  var ChallengeFactory4 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory4' );
+//  var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
   var ChallengeFactoryHardCoded = require( 'GRAPHING_LINES/linegame/model/ChallengeFactoryHardCoded' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
@@ -37,14 +44,15 @@ define( function( require ) {
   var NUMBER_OF_LEVELS = 6;
   var DUMMY_CHALLENGE = new GraphTheLine( "", Line.createSlopeIntercept( 1, 1, 1 ), EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
-  //TODO uncomment these when they're implemented
   // a challenge factory for each level
-  var factory0 = null;//new ChallengeFactory0();
-  var factory1 = null;//new ChallengeFactory1();
-  var factory2 = null;//new ChallengeFactory2();
-  var factory3 = null;//new ChallengeFactory3();
-  var factory4 = null;//new ChallengeFactory4();
-  var factory5 = null;//new ChallengeFactory5();
+  var factories = [
+//    new ChallengeFactory0(),
+//    new ChallengeFactory1(),
+//    new ChallengeFactory2(),
+//    new ChallengeFactory3(),
+//    new ChallengeFactory4(),
+//    new ChallengeFactory5()
+  ];
 
   function LineGameModel() {
 
@@ -155,35 +163,14 @@ define( function( require ) {
 
     // initializes a new set of challenges for the current level
     initChallenges: function() {
-
       this.challengeIndex = 0;
-
+      var level = this.settings.levelProperty.get();
       if ( USE_HARD_CODED_CHALLENGES ) {
-        this.challenges = ChallengeFactoryHardCoded.createChallenges( this.settings.levelProperty.get(), GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
+        this.challenges = ChallengeFactoryHardCoded.createChallenges( level, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
       else {
-        switch( this.settings.level.get() ) {
-          case 0:
-            this.challenges = factory1.createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-            break;
-          case 1:
-            this.challenges = factory2.createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-            break;
-          case 2:
-            this.challenges = factory3.createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-            break;
-          case 3:
-            this.challenges = factory4.createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-            break;
-          case 4:
-            this.challenges = factory5.createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-            break;
-          case 5:
-            this.challenges = factory6.createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-            break;
-          default:
-            throw new Error( "unsupported level: " + this.settings.levelProperty.get() );
-        }
+        assert && assert( level >= 0 && level < factories.length );
+        this.challenges = factories[level].createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
     }
   };

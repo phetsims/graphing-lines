@@ -11,8 +11,25 @@ define( function( require ) {
 
   // imports
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
   var Range = require( 'DOT/Range' );
+
+  // Gets a random index for a specified array.
+  var randomIndex = function( array ) {
+    return Math.floor( Math.random() * array.length );
+  };
+
+  /**
+   * Converts an integer range to a ordered array of integer values that are in that range.
+   * @param {{min:Number, max:Number}} range
+   * @returns {Array<Number>}
+   */
+  var rangeToArray = function( range ) {
+    var array = [];
+    for ( var i = range.min; i <= range.max; i++ ) {
+      array.put( i );
+    }
+    return array;
+  };
 
   return {
 
@@ -22,9 +39,9 @@ define( function( require ) {
      *  @return {*} a value
      */
     choose: function( array ) {
-      var index = ChallengeFactory.randomIndex( array );
+      var index = randomIndex( array );
       assert && assert( index !== -1 );
-      var value = array.get( index );
+      var value = array[index];
       array.splice( index, 1 );
       return value;
     },
@@ -40,10 +57,10 @@ define( function( require ) {
      * @return a value from one of the arrays
      */
     chooseFromArrays: function( arrays, indices ) {
-      indices = indices || ChallengeFactory.rangeToArray( new Range( 0, arrays.length - 1 ) );
-      var index = ChallengeFactory.randomIndex( indices );
+      indices = indices || rangeToArray( { min: 0, max: arrays.length - 1 } );
+      var index = randomIndex( indices );
       assert && assert( index !== -1 );
-      var array = arrays.get( indices.get( index ) );
+      var array = arrays[ indices[ index ] ];
       indices.splice( index, 1 );
       return this.choose( array );
     }

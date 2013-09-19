@@ -30,11 +30,6 @@ define( function( require ) {
     }
   };
 
-  // Gets a random index for a specified array.
-  ChallengeFactory.randomIndex = function( array ) {
-    return Math.floor( Math.random() * array.length );
-  };
-
   /**
    * Picks a point that keeps the slope indicator on the graph.
    * @param {Fraction} slope
@@ -93,19 +88,6 @@ define( function( require ) {
     assert && assert( graphYRange.contains( y1 ) && !graphYRange.contains( y2 ) );
 
     return new Vector2( x1, y1 );
-  };
-
-  /**
-   * Converts an integer range to a ordered array of integer values that are in that range.
-   * @param {Range} range
-   * @returns {Array<Number>}
-   */
-  ChallengeFactory.rangeToArray = function( range ) {
-    var array = [];
-    for ( var i = range.min; i <= range.max; i++ ) {
-      array.put( i );
-    }
-    return array;
   };
 
   return ChallengeFactory;

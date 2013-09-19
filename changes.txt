@@ -1,3 +1,4 @@
+9/19/13 move dependencies to sherpa, update to lodash-2.0.0, jquery-2.0.3, i18n-2.0.4, require-2.1.8
 9/19/13 port more of Line Game model, remove circular dependency in requirejs import
 9/18/13 port more of Line Game model
 9/17/13 port some of the Line Game model

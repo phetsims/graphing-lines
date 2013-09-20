@@ -63,7 +63,7 @@ define( function( require ) {
       var array = [];
       for ( var i = range.min; i <= range.max; i++ ) {
         if ( !options.excludeZero || i !== 0 ) {
-          array.put( i );
+          array.push( i );
         }
       }
       return array;

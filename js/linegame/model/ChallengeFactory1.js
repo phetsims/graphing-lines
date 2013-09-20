@@ -145,7 +145,7 @@ define( function( require ) {
 
         // challenge
         challenges.push( new GraphTheLine( description,
-          Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
           EquationForm.POINT_SLOPE, manipulationMode, xRange, yRange ) );
       }
 
@@ -167,7 +167,7 @@ define( function( require ) {
 
         // challenge
         challenges.push( new MakeTheEquation( description,
-          Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
           EquationForm.POINT_SLOPE, manipulationMode, xRange, yRange ) );
       }
 

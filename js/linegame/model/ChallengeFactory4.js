@@ -73,7 +73,7 @@ define( function( require ) {
         slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope
         point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
         challenges.push( new MakeTheEquation( "1 of 3 required slopes",
-          Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
           EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
       }
 
@@ -92,7 +92,7 @@ define( function( require ) {
           slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // second required slope, unique
           point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
           challenges.push( new MakeTheEquation( "2 of 2 required slopes, random choice of point-slope",
-            Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+            Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
             EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
         }
       }
@@ -111,7 +111,7 @@ define( function( require ) {
         slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // third required slope, unique
         point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
         challenges.push( new GraphTheLine( "3 of 3 required slopes",
-          Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
           EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
       }
 
@@ -133,13 +133,13 @@ define( function( require ) {
         if ( RandomChooser.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
           // Graph-the-Line, slope-intercept, 2 points variable
           challenges.push( new GraphTheLine( "slope-intercept because Make-the-Equation uses point-slope, force slope inversion",
-            Line.createSlopeIntercept( slope.numerator, slope.denominator, point.getY() ),
+            Line.createSlopeIntercept( slope.numerator, slope.denominator, point.y ),
             EquationForm.SLOPE_INTERCEPT, ManipulationMode.TWO_POINTS, xRange, yRange ) );
         }
         else {
           // Graph-the-Line, point-slope, 2 points variable
           challenges.push( new GraphTheLine( "point-slope because Make-the-Equation uses slope-intercept, force slope inversion",
-            Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+            Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
             EquationForm.POINT_SLOPE, ManipulationMode.TWO_POINTS, xRange, yRange ) );
         }
       }

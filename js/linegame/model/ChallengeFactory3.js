@@ -73,7 +73,7 @@ define( function( require ) {
         slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope, unique
         point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
         challenges.add( new GraphTheLine( "1 of 3 required slopes",
-          Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
           EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
       }
 
@@ -92,7 +92,7 @@ define( function( require ) {
           slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
           point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
           challenges.push( new GraphTheLine( "random choice of point-slope",
-            Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+            Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
             EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
         }
       }
@@ -111,7 +111,7 @@ define( function( require ) {
         slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // 3rd required slope, unique
         point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
         challenges.push( new MakeTheEquation( "3 of 3 required slopes",
-          Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
           EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
       }
 
@@ -130,7 +130,7 @@ define( function( require ) {
           slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
           point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
           challenges.push( new MakeTheEquation( "point-slope because Graph-the-Line uses slope-intercept",
-            Line.createPointSlope( point.getX(), point.getY(), slope.numerator, slope.denominator ),
+            Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
             EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
         }
       }

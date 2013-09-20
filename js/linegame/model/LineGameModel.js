@@ -17,12 +17,12 @@ define( function( require ) {
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var callSuper = require( 'PHET_CORE/callSuper' );
   var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
-//  var ChallengeFactory0 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory0' );
-//  var ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
-//  var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
-//  var ChallengeFactory3 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory3' );
-//  var ChallengeFactory4 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory4' );
-//  var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
+  var ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
+  var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
+  var ChallengeFactory3 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory3' );
+  var ChallengeFactory4 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory4' );
+  var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
+  var ChallengeFactory6 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory6' );
   var ChallengeFactoryHardCoded = require( 'GRAPHING_LINES/linegame/model/ChallengeFactoryHardCoded' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
@@ -46,12 +46,12 @@ define( function( require ) {
 
   // a challenge factory for each level
   var factories = [
-//    new ChallengeFactory0(),
-//    new ChallengeFactory1(),
-//    new ChallengeFactory2(),
-//    new ChallengeFactory3(),
-//    new ChallengeFactory4(),
-//    new ChallengeFactory5()
+    new ChallengeFactory1(),
+    new ChallengeFactory2(),
+    new ChallengeFactory3(),
+    new ChallengeFactory4(),
+    new ChallengeFactory5(),
+    new ChallengeFactory6()
   ];
 
   function LineGameModel() {

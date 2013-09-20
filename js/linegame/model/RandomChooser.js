@@ -13,25 +13,7 @@ define( function( require ) {
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Range = require( 'DOT/Range' );
 
-  // Gets a random index for a specified array.
-  var randomIndex = function( array ) {
-    return Math.floor( Math.random() * array.length );
-  };
-
-  /**
-   * Converts an integer range to a ordered array of integer values that are in that range.
-   * @param {{min:Number, max:Number}} range
-   * @returns {Array<Number>}
-   */
-  var rangeToArray = function( range ) {
-    var array = [];
-    for ( var i = range.min; i <= range.max; i++ ) {
-      array.put( i );
-    }
-    return array;
-  };
-
-  return {
+  var RandomChooser = {
 
     /**
      *  Chooses a value from an array, removes the value from the array.
@@ -39,7 +21,7 @@ define( function( require ) {
      *  @return {*} a value
      */
     choose: function( array ) {
-      var index = randomIndex( array );
+      var index = RandomChooser.randomIndex( array );
       assert && assert( index !== -1 );
       var value = array[index];
       array.splice( index, 1 );
@@ -57,13 +39,37 @@ define( function( require ) {
      * @return a value from one of the arrays
      */
     chooseFromArrays: function( arrays, indices ) {
-      indices = indices || rangeToArray( { min: 0, max: arrays.length - 1 } );
-      var index = randomIndex( indices );
+      indices = indices || RandomChooser.rangeToArray( { min: 0, max: arrays.length - 1 } );
+      var index = RandomChooser.randomIndex( indices );
       assert && assert( index !== -1 );
       var array = arrays[ indices[ index ] ];
       indices.splice( index, 1 );
       return this.choose( array );
+    },
+
+    // Gets a random index for a specified array.
+    randomIndex: function( array ) {
+      return Math.floor( Math.random() * array.length );
+    },
+
+    /**
+     * Converts an integer range to a ordered array of integer values that are in that range.
+     * @param {{min:Number, max:Number}} range
+     * @param {boolean} excludeZero
+     * @returns {Array<Number>}
+     */
+    rangeToArray: function( range, options ) {
+      options = _.extend( { excludeZero: false }, options );
+      var array = [];
+      for ( var i = range.min; i <= range.max; i++ ) {
+        if ( !options.excludeZero || i !== 0 ) {
+          array.put( i );
+        }
+      }
+      return array;
     }
   };
+
+  return RandomChooser;
 } );
 

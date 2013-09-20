@@ -4,7 +4,7 @@ DESIGN
 - drop highlighting of saved lines?
 
 HIGH
-- port linegame.model.ChallengeFactory*
+- finish porting ChallengeNode
 - port linegame.view
 - performance stinks on iPad
 - equations on saved lines are not pickable, so no highlight on 'pointer over'

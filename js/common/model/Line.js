@@ -149,6 +149,7 @@ define( function( require ) {
     /**
      * Gets the the y-intercept as a simplified fraction.
      * This is valid only if (x1,y1) and (x2,y2) are at integer locations on the grid.
+     * @returns {Fraction}
      */
     getYIntercept: function() {
       assert && assert( Util.isInteger( this.x1 ) && Util.isInteger( this.y1 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run ) );

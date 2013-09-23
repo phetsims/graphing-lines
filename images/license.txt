@@ -4,10 +4,6 @@ Heavy-Ballot-X-u2718.png author=PhET notes=copied from balancing-chemical-equati
 point_tool_body.png author=PhET notes=created by Ariel Paul
 point_tool_tip.png author=PhET notes=created by Ariel Paul
 PointSlope-icon author=PhET
-reset_button_disabled.png source=PhET author=Sharon
-reset_button_down.png source=PhET author=Sharon
-reset_button_over.png source=PhET author=Sharon
-reset_button_up.png source=PhET author=Sharon
 Slope-icon.png author=PhET
 SlopeIntercept-icon.png author=PhET
 

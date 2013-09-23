@@ -11,7 +11,6 @@ define( function( require ) {
 
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -23,6 +22,10 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // images
+  var bodyImage = require( 'image!GRAPHING_LINES/../images/point_tool_body.png' );
+  var tipImage = require( 'image!GRAPHING_LINES/../images/point_tool_tip.png' );
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
@@ -91,7 +94,7 @@ define( function( require ) {
     Node.call( thisNode );
 
      // tool body
-    var bodyNode = new Image( GLImages.getImage( "point_tool_body.png" ) );
+    var bodyNode = new Image( bodyImage );
 
     /*
      * Pointy tip, separate from the body and not pickable.
@@ -99,7 +102,7 @@ define( function( require ) {
      * to pick a line manipulator when the tip and manipulator were on the same grid point.
      * Making the tip non-pickable was determined to be an acceptable and "natural feeling" solution.
      */
-    var tipNode = new Image( GLImages.getImage( "point_tool_tip.png" ), { pickable: false } );
+    var tipNode = new Image( tipImage, { pickable: false } );
 
     // background behind the displayed value, shows through a transparent hole in the display area portion of the body image
     var BACKGROUND_MARGIN = 5;

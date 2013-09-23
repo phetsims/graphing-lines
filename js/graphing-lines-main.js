@@ -12,9 +12,8 @@ require( [
   'GRAPHING_LINES/slopeIntercept/SlopeInterceptScreen',
   'GRAPHING_LINES/pointSlope/PointSlopeScreen',
   'GRAPHING_LINES/linegame/LineGameScreen',
-  'GRAPHING_LINES/common/GLStrings',
-  'GRAPHING_LINES/common/GLImages' ],
-  function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, LineGameScreen, GLStrings, GLImages ) {
+  'GRAPHING_LINES/common/GLStrings' ],
+  function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, LineGameScreen, GLStrings ) {
     'use strict';
 
     //TODO i18n?
@@ -34,7 +33,7 @@ require( [
       }, simOptions );
     }
 
-    SimLauncher.launch( GLImages, function() {
+    SimLauncher.launch( {imageNames: []}, function() {
       var sim = new Sim( GLStrings[ "graphing-lines.name" ], [
         new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ],
         simOptions );

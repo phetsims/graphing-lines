@@ -10,13 +10,16 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLImages = require( 'GRAPHING_LINES/common/GLImages' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
+
+  // images
+  var correctImage = require( 'image!GRAPHING_LINES/../images/Check-Mark-u2713.png' );
+  var incorrectImage = require( 'image!GRAPHING_LINES/../images/Heavy-Ballot-X-u2718.png' );
 
   // constants
   var X_MARGIN = 20;
@@ -51,8 +54,8 @@ define( function( require ) {
     } );
 
     // icons for 'correct' and 'incorrect'
-    thisNode.correctIconNode = new Image( GLImages.getImage( 'Check-Mark-u2713.png' ) );
-    thisNode.incorrectIconNode = new Image( GLImages.getImage( 'Heavy-Ballot-X-u2718.png' ) );
+    thisNode.correctIconNode = new Image( correctImage );
+    thisNode.incorrectIconNode = new Image( incorrectImage );
 
     // rendering order
     thisNode.addChild( boxNode );

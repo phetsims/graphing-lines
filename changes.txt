@@ -1,3 +1,4 @@
+9/23/13 convert to use chipper 'image' plug-in, and scenery-phet.ResetAllButton
 9/23/13 more porting of linegame.view package
 9/23/13 finish porting ChallengeNode
 9/20/13 started port of ChallengeNode (incomplete)

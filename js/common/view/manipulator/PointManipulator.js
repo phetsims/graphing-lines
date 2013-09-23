@@ -20,12 +20,12 @@ define( function( require ) {
    * Drag handler for arbitrary point.
    * @param {Property<Vector2>} pointProperty
    * @param {Array<Property<Vector2>>} otherPointProperties points that the point can't be on
-   * @param {Property<Range>} x1RangeProperty
-   * @param {Property<Range>} y1RangeProperty
+   * @param {Range} xRange
+   * @param {Range} yRange
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function PointDragHandler( pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) {
+  function PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, mvt ) {
 
     var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
@@ -45,8 +45,8 @@ define( function( require ) {
         var location = mvt.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var x = Math.round( Util.clamp( location.x, x1RangeProperty.get().min, x1RangeProperty.get().max ) );
-        var y = Math.round( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
+        var x = Math.round( Util.clamp( location.x, xRange.min, xRange.max ) );
+        var y = Math.round( Util.clamp( location.y, yRange.min, yRange.max ) );
         var p = new Vector2( x, y );
 
         // is this point the same as one of the others?
@@ -75,12 +75,12 @@ define( function( require ) {
    * @param {Color} color
    * @param {Property<Vector2>} pointProperty
    * @param {Array<Property<Vector2>>} otherPointProperties
-   * @param {Property<Range>} x1RangeProperty
-   * @param {Property<Range>} y1RangeProperty
+   * @param {Range} xRange
+   * @param {Range} yRange
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function PointManipulator( diameter, color, pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) {
+  function PointManipulator( diameter, color, pointProperty, otherPointProperties, xRange, yRange, mvt ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, diameter, color );
@@ -90,7 +90,7 @@ define( function( require ) {
       thisNode.translation = mvt.modelToViewPosition( point );
     } );
 
-    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, x1RangeProperty, y1RangeProperty, mvt ) );
+    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, mvt ) );
   }
 
   return inherit( Manipulator, PointManipulator );

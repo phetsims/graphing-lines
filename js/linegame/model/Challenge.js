@@ -40,7 +40,7 @@ define( function( require ) {
     this.title = title;
     this.description = description;
     this.answer = answer.withColor( LineGameConstants.ANSWER_COLOR );
-    this.guess = new Property( createInitialGuess( answer, manipulationMode ) );
+    this.guess = new Property( createInitialGuess( answer, manipulationMode ) ); //TODO rename guessProperty
     this.answerVisible = false;
     this.equationForm = equationForm;
     this.manipulationMode = manipulationMode;

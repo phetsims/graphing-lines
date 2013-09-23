@@ -82,9 +82,10 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @param {Graph} graph
    * @param {Property<Boolean>} linesVisibleProperty
+   * @param {*} options
    * @constructor
    */
-  function PointToolNode( pointTool, mvt, graph, linesVisibleProperty ) {
+  function PointToolNode( pointTool, mvt, graph, linesVisibleProperty, options ) {
 
     var thisNode = this;
     Node.call( thisNode );
@@ -181,6 +182,8 @@ define( function( require ) {
     // interactivity
     thisNode.cursor = 'pointer';
     thisNode.addInputListener( new PointToolDragHandler( pointTool, graph, mvt ) );
+
+    thisNode.mutate( options );
   }
 
   return inherit( Node, PointToolNode, {

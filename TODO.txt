@@ -16,6 +16,7 @@ MEDIUM
 - horizontal space between text and icons is wrong in sun.CheckBox, problem with scenery.Text bounds?
 
 LOW
+- use 'Property' suffix consistently
 - why does text on check boxes look different than text on buttons?
 - convert icons to images in IconFactory
 - convert models to PropertySet and axon style

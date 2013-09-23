@@ -25,10 +25,10 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeEquationNode' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptEquationNode' );
+  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );

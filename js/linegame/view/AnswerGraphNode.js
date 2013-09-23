@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var ChallengeGraphNode = require( 'PATH/ChallengeGraphNode' );
+  var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
 
   /**
    * @param {Challenge} challenge

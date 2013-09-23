@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var ChallengeGraphNode = require( 'PATH/ChallengeGraphNode' );
+  var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var ManipulationMode = require( 'GRAPHING_LINES/pointslope/model/ManipulationMode' );
+  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var Property = require( 'AXON/Property' );
   var SlopeInterceptParameterRange = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptParameterRange' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );

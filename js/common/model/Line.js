@@ -27,6 +27,14 @@ define( function( require ) {
     }
   };
 
+  /**
+   * @param x1
+   * @param y1
+   * @param x2
+   * @param y2
+   * @param {Color} color
+   * @constructor
+   */
   function Line( x1, y1, x2, y2, color ) {
     assert && assert( x1 !== x2 || y1 !== y2 ); // 2 different points are required
     this.x1 = x1;

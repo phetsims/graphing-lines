@@ -23,6 +23,7 @@ require.config( {
     i18n: '../../sherpa/i18n-2.0.4',
 
     // PhET plugins
+    audio: '../../chipper/requirejs-plugins/audio',
     image: '../../chipper/requirejs-plugins/image',
 
     // PhET libs, uppercase names to identify them in require.js imports

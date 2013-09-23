@@ -59,7 +59,7 @@ define( function( require ) {
     thisNode.guessBoxNode = new EquationBoxNode( GLStrings.yourLine, Color.BLACK, boxSize, new Node() ); // dummy equation
 
     // Graph
-    thisNode.graphNode = createGraphNode( challenge );
+    thisNode.graphNode = this.createGraphNode( challenge );
     thisNode.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
     // rendering order
@@ -112,16 +112,16 @@ define( function( require ) {
     } );
 
     // sync with game state
-    model.playStateProperty.link( function( state ) {
+    model.playStateProperty.link( function( playState ) {
 
       // states in which the graph is interactive
-      thisNode.graphNode.pickable = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK || ( state === PlayState.NEXT && !challenge.isCorrect() ) );
+      thisNode.graphNode.pickable = ( playState === PlayState.FIRST_CHECK || playState === PlayState.SECOND_CHECK || ( playState === PlayState.NEXT && !challenge.isCorrect() ) );
 
       // Graph the answer line at the end of the challenge.
-      thisNode.graphNode.setAnswerVisible( state === PlayState.NEXT );
+      thisNode.graphNode.setAnswerVisible( playState === PlayState.NEXT );
 
       // show stuff when the user got the challenge wrong
-      if ( state === PlayState.NEXT && !challenge.isCorrect() ) {
+      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
         thisNode.guessBoxNode.visible = true;
         thisNode.graphNode.setAnswerPointVisible( true );
         thisNode.graphNode.setGuessPointVisible( true );
@@ -133,26 +133,27 @@ define( function( require ) {
     } );
   }
 
-  /**
-   * Creates the graph portion of the view.
-   * @param {Challenge} challenge
-   * @returns {ChallengeGraphNode}
-   */
-  var createGraphNode = function( challenge ) {
-    if ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {
-      return new PointSlopeGraphNode( challenge );
-    }
-    else if ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {
-      assert && assert( challenge.answer.getYIntercept().isInteger() );
-      return new SlopeInterceptGraphNode( challenge );
-    }
-    else if ( challenge.manipulationMode === ManipulationMode.TWO_POINTS ) {
-      return new TwoPointsGraphNode( challenge );
-    }
-    else {
-      throw new Error( "unsupported manipulationMode: " + challenge.manipulationMode );
-    }
-  };
+  return inherit( ChallengeNode, GraphTheLineNode, {
 
-  return inherit( ChallengeNode, GraphTheLineNode );
+    /**
+     * Creates the graph portion of the view.
+     * @param {Challenge} challenge
+     * @returns {ChallengeGraphNode}
+     */
+    createGraphNode: function( challenge ) {
+      if ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {
+        return new PointSlopeGraphNode( challenge );
+      }
+      else if ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {
+        assert && assert( challenge.answer.getYIntercept().isInteger() );
+        return new SlopeInterceptGraphNode( challenge );
+      }
+      else if ( challenge.manipulationMode === ManipulationMode.TWO_POINTS ) {
+        return new TwoPointsGraphNode( challenge );
+      }
+      else {
+        throw new Error( "unsupported manipulationMode: " + challenge.manipulationMode );
+      }
+    }
+  } );
 } );

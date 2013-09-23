@@ -27,7 +27,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    var scoreboardNode = new GameScoreboardNode(); //TODO flesh this out
+    var scoreboardNode = new GameScoreboardNode(); //TODO flesh this out, add constructor parameters
     scoreboardNode.centerX = playAreaSize.width / 2;
     scoreboardNode.bottom = playAreaSize.height - 10;
     thisNode.addChild( scoreboardNode );

@@ -90,12 +90,11 @@ define( function( require ) {
       // all variables, manually hoisted
       var challenges = [];
       var yIntercepts, riseList, runList, excluded;
-      var equationForms, equationForm, slope, excludedSlopes, yIntercept, point, line;
+      var equationForm, slope, excludedSlopes, yIntercept, point, line;
       var x1, y1, x2, y2, xList, yList, rise, run, i;
 
       // for y-intercept manipulation challenges
       yIntercepts = RandomChooser.rangeToArray( new Range( -10, 10 ) );
-      equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ];
 
       // Make-the-Equation, slope-intercept form, slope=0
       {
@@ -116,7 +115,7 @@ define( function( require ) {
       // Graph-the-Line, slope-intercept or point-slope form (random choice), 2 variables
       {
         // randomly choose equation form
-        equationForm = RandomChooser.choose( equationForms );
+        equationForm = RandomChooser.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
 
         // random points
         xList = RandomChooser.rangeToArray( new Range( -5, 5 ) );
@@ -150,7 +149,7 @@ define( function( require ) {
       // Make-the-Equation, slope-intercept or point-slope form (random choice), 2 variables, random slope with exclusions
       {
         // randomly choose equation form
-        equationForm = RandomChooser.choose( equationForms );
+        equationForm = RandomChooser.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
 
         // exclude slopes whose simplified absolute value matches these
         excludedSlopes = [

@@ -24,8 +24,13 @@ define( function( require ) {
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeEquationNode' );
+  var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
+  var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptEquationNode' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
 
   /**
@@ -36,9 +41,12 @@ define( function( require ) {
    * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
    */
   function ChallengeNode( challenge, model, challengeSize, audioPlayer ) {
-    Node.call( this );
 
-    this.subclassParent; // subclasses should add children to this node, to preserve rendering order
+    var thisNode = this;
+    Node.call( thisNode );
+
+    //TODO rename this subtypeParent
+    thisNode.subclassParent; // subtypes should add children to this node, to preserve rendering order
 
     // description (dev)
     var descriptionNode = new Text( challenge.description, { font: new PhetFont( 12 ), fill: 'black' } );
@@ -46,7 +54,7 @@ define( function( require ) {
     descriptionNode.top = 5;
 
     // smiley/frowning face
-    this.faceNode = new FaceNode( LineGameConstants.FACE_DIAMETER, {
+    thisNode.faceNode = new FaceNode( LineGameConstants.FACE_DIAMETER, {
       headFill: LineGameConstants.FACE_COLOR,
       eyeFill: 'black',
       mouthFill: 'black',
@@ -55,11 +63,11 @@ define( function( require ) {
     } );
 
     // points awarded
-    this.pointsAwardedNode = new Text( "", { font: LineGameConstants.POINTS_AWARDED_FONT, fill: LineGameConstants.POINTS_AWARDED_COLOR } );
+    thisNode.pointsAwardedNode = new Text( "", { font: LineGameConstants.POINTS_AWARDED_FONT, fill: LineGameConstants.POINTS_AWARDED_COLOR } );
 
       // buttons
     var buttonOptions = { font: LineGameConstants.BUTTON_FONT, rectangleFillUp: LineGameConstants.BUTTON_COLOR };
-    this.checkButton = new TextButton( GLStrings.check, buttonOptions );
+    thisNode.checkButton = new TextButton( GLStrings.check, buttonOptions );
     var tryAgainButton = new TextButton( GLStrings.tryAgain, buttonOptions );
     var showAnswerButton = new TextButton( GLStrings.showAnswer, buttonOptions );
     var nextButton = new TextButton( GLStrings.next, buttonOptions );
@@ -69,7 +77,128 @@ define( function( require ) {
     var skipButton = new TextButton( "dev: Skip", devButtonOptions );
     var replayButton = new TextButton( "dev: Replay", devButtonOptions );
 
-    //TODO continue porting constructor code, see below
+    // point tools
+    var linesVisibleProperty = new Property( true );
+    var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.graph, challenge.mvt, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.graph, challenge.mvt, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+
+    // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
+    var pointToolParent = new Node();
+    pointToolParent.addChild( pointToolNode1 );
+    pointToolParent.addChild( pointToolNode2 );
+
+    // rendering order
+    {
+      thisNode.addChild( thisNode.subclassParent );
+      if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+        thisNode.addChild( descriptionNode );
+      }
+      thisNode.addChild( thisNode.checkButton );
+      thisNode.addChild( tryAgainButton );
+      thisNode.addChild( showAnswerButton );
+      thisNode.addChild( nextButton );
+      if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+        thisNode.addChild( skipButton ); // This button lets you skip the current challenge.
+        thisNode.addChild( replayButton ); // This button lets you repeat the current challenge.
+      }
+      thisNode.addChild( pointToolParent );
+      thisNode.addChild( thisNode.faceNode );
+      thisNode.addChild( thisNode.pointsAwardedNode );
+    }
+
+    // layout
+    {
+      // buttons at bottom center
+      var buttonCenterX = challengeSize.width / 2;
+      var buttonBottom = challengeSize.height - 30;
+      thisNode.checkButton.centerX = buttonCenterX;
+      thisNode.bottom = buttonBottom;
+      tryAgainButton.centerX = buttonCenterX;
+      thisNode.bottom = buttonBottom;
+      showAnswerButton.centerX = buttonCenterX;
+      showAnswerButton.bottom = buttonBottom;
+      nextButton.centerX = buttonCenterX;
+      nextButton.bottom = buttonBottom;
+
+      // dev buttons below main buttons
+      skipButton.centerX = buttonCenterX;
+      skipButton.tip = buttonBottom + 2;
+      replayButton.centerX = buttonCenterX;
+      replayButton.tip = buttonBottom + 2;
+    }
+
+    // "Check" button
+    thisNode.checkButton.link( function() {
+      if ( challenge.isCorrect() ) {
+        thisNode.faceNode.smile();
+        audioPlayer.correctAnswer();
+        var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+        model.results.scoreProperty.set( model.results.score.get() + points );
+        thisNode.pointsAwardedNode.text = StringUtils.format( GLStrings.pointsAwarded, points );
+        // points to right of face
+        thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;
+        thisNode.pointsAwardedNode.centerY = thisNode.faceNode.centerY;
+        model.playStateProperty.set( PlayState.NEXT );
+      }
+      else {
+        thisNode.faceNode.frown();
+        audioPlayer.wrongAnswer();
+        thisNode.pointsAwardedNode.text = "";
+        if ( model.playStateProperty.get() === PlayState.FIRST_CHECK ) {
+          model.playStateProperty.set( PlayState.TRY_AGAIN );
+        }
+        else {
+          model.playStateProperty.set( PlayState.SHOW_ANSWER );
+        }
+      }
+    } );
+
+    // "Try Again" button
+    tryAgainButton.link( function() {
+      model.playStateProperty.set( PlayState.SECOND_CHECK );
+    } );
+
+    // "Show Answer" button
+    showAnswerButton.link( function() {
+      model.playStateProperty.set( PlayState.NEXT );
+    } );
+
+    // "Next" button
+    nextButton.link( function() {
+      model.playStateProperty.set( PlayState.FIRST_CHECK );
+    } );
+
+    // "Skip" button
+    skipButton.link( function() {
+      model.skipCurrentChallenge();
+    } );
+
+    // "Repeat" button
+    replayButton.link( function() {
+      model.replayCurrentChallenge();
+    } );
+
+    // play-state changes
+    model.playStateProperty.link( function( state ) {
+
+      // visibility of face
+      thisNode.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
+                                    state === PlayState.SHOW_ANSWER ||
+                                    ( state === PlayState.NEXT && challenge.isCorrect() ) );
+
+      // visibility of points
+      thisNode.pointsAwardedNode.visible = ( thisNode.faceNode.visible && challenge.isCorrect() );
+
+      // visibility of buttons
+      thisNode.checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
+      tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
+      showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
+      nextButton.visible = ( state === PlayState.NEXT );
+
+      // visibility of dev buttons
+      skipButton.visible = ( !nextButton.visible );
+      replayButton.visible( nextButton.visible );
+    } );
   }
 
   /**
@@ -93,140 +222,3 @@ define( function( require ) {
 
   return inherit( Node, ChallengeNode );
 } );
-
-
-//        // point tools
-//        Rectangle2D pointToolDragBounds = new Rectangle2D.Double( 0, 0, challengeSize.getWidth(), challengeSize.getHeight() );
-//        PointToolNode pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.mvt, challenge.graph, pointToolDragBounds, new BooleanProperty( true ) );
-//        PointToolNode pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.mvt, challenge.graph, pointToolDragBounds, new BooleanProperty( true ) );
-//        pointToolNode1.scale( LineGameConstants.POINT_TOOL_SCALE );
-//        pointToolNode2.scale( LineGameConstants.POINT_TOOL_SCALE );
-//
-//        // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
-//        PNode pointToolParent = new PNode();
-//        pointToolParent.addChild( pointToolNode1 );
-//        pointToolParent.addChild( pointToolNode2 );
-//
-//        // Parent for subclass-specific nodes, to maintain rendering order.
-//        subclassParent = new PNode();
-//
-//        // Rendering order
-//        {
-//            addChild( subclassParent );
-//            if ( PhetApplication.getInstance().isDeveloperControlsEnabled() ) {
-//               addChild( descriptionNode );
-//            }
-//            addChild( checkButton );
-//            addChild( tryAgainButton );
-//            addChild( showAnswerButton );
-//            addChild( nextButton );
-//            if ( PhetApplication.getInstance().isDeveloperControlsEnabled() ) {
-//                addChild( skipButton ); // This button lets you skip the current challenge.
-//                addChild( replayButton ); // This button lets you repeat the current challenge.
-//            }
-//            addChild( pointToolParent );
-//            addChild( faceNode );
-//            addChild( pointsAwardedNode );
-//        }
-//
-//        // layout
-//        {
-//            // buttons at bottom center
-//            final double buttonCenterX = ( challengeSize.getWidth() / 2 );
-//            final double buttonCenterY = challengeSize.getHeight() - checkButton.getFullBoundsReference().getHeight() - 30;
-//            checkButton.setOffset( buttonCenterX - ( checkButton.getFullBoundsReference().getWidth() / 2 ), buttonCenterY );
-//            tryAgainButton.setOffset( buttonCenterX - ( tryAgainButton.getFullBoundsReference().getWidth() / 2 ), buttonCenterY );
-//            showAnswerButton.setOffset( buttonCenterX - ( showAnswerButton.getFullBoundsReference().getWidth() / 2 ), buttonCenterY );
-//            nextButton.setOffset( buttonCenterX - ( nextButton.getFullBoundsReference().getWidth() / 2 ), buttonCenterY );
-//            skipButton.setOffset( nextButton.getFullBoundsReference().getCenterX() - ( skipButton.getFullBoundsReference().getWidth() / 2 ),
-//                                  nextButton.getFullBoundsReference().getMaxY() + 2 );
-//            replayButton.setOffset( nextButton.getFullBoundsReference().getCenterX() - ( replayButton.getFullBoundsReference().getWidth() / 2 ),
-//                                    nextButton.getFullBoundsReference().getMaxY() + 2 );
-//        }
-//
-//        // "Check" button
-//        checkButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent e ) {
-//                if ( challenge.isCorrect() ) {
-//                    faceNode.smile();
-//                    audioPlayer.correctAnswer();
-//                    final int points = model.computePoints( model.state.get() == PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
-//                    model.results.score.set( model.results.score.get() + points );
-//                    pointsAwardedNode.setText( MessageFormat.format( Strings.POINTS_AWARDED, String.valueOf( points ) ) );
-//                    // points to right of face
-//                    pointsAwardedNode.setOffset( faceNode.getFullBoundsReference().getMaxX() + 10,
-//                                                 faceNode.getFullBoundsReference().getCenterY() - ( pointsAwardedNode.getFullBoundsReference().getHeight() / 2 ) );
-//                    model.state.set( PlayState.NEXT );
-//                }
-//                else {
-//                    faceNode.frown();
-//                    audioPlayer.wrongAnswer();
-//                    pointsAwardedNode.setText( "" );
-//                    if ( model.state.get() == PlayState.FIRST_CHECK ) {
-//                        model.state.set( PlayState.TRY_AGAIN );
-//                    }
-//                    else {
-//                        model.state.set( PlayState.SHOW_ANSWER );
-//                    }
-//                }
-//            }
-//        } );
-//
-//        // "Try Again" button
-//        tryAgainButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent e ) {
-//                model.state.set( PlayState.SECOND_CHECK );
-//            }
-//        } );
-//
-//        // "Show Answer" button
-//        showAnswerButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent e ) {
-//                model.state.set( PlayState.NEXT );
-//            }
-//        } );
-//
-//        // "Next" button
-//        nextButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent e ) {
-//                model.state.set( PlayState.FIRST_CHECK );
-//            }
-//        } );
-//
-//        // "Skip" button
-//        skipButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent e ) {
-//                model.skipCurrentChallenge();
-//            }
-//        } );
-//
-//        // "Repeat" button
-//        replayButton.addActionListener( new ActionListener() {
-//            public void actionPerformed( ActionEvent e ) {
-//                model.replayCurrentChallenge();
-//            }
-//        } );
-//
-//        // state changes
-//        model.state.addObserver( new VoidFunction1<PlayState>() {
-//            public void apply( PlayState state ) {
-//
-//                // visibility of face
-//                faceNode.setVisible( state == PlayState.TRY_AGAIN ||
-//                                     state == PlayState.SHOW_ANSWER ||
-//                                     ( state == PlayState.NEXT && challenge.isCorrect() ) );
-//
-//                // visibility of points
-//                pointsAwardedNode.setVisible( faceNode.getVisible() && challenge.isCorrect() );
-//
-//                // visibility of buttons
-//                checkButton.setVisible( state == PlayState.FIRST_CHECK || state == PlayState.SECOND_CHECK );
-//                tryAgainButton.setVisible( state == PlayState.TRY_AGAIN );
-//                showAnswerButton.setVisible( state == PlayState.SHOW_ANSWER );
-//                nextButton.setVisible( state == PlayState.NEXT );
-//                skipButton.setVisible( !nextButton.getVisible() );
-//                replayButton.setVisible( nextButton.getVisible() );
-//            }
-//        } );
-//    }
-

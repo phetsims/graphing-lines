@@ -12,6 +12,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
 
   /**
@@ -39,11 +40,11 @@ define( function( require ) {
     var levelLabel = new Text( "Level:", { font: options.controlFont } );
     levelControl.addChild( levelLabel );
     var previousNode = levelLabel;
-    var ySpacing = 8;
+    var xSpacing = 8;
     for ( var level = 0; level < gameSettings.numberOfLevels; level++ ) {
       var radioButton = new AquaRadioButton( gameSettings.levelProperty, level, new Text( level, { font: options.controlFont } ) );
       levelControl.addChild( radioButton );
-      radioButton.left = previousNode.right + ySpacing;
+      radioButton.left = previousNode.right + xSpacing;
       radioButton.centerY = previousNode.centerY;
       previousNode = radioButton;
     }

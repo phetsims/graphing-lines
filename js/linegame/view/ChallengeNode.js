@@ -46,7 +46,7 @@ define( function( require ) {
     Node.call( thisNode );
 
     //TODO rename this subtypeParent
-    thisNode.subclassParent; // subtypes should add children to this node, to preserve rendering order
+    thisNode.subclassParent = new Node(); // subtypes should add children to this node, to preserve rendering order
 
     // description (dev)
     var descriptionNode = new Text( challenge.description, { font: new PhetFont( 12 ), fill: 'black' } );
@@ -79,8 +79,8 @@ define( function( require ) {
 
     // point tools
     var linesVisibleProperty = new Property( true );
-    var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.graph, challenge.mvt, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
-    var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.graph, challenge.mvt, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.mvt, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.mvt, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
 
     // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
     var pointToolParent = new Node();
@@ -128,7 +128,7 @@ define( function( require ) {
     }
 
     // "Check" button
-    thisNode.checkButton.link( function() {
+    thisNode.checkButton.addListener( function() {
       if ( challenge.isCorrect() ) {
         thisNode.faceNode.smile();
         audioPlayer.correctAnswer();
@@ -154,27 +154,27 @@ define( function( require ) {
     } );
 
     // "Try Again" button
-    tryAgainButton.link( function() {
+    tryAgainButton.addListener( function() {
       model.playStateProperty.set( PlayState.SECOND_CHECK );
     } );
 
     // "Show Answer" button
-    showAnswerButton.link( function() {
+    showAnswerButton.addListener( function() {
       model.playStateProperty.set( PlayState.NEXT );
     } );
 
     // "Next" button
-    nextButton.link( function() {
+    nextButton.addListener( function() {
       model.playStateProperty.set( PlayState.FIRST_CHECK );
     } );
 
     // "Skip" button
-    skipButton.link( function() {
+    skipButton.addListener( function() {
       model.skipCurrentChallenge();
     } );
 
     // "Repeat" button
-    replayButton.link( function() {
+    replayButton.addListener( function() {
       model.replayCurrentChallenge();
     } );
 
@@ -196,8 +196,8 @@ define( function( require ) {
       nextButton.visible = ( state === PlayState.NEXT );
 
       // visibility of dev buttons
-      skipButton.visible = ( !nextButton.visible );
-      replayButton.visible( nextButton.visible );
+      skipButton.visible = !nextButton.visible;
+      replayButton.visible = nextButton.visible;
     } );
   }
 
@@ -208,12 +208,12 @@ define( function( require ) {
    * @param {Font} font
    * @param {Color} color
    */
-  ChallengeNode.createEquationNode = function( equationForm, line, font, color ) {
+  ChallengeNode.createEquationNode = function( equationForm, line, fontSize, color ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return new SlopeInterceptEquationNode( line, font, color );
+      return SlopeInterceptEquationNode.createStaticEquation( line, fontSize, color );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return new PointSlopeEquationNode( line, font, color );
+      return new PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
     }
     else {
       throw new Error( "unsupported equation form: " + equationForm );

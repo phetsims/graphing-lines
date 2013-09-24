@@ -33,11 +33,11 @@ define( function( require ) {
   /**
    * Drag handler for the pointer tool.
    * @param {PointTool} pointTool
-   * @param {Graph} graph
    * @param {ModelViewTransform2} mvt
+   * @param {Graph} graph
    * @constructor
    */
-  function PointToolDragHandler( pointTool, graph, mvt ) {
+  function PointToolDragHandler( pointTool, mvt, graph ) {
 
     var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
 
@@ -184,7 +184,7 @@ define( function( require ) {
 
     // interactivity
     thisNode.cursor = 'pointer';
-    thisNode.addInputListener( new PointToolDragHandler( pointTool, graph, mvt ) );
+    thisNode.addInputListener( new PointToolDragHandler( pointTool, mvt, graph ) );
 
     thisNode.mutate( options );
   }

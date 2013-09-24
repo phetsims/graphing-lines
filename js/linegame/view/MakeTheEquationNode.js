@@ -110,16 +110,16 @@ define( function( require ) {
     challenge.guess.link( updateIcons.bind( thisNode ) );
 
     // sync with game state
-    model.playStateProperty.link( function( state ) {
+    model.playStateProperty.link( function( playState ) {
 
       // states in which the equation is interactive
-      guessBoxNode.pickable = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK || ( state === PlayState.NEXT && !challenge.isCorrect() ) );
+      guessBoxNode.pickable = ( playState === PlayState.FIRST_CHECK || playState === PlayState.SECOND_CHECK || ( playState === PlayState.NEXT && !challenge.isCorrect() ) );
 
       // Graph the guess line at the end of the challenge.
-      graphNode.setGuessVisible( state === PlayState.NEXT );
+      graphNode.setGuessVisible( playState === PlayState.NEXT );
 
       // show stuff when the user got the challenge wrong
-      if ( state === PlayState.NEXT && !challenge.isCorrect() ) {
+      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
         answerBoxNode.setVisible( true );
         graphNode.setAnswerPointVisible( true );
         graphNode.setGuessPointVisible( true );
@@ -151,8 +151,8 @@ define( function( require ) {
         interactiveSlope, interactiveIntercept, interactiveFont, staticFont, staticColor );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      interactivePoint = ( manipulationMode == ManipulationMode.POINT ) || ( manipulationMode == ManipulationMode.POINT_SLOPE );
-      interactiveSlope = ( manipulationMode == ManipulationMode.SLOPE ) || ( manipulationMode == ManipulationMode.POINT_SLOPE );
+      interactivePoint = ( manipulationMode === ManipulationMode.POINT ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
+      interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
       return new PointSlopeEquationNode( line, new Property( graph.xRange ),
         new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ),
         interactivePoint, interactivePoint, interactiveSlope, interactiveFont, staticFont, staticColor );

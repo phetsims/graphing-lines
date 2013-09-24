@@ -14,7 +14,7 @@ define( function( require ) {
   var GameSettingsPanel = require( 'GRAPHING_LINES/linegame/view/GameSettingsPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var Node = require( 'PATH/Node' );
+  var Node = require( 'SCENERY/nodes/Node' );
 
   /**
    * @param {LineGameModel} model

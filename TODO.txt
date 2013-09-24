@@ -17,7 +17,6 @@ MEDIUM
 
 LOW
 - use 'Property' suffix consistently
-- why does text on check boxes look different than text on buttons?
 - convert icons to images in IconFactory
 - convert models to PropertySet and axon style
 - change 'tab.*' string keys to 'screen.*'

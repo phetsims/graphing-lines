@@ -14,6 +14,7 @@ define( function( require ) {
 
   function GameSettings( numberOfLevels, soundEnabled, timerEnabled ) {
 
+    this.numberOfLevels = numberOfLevels;
     this.levelProperty = new Property( 0 );
     this.soundEnabledProperty = new Property( soundEnabled );
     this.timerEnabledProperty = new Property( timerEnabled );

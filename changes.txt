@@ -1,3 +1,4 @@
+9/24/13 more porting of linegame.view package
 9/24/12 quick-&-dirty game settings panel
 9/23/13 more porting of linegame.view package
 9/23/13 convert to use chipper 'image' plug-in, and scenery-phet.ResetAllButton

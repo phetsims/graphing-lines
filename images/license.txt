@@ -1,3 +1,4 @@
+blue-stopwatch.png source=www.freeclipartnow.com notes=Public Domain license, see http://www.freeclipartnow.com/termsofuse.php
 Check-Mark-u2713.png author=PhET notes=copied from balancing-chemical-equations
 Game-icon.png author=PhET
 Heavy-Ballot-X-u2718.png author=PhET notes=copied from balancing-chemical-equations

@@ -61,10 +61,10 @@ define( function( require ) {
       this.graph.lines.clear();
       // add lines in the order that they would be rendered
       if ( this.guess.get() ) {
-        this.graph.lines.add( this.guess.get() );
+        this.graph.lines.push( this.guess.get() );
       }
       if ( this.answerVisible ) {
-        this.graph.lines.add( this.answer );
+        this.graph.lines.push( this.answer );
       }
     }
   } );

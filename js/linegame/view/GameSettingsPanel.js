@@ -42,7 +42,7 @@ define( function( require ) {
     var previousNode = levelLabel;
     var xSpacing = 8;
     for ( var level = 0; level < gameSettings.numberOfLevels; level++ ) {
-      var radioButton = new AquaRadioButton( gameSettings.levelProperty, level, new Text( level, { font: options.controlFont } ) );
+      var radioButton = new AquaRadioButton( gameSettings.levelProperty, level, new Text( level + 1, { font: options.controlFont } ) );
       levelControl.addChild( radioButton );
       radioButton.left = previousNode.right + xSpacing;
       radioButton.centerY = previousNode.centerY;

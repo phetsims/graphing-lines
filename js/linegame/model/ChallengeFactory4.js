@@ -45,7 +45,7 @@ define( function( require ) {
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = ChallengeFactory2.createSlopeArrays();
-      slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.size() - 1 ) );
+      slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
 
       // for y-intercept manipulation challenges, one must be positive, one negative
       yInterceptRange = new Range( -10, 10 );

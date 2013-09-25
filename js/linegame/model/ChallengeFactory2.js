@@ -66,9 +66,7 @@ define( function( require ) {
         new Fraction( -5, 1 )
       ],
       // positive fractions
-      [
-        ChallengeFactory2.createPositiveFractionalSlopes()
-      ],
+      ChallengeFactory2.createPositiveFractionalSlopes(),
       // negative fractions
       [
         new Fraction( -1, 2 ),

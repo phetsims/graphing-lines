@@ -53,7 +53,7 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( GLStrings.lineToGraph, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT, challenge.answer.color ) );
+      ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
 
     // Guess
     thisNode.guessBoxNode = new EquationBoxNode( GLStrings.yourLine, Color.BLACK, boxSize, new Node() ); // dummy equation
@@ -73,7 +73,7 @@ define( function( require ) {
       // graphNode is positioned automatically based on mvt's origin offset.
 
       // equation in left half of challenge space
-      answerBoxNode.right = ( challengeSize.getWidth() / 2 ) - 50;
+      answerBoxNode.right = ( challengeSize.width / 2 ) - 50;
       answerBoxNode.bottom = challenge.mvt.modelToViewY( 0 ) - 10;
 
       // face centered below equation boxes
@@ -97,7 +97,7 @@ define( function( require ) {
 
       // update the equation (line is null if ManipulationMode.THREE_POINTS and points don't make a line)
       thisNode.subclassParent.removeChild( thisNode.guessBoxNode );
-      var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT, line.color );
+      var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT_SIZE, line.color );
       var color = ( !line ) ? LineGameConstants.GUESS_COLOR : line.color;
       thisNode.guessBoxNode = new EquationBoxNode( GLStrings.yourLine, color, boxSize, equationNode );
 

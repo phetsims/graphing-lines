@@ -51,14 +51,14 @@ define( function( require ) {
     // Answer
     var answerBoxNode =
       new EquationBoxNode( GLStrings.aCorrectEquation, challenge.answer.color, boxSize,
-        ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT, challenge.answer.color ) );
+        ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
     answerBoxNode.visible = false;
 
     // Guess
     var guessBoxNode =
       new EquationBoxNode( GLStrings.yourEquation, challenge.guess.get().color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guess, challenge.graph,
-          LineGameConstants.INTERACTIVE_EQUATION_FONT, LineGameConstants.STATIC_EQUATION_FONT, challenge.guess.get().color ) );
+          LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guess.get().color ) );
 
     // Graph
     var graphNode = new AnswerGraphNode( challenge );
@@ -92,7 +92,7 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT, new Color( 0, 0, 0, 25 ) );
+      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, new Color( 0, 0, 0, 25 ) );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;
       thisNode.addChild( devAnswerNode );
@@ -141,21 +141,28 @@ define( function( require ) {
    * @param {Font} staticFont
    * @param {Color} staticColor
    */
-   var createInteractiveEquationNode = function( equationForm, manipulationMode, line, graph, interactiveFont, staticFont, staticColor ) {
+   var createInteractiveEquationNode = function( equationForm, manipulationMode, line, graph, interactiveFontSize, staticFontSize, staticColor ) {
     var interactivePoint, interactiveSlope, interactiveIntercept;
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       interactiveIntercept = ( manipulationMode === ManipulationMode.INTERCEPT ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
-      return new SlopeInterceptEquationNode( line,
-        new Property( graph.yRange ), new Property( graph.xRange ), new Property( graph.yRange ),
-        interactiveSlope, interactiveIntercept, interactiveFont, staticFont, staticColor );
+      return new SlopeInterceptEquationNode( line, new Property( graph.yRange ), new Property( graph.xRange ), new Property( graph.yRange ), {
+        interactiveSlope: interactiveSlope,
+        interactiveIntercept: interactiveIntercept,
+        interactiveFontSize: interactiveFontSize,
+        staticFontSize: staticFontSize,
+        staticColor: staticColor } );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
       interactivePoint = ( manipulationMode === ManipulationMode.POINT ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
-      return new PointSlopeEquationNode( line, new Property( graph.xRange ),
-        new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ),
-        interactivePoint, interactivePoint, interactiveSlope, interactiveFont, staticFont, staticColor );
+      return new PointSlopeEquationNode( line, new Property( graph.xRange ), new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ), {
+        interactiveX1: interactivePoint,
+        interactiveY1: interactivePoint,
+        interactiveSlope: interactiveSlope,
+        interactiveFontSize: interactiveFontSize,
+        staticFontSize: staticFontSize,
+        staticColor: staticColor } );
     }
     else {
       throw new Error( "unsupported equation form: " + equationForm );

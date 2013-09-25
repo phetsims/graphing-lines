@@ -20,7 +20,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var PlottedPointNode = require( 'GRAPHING_LINES/common/view/PlottedPointNode' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-  var Vector2 = require( 'GRAPHING_LINES/common/view/PlottedPointNode' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Challenge} challenge
@@ -48,7 +48,7 @@ define( function( require ) {
       // point (x1,y1) for answer
       thisNode.answerPointNode = new PlottedPointNode( pointDiameter, challenge.answer.color );
       thisNode.answerParentNode.addChild( thisNode.answerPointNode );
-      thisNode.answerPointNode.setOffset( challenge.mvt.modelToView( new Vector2( challenge.answer.x1, challenge.answer.y1 ) ) );
+      thisNode.answerPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( challenge.answer.x1, challenge.answer.y1 ) );
     }
 
     // guess
@@ -77,7 +77,7 @@ define( function( require ) {
         thisNode.guessPointNode = new PlottedPointNode( pointDiameter, line.color );
         thisNode.guessPointNode.visible = thisNode.guessPointVisible;
         thisNode.guessParentNode.addChild( thisNode.guessPointNode );
-        thisNode.guessPointNode.translation = challenge.mvt.modelToView( line.x1, line.y1 );
+        thisNode.guessPointNode.translation = challenge.mvt.modelToViewPosition( line.x1, line.y1 );
       }
     } );
 

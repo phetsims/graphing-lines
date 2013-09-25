@@ -24,16 +24,16 @@ define( function( require ) {
   function GameSettingsPanel( gameSettings, startFunction, options ) {
 
     options = _.extend( {
-      titleFont: new PhetFont( 24 ),
-      labelFont: new PhetFont( 12 ),
-      controlFont: new PhetFont( 12 ),
+      titleFont: new PhetFont( 38 ),
+      labelFont: new PhetFont( 24 ),
+      controlFont: new PhetFont( 24 ),
       startButtonColor: 'rgb(235, 235, 235)'
     }, options );
 
     var titleNode = new Text( "Game Settings", { font: options.titleFont } );
     var timerCheckBox = CheckBox.createTextCheckBox( "Timer", { font: options.controlFont }, gameSettings.timerEnabledProperty );
     var soundCheckBox = CheckBox.createTextCheckBox( "Sound", { font: options.controlFont }, gameSettings.soundEnabledProperty );
-    var startButton = new TextButton( "Start", startFunction );
+    var startButton = new TextButton( "Start", startFunction, { font: options.controlFont, rectangleFillUp: options.startButtonColor } );
 
     // level control
     var levelControl = new Node();

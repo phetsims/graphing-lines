@@ -46,7 +46,6 @@ define( function( require ) {
     // game "phase" changes
     model.gamePhaseProperty.link( function( gamePhase ) {
 
-      debugger;//XXX
       // visibility of scenegraph branches
       thisView.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
       thisView.playNode.visible = ( gamePhase === GamePhase.PLAY );

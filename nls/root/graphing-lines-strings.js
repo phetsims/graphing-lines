@@ -1,6 +1,7 @@
 // Copyright 2002-2013, University of Colorado
 
 define( {
+  "check": "Check",
   "graphing-lines.name": "Graphing Lines",
   "eraseLines": "Erase Lines",
   "saveLine": "Save Line",
@@ -14,11 +15,13 @@ define( {
   "setThePoint": "Set the Point",
   "putPointsOnLine": "Put Points on Line",
   "lineToGraph": "Line to Graph:",
+  "next": "Next",
   "yourLine": "Your Line:",
   "yourEquation": "Your Equation:",
   "aCorrectEquation": "A Correct Equation:",
   "undefined": "undefined",
   "notALine": "... is not a line.",
+  "showAnswer": "Show Answer",
   "symbol.x": "x",
   "symbol.y": "y",
   "symbol.slope": "m",
@@ -27,6 +30,7 @@ define( {
   "tab.slopeIntercept": "Slope-Intercept",
   "tab.pointSlope": "Point-Slope",
   "tab.lineGame": "Line Game",
+  "tryAgain": "Try Again",
   "point.xy": "({0}, {1})",
   "point.unknown": "( ?, ? )",
   "pointsAwarded": "+{0}",

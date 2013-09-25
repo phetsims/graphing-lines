@@ -30,7 +30,7 @@ define( function( require ) {
     ScreenView.call( thisView, { renderer: 'svg' } );
 
     // audio
-    var audioPlayer = new GameAudioPlayer( model.settings.soundEnabled );
+    var audioPlayer = new GameAudioPlayer( model.settings.soundEnabledProperty );
 
     // one parent node for each "phase" of the game
     var playAreaSize = new Dimension2( thisView.layoutBounds.width, thisView.layoutBounds.height );

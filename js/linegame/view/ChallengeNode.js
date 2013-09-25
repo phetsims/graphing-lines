@@ -49,9 +49,7 @@ define( function( require ) {
     thisNode.subclassParent = new Node(); // subtypes should add children to this node, to preserve rendering order
 
     // description (dev)
-    var descriptionNode = new Text( challenge.description, { font: new PhetFont( 12 ), fill: 'black' } );
-    descriptionNode.left = 5;
-    descriptionNode.top = 5;
+    var descriptionNode = new Text( challenge.description, { font: new PhetFont( 20 ), fill: 'black' } );
 
     // smiley/frowning face
     thisNode.faceNode = new FaceNode( LineGameConstants.FACE_DIAMETER, {
@@ -66,16 +64,17 @@ define( function( require ) {
     thisNode.pointsAwardedNode = new Text( "", { font: LineGameConstants.POINTS_AWARDED_FONT, fill: LineGameConstants.POINTS_AWARDED_COLOR } );
 
       // buttons
+    var doNothing = function(){}; //TODO delete this when sun#21 is addressed
     var buttonOptions = { font: LineGameConstants.BUTTON_FONT, rectangleFillUp: LineGameConstants.BUTTON_COLOR };
-    thisNode.checkButton = new TextButton( GLStrings.check, buttonOptions );
-    var tryAgainButton = new TextButton( GLStrings.tryAgain, buttonOptions );
-    var showAnswerButton = new TextButton( GLStrings.showAnswer, buttonOptions );
-    var nextButton = new TextButton( GLStrings.next, buttonOptions );
+    thisNode.checkButton = new TextButton( GLStrings.check, doNothing, buttonOptions );
+    var tryAgainButton = new TextButton( GLStrings.tryAgain, doNothing, buttonOptions );
+    var showAnswerButton = new TextButton( GLStrings.showAnswer, doNothing, buttonOptions );
+    var nextButton = new TextButton( GLStrings.next, doNothing, buttonOptions );
 
     // developer buttons, no i18n
-    var devButtonOptions = { font: new PhetFont( 12 ) };
-    var skipButton = new TextButton( "dev: Skip", devButtonOptions );
-    var replayButton = new TextButton( "dev: Replay", devButtonOptions );
+    var devButtonOptions = { font: new PhetFont( 12 ), rectangleFillUp: Color.WHITE };
+    var skipButton = new TextButton( "dev: Skip", doNothing, devButtonOptions );
+    var replayButton = new TextButton( "dev: Replay", doNothing, devButtonOptions );
 
     // point tools
     var linesVisibleProperty = new Property( true );
@@ -108,13 +107,16 @@ define( function( require ) {
 
     // layout
     {
+      descriptionNode.left = 10;
+      descriptionNode.top = 10;
+
       // buttons at bottom center
       var buttonCenterX = challengeSize.width / 2;
       var buttonBottom = challengeSize.height - 30;
       thisNode.checkButton.centerX = buttonCenterX;
-      thisNode.bottom = buttonBottom;
+      thisNode.checkButton.bottom = buttonBottom;
       tryAgainButton.centerX = buttonCenterX;
-      thisNode.bottom = buttonBottom;
+      tryAgainButton.bottom = buttonBottom;
       showAnswerButton.centerX = buttonCenterX;
       showAnswerButton.bottom = buttonBottom;
       nextButton.centerX = buttonCenterX;
@@ -122,9 +124,9 @@ define( function( require ) {
 
       // dev buttons below main buttons
       skipButton.centerX = buttonCenterX;
-      skipButton.tip = buttonBottom + 2;
+      skipButton.top = buttonBottom + 2;
       replayButton.centerX = buttonCenterX;
-      replayButton.tip = buttonBottom + 2;
+      replayButton.top = buttonBottom + 2;
     }
 
     // "Check" button
@@ -133,7 +135,7 @@ define( function( require ) {
         thisNode.faceNode.smile();
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
-        model.results.scoreProperty.set( model.results.score.get() + points );
+        model.results.scoreProperty.set( model.results.scoreProperty.get() + points );
         thisNode.pointsAwardedNode.text = StringUtils.format( GLStrings.pointsAwarded, points );
         // points to right of face
         thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;

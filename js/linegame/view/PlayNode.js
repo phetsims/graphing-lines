@@ -39,7 +39,7 @@ define( function( require ) {
     var challengeParent = new Node();
     thisNode.addChild( challengeParent );
 
-    // When "New Game" button is pressed, change game phase
+    // When "New Game" button is pressed, go back to game settings
     scoreboardNode.addListener( {
       newGame: function() {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );

@@ -15,7 +15,6 @@ define( function( require ) {
 
   // imports
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
-  var callSuper = require( 'PHET_CORE/callSuper' );
   var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
   var ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
   var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
@@ -182,10 +181,10 @@ define( function( require ) {
   }
 
   inherit( Property, PropertyWithHook, {
-    //@override
+    /** @override */
     set: function( value ) {
       this.hook( value );
-      callSuper( Property, 'set', this, value );
+      Property.prototype.set.call( this, value );
     }
   } );
 

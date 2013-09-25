@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var Bounds2 = require( 'DOT/Bounds2');
-  var callSuper = require( 'PHET_CORE/callSuper' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -100,9 +99,7 @@ define( function( require ) {
 
     layoutBounds: GLConstants.LAYOUT_BOUNDS,
 
-    /** @override */
     reset: function() {
-      callSuper( ScreenView, "reset", this );
       this.viewProperties.reset();
     }
   } );

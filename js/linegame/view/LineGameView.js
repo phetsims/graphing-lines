@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {LineGameModel} model
    * @constructor
    */
-  function GameView( model ) {
+  function LineGameView( model ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: 'svg' } );
@@ -46,6 +46,7 @@ define( function( require ) {
     // game "phase" changes
     model.gamePhaseProperty.link( function( gamePhase ) {
 
+      debugger;//XXX
       // visibility of scenegraph branches
       thisView.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
       thisView.playNode.visible = ( gamePhase === GamePhase.PLAY );
@@ -65,5 +66,5 @@ define( function( require ) {
     //TODO add functionality to adjust the bounds of the reward, see java.LineGameCanvas
   }
 
-  return inherit( ScreenView, GameView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );
+  return inherit( ScreenView, LineGameView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );
 } );

@@ -12,7 +12,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var callSuper = require( 'PHET_CORE/callSuper' );
   var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -66,7 +65,7 @@ define( function( require ) {
 
     /** @override */
     reset: function() {
-      callSuper( GraphTheLine, "reset", this );
+      GraphTheLine.prototype.reset.call( this );
       this.p1.reset();
       this.p2.reset();
       this.p3.reset();

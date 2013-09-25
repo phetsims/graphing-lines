@@ -44,7 +44,6 @@ define( function( require ) {
       var equationForms, slope, yIntercept, point;
 
       // for slope manipulation challenges, 1 slope must come from each list
-      debugger;//XXX
       slopeArrays = ChallengeFactory2.createSlopeArrays(); // same slopes as level 1
       slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
 

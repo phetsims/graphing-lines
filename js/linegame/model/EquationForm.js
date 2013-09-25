@@ -9,7 +9,7 @@ define( function() {
   'use strict';
 
   return Object.freeze( {
-    SLOPE_INTERCEPT: {}, /* y = mx + b */
-    POINT_SLOPE: {} /* (y2 - y1) = m(x2 - x1) */
+    SLOPE_INTERCEPT: 'SLOPE_INTERCEPT', /* y = mx + b */
+    POINT_SLOPE: 'POINT_SLOPE' /* (y2 - y1) = m(x2 - x1) */
   } );
 } );

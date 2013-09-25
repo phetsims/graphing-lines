@@ -12,12 +12,12 @@ define( function( require ) {
   'use strict';
 
   return Object.freeze( {
-    FIRST_CHECK: {},
-    TRY_AGAIN: {},
-    SECOND_CHECK: {},
-    SHOW_ANSWER: {},
-    NEXT: {},
-    NONE: {} // use this value when game is not in the "play" phase
+    FIRST_CHECK: 'FIRST_CHECK',
+    TRY_AGAIN: 'TRY_AGAIN',
+    SECOND_CHECK: 'SECOND_CHECK',
+    SHOW_ANSWER: 'SHOW_ANSWER',
+    NEXT: 'NEXT',
+    NONE: 'NONE' // use this value when game is not in the "play" phase
   });
 } );
 

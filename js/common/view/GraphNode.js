@@ -15,7 +15,6 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -23,6 +22,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -151,7 +151,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    var labelNode = new Text( GLStrings["symbol.x"], { font: AXIS_LABEL_FONT } );
+    var labelNode = new Text( strings["symbol.x"], { font: AXIS_LABEL_FONT } );
     this.addChild( labelNode );
     labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
     labelNode.centerY = lineNode.centerY;
@@ -203,7 +203,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    var labelNode = new Text( GLStrings["symbol.y"], { font: AXIS_LABEL_FONT } );
+    var labelNode = new Text( strings["symbol.y"], { font: AXIS_LABEL_FONT } );
     this.addChild( labelNode );
     labelNode.centerX = lineNode.centerX;
     labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;

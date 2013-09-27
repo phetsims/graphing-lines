@@ -12,12 +12,12 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var TextButton = require( 'SUN/TextButton' );
 
   // constants
@@ -45,7 +45,7 @@ define( function( require ) {
     var expandCollapseButton = new ExpandCollapseButton( 30, maximizedProperty );
 
     // Save Line button
-    var saveLineButton = new TextButton( GLStrings.saveLine, function() {
+    var saveLineButton = new TextButton( strings.saveLine, function() {
       savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) );
     }, {
       font: BUTTON_FONT,
@@ -54,7 +54,7 @@ define( function( require ) {
     } );
 
     // Erase Lines button
-    var eraseLinesButton = new TextButton( GLStrings.eraseLines, function() {
+    var eraseLinesButton = new TextButton( strings.eraseLines, function() {
       savedLines.clear();
     }, {
       font: BUTTON_FONT,

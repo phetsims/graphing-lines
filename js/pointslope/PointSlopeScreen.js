@@ -10,17 +10,17 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
 
   // images
   var pointSlopeImage = require( 'image!GRAPHING_LINES/../images/PointSlope-icon.png' );
 
   function PointSlopeScreen() {
 
-    this.name = GLStrings[ "tab.pointSlope" ];
+    this.name = strings[ "tab.pointSlope" ];
     this.icon = new Image( pointSlopeImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

@@ -14,7 +14,6 @@ define( function( require ) {
   // imports
   var CoordinateSpinner = require( 'GRAPHING_LINES/common/view/spinner/CoordinateSpinner' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
@@ -26,6 +25,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -65,7 +65,7 @@ define( function( require ) {
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    var mNode = new Text( GLStrings["symbol.slope"], staticOptions );
+    var mNode = new Text( strings["symbol.slope"], staticOptions );
     var interactiveEqualsNode = new Text( "=", staticOptions );
     // y2 - y2
     var y2Node = new CoordinateSpinner( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
@@ -235,19 +235,19 @@ define( function( require ) {
     var font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // m =
-    var htmlLeftSide = StringUtils.format( "{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{1} =", GLStrings.slope, GLStrings["symbol.slope"] );
+    var htmlLeftSide = StringUtils.format( "{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{1} =", strings.slope, strings["symbol.slope"] );
     var leftSideNode = new HTMLText( htmlLeftSide, { font: font, fill: options.fill } );
 
     // y2 - y1
     //TODO is this OK?
     //NOTE: <font> tag is deprecated in HTML4 and unsupported in HTML5. But as of Java 1.7, Swing (supposedly) implements a subset of HTML3.
     var pattern = "<html>{0}<font size='-1'><sub>2</sub></font> - {1}<font size='-1'><sub>1</sub></font></html>"; // same for numerator and denominator
-    var htmlNumerator = StringUtils.format( pattern, GLStrings["symbol.y"], GLStrings["symbol.y"] );
+    var htmlNumerator = StringUtils.format( pattern, strings["symbol.y"], strings["symbol.y"] );
 //    var numeratorNode = new HTMLText( htmlNumerator, { font: font, fill: options.fill } ); //TODO vertical layout problems with HTMLText, height wrong?
     var numeratorNode = new Text( "y2 - y1", { font: font, fill: options.fill } );
 
     // x2 - x1
-    var htmlDenominator = StringUtils.format( pattern, GLStrings["symbol.x"], GLStrings["symbol.x"] );
+    var htmlDenominator = StringUtils.format( pattern, strings["symbol.x"], strings["symbol.x"] );
 //    var denominatorNode = new HTMLText( htmlDenominator, { font: font, fill: options.fill } ); //TODO vertical layout problems with HTMLText, height wrong?
     var denominatorNode = new Text( "x2 - x1", { font: font, fill: options.fill } );
 
@@ -287,14 +287,14 @@ define( function( require ) {
     var font = new PhetFont( { size: fontSize, weight: 'bold' } );
 
     // m is
-    var slopeIsNode = new Text( StringUtils.format( GLStrings.slopeIs, GLStrings["symbol.slope"] ), { font: font, fill: color } );
+    var slopeIsNode = new Text( StringUtils.format( strings.slopeIs, strings["symbol.slope"] ), { font: font, fill: color } );
     equationNode.addChild( slopeIsNode );
     slopeIsNode.x = 0;
     slopeIsNode.y = 0;
 
     if ( line.undefinedSlope() ) {
       // "undefined slope"
-      var undefinedSlope = new Text( GLStrings.undefined, { font: font, fill: color } );
+      var undefinedSlope = new Text( strings.undefined, { font: font, fill: color } );
       equationNode.addChild( undefinedSlope );
       undefinedSlope.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
       undefinedSlope.y = slopeIsNode.y;

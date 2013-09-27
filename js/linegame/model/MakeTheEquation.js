@@ -11,9 +11,9 @@ define( function( require ) {
 
   // imports
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MakeTheEquationNode = require( 'GRAPHING_LINES/linegame/view/MakeTheEquationNode' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -27,7 +27,7 @@ define( function( require ) {
    */
   function MakeTheEquation( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     Challenge.call( this,
-      Challenge.createTitle( GLStrings.makeTheEquation, manipulationMode ),
+      Challenge.createTitle( strings.makeTheEquation, manipulationMode ),
       description,
       answer,
       equationForm,

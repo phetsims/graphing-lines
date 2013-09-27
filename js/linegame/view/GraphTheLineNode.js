@@ -15,7 +15,6 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
@@ -24,11 +23,12 @@ define( function( require ) {
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeGraphNode' );
   var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptGraphNode' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TwoPointsGraphNode = require( 'GRAPHING_LINES/linegame/view/TwoPointsGraphNode' );
 
   // constants
-  var NOT_A_LINE = new Text( GLStrings.notALine, { font: new PhetFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
+  var NOT_A_LINE = new Text( strings.notALine, { font: new PhetFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
   /**
    * @param {GraphTheLine} challenge
@@ -52,11 +52,11 @@ define( function( require ) {
     var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
     // Answer
-    var answerBoxNode = new EquationBoxNode( GLStrings.lineToGraph, challenge.answer.color, boxSize,
+    var answerBoxNode = new EquationBoxNode( strings.lineToGraph, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
 
     // Guess
-    thisNode.guessBoxNode = new EquationBoxNode( GLStrings.yourLine, Color.BLACK, boxSize, new Node() ); // dummy equation
+    thisNode.guessBoxNode = new EquationBoxNode( strings.yourLine, Color.BLACK, boxSize, new Node() ); // dummy equation
 
     // Graph
     thisNode.graphNode = this.createGraphNode( challenge );
@@ -99,7 +99,7 @@ define( function( require ) {
       thisNode.subclassParent.removeChild( thisNode.guessBoxNode );
       var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT_SIZE, line.color );
       var color = ( !line ) ? LineGameConstants.GUESS_COLOR : line.color;
-      thisNode.guessBoxNode = new EquationBoxNode( GLStrings.yourLine, color, boxSize, equationNode );
+      thisNode.guessBoxNode = new EquationBoxNode( strings.yourLine, color, boxSize, equationNode );
 
       // adjust position of guess equation so that it's below the answer
       thisNode.guessBoxNode.left = answerBoxNode.left;

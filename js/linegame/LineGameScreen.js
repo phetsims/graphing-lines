@@ -10,17 +10,17 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
 
   // images
   var gameImage = require( 'image!GRAPHING_LINES/../images/Game-icon.png' );
 
   function GameScreen() {
 
-    this.name = GLStrings[ "tab.lineGame" ];
+    this.name = strings[ "tab.lineGame" ];
     this.icon = new Image( gameImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

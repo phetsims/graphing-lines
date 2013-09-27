@@ -19,7 +19,6 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -29,6 +28,7 @@ define( function( require ) {
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
@@ -66,10 +66,10 @@ define( function( require ) {
       // buttons
     var doNothing = function(){}; //TODO delete this when sun#21 is addressed
     var buttonOptions = { font: LineGameConstants.BUTTON_FONT, rectangleFillUp: LineGameConstants.BUTTON_COLOR };
-    thisNode.checkButton = new TextButton( GLStrings.check, doNothing, buttonOptions );
-    var tryAgainButton = new TextButton( GLStrings.tryAgain, doNothing, buttonOptions );
-    var showAnswerButton = new TextButton( GLStrings.showAnswer, doNothing, buttonOptions );
-    var nextButton = new TextButton( GLStrings.next, doNothing, buttonOptions );
+    thisNode.checkButton = new TextButton( strings.check, doNothing, buttonOptions );
+    var tryAgainButton = new TextButton( strings.tryAgain, doNothing, buttonOptions );
+    var showAnswerButton = new TextButton( strings.showAnswer, doNothing, buttonOptions );
+    var nextButton = new TextButton( strings.next, doNothing, buttonOptions );
 
     // developer buttons, no i18n
     var devButtonOptions = { font: new PhetFont( 12 ), rectangleFillUp: Color.WHITE };
@@ -136,7 +136,7 @@ define( function( require ) {
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
         model.results.scoreProperty.set( model.results.scoreProperty.get() + points );
-        thisNode.pointsAwardedNode.text = StringUtils.format( GLStrings.pointsAwarded, points );
+        thisNode.pointsAwardedNode.text = StringUtils.format( strings.pointsAwarded, points );
         // points to right of face
         thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;
         thisNode.pointsAwardedNode.centerY = thisNode.faceNode.centerY;

@@ -11,7 +11,6 @@ define( function( require ) {
 
   // imports
   var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -19,6 +18,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var Property = require( 'AXON/Property' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
 
   /**
    * @param {String} title title that is visible to the user
@@ -134,16 +134,16 @@ define( function( require ) {
   // Creates a standard title for the challenge, based on what the user can manipulate.
   Challenge.createTitle = function( defaultTitle, manipulationMode ) {
     if ( manipulationMode === ManipulationMode.SLOPE ) {
-      return GLStrings.setTheSlope;
+      return strings.setTheSlope;
     }
     else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
-      return GLStrings.setTheYIntercept;
+      return strings.setTheYIntercept;
     }
     else if ( manipulationMode === ManipulationMode.POINT ) {
-      return GLStrings.setThePoint;
+      return strings.setThePoint;
     }
     else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
-      return GLStrings.putPointsOnLine;
+      return strings.putPointsOnLine;
     }
     else {
       return defaultTitle;

@@ -16,7 +16,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
@@ -25,6 +24,7 @@ define( function( require ) {
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   /**
@@ -50,13 +50,13 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode =
-      new EquationBoxNode( GLStrings.aCorrectEquation, challenge.answer.color, boxSize,
+      new EquationBoxNode( strings.aCorrectEquation, challenge.answer.color, boxSize,
         ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
     answerBoxNode.visible = false;
 
     // Guess
     var guessBoxNode =
-      new EquationBoxNode( GLStrings.yourEquation, challenge.guess.get().color, boxSize,
+      new EquationBoxNode( strings.yourEquation, challenge.guess.get().color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guess, challenge.graph,
           LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guess.get().color ) );
 

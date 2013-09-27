@@ -10,17 +10,17 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
   var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
 
   // images
   var slopeImage = require( 'image!GRAPHING_LINES/../images/Slope-icon.png' );
 
   function SlopeScreen() {
 
-    this.name = GLStrings[ "tab.slope" ];
+    this.name = strings[ "tab.slope" ];
     this.icon = new Image( slopeImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

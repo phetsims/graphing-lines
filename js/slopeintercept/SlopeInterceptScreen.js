@@ -10,17 +10,17 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
-  var GLStrings = require( 'GRAPHING_LINES/common/GLStrings' );
   var Image = require( 'SCENERY/nodes/Image' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeIntercept/model/SlopeInterceptModel' );
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeIntercept/view/SlopeInterceptView' );
+  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
 
   // images
   var slopeInterceptImage = require( 'image!GRAPHING_LINES/../images/SlopeIntercept-icon.png' );
 
   function SlopeInterceptScreen() {
 
-    this.name = GLStrings[ "tab.slopeIntercept" ];
+    this.name = strings[ "tab.slopeIntercept" ];
     this.icon = new Image( slopeInterceptImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

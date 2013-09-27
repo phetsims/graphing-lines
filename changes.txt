@@ -1,3 +1,4 @@
+9/27/13 move GLStrings.js to graphing-lines-strings.js
 9/24/13 fixes to linegame package
 9/24/13 add missing strings that came from 'games' package in Java
 9/24/13 replace phet-core.callSuper with Supertype.prototype.method.call( this,...)

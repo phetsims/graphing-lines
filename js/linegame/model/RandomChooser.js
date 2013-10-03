@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Range = require( 'DOT/Range' );
 
   var RandomChooser = {

@@ -11,7 +11,6 @@ define( function( require ) {
 
   // imports
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var assert = require( 'ASSERT/assert' )( 'graphing-lines' );
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );

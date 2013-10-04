@@ -34,11 +34,16 @@ define( function( require ) {
   var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
+
+  // strings
+  var symbolInterceptString = require( 'string!GRAPHING_LINES/symbol.intercept' );
+  var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
+  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
+  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
    * @param {Property<Line>} interactiveLineProperty
@@ -88,7 +93,7 @@ define( function( require ) {
     var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // nodes: y = -(rise/run)x + -b
-    yNode = new Text( strings["symbol.y"], staticOptions );
+    yNode = new Text( symbolYString, staticOptions );
     equalsNode = new Text( "=", staticOptions );
     slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
     if ( options.interactiveSlope ) {
@@ -100,7 +105,7 @@ define( function( require ) {
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     slopeFractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
-    xNode = new Text( strings["symbol.x"], _.extend( { absoluteValue: true }, staticOptions ) );
+    xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptNode = new Spinner( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
@@ -374,7 +379,7 @@ define( function( require ) {
   SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
     var html = StringUtils.format( "{0} = {1}{2} + {3}",
-      strings["symbol.y"], strings["symbol.slope"], strings["symbol.x"], strings["symbol.intercept"] );
+      symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
     return new HTMLText( html, { font: options.font, pickable: false } );
 
   };

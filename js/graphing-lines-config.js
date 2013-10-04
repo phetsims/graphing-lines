@@ -11,20 +11,16 @@ require.config( {
 
   deps: ['graphing-lines-main'],
 
-  config: {
-    i18n: {
-      locale: 'en_us'
-    }
-  },
-
   paths: {
 
     // third-party libs
+    text: '../../sherpa/text',
     i18n: '../../sherpa/i18n-2.0.4',
 
     // PhET plugins
     audio: '../../chipper/requirejs-plugins/audio',
     image: '../../chipper/requirejs-plugins/image',
+    string: '../../chipper/requirejs-plugins/string',
 
     // PhET libs, uppercase names to identify them in require.js imports
     ASSERT: '../../assert/js',

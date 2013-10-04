@@ -17,7 +17,12 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var Property = require( 'AXON/Property' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
+
+  // strings
+  var putPointsOnLineString = require( 'string!GRAPHING_LINES/putPointsOnLine' );
+  var setThePointString = require( 'string!GRAPHING_LINES/setThePoint' );
+  var setTheSlopeString = require( 'string!GRAPHING_LINES/setTheSlope' );
+  var setTheYInterceptString = require( 'string!GRAPHING_LINES/setTheYIntercept' );
 
   /**
    * @param {String} title title that is visible to the user
@@ -133,16 +138,16 @@ define( function( require ) {
   // Creates a standard title for the challenge, based on what the user can manipulate.
   Challenge.createTitle = function( defaultTitle, manipulationMode ) {
     if ( manipulationMode === ManipulationMode.SLOPE ) {
-      return strings.setTheSlope;
+      return setTheSlopeString;
     }
     else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
-      return strings.setTheYIntercept;
+      return setTheYInterceptString;
     }
     else if ( manipulationMode === ManipulationMode.POINT ) {
-      return strings.setThePoint;
+      return setThePointString;
     }
     else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
-      return strings.putPointsOnLine;
+      return putPointsOnLineString;
     }
     else {
       return defaultTitle;

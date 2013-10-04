@@ -17,8 +17,11 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var TextButton = require( 'SUN/TextButton' );
+
+  // strings
+  var saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
+  var eraseLinesString = require( 'string!GRAPHING_LINES/eraseLines' );
 
   // constants
   var BUTTON_FONT = new PhetFont( 18 );
@@ -45,7 +48,7 @@ define( function( require ) {
     var expandCollapseButton = new ExpandCollapseButton( 30, maximizedProperty );
 
     // Save Line button
-    var saveLineButton = new TextButton( strings.saveLine, function() {
+    var saveLineButton = new TextButton( saveLineString, function() {
       savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) );
     }, {
       font: BUTTON_FONT,
@@ -54,7 +57,7 @@ define( function( require ) {
     } );
 
     // Erase Lines button
-    var eraseLinesButton = new TextButton( strings.eraseLines, function() {
+    var eraseLinesButton = new TextButton( eraseLinesString, function() {
       savedLines.clear();
     }, {
       font: BUTTON_FONT,

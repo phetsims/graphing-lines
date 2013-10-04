@@ -32,11 +32,15 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
+
+  // strings
+  var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
+  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
+  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
    * @param {Property<Line>} interactiveLineProperty
@@ -86,7 +90,7 @@ define( function( require ) {
 
     // nodes: (y-y1) = m(x-x1)
     yLeftParenNode = new Text( "(", staticOptions );
-    yNode = new Text( strings["symbol.y"], staticOptions );
+    yNode = new Text( symbolYString, staticOptions );
     yOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveY1 ) {
       y1Node = new Spinner( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
@@ -108,7 +112,7 @@ define( function( require ) {
     }
     fractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
     xLeftParenNode = new Text( "(", staticOptions );
-    xNode = new Text( strings["symbol.x"], staticOptions );
+    xNode = new Text( symbolXString, staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveX1 ) {
       x1Node = new Spinner( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
@@ -366,7 +370,7 @@ define( function( require ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
     //TODO Is this OK? <font> tag is deprecated in HTML4 and unsupported in HTML5.
     var html = StringUtils.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>",
-      strings["symbol.y"], strings["symbol.y"], strings["symbol.slope"], strings["symbol.x"], strings["symbol.x"] );
+      symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
     return new HTMLText( html, { font: options.font, pickable: false } );
   };
 

@@ -28,10 +28,16 @@ define( function( require ) {
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
+
+  // strings
+  var checkString = require( 'string!GRAPHING_LINES/check' );
+  var pointsAwardedString = require( 'string!GRAPHING_LINES/pointsAwarded' );
+  var nextString = require( 'string!GRAPHING_LINES/next' );
+  var showAnswerString = require( 'string!GRAPHING_LINES/showAnswer' );
+  var tryAgainString = require( 'string!GRAPHING_LINES/tryAgain' );
 
   /**
    * Constructor
@@ -66,10 +72,10 @@ define( function( require ) {
       // buttons
     var doNothing = function(){}; //TODO delete this when sun#21 is addressed
     var buttonOptions = { font: LineGameConstants.BUTTON_FONT, rectangleFillUp: LineGameConstants.BUTTON_COLOR };
-    thisNode.checkButton = new TextButton( strings.check, doNothing, buttonOptions );
-    var tryAgainButton = new TextButton( strings.tryAgain, doNothing, buttonOptions );
-    var showAnswerButton = new TextButton( strings.showAnswer, doNothing, buttonOptions );
-    var nextButton = new TextButton( strings.next, doNothing, buttonOptions );
+    thisNode.checkButton = new TextButton( checkString, doNothing, buttonOptions );
+    var tryAgainButton = new TextButton( tryAgainString, doNothing, buttonOptions );
+    var showAnswerButton = new TextButton( showAnswerString, doNothing, buttonOptions );
+    var nextButton = new TextButton( nextString, doNothing, buttonOptions );
 
     // developer buttons, no i18n
     var devButtonOptions = { font: new PhetFont( 12 ), rectangleFillUp: Color.WHITE };
@@ -136,7 +142,7 @@ define( function( require ) {
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
         model.results.scoreProperty.set( model.results.scoreProperty.get() + points );
-        thisNode.pointsAwardedNode.text = StringUtils.format( strings.pointsAwarded, points );
+        thisNode.pointsAwardedNode.text = StringUtils.format( pointsAwardedString, points );
         // points to right of face
         thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;
         thisNode.pointsAwardedNode.centerY = thisNode.faceNode.centerY;

@@ -10,9 +10,11 @@ define( function( require ) {
 
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
+  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
 
   /**
    * @param {Line} line
@@ -21,7 +23,7 @@ define( function( require ) {
    */
   function SlopeUndefinedNode( line, options ) {
     options = _.extend( { pickable: false }, options );
-    Text.call( this, StringUtils.format( strings.slopeUndefined, strings["symbol.x"], line.x1 ), options );
+    Text.call( this, StringUtils.format( strings.slopeUndefined, symbolXString, line.x1 ), options );
   }
 
   return inherit( Text, SlopeUndefinedNode );

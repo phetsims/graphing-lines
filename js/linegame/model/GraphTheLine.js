@@ -13,8 +13,10 @@ define( function( require ) {
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var graphTheLineString = require( 'string!GRAPHING_LINES/graphTheLine' );
 
   /**
    * @param {String} description brief description of the challenge, visible in dev versions
@@ -27,7 +29,7 @@ define( function( require ) {
    */
   function GraphTheLine( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     Challenge.call( this,
-      Challenge.createTitle( strings.graphTheLine, manipulationMode ),
+      Challenge.createTitle( graphTheLineString, manipulationMode ),
       description,
       answer,
       equationForm,

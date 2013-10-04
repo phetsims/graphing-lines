@@ -13,14 +13,16 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeIntercept/model/SlopeInterceptModel' );
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeIntercept/view/SlopeInterceptView' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
+
+  // strings
+  var slopeInterceptString = require( 'string!GRAPHING_LINES/tab.slopeIntercept' );
 
   // images
   var slopeInterceptImage = require( 'image!GRAPHING_LINES/../images/SlopeIntercept-icon.png' );
 
   function SlopeInterceptScreen() {
 
-    this.name = strings[ "tab.slopeIntercept" ];
+    this.name = slopeInterceptString;
     this.icon = new Image( slopeInterceptImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

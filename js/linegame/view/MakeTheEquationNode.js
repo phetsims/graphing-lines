@@ -24,8 +24,11 @@ define( function( require ) {
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
+  var aCorrectEquationString = require( 'string!GRAPHING_LINES/aCorrectEquation' );
+  var yourEquationString = require( 'string!GRAPHING_LINES/yourEquation' );
 
   /**
    * @param {GraphTheLine} challenge
@@ -50,13 +53,13 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode =
-      new EquationBoxNode( strings.aCorrectEquation, challenge.answer.color, boxSize,
+      new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
         ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
     answerBoxNode.visible = false;
 
     // Guess
     var guessBoxNode =
-      new EquationBoxNode( strings.yourEquation, challenge.guess.get().color, boxSize,
+      new EquationBoxNode( yourEquationString, challenge.guess.get().color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guess, challenge.graph,
           LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guess.get().color ) );
 

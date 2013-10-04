@@ -18,10 +18,13 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var pointUnknownString = require( 'string!GRAPHING_LINES/point.unknown' );
+  var pointXYString = require( 'string!GRAPHING_LINES/point.xy' );
 
   // images
   var bodyImage = require( 'image!GRAPHING_LINES/../images/point_tool_body.png' );
@@ -173,7 +176,7 @@ define( function( require ) {
         }
       }
       else {
-        thisNode._setCoordinatesString( strings["point.unknown"] );
+        thisNode._setCoordinatesString( pointUnknownString );
         thisNode._setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
         thisNode._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
       }
@@ -193,7 +196,7 @@ define( function( require ) {
 
     // Sets the displayed value to a point
     _setCoordinatesVector2: function( p ) {
-      this._setCoordinatesString( StringUtils.format( strings["point.xy"], Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
+      this._setCoordinatesString( StringUtils.format( pointXYString, Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
     },
 
     // Sets the displayed value to an arbitrary string

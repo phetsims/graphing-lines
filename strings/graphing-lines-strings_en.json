@@ -1,6 +1,4 @@
-// Copyright 2002-2013, University of Colorado
-
-define( {
+{
   "check": "Check",
   "graphing-lines.name": "Graphing Lines",
   "eraseLines": "Erase Lines",
@@ -35,4 +33,4 @@ define( {
   "point.unknown": "( ?, ? )",
   "pointsAwarded": "+{0}",
   "slopeIs": "{0} is"
-} );
+}

@@ -13,14 +13,16 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
+
+  // strings
+  var lineGameString = require( 'string!GRAPHING_LINES/tab.lineGame' );
 
   // images
   var gameImage = require( 'image!GRAPHING_LINES/../images/Game-icon.png' );
 
   function GameScreen() {
 
-    this.name = strings[ "tab.lineGame" ];
+    this.name = lineGameString;
     this.icon = new Image( gameImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

@@ -21,9 +21,12 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  // strings
+  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
+  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   //----------------------------------------------------------------------------------------
   // constants
@@ -150,7 +153,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    var labelNode = new Text( strings["symbol.x"], { font: AXIS_LABEL_FONT } );
+    var labelNode = new Text( symbolXString, { font: AXIS_LABEL_FONT } );
     this.addChild( labelNode );
     labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
     labelNode.centerY = lineNode.centerY;
@@ -202,7 +205,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    var labelNode = new Text( strings["symbol.y"], { font: AXIS_LABEL_FONT } );
+    var labelNode = new Text( symbolYString, { font: AXIS_LABEL_FONT } );
     this.addChild( labelNode );
     labelNode.centerX = lineNode.centerX;
     labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;

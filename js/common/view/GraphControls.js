@@ -18,12 +18,17 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
+  // strings
+  var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
+  var slopeString = require( 'string!GRAPHING_LINES/slope' );
+  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
+  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
+
   // constants
-  var Y_EQUALS_X = StringUtils.format( "{0} = {1}", strings["symbol.y"], strings["symbol.x"] );
-  var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", strings["symbol.y"], strings["symbol.x"] );
+  var Y_EQUALS_X = StringUtils.format( "{0} = {1}", symbolYString, symbolXString );
+  var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", symbolYString, symbolXString );
 
   /**
    * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?
@@ -48,12 +53,12 @@ define( function( require ) {
     // check boxes
     var TEXT_OPTIONS = { font: new PhetFont( 18 ) };
     var ICON_SIZE = 60;
-    var hideLinesCheckBox = CheckBox.createTextCheckBox( strings.hideLines, TEXT_OPTIONS, notLinesVisibleProperty );
+    var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
     var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
       { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
     var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
       { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
-    var slopeCheckBox = CheckBox.createTextCheckBox( strings.slope, TEXT_OPTIONS, slopeVisibleProperty,
+    var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeVisibleProperty,
       { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this

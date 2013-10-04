@@ -12,8 +12,8 @@ require( [
   'GRAPHING_LINES/slopeIntercept/SlopeInterceptScreen',
   'GRAPHING_LINES/pointSlope/PointSlopeScreen',
   'GRAPHING_LINES/linegame/LineGameScreen',
-  'GRAPHING_LINES/graphing-lines-strings' ],
-  function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, LineGameScreen, strings ) {
+  'string!GRAPHING_LINES/graphing-lines.name' ],
+  function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, LineGameScreen, simTitle ) {
     'use strict';
 
     //TODO i18n?
@@ -34,7 +34,7 @@ require( [
     }
 
     SimLauncher.launch( function() {
-      var sim = new Sim( strings[ "graphing-lines.name" ], [
+      var sim = new Sim( simTitle, [
         new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ],
         simOptions );
       sim.start();

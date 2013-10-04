@@ -13,14 +13,16 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
   var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
+
+  // strings
+  var slopeString = require( 'string!GRAPHING_LINES/tab.slope' );
 
   // images
   var slopeImage = require( 'image!GRAPHING_LINES/../images/Slope-icon.png' );
 
   function SlopeScreen() {
 
-    this.name = strings[ "tab.slope" ];
+    this.name = slopeString;
     this.icon = new Image( slopeImage );
     this.backgroundColor = new Color( 255, 255, 214 );
 

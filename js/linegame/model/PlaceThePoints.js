@@ -19,7 +19,6 @@ define( function( require ) {
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
   var Property = require( 'AXON/Property' );
-  var strings = require( 'GRAPHING_LINES/graphing-lines-strings' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**

@@ -8,7 +8,6 @@ HIGH
 - consolidate equation fontSize and fontWeight in GLConfig
 
 MEDIUM
-- line highlighting has problems, doesn't highlight entire equation, Text bounds issue?
 - rounded corners on spinners, see Shape.roundRect
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
 - horizontal space between text and icons is wrong in sun.CheckBox, problem with scenery.Text bounds?

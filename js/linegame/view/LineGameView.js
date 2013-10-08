@@ -53,7 +53,7 @@ define( function( require ) {
 
       // play audio when game ends
       if ( gamePhase === GamePhase.RESULTS ) {
-        if ( model.results.score.get() === model.getPerfectScore() ) {
+        if ( model.results.scoreProperty.get() === model.getPerfectScore() ) {
           audioPlayer.gameOverPerfectScore();
         }
         else {

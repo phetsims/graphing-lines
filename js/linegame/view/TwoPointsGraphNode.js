@@ -44,8 +44,8 @@ define( function( require ) {
     // Sync with the guess
     challenge.guess.link( function( line ) {
       // move the manipulators
-      x1y1Manipulator.setOffset( challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) ) );
-      x2y2Manipulator.setOffset( challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) ) );
+      x1y1Manipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+      x2y2Manipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
   }
 

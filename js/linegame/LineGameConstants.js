@@ -16,7 +16,7 @@ define( function( require ) {
     // fonts
     TITLE_FONT: new PhetFont( { size: 40, weight: 'bold' } ),
     BUTTON_FONT: new PhetFont( { size: 30, weight: 'bold' } ),
-    INTERACTIVE_EQUATION_FONT: new PhetFont( { size: 28, weight: 'bold' } ),
+    INTERACTIVE_EQUATION_FONT_SIZE: 28,
     STATIC_EQUATION_FONT_SIZE: 28,
     POINTS_AWARDED_FONT: new PhetFont( { size: 36, weight: 'bold' } ),
 

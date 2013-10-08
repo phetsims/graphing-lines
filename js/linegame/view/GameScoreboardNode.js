@@ -9,7 +9,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   function GameScoreboardNode() {
-    Rectangle.call( this, 0, 0, 500, 100, { fill: 'gray', stroke: 'black' } );
+    Rectangle.call( this, 0, 0, 1000, 50, { fill: 'rgb(155,191,255)', stroke: 'black' } );
   }
 
   return inherit( Rectangle, GameScoreboardNode, {

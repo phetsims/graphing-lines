@@ -14,6 +14,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
+  var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
   var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
 
   /**
@@ -23,7 +24,7 @@ define( function( require ) {
    */
   function SlopeUndefinedNode( line, options ) {
     options = _.extend( { pickable: false }, options );
-    Text.call( this, StringUtils.format( strings.slopeUndefined, symbolXString, line.x1 ), options );
+    Text.call( this, StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), options );
   }
 
   return inherit( Text, SlopeUndefinedNode );

@@ -105,6 +105,15 @@ define( function( require ) {
     // True if the guess and answer are descriptions of the same line.
     isCorrect: function() {
       return this.answer.same( this.guess.get() );
+    },
+
+    toString: function() {
+      return this.constructor.name + "[" +
+             " title=" + this.title +
+             " answer=" + this.answer.toString() +
+             " equationForm=" + this.equationForm +
+             " manipulationMode=" + this.manipulationMode +
+             " ]";
     }
   };
 

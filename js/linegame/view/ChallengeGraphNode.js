@@ -53,7 +53,7 @@ define( function( require ) {
 
     // guess
     thisNode.guessParentNode = new Node(); //TODO eliminate parent?
-    thisNode.guessPointVisible = true;
+    thisNode.guessPointVisible = false;
 
     // slope tool
     thisNode.slopeToolNode = slopeToolEnabled ? new SlopeToolNode( challenge.guess, challenge.mvt ) : new Node();

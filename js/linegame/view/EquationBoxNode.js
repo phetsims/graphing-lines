@@ -75,9 +75,9 @@ define( function( require ) {
       // icons in upper-right corner
       var iconXMargin = 10;
       var iconYMargin = 5;
-      thisNode.correctIconNode.left = boxNode.right - iconXMargin;
+      thisNode.correctIconNode.right = boxNode.right - iconXMargin;
       thisNode.correctIconNode.top = boxNode.top + iconYMargin;
-      thisNode.incorrectIconNode.left = boxNode.right - iconXMargin;
+      thisNode.incorrectIconNode.right = boxNode.right - iconXMargin;
       thisNode.incorrectIconNode.top = boxNode.top + iconYMargin;
     }
 

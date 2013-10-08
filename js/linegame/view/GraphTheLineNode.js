@@ -85,7 +85,7 @@ define( function( require ) {
 
       // title above answer equation, left justified
       titleNode.left = answerBoxNode.left;
-      titleNode.bottom = answerBoxNode.top = 20;
+      titleNode.bottom = answerBoxNode.top - 20;
     }
 
     // Update visibility of the correct/incorrect icons.

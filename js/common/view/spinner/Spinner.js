@@ -20,6 +20,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var Timer = require( 'JOIST/Timer' );
   var Util = require( 'DOT/Util' );
 
   // creates a vertical gradient where with color1 at the top and bottom, color2 in the center
@@ -48,11 +49,11 @@ define( function( require ) {
     var intervalID = null;
     var cleanupTimer = function() {
       if ( timeoutID ) {
-        window.clearTimeout( timeoutID );
+        Timer.clearTimeout( timeoutID );
         timeoutID = null;
       }
       if ( intervalID ) {
-        window.clearInterval( intervalID );
+        Timer.clearInterval( intervalID );
         intervalID = null;
       }
     };
@@ -71,10 +72,10 @@ define( function( require ) {
       down: function() {
         stateProperty.set( 'down' );
         fired = false;
-        timeoutID = window.setTimeout( function() {
+        timeoutID = Timer.setTimeout( function() {
           timeoutID = null;
           fired = true;
-          intervalID = window.setInterval( function() {
+          intervalID = Timer.setInterval( function() {
             if ( enabledProperty.get() ) {
               fireFunction();
             }

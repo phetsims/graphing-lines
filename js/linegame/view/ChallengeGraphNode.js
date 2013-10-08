@@ -77,7 +77,7 @@ define( function( require ) {
         thisNode.guessPointNode = new PlottedPointNode( pointDiameter, line.color );
         thisNode.guessPointNode.visible = thisNode.guessPointVisible;
         thisNode.guessParentNode.addChild( thisNode.guessPointNode );
-        thisNode.guessPointNode.translation = challenge.mvt.modelToViewPosition( line.x1, line.y1 );
+        thisNode.guessPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       }
     } );
 

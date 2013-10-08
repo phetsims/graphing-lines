@@ -34,7 +34,7 @@ define( function( require ) {
    * @constructor
    */
   function LineNode( line, graph, mvt ) {
-    Node.call( this );
+    Node.call( this, { pickable: false } );
 
     this.line = line;
 
@@ -154,19 +154,6 @@ define( function( require ) {
 
     setEquationVisible: function( visible ) {
       this._equationParentNode.visible = visible;
-    },
-
-    // Changes the line and equation color, used to support mouse-over highlighting of saved lines.
-    updateColor: function( color ) {
-
-      this._arrowNode.fill = color;
-
-       // same equation, same position, new color
-      var translation = this._equationNode.translation;
-      this._equationParentNode.removeChild( this._equationNode );
-      this._equationNode = this.createEquationNode( this.line, EQUATION_FONT_SIZE, color );
-      this._equationNode.translation = translation;
-      this._equationParentNode.addChild( this._equationNode );
     }
   } );
 } );

@@ -18,12 +18,9 @@ LOW
 - convert icons to images in IconFactory
 - convert models to PropertySet and axon style
 - change 'tab.*' string keys to 'screen.*'
-- remove '.' from string keys so we don't have to use GLStrings["foo.bar"]
-- import all string files from Java sim
 - omit subtype-specific options before passing them to supertype, phet-core#3
 - i18n of credits
 - ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
-- use scenery-phet.ResetAllButton
 
 PERFORMANCE
 - lousy on iPad
@@ -32,6 +29,5 @@ PERFORMANCE
 
 MIGRATE TO COMMON
 - Spinner
-- generalize timer code used in Spinner, borrowed from scenery-phet.ArrowButton
 - ExpandCollapseButton
 

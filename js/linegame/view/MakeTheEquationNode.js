@@ -90,12 +90,12 @@ define( function( require ) {
 
       // title above guess equation, left justified
       titleNode.left = guessBoxNode.left;
-      titleNode.bottom = guessBoxNode.top = 20;
+      titleNode.bottom = guessBoxNode.top - 20;
     }
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, new Color( 0, 0, 0, 25 ) );
+      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, new Color( 0, 0, 0, 0.1 ) );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;
       thisNode.addChild( devAnswerNode );

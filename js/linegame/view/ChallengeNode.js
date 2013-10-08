@@ -48,6 +48,8 @@ define( function( require ) {
    */
   function ChallengeNode( challenge, model, challengeSize, audioPlayer ) {
 
+    console.log( this.constructor.name + " challenge=" + challenge.toString() );//XXX
+
     var thisNode = this;
     Node.call( thisNode );
 
@@ -55,7 +57,7 @@ define( function( require ) {
     thisNode.subclassParent = new Node(); // subtypes should add children to this node, to preserve rendering order
 
     // description (dev)
-    var descriptionNode = new Text( challenge.description, { font: new PhetFont( 20 ), fill: 'black' } );
+    var descriptionNode = new Text( challenge.description, { font: new PhetFont( 16 ), fill: 'black' } );
 
     // smiley/frowning face
     thisNode.faceNode = new FaceNode( LineGameConstants.FACE_DIAMETER, {

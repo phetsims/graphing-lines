@@ -4,7 +4,7 @@ DESIGN
 - drop highlighting of saved lines?
 
 HIGH
-- port linegame.view
+- at end of a challenge, plotted point is not always on top of line
 - performance stinks on iPad
 - equations on saved lines are not pickable, so no highlight on 'pointer over'
 - consolidate equation fontSize and fontWeight in GLConfig

@@ -34,7 +34,7 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      thisNode.addChild( new LineNode( challenge.answer.withColor( new Color( 0, 0, 0, 25 ) ), challenge.graph, challenge.mvt ) );
+      thisNode.addChild( new LineNode( challenge.answer.withColor( new Color( 0, 0, 0, 0.1 ) ), challenge.graph, challenge.mvt ) );
     }
 
     var pointDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.POINT_DIAMETER );

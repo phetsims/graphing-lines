@@ -12,13 +12,13 @@ define( function() {
   'use strict';
 
   return Object.freeze( {
-    SLOPE: {},
-    INTERCEPT: {},
-    SLOPE_INTERCEPT: {},
-    POINT: {},
-    POINT_SLOPE: {},
-    TWO_POINTS: {}, /* 2 points that define a line: (x1,y1) and (x2,y2) */
-    THREE_POINTS: {}   /* 3 arbitrary points that may or may not form a line: p1, p2, p3 */
+    SLOPE: 'SLOPE',
+    INTERCEPT: 'INTERCEPT',
+    SLOPE_INTERCEPT: 'SLOPE_INTERCEPT',
+    POINT: 'POINT',
+    POINT_SLOPE: 'POINT_SLOPE',
+    TWO_POINTS: 'TWO_POINTS', /* 2 points that define a line: (x1,y1) and (x2,y2) */
+    THREE_POINTS: 'THREE_POINTS'   /* 3 arbitrary points that may or may not form a line: p1, p2, p3 */
   } );
 } );
 

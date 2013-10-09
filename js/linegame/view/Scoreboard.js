@@ -28,6 +28,7 @@ define( function( require ) {
 
     var thisNode = this;
 
+    //TODO revisit these, odd combination of supertype and composite options
     options = _.extend( {
       font: new PhetFont( 20 ),
       ySpacing: 40,

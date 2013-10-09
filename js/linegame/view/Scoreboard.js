@@ -1,7 +1,8 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 //TODO i18n
-//TODO add ability to hide fields
+//TODO add ability to hide fields, adjust layout accordingly
+//TODO add minWidth option
 define( function( require ) {
   'use strict';
 

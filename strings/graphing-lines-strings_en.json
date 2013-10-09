@@ -32,5 +32,10 @@
   "point.xy": "({0}, {1})",
   "point.unknown": "( ?, ? )",
   "pointsAwarded": "+{0}",
-  "slopeIs": "{0} is"
+  "slopeIs": "{0} is",
+  "level": "Level",
+  "score": "Score",
+  "newGame": "New Game",
+  "pattern.challengeNumber": "Challenge {0} of {1}",
+  "pattern.0label.1value": "{0}: {1}"
 }

@@ -16,13 +16,12 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
 
-  //TODO import these from string files
   // strings
-  var levelString = "Level";
-  var newGameString = "New Game";
-  var pattern_0label_1valueString = "{0}: {1}";
-  var patternChallengeNumberString = "Challenge {0} of {1}";
-  var scoreString = "Score";
+  var levelString = require( 'string!GRAPHING_LINES/level' );
+  var newGameString = require( 'string!GRAPHING_LINES/newGame' );
+  var pattern_0label_1valueString = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
+  var patternChallengeNumberString = require( 'string!GRAPHING_LINES/pattern.challengeNumber' );
+  var scoreString = require( 'string!GRAPHING_LINES/score' );
 
   function Scoreboard( challengeIndexProperty, challengesPerGameProperty, levelProperty, scoreProperty, elapsedTimeProperty, timerEnabledProperty, newGameCallback, options ) {
 

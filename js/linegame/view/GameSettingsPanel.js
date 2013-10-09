@@ -18,6 +18,7 @@ define( function( require ) {
   function GameSettingsPanel( numberOfLevels, levelProperty, timerEnabledProperty, soundEnabledProperty, startFunction, options ) {
 
     options = _.extend( {
+      fill: 'rgb( 235, 235, 235 )',
       titleFont: new PhetFont( 38 ),
       labelFont: new PhetFont( 24 ),
       controlFont: new PhetFont( 24 ),

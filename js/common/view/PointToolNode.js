@@ -27,8 +27,8 @@ define( function( require ) {
   var pointXYString = require( 'string!GRAPHING_LINES/point.xy' );
 
   // images
-  var bodyImage = require( 'image!GRAPHING_LINES/../images/point_tool_body.png' );
-  var tipImage = require( 'image!GRAPHING_LINES/../images/point_tool_tip.png' );
+  var bodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
+  var tipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;

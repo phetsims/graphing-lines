@@ -18,7 +18,7 @@ define( function( require ) {
   var slopeString = require( 'string!GRAPHING_LINES/tab.slope' );
 
   // images
-  var slopeImage = require( 'image!GRAPHING_LINES/../images/Slope-icon.png' );
+  var slopeImage = require( 'image!GRAPHING_LINES/Slope-icon.png' );
 
   function SlopeScreen() {
 

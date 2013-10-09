@@ -18,7 +18,7 @@ define( function( require ) {
   var pointSlopeString = require( 'string!GRAPHING_LINES/tab.pointSlope' );
 
   // images
-  var pointSlopeImage = require( 'image!GRAPHING_LINES/../images/PointSlope-icon.png' );
+  var pointSlopeImage = require( 'image!GRAPHING_LINES/PointSlope-icon.png' );
 
   function PointSlopeScreen() {
 

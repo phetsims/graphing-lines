@@ -18,7 +18,7 @@ define( function( require ) {
   var lineGameString = require( 'string!GRAPHING_LINES/tab.lineGame' );
 
   // images
-  var gameImage = require( 'image!GRAPHING_LINES/../images/Game-icon.png' );
+  var gameImage = require( 'image!GRAPHING_LINES/Game-icon.png' );
 
   function GameScreen() {
 

@@ -18,7 +18,7 @@ define( function( require ) {
   var slopeInterceptString = require( 'string!GRAPHING_LINES/tab.slopeIntercept' );
 
   // images
-  var slopeInterceptImage = require( 'image!GRAPHING_LINES/../images/SlopeIntercept-icon.png' );
+  var slopeInterceptImage = require( 'image!GRAPHING_LINES/SlopeIntercept-icon.png' );
 
   function SlopeInterceptScreen() {
 

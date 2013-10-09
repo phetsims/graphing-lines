@@ -18,8 +18,8 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // images
-  var correctImage = require( 'image!GRAPHING_LINES/../images/Check-Mark-u2713.png' );
-  var incorrectImage = require( 'image!GRAPHING_LINES/../images/Heavy-Ballot-X-u2718.png' );
+  var correctImage = require( 'image!GRAPHING_LINES/Check-Mark-u2713.png' );
+  var incorrectImage = require( 'image!GRAPHING_LINES/Heavy-Ballot-X-u2718.png' );
 
   // constants
   var X_MARGIN = 20;

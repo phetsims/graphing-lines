@@ -1,7 +1,6 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 //TODO i18n
-//TODO add ability to hide fields, adjust layout accordingly
 //TODO add minWidth option
 define( function( require ) {
   'use strict';
@@ -31,6 +30,8 @@ define( function( require ) {
 
     //TODO revisit these, odd combination of supertype and composite options
     options = _.extend( {
+      levelVisible: true,
+      challengeNumberVisible: true,
       font: new PhetFont( 20 ),
       ySpacing: 40,
       xMargin: 20,
@@ -71,7 +72,7 @@ define( function( require ) {
       timeValue.text = formatTime( elapsedTime );
     } );
     timerEnabledProperty.link( function( timerEnabled ) {
-      clockIcon.visible = timeValue.visible = timerEnabled;
+      timerNode.visible = timerEnabled;
     } );
 
     // New Game button
@@ -81,6 +82,8 @@ define( function( require ) {
     // Content for the panel. One row, vertically centered, evenly spaced
     var content = new Node();
     var nodes = [ levelNode, challengeNumberNode, scoreNode, timerNode, newGameButton ];
+    if ( !options.levelVisible ) { nodes.splice( nodes.indexOf( levelNode ), 1 ); }
+    if ( !options.challengeNumberVisible ) { nodes.splice( nodes.indexOf( challengeNumberNode ), 1 ); }
     for ( var i = 0; i < nodes.length; i++ ) {
       content.addChild( nodes[i] );
       if ( i > 0 ) {

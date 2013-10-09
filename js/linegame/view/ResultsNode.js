@@ -41,26 +41,23 @@ define( function( require ) {
         }
 
         // game results
-        var gameOverNode = new GameOverNode( model.levelProperty.get(),
+        var gameOverNode = new GameOverNode(
+          model.levelProperty.get(),
           model.scoreProperty.get(),
           model.getPerfectScore(),
-          0,
+          0, /* scoreDecimalPlaces */
           model.timer.timeProperty.get(),
           model.bestTimes[ model.levelProperty.get() ],
           model.isNewBestTime,
           model.timerEnabledProperty.get(),
-          LineGameConstants.BUTTON_COLOR,
-          { scale: 1.5 } );
+          function() {
+            model.gamePhaseProperty.set( GamePhase.SETTINGS );
+          }, {
+            newGameButtonColor: LineGameConstants.BUTTON_COLOR
+          } );
         thisNode.addChild( gameOverNode );
         gameOverNode.centerX = playAreaSize.width / 2;
         gameOverNode.centerY = playAreaSize.height / 2;
-
-        // change phase when "New Game" button is pressed
-        gameOverNode.addListener( {
-          newGame: function() {
-            model.gamePhaseProperty.set( GamePhase.SETTINGS );
-          }
-        } );
       }
       else {
         thisNode.removeAllChildren();

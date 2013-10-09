@@ -111,7 +111,7 @@ define( function( require ) {
     // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
     thisModel.playStateProperty.link( function( playState ) {
       if ( playState === PlayState.FIRST_CHECK ) {
-        if ( thisModel.challengeIndexProperty.get() - 1 === thisModel.challenges.length ) {
+        if ( thisModel.challengeIndexProperty.get() === thisModel.challenges.length - 1 ) {
           // game has been completed
           thisModel.gamePhaseProperty.set( GamePhase.RESULTS );
         }

@@ -30,7 +30,7 @@ define( function( require ) {
     ScreenView.call( thisView, { renderer: 'svg' } );
 
     // audio
-    var audioPlayer = new GameAudioPlayer( model.settings.soundEnabledProperty );
+    var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
     // one parent node for each "phase" of the game
     var playAreaSize = new Dimension2( thisView.layoutBounds.width, thisView.layoutBounds.height );
@@ -53,7 +53,7 @@ define( function( require ) {
 
       // play audio when game ends
       if ( gamePhase === GamePhase.RESULTS ) {
-        if ( model.results.scoreProperty.get() === model.getPerfectScore() ) {
+        if ( model.scoreProperty.get() === model.getPerfectScore() ) {
           audioPlayer.gameOverPerfectScore();
         }
         else {

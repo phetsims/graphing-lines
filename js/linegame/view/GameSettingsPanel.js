@@ -15,13 +15,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
 
-  /**
-   * @param {GameSettings} gameSettings
-   * @param {function} startFunction called when the "Start" button is pressed
-   * @param {*} options
-   * @constructor
-   */
-  function GameSettingsPanel( gameSettings, startFunction, options ) {
+  function GameSettingsPanel( numberOfLevels, levelProperty, timerEnabledProperty, soundEnabledProperty, startFunction, options ) {
 
     options = _.extend( {
       titleFont: new PhetFont( 38 ),
@@ -33,8 +27,8 @@ define( function( require ) {
     }, options );
 
     var titleNode = new Text( "Game Settings", { font: options.titleFont } );
-    var timerCheckBox = CheckBox.createTextCheckBox( "Timer", { font: options.controlFont }, gameSettings.timerEnabledProperty );
-    var soundCheckBox = CheckBox.createTextCheckBox( "Sound", { font: options.controlFont }, gameSettings.soundEnabledProperty );
+    var timerCheckBox = CheckBox.createTextCheckBox( "Timer", { font: options.controlFont }, timerEnabledProperty );
+    var soundCheckBox = CheckBox.createTextCheckBox( "Sound", { font: options.controlFont }, soundEnabledProperty );
     var startButton = new TextButton( "Start", startFunction, { font: options.controlFont, rectangleFillUp: options.startButtonColor } );
 
     // level control
@@ -43,8 +37,8 @@ define( function( require ) {
     levelControl.addChild( levelLabel );
     var previousNode = levelLabel;
     var xSpacing = 8;
-    for ( var level = 0; level < gameSettings.numberOfLevels; level++ ) {
-      var radioButton = new AquaRadioButton( gameSettings.levelProperty, level, new Text( level + 1, { font: options.controlFont } ) );
+    for ( var level = 0; level < numberOfLevels; level++ ) {
+      var radioButton = new AquaRadioButton( levelProperty, level, new Text( level + 1, { font: options.controlFont } ) );
       levelControl.addChild( radioButton );
       radioButton.left = previousNode.right + xSpacing;
       radioButton.centerY = previousNode.centerY;

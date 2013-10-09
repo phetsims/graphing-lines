@@ -141,7 +141,7 @@ define( function( require ) {
         thisNode.faceNode.smile();
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
-        model.results.scoreProperty.set( model.results.scoreProperty.get() + points );
+        model.scoreProperty.set( model.scoreProperty.get() + points );
         thisNode.pointsAwardedNode.text = StringUtils.format( pointsAwardedString, points );
         // points to right of face
         thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;

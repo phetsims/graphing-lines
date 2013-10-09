@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GameScoreboardNode = require( 'GRAPHING_LINES/linegame/view/GameScoreboardNode' );
+  var Scoreboard = require( 'GRAPHING_LINES/linegame/view/Scoreboard' );
 
   /**
    * @param {LineGameModel} model
@@ -27,7 +27,16 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    var scoreboardNode = new GameScoreboardNode(); //TODO flesh this out, add constructor parameters
+    var scoreboardNode = new Scoreboard(
+      model.challengeIndexProperty,
+      model.challengesPerGameProperty,
+      model.levelProperty,
+      model.scoreProperty,
+      model.timer.timeProperty,
+      model.timerEnabledProperty,
+      function() {
+        model.gamePhaseProperty.set( GamePhase.SETTINGS );
+      } );
     scoreboardNode.centerX = playAreaSize.width / 2;
     scoreboardNode.bottom = playAreaSize.height - 10;
     thisNode.addChild( scoreboardNode );
@@ -38,32 +47,6 @@ define( function( require ) {
     // challenge parent, to maintain rendering order
     var challengeParent = new Node();
     thisNode.addChild( challengeParent );
-
-    // When "New Game" button is pressed, go back to game settings
-    scoreboardNode.addListener( {
-      newGame: function() {
-        model.gamePhaseProperty.set( GamePhase.SETTINGS );
-      }} );
-
-    // level on the scoreboard
-    model.settings.levelProperty.link( function( level ) {
-      scoreboardNode.setLevel( level );
-    } );
-
-    // points on the scoreboard
-    model.results.scoreProperty.link( function( score ) {
-      scoreboardNode.setScore( score );
-    } );
-
-    // timer visibility on the scoreboard
-    model.settings.timerEnabledProperty.link( function( enabled ) {
-      scoreboardNode.setTimerVisible( enabled );
-    } );
-
-    // timer
-    model.timer.timeProperty.link( function( time ) {
-      scoreboardNode.setTime( time, model.results.bestTimes[ model.settings.levelProperty.get() ] );
-    } );
 
     // Set up a new challenge
     model.challengeProperty.link( function( challenge ) {

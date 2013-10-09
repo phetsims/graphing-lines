@@ -1,3 +1,5 @@
+10/9/13 Scoreboard: highly-modified copy of BAA.GameScoreboardNode
+10/9/13 moved GameSettings and GameResults into LineGameModel
 10/8/13 use screen icons provided by SST
 10/8/13 remove 'highlight on mouseOver' feature for lines, set them to pickable:false
 10/8/13 use joist.Timer in Spinner

@@ -35,20 +35,20 @@ define( function( require ) {
 
         // game reward, shown for perfect score
         if ( model.isPerfectScore() ) {
-          thisNode.rewardNode.setLevel( model.settings.levelProperty.get() );
+          thisNode.rewardNode.setLevel( model.levelProperty.get() );
           thisNode.addChild( thisNode.rewardNode );
           thisNode.setRewardRunning( true );
         }
 
         // game results
-        var gameOverNode = new GameOverNode( model.settings.levelProperty.get(),
-          model.results.scoreProperty.get(),
+        var gameOverNode = new GameOverNode( model.levelProperty.get(),
+          model.scoreProperty.get(),
           model.getPerfectScore(),
           0,
           model.timer.timeProperty.get(),
-          model.results.bestTimes[ model.settings.levelProperty.get() ],
-          model.results.isNewBestTime,
-          model.settings.timerEnabledProperty.get(),
+          model.bestTimes[ model.levelProperty.get() ],
+          model.isNewBestTime,
+          model.timerEnabledProperty.get(),
           LineGameConstants.BUTTON_COLOR,
           { scale: 1.5 } );
         thisNode.addChild( gameOverNode );

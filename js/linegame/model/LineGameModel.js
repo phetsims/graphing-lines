@@ -24,8 +24,6 @@ define( function( require ) {
   var ChallengeFactoryHardCoded = require( 'GRAPHING_LINES/linegame/model/ChallengeFactoryHardCoded' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GameResults = require( 'GRAPHING_LINES/linegame/model/GameResults' );
-  var GameSettings = require( 'GRAPHING_LINES/linegame/model/GameSettings' );
   var GameTimer = require( 'GRAPHING_LINES/linegame/model/GameTimer' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
@@ -51,17 +49,32 @@ define( function( require ) {
     new ChallengeFactory5(),
     new ChallengeFactory6()
   ];
+  assert && assert( factories.length === NUMBER_OF_LEVELS );
 
   function LineGameModel() {
 
     var thisModel = this;
 
-    thisModel.settings = new GameSettings( NUMBER_OF_LEVELS, true /* soundEnabled */, true /* timerEnabled */ );
+    // settings
+    thisModel.numberOfLevels = 6;
+    thisModel.levelProperty = new Property( 0 );
+    thisModel.soundEnabledProperty = new Property( true );
+    thisModel.timerEnabledProperty = new Property( true );
+
+    // results
+    thisModel.scoreProperty = new Property( 0 ); // how many points the user has earned for the current game
+    thisModel.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
+    thisModel.bestTimes = []; // best times for each level, in ms
+    for ( var level = 0; level < thisModel.numberOfLevels; level++ ) {
+      thisModel.bestTimes.push( null ); // null if a level has no best time yet
+    }
+
     thisModel.timer = new GameTimer();
-    thisModel.results = new GameResults( NUMBER_OF_LEVELS );
-    thisModel.challengeIndex = 0;
-    thisModel.challengeProperty = new Property( DUMMY_CHALLENGE ); //TODO is DUMMY_CHALLENGE needed?
+
     thisModel.challenges = []; // Array<Challenge>
+    thisModel.challengeProperty = new Property( DUMMY_CHALLENGE ); //TODO is DUMMY_CHALLENGE needed?
+    thisModel.challengeIndexProperty = new Property( 0 );
+    thisModel.challengesPerGameProperty = new Property( 0 );
     thisModel.playStateProperty = new Property( PlayState.NONE );
 
     thisModel.gamePhaseProperty = new PropertyWithHook( GamePhase.SETTINGS,
@@ -77,7 +90,7 @@ define( function( require ) {
         else if ( gamePhase === GamePhase.PLAY ) {
           thisModel.initChallenges();
           thisModel.playStateProperty.set( PlayState.FIRST_CHECK );
-          thisModel.results.scoreProperty.set( 0 );
+          thisModel.scoreProperty.set( 0 );
           thisModel.timer.start();
         }
         else if ( gamePhase === GamePhase.RESULTS ) {
@@ -95,14 +108,14 @@ define( function( require ) {
     // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
     thisModel.playStateProperty.link( function( playState ) {
       if ( playState === PlayState.FIRST_CHECK ) {
-        if ( thisModel.challengeIndex === thisModel.challenges.length ) {
+        if ( thisModel.challengeIndexProperty.get() - 1 === thisModel.challenges.length ) {
           // game has been completed
           thisModel.gamePhaseProperty.set( GamePhase.RESULTS );
         }
         else {
           // next challenge
-          thisModel.challengeProperty.set( thisModel.challenges[thisModel.challengeIndex] );
-          thisModel.challengeIndex++;
+          thisModel.challengeIndexProperty.set( thisModel.challengeIndexProperty.get() + 1 );
+          thisModel.challengeProperty.set( thisModel.challenges[thisModel.challengeIndexProperty.get()] );
         }
       }
       else if ( playState === PlayState.NEXT ) {
@@ -113,10 +126,18 @@ define( function( require ) {
 
   LineGameModel.prototype = {
 
+    //TODO reset other stuff, or use PropertySet
+    reset: function() {
+      this.levelProperty.reset();
+      this.soundEnabledProperty.reset();
+      this.timerEnabledProperty.reset();
+      this.scoreProperty.reset();
+    },
+
     step: function() { /* no animation, do nothing */ },
 
     isPerfectScore: function() {
-      return this.results.scoreProperty.get() === this.getPerfectScore();
+      return this.scoreProperty.get() === this.getPerfectScore();
     },
 
     // Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
@@ -146,7 +167,7 @@ define( function( require ) {
      */
     replayCurrentChallenge: function() {
       this.challengeProperty.get().reset();
-      this.challengeIndex--;
+      this.challengeIndexProperty.set( this.challengeIndexProperty.get() - 1 );
       this.challengeProperty.set( DUMMY_CHALLENGE ); // force an update
       this.playStateProperty.set( PlayState.FIRST_CHECK );
     },
@@ -154,15 +175,15 @@ define( function( require ) {
     // Updates the best time for the current level, at the end of a timed game with a perfect score.
     updateBestTime: function() {
       assert && assert( !this.timer.isRunning() );
-      if ( this.settings.timerEnabledProperty.get() && this.isPerfectScore() ) {
-        this.results.updateBestTime( this.settings.levelProperty.get(), this.timer.timeProperty.get() );
+      if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
+        //TODO update best time
       }
     },
 
     // initializes a new set of challenges for the current level
     initChallenges: function() {
-      this.challengeIndex = 0;
-      var level = this.settings.levelProperty.get();
+      this.challengeIndexProperty.set( -1 );
+      var level = this.levelProperty.get();
       if ( USE_HARD_CODED_CHALLENGES ) {
         this.challenges = ChallengeFactoryHardCoded.createChallenges( level, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
@@ -170,6 +191,7 @@ define( function( require ) {
         assert && assert( level >= 0 && level < factories.length );
         this.challenges = factories[level].createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
+      this.challengesPerGameProperty.set( this.challenges.length );
     }
   };
 

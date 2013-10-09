@@ -69,14 +69,17 @@ define( function( require ) {
       thisModel.bestTimes.push( null ); // null if a level has no best time yet
     }
 
+    // time
     thisModel.timer = new GameTimer();
 
+    // challenges
     thisModel.challenges = []; // Array<Challenge>
     thisModel.challengeProperty = new Property( DUMMY_CHALLENGE ); //TODO is DUMMY_CHALLENGE needed?
     thisModel.challengeIndexProperty = new Property( 0 );
     thisModel.challengesPerGameProperty = new Property( 0 );
-    thisModel.playStateProperty = new Property( PlayState.NONE );
 
+    // state
+    thisModel.playStateProperty = new Property( PlayState.NONE );
     thisModel.gamePhaseProperty = new PropertyWithHook( GamePhase.SETTINGS,
       /*
        * This function will be called prior to setting the property value.

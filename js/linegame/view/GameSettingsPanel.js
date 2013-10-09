@@ -27,7 +27,9 @@ define( function( require ) {
       titleFont: new PhetFont( 38 ),
       labelFont: new PhetFont( 24 ),
       controlFont: new PhetFont( 24 ),
-      startButtonColor: 'rgb(235, 235, 235)'
+      startButtonColor: 'rgb(235, 235, 235)',
+      xMargin: 20,
+      yMargin: 20
     }, options );
 
     var titleNode = new Text( "Game Settings", { font: options.titleFont } );
@@ -58,7 +60,7 @@ define( function( require ) {
     content.addChild( startButton );
 
     // layout
-    var ySpacing = 15;
+    var ySpacing = 30;
     var contentWidth = content.width;
     titleNode.centerX = contentWidth / 2;
     levelControl.top = titleNode.bottom + ySpacing;

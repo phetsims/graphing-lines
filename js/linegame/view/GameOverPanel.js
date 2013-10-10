@@ -26,12 +26,12 @@ define( function( require ) {
   var gameOverString = require( 'string!GRAPHING_LINES/gameOver' );
   var levelString = require( 'string!GRAPHING_LINES/level' );
   var newGameString = require( 'string!GRAPHING_LINES/newGame' );
-  var pattern_imperfectScore = require( 'string!GRAPHING_LINES/pattern_imperfectScore' );
-  var pattern_perfectScore = require( 'string!GRAPHING_LINES/pattern_perfectScore' );
-  var pattern_0label_1valueString = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
-  var pattern_imperfectTime = require( 'string!GRAPHING_LINES/pattern_imperfectTime' );
-  var pattern_perfectTime_newBest = require( 'string!GRAPHING_LINES/pattern_perfectTime_newBest' );
-  var pattern_perfectTime_yourBest = require( 'string!GRAPHING_LINES/pattern_perfectTime_yourBest' );
+  var pattern_0label_1value = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
+  var pattern_0points_1max = require( 'string!GRAPHING_LINES/pattern.0points.1max' );
+  var pattern_0points_1max_perfect = require( 'string!GRAPHING_LINES/pattern.0points.1max.perfect' );
+  var pattern_0time = require( 'string!GRAPHING_LINES/pattern.0time' );
+  var pattern_0time_newBest = require( 'string!GRAPHING_LINES/pattern.0time.newBest' );
+  var pattern_0time_yourBest = require( 'string!GRAPHING_LINES/pattern.0time.yourBest' );
 
   function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, timerEnabled, newGameCallback, options ) {
 
@@ -48,7 +48,7 @@ define( function( require ) {
     var titleNode = new Text( gameOverString, { font: options.titleFont } );
 
     var textOptions = { font: options.font };
-    var levelNode = new Text( StringUtils.format( pattern_0label_1valueString, levelString, level + 1 ), textOptions );
+    var levelNode = new Text( StringUtils.format( pattern_0label_1value, levelString, level + 1 ), textOptions );
     var scoreNode = new Text( getScoreString( score, perfectScore, scoreDecimalPlaces ), textOptions );
     var timeNode = new Text( getTimeString( ( score === perfectScore ), time, bestTime ), textOptions );
     timeNode.visible = timerEnabled;
@@ -94,10 +94,10 @@ define( function( require ) {
     var pointsString = Util.toFixed( score, numberOfDecimalPlaces );
     var perfectScoreString = Util.toFixed( perfectScore, numberOfDecimalPlaces );
     if ( score === perfectScore ) {
-      return StringUtils.format( pattern_perfectScore, pointsString, perfectScoreString );
+      return StringUtils.format( pattern_0points_1max, pointsString, perfectScoreString );
     }
     else {
-      return StringUtils.format( pattern_imperfectScore, pointsString, perfectScoreString );
+      return StringUtils.format( pattern_0points_1max_perfect, pointsString, perfectScoreString );
     }
   };
 
@@ -110,15 +110,15 @@ define( function( require ) {
     // Time: 0:29
     if ( !isPerfectScore ) {
       // Time: 0:29
-      return StringUtils.format( pattern_imperfectTime, GameTimer.formatTime( time ) );
+      return StringUtils.format( pattern_0time, GameTimer.formatTime( time ) );
     }
     else if ( time !== bestTime ) {
       // Time: 0:29 (Your New Best!)
-      return StringUtils.format( pattern_perfectTime_newBest, GameTimer.formatTime( time ) );
+      return StringUtils.format( pattern_0time_newBest, GameTimer.formatTime( time ) );
     }
     else {
       // Time: 0:29 (Your Best: 0:20)
-      return StringUtils.format( pattern_perfectTime_yourBest, GameTimer.formatTime( time ) );
+      return StringUtils.format( pattern_0time_yourBest, GameTimer.formatTime( time ) );
     }
   };
 

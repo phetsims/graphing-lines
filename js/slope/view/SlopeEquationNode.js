@@ -294,7 +294,7 @@ define( function( require ) {
     var font = new PhetFont( { size: fontSize, weight: 'bold' } );
 
     // m is
-    var slopeIsNode = new Text( StringUtils.format( slopeIsString, symbolSlopeString ), { font: font, fill: color } );
+    var slopeIsNode = new Text( slopeIsString, { font: font, fill: color } );
     equationNode.addChild( slopeIsNode );
     slopeIsNode.x = 0;
     slopeIsNode.y = 0;

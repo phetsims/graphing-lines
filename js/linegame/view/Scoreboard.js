@@ -20,8 +20,8 @@ define( function( require ) {
   // strings
   var levelString = require( 'string!GRAPHING_LINES/level' );
   var newGameString = require( 'string!GRAPHING_LINES/newGame' );
-  var pattern_0label_1valueString = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
-  var patternChallengeNumberString = require( 'string!GRAPHING_LINES/pattern.challengeNumber' );
+  var pattern_0label_1value = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
+  var pattern_0challenge_1max = require( 'string!GRAPHING_LINES/pattern.0challenge.1max' );
   var scoreString = require( 'string!GRAPHING_LINES/score' );
 
   function Scoreboard( challengeIndexProperty, challengesPerGameProperty, levelProperty, scoreProperty, elapsedTimeProperty, timerEnabledProperty, newGameCallback, options ) {
@@ -45,19 +45,19 @@ define( function( require ) {
     // Level
     var levelNode = new Text( '', { font: options.font } );
     levelProperty.link( function( level ) {
-      levelNode.text = StringUtils.format( pattern_0label_1valueString, levelString, level + 1 );
+      levelNode.text = StringUtils.format( pattern_0label_1value, levelString, level + 1 );
     } );
 
     // Challenge number
     var challengeNumberNode = new Text( '', { font: options.font } );
     challengeIndexProperty.link( function( challengeIndex ) {
-      challengeNumberNode.text = StringUtils.format( patternChallengeNumberString, challengeIndex + 1, challengesPerGameProperty.get() );
+      challengeNumberNode.text = StringUtils.format( pattern_0challenge_1max, challengeIndex + 1, challengesPerGameProperty.get() );
     } );
 
     // Score
     var scoreNode = new Text( '', { font: options.font } );
     scoreProperty.link( function( score ) {
-      scoreNode.text = StringUtils.format( pattern_0label_1valueString, scoreString, score );
+      scoreNode.text = StringUtils.format( pattern_0label_1value, scoreString, score );
     } );
 
     // Timer

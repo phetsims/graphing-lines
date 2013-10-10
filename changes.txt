@@ -1,3 +1,4 @@
+10/10/13 make game buttons less ugly
 10/10/13 make "Game Settings" panel look less ugly
 10/9/13 quick-&-dirty "Game Over" interface
 10/9/13 Scoreboard i18n

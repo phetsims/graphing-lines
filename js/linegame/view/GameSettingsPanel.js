@@ -35,7 +35,7 @@ define( function( require ) {
       font: options.controlFont,
       rectangleFillUp: options.startButtonColor,
       rectangleXMargin: 20,
-      rectangleYMargin: 10
+      rectangleYMargin: 5
     } );
 
     // level control

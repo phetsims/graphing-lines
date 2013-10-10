@@ -71,7 +71,11 @@ define( function( require ) {
 
       // buttons
     var doNothing = function(){}; //TODO delete this when sun#21 is addressed
-    var buttonOptions = { font: LineGameConstants.BUTTON_FONT, rectangleFillUp: LineGameConstants.BUTTON_COLOR };
+    var buttonOptions = {
+      font: LineGameConstants.BUTTON_FONT,
+      rectangleFillUp: LineGameConstants.BUTTON_COLOR,
+      rectangleXMargin: 20,
+      rectangleYMargin: 5 };
     thisNode.checkButton = new TextButton( checkString, doNothing, buttonOptions );
     var tryAgainButton = new TextButton( tryAgainString, doNothing, buttonOptions );
     var showAnswerButton = new TextButton( showAnswerString, doNothing, buttonOptions );

@@ -75,8 +75,11 @@ define( function( require ) {
     } );
 
     // New Game button
-    var newGameButton = new TextButton( newGameString, newGameCallback,
-      { font: options.font, rectangleFillUp: options.newGameButtonColor } );
+    var newGameButton = new TextButton( newGameString, newGameCallback, {
+      font: options.font,
+      rectangleFillUp: options.newGameButtonColor,
+      rectangleXMargin: 20,
+      rectangleYMargin: 5 } );
 
     // Content for the panel. One row, vertically centered, evenly spaced
     var content = new Node();

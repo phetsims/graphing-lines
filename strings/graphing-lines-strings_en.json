@@ -37,5 +37,15 @@
   "score": "Score",
   "newGame": "New Game",
   "pattern.challengeNumber": "Challenge {0} of {1}",
-  "pattern.0label.1value": "{0}: {1}"
+  "pattern.0label.1value": "{0}: {1}",
+  "gameOver": "Game Over",
+  "pattern_imperfectScore": "Score: {0} out of {1}",
+  "pattern_perfectScore": "Score: {0} out of {1} (Perfect!)",
+  "pattern_imperfectTime": "Time: {0}",
+  "pattern_perfectTime_newBest": "Time: {0} (Your New Best!)",
+  "pattern_perfectTime_yourBest": "Time: {0} (Your Best: {1})",
+  "gameSettings": "Game Settings",
+  "start": "Start",
+  "timer": "Timer",
+  "sound": "Sound"
 }

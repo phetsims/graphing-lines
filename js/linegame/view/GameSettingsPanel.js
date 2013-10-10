@@ -1,7 +1,10 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO this is a quick-&-dirty implementation, do it right
-//TODO i18n
+/**
+ * Control panel that provides settings for a game.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
 define( function( require ) {
   'use strict';
 
@@ -16,6 +19,12 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
 
+  // strings
+  var gameSettingsString = require( 'string!GRAPHING_LINES/gameSettings' );
+  var soundString = require( 'string!GRAPHING_LINES/sound' ); //TODO if this goes away, remove from string file
+  var startString = require( 'string!GRAPHING_LINES/start' );
+  var timerString = require( 'string!GRAPHING_LINES/timer' ); //TODO if this goes away, remove from string file
+
   function GameSettingsPanel( numberOfLevels, levelProperty, timerEnabledProperty, soundEnabledProperty, startFunction, options ) {
 
     options = _.extend( {
@@ -28,10 +37,10 @@ define( function( require ) {
       yMargin: 20
     }, options );
 
-    var titleNode = new Text( "Game Settings", { font: options.titleFont } );
-    var timerCheckBox = CheckBox.createTextCheckBox( "Timer", { font: options.controlFont }, timerEnabledProperty );
-    var soundCheckBox = CheckBox.createTextCheckBox( "Sound", { font: options.controlFont }, soundEnabledProperty );
-    var startButton = new TextButton( "Start", startFunction, {
+    var titleNode = new Text( gameSettingsString, { font: options.titleFont } );
+    var timerCheckBox = CheckBox.createTextCheckBox( timerString, { font: options.controlFont }, timerEnabledProperty );
+    var soundCheckBox = CheckBox.createTextCheckBox( soundString, { font: options.controlFont }, soundEnabledProperty );
+    var startButton = new TextButton( startString, startFunction, {
       font: options.controlFont,
       rectangleFillUp: options.startButtonColor,
       rectangleXMargin: 20,

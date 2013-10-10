@@ -1,6 +1,10 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO port
+/**
+ * Upon completion of a Game, this panel displays a summary of the user's game results.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
 define( function( require ) {
   'use strict';
 
@@ -19,16 +23,15 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // strings
-
-  var gameOverString = 'Game Over'; //TODO move to strings
+  var gameOverString = require( 'string!GRAPHING_LINES/gameOver' );
   var levelString = require( 'string!GRAPHING_LINES/level' );
   var newGameString = require( 'string!GRAPHING_LINES/newGame' );
-  var pattern_imperfectScore = 'Score: {0} out of {1}'; //TODO move to strings
-  var pattern_perfectScore = 'Score: {0} out of {1} (Perfect!)'; //TODO move to strings
+  var pattern_imperfectScore = require( 'string!GRAPHING_LINES/pattern_imperfectScore' );
+  var pattern_perfectScore = require( 'string!GRAPHING_LINES/pattern_perfectScore' );
   var pattern_0label_1valueString = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
-  var pattern_imperfectTime = 'Time: {0}';
-  var pattern_perfectTime_newBest = 'Time: {0} (Your New Best!)';
-  var pattern_perfectTime_yourBest = 'Time: {0} (Your Best: {1})';
+  var pattern_imperfectTime = require( 'string!GRAPHING_LINES/pattern_imperfectTime' );
+  var pattern_perfectTime_newBest = require( 'string!GRAPHING_LINES/pattern_perfectTime_newBest' );
+  var pattern_perfectTime_yourBest = require( 'string!GRAPHING_LINES/pattern_perfectTime_yourBest' );
 
   function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, timerEnabled, newGameCallback, options ) {
 

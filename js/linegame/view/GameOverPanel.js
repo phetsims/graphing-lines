@@ -19,7 +19,7 @@ define( function( require ) {
   // strings
   var newGameString = require( 'string!GRAPHING_LINES/newGame' );
 
-  function GameOverNode( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, isNewBestTime, timerEnabled, newGameCallback, options ) {
+  function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, isNewBestTime, timerEnabled, newGameCallback, options ) {
 
     options = _.extend( {
       xMargin: 20,
@@ -75,5 +75,5 @@ define( function( require ) {
     Panel.call( this, content, options );
   }
 
-  return inherit( Panel, GameOverNode );
+  return inherit( Panel, GameOverPanel );
 } );

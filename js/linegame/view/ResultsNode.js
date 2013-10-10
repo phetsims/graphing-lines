@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GameOverNode = require( 'GRAPHING_LINES/linegame/view/GameOverNode' );
+  var GameOverPanel = require( 'GRAPHING_LINES/linegame/view/GameOverPanel' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -41,7 +41,7 @@ define( function( require ) {
         }
 
         // game results
-        var gameOverNode = new GameOverNode(
+        thisNode.addChild( new GameOverPanel(
           model.levelProperty.get(),
           model.scoreProperty.get(),
           model.getPerfectScore(),
@@ -53,11 +53,10 @@ define( function( require ) {
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {
-            newGameButtonColor: LineGameConstants.BUTTON_COLOR
-          } );
-        thisNode.addChild( gameOverNode );
-        gameOverNode.centerX = playAreaSize.width / 2;
-        gameOverNode.centerY = playAreaSize.height / 2;
+            newGameButtonColor: LineGameConstants.BUTTON_COLOR,
+            centerX: playAreaSize.width / 2,
+            centerY: playAreaSize.height / 2
+          } ) );
       }
       else {
         thisNode.removeAllChildren();

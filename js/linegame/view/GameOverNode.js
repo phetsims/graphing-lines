@@ -8,6 +8,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -23,7 +24,7 @@ define( function( require ) {
     options = _.extend( {
       xMargin: 20,
       yMargin: 20,
-      fill: new Color( 235, 235, 235 ),
+      fill: 'rgb( 180, 205, 255 )',
       font: new PhetFont( 20 ),
       newGameButtonColor: new Color( 255, 255, 255 )
     }, options );
@@ -42,8 +43,11 @@ define( function( require ) {
       { font: new PhetFont( 20 ), align: 'left' } );
 
     // New Game button
-    var newGameButton = new TextButton( newGameString, newGameCallback,
-      { font: options.font, rectangleFillUp: options.newGameButtonColor } );
+    var newGameButton = new TextButton( newGameString, newGameCallback, {
+      font: options.font,
+      rectangleFillUp: options.newGameButtonColor,
+      rectangleXMargin: 20,
+      rectangleYMargin: 5 } );
 
     // content for the panel
     var content = new Node();
@@ -51,12 +55,22 @@ define( function( require ) {
     content.addChild( dataNode );
     content.addChild( newGameButton );
 
+    // separators
+    var separatorWidth = content.width;
+    var topSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: 'black' } );
+    var bottomSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: 'black' } );
+    content.addChild( topSeparator );
+    content.addChild( bottomSeparator );
+
     // layout
     var ySpacing = 30;
-    dataNode.centerX = titleNode.centerX;
-    dataNode.top = titleNode.bottom + ySpacing;
-    newGameButton.centerX = dataNode.centerX;
-    newGameButton.top = dataNode.bottom + ySpacing
+    titleNode.centerX = topSeparator.centerX;
+    topSeparator.top = titleNode.bottom + ySpacing;
+    dataNode.centerX = topSeparator.centerX;
+    dataNode.top = topSeparator.bottom + ySpacing;
+    bottomSeparator.top = dataNode.bottom + ySpacing;
+    newGameButton.centerX = bottomSeparator.centerX;
+    newGameButton.top = bottomSeparator.bottom + ySpacing
 
     Panel.call( this, content, options );
   }

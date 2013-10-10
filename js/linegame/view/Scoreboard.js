@@ -7,6 +7,7 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
+  var GameTimer = require( 'GRAPHING_LINES/linegame/model/GameTimer' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
@@ -68,7 +69,7 @@ define( function( require ) {
     timeValue.left = clockIcon.right + 8;
     timeValue.centerY = clockIcon.centerY;
     elapsedTimeProperty.link( function( elapsedTime ) {
-      timeValue.text = formatTime( elapsedTime );
+      timeValue.text = GameTimer.formatTime( elapsedTime );
     } );
     timerEnabledProperty.link( function( timerEnabled ) {
       timerNode.visible = timerEnabled;
@@ -96,20 +97,6 @@ define( function( require ) {
 
     Panel.call( thisNode, content, options );
   }
-
-  //TODO move this somewhere more general
-  //TODO does time format need to be localized?
-  /**
-   * Formats a value representing seconds into HH:MM:SS.
-   * @param {Number} secs
-   * @returns {string}
-   */
-  var formatTime = function( secs ) {
-    var hours = Math.floor( secs / 3600 );
-    var minutes = Math.floor( (secs - (hours * 3600)) / 60 );
-    var seconds = Math.floor( secs - (hours * 3600) - (minutes * 60) );
-    return ( hours > 0 ? hours + ':' : '' ) + hours > 0 && minutes < 10 ? '0' + minutes : minutes + ':' + ( seconds > 9 ? seconds : '0' + seconds );
-  };
 
   return inherit( Panel, Scoreboard );
 } );

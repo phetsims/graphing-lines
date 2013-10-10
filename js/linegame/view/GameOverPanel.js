@@ -6,41 +6,49 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
+  var GameTimer = require( 'GRAPHING_LINES/linegame/model/GameTimer' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var MultiLineText = require( 'SCENERY_PHET/MultiLineText' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
+  var Util = require( 'DOT/Util' );
 
   // strings
-  var newGameString = require( 'string!GRAPHING_LINES/newGame' );
 
-  function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, isNewBestTime, timerEnabled, newGameCallback, options ) {
+  var gameOverString = 'Game Over'; //TODO move to strings
+  var levelString = require( 'string!GRAPHING_LINES/level' );
+  var newGameString = require( 'string!GRAPHING_LINES/newGame' );
+  var pattern_imperfectScore = 'Score: {0} out of {1}'; //TODO move to strings
+  var pattern_perfectScore = 'Score: {0} out of {1} (Perfect!)'; //TODO move to strings
+  var pattern_0label_1valueString = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
+  var pattern_imperfectTime = 'Time: {0}';
+  var pattern_perfectTime_newBest = 'Time: {0} (Your New Best!)';
+  var pattern_perfectTime_yourBest = 'Time: {0} (Your Best: {1})';
+
+  function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, timerEnabled, newGameCallback, options ) {
 
     options = _.extend( {
+      minWidth: 400,
       xMargin: 20,
       yMargin: 20,
       fill: 'rgb( 180, 205, 255 )',
-      font: new PhetFont( 20 ),
+      font: new PhetFont( 24 ),
+      titleFont: new PhetFont( 30 ),
       newGameButtonColor: new Color( 255, 255, 255 )
     }, options );
 
-    var titleNode = new Text( "Game Over", { font: new PhetFont( 30 ) } );
+    var titleNode = new Text( gameOverString, { font: options.titleFont } );
 
-    //TODO what should UI look like? this is a dump of the parameter values
-    var dataNode = new MultiLineText(
-      'level=' + level + '\n' +
-      'score=' + score + '\n' +
-      'perfectScore=' + perfectScore + '\n' +
-      'time=' + time + '\n' +
-      'bestTime=' + bestTime + '\n' +
-      'isNewBestTime=' + isNewBestTime + '\n' +
-      'timerEnabled=' + timerEnabled,
-      { font: new PhetFont( 20 ), align: 'left' } );
+    var textOptions = { font: options.font };
+    var levelNode = new Text( StringUtils.format( pattern_0label_1valueString, levelString, level + 1 ), textOptions );
+    var scoreNode = new Text( getScoreString( score, perfectScore, scoreDecimalPlaces ), textOptions );
+    var timeNode = new Text( getTimeString( ( score === perfectScore ), time, bestTime ), textOptions );
+    timeNode.visible = timerEnabled;
 
     // New Game button
     var newGameButton = new TextButton( newGameString, newGameCallback, {
@@ -52,11 +60,13 @@ define( function( require ) {
     // content for the panel
     var content = new Node();
     content.addChild( titleNode );
-    content.addChild( dataNode );
+    content.addChild( levelNode );
+    content.addChild( scoreNode );
+    content.addChild( timeNode );
     content.addChild( newGameButton );
 
     // separators
-    var separatorWidth = content.width;
+    var separatorWidth = Math.max( content.width, options.minWidth - ( 2 * options.xMargin ) );
     var topSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: 'black' } );
     var bottomSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: 'black' } );
     content.addChild( topSeparator );
@@ -66,14 +76,48 @@ define( function( require ) {
     var ySpacing = 30;
     titleNode.centerX = topSeparator.centerX;
     topSeparator.top = titleNode.bottom + ySpacing;
-    dataNode.centerX = topSeparator.centerX;
-    dataNode.top = topSeparator.bottom + ySpacing;
-    bottomSeparator.top = dataNode.bottom + ySpacing;
+    levelNode.top = topSeparator.bottom + ySpacing;
+    scoreNode.top = levelNode.bottom + ySpacing;
+    timeNode.top = scoreNode.bottom + ySpacing;
+    bottomSeparator.top = timeNode.bottom + ySpacing;
     newGameButton.centerX = bottomSeparator.centerX;
     newGameButton.top = bottomSeparator.bottom + ySpacing
 
     Panel.call( this, content, options );
   }
+
+  // Gets the score string. If the score was perfect, indicate that.
+  var getScoreString = function( score, perfectScore, numberOfDecimalPlaces ) {
+    var pointsString = Util.toFixed( score, numberOfDecimalPlaces );
+    var perfectScoreString = Util.toFixed( perfectScore, numberOfDecimalPlaces );
+    if ( score === perfectScore ) {
+      return StringUtils.format( pattern_perfectScore, pointsString, perfectScoreString );
+    }
+    else {
+      return StringUtils.format( pattern_imperfectScore, pointsString, perfectScoreString );
+    }
+  };
+
+  /*
+   * Gets the time string.
+   * If we had an imperfect score, simply show the time.
+   * If we had a perfect score, show the best time, and indicate if the time was a "new best".
+   */
+  var getTimeString = function( isPerfectScore, time, bestTime ) {
+    // Time: 0:29
+    if ( !isPerfectScore ) {
+      // Time: 0:29
+      return StringUtils.format( pattern_imperfectTime, GameTimer.formatTime( time ) );
+    }
+    else if ( time !== bestTime ) {
+      // Time: 0:29 (Your New Best!)
+      return StringUtils.format( pattern_perfectTime_newBest, GameTimer.formatTime( time ) );
+    }
+    else {
+      // Time: 0:29 (Your Best: 0:20)
+      return StringUtils.format( pattern_perfectTime_yourBest, GameTimer.formatTime( time ) );
+    }
+  };
 
   return inherit( Panel, GameOverPanel );
 } );

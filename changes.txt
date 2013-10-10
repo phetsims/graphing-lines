@@ -1,3 +1,4 @@
+10/10/13 make "Game Over" panel look like Java version
 10/10/13 make "Game Over" panel less ugly
 10/10/13 make game buttons less ugly
 10/10/13 make "Game Settings" panel look less ugly

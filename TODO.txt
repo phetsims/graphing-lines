@@ -3,6 +3,8 @@ TODO list for graphing-lines (HTML5 port)
 DESIGN
 
 HIGH
+- implement GameTimer
+- replace "Sound" and "Timer" check boxes with icon buttons
 - at end of a challenge, plotted point is not always on top of line
 - performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConfig

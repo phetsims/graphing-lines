@@ -1,7 +1,11 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO i18n
 //TODO add minWidth option
+/**
+ * Scoreboard for a game.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
 define( function( require ) {
   'use strict';
 
@@ -12,7 +16,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var SimpleClockIcon = require( 'GRAPHING_LINES/linegame/view/SimpleClockIcon' ); //TODO copied from BAA
+  var SimpleClockIcon = require( 'SCENERY_PHET/SimpleClockIcon' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );

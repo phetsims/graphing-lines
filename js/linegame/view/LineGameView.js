@@ -11,7 +11,7 @@ define( function( require ) {
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
-  var GameAudioPlayer = require( 'GRAPHING_LINES/linegame/view/GameAudioPlayer' );
+  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PlayNode = require( 'GRAPHING_LINES/linegame/view/PlayNode' );

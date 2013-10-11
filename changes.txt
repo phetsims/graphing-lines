@@ -1,3 +1,4 @@
+10/11/13 integrate vegas.GameAudioPlayer
 10/11/13 migrate 'Game Settings' panel to vegas
 10/11/13 migrate 'Game Over' panel to vegas
 10/11/13 move 'general' game strings to vegas

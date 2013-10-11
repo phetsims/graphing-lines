@@ -82,7 +82,7 @@ define( function( require ) {
     // Timer
     var timerNode = new Node( { pickable: false } );
     var clockIcon = new SimpleClockIcon( options.clockIconRadius );
-    var timeValue = new Text( '0', { font: options.font } );
+    var timeValue = new Text( '', { font: options.font } );
     timerNode.addChild( clockIcon );
     timerNode.addChild( timeValue );
     timeValue.left = clockIcon.right + 8;

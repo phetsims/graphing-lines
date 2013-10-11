@@ -1,3 +1,4 @@
+10/11/13 replace check boxes with sound and timer toggle buttons
 10/11/13 migrated BAA.SimpleClockIcon to scenery-phet
 10/11/13 localize and migrate GameTimer to vegas
 10/11/13 implement GameTimer

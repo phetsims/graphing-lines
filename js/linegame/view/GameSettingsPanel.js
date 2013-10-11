@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
-  var CheckBox = require( 'SUN/CheckBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -18,6 +17,8 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextButton = require( 'SUN/TextButton' );
+  var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
+  var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
 
   // strings
   var gameSettingsString = require( 'string!GRAPHING_LINES/gameSettings' );
@@ -38,8 +39,9 @@ define( function( require ) {
     }, options );
 
     var titleNode = new Text( gameSettingsString, { font: options.titleFont } );
-    var timerCheckBox = CheckBox.createTextCheckBox( timerString, { font: options.controlFont }, timerEnabledProperty );
-    var soundCheckBox = CheckBox.createTextCheckBox( soundString, { font: options.controlFont }, soundEnabledProperty );
+
+    var timerButton = new TimerToggleButton( timerEnabledProperty );
+    var soundButton = new SoundToggleButton( soundEnabledProperty );
     var startButton = new TextButton( startString, startFunction, {
       font: options.controlFont,
       rectangleFillUp: options.startButtonColor,
@@ -65,8 +67,8 @@ define( function( require ) {
     var content = new Node();
     content.addChild( titleNode );
     content.addChild( levelControl );
-    content.addChild( timerCheckBox );
-    content.addChild( soundCheckBox );
+    content.addChild( timerButton );
+    content.addChild( soundButton );
     content.addChild( startButton );
 
     // separators
@@ -81,9 +83,9 @@ define( function( require ) {
     titleNode.centerX = topSeparator.centerX;
     topSeparator.top = titleNode.bottom + ySpacing;
     levelControl.top = topSeparator.bottom + ySpacing;
-    timerCheckBox.top = levelControl.bottom + ySpacing;
-    soundCheckBox.top = timerCheckBox.bottom + ySpacing;
-    bottomSeparator.top = soundCheckBox.bottom + ySpacing;
+    timerButton.top = levelControl.bottom + ySpacing;
+    soundButton.top = timerButton.bottom + ySpacing;
+    bottomSeparator.top = soundButton.bottom + ySpacing;
     startButton.centerX = topSeparator.centerX;
     startButton.top = bottomSeparator.bottom + ySpacing;
 

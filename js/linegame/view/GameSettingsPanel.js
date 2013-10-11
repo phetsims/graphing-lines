@@ -21,10 +21,8 @@ define( function( require ) {
   var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
 
   // strings
-  var gameSettingsString = require( 'string!GRAPHING_LINES/gameSettings' );
-  var soundString = require( 'string!GRAPHING_LINES/sound' ); //TODO if this goes away, remove from string file
-  var startString = require( 'string!GRAPHING_LINES/start' );
-  var timerString = require( 'string!GRAPHING_LINES/timer' ); //TODO if this goes away, remove from string file
+  var gameSettingsString = require( 'string!VEGAS/gameSettings' );
+  var startString = require( 'string!VEGAS/start' );
 
   function GameSettingsPanel( numberOfLevels, levelProperty, timerEnabledProperty, soundEnabledProperty, startFunction, options ) {
 

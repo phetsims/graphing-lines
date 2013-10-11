@@ -33,11 +33,11 @@ define( function( require ) {
   var TextButton = require( 'SUN/TextButton' );
 
   // strings
-  var checkString = require( 'string!GRAPHING_LINES/check' );
-  var pointsAwardedString = require( 'string!GRAPHING_LINES/pointsAwarded' );
-  var nextString = require( 'string!GRAPHING_LINES/next' );
-  var showAnswerString = require( 'string!GRAPHING_LINES/showAnswer' );
-  var tryAgainString = require( 'string!GRAPHING_LINES/tryAgain' );
+  var checkString = require( 'string!VEGAS/check' );
+  var pointsAwardedString = require( 'string!VEGAS/pointsAwarded' );
+  var nextString = require( 'string!VEGAS/next' );
+  var showAnswerString = require( 'string!VEGAS/showAnswer' );
+  var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   /**
    * Constructor

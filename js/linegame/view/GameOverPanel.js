@@ -23,10 +23,10 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // strings
-  var gameOverString = require( 'string!GRAPHING_LINES/gameOver' );
-  var levelString = require( 'string!GRAPHING_LINES/level' );
-  var newGameString = require( 'string!GRAPHING_LINES/newGame' );
-  var pattern_0label_1value = require( 'string!GRAPHING_LINES/pattern.0label.1value' );
+  var gameOverString = require( 'string!VEGAS/gameOver' );
+  var levelString = require( 'string!VEGAS/level' );
+  var newGameString = require( 'string!VEGAS/newGame' );
+  var pattern_0label_1value = require( 'string!VEGAS/pattern.0label.1value' );
   var pattern_0points_1max = require( 'string!GRAPHING_LINES/pattern.0points.1max' );
   var pattern_0points_1max_perfect = require( 'string!GRAPHING_LINES/pattern.0points.1max.perfect' );
   var pattern_0time = require( 'string!GRAPHING_LINES/pattern.0time' );

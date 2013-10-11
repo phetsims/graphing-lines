@@ -11,7 +11,7 @@ define( function( require ) {
 
   // imports
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GameSettingsPanel = require( 'GRAPHING_LINES/linegame/view/GameSettingsPanel' );
+  var GameSettingsPanel = require( 'VEGAS/GameSettingsPanel' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );

@@ -28,6 +28,17 @@ define( function( require ) {
   var pattern_0challenge_1max = require( 'string!GRAPHING_LINES/pattern.0challenge.1max' );
   var scoreString = require( 'string!GRAPHING_LINES/score' );
 
+  /**
+   * @param {Property<Number>} challengeIndexProperty which challenge is the user current playing? (index starts at 0, displayed starting at 1)
+   * @param {Property<Number>} challengesPerGameProperty how many challenges are in the current game
+   * @param {Property<Number>} levelProperty
+   * @param {Property<Number>} scoreProperty
+   * @param {Property<Number>} elapsedTimeProperty elapsed time in seconds
+   * @param {Property<Number>} timerEnabledProperty is the timer enabled?
+   * @param {Function} newGameCallback
+   * @param {*} options
+   * @constructor
+   */
   function Scoreboard( challengeIndexProperty, challengesPerGameProperty, levelProperty, scoreProperty, elapsedTimeProperty, timerEnabledProperty, newGameCallback, options ) {
 
     var thisNode = this;
@@ -44,7 +55,10 @@ define( function( require ) {
       fill: 'rgb( 180, 205, 255 )',
       stroke: 'black',
       lineWidth: 1,
-      newGameButtonColor: new Color( 235, 235, 235 )
+      newGameButtonColor: new Color( 235, 235, 235 ),
+      newGameButtonXMargin: 20,
+      newGameButtonYMargin: 5,
+      clockIconRadius: 15
     }, options );
 
     // Level
@@ -67,7 +81,7 @@ define( function( require ) {
 
     // Timer
     var timerNode = new Node( { pickable: false } );
-    var clockIcon = new SimpleClockIcon( 15 ); //TODO grab from BAA
+    var clockIcon = new SimpleClockIcon( options.clockIconRadius );
     var timeValue = new Text( '0', { font: options.font } );
     timerNode.addChild( clockIcon );
     timerNode.addChild( timeValue );
@@ -84,8 +98,9 @@ define( function( require ) {
     var newGameButton = new TextButton( newGameString, newGameCallback, {
       font: options.font,
       rectangleFillUp: options.newGameButtonColor,
-      rectangleXMargin: 20,
-      rectangleYMargin: 5 } );
+      rectangleXMargin: options.newGameButtonXMargin,
+      rectangleYMargin: options.newGameButtonYMargin
+    } );
 
     // Content for the panel. One row, vertically centered, evenly spaced
     var subContent = new Node();

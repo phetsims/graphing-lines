@@ -1,6 +1,5 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO add minWidth option
 /**
  * Scoreboard for a game.
  *
@@ -13,6 +12,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var GameTimer = require( 'VEGAS/GameTimer' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
@@ -34,10 +34,11 @@ define( function( require ) {
 
     //TODO revisit these, odd combination of supertype and composite options
     options = _.extend( {
+      minWidth: 0,
       levelVisible: true,
       challengeNumberVisible: true,
       font: new PhetFont( 20 ),
-      ySpacing: 40,
+      xSpacing: 40,
       xMargin: 20,
       yMargin: 10,
       fill: 'rgb( 180, 205, 255 )',
@@ -47,25 +48,25 @@ define( function( require ) {
     }, options );
 
     // Level
-    var levelNode = new Text( '', { font: options.font } );
+    var levelNode = new Text( '', { font: options.font, pickable: false } );
     levelProperty.link( function( level ) {
       levelNode.text = StringUtils.format( pattern_0label_1value, levelString, level + 1 );
     } );
 
     // Challenge number
-    var challengeNumberNode = new Text( '', { font: options.font } );
+    var challengeNumberNode = new Text( '', { font: options.font, pickable: false } );
     challengeIndexProperty.link( function( challengeIndex ) {
       challengeNumberNode.text = StringUtils.format( pattern_0challenge_1max, challengeIndex + 1, challengesPerGameProperty.get() );
     } );
 
     // Score
-    var scoreNode = new Text( '', { font: options.font } );
+    var scoreNode = new Text( '', { font: options.font, pickable: false } );
     scoreProperty.link( function( score ) {
       scoreNode.text = StringUtils.format( pattern_0label_1value, scoreString, score );
     } );
 
     // Timer
-    var timerNode = new Node();
+    var timerNode = new Node( { pickable: false } );
     var clockIcon = new SimpleClockIcon( 15 ); //TODO grab from BAA
     var timeValue = new Text( '0', { font: options.font } );
     timerNode.addChild( clockIcon );
@@ -87,16 +88,26 @@ define( function( require ) {
       rectangleYMargin: 5 } );
 
     // Content for the panel. One row, vertically centered, evenly spaced
-    var content = new Node();
+    var subContent = new Node();
     var nodes = [ levelNode, challengeNumberNode, scoreNode, timerNode, newGameButton ];
     if ( !options.levelVisible ) { nodes.splice( nodes.indexOf( levelNode ), 1 ); }
     if ( !options.challengeNumberVisible ) { nodes.splice( nodes.indexOf( challengeNumberNode ), 1 ); }
     for ( var i = 0; i < nodes.length; i++ ) {
-      content.addChild( nodes[i] );
+      subContent.addChild( nodes[i] );
       if ( i > 0 ) {
-        nodes[i].left = nodes[i - 1].right + options.ySpacing;
+        nodes[i].left = nodes[i - 1].right + options.xSpacing;
         nodes[i].centerY = nodes[i - 1].centerY
       }
+    }
+
+    // ensure a minimum width
+    var content = subContent;
+    if ( subContent.width < options.minWidth ) {
+      content = new Node();
+      var strut = new Line( 0, 0, options.minWidth, 0, { pickable: false } ); // horizontal strut
+      content.addChild( strut );
+      content.addChild( subContent );
+      subContent.centerX = strut.centerX;
     }
 
     Panel.call( thisNode, content, options );

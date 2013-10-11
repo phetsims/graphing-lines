@@ -40,8 +40,15 @@ define( function( require ) {
 
     var titleNode = new Text( gameSettingsString, { font: options.titleFont } );
 
+    // toggle buttons
     var timerButton = new TimerToggleButton( timerEnabledProperty );
     var soundButton = new SoundToggleButton( soundEnabledProperty );
+    var toggleButtonsParent = new Node();
+    toggleButtonsParent.addChild( timerButton );
+    toggleButtonsParent.addChild( soundButton );
+    soundButton.left = timerButton.right + 50;
+    soundButton.centerY = timerButton.centerY;
+
     var startButton = new TextButton( startString, startFunction, {
       font: options.controlFont,
       rectangleFillUp: options.startButtonColor,
@@ -67,8 +74,7 @@ define( function( require ) {
     var content = new Node();
     content.addChild( titleNode );
     content.addChild( levelControl );
-    content.addChild( timerButton );
-    content.addChild( soundButton );
+    content.addChild( toggleButtonsParent );
     content.addChild( startButton );
 
     // separators
@@ -83,9 +89,9 @@ define( function( require ) {
     titleNode.centerX = topSeparator.centerX;
     topSeparator.top = titleNode.bottom + ySpacing;
     levelControl.top = topSeparator.bottom + ySpacing;
-    timerButton.top = levelControl.bottom + ySpacing;
-    soundButton.top = timerButton.bottom + ySpacing;
-    bottomSeparator.top = soundButton.bottom + ySpacing;
+    toggleButtonsParent.centerX = topSeparator.centerX;
+    toggleButtonsParent.top = levelControl.bottom + ySpacing;
+    bottomSeparator.top = toggleButtonsParent.bottom + ySpacing;
     startButton.centerX = topSeparator.centerX;
     startButton.top = bottomSeparator.bottom + ySpacing;
 

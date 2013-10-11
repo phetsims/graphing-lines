@@ -27,10 +27,5 @@
   "tab.lineGame": "Line Game",
   "point.xy": "({0}, {1})",
   "point.unknown": "( ?, ? )",
-  "slopeIs": "Slope is",
-  "pattern.0points.1max": "Score: {0} out of {1}",
-  "pattern.0points.1max.perfect": "Score: {0} out of {1} (Perfect!)",
-  "pattern.0time": "Time: {0}",
-  "pattern.0time.newBest": "Time: {0} (Your New Best!)",
-  "pattern.0time.yourBest": "Time: {0} (Your Best: {1})"
+  "slopeIs": "Slope is"
 }

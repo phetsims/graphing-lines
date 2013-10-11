@@ -15,6 +15,7 @@ MEDIUM
 - horizontal space between text and icons is wrong in sun.CheckBox, problem with scenery.Text bounds?
 
 LOW
+- use 'pattern' prefix for all strings that contain {0} placeholders
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
 - use 'Property' suffix consistently
 - convert icons to images in IconFactory

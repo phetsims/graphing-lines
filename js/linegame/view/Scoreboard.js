@@ -43,22 +43,26 @@ define( function( require ) {
 
     var thisNode = this;
 
-    //TODO revisit these, odd combination of supertype and composite options
     options = _.extend( {
-      minWidth: 0,
+      // things that can be hidden
       levelVisible: true,
       challengeNumberVisible: true,
+      // all text
       font: new PhetFont( 20 ),
+      // "New Game" button
+      newGameButtonColor: new Color( 235, 235, 235 ),
+      newGameButtonXMargin: 20,
+      newGameButtonYMargin: 5,
+      // Timer
+      clockIconRadius: 15,
+      // Panel
+      minWidth: 0,
       xSpacing: 40,
       xMargin: 20,
       yMargin: 10,
       fill: 'rgb( 180, 205, 255 )',
       stroke: 'black',
-      lineWidth: 1,
-      newGameButtonColor: new Color( 235, 235, 235 ),
-      newGameButtonXMargin: 20,
-      newGameButtonYMargin: 5,
-      clockIconRadius: 15
+      lineWidth: 1
     }, options );
 
     // Level
@@ -79,7 +83,7 @@ define( function( require ) {
       scoreNode.text = StringUtils.format( pattern_0label_1value, scoreString, score );
     } );
 
-    // Timer
+    // Timer, always takes up space even when hidden.
     var timerNode = new Node( { pickable: false } );
     var clockIcon = new SimpleClockIcon( options.clockIconRadius );
     var timeValue = new Text( '', { font: options.font } );
@@ -115,6 +119,7 @@ define( function( require ) {
       }
     }
 
+    //TODO sun.Panel should support this, instead of having to do it here
     // ensure a minimum width, horizontally center the content.
     var content = subContent;
     if ( subContent.width < options.minWidth ) {

@@ -1,3 +1,4 @@
+10/11/13 localize and migrate GameTimer to vegas
 10/11/13 implement GameTimer
 10/10/13 i18n of "Game Settings" and "Game Over" panels
 10/10/13 make "Game Over" panel look like Java version

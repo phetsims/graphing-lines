@@ -24,7 +24,7 @@ define( function( require ) {
   var ChallengeFactoryHardCoded = require( 'GRAPHING_LINES/linegame/model/ChallengeFactoryHardCoded' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GameTimer = require( 'GRAPHING_LINES/linegame/model/GameTimer' );
+  var GameTimer = require( 'VEGAS/GameTimer' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );

@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var Scoreboard = require( 'GRAPHING_LINES/linegame/view/Scoreboard' );
+  var Scoreboard = require( 'VEGAS/Scoreboard' );
 
   /**
    * @param {LineGameModel} model

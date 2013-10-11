@@ -102,7 +102,7 @@ define( function( require ) {
       rectangleYMargin: options.newGameButtonYMargin
     } );
 
-    // Content for the panel. One row, vertically centered, evenly spaced
+    // Content for the panel, one row.
     var subContent = new Node();
     var nodes = [ levelNode, challengeNumberNode, scoreNode, timerNode, newGameButton ];
     if ( !options.levelVisible ) { nodes.splice( nodes.indexOf( levelNode ), 1 ); }
@@ -115,7 +115,7 @@ define( function( require ) {
       }
     }
 
-    // ensure a minimum width
+    // ensure a minimum width, horizontally center the content.
     var content = subContent;
     if ( subContent.width < options.minWidth ) {
       content = new Node();

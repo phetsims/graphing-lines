@@ -32,7 +32,7 @@ define( function( require ) {
       model.challengesPerGameProperty,
       model.levelProperty,
       model.scoreProperty,
-      model.timer.timeProperty,
+      model.timer.elapsedTimeProperty,
       model.timerEnabledProperty,
       function() {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );

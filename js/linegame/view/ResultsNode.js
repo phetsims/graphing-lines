@@ -46,7 +46,7 @@ define( function( require ) {
           model.scoreProperty.get(),
           model.getPerfectScore(),
           0, /* scoreDecimalPlaces */
-          model.timer.timeProperty.get(),
+          model.timer.elapsedTime,
           model.bestTimes[ model.levelProperty.get() ],
           model.timerEnabledProperty.get(),
           function() {

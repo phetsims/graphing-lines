@@ -177,7 +177,7 @@ define( function( require ) {
 
     // Updates the best time for the current level, at the end of a timed game with a perfect score.
     updateBestTime: function() {
-      assert && assert( !this.timer.isRunning() );
+      assert && assert( !this.timer.isRunning );
       if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
         //TODO update best time
       }

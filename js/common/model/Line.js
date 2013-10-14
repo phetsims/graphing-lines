@@ -59,7 +59,7 @@ define( function( require ) {
 
     // Returns true if 2 points on the specified line are also on this line.
     same: function( line ) {
-      return ( line !== null ) && this.onLine( line.x1, line.y1 ) && this.onLine( line.x2, line.y2 );
+      return ( line !== null ) && this.onLineXY( line.x1, line.y1 ) && this.onLineXY( line.x2, line.y2 );
     },
 
     // Returns true if the slope is undefined.
@@ -132,8 +132,15 @@ define( function( require ) {
       return ( this.rise !== 0 ) && ( this.run !== 0 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run );
     },
 
-    // Returns true if point (x,y) is on this line.
-    onLine: function( x, y ) {
+    /**
+     * Returns true if point is on this line.
+     * @param {Vector2} p
+     */
+    onLinePoint: function( p ) {
+      return this.onLineXY( p.x, p.y );
+    },
+
+    onLineXY: function( x, y ) {
       if ( this.rise === 0 ) {
         return ( y === this.y1 );
       }

@@ -42,13 +42,9 @@ define( function( require ) {
     // update the guess when the points change
     var updateGuess = function() {
       var line = new Line( thisChallenge.p1.get().x, thisChallenge.p1.get().y, thisChallenge.p2.get().x, thisChallenge.p2.get().y, LineGameConstants.GUESS_COLOR );
-      if ( line.onLine( thisChallenge.p3.get() ) ) {
+      if ( line.onLinePoint( thisChallenge.p3.get() ) ) {
         // all 3 points are on a line
         thisChallenge.guess.set( line );
-        if ( thisChallenge.isCorrect() ) {
-          // when correct, we want the guess to match the answer exactly
-          thisChallenge.guess.set( thisChallenge.answer );
-        }
       }
       else {
         // the 3 points don't form a line

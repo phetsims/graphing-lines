@@ -9,18 +9,18 @@ HIGH
 MEDIUM
 - rounded corners on spinners, see Shape.roundRect
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
-- horizontal space between text and icons is wrong in sun.CheckBox, problem with scenery.Text bounds?
 
 LOW
-- use 'pattern' prefix for all strings that contain {0} placeholders
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
 - use 'Property' suffix consistently
 - convert icons to images in IconFactory
 - convert models to PropertySet and axon style
-- change 'tab.*' string keys to 'screen.*'
-- omit subtype-specific options before passing them to supertype, phet-core#3
 - i18n of credits
 - ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
+
+LOWEST
+- change 'tab.*' string keys to 'screen.*'
+- omit subtype-specific options before passing them to supertype, phet-core#3
 
 PERFORMANCE
 - lousy on iPad

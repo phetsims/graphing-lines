@@ -122,7 +122,7 @@ define( function( require ) {
 
       // buttons at bottom center
       var buttonCenterX = challengeSize.width / 2;
-      var buttonBottom = challengeSize.height - 30;
+      var buttonBottom = challengeSize.height - 20;
       thisNode.checkButton.centerX = buttonCenterX;
       thisNode.checkButton.bottom = buttonBottom;
       tryAgainButton.centerX = buttonCenterX;
@@ -132,11 +132,11 @@ define( function( require ) {
       nextButton.centerX = buttonCenterX;
       nextButton.bottom = buttonBottom;
 
-      // dev buttons below main buttons
-      skipButton.centerX = buttonCenterX;
-      skipButton.top = buttonBottom + 2;
-      replayButton.centerX = buttonCenterX;
-      replayButton.top = buttonBottom + 2;
+      // dev buttons to right of main buttons
+      skipButton.left = showAnswerButton.right + 15;
+      skipButton.centerY = thisNode.checkButton.centerY;
+      replayButton.left = skipButton.left;
+      replayButton.centerY = skipButton.centerY;
     }
 
     // "Check" button

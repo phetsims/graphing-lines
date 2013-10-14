@@ -12,6 +12,7 @@ define( function( require ) {
   // imports
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var MakeTheEquationNode = require( 'GRAPHING_LINES/linegame/view/MakeTheEquationNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -36,7 +37,7 @@ define( function( require ) {
       manipulationMode,
       xRange,
       yRange,
-      new Vector2( 735, 300 ), /* origin offset */
+      LineGameConstants.ORIGIN_OFFSET,
       new Vector2( xRange.min + ( 0.65 * xRange.getLength() ), yRange.min - 1 ), /* point tool location 1 */
       new Vector2( xRange.min + ( 0.95 * xRange.getLength() ), yRange.min - 4 ) /* point tool location 2 */
     );

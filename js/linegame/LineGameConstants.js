@@ -11,8 +11,11 @@ define( function( require ) {
   // imports
   var Color = require( 'SCENERY/util/Color' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   return {
+    ORIGIN_OFFSET: new Vector2( 800, 300 ), // graph (0,0) will be positioned here
+
     // fonts
     TITLE_FONT: new PhetFont( { size: 40, weight: 'bold' } ),
     BUTTON_FONT: new PhetFont( { size: 30, weight: 'bold' } ),

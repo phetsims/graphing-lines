@@ -38,7 +38,7 @@ define( function( require ) {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
       } );
     scoreboardNode.centerX = playAreaSize.width / 2;
-    scoreboardNode.bottom = playAreaSize.height - 10;
+    scoreboardNode.bottom = playAreaSize.height - 20;
     thisNode.addChild( scoreboardNode );
 
     // compute the size of the area available for the challenges

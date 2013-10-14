@@ -1,3 +1,4 @@
+10/14/13 adjust layout of game
 10/14/13 Line.onLineXY and onLinePoint, fixed "Place the Point" challenges
 10/11/13 integrate vegas.GameAudioPlayer
 10/11/13 migrate 'Game Settings' panel to vegas

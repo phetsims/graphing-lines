@@ -18,12 +18,12 @@ define( function( require ) {
   var slopeInterceptString = require( 'string!GRAPHING_LINES/tab.slopeIntercept' );
 
   // images
-  var slopeInterceptImage = require( 'image!GRAPHING_LINES/SlopeIntercept-icon.png' );
+  var screenIcon = require( 'image!GRAPHING_LINES/SlopeIntercept-screen-icon.png' );
 
   function SlopeInterceptScreen() {
 
     this.name = slopeInterceptString;
-    this.icon = new Image( slopeInterceptImage );
+    this.icon = new Image( screenIcon );
     this.backgroundColor = new Color( 255, 255, 214 );
 
     this.createModel = function() {

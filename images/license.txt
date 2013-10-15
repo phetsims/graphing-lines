@@ -1,10 +1,10 @@
 blue-stopwatch.png source=www.freeclipartnow.com notes=Public Domain license, see http://www.freeclipartnow.com/termsofuse.php
 Check-Mark-u2713.png author=PhET notes=copied from balancing-chemical-equations
-Game-icon.png source=PhET author=Sharon Siman-Tov
+LineGame-screen-icon.png source=PhET author=Sharon Siman-Tov
 Heavy-Ballot-X-u2718.png author=PhET notes=copied from balancing-chemical-equations
 point_tool_body.png author=PhET notes=created by Ariel Paul
 point_tool_tip.png author=PhET notes=created by Ariel Paul
-PointSlope-icon source=PhET author=Sharon Siman-Tov
-Slope-icon.png source=PhET author=Sharon Siman-Tov
-SlopeIntercept-icon.png source=PhET author=Sharon Siman-Tov
+PointSlope-screen-icon source=PhET author=Sharon Siman-Tov
+Slope-screen-icon.png source=PhET author=Sharon Siman-Tov
+SlopeIntercept-screen-icon.png source=PhET author=Sharon Siman-Tov
 

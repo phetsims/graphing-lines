@@ -18,12 +18,12 @@ define( function( require ) {
   var slopeString = require( 'string!GRAPHING_LINES/tab.slope' );
 
   // images
-  var slopeImage = require( 'image!GRAPHING_LINES/Slope-icon.png' );
+  var screenIcon = require( 'image!GRAPHING_LINES/Slope-screen-icon.png' );
 
   function SlopeScreen() {
 
     this.name = slopeString;
-    this.icon = new Image( slopeImage );
+    this.icon = new Image( screenIcon );
     this.backgroundColor = new Color( 255, 255, 214 );
 
     this.createModel = function() {

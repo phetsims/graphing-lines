@@ -1,3 +1,4 @@
+10/14/13 rename screen-icon images
 10/14/13 integrate revised screen icons
 10/14/13 add 'hardcoded' query parameter that will use the same representative set of challenges every time
 10/14/13 adjust layout of game

@@ -18,12 +18,12 @@ define( function( require ) {
   var lineGameString = require( 'string!GRAPHING_LINES/tab.lineGame' );
 
   // images
-  var gameImage = require( 'image!GRAPHING_LINES/Game-icon.png' );
+  var screenIcon = require( 'image!GRAPHING_LINES/LineGame-screen-icon.png' );
 
   function GameScreen() {
 
     this.name = lineGameString;
-    this.icon = new Image( gameImage );
+    this.icon = new Image( screenIcon );
     this.backgroundColor = new Color( 255, 255, 214 );
 
     this.createModel = function() {

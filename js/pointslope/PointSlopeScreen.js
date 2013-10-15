@@ -18,12 +18,12 @@ define( function( require ) {
   var pointSlopeString = require( 'string!GRAPHING_LINES/tab.pointSlope' );
 
   // images
-  var pointSlopeImage = require( 'image!GRAPHING_LINES/PointSlope-icon.png' );
+  var screenIcon = require( 'image!GRAPHING_LINES/PointSlope-screen-icon.png' );
 
   function PointSlopeScreen() {
 
     this.name = pointSlopeString;
-    this.icon = new Image( pointSlopeImage );
+    this.icon = new Image( screenIcon );
     this.backgroundColor = new Color( 255, 255, 214 );
 
     this.createModel = function() {

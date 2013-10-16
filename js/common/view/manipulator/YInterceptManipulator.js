@@ -48,9 +48,7 @@ define( function( require ) {
         var line = lineProperty.get();
         // Keep slope constant, change y1.
         lineProperty.set( Line.createSlopeIntercept( line.rise, line.run, y1, line.color ) );
-      },
-
-      translate: function() { /* override default behavior, do nothing */ }
+      }
     } );
   }
 

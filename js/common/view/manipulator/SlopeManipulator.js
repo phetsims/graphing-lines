@@ -51,9 +51,7 @@ define( function( require ) {
         if ( rise !== 0 || run !== 0 ) {
           lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );
         }
-      },
-
-      translate: function() { /* override default behavior, do nothing */ }
+      }
     } );
   }
 

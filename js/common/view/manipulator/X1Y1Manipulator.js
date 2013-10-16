@@ -57,9 +57,7 @@ define( function( require ) {
           // Keep (x2,y2) constant, change (x1,y1) and slope.
           lineProperty.set( new Line( x1, y1, line.x2, line.y2, line.color ) );
         }
-      },
-
-      translate: function() { /* override default behavior, do nothing */ }
+      }
     } );
   }
 

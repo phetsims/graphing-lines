@@ -62,9 +62,7 @@ define( function( require ) {
         if ( !same ) {
           pointProperty.set( new Vector2( x, y ) );
         }
-      },
-
-      translate: function() { /* override default behavior, do nothing */ }
+      }
     } );
   }
 

@@ -75,9 +75,7 @@ define( function( require ) {
           location = new Vector2( Util.toFixed( location.x, 0 ), Util.toFixed( location.y, 0 ) );
         }
         pointTool.location = location;
-      },
-
-      translate: function() { /* override default behavior, do nothing. */ }
+      }
     } );
   }
 

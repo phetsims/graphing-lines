@@ -245,10 +245,10 @@ define( function( require ) {
     var htmlLeftSide = StringUtils.format( "{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{1} =", slopeString, symbolSlopeString );
     var leftSideNode = new HTMLText( htmlLeftSide, { font: font, fill: options.fill } );
 
+    // pattern for numerator and denominator, with smaller subscripts
+    var pattern = '<html>{0}<span style="font-size:70%"><sub>2</sub></span> - {1}<span style="font-size:70%"><sub>1</sub></span></html>';
+
     // y2 - y1
-    //TODO is this OK?
-    //NOTE: <font> tag is deprecated in HTML4 and unsupported in HTML5. But as of Java 1.7, Swing (supposedly) implements a subset of HTML3.
-    var pattern = "<html>{0}<font size='-1'><sub>2</sub></font> - {1}<font size='-1'><sub>1</sub></font></html>"; // same for numerator and denominator
     var htmlNumerator = StringUtils.format( pattern, symbolYString, symbolYString );
     var numeratorNode = new HTMLText( htmlNumerator, { font: font, fill: options.fill } );
 
@@ -273,9 +273,9 @@ define( function( require ) {
     fractionLineNode.left = leftSideNode.right + 5;
     fractionLineNode.centerY = leftSideNode.centerY;
     numeratorNode.centerX = fractionLineNode.centerX;
-    numeratorNode.bottom = fractionLineNode.top - ySpacing; //TODO this is wrong with HTMLText
+    numeratorNode.bottom = fractionLineNode.top - 5;
     denominatorNode.centerX = fractionLineNode.centerX;
-    denominatorNode.top = fractionLineNode.bottom + ySpacing; //TODO this is wrong with HTMLText
+    denominatorNode.top = fractionLineNode.bottom + 1;
 
     return equationNode;
   };

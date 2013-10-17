@@ -1,3 +1,4 @@
+10/17/13 use inline CSS instead of deprecated 'font' tag to make subscripts smaller in general form of Slope equation
 10/17/13 problems with HTMLText have disappeared, use HTMLText in SlopeEquationNode.createGeneralFormNode
 10/17/13 new screen-icons.ai from SST
 10/14/13 rename screen-icon images

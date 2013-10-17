@@ -15,7 +15,6 @@ LOW
 - convert icons to images in IconFactory
 - convert models to PropertySet and axon style
 - i18n of credits
-- ok to use <font> tag in PointSlopeEquationNode.createGeneralFormNode and SlopeEquationNode.createGeneralFormNode?
 
 LOWEST
 - change 'tab.*' string keys to 'screen.*'

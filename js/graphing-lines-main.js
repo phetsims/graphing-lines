@@ -16,7 +16,7 @@ require( [
   function( SimLauncher, Sim, SlopeScreen, SlopeInterceptScreen, PointSlopeScreen, LineGameScreen, simTitle ) {
     'use strict';
 
-    //TODO i18n?
+    //TODO i18n, see joist#66
     var simOptions = {
       credits: 'PhET Development Team -\n' +
                'Lead Design: Ariel Paul\n' +

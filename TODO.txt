@@ -7,7 +7,6 @@ HIGH
 - consolidate equation fontSize and fontWeight in GLConfig
 
 MEDIUM
-- get screen-icons.ai from SST
 - rounded corners on spinners, see Shape.roundRect
 - use HTMLText in SlopeEquationNode.createGeneralFormNode when HTMLText bounds is fixed
 

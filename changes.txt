@@ -1,3 +1,4 @@
+10/17/13 new screen-icons.ai from SST
 10/14/13 rename screen-icon images
 10/14/13 integrate revised screen icons
 10/14/13 add 'hardcoded' query parameter that will use the same representative set of challenges every time

@@ -250,13 +250,11 @@ define( function( require ) {
     //NOTE: <font> tag is deprecated in HTML4 and unsupported in HTML5. But as of Java 1.7, Swing (supposedly) implements a subset of HTML3.
     var pattern = "<html>{0}<font size='-1'><sub>2</sub></font> - {1}<font size='-1'><sub>1</sub></font></html>"; // same for numerator and denominator
     var htmlNumerator = StringUtils.format( pattern, symbolYString, symbolYString );
-//    var numeratorNode = new HTMLText( htmlNumerator, { font: font, fill: options.fill } ); //TODO vertical layout problems with HTMLText, height wrong?
-    var numeratorNode = new Text( "y2 - y1", { font: font, fill: options.fill } );
+    var numeratorNode = new HTMLText( htmlNumerator, { font: font, fill: options.fill } );
 
     // x2 - x1
     var htmlDenominator = StringUtils.format( pattern, symbolXString, symbolXString );
-//    var denominatorNode = new HTMLText( htmlDenominator, { font: font, fill: options.fill } ); //TODO vertical layout problems with HTMLText, height wrong?
-    var denominatorNode = new Text( "x2 - x1", { font: font, fill: options.fill } );
+    var denominatorNode = new HTMLText( htmlDenominator, { font: font, fill: options.fill } );
 
     // fraction line
     var length = Math.max( numeratorNode.width, denominatorNode.width );

@@ -12,10 +12,11 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-  var Property = require( 'AXON/Property' );
+  var PropertySet = require( 'AXON/PropertySet' );
   var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -30,6 +31,7 @@ define( function( require ) {
   function LineFormsModel( interactiveLine ) {
 
     var thisModel = this;
+    PropertySet.call( thisModel, { interactiveLine: interactiveLine } );
 
     // diameter of the manipulators
     thisModel.manipulatorDiameter = 0.85;
@@ -41,8 +43,7 @@ define( function( require ) {
     var mvtScale = GRID_VIEW_UNITS / Math.max( thisModel.graph.xRange.getLength(), thisModel.graph.yRange.getLength() ); // view units / model units
     thisModel.mvt = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, mvtScale, -mvtScale ); // y is inverted
 
-    // lines
-    thisModel.interactiveLineProperty = new Property( interactiveLine );
+    // static lines
     thisModel.savedLines = new ObservableArray();
     thisModel.standardLines = new ObservableArray();
 
@@ -50,7 +51,7 @@ define( function( require ) {
     var updateGraphLines = function() {
       thisModel.graph.lines.clear();
       // add lines in the order that they would be rendered
-      thisModel.graph.lines.add( thisModel.interactiveLineProperty.get() );
+      thisModel.graph.lines.add( thisModel.interactiveLine );
       thisModel.savedLines.forEach( function( line ) {
         thisModel.graph.lines.add( line );
       } );
@@ -71,16 +72,15 @@ define( function( require ) {
       new Bounds2( thisModel.graph.xRange.min - 1, thisModel.graph.yRange.min - 3, thisModel.graph.xRange.max + 3, thisModel.graph.yRange.max + 1 ) );
   }
 
-  LineFormsModel.prototype = {
+  return inherit( PropertySet, LineFormsModel, {
 
+    // @override
     reset: function() {
-      this.interactiveLineProperty.reset();
+      PropertySet.prototype.reset.call( this );
       this.savedLines.clear();
       this.standardLines.clear();
       this.pointTool1.reset();
       this.pointTool2.reset();
     }
-  };
-
-  return LineFormsModel;
+  } );
 } );

@@ -30,7 +30,7 @@ define( function( require ) {
       var parentNode = new Node();
 
       var model = new SlopeInterceptModel();
-      model.interactiveLineProperty.set( Line.createSlopeIntercept( 1, 2, 0 ) ); // bigger values will make slope tool look smaller in icon
+      model.interactiveLine = Line.createSlopeIntercept( 1, 2, 0 ); // bigger values will make slope tool look smaller in icon
 
       // slope tool
       var slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt );

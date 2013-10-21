@@ -67,10 +67,10 @@ define( function( require ) {
     var graphNode = new AnswerGraphNode( challenge );
 
     // rendering order
-    thisNode.subclassParent.addChild( titleNode );
-    thisNode.subclassParent.addChild( graphNode );
-    thisNode.subclassParent.addChild( answerBoxNode );
-    thisNode.subclassParent.addChild( guessBoxNode );
+    thisNode.subtypeParent.addChild( titleNode );
+    thisNode.subtypeParent.addChild( graphNode );
+    thisNode.subtypeParent.addChild( answerBoxNode );
+    thisNode.subtypeParent.addChild( guessBoxNode );
 
     // layout
     {

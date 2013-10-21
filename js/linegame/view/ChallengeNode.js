@@ -51,8 +51,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    //TODO rename this subtypeParent
-    thisNode.subclassParent = new Node(); // subtypes should add children to this node, to preserve rendering order
+    thisNode.subtypeParent = new Node(); // subtypes should add children to this node, to preserve rendering order
 
     // description (dev)
     var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new PhetFont( 16 ), fill: 'black' } );
@@ -98,7 +97,7 @@ define( function( require ) {
 
     // rendering order
     {
-      thisNode.addChild( thisNode.subclassParent );
+      thisNode.addChild( thisNode.subtypeParent );
       if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
         thisNode.addChild( descriptionNode );
       }

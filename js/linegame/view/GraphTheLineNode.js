@@ -66,10 +66,10 @@ define( function( require ) {
     thisNode.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
     // rendering order
-    thisNode.subclassParent.addChild( titleNode );
-    thisNode.subclassParent.addChild( thisNode.graphNode );
-    thisNode.subclassParent.addChild( answerBoxNode );
-    thisNode.subclassParent.addChild( thisNode.guessBoxNode );
+    thisNode.subtypeParent.addChild( titleNode );
+    thisNode.subtypeParent.addChild( thisNode.graphNode );
+    thisNode.subtypeParent.addChild( answerBoxNode );
+    thisNode.subtypeParent.addChild( thisNode.guessBoxNode );
 
     // layout
     {
@@ -99,7 +99,7 @@ define( function( require ) {
     challenge.guessProperty.link( function( line ) {
 
       // update the equation (line is null if ManipulationMode.THREE_POINTS and points don't make a line)
-      thisNode.subclassParent.removeChild( thisNode.guessBoxNode );
+      thisNode.subtypeParent.removeChild( thisNode.guessBoxNode );
       var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT_SIZE, line.color );
       var color = ( !line ) ? LineGameConstants.GUESS_COLOR : line.color;
       thisNode.guessBoxNode = new EquationBoxNode( yourLineString, color, boxSize, equationNode );
@@ -107,7 +107,7 @@ define( function( require ) {
       // adjust position of guess equation so that it's below the answer
       thisNode.guessBoxNode.left = answerBoxNode.left;
       thisNode.guessBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
-      thisNode.subclassParent.addChild( thisNode.guessBoxNode );
+      thisNode.subtypeParent.addChild( thisNode.guessBoxNode );
       thisNode.guessBoxNode.visible = ( model.playStateProperty.get() === PlayState.NEXT );
 
       // visibility of correct/incorrect icons

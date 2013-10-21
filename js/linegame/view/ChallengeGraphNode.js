@@ -24,7 +24,7 @@ define( function( require ) {
 
   /**
    * @param {Challenge} challenge
-   * @param {boolean} slopeToolEnabled //TODO make this an option?
+   * @param {boolean} slopeToolEnabled
    * @constructor
    */
   function ChallengeGraphNode( challenge, slopeToolEnabled ) {

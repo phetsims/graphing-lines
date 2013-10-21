@@ -3,6 +3,7 @@ TODO list for graphing-lines (HTML5 port)
 DESIGN
 
 HIGH
+- remove use of <font> in PointSlopeEquationNode (see SlopeEquationNode)
 - performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConfig
 - address lots of TODO items in the code
@@ -14,7 +15,7 @@ LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
 - use 'Property' suffix consistently
 - convert icons to images in IconFactory
-- convert models to PropertySet and axon style
+- convert models to PropertySet and axon style: LineFormsModel (1 Property), Challenge (1), LineGameModel (9)
 - i18n of credits
 
 LOWEST

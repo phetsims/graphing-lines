@@ -8,6 +8,7 @@
 define( function() {
   'use strict';
 
+  //TODO enum pattern uses {} for each value, but strings are more convenient for debugging
   return Object.freeze( {
     SLOPE_INTERCEPT: 'SLOPE_INTERCEPT', /* y = mx + b */
     POINT_SLOPE: 'POINT_SLOPE' /* (y2 - y1) = m(x2 - x1) */

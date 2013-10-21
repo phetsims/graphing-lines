@@ -16,10 +16,6 @@ LOW
 - convert icons to images in IconFactory
 - i18n of credits
 
-LOWEST
-- change 'tab.*' string keys to 'screen.*'
-- omit subtype-specific options before passing them to supertype, phet-core#3
-
 PERFORMANCE
 - lousy on iPad
 - consider making Line mutable, to reduce affects of garbage collection
@@ -27,5 +23,4 @@ PERFORMANCE
 
 MIGRATE TO COMMON
 - Spinner
-- ExpandCollapseButton
 

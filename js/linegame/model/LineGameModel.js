@@ -75,7 +75,7 @@ define( function( require ) {
 
     // challenges
     thisModel.challenges = []; // Array<Challenge>
-    thisModel.challengeProperty = new Property( DUMMY_CHALLENGE ); //TODO is DUMMY_CHALLENGE needed?
+    thisModel.challengeProperty = new Property( DUMMY_CHALLENGE );
     thisModel.challengeIndexProperty = new Property( 0 );
     thisModel.challengesPerGameProperty = new Property( 0 );
 

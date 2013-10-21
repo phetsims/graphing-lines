@@ -27,7 +27,6 @@ define( function( require ) {
       return value;
     },
 
-    //TODO will this work? will index be removed from indices?
     /**
      * Chooses a value from an array of arrays, removes it from the array in which it was found, removes the array from the arrayIndices.
      * Use this when values are organized into 2 or more sets, and a value should be chosen from each set.

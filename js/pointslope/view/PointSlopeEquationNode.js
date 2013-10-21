@@ -368,9 +368,8 @@ define( function( require ) {
   // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
   PointSlopeEquationNode.createGeneralFormNode = function( options ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
-    //TODO Is this OK? <font> tag is deprecated in HTML4 and unsupported in HTML5.
-    var html = StringUtils.format( "<html>({0} - {1}<font size='-1'><sub>1</sub></font>) = {2}({3} - {4}<font size='-1'><sub>1</sub></font>)</html>",
-      symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
+    var pattern = '<html>({0} - {1}<span style="font-size:70%"><sub>1</sub></span>) = {2}({3} - {4}<span style="font-size:70%"><sub>1</sub></span>)</html>';
+    var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
     return new HTMLText( html, { font: options.font, pickable: false } );
   };
 

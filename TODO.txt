@@ -3,19 +3,17 @@ TODO list for graphing-lines (HTML5 port)
 DESIGN
 
 HIGH
-- remove use of <font> in PointSlopeEquationNode (see SlopeEquationNode)
 - performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConfig
 - address lots of TODO items in the code
 
 MEDIUM
 - rounded corners on spinners, see Shape.roundRect
+- convert LineGameModel (9 properties) to PropertySet
 
 LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
-- use 'Property' suffix consistently
 - convert icons to images in IconFactory
-- convert LineGameModel (9 properties) to PropertySet
 - i18n of credits
 
 LOWEST

@@ -4,7 +4,7 @@ DESIGN
 
 HIGH
 - performance stinks on iPad
-- consolidate equation fontSize and fontWeight in GLConfig
+- consolidate equation fontSize and fontWeight in GLConstants
 - address lots of TODO items in the code
 
 MEDIUM

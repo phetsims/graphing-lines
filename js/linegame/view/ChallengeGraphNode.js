@@ -41,7 +41,7 @@ define( function( require ) {
 
     // answer
     {
-      thisNode.answerParentNode = new Node(); //TODO eliminate parent?
+      thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
       var answerNode = new LineNode( challenge.answer, challenge.graph, challenge.mvt );
       thisNode.answerParentNode.addChild( answerNode );
 
@@ -52,7 +52,7 @@ define( function( require ) {
     }
 
     // guess
-    thisNode.guessParentNode = new Node(); //TODO eliminate parent?
+    thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
     thisNode.guessPointVisible = true;
 
     // slope tool

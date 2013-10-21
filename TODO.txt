@@ -5,6 +5,7 @@ DESIGN
 HIGH
 - performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConfig
+- address lots of TODO items in the code
 
 MEDIUM
 - rounded corners on spinners, see Shape.roundRect

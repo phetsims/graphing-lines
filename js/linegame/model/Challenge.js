@@ -44,7 +44,7 @@ define( function( require ) {
     this.title = title;
     this.description = description;
     this.answer = answer.withColor( LineGameConstants.ANSWER_COLOR );
-    this.guess = new Property( createInitialGuess( answer, manipulationMode ) ); //TODO rename guessProperty
+    this.guessProperty = new Property( createInitialGuess( answer, manipulationMode ) );
     this.answerVisible = false;
     this.equationForm = equationForm;
     this.manipulationMode = manipulationMode;
@@ -63,7 +63,7 @@ define( function( require ) {
     this.pointTool2 = new PointTool( pointToolLocation2, 'down', this.graph.lines, dragBounds2 );
 
     // When the guess changes, update the lines that are "seen" by the point tools.
-    this.guess.link( this.updateGraphLines.bind( this ) );
+    this.guessProperty.link( this.updateGraphLines.bind( this ) );
   }
 
   Challenge.prototype = {
@@ -90,7 +90,7 @@ define( function( require ) {
 
     // Resets the challenge
     reset: function() {
-      this.guess.reset();
+      this.guessProperty.reset();
       this.pointTool1.reset();
       this.pointTool2.reset();
       this.setAnswerVisible( false );
@@ -104,7 +104,7 @@ define( function( require ) {
 
     // True if the guess and answer are descriptions of the same line.
     isCorrect: function() {
-      return this.answer.same( this.guess.get() );
+      return this.answer.same( this.guessProperty.get() );
     },
 
     toString: function() {

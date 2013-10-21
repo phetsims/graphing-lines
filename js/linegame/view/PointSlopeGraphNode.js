@@ -36,27 +36,27 @@ define( function( require ) {
     var pointSlopeParameterRange = new PointSlopeParameterRange();
     var x1RangeProperty = new Property( challenge.graph.xRange );
     var y1RangeProperty = new Property( challenge.graph.yRange );
-    var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guess.get(), challenge.graph ) );
-    var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guess.get(), challenge.graph ) );
+    var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
+    var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
 
     var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
 
     // point manipulator
-    var pointManipulator = new X1Y1Manipulator( manipulatorDiameter, challenge.guess, x1RangeProperty, y1RangeProperty, challenge.mvt, true /* constantSlope */ );
+    var pointManipulator = new X1Y1Manipulator( manipulatorDiameter, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.mvt, true /* constantSlope */ );
     var pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
       thisNode.addChild( pointManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorDiameter, challenge.guess, riseRangeProperty, runRangeProperty, challenge.mvt );
+    var slopeManipulator = new SlopeManipulator( manipulatorDiameter, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );
     }
 
     // Sync with the guess
-    challenge.guess.link( function( line ) {
+    challenge.guessProperty.link( function( line ) {
 
       // move the manipulators
       pointManipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );

@@ -96,7 +96,7 @@ define( function( require ) {
     };
 
     // sync with guess
-    challenge.guess.link( function( line ) {
+    challenge.guessProperty.link( function( line ) {
 
       // update the equation (line is null if ManipulationMode.THREE_POINTS and points don't make a line)
       thisNode.subclassParent.removeChild( thisNode.guessBoxNode );

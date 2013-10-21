@@ -44,11 +44,11 @@ define( function( require ) {
       var line = new Line( thisChallenge.p1.get().x, thisChallenge.p1.get().y, thisChallenge.p2.get().x, thisChallenge.p2.get().y, LineGameConstants.GUESS_COLOR );
       if ( line.onLinePoint( thisChallenge.p3.get() ) ) {
         // all 3 points are on a line
-        thisChallenge.guess.set( line );
+        thisChallenge.guessProperty.set( line );
       }
       else {
         // the 3 points don't form a line
-        thisChallenge.guess.set( null );
+        thisChallenge.guessProperty.set( null );
       }
     };
     thisChallenge.p1.link( updateGuess.bind( thisChallenge ) );

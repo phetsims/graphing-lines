@@ -56,7 +56,7 @@ define( function( require ) {
     thisNode.guessPointVisible = true;
 
     // slope tool
-    thisNode.slopeToolNode = slopeToolEnabled ? new SlopeToolNode( challenge.guess, challenge.mvt ) : new Node();
+    thisNode.slopeToolNode = slopeToolEnabled ? new SlopeToolNode( challenge.guessProperty, challenge.mvt ) : new Node();
 
     // rendering order
     thisNode.addChild( thisNode.guessParentNode );
@@ -64,7 +64,7 @@ define( function( require ) {
     thisNode.addChild( thisNode.slopeToolNode );
 
     // Sync with the guess
-    challenge.guess.link( function( line ) {
+    challenge.guessProperty.link( function( line ) {
 
       thisNode.guessParentNode.removeAllChildren();
       thisNode.guessPointNode = null;

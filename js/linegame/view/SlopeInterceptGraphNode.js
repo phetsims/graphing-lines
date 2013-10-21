@@ -33,28 +33,28 @@ define( function( require ) {
 
     // dynamic ranges
     var parameterRange = new SlopeInterceptParameterRange();
-    var riseRangeProperty = new Property( parameterRange.rise( challenge.guess.get(), challenge.graph ) );
-    var runRangeProperty = new Property( parameterRange.run( challenge.guess.get(), challenge.graph ) );
+    var riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
+    var runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
     var y1RangeProperty = new Property( challenge.graph.yRange );
 
     var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
 
     // intercept manipulator
-    var yInterceptManipulator = new YInterceptManipulator( manipulatorDiameter, challenge.guess, y1RangeProperty, challenge.mvt );
+    var yInterceptManipulator = new YInterceptManipulator( manipulatorDiameter, challenge.guessProperty, y1RangeProperty, challenge.mvt );
     var interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
       thisNode.addChild( yInterceptManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorDiameter, challenge.guess, riseRangeProperty, runRangeProperty, challenge.mvt );
+    var slopeManipulator = new SlopeManipulator( manipulatorDiameter, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {
       thisNode.addChild( slopeManipulator );
     }
 
     // Sync with the guess
-    challenge.guess.link( function( line ) {
+    challenge.guessProperty.link( function( line ) {
 
       // move the manipulators
       slopeManipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );

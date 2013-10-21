@@ -59,9 +59,9 @@ define( function( require ) {
 
     // Guess
     var guessBoxNode =
-      new EquationBoxNode( yourEquationString, challenge.guess.get().color, boxSize,
-        createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guess, challenge.graph,
-          LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guess.get().color ) );
+      new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
+        createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
+          LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
 
     // Graph
     var graphNode = new AnswerGraphNode( challenge );
@@ -110,7 +110,7 @@ define( function( require ) {
     };
 
     // sync with guess
-    challenge.guess.link( updateIcons.bind( thisNode ) );
+    challenge.guessProperty.link( updateIcons.bind( thisNode ) );
 
     // sync with game state
     model.playStateProperty.link( function( playState ) {
@@ -138,18 +138,18 @@ define( function( require ) {
    * Creates an interactive equation.
    * @param {EquationForm} equationForm
    * @param {ManipulationMode} manipulationMode
-   * @param {Property<Line>} line
+   * @param {Property<Line>} lineProperty
    * @param {Graph} graph
    * @param {Font} interactiveFont
    * @param {Font} staticFont
    * @param {Color} staticColor
    */
-   var createInteractiveEquationNode = function( equationForm, manipulationMode, line, graph, interactiveFontSize, staticFontSize, staticColor ) {
+   var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, interactiveFontSize, staticFontSize, staticColor ) {
     var interactivePoint, interactiveSlope, interactiveIntercept;
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       interactiveIntercept = ( manipulationMode === ManipulationMode.INTERCEPT ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
-      return new SlopeInterceptEquationNode( line, new Property( graph.yRange ), new Property( graph.xRange ), new Property( graph.yRange ), {
+      return new SlopeInterceptEquationNode( lineProperty, new Property( graph.yRange ), new Property( graph.xRange ), new Property( graph.yRange ), {
         interactiveSlope: interactiveSlope,
         interactiveIntercept: interactiveIntercept,
         interactiveFontSize: interactiveFontSize,
@@ -159,7 +159,7 @@ define( function( require ) {
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
       interactivePoint = ( manipulationMode === ManipulationMode.POINT ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
-      return new PointSlopeEquationNode( line, new Property( graph.xRange ), new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ), {
+      return new PointSlopeEquationNode( lineProperty, new Property( graph.xRange ), new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ), {
         interactiveX1: interactivePoint,
         interactiveY1: interactivePoint,
         interactiveSlope: interactiveSlope,

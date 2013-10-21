@@ -63,8 +63,8 @@ define( function( require ) {
     updateGraphLines: function() {
       this.graph.lines.clear();
       // add lines in the order that they would be rendered
-      if ( this.guess.get() ) {
-        this.graph.lines.push( this.guess.get() );
+      if ( this.guessProperty.get() ) {
+        this.graph.lines.push( this.guessProperty.get() );
       }
       if ( this.answerVisible ) {
         this.graph.lines.push( this.answer );

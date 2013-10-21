@@ -31,10 +31,10 @@ define( function( require ) {
 
     var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
 
-    var x1y1Manipulator = new X1Y1Manipulator( manipulatorDiameter, challenge.guess,
+    var x1y1Manipulator = new X1Y1Manipulator( manipulatorDiameter, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.mvt, false /* constantSlope */ );
 
-    var x2y2Manipulator = new X2Y2Manipulator( manipulatorDiameter, challenge.guess,
+    var x2y2Manipulator = new X2Y2Manipulator( manipulatorDiameter, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.mvt );
 
     // Rendering order
@@ -42,7 +42,7 @@ define( function( require ) {
     thisNode.addChild( x2y2Manipulator );
 
     // Sync with the guess
-    challenge.guess.link( function( line ) {
+    challenge.guessProperty.link( function( line ) {
       // move the manipulators
       x1y1Manipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       x2y2Manipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );

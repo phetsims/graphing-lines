@@ -38,7 +38,4 @@ define( function( require ) {
     POINT_DIAMETER: 0.5, // diameter of plotted points, in model units
     POINT_TOOL_SCALE: 0.80
   };
-
-  return LineGameConstants;
 } );
-

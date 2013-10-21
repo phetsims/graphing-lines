@@ -102,7 +102,7 @@ define( function( require ) {
           thisModel.updateBestTime();
         }
         else {
-          throw new Error( "unsupported game phase = " + gamePhase );
+          throw new Error( "unsupported game phase: " + gamePhase );
         }
       } );
 

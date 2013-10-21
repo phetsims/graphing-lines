@@ -1,5 +1,6 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
+//TODO use PropertySet
 /**
  * Model for the "Line Game" screen. Responsibilities include:
  * <ul>
@@ -129,12 +130,17 @@ define( function( require ) {
 
   LineGameModel.prototype = {
 
-    //TODO reset other stuff, or use PropertySet
     reset: function() {
+
       this.levelProperty.reset();
       this.soundEnabledProperty.reset();
       this.timerEnabledProperty.reset();
       this.scoreProperty.reset();
+
+      this.gamePhaseProperty.reset();
+      this.playStateProperty.reset();
+
+      this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
     },
 
     step: function() { /* no animation, do nothing */ },
@@ -198,7 +204,7 @@ define( function( require ) {
     }
   };
 
-  //TODO revisit this later
+  //TODO revisit this later. Could be eliminated by requiring clients to call setGamePhase.
   function PropertyWithHook( value, hook ) {
     this.hook = hook;
     Property.call( this, value );

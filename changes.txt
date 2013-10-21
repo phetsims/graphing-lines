@@ -1,3 +1,4 @@
+10/21/13 flesh out LineGameModel.reset, make some notes about potential use of PropertySet
 10/21/13 convert LineFormsModel to PropertySet (1 Property)
 10/21/13 convert PlaceThePoints to PropertySet (extends Challenge with 3 additional Properties)
 10/21/13 convert Challenge to PropertySet (1 Property)

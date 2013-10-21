@@ -29,11 +29,11 @@ define( function( require ) {
     // manipulators
     var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
     var p1Manipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_1,
-      challenge.p1, [ challenge.p2, challenge.p3 ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
+      challenge.p1Property, [ challenge.p2Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
     var p2Manipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_2,
-      challenge.p2, [ challenge.p1, challenge.p3 ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
+      challenge.p2Property, [ challenge.p1Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
     var p3Manipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_3,
-      challenge.p3, [ challenge.p1, challenge.p2 ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
+      challenge.p3Property, [ challenge.p1Property, challenge.p2Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
 
     // rendering order
     thisNode.addChild( p1Manipulator );
@@ -42,13 +42,13 @@ define( function( require ) {
 
     // Move the manipulators to match points
     var updateManipulators = function() {
-      p1Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p1.get() );
-      p2Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p2.get() );
-      p3Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p3.get() );
+      p1Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p1 );
+      p2Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p2 );
+      p3Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p3 );
     };
-    challenge.p1.link( updateManipulators.bind( thisNode ) );
-    challenge.p2.link( updateManipulators.bind( thisNode ) );
-    challenge.p3.link( updateManipulators.bind( thisNode ) );
+    challenge.p1Property.link( updateManipulators.bind( thisNode ) );
+    challenge.p2Property.link( updateManipulators.bind( thisNode ) );
+    challenge.p3Property.link( updateManipulators.bind( thisNode ) );
   }
 
   return inherit( ChallengeGraphNode, ThreePointsGraphNode );

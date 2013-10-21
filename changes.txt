@@ -1,4 +1,5 @@
-10/21/13 convert Challenge to PropertySet
+10/21/13 convert PlaceThePoints to PropertySet (extends Challenge with 3 additional Properties)
+10/21/13 convert Challenge to PropertySet (1 Property)
 10/21/13 add 'Property' suffix to Challenge.guess
 10/17/13 use inline CSS instead of deprecated 'font' tag to make subscripts smaller in general form of Slope equation
 10/17/13 problems with HTMLText have disappeared, use HTMLText in SlopeEquationNode.createGeneralFormNode

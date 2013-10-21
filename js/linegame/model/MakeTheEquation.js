@@ -64,7 +64,7 @@ define( function( require ) {
       this.graph.lines.clear();
       // add lines in the order that they would be rendered
       if ( this.answerVisible ) {
-        this.graph.lines.push( this.guessProperty.get() );
+        this.graph.lines.push( this.guess );
       }
       this.graph.lines.push( this.answer );
     }

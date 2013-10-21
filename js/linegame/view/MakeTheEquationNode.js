@@ -59,9 +59,9 @@ define( function( require ) {
 
     // Guess
     var guessBoxNode =
-      new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
+      new EquationBoxNode( yourEquationString, challenge.guess.color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-          LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
+          LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guess.color ) );
 
     // Graph
     var graphNode = new AnswerGraphNode( challenge );

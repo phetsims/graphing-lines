@@ -11,12 +11,13 @@ define( function( require ) {
 
   // imports
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-  var Property = require( 'AXON/Property' );
+  var PropertySet = require( 'AXON/PropertySet' );
 
   // strings
   var putPointsOnLineString = require( 'string!GRAPHING_LINES/putPointsOnLine' );
@@ -41,10 +42,11 @@ define( function( require ) {
 
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
+    PropertySet.call( this, { guess: createInitialGuess( answer, manipulationMode ) } );
+
     this.title = title;
     this.description = description;
     this.answer = answer.withColor( LineGameConstants.ANSWER_COLOR );
-    this.guessProperty = new Property( createInitialGuess( answer, manipulationMode ) );
     this.answerVisible = false;
     this.equationForm = equationForm;
     this.manipulationMode = manipulationMode;
@@ -65,57 +67,6 @@ define( function( require ) {
     // When the guess changes, update the lines that are "seen" by the point tools.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );
   }
-
-  Challenge.prototype = {
-
-    /**
-     * Creates the view component for the challenge.
-     *
-     * @abstract
-     * @param {LineGameModel} model the game model
-     * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
-     * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
-     */
-    createView: function( model, challengeSize, audioPlayer ) {
-       throw new Error( 'must be implemented by subtype' );
-    },
-
-    /**
-     * Updates the collection of lines that are "seen" by the point tools.
-     * @abstract
-     */
-    updateGraphLines: function() {
-      throw new Error( 'must be implemented by subtype' );
-    },
-
-    // Resets the challenge
-    reset: function() {
-      this.guessProperty.reset();
-      this.pointTool1.reset();
-      this.pointTool2.reset();
-      this.setAnswerVisible( false );
-    },
-
-    // Visibility of the answer affects what is "seen" by the point tools.
-    setAnswerVisible: function( visible ) {
-      this.answerVisible = visible;
-      this.updateGraphLines();
-    },
-
-    // True if the guess and answer are descriptions of the same line.
-    isCorrect: function() {
-      return this.answer.same( this.guessProperty.get() );
-    },
-
-    toString: function() {
-      return this.constructor.name + "[" +
-             " title=" + this.title +
-             " answer=" + this.answer.toString() +
-             " equationForm=" + this.equationForm +
-             " manipulationMode=" + this.manipulationMode +
-             " ]";
-    }
-  };
 
   /*
    * Creates an initial guess, based on the answer and what the user can manipulate.
@@ -163,5 +114,54 @@ define( function( require ) {
     }
   };
 
-  return Challenge;
+  return inherit( PropertySet, Challenge, {
+
+    /**
+     * Creates the view component for the challenge.
+     *
+     * @abstract
+     * @param {LineGameModel} model the game model
+     * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
+     * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
+     */
+    createView: function( model, challengeSize, audioPlayer ) {
+      throw new Error( 'must be implemented by subtype' );
+    },
+
+    /**
+     * Updates the collection of lines that are "seen" by the point tools.
+     * @abstract
+     */
+    updateGraphLines: function() {
+      throw new Error( 'must be implemented by subtype' );
+    },
+
+    // Resets the challenge
+    reset: function() {
+      PropertySet.prototype.reset.call( this );
+      this.pointTool1.reset();
+      this.pointTool2.reset();
+      this.setAnswerVisible( false );
+    },
+
+    // Visibility of the answer affects what is "seen" by the point tools.
+    setAnswerVisible: function( visible ) {
+      this.answerVisible = visible;
+      this.updateGraphLines();
+    },
+
+    // True if the guess and answer are descriptions of the same line.
+    isCorrect: function() {
+      return this.answer.same( this.guess );
+    },
+
+    toString: function() {
+      return this.constructor.name + "[" +
+             " title=" + this.title +
+             " answer=" + this.answer.toString() +
+             " equationForm=" + this.equationForm +
+             " manipulationMode=" + this.manipulationMode +
+             " ]";
+    }
+  });
 } );

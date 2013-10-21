@@ -33,8 +33,8 @@ define( function( require ) {
 
     // dynamic ranges
     var parameterRange = new SlopeInterceptParameterRange();
-    var riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
-    var runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
+    var riseRangeProperty = new Property( parameterRange.rise( challenge.guess, challenge.graph ) );
+    var runRangeProperty = new Property( parameterRange.run( challenge.guess, challenge.graph ) );
     var y1RangeProperty = new Property( challenge.graph.yRange );
 
     var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );

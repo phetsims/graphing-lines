@@ -15,7 +15,7 @@ LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
 - use 'Property' suffix consistently
 - convert icons to images in IconFactory
-- convert models to PropertySet and axon style: LineFormsModel (1 Property), Challenge (1), LineGameModel (9)
+- convert models to PropertySet and axon style: LineFormsModel (1 Property), LineGameModel (9)
 - i18n of credits
 
 LOWEST

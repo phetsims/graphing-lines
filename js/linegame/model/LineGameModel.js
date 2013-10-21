@@ -35,7 +35,7 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
 
   // constants
-  var USE_HARD_CODED_CHALLENGES = window.phetcommon.getQueryParameter( 'hardcoded' );
+  var USE_HARD_CODED_CHALLENGES = window.phetcommon.getQueryParameter( 'hardcoded' ); // for debugging
   var MAX_POINTS_PER_CHALLENGE = 2;
   var NUMBER_OF_LEVELS = 6;
   var DUMMY_CHALLENGE = new GraphTheLine( "", Line.createSlopeIntercept( 1, 1, 1 ), EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );

@@ -18,10 +18,10 @@ define( function( require ) {
 
   /**
    * @param {LineGameModel} model
-   * @param {Dimension2} playAreaSize //TODO change to ScreenView.layoutBounds?
+   * @param {Bounds2} layoutBounds
    * @constructor
    */
-  function SettingsNode( model, playAreaSize ) {
+  function SettingsNode( model, layoutBounds ) {
     Node.call( this );
 
     this.addChild( new GameSettingsPanel( model.numberOfLevels, model.levelProperty, model.timerEnabledProperty, model.soundEnabledProperty,
@@ -29,8 +29,8 @@ define( function( require ) {
         model.gamePhaseProperty.set( GamePhase.PLAY );
       }, {
         startButtonColor: LineGameConstants.BUTTON_COLOR,
-        centerX: playAreaSize.width / 2,
-        centerY: playAreaSize.height / 2
+        centerX: layoutBounds.centerX,
+        centerY: layoutBounds.centerY
       } ) );
   }
 

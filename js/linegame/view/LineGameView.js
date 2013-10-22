@@ -33,10 +33,9 @@ define( function( require ) {
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
     // one parent node for each "phase" of the game
-    var playAreaSize = new Dimension2( thisView.layoutBounds.width, thisView.layoutBounds.height );
-    thisView.settingsNode = new SettingsNode( model, playAreaSize );
-    thisView.playNode = new PlayNode( model, playAreaSize, audioPlayer );
-    thisView.resultsNode = new ResultsNode( model, playAreaSize );
+    thisView.settingsNode = new SettingsNode( model, thisView.layoutBounds );
+    thisView.playNode = new PlayNode( model, thisView.layoutBounds, audioPlayer );
+    thisView.resultsNode = new ResultsNode( model, thisView.layoutBounds );
 
     // rendering order
     thisView.addChild( thisView.resultsNode );

@@ -18,11 +18,11 @@ define( function( require ) {
 
   /**
    * @param {LineGameModel} model
-   * @param {Dimension2} playAreaSize //TODO change to ScreenView.layoutBounds?
+   * @param {Bounds2} layoutBounds
    * @param {GameAudioPlayer} audioPlayer
    * @constructor
    */
-  function PlayNode( model, playAreaSize, audioPlayer ) {
+  function PlayNode( model, layoutBounds, audioPlayer ) {
 
     var thisNode = this;
     Node.call( thisNode );
@@ -37,12 +37,12 @@ define( function( require ) {
       function() {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
       } );
-    scoreboardNode.centerX = playAreaSize.width / 2;
-    scoreboardNode.bottom = playAreaSize.height - 20;
+    scoreboardNode.centerX = layoutBounds.centerX;
+    scoreboardNode.bottom = layoutBounds.bottom - 20;
     thisNode.addChild( scoreboardNode );
 
     // compute the size of the area available for the challenges
-    var challengeSize = new Dimension2( playAreaSize.width, scoreboardNode.top );
+    var challengeSize = new Dimension2( layoutBounds.width, scoreboardNode.top );
 
     // challenge parent, to maintain rendering order
     var challengeParent = new Node();

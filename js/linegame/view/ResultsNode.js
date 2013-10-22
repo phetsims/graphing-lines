@@ -19,10 +19,10 @@ define( function( require ) {
 
   /**
    * @param {LineGameModel} model
-   * @param {Dimension2} playAreaSize //TODO change to ScreenView.layoutBounds?
+   * @param {Bounds2} layoutBounds
    * @constructor
    */
-  function ResultsNode( model, playAreaSize ) {
+  function ResultsNode( model, layoutBounds ) {
 
     var thisNode = this;
     Node.call( thisNode );
@@ -53,8 +53,8 @@ define( function( require ) {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {
             newGameButtonColor: LineGameConstants.BUTTON_COLOR,
-            centerX: playAreaSize.width / 2,
-            centerY: playAreaSize.height / 2
+            centerX: layoutBounds.centerX,
+            centerY: layoutBounds.centerY
           } ) );
       }
       else {

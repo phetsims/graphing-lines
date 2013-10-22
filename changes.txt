@@ -1,3 +1,4 @@
+10/21/13 use screen-view layoutBounds instead of 'playAreaSize' for top-level game nodes
 10/21/13 rename ChallengeNode.subclassParent to subtypeParent
 10/21/13 use inline CSS instead of deprecated 'font' tag to make subscripts smaller in general form of Point-Slope equation
 10/21/13 flesh out LineGameModel.reset, make some notes about potential use of PropertySet

@@ -3,7 +3,7 @@ TODO list for graphing-lines (HTML5 port)
 DESIGN
 
 HIGH
-- game doesn't work on iPad
+- game doesn't work on iPad, sim never comes up
 - performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConstants
 - address lots of TODO items in the code

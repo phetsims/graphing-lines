@@ -9,8 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Color = require( 'SCENERY/util/Color' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Screen = require( 'JOIST/SCREEN' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeIntercept/model/SlopeInterceptModel' );
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeIntercept/view/SlopeInterceptView' );
 
@@ -21,19 +22,12 @@ define( function( require ) {
   var screenIcon = require( 'image!GRAPHING_LINES/SlopeIntercept-screen-icon.png' );
 
   function SlopeInterceptScreen() {
-
-    this.name = slopeInterceptString;
-    this.icon = new Image( screenIcon );
-    this.backgroundColor = new Color( 255, 255, 214 );
-
-    this.createModel = function() {
-      return new SlopeInterceptModel();
-    };
-
-    this.createView = function( model ) {
-      return new SlopeInterceptView( model );
-    };
+    Screen.call( this, slopeInterceptString, new Image( screenIcon ),
+      function() { return new SlopeInterceptModel(); },
+      function( model ) { return new SlopeInterceptView( model ); },
+      { backgroundColor: 'rgb( 255, 255, 214 )' }
+    );
   }
 
-  return SlopeInterceptScreen;
+  return inherit( Screen, SlopeInterceptScreen );
 } );

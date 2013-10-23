@@ -9,8 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Color = require( 'SCENERY/util/Color' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
+  var Screen = require( 'JOIST/SCREEN' );
   var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
   var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
 
@@ -21,19 +22,12 @@ define( function( require ) {
   var screenIcon = require( 'image!GRAPHING_LINES/Slope-screen-icon.png' );
 
   function SlopeScreen() {
-
-    this.name = slopeString;
-    this.icon = new Image( screenIcon );
-    this.backgroundColor = new Color( 255, 255, 214 );
-
-    this.createModel = function() {
-      return new SlopeModel();
-    };
-
-    this.createView = function( model ) {
-      return new SlopeView( model );
-    };
+    Screen.call( this, slopeString, new Image( screenIcon ),
+      function() { return new SlopeModel(); },
+      function( model ) { return new SlopeView( model ); },
+      { backgroundColor: 'rgb( 255, 255, 214 )' }
+    );
   }
 
-  return SlopeScreen;
+  return inherit( Screen, SlopeScreen );
 } );

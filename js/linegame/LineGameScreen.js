@@ -9,10 +9,11 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Color = require( 'SCENERY/util/Color' );
   var Image = require( 'SCENERY/nodes/Image' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
+  var Screen = require( 'JOIST/SCREEN' );
 
   // strings
   var lineGameString = require( 'string!GRAPHING_LINES/tab.lineGame' );
@@ -21,19 +22,12 @@ define( function( require ) {
   var screenIcon = require( 'image!GRAPHING_LINES/LineGame-screen-icon.png' );
 
   function GameScreen() {
-
-    this.name = lineGameString;
-    this.icon = new Image( screenIcon );
-    this.backgroundColor = new Color( 255, 255, 214 );
-
-    this.createModel = function() {
-      return new LineGameModel();
-    };
-
-    this.createView = function( model ) {
-      return new LineGameView( model );
-    };
+    Screen.call( this, lineGameString, new Image( screenIcon ),
+      function() { return new LineGameModel(); },
+      function( model ) { return new LineGameView( model ); },
+      { backgroundColor: 'rgb( 255, 255, 214 )' }
+    );
   }
 
-  return GameScreen;
+  return inherit( Screen, GameScreen );
 } );

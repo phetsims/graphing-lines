@@ -13,6 +13,7 @@ MEDIUM
 - rounded corners on spinners, see Shape.roundRect
 - convert LineGameModel (9 properties) to PropertySet
 - game reward
+- replace 'GameOverNode' and 'GameSettingsPanel' with vegas components
 
 LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'

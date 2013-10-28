@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GameOverPanel = require( 'VEGAS/GameOverPanel' );
+  var GameOverPanel = require( 'GRAPHING_LINES/linegame/view/GameOverPanel' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );

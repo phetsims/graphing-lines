@@ -27,5 +27,6 @@
   "tab.lineGame": "Line Game",
   "point.xy": "({0}, {1})",
   "point.unknown": "( ?, ? )",
-  "slopeIs": "Slope is"
+  "slopeIs": "Slope is",
+  "pointsAwarded": "+{0}"
 }

@@ -102,7 +102,7 @@ define( function( require ) {
 
     // Sets the visibility of (x1,y1) for the guess.
     setGuessPointVisible: function( visible ) {
-      this.guessPointVisible.visible = visible;
+      this.guessPointVisible = visible;
       if ( this.guessPointNode ) {
         this.guessPointNode.visible = visible;
       }

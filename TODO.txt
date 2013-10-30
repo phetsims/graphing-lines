@@ -13,6 +13,8 @@ MEDIUM
 - convert LineGameModel (9 properties) to PropertySet
 - replace 'GameOverNode' and 'GameSettingsPanel' with vegas components
 - game reward, see build-an-atom#62
+- update lines only when they are visible
+- update interactive equation only when the control panel is expanded
 
 LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'

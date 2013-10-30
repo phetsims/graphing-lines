@@ -110,6 +110,9 @@ define( function( require ) {
 
     options = _.extend( {
       color: 'blue',
+      cornerRadius: 6,
+      xMargin: 3,
+      yMargin: 3,
       decimalPlaces: 0,
       font: new PhetFont( 24 ),
       upFunction: function() { return valueProperty.get() + 1; },
@@ -142,12 +145,10 @@ define( function( require ) {
     maxWidth = Math.max( maxWidth, textNode.width );
 
     // compute shape of the background behind the numeric value
-    var xMargin = 3;
-    var yMargin = 3;
-    var backgroundWidth = maxWidth + ( 2 * xMargin );
-    var backgroundHeight = textNode.height + ( 2 * yMargin );
-    var backgroundOverlap = 0.5;
-    var backgroundCornerRadius = 10;
+    var backgroundWidth = maxWidth + ( 2 * options.xMargin );
+    var backgroundHeight = textNode.height + ( 2 * options.yMargin );
+    var backgroundOverlap = 1;
+    var backgroundCornerRadius = options.cornerRadius;
 
     // compute colors
     var arrowColors = {
@@ -176,12 +177,22 @@ define( function( require ) {
       valueProperty.set( options.downFunction() );
     };
 
-    // top half of the background, for "up"
-    var upBackground = new Path( Shape.rectangle( 0, 0, backgroundWidth, backgroundHeight / 2 ) ); //TODO use CAG to round top corners
+    // top half of the background, for "up". Shape computed starting at upper-left, going clockwise.
+    var upBackground = new Path( new Shape()
+      .arc( backgroundCornerRadius, backgroundCornerRadius, backgroundCornerRadius, Math.PI, Math.PI * 3 / 2, false )
+      .arc( backgroundWidth - backgroundCornerRadius, backgroundCornerRadius, backgroundCornerRadius, -Math.PI / 2, 0, false )
+      .lineTo( backgroundWidth, ( backgroundHeight / 2 ) + backgroundOverlap )
+      .lineTo( 0, ( backgroundHeight / 2 ) + backgroundOverlap )
+      .close() );
     upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
 
-    // bottom half of the background, for "down"
-    var downBackground = new Path( Shape.rectangle( 0, backgroundHeight / 2, backgroundWidth, backgroundHeight / 2 ) ); //TODO use CAG to round top corners
+    // bottom half of the background, for "down". Shape computed starting at bottom-right, going clockwise.
+    var downBackground = new Path( new Shape()
+      .arc( backgroundWidth - backgroundCornerRadius, backgroundHeight - backgroundCornerRadius, backgroundCornerRadius, 0, Math.PI / 2, false )
+      .arc( backgroundCornerRadius, backgroundHeight - backgroundCornerRadius, backgroundCornerRadius, Math.PI / 2, Math.PI, false )
+      .lineTo( 0, backgroundHeight / 2 )
+      .lineTo( backgroundWidth, backgroundHeight / 2 )
+      .close() );
     downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // compute size of arrows

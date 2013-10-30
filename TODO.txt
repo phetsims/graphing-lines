@@ -9,7 +9,6 @@ HIGH
 - update best time in LineGameModel
 
 MEDIUM
-- rounded corners on spinners, see Shape.roundRect
 - convert LineGameModel (9 properties) to PropertySet
 - replace 'GameOverNode' and 'GameSettingsPanel' with vegas components
 - game reward, see build-an-atom#62

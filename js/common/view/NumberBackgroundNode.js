@@ -34,7 +34,7 @@ define( function( require ) {
       minHeight: 0,
       xMargin: 5,
       yMargin: 5,
-      cornerRadius: 3
+      cornerRadius: 6
     };
     options = _.extend( defaultOptions, options );
 

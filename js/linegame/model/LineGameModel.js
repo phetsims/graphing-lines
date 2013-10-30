@@ -81,7 +81,7 @@ define( function( require ) {
 
     // state
     thisModel.playStateProperty = new Property( PlayState.NONE );
-    thisModel.gamePhaseProperty = new PropertyWithHook( GamePhase.SETTINGS,
+    thisModel.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
       /*
        * This function will be called prior to setting the property value.
        * Updates fields so that they are accurate before property listeners are notified.
@@ -215,13 +215,21 @@ define( function( require ) {
     }
   };
 
-  //TODO revisit this later. Could be eliminated by requiring clients to call setGamePhase.
-  function PropertyWithHook( value, hook ) {
+  /**
+   * Property used for the game phase.
+   * It has a 'hook' function that is called before the value is changed.
+   * This is useful for setting the various state parameters of the game before
+   * notifying observes that the game phase has changed.
+   * @param {GamePhase} value
+   * @param {function} hook function with one parameter of type {GamePhase}
+   * @constructor
+   */
+  function GamePhaseProperty( value, hook ) {
     this.hook = hook;
     Property.call( this, value );
   }
 
-  inherit( Property, PropertyWithHook, {
+  inherit( Property, GamePhaseProperty, {
     /** @override */
     set: function( value ) {
       this.hook( value );

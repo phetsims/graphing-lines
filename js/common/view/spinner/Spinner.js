@@ -136,19 +136,46 @@ define( function( require ) {
       return value > range.min;
     } );
 
-    var textNode = new Text( "", { font: options.font, pickable: false } );
+    // callbacks for changing the value
+    var fireUp = function() {
+      valueProperty.set( options.upFunction() );
+    };
+    var fireDown = function() {
+      valueProperty.set( options.downFunction() );
+    };
+
+    // displays the value
+    var valueNode = new Text( "", { font: options.font, pickable: false } );
 
     // compute max width of text based on value range
-    textNode.text = Util.toFixed( rangeProperty.get().min, options.decimalPlaces );
-    var maxWidth = textNode.width;
-    textNode.text = Util.toFixed( rangeProperty.get().max, options.decimalPlaces );
-    maxWidth = Math.max( maxWidth, textNode.width );
+    valueNode.text = Util.toFixed( rangeProperty.get().min, options.decimalPlaces );
+    var maxWidth = valueNode.width;
+    valueNode.text = Util.toFixed( rangeProperty.get().max, options.decimalPlaces );
+    maxWidth = Math.max( maxWidth, valueNode.width );
 
     // compute shape of the background behind the numeric value
     var backgroundWidth = maxWidth + ( 2 * options.xMargin );
-    var backgroundHeight = textNode.height + ( 2 * options.yMargin );
+    var backgroundHeight = valueNode.height + ( 2 * options.yMargin );
     var backgroundOverlap = 1;
     var backgroundCornerRadius = options.cornerRadius;
+
+    // top half of the background, for "up". Shape computed starting at upper-left, going clockwise.
+    var upBackground = new Path( new Shape()
+      .arc( backgroundCornerRadius, backgroundCornerRadius, backgroundCornerRadius, Math.PI, Math.PI * 3 / 2, false )
+      .arc( backgroundWidth - backgroundCornerRadius, backgroundCornerRadius, backgroundCornerRadius, -Math.PI / 2, 0, false )
+      .lineTo( backgroundWidth, ( backgroundHeight / 2 ) + backgroundOverlap )
+      .lineTo( 0, ( backgroundHeight / 2 ) + backgroundOverlap )
+      .close() );
+    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
+
+    // bottom half of the background, for "down". Shape computed starting at bottom-right, going clockwise.
+    var downBackground = new Path( new Shape()
+      .arc( backgroundWidth - backgroundCornerRadius, backgroundHeight - backgroundCornerRadius, backgroundCornerRadius, 0, Math.PI / 2, false )
+      .arc( backgroundCornerRadius, backgroundHeight - backgroundCornerRadius, backgroundCornerRadius, Math.PI / 2, Math.PI, false )
+      .lineTo( 0, backgroundHeight / 2 )
+      .lineTo( backgroundWidth, backgroundHeight / 2 )
+      .close() );
+    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // compute colors
     var arrowColors = {
@@ -168,32 +195,6 @@ define( function( require ) {
       out: pressedGradient,
       disabled: 'white'
     };
-
-    // callbacks for changing the value
-    var fireUp = function() {
-      valueProperty.set( options.upFunction() );
-    };
-    var fireDown = function() {
-      valueProperty.set( options.downFunction() );
-    };
-
-    // top half of the background, for "up". Shape computed starting at upper-left, going clockwise.
-    var upBackground = new Path( new Shape()
-      .arc( backgroundCornerRadius, backgroundCornerRadius, backgroundCornerRadius, Math.PI, Math.PI * 3 / 2, false )
-      .arc( backgroundWidth - backgroundCornerRadius, backgroundCornerRadius, backgroundCornerRadius, -Math.PI / 2, 0, false )
-      .lineTo( backgroundWidth, ( backgroundHeight / 2 ) + backgroundOverlap )
-      .lineTo( 0, ( backgroundHeight / 2 ) + backgroundOverlap )
-      .close() );
-    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
-
-    // bottom half of the background, for "down". Shape computed starting at bottom-right, going clockwise.
-    var downBackground = new Path( new Shape()
-      .arc( backgroundWidth - backgroundCornerRadius, backgroundHeight - backgroundCornerRadius, backgroundCornerRadius, 0, Math.PI / 2, false )
-      .arc( backgroundCornerRadius, backgroundHeight - backgroundCornerRadius, backgroundCornerRadius, Math.PI / 2, Math.PI, false )
-      .lineTo( 0, backgroundHeight / 2 )
-      .lineTo( backgroundWidth, backgroundHeight / 2 )
-      .close() );
-    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // compute size of arrows
     var arrowButtonSize = new Dimension2( 0.5 * backgroundWidth, 0.1 * backgroundWidth );
@@ -222,12 +223,12 @@ define( function( require ) {
     thisNode.addChild( downBackground );
     thisNode.addChild( upArrow );
     thisNode.addChild( downArrow );
-    thisNode.addChild( textNode );
+    thisNode.addChild( valueNode );
 
     // layout, background nodes are already drawn in the local coordinate frame
     var ySpacing = 3;
-    textNode.x = 0;
-    textNode.centerY = backgroundHeight / 2;
+    valueNode.x = 0;
+    valueNode.centerY = backgroundHeight / 2;
     upArrow.centerX = upBackground.centerX;
     upArrow.bottom = upBackground.top - ySpacing;
     downArrow.centerX = downBackground.centerX;
@@ -236,9 +237,9 @@ define( function( require ) {
     // Update text to match the value
     valueProperty.link( function( value ) {
       // displayed value
-      textNode.text = Util.toFixed( value, options.decimalPlaces );
+      valueNode.text = Util.toFixed( value, options.decimalPlaces );
       // horizontally centered
-      textNode.x = ( backgroundWidth - textNode.width ) / 2;
+      valueNode.x = ( backgroundWidth - valueNode.width ) / 2;
     } );
 
     // Update button colors

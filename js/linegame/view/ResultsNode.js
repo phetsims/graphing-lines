@@ -48,6 +48,7 @@ define( function( require ) {
           0, /* scoreDecimalPlaces */
           model.timer.elapsedTime,
           model.bestTimes[ model.levelProperty.get() ],
+          model.isNewBestTime,
           model.timerEnabledProperty.get(),
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );

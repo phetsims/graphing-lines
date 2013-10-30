@@ -32,9 +32,9 @@ define( function( require ) {
   var pattern_0points_1max_perfect = 'Score: {0} out of {1} (Perfect!)';
   var pattern_0time = 'Time: {0}';
   var pattern_0time_newBest = 'Time: {0} (Your New Best!)';
-  var pattern_0time_yourBest = 'Time: {0} (Your Best: {1})';
+  var pattern_0time_1yourBest = 'Time: {0} (Your Best: {1})';
 
-  function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, timerEnabled, newGameCallback, options ) {
+  function GameOverPanel( level, score, perfectScore, scoreDecimalPlaces, time, bestTime, isNewBestTime, timerEnabled, newGameCallback, options ) {
 
     options = _.extend( {
       minWidth: 400,
@@ -47,11 +47,10 @@ define( function( require ) {
     }, options );
 
     var titleNode = new Text( gameOverString, { font: options.titleFont } );
-
     var textOptions = { font: options.font };
     var levelNode = new Text( StringUtils.format( pattern_0level, level + 1 ), textOptions );
     var scoreNode = new Text( getScoreString( score, perfectScore, scoreDecimalPlaces ), textOptions );
-    var timeNode = new Text( getTimeString( ( score === perfectScore ), time, bestTime ), textOptions );
+    var timeNode = new Text( getTimeString( ( score === perfectScore ), time, bestTime, isNewBestTime ), textOptions );
     timeNode.visible = timerEnabled;
 
     // New Game button
@@ -107,19 +106,21 @@ define( function( require ) {
    * If we had an imperfect score, simply show the time.
    * If we had a perfect score, show the best time, and indicate if the time was a "new best".
    */
-  var getTimeString = function( isPerfectScore, time, bestTime ) {
+  var getTimeString = function( isPerfectScore, time, bestTime, isNewBestTime ) {
     // Time: 0:29
     if ( !isPerfectScore ) {
       // Time: 0:29
       return StringUtils.format( pattern_0time, GameTimer.formatTime( time ) );
     }
-    else if ( time !== bestTime ) {
+    else if ( isNewBestTime ) {
+      assert && assert( time <= bestTime );
       // Time: 0:29 (Your New Best!)
       return StringUtils.format( pattern_0time_newBest, GameTimer.formatTime( time ) );
     }
     else {
+      assert && assert( time >= bestTime );
       // Time: 0:29 (Your Best: 0:20)
-      return StringUtils.format( pattern_0time_yourBest, GameTimer.formatTime( time ) );
+      return StringUtils.format( pattern_0time_1yourBest, GameTimer.formatTime( time ), GameTimer.formatTime( bestTime ) );
     }
   };
 

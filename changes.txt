@@ -1,3 +1,4 @@
+10/29/13 implement best-time logic in game model
 10/29/13 use same default corner radius for Spinners and NumberBackgroundNode
 10/29/13 rounded corners on spinners (based on Shape.roundRect)
 10/29/13 update the slope tool only when it's visible

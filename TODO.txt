@@ -6,7 +6,6 @@ HIGH
 - performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConstants
 - address lots of TODO items in the code
-- update best time in LineGameModel
 
 MEDIUM
 - convert LineGameModel (9 properties) to PropertySet

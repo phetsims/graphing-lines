@@ -185,7 +185,18 @@ define( function( require ) {
     updateBestTime: function() {
       assert && assert( !this.timer.isRunning );
       if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
-        //TODO update best time
+        var level = this.levelProperty.get();
+        var time = this.timer.elapsedTime;
+        this.isNewBestTime = false;
+        if ( !this.bestTimes[ level ] ) {
+          // there was no previous time for this level
+          this.bestTimes[ level ] = time;
+        }
+        else if ( time < this.bestTimes[ level ] ) {
+          // we have a new best time for this level
+          this.bestTimes[ level ] = time;
+          this.isNewBestTime = true;
+        }
       }
     },
 

@@ -1,3 +1,4 @@
+10/29/13 joist#66, generalize handling of credits
 10/29/13 convert LineGameModel (9 properties) to PropertySet
 10/29/13 rename inner type of LineGameModel from PropertyWithHook to GamePhaseProperty
 10/29/13 compute drag bounds for point tools in linegame.Challenge

@@ -19,12 +19,12 @@ define( function( require ) {
   // strings
   var simTitle = require( 'string!GRAPHING_LINES/graphing-lines.name' );
 
-  //TODO i18n, see joist#66
   var simOptions = {
-    credits: 'PhET Development Team -\n' +
-             'Lead Design: Ariel Paul\n' +
-             'Software Development: Chris Malley\n' +
-             'Design Team: Karina Hensberry, Patricia Loeblein, Kathy Perkins'
+    credits: {
+      leadDesign: 'Ariel Paul',
+      softwareDevelopment: 'Chris Malley',
+      designTeam: 'Karina Hensberry, Patricia Loeblein, Kathy Perkins'
+    }
   };
 
   // Appending '?dev' to the URL will enable developer-only features.

@@ -34,11 +34,14 @@ define( function( require ) {
    * @param {Range} xRange range of the graph's x axis
    * @param {Range} yRange range of the graph's y axis
    * @param {Vector2} originOffset offset of the origin (center of the graph) in view coordinates //TODO change to model coordinates?
-   * @param {Vector2} pointToolLocation1 location of point tool in model coordinates
-   * @param {Vector2} pointToolLocation2 location of point tool in model coordinates
+   * @param {Vector2} pointToolLocation1 location of point tool 1 in model coordinates
+   * @param {Vector2} pointToolLocation2 location of point tool 2 in model coordinates
+   * @param {Bounds2} pointToolDragBounds1 drag bounds of point tool 1 in model coordinates
+   * @param {Bounds2} pointToolDragBounds2 drag bounds of point tool 2 in model coordinates
    * @constructor
    */
-  function Challenge( title, description, answer, equationForm, manipulationMode, xRange, yRange, originOffset, pointToolLocation1, pointToolLocation2 ) {
+  function Challenge( title, description, answer, equationForm, manipulationMode, xRange, yRange, originOffset,
+                      pointToolLocation1, pointToolLocation2, pointToolDragBounds1, pointToolDragBounds2 ) {
 
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
@@ -59,10 +62,8 @@ define( function( require ) {
     this.graph = new Graph( xRange, yRange );
 
     // Point tools
-    var dragBounds1 = null; //TODO compute dragBounds1
-    var dragBounds2 = null; //TODO compute dragBounds2
-    this.pointTool1 = new PointTool( pointToolLocation1, 'up', this.graph.lines, dragBounds1 );
-    this.pointTool2 = new PointTool( pointToolLocation2, 'down', this.graph.lines, dragBounds2 );
+    this.pointTool1 = new PointTool( pointToolLocation1, 'up', this.graph.lines, pointToolDragBounds1 );
+    this.pointTool2 = new PointTool( pointToolLocation2, 'down', this.graph.lines, pointToolDragBounds2 );
 
     // When the guess changes, update the lines that are "seen" by the point tools.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );

@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -39,7 +40,9 @@ define( function( require ) {
       yRange,
       LineGameConstants.ORIGIN_OFFSET,
       new Vector2( xRange.min + ( 0.65 * xRange.getLength() ), yRange.min - 1 ), /* point tool location 1 */
-      new Vector2( xRange.min + ( 0.95 * xRange.getLength() ), yRange.min - 4 ) /* point tool location 2 */
+      new Vector2( xRange.min + ( 0.95 * xRange.getLength() ), yRange.min - 4 ), /* point tool location 2 */
+      new Bounds2( -13, -13, 14, 15 ),
+      new Bounds2( -13, -16, 14, 12 )
     );
   }
 

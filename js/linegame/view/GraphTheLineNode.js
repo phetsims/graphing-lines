@@ -90,9 +90,9 @@ define( function( require ) {
 
     // Update visibility of the correct/incorrect icons.
     var updateIcons = function() {
-      answerBoxNode.setCorrectIconVisible( model.playStateProperty.get() === PlayState.NEXT );
-      thisNode.guessBoxNode.setCorrectIconVisible( model.playStateProperty.get() === PlayState.NEXT && challenge.isCorrect() );
-      thisNode.guessBoxNode.setIncorrectIconVisible( model.playStateProperty.get() === PlayState.NEXT && !challenge.isCorrect() );
+      answerBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT );
+      thisNode.guessBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT && challenge.isCorrect() );
+      thisNode.guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess
@@ -108,7 +108,7 @@ define( function( require ) {
       thisNode.guessBoxNode.left = answerBoxNode.left;
       thisNode.guessBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
       thisNode.subtypeParent.addChild( thisNode.guessBoxNode );
-      thisNode.guessBoxNode.visible = ( model.playStateProperty.get() === PlayState.NEXT );
+      thisNode.guessBoxNode.visible = ( model.playState === PlayState.NEXT );
 
       // visibility of correct/incorrect icons
       updateIcons();

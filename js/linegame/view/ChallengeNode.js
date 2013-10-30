@@ -143,40 +143,40 @@ define( function( require ) {
       if ( challenge.isCorrect() ) {
         thisNode.faceNode.smile();
         audioPlayer.correctAnswer();
-        var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
-        model.scoreProperty.set( model.scoreProperty.get() + points );
+        var points = model.computePoints( model.playState === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+        model.score = model.score + points;
         thisNode.pointsAwardedNode.text = StringUtils.format( pointsAwardedString, points );
         // points to right of face
         thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;
         thisNode.pointsAwardedNode.centerY = thisNode.faceNode.centerY;
-        model.playStateProperty.set( PlayState.NEXT );
+        model.playState = PlayState.NEXT;
       }
       else {
         thisNode.faceNode.frown();
         audioPlayer.wrongAnswer();
         thisNode.pointsAwardedNode.text = "";
-        if ( model.playStateProperty.get() === PlayState.FIRST_CHECK ) {
-          model.playStateProperty.set( PlayState.TRY_AGAIN );
+        if ( model.playState === PlayState.FIRST_CHECK ) {
+          model.playState = PlayState.TRY_AGAIN;
         }
         else {
-          model.playStateProperty.set( PlayState.SHOW_ANSWER );
+          model.playState = PlayState.SHOW_ANSWER;
         }
       }
     } );
 
     // "Try Again" button
     tryAgainButton.addListener( function() {
-      model.playStateProperty.set( PlayState.SECOND_CHECK );
+      model.playState = PlayState.SECOND_CHECK;
     } );
 
     // "Show Answer" button
     showAnswerButton.addListener( function() {
-      model.playStateProperty.set( PlayState.NEXT );
+      model.playState = PlayState.NEXT;
     } );
 
     // "Next" button
     nextButton.addListener( function() {
-      model.playStateProperty.set( PlayState.FIRST_CHECK );
+      model.playState = PlayState.FIRST_CHECK;
     } );
 
     // "Skip" button

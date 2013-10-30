@@ -35,21 +35,21 @@ define( function( require ) {
 
         // game reward, shown for perfect score
         if ( model.isPerfectScore() ) {
-          thisNode.rewardNode.setLevel( model.levelProperty.get() );
+          thisNode.rewardNode.setLevel( model.level );
           thisNode.addChild( thisNode.rewardNode );
           thisNode.setRewardRunning( true );
         }
 
         // game results
         thisNode.addChild( new GameOverPanel(
-          model.levelProperty.get(),
-          model.scoreProperty.get(),
+          model.level,
+          model.score,
           model.getPerfectScore(),
           0, /* scoreDecimalPlaces */
           model.timer.elapsedTime,
-          model.bestTimes[ model.levelProperty.get() ],
+          model.bestTimes[ model.level ],
           model.isNewBestTime,
-          model.timerEnabledProperty.get(),
+          model.timerEnabled,
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {

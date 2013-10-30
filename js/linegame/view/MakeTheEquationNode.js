@@ -104,9 +104,9 @@ define( function( require ) {
 
     // Update visibility of the correct/incorrect icons.
     var updateIcons = function() {
-      answerBoxNode.setCorrectIconVisible( model.playStateProperty.get() === PlayState.NEXT );
-      guessBoxNode.setCorrectIconVisible( model.playStateProperty.get() === PlayState.NEXT && challenge.isCorrect() );
-      guessBoxNode.setIncorrectIconVisible( model.playStateProperty.get() === PlayState.NEXT && !challenge.isCorrect() );
+      answerBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT );
+      guessBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT && challenge.isCorrect() );
+      guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess

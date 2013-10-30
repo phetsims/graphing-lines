@@ -1,3 +1,4 @@
+10/29/13 update the slope tool only when it's visible
 10/29/13 fix minor bug that was ignored by desktop browsers but caused mobile Safari to error
 10/29/13 joist#69, convert to different requirejs style for main.js
 10/21/13 use screen-view layoutBounds instead of 'playAreaSize' for top-level game nodes

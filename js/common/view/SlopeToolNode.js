@@ -111,13 +111,30 @@ define( function( require ) {
    */
   function SlopeToolNode( lineProperty, mvt ) {
     var thisNode = this;
+    thisNode.lineProperty = lineProperty;
+    thisNode.mvt = mvt;
     Node.call( this, { pickable: false } );
     lineProperty.link( function( line ) {
-      thisNode._update( line, mvt );
+      // slope tool can be invisible, update only if visible
+      if ( thisNode.visible ) {
+        thisNode._update( line, mvt );
+      }
     } );
   }
 
   return inherit( Node, SlopeToolNode, {
+
+    /*
+     * Slope tool is not updated while invisible.
+     * If it becomes visible, update it.
+     * @override
+     */
+    setVisible: function( visible ) {
+      if ( visible && !this.visible ) {
+        this._update( this.lineProperty.get(), this.mvt );
+      }
+      Node.prototype.setVisible.call( this, visible );
+    },
 
     _update: function( line, mvt ) {
 

@@ -33,11 +33,11 @@ define( function( require ) {
   var TextButton = require( 'SUN/TextButton' );
 
   // strings
-  var checkString = require( 'string!VEGAS/Games.check' );
+  var checkString = require( 'string!VEGAS/check' );
   var pointsAwardedString = require( 'string!GRAPHING_LINES/pointsAwarded' );
   var nextString = require( 'string!VEGAS/next' );
-  var showAnswerString = require( 'string!VEGAS/Games.showAnswer' );
-  var tryAgainString = require( 'string!VEGAS/Games.tryAgain' );
+  var showAnswerString = require( 'string!VEGAS/showAnswer' );
+  var tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   /**
    * Constructor
@@ -68,8 +68,8 @@ define( function( require ) {
     // points awarded
     thisNode.pointsAwardedNode = new Text( "", { font: LineGameConstants.POINTS_AWARDED_FONT, fill: LineGameConstants.POINTS_AWARDED_COLOR } );
 
-      // buttons
-    var doNothing = function(){}; //TODO delete this when sun#21 is addressed
+    // buttons
+    var doNothing = function() {}; //TODO delete this when sun#21 is addressed
     var buttonOptions = {
       font: LineGameConstants.BUTTON_FONT,
       rectangleFillUp: LineGameConstants.BUTTON_COLOR,

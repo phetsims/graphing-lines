@@ -10,9 +10,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GameOverPanel = require( 'GRAPHING_LINES/linegame/view/GameOverPanel' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
   var RewardNode = require( 'GRAPHING_LINES/linegame/view/RewardNode' );
@@ -41,19 +41,20 @@ define( function( require ) {
         }
 
         // game results
-        thisNode.addChild( new GameOverPanel(
+        thisNode.addChild( new LevelCompletedNode(
           model.level,
           model.score,
           model.getPerfectScore(),
-          0, /* scoreDecimalPlaces */
+          model.getPerfectScore() / model.maxPointsPerChallenge, // number of stars in the progress indicator
+          model.timerEnabled,
           model.timer.elapsedTime,
           model.bestTimes[ model.level ],
           model.isNewBestTime,
-          model.timerEnabled,
+          layoutBounds,
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {
-            newGameButtonColor: LineGameConstants.BUTTON_COLOR,
+            buttonColor: LineGameConstants.BUTTON_COLOR,
             centerX: layoutBounds.centerX,
             centerY: layoutBounds.centerY
           } ) );

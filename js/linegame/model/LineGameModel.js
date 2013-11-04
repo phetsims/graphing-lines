@@ -37,8 +37,6 @@ define( function( require ) {
 
   // constants
   var USE_HARD_CODED_CHALLENGES = window.phetcommon.getQueryParameter( 'hardcoded' ); // for debugging
-  var MAX_POINTS_PER_CHALLENGE = 2;
-  var NUMBER_OF_LEVELS = 6;
   var DUMMY_CHALLENGE = new GraphTheLine( "", Line.createSlopeIntercept( 1, 1, 1 ),
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
@@ -51,7 +49,6 @@ define( function( require ) {
     new ChallengeFactory5(),
     new ChallengeFactory6()
   ];
-  assert && assert( factories.length === NUMBER_OF_LEVELS );
 
   /**
    * Property used for the game phase.
@@ -92,7 +89,8 @@ define( function( require ) {
 
     thisModel.challenges = []; // Array<Challenge>
     thisModel.timer = new GameTimer();
-    thisModel.numberOfLevels = 6;
+    thisModel.numberOfLevels = factories.length;
+    thisModel.maxPointsPerChallenge = 2;
     thisModel.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
     thisModel.bestTimes = []; // best times for each level, in ms
     for ( var level = 0; level < thisModel.numberOfLevels; level++ ) {
@@ -168,7 +166,7 @@ define( function( require ) {
 
     // Compute points to be awarded for a correct answer.
     computePoints: function( attempts ) {
-      return Math.max( 0, MAX_POINTS_PER_CHALLENGE - attempts + 1 );
+      return Math.max( 0, this.maxPointsPerChallenge - attempts + 1 );
     },
 
     /**

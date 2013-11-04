@@ -11,7 +11,7 @@
 define( function( require ) {
   'use strict';
 
-  //TODO enum pattern uses {} for each value, but strings are more convenient for debugging
+  // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
   return Object.freeze( {
     FIRST_CHECK: 'FIRST_CHECK',
     TRY_AGAIN: 'TRY_AGAIN',

@@ -49,7 +49,7 @@ define( function( require ) {
 
     // Save Line button
     var saveLineButton = new TextButton( saveLineString, {
-      callback: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
+      listener: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.SAVE_LINE_BUTTON,
       enabled: false
@@ -57,7 +57,7 @@ define( function( require ) {
 
     // Erase Lines button
     var eraseLinesButton = new TextButton( eraseLinesString, {
-      callback: function() { savedLines.clear(); },
+      listener: function() { savedLines.clear(); },
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.ERASE_LINES_BUTTON,
       enabled: false

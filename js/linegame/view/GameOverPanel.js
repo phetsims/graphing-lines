@@ -55,7 +55,7 @@ define( function( require ) {
 
     // New Game button
     var newGameButton = new TextButton( newGameString, {
-      callback: newGameCallback,
+      listener: newGameCallback,
       font: options.font,
       rectangleFillUp: options.newGameButtonColor,
       rectangleXMargin: 20,

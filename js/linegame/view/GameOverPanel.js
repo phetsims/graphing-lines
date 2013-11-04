@@ -20,7 +20,7 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TextButton = require( 'SUN/TextButton' );
+  var TextPushButton = require( 'SUN/TextPushButton' );
   var Util = require( 'DOT/Util' );
 
   //TODO i18n
@@ -54,7 +54,7 @@ define( function( require ) {
     timeNode.visible = timerEnabled;
 
     // New Game button
-    var newGameButton = new TextButton( newGameString, {
+    var newGameButton = new TextPushButton( newGameString, {
       listener: newGameCallback,
       font: options.font,
       rectangleFillUp: options.newGameButtonColor,

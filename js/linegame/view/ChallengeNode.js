@@ -30,7 +30,7 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TextButton = require( 'SUN/TextButton' );
+  var TextPushButton = require( 'SUN/TextPushButton' );
 
   // strings
   var checkString = require( 'string!VEGAS/check' );
@@ -74,15 +74,15 @@ define( function( require ) {
       rectangleFillUp: LineGameConstants.BUTTON_COLOR,
       rectangleXMargin: 20,
       rectangleYMargin: 5 };
-    thisNode.checkButton = new TextButton( checkString, buttonOptions );
-    var tryAgainButton = new TextButton( tryAgainString, buttonOptions );
-    var showAnswerButton = new TextButton( showAnswerString, buttonOptions );
-    var nextButton = new TextButton( nextString, buttonOptions );
+    thisNode.checkButton = new TextPushButton( checkString, buttonOptions );
+    var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
+    var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
+    var nextButton = new TextPushButton( nextString, buttonOptions );
 
     // developer buttons, no i18n
     var devButtonOptions = { font: new PhetFont( 12 ), rectangleFillUp: Color.WHITE };
-    var skipButton = new TextButton( "dev: Skip", devButtonOptions );
-    var replayButton = new TextButton( "dev: Replay", devButtonOptions );
+    var skipButton = new TextPushButton( "dev: Skip", devButtonOptions );
+    var replayButton = new TextPushButton( "dev: Replay", devButtonOptions );
 
     // point tools
     var linesVisibleProperty = new Property( true );

@@ -49,7 +49,8 @@ define( function( require ) {
     soundButton.left = timerButton.right + 50;
     soundButton.centerY = timerButton.centerY;
 
-    var startButton = new TextButton( startString, startFunction, {
+    var startButton = new TextButton( startString, {
+      callback: startFunction,
       font: options.controlFont,
       rectangleFillUp: options.startButtonColor,
       rectangleXMargin: 20,

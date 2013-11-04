@@ -54,7 +54,8 @@ define( function( require ) {
     timeNode.visible = timerEnabled;
 
     // New Game button
-    var newGameButton = new TextButton( newGameString, newGameCallback, {
+    var newGameButton = new TextButton( newGameString, {
+      callback: newGameCallback,
       font: options.font,
       rectangleFillUp: options.newGameButtonColor,
       rectangleXMargin: 20,

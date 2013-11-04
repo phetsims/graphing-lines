@@ -48,18 +48,16 @@ define( function( require ) {
     var expandCollapseButton = new ExpandCollapseButton( 30, maximizedProperty );
 
     // Save Line button
-    var saveLineButton = new TextButton( saveLineString, function() {
-      savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) );
-    }, {
+    var saveLineButton = new TextButton( saveLineString, {
+      callback: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.SAVE_LINE_BUTTON,
       enabled: false
     } );
 
     // Erase Lines button
-    var eraseLinesButton = new TextButton( eraseLinesString, function() {
-      savedLines.clear();
-    }, {
+    var eraseLinesButton = new TextButton( eraseLinesString, {
+      callback: function() { savedLines.clear(); },
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.ERASE_LINES_BUTTON,
       enabled: false

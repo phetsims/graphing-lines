@@ -69,21 +69,20 @@ define( function( require ) {
     thisNode.pointsAwardedNode = new Text( "", { font: LineGameConstants.POINTS_AWARDED_FONT, fill: LineGameConstants.POINTS_AWARDED_COLOR } );
 
     // buttons
-    var doNothing = function() {}; //TODO delete this when sun#21 is addressed
     var buttonOptions = {
       font: LineGameConstants.BUTTON_FONT,
       rectangleFillUp: LineGameConstants.BUTTON_COLOR,
       rectangleXMargin: 20,
       rectangleYMargin: 5 };
-    thisNode.checkButton = new TextButton( checkString, doNothing, buttonOptions );
-    var tryAgainButton = new TextButton( tryAgainString, doNothing, buttonOptions );
-    var showAnswerButton = new TextButton( showAnswerString, doNothing, buttonOptions );
-    var nextButton = new TextButton( nextString, doNothing, buttonOptions );
+    thisNode.checkButton = new TextButton( checkString, buttonOptions );
+    var tryAgainButton = new TextButton( tryAgainString, buttonOptions );
+    var showAnswerButton = new TextButton( showAnswerString, buttonOptions );
+    var nextButton = new TextButton( nextString, buttonOptions );
 
     // developer buttons, no i18n
     var devButtonOptions = { font: new PhetFont( 12 ), rectangleFillUp: Color.WHITE };
-    var skipButton = new TextButton( "dev: Skip", doNothing, devButtonOptions );
-    var replayButton = new TextButton( "dev: Replay", doNothing, devButtonOptions );
+    var skipButton = new TextButton( "dev: Skip", devButtonOptions );
+    var replayButton = new TextButton( "dev: Replay", devButtonOptions );
 
     // point tools
     var linesVisibleProperty = new Property( true );

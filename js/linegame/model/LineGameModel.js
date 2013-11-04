@@ -1,6 +1,5 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO use PropertySet
 /**
  * Model for the "Line Game" screen. Responsibilities include:
  * <ul>

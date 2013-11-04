@@ -9,7 +9,7 @@ HIGH
 
 MEDIUM
 - add bestScores to LineGameModel, for populating stars in LevelStartButtons
-- replace 'GameSettingsPanel' with vegas components (LevelStartButton,...)
+- replace 'GameSettingsPanel' with vegas components (see BAA.StartGameLevelNode)
 - game reward, see build-an-atom#62
 
 LOW

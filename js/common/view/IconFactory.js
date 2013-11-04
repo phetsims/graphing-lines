@@ -1,5 +1,6 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
+//TODO should there icons be converted to images?
 /**
  * Factory for creating icons that appear in control panels.
  *
@@ -46,7 +47,7 @@ define( function( require ) {
       parentNode.addChild( lineNode );
 
       parentNode.scale( width / parentNode.width );
-      return parentNode;//TODO convert to image
+      return parentNode;
     },
 
     // Creates an icon for a line between 2 points on a grid with fixed dimensions.

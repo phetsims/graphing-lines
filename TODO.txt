@@ -18,6 +18,7 @@ LOW
 
 PERFORMANCE
 - lousy on iPad
+- put graph in its own layer, since it doesn't change
 - consider making Line mutable, to reduce affects of garbage collection
 - revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
 

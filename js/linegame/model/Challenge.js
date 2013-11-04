@@ -33,7 +33,7 @@ define( function( require ) {
    * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change
    * @param {Range} xRange range of the graph's x axis
    * @param {Range} yRange range of the graph's y axis
-   * @param {Vector2} originOffset offset of the origin (center of the graph) in view coordinates //TODO change to model coordinates?
+   * @param {Vector2} originOffset offset of the origin (center of the graph) in view coordinates
    * @param {Vector2} pointToolLocation1 location of point tool 1 in model coordinates
    * @param {Vector2} pointToolLocation2 location of point tool 2 in model coordinates
    * @param {Bounds2} pointToolDragBounds1 drag bounds of point tool 1 in model coordinates

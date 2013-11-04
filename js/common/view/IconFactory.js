@@ -1,6 +1,6 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
-//TODO should there icons be converted to images?
+//TODO should these icons be converted to images?
 /**
  * Factory for creating icons that appear in control panels.
  *

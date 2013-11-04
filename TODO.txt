@@ -8,7 +8,7 @@ HIGH
 - address lots of TODO items in the code
 
 MEDIUM
-- replace 'GameOverNode' and 'GameSettingsPanel' with vegas components
+- replace 'GameSettingsPanel' with vegas components (LevelStartButton,...)
 - game reward, see build-an-atom#62
 
 LOW

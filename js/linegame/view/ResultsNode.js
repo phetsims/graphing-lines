@@ -53,6 +53,7 @@ define( function( require ) {
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {
+            starDiameter: 45,
             buttonFill: LineGameConstants.BUTTON_COLOR,
             centerX: layoutBounds.centerX,
             centerY: layoutBounds.centerY

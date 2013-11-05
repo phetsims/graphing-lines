@@ -50,7 +50,6 @@ define( function( require ) {
           model.timer.elapsedTime,
           model.bestTimes[ model.level ],
           model.isNewBestTime,
-          layoutBounds,
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {

@@ -53,7 +53,7 @@ define( function( require ) {
           function() {
             model.gamePhaseProperty.set( GamePhase.SETTINGS );
           }, {
-            buttonColor: LineGameConstants.BUTTON_COLOR,
+            buttonFill: LineGameConstants.BUTTON_COLOR,
             centerX: layoutBounds.centerX,
             centerY: layoutBounds.centerY
           } ) );

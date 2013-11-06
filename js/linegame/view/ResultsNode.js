@@ -70,7 +70,7 @@ define( function( require ) {
 
      // Sets the bounds of the reward node, called when the canvas is resized so that the reward fills the browser window.
     setRewardBounds: function( bounds ) {
-        this.rewardNode.setBounds( bounds );
+        this.rewardNode.set( bounds );
     },
 
     isRewardRunning: function() {

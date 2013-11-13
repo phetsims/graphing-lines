@@ -72,7 +72,7 @@ define( function( require ) {
         location = constrainBounds( location, pointTool.dragBounds );
         if ( graph.contains( location ) ) {
           // snap to the graph's grid
-          location = new Vector2( Util.toFixed( location.x, 0 ), Util.toFixed( location.y, 0 ) );
+          location = new Vector2( Util.toFixedNumber( location.x, 0 ), Util.toFixedNumber( location.y, 0 ) );
         }
         pointTool.location = location;
       }

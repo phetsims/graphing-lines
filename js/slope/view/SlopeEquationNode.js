@@ -335,11 +335,11 @@ define( function( require ) {
       }
       else {
         // fractional slope
-        var rise = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
-        var riseNode = new Text( rise, { font: font, fill: color } );
+        var riseString = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+        var riseNode = new Text( riseString, { font: font, fill: color } );
 
-        var run = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
-        var runNode = new Text( run, { font: font, fill: color } );
+        var runString = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+        var runNode = new Text( runString, { font: font, fill: color } );
 
         var lineLength = Math.max( riseNode.width, runNode.width );
         var fractionLineNode = new LineNode( 0, 0, lineLength, 0, { stroke: color, lineWidth: equationNode.fractionLineThickness } );

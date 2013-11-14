@@ -122,7 +122,7 @@ define( function( require ) {
     }, options );
 
     var thisNode = this;
-    Node.call( thisNode );
+    Node.call( thisNode, { cursor: 'pointer' } );
 
     // properties for the "up" (increment) control
     var upStateProperty = new Property( 'up' );

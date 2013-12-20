@@ -23,6 +23,8 @@ MEDIUM
 LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
 - convert icons to images in IconFactory
+- model.txt
+- implementation-notes.tx
 
 PERFORMANCE
 - lousy on iPad

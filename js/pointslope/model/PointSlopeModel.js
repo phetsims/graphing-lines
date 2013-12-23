@@ -15,7 +15,6 @@ define( function( require ) {
   var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
   var PointSlopeParameterRange = require( 'GRAPHING_LINES/pointslope/model/PointSlopeParameterRange' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
 
   /**
    * @param {Line} interactiveLine

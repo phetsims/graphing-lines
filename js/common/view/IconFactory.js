@@ -12,7 +12,6 @@ define( function( require ) {
   // imports
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );

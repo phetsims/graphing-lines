@@ -17,7 +17,6 @@ define( function( require ) {
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var PropertySet = require( 'AXON/PropertySet' );
-  var Range = require( 'DOT/Range' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants

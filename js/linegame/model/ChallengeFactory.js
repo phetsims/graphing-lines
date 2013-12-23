@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function ChallengeFactory() {}

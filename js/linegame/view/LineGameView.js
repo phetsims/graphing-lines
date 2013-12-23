@@ -10,7 +10,6 @@ define( function( require ) {
 
   // imports
   var Bounds2 = require( 'DOT/Bounds2' );
-  var Dimension2 = require( 'DOT/Dimension2' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -18,7 +17,6 @@ define( function( require ) {
   var ResultsNode = require( 'GRAPHING_LINES/linegame/view/ResultsNode' );
   var ScreenView = require( 'JOIST/ScreenView' );
   var SettingsNode = require( 'GRAPHING_LINES/linegame/view/SettingsNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
 
   /**
    * @param {LineGameModel} model

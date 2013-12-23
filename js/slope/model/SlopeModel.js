@@ -14,7 +14,6 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
 
   function SlopeModel() {
 

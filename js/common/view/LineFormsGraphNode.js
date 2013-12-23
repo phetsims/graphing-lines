@@ -19,9 +19,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
-  var HighlightListener = require( 'SCENERY_PHET/input/HighlightListener' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );

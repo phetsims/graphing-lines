@@ -120,7 +120,6 @@ define( function( require ) {
     buttonsSeparator.setLine( 0, 0, panelWidth, 0 );
 
     // now do horizontal layout
-    var centerX = panelWidth / 2;
     titleNode.centerX = content.centerX;
     if ( titleNode.left <= expandCollapseButton.right ) {
       titleNode.left = expandCollapseButton.right + xSpacing;

@@ -21,7 +21,6 @@ define( function( require ) {
   var PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Range = require( 'DOT/Range' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   function ChallengeFactory5() {
     ChallengeFactory.call( this );

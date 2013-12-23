@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
   var PointSlopeLineNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeLineNode' );

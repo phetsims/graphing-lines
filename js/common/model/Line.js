@@ -10,7 +10,6 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Color = require( 'SCENERY/util/Color' );
   var Fraction = require( 'GRAPHING_LINES/common/model/Fraction' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Util = require( 'DOT/Util' );

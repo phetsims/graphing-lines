@@ -8,7 +8,7 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( function() {
   'use strict';
 
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging

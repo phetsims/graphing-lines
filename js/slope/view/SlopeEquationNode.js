@@ -266,7 +266,6 @@ define( function( require ) {
     equationNode.addChild( denominatorNode );
 
     // layout
-    var ySpacing = 2;
     leftSideNode.x = 0;
     leftSideNode.y = 0;
     fractionLineNode.left = leftSideNode.right + 5;

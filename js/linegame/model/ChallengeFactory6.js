@@ -38,8 +38,8 @@ define( function( require ) {
 
       // all variables, manually hoisted
       var challenges = [];
-      var yIntercepts, equationForms, equationForm, slope, yIntercept, point, line;
-      var x1, y1, x2, y2, xList, yList, rise, run, i;
+      var yIntercepts, equationForms, equationForm, slope, yIntercept, line;
+      var x1, y1, x2, y2, xList, yList, i;
 
       yIntercepts = RandomChooser.rangeToArray( new Range( -10, 10 ) );
 

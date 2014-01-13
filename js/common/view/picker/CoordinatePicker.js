@@ -13,7 +13,7 @@ define( function( require ) {
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var NumberPicker = require( 'GRAPHING_LINES/common/view/picker/NumberPicker' );
+  var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
    * @param {Property<Number>} a1 the coordinate that this picker changes

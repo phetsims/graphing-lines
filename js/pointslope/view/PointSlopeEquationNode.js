@@ -24,7 +24,7 @@ define( function( require ) {
   var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var NumberPicker = require( 'GRAPHING_LINES/common/view/picker/NumberPicker' );
+  var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );

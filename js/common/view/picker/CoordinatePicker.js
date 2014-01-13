@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Spinner for one coordinate of a 2D point.
+ * Picker for one coordinate of a 2D point.
  * It prevents the point from having the same value as some other point,
  * so that we don't end up with with an undefined line because (x1,y1) == (x2,y2).
  *
@@ -13,10 +13,10 @@ define( function( require ) {
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
+  var NumberPicker = require( 'GRAPHING_LINES/common/view/picker/NumberPicker' );
 
   /**
-   * @param {Property<Number>} a1 the coordinate that this spinner changes
+   * @param {Property<Number>} a1 the coordinate that this picker changes
    * @param {Property<Number>} b1 the other coordinate of the point that has coordinate a1
    * @param {Property<Number>} a2 the coordinate in the second point that is on the same axis as a1
    * @param {Property<Number>} b2 the coordinate in the second point that is on the same axis as b1
@@ -24,7 +24,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function CoordinateSpinner( a1, b1, a2, b2, range, options ) {
+  function CoordinatePicker( a1, b1, a2, b2, range, options ) {
 
     options = _.extend( {
       color: GLColors.POINT_X1_Y1
@@ -54,8 +54,8 @@ define( function( require ) {
       return x1New;
     };
 
-    Spinner.call( this, a1, range, options );
+    NumberPicker.call( this, a1, range, options );
   }
 
-  return inherit( Spinner, CoordinateSpinner );
+  return inherit( NumberPicker, CoordinatePicker );
 } );

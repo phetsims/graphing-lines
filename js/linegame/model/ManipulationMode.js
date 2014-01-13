@@ -4,7 +4,7 @@
  * Manipulation modes, for use in configuring Game challenges.
  * These indicate which properties of a line the user is able to change.
  * For "Graph the Line" challenges, this specifies what manipulators are provided on the graph.
- * For "Make the Equation" challenges, this specifies which parts of the equation are interactive spinners.
+ * For "Make the Equation" challenges, this specifies which parts of the equation are interactive pickers.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -5,7 +5,7 @@
  * General point-slope form is: (y - y1) = m(x - x1)
  * <p>
  * Point and/or slope may be interactive.
- * Spinners are used to increment/decrement parts of the equation that are specified as being interactive.
+ * Pickers are used to increment/decrement parts of the equation that are specified as being interactive.
  * Non-interactive parts of the equation are expressed in a form that is typical of how the equation
  * would normally be written. For example, if the slope is -1, then only the sign is written, not "-1".
  *
@@ -24,14 +24,14 @@ define( function( require ) {
   var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var NumberPicker = require( 'GRAPHING_LINES/common/view/picker/NumberPicker' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range');
-  var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
+  var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
-  var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -70,7 +70,7 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
-    // internal properties that are connected to spinners
+    // internal properties that are connected to pickers
     var x1Property = new Property( interactiveLineProperty.get().x1 );
     var y1Property = new Property( interactiveLineProperty.get().y1 );
     var riseProperty = new Property( interactiveLineProperty.get().rise );
@@ -79,8 +79,8 @@ define( function( require ) {
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
 
-    // Determine the max width of the rise and run spinners.
-    var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
+    // Determine the max width of the rise and run pickers.
+    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation "(y - y1) = m(x - x1)"
     var yLeftParenNode, yNode, yOperatorNode, y1Node, yRightParenNode, equalsNode;
@@ -93,7 +93,7 @@ define( function( require ) {
     yNode = new Text( symbolYString, staticOptions );
     yOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveY1 ) {
-      y1Node = new Spinner( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
+      y1Node = new NumberPicker( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -103,19 +103,19 @@ define( function( require ) {
     equalsNode = new Text( "=", staticOptions );
     slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
-      runNode = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
+      riseNode = new SlopePicker( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopePicker( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
     }
     else {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    fractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
+    fractionLineNode = new LineNode( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     xLeftParenNode = new Text( "(", staticOptions );
     xNode = new Text( symbolXString, staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
     if ( options.interactiveX1 ) {
-      x1Node = new Spinner( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
+      x1Node = new NumberPicker( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -216,16 +216,16 @@ define( function( require ) {
         // slope
         var previousXOffset;
         if ( options.interactiveSlope ) {
-          // (rise/run), where rise and run are spinners, and the sign is integrated into the spinners
+          // (rise/run), where rise and run are pickers, and the sign is integrated into the pickers
           thisNode.addChild( riseNode );
           thisNode.addChild( fractionLineNode );
           thisNode.addChild( runNode );
           fractionLineNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           fractionLineNode.centerY = equalsNode.centerY;
           riseNode.centerX = fractionLineNode.centerX;
-          riseNode.bottom = fractionLineNode.top - thisNode.spinnersYSpacing;
+          riseNode.bottom = fractionLineNode.top - thisNode.pickersYSpacing;
           runNode.centerX = fractionLineNode.centerX;
-          runNode.top = fractionLineNode.bottom + thisNode.spinnersYSpacing;
+          runNode.top = fractionLineNode.bottom + thisNode.pickersYSpacing;
           previousNode = fractionLineNode;
           previousXOffset = thisNode.fractionalSlopeXSpacing;
         }

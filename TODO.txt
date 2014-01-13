@@ -33,5 +33,5 @@ PERFORMANCE
 - revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
 
 MIGRATE TO COMMON
-- Spinner
+- NumberPicker
 

@@ -1,7 +1,9 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Spinner for a number value, with up and down arrows.
+ * 'Picker' for a number value, with up and down arrows.
+ * This is essential a value with built-in spinners, but PhET has been calling it a 'picker',
+ * so that's what this type is named.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -41,7 +43,7 @@ define( function( require ) {
    * @param {Number} intervalDelay // fire continuously at this frequency (milliseconds)
    * @constructor
    */
-  function SpinnerListener( stateProperty, enabledProperty, fireFunction, timerDelay, intervalDelay ) {
+  function PickerListener( stateProperty, enabledProperty, fireFunction, timerDelay, intervalDelay ) {
 
     // stuff related to press-&-hold feature
     var fired = false;
@@ -96,7 +98,7 @@ define( function( require ) {
     } );
   }
 
-  inherit( ButtonListener, SpinnerListener );
+  inherit( ButtonListener, PickerListener );
 
   //-------------------------------------------------------------------------------------------
 
@@ -106,7 +108,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function Spinner( valueProperty, rangeProperty, options ) {
+  function NumberPicker( valueProperty, rangeProperty, options ) {
 
     options = _.extend( {
       color: 'blue',
@@ -166,7 +168,7 @@ define( function( require ) {
       .lineTo( backgroundWidth, ( backgroundHeight / 2 ) + backgroundOverlap )
       .lineTo( 0, ( backgroundHeight / 2 ) + backgroundOverlap )
       .close() );
-    upBackground.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
+    upBackground.addInputListener( new PickerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
 
     // bottom half of the background, for "down". Shape computed starting at bottom-right, going clockwise.
     var downBackground = new Path( new Shape()
@@ -175,7 +177,7 @@ define( function( require ) {
       .lineTo( 0, backgroundHeight / 2 )
       .lineTo( backgroundWidth, backgroundHeight / 2 )
       .close() );
-    downBackground.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
+    downBackground.addInputListener( new PickerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // compute colors
     var arrowColors = {
@@ -207,7 +209,7 @@ define( function( require ) {
       .lineTo( 0, arrowButtonSize.height )
       .close();
     var upArrow = new Path( upArrowShape, arrowOptions );
-    upArrow.addInputListener( new SpinnerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
+    upArrow.addInputListener( new PickerListener( upStateProperty, upEnabledProperty, fireUp, options.timerDelay, options.intervalDelay ) );
 
     // 'down' arrow
     var downArrowShape = new Shape()
@@ -216,7 +218,7 @@ define( function( require ) {
       .lineTo( arrowButtonSize.width, 0 )
       .close();
     var downArrow = new Path( downArrowShape, arrowOptions );
-    downArrow.addInputListener( new SpinnerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
+    downArrow.addInputListener( new PickerListener( downStateProperty, downEnabledProperty, fireDown, options.timerDelay, options.intervalDelay ) );
 
     // rendering order
     thisNode.addChild( upBackground );
@@ -287,5 +289,5 @@ define( function( require ) {
     thisNode.mutate( options );
   }
 
-  return inherit( Node, Spinner );
+  return inherit( Node, NumberPicker );
 } );

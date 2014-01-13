@@ -5,7 +5,7 @@
  * General slope-intercept form is: y = mx + b
  * <p>
  * Slope and/or intercept may be interactive.
- * Spinners are used to increment/decrement parts of the equation that are specified as being interactive.
+ * Pickers are used to increment/decrement parts of the equation that are specified as being interactive.
  * Non-interactive parts of the equation are expressed in a form that is typical of how the equation
  * would normally be written.  For example, if the slope is -1, then only the sign is written, not "-1".
  * <p>
@@ -27,13 +27,13 @@ define( function( require ) {
   var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var NumberPicker = require( 'GRAPHING_LINES/common/view/picker/NumberPicker' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var SlopeSpinner = require( 'GRAPHING_LINES/common/view/spinner/SlopeSpinner' );
+  var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
-  var Spinner = require( 'GRAPHING_LINES/common/view/spinner/Spinner' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -71,7 +71,7 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
-    // internal properties that are connected to spinners
+    // internal properties that are connected to pickers
     var riseProperty = new Property( interactiveLineProperty.get().rise );
     var runProperty = new Property( interactiveLineProperty.get().run );
     var yInterceptProperty = new Property( interactiveLineProperty.get().y1 );
@@ -89,29 +89,29 @@ define( function( require ) {
     var yInterceptMinusSignNode; // for "y = -b" case
     var slopeFractionLineNode, yInterceptFractionLineNode;
 
-    // Determine the max width of the rise and run spinners.
-    var maxSlopeSpinnerWidth = thisNode.computeMaxSlopeSpinnerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
+    // Determine the max width of the rise and run pickers.
+    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // nodes: y = -(rise/run)x + -b
     yNode = new Text( symbolYString, staticOptions );
     equalsNode = new Text( "=", staticOptions );
     slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopeSpinner( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
-      runNode = new SlopeSpinner( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
+      riseNode = new SlopePicker( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopePicker( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
     }
     else {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    slopeFractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
+    slopeFractionLineNode = new LineNode( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, _.extend( { absoluteValue: true }, staticOptions ) );
-    yInterceptNode = new Spinner( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
+    yInterceptNode = new NumberPicker( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-    yInterceptFractionLineNode = new LineNode( 0, 0, maxSlopeSpinnerWidth, 0, fractionLineOptions );
+    yInterceptFractionLineNode = new LineNode( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
 
     //TODO can we update less? move this to prototype?
     /*
@@ -161,9 +161,9 @@ define( function( require ) {
         slopeFractionLineNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
         slopeFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;
         riseNode.centerX = slopeFractionLineNode.centerX;
-        riseNode.bottom = slopeFractionLineNode.top - thisNode.spinnersYSpacing;
+        riseNode.bottom = slopeFractionLineNode.top - thisNode.pickersYSpacing;
         runNode.centerX = slopeFractionLineNode.centerX;
-        runNode.top = slopeFractionLineNode.bottom + thisNode.spinnersYSpacing;
+        runNode.top = slopeFractionLineNode.bottom + thisNode.pickersYSpacing;
         xNode.left = slopeFractionLineNode.right + thisNode.fractionalSlopeXSpacing;
         xNode.y = yNode.y;
       }

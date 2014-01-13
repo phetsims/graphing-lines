@@ -1,3 +1,4 @@
+1/13/14 rename 'Spinner' to 'NumberPicker', change 'spinner' to 'picker' throughout, since this is what PhET calls these
 1/3/14 check in icons for game levels
 12/23/13 remove unused imports
 11/13/13 add cursor:'pointer' for spinners

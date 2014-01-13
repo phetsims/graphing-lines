@@ -12,7 +12,7 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var CoordinateSpinner = require( 'GRAPHING_LINES/common/view/spinner/CoordinateSpinner' );
+  var CoordinatePicker = require( 'GRAPHING_LINES/common/view/picker/CoordinatePicker' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -60,7 +60,7 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
-    // internal properties that are connected to spinners
+    // internal properties that are connected to pickers
     var x1Property = new Property( interactiveLineProperty.get().x1 );
     var y1Property = new Property( interactiveLineProperty.get().y1 );
     var x2Property = new Property( interactiveLineProperty.get().x2 );
@@ -74,15 +74,15 @@ define( function( require ) {
     var mNode = new Text( symbolSlopeString, staticOptions );
     var interactiveEqualsNode = new Text( "=", staticOptions );
     // y2 - y2
-    var y2Node = new CoordinateSpinner( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
-    var y1Node = new CoordinateSpinner( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line, correct length will be set later
     var interactiveFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions  );
     // x2 - x1
-    var x2Node = new CoordinateSpinner( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
-    var x1Node = new CoordinateSpinner( x1Property, y1Property, x2Property, y2Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
     var unsimplifiedEqualsNode = new Text( "=", staticOptions );
     var unsimplifiedRiseNode = new Node( staticOptions ); // non-null for now, proper node created later
@@ -129,7 +129,7 @@ define( function( require ) {
       interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + thisNode.fractionLineYFudgeFactor;
       // y2 - y1
       y2Node.left = interactiveFractionLineNode.left;
-      y2Node.bottom = interactiveFractionLineNode.top - thisNode.spinnersYSpacing;
+      y2Node.bottom = interactiveFractionLineNode.top - thisNode.pickersYSpacing;
       numeratorOperatorNode.left = y2Node.right + thisNode.operatorXSpacing;
       numeratorOperatorNode.centerY = y2Node.centerY;
       y1Node.left = numeratorOperatorNode.right + thisNode.operatorXSpacing;
@@ -139,7 +139,7 @@ define( function( require ) {
       interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 1 );
       // x2 - x1
       x2Node.left = y2Node.left;
-      x2Node.top = interactiveFractionLineNode.bottom + thisNode.spinnersYSpacing;
+      x2Node.top = interactiveFractionLineNode.bottom + thisNode.pickersYSpacing;
       denominatorOperatorNode.left = x2Node.right + thisNode.operatorXSpacing;
       denominatorOperatorNode.centerY = x2Node.centerY;
       x1Node.left = denominatorOperatorNode.right + thisNode.operatorXSpacing;

@@ -34,7 +34,7 @@ define( function( require ) {
   //-------------------------------------------------------------------------------------------
 
   /**
-   * @param {Property<Boolean>} stateProperty
+   * @param {Property<String>} stateProperty 'up'|'over'|'down'|'out'
    * @param {Property<Boolean>} enabledProperty
    * @param {Function} fireFunction
    * @param {Number} timerDelay start to fire continuously after pressing for this long (milliseconds)

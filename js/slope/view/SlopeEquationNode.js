@@ -19,7 +19,7 @@ define( function( require ) {
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
-  var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
+  var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

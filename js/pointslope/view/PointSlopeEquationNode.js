@@ -22,11 +22,11 @@ define( function( require ) {
   var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
-  var MinusNode = require( 'GRAPHING_LINES/common/view/MinusNode' );
+  var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PlusNode = require( 'GRAPHING_LINES/common/view/PlusNode' );
+  var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range');
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );

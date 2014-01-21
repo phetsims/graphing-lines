@@ -95,7 +95,7 @@ define( function( require ) {
     // nodes: y = -(rise/run)x + -b
     yNode = new Text( symbolYString, staticOptions );
     equalsNode = new Text( "=", staticOptions );
-    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
+    slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
@@ -107,7 +107,7 @@ define( function( require ) {
     slopeFractionLineNode = new LineNode( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
-    yInterceptMinusSignNode = new MinusNode( thisNode.signLineSize, _.extend( { absoluteValue: true }, staticOptions ) );
+    yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
     yInterceptNode = new NumberPicker( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -242,7 +242,7 @@ define( function( require ) {
           // y = (rise/run)x + b
           thisNode.addChild( operatorNode );
           thisNode.addChild( yInterceptNode );
-          operatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
+          operatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize } , staticOptions ) ) );
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           yInterceptNode.left = operatorNode.right + thisNode.operatorXSpacing;
@@ -288,8 +288,8 @@ define( function( require ) {
           // y = mx +/- b
           thisNode.addChild( operatorNode );
           operatorNode.addChild( positiveIntercept ?
-                                 new PlusNode( thisNode.operatorLineSize, staticOptions ) :
-                                 new MinusNode( thisNode.operatorLineSize, staticOptions ) );
+                                 new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) :
+                                 new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
 

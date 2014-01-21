@@ -99,9 +99,9 @@ define( function( require ) {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     yRightParenNode = new Text( ")", staticOptions );
-    y1MinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions ); // for y=-y1 case
+    y1MinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) ); // for y=-y1 case
     equalsNode = new Text( "=", staticOptions );
-    slopeMinusSignNode = new MinusNode( thisNode.signLineSize, staticOptions );
+    slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
@@ -151,18 +151,18 @@ define( function( require ) {
 
       // Change the x operator to account for the signs of x1.
       if ( options.interactiveX1 || line.x1 >= 0 ) {
-        xOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticOptions ) );
+        xOperatorNode.addChild( new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
       else {
-        xOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
+        xOperatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
 
       // Change the y operator to account for the signs of y1.
       if ( options.interactiveY1 || line.y1 >= 0 ) {
-        yOperatorNode.addChild( new MinusNode( thisNode.operatorLineSize, staticOptions ) );
+        yOperatorNode.addChild( new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
       else {
-        yOperatorNode.addChild( new PlusNode( thisNode.operatorLineSize, staticOptions ) );
+        yOperatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
 
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactiveX1 ) {

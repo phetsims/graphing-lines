@@ -75,13 +75,13 @@ define( function( require ) {
     var interactiveEqualsNode = new Text( "=", staticOptions );
     // y2 - y2
     var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
-    var numeratorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
+    var numeratorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line, correct length will be set later
     var interactiveFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions  );
     // x2 - x1
     var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
-    var denominatorOperatorNode = new MinusNode( thisNode.operatorLineSize, staticOptions );
+    var denominatorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
     var unsimplifiedEqualsNode = new Text( "=", staticOptions );
@@ -313,7 +313,7 @@ define( function( require ) {
       var nextXOffset;
       if ( line.getSlope() < 0 ) {
         // minus sign
-        var minusSignNode = new MinusNode( equationNode.signLineSize, { fill: color } );
+        var minusSignNode = new MinusNode( { size: equationNode.signLineSize, fill: color } );
         equationNode.addChild( minusSignNode );
         minusSignNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
         minusSignNode.centerY = slopeIsNode.centerY + equationNode.slopeSignYFudgeFactor + equationNode.slopeSignYOffset;

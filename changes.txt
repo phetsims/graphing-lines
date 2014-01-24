@@ -1,3 +1,4 @@
+# 1.0.0-dev.2 1/24/14
 1/21/14 make 'size' an option for PlusNode and MinusNode
 1/21/14 migrate PlusNode and MinusNode to scenery-phet, for use in ph-scale
 1/13/14 migrate NumberPicker to scenery-phet, for use in ph-scale

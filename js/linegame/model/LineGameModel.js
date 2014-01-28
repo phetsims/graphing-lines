@@ -151,8 +151,6 @@ define( function( require ) {
       this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
     },
 
-    step: function() { /* no animation, do nothing */ },
-
     isPerfectScore: function() {
       return this.score === this.getPerfectScore();
     },

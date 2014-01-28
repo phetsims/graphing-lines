@@ -28,7 +28,5 @@ define( function( require ) {
     //NOTE: Unlike slope-intercept and point-slope, ranges do not need to be dynamically adjusted, because the points are free ranging.
   }
 
-  return inherit( LineFormsModel, SlopeModel, {
-    step: function( deltaSeconds ) { /* do nothing */ }
-  });
+  return inherit( LineFormsModel, SlopeModel );
 } );

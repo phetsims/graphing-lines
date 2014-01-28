@@ -45,7 +45,5 @@ define( function( require ) {
     } );
   }
 
-  return inherit( LineFormsModel, PointSlopeModel, {
-    step: function( deltaSeconds ) { /* do nothing */ }
-  });
+  return inherit( LineFormsModel, PointSlopeModel );
 } );

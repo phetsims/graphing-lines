@@ -20,7 +20,6 @@ define( function( require ) {
   // imports
   var DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -378,9 +377,9 @@ define( function( require ) {
   // Creates a node that displays the general form of this equation: y = mx + b
   SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
-    var html = StringUtils.format( "{0} = {1}{2} + {3}",
+    var text = StringUtils.format( "{0} = {1}{2} + {3}",
       symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
-    return new HTMLText( html, { font: options.font, pickable: false } );
+    return new Text( text, { font: options.font, pickable: false } );
 
   };
 

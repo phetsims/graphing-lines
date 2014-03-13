@@ -14,7 +14,6 @@ define( function( require ) {
   // imports
   var CoordinatePicker = require( 'GRAPHING_LINES/common/view/picker/CoordinatePicker' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -25,6 +24,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
@@ -241,19 +241,16 @@ define( function( require ) {
     var font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // m =
-    var htmlLeftSide = StringUtils.format( "{0}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{1} =", slopeString, symbolSlopeString );
-    var leftSideNode = new HTMLText( htmlLeftSide, { font: font, fill: options.fill } );
+    var leftSideNode = new Text( StringUtils.format( "{0}      {1} =", slopeString, symbolSlopeString ), { font: font, fill: options.fill } );
 
-    // pattern for numerator and denominator, with smaller subscripts
-    var pattern = '<html>{0}<span style="font-size:70%"><sub>2</sub></span> - {1}<span style="font-size:70%"><sub>1</sub></span></html>';
+    // pattern for numerator and denominator
+    var pattern = '{0}<sub>2</sub> - {1}<sub>1</sub>';
 
     // y2 - y1
-    var htmlNumerator = StringUtils.format( pattern, symbolYString, symbolYString );
-    var numeratorNode = new HTMLText( htmlNumerator, { font: font, fill: options.fill } );
+    var numeratorNode = new SubSupText( StringUtils.format( pattern, symbolYString, symbolYString ), { font: font, fill: options.fill } );
 
     // x2 - x1
-    var htmlDenominator = StringUtils.format( pattern, symbolXString, symbolXString );
-    var denominatorNode = new HTMLText( htmlDenominator, { font: font, fill: options.fill } );
+    var denominatorNode = new SubSupText( StringUtils.format( pattern, symbolXString, symbolXString ), { font: font, fill: options.fill } );
 
     // fraction line
     var length = Math.max( numeratorNode.width, denominatorNode.width );

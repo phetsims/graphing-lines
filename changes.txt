@@ -1,3 +1,4 @@
+3/13/14 replace HTMLText with SubSupText, so that we use less memory
 1/28/14 remove 'do nothing' step functions from models, since screen.model.step is now optional in joist.Sim.animationLoop
 # 1.0.0-dev.2 1/24/14
 1/21/14 make 'size' an option for PlusNode and MinusNode

@@ -19,7 +19,6 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
-  var HTMLText = require( 'SCENERY/nodes/HTMLText' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
@@ -33,6 +32,7 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
@@ -368,9 +368,9 @@ define( function( require ) {
   // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
   PointSlopeEquationNode.createGeneralFormNode = function( options ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
-    var pattern = '<html>({0} - {1}<span style="font-size:70%"><sub>1</sub></span>) = {2}({3} - {4}<span style="font-size:70%"><sub>1</sub></span>)</html>';
+    var pattern = '({0} - {1}<sub>1</sub>) = {2}({3} - {4}<sub>1</sub>)';
     var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
-    return new HTMLText( html, { font: options.font, pickable: false } );
+    return new SubSupText( html, { font: options.font, pickable: false } );
   };
 
   PointSlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {

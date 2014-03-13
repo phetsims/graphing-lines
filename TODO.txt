@@ -3,6 +3,7 @@ TODO list for graphing-lines (HTML5 port)
 DESIGN
 
 HIGH
+- replace HTMText with SubSupText
 - make manipulators bigger, or make them smaller with a 'halo'
 - add a tab on right side of point tool, so you can see values while moving on tablet
 - expand touchArea for "Hide lines" check box

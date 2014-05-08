@@ -18,7 +18,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/TextPushButton' );
-  var SoundToggleButtonDeprecated = require( 'SCENERY_PHET/SoundToggleButtonDeprecated' );
+  var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var TimerToggleButtonDeprecated = require( 'SCENERY_PHET/TimerToggleButtonDeprecated' );
 
   //TODO i18n
@@ -42,7 +42,7 @@ define( function( require ) {
 
     // toggle buttons
     var timerButton = new TimerToggleButtonDeprecated( timerEnabledProperty );
-    var soundButton = new SoundToggleButtonDeprecated( soundEnabledProperty );
+    var soundButton = new SoundToggleButton( soundEnabledProperty );
     var toggleButtonsParent = new Node();
     toggleButtonsParent.addChild( timerButton );
     toggleButtonsParent.addChild( soundButton );

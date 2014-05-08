@@ -19,7 +19,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
-  var TimerToggleButtonDeprecated = require( 'SCENERY_PHET/TimerToggleButtonDeprecated' );
+  var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
 
   //TODO i18n
   // strings
@@ -41,7 +41,7 @@ define( function( require ) {
     var titleNode = new Text( gameSettingsString, { font: options.titleFont } );
 
     // toggle buttons
-    var timerButton = new TimerToggleButtonDeprecated( timerEnabledProperty );
+    var timerButton = new TimerToggleButton( timerEnabledProperty );
     var soundButton = new SoundToggleButton( soundEnabledProperty );
     var toggleButtonsParent = new Node();
     toggleButtonsParent.addChild( timerButton );

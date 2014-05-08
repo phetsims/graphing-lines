@@ -13,7 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
-  var ResetAllButtonDeprecated = require( 'SCENERY_PHET/ResetAllButtonDeprecated' );
+  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var ScreenView = require( 'JOIST/ScreenView' );
 
   /**
@@ -39,9 +39,12 @@ define( function( require ) {
     pointToolParent.addChild( pointTool2 );
 
     // Reset All button
-    var resetAllButton = new ResetAllButtonDeprecated( function() {
-      model.reset();
-      viewProperties.reset();
+    var resetAllButton = new ResetAllButton( {
+      listener: function() {
+        model.reset();
+        viewProperties.reset();
+      },
+      scale: 1.32
     } );
 
     // Parent for all controls, to simplify layout

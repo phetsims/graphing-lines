@@ -17,7 +17,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var TextPushButton = require( 'SUN/TextPushButton' );
+  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
 
   // strings
   var saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
@@ -48,7 +48,7 @@ define( function( require ) {
     var expandCollapseButton = new ExpandCollapseButton( 30, maximizedProperty );
 
     // Save Line button
-    var saveLineButton = new TextPushButton( saveLineString, {
+    var saveLineButton = new TextPushButtonDeprecated( saveLineString, {
       listener: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.SAVE_LINE_BUTTON,
@@ -56,7 +56,7 @@ define( function( require ) {
     } );
 
     // Erase Lines button
-    var eraseLinesButton = new TextPushButton( eraseLinesString, {
+    var eraseLinesButton = new TextPushButtonDeprecated( eraseLinesString, {
       listener: function() { savedLines.clear(); },
       font: BUTTON_FONT,
       rectangleFillUp: GLColors.ERASE_LINES_BUTTON,

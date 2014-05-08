@@ -17,7 +17,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButton = require( 'SUN/TextPushButton' );
+  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var TimerToggleButtonDeprecated = require( 'SCENERY_PHET/TimerToggleButtonDeprecated' );
 
@@ -49,7 +49,7 @@ define( function( require ) {
     soundButton.left = timerButton.right + 50;
     soundButton.centerY = timerButton.centerY;
 
-    var startButton = new TextPushButton( startString, {
+    var startButton = new TextPushButtonDeprecated( startString, {
       listener: startFunction,
       font: options.controlFont,
       rectangleFillUp: options.startButtonColor,

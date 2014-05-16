@@ -17,7 +17,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
 
@@ -49,12 +49,12 @@ define( function( require ) {
     soundButton.left = timerButton.right + 50;
     soundButton.centerY = timerButton.centerY;
 
-    var startButton = new TextPushButtonDeprecated( startString, {
+    var startButton = new TextPushButton( startString, {
       listener: startFunction,
       font: options.controlFont,
-      rectangleFillUp: options.startButtonColor,
-      rectangleXMargin: 20,
-      rectangleYMargin: 5
+      baseColor: options.startButtonColor,
+      xMargin: 20,
+      yMargin: 5
     } );
 
     // level control

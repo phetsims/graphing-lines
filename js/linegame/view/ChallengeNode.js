@@ -30,7 +30,7 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButtonDeprecated = require( 'SUN/TextPushButtonDeprecated' );
+  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
 
   // strings
   var checkString = require( 'string!VEGAS/check' );
@@ -71,18 +71,18 @@ define( function( require ) {
     // buttons
     var buttonOptions = {
       font: LineGameConstants.BUTTON_FONT,
-      rectangleFillUp: LineGameConstants.BUTTON_COLOR,
-      rectangleXMargin: 20,
-      rectangleYMargin: 5 };
-    thisNode.checkButton = new TextPushButtonDeprecated( checkString, buttonOptions );
-    var tryAgainButton = new TextPushButtonDeprecated( tryAgainString, buttonOptions );
-    var showAnswerButton = new TextPushButtonDeprecated( showAnswerString, buttonOptions );
-    var nextButton = new TextPushButtonDeprecated( nextString, buttonOptions );
+      baseColor: LineGameConstants.BUTTON_COLOR,
+      xMargin: 20,
+      yMargin: 5 };
+    thisNode.checkButton = new TextPushButton( checkString, buttonOptions );
+    var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
+    var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
+    var nextButton = new TextPushButton( nextString, buttonOptions );
 
     // developer buttons, no i18n
-    var devButtonOptions = { font: new PhetFont( 12 ), rectangleFillUp: Color.WHITE };
-    var skipButton = new TextPushButtonDeprecated( "dev: Skip", devButtonOptions );
-    var replayButton = new TextPushButtonDeprecated( "dev: Replay", devButtonOptions );
+    var devButtonOptions = { font: new PhetFont( 12 ), baseColor: Color.WHITE };
+    var skipButton = new TextPushButton( "dev: Skip", devButtonOptions );
+    var replayButton = new TextPushButton( "dev: Replay", devButtonOptions );
 
     // point tools
     var linesVisibleProperty = new Property( true );

@@ -1,3 +1,4 @@
+5/16/14 set a specific font size for scoreboard, to compensate for changes made to vegas.Scoreboard
 5/16/14 replace sun.TextPushButtonDeprecated with sun.buttons.TextPushButton
 3/13/14 replace HTMLText with SubSupText, so that we use less memory
 1/28/14 remove 'do nothing' step functions from models, since screen.model.step is now optional in joist.Sim.animationLoop

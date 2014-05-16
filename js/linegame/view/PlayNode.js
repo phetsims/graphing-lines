@@ -11,9 +11,10 @@ define( function( require ) {
 
   // imports
   var Dimension2 = require( 'DOT/Dimension2' );
+  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Scoreboard = require( 'VEGAS/Scoreboard' );
 
   /**
@@ -36,7 +37,8 @@ define( function( require ) {
       model.timerEnabledProperty,
       function() {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
-      } );
+      },
+      { font: new PhetFont( 20 ) } );
     scoreboardNode.centerX = layoutBounds.centerX;
     scoreboardNode.bottom = layoutBounds.bottom - 20;
     thisNode.addChild( scoreboardNode );

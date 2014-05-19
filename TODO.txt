@@ -18,7 +18,9 @@ PERFORMANCE
 - lousy on iPad
 - put graph in its own layer, since it doesn't change
 - consider making Line mutable, to reduce affects of garbage collection
-- revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
+- changing a line results in allocation of: Line, LineNode, EquationNode
+- EquationNode subtypes do lots of addChild/removeChild
+- SlopeToolNode does removeAllChildren when its line changes
 
 USABILITY
 - make manipulators bigger, or make them smaller with a 'halo'

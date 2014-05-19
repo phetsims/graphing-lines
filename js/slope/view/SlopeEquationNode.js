@@ -270,6 +270,7 @@ define( function( require ) {
 
   /**
    * Creates a static equation for the specified line.
+   * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
    *
    * @param {Line} line
    * @param {Number} fontSize

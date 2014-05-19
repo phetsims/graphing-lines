@@ -11,7 +11,6 @@ HIGH
 - expand touchArea for "Hide lines" check box
 - large touchArea for spinners
 - dead zone between button and arrow in spinners, set mouseArea?
-- increase x-margins for 'Save Lines' and 'Erase Lines' buttons (increase default x-margin in sun?)
 - increase font size in interactive equations for all screens
 - add option to show 'best time' on vegas.LevelStartButton
 - consolidate equation fontSize and fontWeight in GLConstants

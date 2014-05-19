@@ -51,14 +51,16 @@ define( function( require ) {
     var saveLineButton = new TextPushButton( saveLineString, {
       listener: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
       font: BUTTON_FONT,
-      baseColor: GLColors.SAVE_LINE_BUTTON
+      baseColor: GLColors.SAVE_LINE_BUTTON,
+      xMargin: 10
     } );
 
     // Erase Lines button
     var eraseLinesButton = new TextPushButton( eraseLinesString, {
       listener: function() { savedLines.clear(); },
       font: BUTTON_FONT,
-      baseColor: GLColors.ERASE_LINES_BUTTON
+      baseColor: GLColors.ERASE_LINES_BUTTON,
+      xMargin: 10
     } );
 
     // Sets the enabled states of the Save and Erase buttons

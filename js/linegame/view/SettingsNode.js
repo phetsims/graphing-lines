@@ -53,7 +53,7 @@ define( function( require ) {
       },
       model.bestScoreProperties[ level ],
       model.getPerfectScore(),
-      { backgroundColor: 'rgb( 242, 255, 204 )', highlightedBackgroundColor: 'rgb( 224, 255, 122 )' } );
+      { backgroundColor: 'rgb( 180, 205, 255 )', highlightedBackgroundColor: 'rgb( 220, 230, 255 )' } );
   };
 
   /**
@@ -93,9 +93,9 @@ define( function( require ) {
     }
 
     // Timer and Sound controls
-    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, { stroke: 'gray' } );
+    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, { stroke: 'gray', scale: 1.3 } );
     this.addChild( timerToggleButton );
-    var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, { stroke: 'gray' } );
+    var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, { stroke: 'gray', scale: 1.3 } );
     this.addChild( soundToggleButton );
 
     // Reset All button
@@ -113,7 +113,7 @@ define( function( require ) {
     soundToggleButton.left = X_MARGIN;
     soundToggleButton.bottom = layoutBounds.height - Y_MARGIN;
     timerToggleButton.left = X_MARGIN;
-    timerToggleButton.bottom = soundToggleButton.top - 10;
+    timerToggleButton.bottom = soundToggleButton.top - 15;
     resetButton.right = layoutBounds.width - X_MARGIN;
     resetButton.bottom = layoutBounds.height - Y_MARGIN;
   }

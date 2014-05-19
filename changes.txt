@@ -1,3 +1,5 @@
+5/19/14 tweak colors for level-selection buttons
+5/19/14 increase size of timer and sound toggle buttons
 5/19/14 Game: convert 'best time' to properties, for eventual integration with LevelStartButton
 5/19/14 Game: populate 'best score' at the end of a game
 5/19/14 replace vegas.GameSettingsPanel with custom node that uses vegas.LevelStartButton

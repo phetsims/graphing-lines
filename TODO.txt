@@ -20,6 +20,7 @@ HIGH
 MEDIUM
 - add bestScores {Array<Property{Number}>} to LineGameModel, for populating stars in LevelStartButtons
 - replace 'GameSettingsPanel' with vegas components (see BAA.StartGameLevelNode)
+- new icons on game level buttons
 - game reward, see build-an-atom#62
 
 LOW
@@ -27,7 +28,7 @@ LOW
 - convert translated strings of the form '<htm>foo<br>bar</html>' to 'foo\nbar'
 - convert icons to images in IconFactory
 - model.txt
-- implementation-notes.tx
+- implementation-notes.txt
 
 PERFORMANCE
 - lousy on iPad

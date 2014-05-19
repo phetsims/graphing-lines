@@ -19,7 +19,7 @@ define( function( require ) {
   function Graph( xRange, yRange ) {
     this.xRange = xRange;
     this.yRange = yRange;
-    this.lines = new ObservableArray();
+    this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
   }
 
   Graph.prototype = {
@@ -29,6 +29,7 @@ define( function( require ) {
     getHeight: function() { return this.yRange.getLength(); },
 
     /**
+     * Does the graph contain the specified point?
      * @param {Vector2} point
      * @returns {Boolean}
      */

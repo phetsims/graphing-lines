@@ -17,6 +17,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -147,7 +148,7 @@ define( function( require ) {
      * Subtypes must override this method to return an equation in the correct form.
      */
     createEquationNode: function( line, fontSize, color ) {
-      return new Node();
+      return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds
     },
 
     setEquationVisible: function( visible ) {

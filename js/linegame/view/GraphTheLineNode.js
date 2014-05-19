@@ -17,10 +17,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeGraphNode' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptGraphNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TwoPointsGraphNode = require( 'GRAPHING_LINES/linegame/view/TwoPointsGraphNode' );
@@ -59,7 +59,7 @@ define( function( require ) {
       ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
 
     // Guess
-    thisNode.guessBoxNode = new EquationBoxNode( yourLineString, Color.BLACK, boxSize, new Node() ); // dummy equation
+    thisNode.guessBoxNode = new EquationBoxNode( yourLineString, Color.BLACK, boxSize, new Rectangle( 0, 0, 1, 1 ) ); // placeholder for equation, must have well-defined bounds
 
     // Graph
     thisNode.graphNode = this.createGraphNode( challenge );

@@ -16,6 +16,7 @@ USABILITY
 - dead zone between button and arrow in spinners, set mouseArea?
 
 HIGH
+- disable slope-tool icon when 'slope' check box is disabled
 - add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

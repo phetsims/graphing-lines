@@ -12,7 +12,6 @@ USABILITY
 - make manipulators bigger, or make them smaller with a 'halo'
 - add a tab on right side of point tool, so you can see values while moving on tablet
 - large touchArea for spinners
-- dead zone between button and arrow in spinners, set mouseArea?
 
 HIGH
 - disable slope-tool icon when 'slope' check box is disabled

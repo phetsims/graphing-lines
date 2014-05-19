@@ -6,7 +6,7 @@ HIGHEST
 - performance stinks on iPad
 
 HIGH
-- frequent exception in game level 2, "Uncaught RangeError: Maximum call stack size exceeded" (as of 1.0.0-dev.2)
+- game level 2, assertion failure in Line.getYIntercept: x1=0 y1= x2=NaN y2=undefined rise=NaN run=NaN
 - add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

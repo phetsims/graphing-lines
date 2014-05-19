@@ -89,12 +89,12 @@ define( function( require ) {
     thisModel.timer = new GameTimer();
     thisModel.numberOfLevels = factories.length;
     thisModel.maxPointsPerChallenge = 2;
-    thisModel.bestScoreProperties = []; //TODO populate property value when a game is completed
+    thisModel.bestScoreProperties = []; // best scores for each level, array of Property<Number>
+    thisModel.bestTimeProperties = []; // best times for each level, in ms, array of Property<Number>
     thisModel.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
-    thisModel.bestTimes = []; // best times for each level, in ms  //TODO make these properties, for display on buttons?
     for ( var level = 0; level < thisModel.numberOfLevels; level++ ) {
       thisModel.bestScoreProperties.push( new Property( 0 ) );
-      thisModel.bestTimes.push( null ); // null if a level has no best time yet
+      thisModel.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 
     thisModel.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
@@ -131,6 +131,9 @@ define( function( require ) {
         if ( thisModel.challengeIndex === thisModel.challenges.length - 1 ) {
           // game has been completed
           thisModel.gamePhaseProperty.set( GamePhase.RESULTS );
+          if ( thisModel.score > thisModel.bestScoreProperties[ thisModel.level ].get() ) {
+            thisModel.bestScoreProperties[ thisModel.level ].set( thisModel.score );
+          }
         }
         else {
           // next challenge
@@ -150,7 +153,15 @@ define( function( require ) {
     reset: function() {
       PropertySet.prototype.reset.call( this );
       this.gamePhaseProperty.reset();
+      this.resetBestScores();
       this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
+    },
+
+    // resets the best score to zero for every level
+    resetBestScores: function() {
+      this.bestScoreProperties.forEach( function( property ) {
+        property.set( 0 );
+      } );
     },
 
     isPerfectScore: function() {
@@ -196,13 +207,13 @@ define( function( require ) {
         var level = this.level;
         var time = this.timer.elapsedTime;
         this.isNewBestTime = false;
-        if ( !this.bestTimes[ level ] ) {
+        if ( !this.bestTimeProperties[ level ].get() ) {
           // there was no previous time for this level
-          this.bestTimes[ level ] = time;
+          this.bestTimeProperties[ level ].set( time );
         }
-        else if ( time < this.bestTimes[ level ] ) {
+        else if ( time < this.bestTimeProperties[ level ].get() ) {
           // we have a new best time for this level
-          this.bestTimes[ level ] = time;
+          this.bestTimeProperties[ level ].set( time );
           this.isNewBestTime = true;
         }
       }

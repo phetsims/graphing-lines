@@ -58,16 +58,15 @@ define( function( require ) {
     options = _.extend( {
       interactiveSlope: true,
       interactiveIntercept: true,
-      interactiveFontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
-      staticFontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
+      fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
 
     var thisNode = this;
-    EquationNode.call( this, options.staticFontSize );
+    EquationNode.call( this, options.fontSize );
 
-    var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
+    var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
+    var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
@@ -391,8 +390,7 @@ define( function( require ) {
       new Property( new Range( 0, 1 ) ), {
         interactiveSlope: false,
         interactiveIntercept: false,
-        interactiveFontSize: fontSize,
-        staticFontSize: fontSize,
+        fontSize: fontSize,
         staticColor: color
       } );
   };

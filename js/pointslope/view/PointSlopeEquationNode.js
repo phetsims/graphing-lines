@@ -58,16 +58,15 @@ define( function( require ) {
       interactiveX1: true,
       interactiveY1: true,
       interactiveSlope: true,
-      interactiveFontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
-      staticFontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
+      fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
 
     var thisNode = this;
-    EquationNode.call( thisNode, options.staticFontSize );
+    EquationNode.call( thisNode, options.fontSize );
 
-    var interactiveFont = new PhetFont( { size: options.interactiveFontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: options.staticFontSize, weight: 'bold' } );
+    var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
+    var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
 
@@ -146,7 +145,7 @@ define( function( require ) {
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
         // use slope-intercept form for y=x and y=-x, using a line with the proper slope and (x1,y1)=(0,0)
         thisNode.addChild( SlopeInterceptEquationNode.createStaticEquation(
-          Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.staticFontSize, options.staticColor ) );
+          Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.fontSize, options.staticColor ) );
         return;
       }
 
@@ -383,8 +382,7 @@ define( function( require ) {
         interactiveX1: false,
         interactiveY1: false,
         interactiveSlope: false,
-        interactiveFontSize: fontSize,
-        staticFontSize: fontSize,
+        fontSize: fontSize,
         staticColor: color
       } );
   };

@@ -140,11 +140,10 @@ define( function( require ) {
    * @param {ManipulationMode} manipulationMode
    * @param {Property<Line>} lineProperty
    * @param {Graph} graph
-   * @param {Font} interactiveFont
-   * @param {Font} staticFont
+   * @param {Number} fontSize
    * @param {Color} staticColor
    */
-   var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, interactiveFontSize, staticFontSize, staticColor ) {
+   var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
     var interactivePoint, interactiveSlope, interactiveIntercept;
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
@@ -152,8 +151,7 @@ define( function( require ) {
       return new SlopeInterceptEquationNode( lineProperty, new Property( graph.yRange ), new Property( graph.xRange ), new Property( graph.yRange ), {
         interactiveSlope: interactiveSlope,
         interactiveIntercept: interactiveIntercept,
-        interactiveFontSize: interactiveFontSize,
-        staticFontSize: staticFontSize,
+        fontSize: fontSize,
         staticColor: staticColor } );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
@@ -163,8 +161,7 @@ define( function( require ) {
         interactiveX1: interactivePoint,
         interactiveY1: interactivePoint,
         interactiveSlope: interactiveSlope,
-        interactiveFontSize: interactiveFontSize,
-        staticFontSize: staticFontSize,
+        fontSize: fontSize,
         staticColor: staticColor } );
     }
     else {

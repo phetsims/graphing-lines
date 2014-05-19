@@ -1,3 +1,4 @@
+5/19/14 remove distinction between font size for interactive vs static parts of equation
 5/19/14 increase xMargin for 'Save Line' and 'Erase Lines' buttons
 5/19/14 verify that Fraction numerator and denominator are integers
 5/19/14 replace 'new Node()' placeholders with 'new Rectangle(0,0,1,1)' to avoid undefined-bounds assertion in dot.Transform3

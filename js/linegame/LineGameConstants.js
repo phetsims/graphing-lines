@@ -10,6 +10,7 @@ define( function( require ) {
 
   // imports
   var Color = require( 'SCENERY/util/Color' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -34,7 +35,7 @@ define( function( require ) {
     // sizes
     GRAPH_WIDTH: 400, // graph width in view coordinates
     FACE_DIAMETER: 120,
-    MANIPULATOR_DIAMETER: 0.85, // diameter of the manipulators, in model units
+    MANIPULATOR_DIAMETER: GLConstants.MANIPULATOR_DIAMETER, // diameter of the manipulators, in model units
     POINT_DIAMETER: 0.5, // diameter of plotted points, in model units
     POINT_TOOL_SCALE: 0.80
   };

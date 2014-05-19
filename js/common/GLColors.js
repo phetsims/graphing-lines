@@ -12,7 +12,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
 
   return {
-    CANVAS: new Color( 255, 255, 225 ),
+    SCREEN_BACKGROUND: 'rgb( 255, 255, 214 )',
     INTERACTIVE_LINE: Color.BLACK,
     SAVED_LINE_NORMAL: new Color( 160, 160, 160 ),
     SAVED_LINE_HIGHLIGHT: new Color( 0, 0, 255 ),

@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/SCREEN' );
@@ -25,7 +26,7 @@ define( function( require ) {
     Screen.call( this, slopeInterceptString, new Image( screenIcon ),
       function() { return new SlopeInterceptModel(); },
       function( model ) { return new SlopeInterceptView( model ); },
-      { backgroundColor: 'rgb( 255, 255, 214 )' }
+      { backgroundColor: GLColors.SCREEN_BACKGROUND }
     );
   }
 

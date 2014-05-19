@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
@@ -25,7 +26,7 @@ define( function( require ) {
     Screen.call( this, lineGameString, new Image( screenIcon ),
       function() { return new LineGameModel(); },
       function( model ) { return new LineGameView( model ); },
-      { backgroundColor: 'rgb( 255, 255, 214 )' }
+      { backgroundColor: GLColors.SCREEN_BACKGROUND }
     );
   }
 

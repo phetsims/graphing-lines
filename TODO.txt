@@ -16,8 +16,6 @@ MEDIUM
 - game reward, see build-an-atom#62
 
 LOW
-- create screen icons programmatically
-- convert icons to images in IconFactory
 
 PERFORMANCE
 - lousy on iPad

@@ -12,6 +12,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -111,7 +112,7 @@ define( function( require ) {
 
     // Horizontal strut, to prevent control panel from resizing when minimized.  Do this after vertical layout!
     var panelWidth = content.width + 5;
-    var strutNode = new Line( 0, 0, panelWidth, 0, { pickable: false } );
+    var strutNode = new HStrut( panelWidth );
     content.addChild( strutNode );
     strutNode.moveToBack();
 

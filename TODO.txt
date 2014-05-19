@@ -6,7 +6,7 @@ HIGHEST
 - performance stinks on iPad
 
 HIGH
-- frequent exception in game level 2, "Uncaught RangeError: Maximum call stack size exceeded"
+- frequent exception in game level 2, "Uncaught RangeError: Maximum call stack size exceeded" (as of 1.0.0-dev.2)
 - add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

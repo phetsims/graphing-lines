@@ -1,4 +1,5 @@
-5/16/14 add GLColors.SCREEN_BACKGROUND
+5/19/14 delete unused LineFormsView.reset
+5/19/14 add GLColors.SCREEN_BACKGROUND
 5/16/14 set a specific font size for scoreboard, to compensate for changes made to vegas.Scoreboard
 5/16/14 replace sun.TextPushButtonDeprecated with sun.buttons.TextPushButton
 3/13/14 replace HTMLText with SubSupText, so that we use less memory

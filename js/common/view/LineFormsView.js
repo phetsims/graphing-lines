@@ -97,12 +97,5 @@ define( function( require ) {
     }
   }
 
-  return inherit( ScreenView, LineFormsView, {
-
-    layoutBounds: GLConstants.LAYOUT_BOUNDS,
-
-    reset: function() {
-      this.viewProperties.reset();
-    }
-  } );
+  return inherit( ScreenView, LineFormsView, { layoutBounds: GLConstants.LAYOUT_BOUNDS } );
 } );

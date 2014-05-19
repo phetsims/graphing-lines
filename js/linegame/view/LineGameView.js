@@ -12,6 +12,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PlayNode = require( 'GRAPHING_LINES/linegame/view/PlayNode' );
   var ResultsNode = require( 'GRAPHING_LINES/linegame/view/ResultsNode' );
@@ -62,5 +63,5 @@ define( function( require ) {
     //TODO add functionality to adjust the bounds of the reward, see java.LineGameCanvas
   }
 
-  return inherit( ScreenView, LineGameView, { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) } );
+  return inherit( ScreenView, LineGameView, { layoutBounds: GLConstants.LAYOUT_BOUNDS } );
 } );

@@ -1,21 +1,7 @@
 TODO list for graphing-lines (HTML5 port)
 
-DESIGN
-
-HIGHEST
-- performance stinks on iPad
-
-HIGH
-- add option to show 'best time' on vegas.LevelStartButton
-- address TODO items in the code
-
-MEDIUM
-- game reward, see build-an-atom#62
-
-LOW
-
 PERFORMANCE
-- lousy on iPad
+- performance stinks on iPad
 - put graph in its own layer, since it doesn't change
 - consider making Line mutable, to reduce affects of garbage collection
 - changing a line results in allocation of: Line, LineNode, EquationNode
@@ -28,6 +14,15 @@ USABILITY
 - expand touchArea for "Hide lines" check box
 - large touchArea for spinners
 - dead zone between button and arrow in spinners, set mouseArea?
+
+HIGH
+- add option to show 'best time' on vegas.LevelStartButton
+- address TODO items in the code
+
+MEDIUM
+- game reward, see build-an-atom#62
+
+LOW
 
 MIGRATE TO COMMON
 

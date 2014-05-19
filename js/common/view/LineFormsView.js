@@ -1,7 +1,7 @@
 // Copyright 2002-2013, University of Colorado Boulder
 
 /**
- * Base type view for the "Slope", "Slope-Intercept" and "Point-Slope" screens.
+ * Base type view for the various screens that deal with line forms (Slope, Slope-Intercept, Point-Slope).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

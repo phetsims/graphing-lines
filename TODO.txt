@@ -6,7 +6,6 @@ HIGHEST
 - performance stinks on iPad
 
 HIGH
-- game level 2, assertion failure in Line.getYIntercept: x1=0 y1= x2=NaN y2=undefined rise=NaN run=NaN
 - add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

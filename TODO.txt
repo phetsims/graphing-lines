@@ -7,7 +7,7 @@ HIGHEST
 
 HIGH
 - add option to show 'best time' on vegas.LevelStartButton
-- address lots of TODO items in the code
+- address TODO items in the code
 
 MEDIUM
 - add bestScores {Array<Property{Number}>} to LineGameModel, for populating stars in LevelStartButtons

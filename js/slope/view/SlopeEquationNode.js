@@ -39,6 +39,8 @@ define( function( require ) {
   var undefinedString = require( 'string!GRAPHING_LINES/undefined' );
 
   /**
+   * Creates an interactive equation. x1, y1, x2 and y2 are interactive.
+   *
    * @param {Property<Line>} interactiveLineProperty
    * @param {Property<Number>} xRangeProperty
    * @param {Property<Number>} yRangeProperty
@@ -84,38 +86,43 @@ define( function( require ) {
     var denominatorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // = unsimplified value
+    var unsimplifiedSlopeOptions = {
+      font: staticFont,
+      decimalPlaces: 0,
+      backgroundFill: GLColors.SLOPE,
+      minWidth: y2Node.width,
+      minHeight: y2Node.height - 20
+    };
     var unsimplifiedEqualsNode = new Text( "=", staticOptions );
-    var unsimplifiedRiseNode = new Node( staticOptions ); // non-null for now, proper node created later
-    var unsimplifiedRunNode = new Node( staticOptions );  // non-null for now, proper node created later
+    var unsimplifiedRiseNode = new NumberBackgroundNode( interactiveLineProperty.get().rise, unsimplifiedSlopeOptions );
+    var unsimplifiedRunNode = new NumberBackgroundNode( interactiveLineProperty.get().run, unsimplifiedSlopeOptions );
     var unsimplifiedFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
-    // Compute the size needed to display the unsimplified rise and run values.
-    var maxUnsimplifiedWidth = y2Node.width;
-    var maxUnsimplifiedHeight = y2Node.height - 20;
+    var undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
 
     // rendering order
     var parentNode = new Node();
     thisNode.addChild( parentNode );
-    {
-      // m =
-      parentNode.addChild( mNode );
-      parentNode.addChild( interactiveEqualsNode );
-      // y2 - y1
-      parentNode.addChild( y2Node );
-      parentNode.addChild( numeratorOperatorNode );
-      parentNode.addChild( y1Node );
-      // fraction line
-      parentNode.addChild( interactiveFractionLineNode );
-      // x2 - x1
-      parentNode.addChild( x2Node );
-      parentNode.addChild( denominatorOperatorNode );
-      parentNode.addChild( x1Node );
-      // = rise/run
-      parentNode.addChild( unsimplifiedEqualsNode );
-      parentNode.addChild( unsimplifiedRiseNode );
-      parentNode.addChild( unsimplifiedFractionLineNode );
-      parentNode.addChild( unsimplifiedRunNode );
-    }
+    thisNode.addChild( undefinedSlopeIndicator );
+
+    // m =
+    parentNode.addChild( mNode );
+    parentNode.addChild( interactiveEqualsNode );
+    // y2 - y1
+    parentNode.addChild( y2Node );
+    parentNode.addChild( numeratorOperatorNode );
+    parentNode.addChild( y1Node );
+    // fraction line
+    parentNode.addChild( interactiveFractionLineNode );
+    // x2 - x1
+    parentNode.addChild( x2Node );
+    parentNode.addChild( denominatorOperatorNode );
+    parentNode.addChild( x1Node );
+    // = rise/run
+    parentNode.addChild( unsimplifiedEqualsNode );
+    parentNode.addChild( unsimplifiedRiseNode );
+    parentNode.addChild( unsimplifiedFractionLineNode );
+    parentNode.addChild( unsimplifiedRunNode );
 
     // static layout
     {
@@ -173,7 +180,6 @@ define( function( require ) {
     y2Property.link( updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
-    var undefinedSlopeIndicator = null;
     interactiveLineProperty.link( function( line ) {
 
       // Synchronize the controls atomically.
@@ -188,22 +194,8 @@ define( function( require ) {
 
       // Update the unsimplified slope
       {
-        var unsimplifiedSlopeOptions = {
-          font: staticFont,
-          decimalPlaces: 0,
-          backgroundFill: GLColors.SLOPE,
-          minWidth: maxUnsimplifiedWidth, minHeight: maxUnsimplifiedHeight
-        };
-
-        // rise
-        parentNode.removeChild( unsimplifiedRiseNode );
-        unsimplifiedRiseNode = new NumberBackgroundNode( line.rise, unsimplifiedSlopeOptions );
-        parentNode.addChild( unsimplifiedRiseNode );
-
-        // run
-        parentNode.removeChild( unsimplifiedRunNode );
-        unsimplifiedRunNode = new NumberBackgroundNode( line.run, unsimplifiedSlopeOptions );
-        parentNode.addChild( unsimplifiedRunNode );
+        unsimplifiedRiseNode.setValue( line.rise );
+        unsimplifiedRunNode.setValue( line.run );
 
         // fraction line length
         var unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );
@@ -214,20 +206,21 @@ define( function( require ) {
       updateLayout( line );
 
       // undefined-slope indicator
-      if ( undefinedSlopeIndicator !== null ) {
-        thisNode.removeChild( undefinedSlopeIndicator );
-        undefinedSlopeIndicator = null;
-      }
       if ( line.undefinedSlope() ) {
-        undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.getWidth(), thisNode.getHeight() );
+        undefinedSlopeIndicator.visible = true;
+        undefinedSlopeIndicator.setSize( parentNode.getWidth(), parentNode.getHeight() );
         undefinedSlopeIndicator.centerX = parentNode.centerX;
         undefinedSlopeIndicator.centerY = parentNode.centerY + thisNode.undefinedSlopeYFudgeFactor;
-        thisNode.addChild( undefinedSlopeIndicator );
+      }
+      else {
+        undefinedSlopeIndicator.visible = false;
       }
     } );
   }
 
-  // Creates a node that displays the general form of this equation: m = (y2-y1)/(x2-x1)
+  /**
+   * Creates a node that displays the general form of this equation: m = (y2-y1)/(x2-x1)
+   */
   SlopeEquationNode.createGeneralFormNode = function( options ) {
 
     options = _.extend( {
@@ -276,6 +269,8 @@ define( function( require ) {
   };
 
   /**
+   * Creates a static equation for the specified line.
+   *
    * @param {Line} line
    * @param {Number} fontSize
    * @param {Color} color

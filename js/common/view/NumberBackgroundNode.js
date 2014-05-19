@@ -39,29 +39,38 @@ define( function( require ) {
 
     Node.call( this );
 
-    var textNode = new Text( Util.toFixed( value, options.decimalPlaces ), {
+    this.decimalPlaces = options.decimalPlaces; // @private
+
+    // @private
+    this.textNode = new Text( '?', {
       fill: options.textFill,
       font: options.font
     } );
 
-    var backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
-    var backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
-    var backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.cornerRadius, options.cornerRadius, {
+    var backgroundWidth = Math.max( options.minWidth, this.textNode.width + options.xMargin + options.xMargin );
+    var backgroundHeight = Math.max( options.minHeight, this.textNode.height + options.yMargin + options.yMargin );
+    // @private
+    this.backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.cornerRadius, options.cornerRadius, {
       fill: options.backgroundFill,
       stroke: options.backgroundStroke
     } );
 
     // rendering order
-    this.addChild( backgroundNode );
-    this.addChild( textNode );
+    this.addChild( this.backgroundNode );
+    this.addChild( this.textNode );
 
-    // layout
-    textNode.centerX = backgroundNode.centerX;
-    textNode.centerY = backgroundNode.centerY;
+    this.setValue( value );
 
     // remove subtype-specific options before passing to supertype
     this.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
   }
 
-  return inherit( Node, NumberBackgroundNode );
+  return inherit( Node, NumberBackgroundNode, {
+
+    setValue: function( value ) {
+      this.textNode.text = Util.toFixed( value, this.decimalPlaces );
+      this.textNode.centerX = this.backgroundNode.centerX;
+      this.textNode.centerY = this.backgroundNode.centerY;
+    }
+  } );
 } );

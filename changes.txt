@@ -1,3 +1,5 @@
+5/19/14 SlopeEquationNode: mutate the interactive equation instead of using removeChild/addChild, to improve performance
+5/19/14 make NumberBackgroundNode and UndefinedSlopeIndicator mutable, to improve performance
 5/19/14 remove underscore prefix from private fields and functions, obsolete convention not followed consistently in this sim
 5/19/14 use sun.HStrut instead of scenery.Line in control panels
 5/19/14 copy and revise implementation.txt from Java implementation

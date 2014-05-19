@@ -6,11 +6,6 @@ HIGHEST
 - performance stinks on iPad
 
 HIGH
-- make manipulators bigger, or make them smaller with a 'halo'
-- add a tab on right side of point tool, so you can see values while moving on tablet
-- expand touchArea for "Hide lines" check box
-- large touchArea for spinners
-- dead zone between button and arrow in spinners, set mouseArea?
 - increase font size in interactive equations for all screens
 - add option to show 'best time' on vegas.LevelStartButton
 - consolidate equation fontSize and fontWeight in GLConstants
@@ -34,6 +29,13 @@ PERFORMANCE
 - put graph in its own layer, since it doesn't change
 - consider making Line mutable, to reduce affects of garbage collection
 - revisit *EquationNode subtypes to reduce size of constructor and minimize updates (or not... liable to destabilize)
+
+USABILITY
+- make manipulators bigger, or make them smaller with a 'halo'
+- add a tab on right side of point tool, so you can see values while moving on tablet
+- expand touchArea for "Hide lines" check box
+- large touchArea for spinners
+- dead zone between button and arrow in spinners, set mouseArea?
 
 MIGRATE TO COMMON
 

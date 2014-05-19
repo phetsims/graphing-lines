@@ -54,6 +54,7 @@ define( function( require ) {
     var TEXT_OPTIONS = { font: new PhetFont( 18 ) };
     var ICON_SIZE = 60;
     var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
+    hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );
     var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
       { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
     var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
@@ -64,7 +65,7 @@ define( function( require ) {
     // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
     var contentNode = new Node();
     var previousNode = slopeCheckBox;
-    var Y_SPACING = 15;
+    var Y_SPACING = 20;
     contentNode.addChild( slopeCheckBox );
     if ( options.includeStandardLines ) {
       contentNode.addChild( positiveCheckBox );

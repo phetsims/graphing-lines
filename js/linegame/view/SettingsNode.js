@@ -21,8 +21,9 @@ define( function( require ) {
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
+  var Util = require( 'DOT/Util' );
 
-  // images
+  // images, ordered by level
   var levelImages = [
     require( 'image!GRAPHING_LINES/Level_1.png' ),
     require( 'image!GRAPHING_LINES/Level_2.png' ),
@@ -69,7 +70,8 @@ define( function( require ) {
     var title = new Text( chooseYourGameLevelString, { font: new PhetFont( 40 ) } );
     this.addChild( title );
 
-    // Buttons for selecting a game level
+    // Level-selection buttons, arranged in 2 rows
+    assert && assert( Util.isInteger( model.numberOfLevels / 2 ) ); // assumes an even number of buttons
     var buttonsParent = new Node();
     this.addChild( buttonsParent );
     var button, previousButton;

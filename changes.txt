@@ -1,3 +1,4 @@
+5/19/14 remove _.omit experiment in NumberBackgroundNode
 5/19/14 SlopeEquationNode: mutate the interactive equation instead of using removeChild/addChild, to improve performance
 5/19/14 make NumberBackgroundNode and UndefinedSlopeIndicator mutable, to improve performance
 5/19/14 remove underscore prefix from private fields and functions, obsolete convention not followed consistently in this sim

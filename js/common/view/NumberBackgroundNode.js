@@ -23,7 +23,7 @@ define( function( require ) {
    */
   function NumberBackgroundNode( value, options ) {
 
-    var defaultOptions = {
+    options = _.extend( {
       decimalPlaces: 0,
       font: new PhetFont( 12 ),
       textFill: 'black',
@@ -34,18 +34,11 @@ define( function( require ) {
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 6
-    };
-    options = _.extend( defaultOptions, options );
-
-    Node.call( this );
+    }, options );
 
     this.decimalPlaces = options.decimalPlaces; // @private
 
-    // @private
-    this.textNode = new Text( '?', {
-      fill: options.textFill,
-      font: options.font
-    } );
+    this.textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
 
     var backgroundWidth = Math.max( options.minWidth, this.textNode.width + options.xMargin + options.xMargin );
     var backgroundHeight = Math.max( options.minHeight, this.textNode.height + options.yMargin + options.yMargin );
@@ -55,14 +48,10 @@ define( function( require ) {
       stroke: options.backgroundStroke
     } );
 
-    // rendering order
-    this.addChild( this.backgroundNode );
-    this.addChild( this.textNode );
+    options.children = [ this.backgroundNode, this.textNode ];
+    Node.call( this, options );
 
     this.setValue( value );
-
-    // remove subtype-specific options before passing to supertype
-    this.mutate( _.omit( options, Object.keys( defaultOptions ) ) );
   }
 
   return inherit( Node, NumberBackgroundNode, {

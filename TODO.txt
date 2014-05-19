@@ -13,7 +13,6 @@ USABILITY
 - add a tab on right side of point tool, so you can see values while moving on tablet
 
 HIGH
-- disable slope-tool icon when 'slope' check box is disabled
 - add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

@@ -1,5 +1,6 @@
 5/19/14 expand width of picker touch areas
 5/19/14 expand touchArea for "Hide lines" check box
+5/19/14 disable slope-tool icon when 'slope' check box is disabled
 5/19/14 add opacity as a fallback for showing enabled/disabled state of sun.CheckBox
 5/19/14 fix in ChallengeFactory2, incorrect use of RandomChooser.rangeToArray, was creating invalid lines and causing assertion failures
 5/19/14 tweak colors for level-selection buttons

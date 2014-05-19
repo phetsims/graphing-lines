@@ -14,7 +14,6 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelStartButton = require( 'VEGAS/LevelStartButton' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
@@ -54,7 +53,7 @@ define( function( require ) {
       },
       model.bestScoreProperties[ level ],
       model.getPerfectScore(),
-      { backgroundColor: 'rgb( 242, 255, 204 )', highlightedBackgroundColor: 'rgb( 224, 255, 122 )' } )
+      { backgroundColor: 'rgb( 242, 255, 204 )', highlightedBackgroundColor: 'rgb( 224, 255, 122 )' } );
   };
 
   /**

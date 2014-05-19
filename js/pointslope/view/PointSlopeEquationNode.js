@@ -55,8 +55,7 @@ define( function( require ) {
   function PointSlopeEquationNode( interactiveLineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty, options ) {
 
     options = _.extend( {
-      interactiveX1: true,
-      interactiveY1: true,
+      interactivePoint: true,
       interactiveSlope: true,
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
@@ -92,7 +91,7 @@ define( function( require ) {
     yLeftParenNode = new Text( "(", staticOptions );
     yNode = new Text( symbolYString, staticOptions );
     yOperatorNode = new Node(); // parent for + or - node
-    if ( options.interactiveY1 ) {
+    if ( options.interactivePoint ) {
       y1Node = new NumberPicker( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
@@ -114,7 +113,7 @@ define( function( require ) {
     xLeftParenNode = new Text( "(", staticOptions );
     xNode = new Text( symbolXString, staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
-    if ( options.interactiveX1 ) {
+    if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
     }
     else {
@@ -130,7 +129,7 @@ define( function( require ) {
      */
     var updateLayout = function( line ) {
 
-      var interactive = options.interactiveX1 || options.interactiveY1 || options.interactiveSlope;
+      var interactive = options.interactivePoint || options.interactiveSlope;
 
       // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
       thisNode.removeAllChildren();
@@ -150,7 +149,7 @@ define( function( require ) {
       }
 
       // Change the x operator to account for the signs of x1.
-      if ( options.interactiveX1 || line.x1 >= 0 ) {
+      if ( options.interactivePoint || line.x1 >= 0 ) {
         xOperatorNode.addChild( new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
       else {
@@ -158,14 +157,14 @@ define( function( require ) {
       }
 
       // Change the y operator to account for the signs of y1.
-      if ( options.interactiveY1 || line.y1 >= 0 ) {
+      if ( options.interactivePoint || line.y1 >= 0 ) {
         yOperatorNode.addChild( new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
       else {
         yOperatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
       }
 
-      if ( line.rise === 0 && !options.interactiveSlope && !options.interactiveX1 ) {
+      if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
         thisNode.addChild( yNode );
         thisNode.addChild( equalsNode );
@@ -173,7 +172,7 @@ define( function( require ) {
         yNode.x = 0;
         yNode.y = 0;
         equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
-        if ( options.interactiveY1 || line.y1 >= 0 ) {
+        if ( options.interactivePoint || line.y1 >= 0 ) {
           // y = y1
           y1Node.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           y1Node.y = yNode.y;
@@ -299,7 +298,7 @@ define( function( require ) {
         }
 
         // x term
-        if ( options.interactiveX1 || options.interactiveSlope || line.rise !== 0 ) {
+        if ( options.interactivePoint || options.interactiveSlope || line.rise !== 0 ) {
           // (x - x1)
           thisNode.addChild( xLeftParenNode );
           thisNode.addChild( xNode );
@@ -379,8 +378,7 @@ define( function( require ) {
       new Property( new Range( 0, 1 ) ),
       new Property( new Range( 0, 1 ) ),
       new Property( new Range( 0, 1 ) ), {
-        interactiveX1: false,
-        interactiveY1: false,
+        interactivePoint: false,
         interactiveSlope: false,
         fontSize: fontSize,
         staticColor: color

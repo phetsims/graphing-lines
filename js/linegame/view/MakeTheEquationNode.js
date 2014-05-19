@@ -158,8 +158,7 @@ define( function( require ) {
       interactivePoint = ( manipulationMode === ManipulationMode.POINT ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
       return new PointSlopeEquationNode( lineProperty, new Property( graph.xRange ), new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ), {
-        interactiveX1: interactivePoint,
-        interactiveY1: interactivePoint,
+        interactivePoint: interactivePoint,
         interactiveSlope: interactiveSlope,
         fontSize: fontSize,
         staticColor: staticColor } );

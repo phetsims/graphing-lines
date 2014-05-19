@@ -1,3 +1,4 @@
+5/19/14 copy and revise implementation.txt from Java implementation
 5/19/14 copy and revise model.txt from Java implementation
 5/19/14 remove distinction between font size for interactive vs static parts of equation
 5/19/14 increase xMargin for 'Save Line' and 'Erase Lines' buttons

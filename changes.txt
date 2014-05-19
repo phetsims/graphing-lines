@@ -1,3 +1,4 @@
+5/19/14 add opacity as a fallback for showing enabled/disabled state of sun.CheckBox
 5/19/14 fix in ChallengeFactory2, incorrect use of RandomChooser.rangeToArray, was creating invalid lines and causing assertion failures
 5/19/14 tweak colors for level-selection buttons
 5/19/14 increase size of timer and sound toggle buttons

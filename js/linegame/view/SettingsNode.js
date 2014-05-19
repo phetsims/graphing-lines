@@ -93,9 +93,10 @@ define( function( require ) {
     }
 
     // Timer and Sound controls
-    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, { stroke: 'gray', scale: 1.3 } );
+    var toggleOptions = { stroke: 'gray', scale: 1.3 };
+    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, toggleOptions );
     this.addChild( timerToggleButton );
-    var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, { stroke: 'gray', scale: 1.3 } );
+    var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, toggleOptions );
     this.addChild( soundToggleButton );
 
     // Reset All button

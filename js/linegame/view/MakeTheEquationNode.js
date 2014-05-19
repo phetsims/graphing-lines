@@ -16,6 +16,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
@@ -60,7 +61,7 @@ define( function( require ) {
     var guessBoxNode =
       new EquationBoxNode( yourEquationString, challenge.guess.color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-          LineGameConstants.INTERACTIVE_EQUATION_FONT_SIZE, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.guess.color ) );
+          GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guess.color ) );
 
     // Graph
     var graphNode = new AnswerGraphNode( challenge );

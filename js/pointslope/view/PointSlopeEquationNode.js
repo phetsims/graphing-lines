@@ -17,6 +17,7 @@ define( function( require ) {
   // imports
   var DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -57,8 +58,8 @@ define( function( require ) {
       interactiveX1: true,
       interactiveY1: true,
       interactiveSlope: true,
-      interactiveFontSize: 28,
-      staticFontSize: 28,
+      interactiveFontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
+      staticFontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
 

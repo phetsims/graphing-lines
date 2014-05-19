@@ -6,7 +6,6 @@ HIGHEST
 - performance stinks on iPad
 
 HIGH
-- increase font size in interactive equations for all screens
 - add option to show 'best time' on vegas.LevelStartButton
 - consolidate equation fontSize and fontWeight in GLConstants
 - address lots of TODO items in the code

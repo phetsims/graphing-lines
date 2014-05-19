@@ -117,7 +117,7 @@ define( function( require ) {
     lineProperty.link( function( line ) {
       // slope tool can be invisible, update only if visible
       if ( thisNode.visible ) {
-        thisNode._update( line, mvt );
+        thisNode.update( line, mvt );
       }
     } );
   }
@@ -131,12 +131,13 @@ define( function( require ) {
      */
     setVisible: function( visible ) {
       if ( visible && !this.visible ) {
-        this._update( this.lineProperty.get(), this.mvt );
+        this.update( this.lineProperty.get(), this.mvt );
       }
       Node.prototype.setVisible.call( this, visible );
     },
 
-    _update: function( line, mvt ) {
+    // @private
+    update: function( line, mvt ) {
 
       this.removeAllChildren();
 

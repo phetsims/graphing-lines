@@ -84,16 +84,16 @@ define( function( require ) {
     // double-headed arrow
     this.tailLocation = mvt.modelToViewPosition( new Vector2( tailX, tailY ) );
     this.tipLocation = mvt.modelToViewPosition( new Vector2( tipX, tipY ) );
-    this._arrowNode = new ArrowNode( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y,
+    this.arrowNode = new ArrowNode( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y,
       { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, fill: line.color, stroke: null } );
-    this.addChild( this._arrowNode );
+    this.addChild( this.arrowNode );
 
     // equation
-    this._equationParentNode = new Node(); // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
-    this.addChild( this._equationParentNode );
-    this._equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
-    this._equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
-    this._equationParentNode.addChild( this._equationNode );
+    this.equationParentNode = new Node(); // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
+    this.addChild( this.equationParentNode );
+    this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
+    this.equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
+    this.equationParentNode.addChild( this.equationNode );
 
     // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
     var X_OFFSET = 30;
@@ -101,42 +101,42 @@ define( function( require ) {
     if ( line.undefinedSlope() ) {
       // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
       if ( line.rise < 0 ) {
-        this._equationParentNode.translation = this.tipLocation;
-        this._equationNode.right = -X_OFFSET;
-        this._equationNode.bottom = -Y_OFFSET;
+        this.equationParentNode.translation = this.tipLocation;
+        this.equationNode.right = -X_OFFSET;
+        this.equationNode.bottom = -Y_OFFSET;
       }
       else {
-        this._equationParentNode.translation = this.tailLocation;
-        this._equationNode.left = X_OFFSET;
-        this._equationNode.bottom = -Y_OFFSET;
+        this.equationParentNode.translation = this.tailLocation;
+        this.equationNode.left = X_OFFSET;
+        this.equationNode.bottom = -Y_OFFSET;
       }
     }
     else if ( line.rise <= 0 ) {
       if ( line.run >= 0 ) {
         // equation above the line, at tip
-        this._equationParentNode.translation = this.tipLocation;
-        this._equationNode.right = -X_OFFSET;
-        this._equationNode.bottom = -Y_OFFSET;
+        this.equationParentNode.translation = this.tipLocation;
+        this.equationNode.right = -X_OFFSET;
+        this.equationNode.bottom = -Y_OFFSET;
       }
       else {
         // equation above the line, at tail
-        this._equationParentNode.translation = this.tailLocation;
-        this._equationNode.left = X_OFFSET;
-        this._equationNode.bottom = -Y_OFFSET;
+        this.equationParentNode.translation = this.tailLocation;
+        this.equationNode.left = X_OFFSET;
+        this.equationNode.bottom = -Y_OFFSET;
       }
     }
     else {
       if ( line.run > 0 ) {
         // equation below the line, at tip
-        this._equationParentNode.translation = this.tipLocation;
-        this._equationNode.right = -X_OFFSET;
-        this._equationNode.bottom = this._equationNode.height + Y_OFFSET;
+        this.equationParentNode.translation = this.tipLocation;
+        this.equationNode.right = -X_OFFSET;
+        this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
       }
       else {
         // equation below the line, at tail
-        this._equationParentNode.translation = this.tailLocation;
-        this._equationNode.left = X_OFFSET;
-        this._equationNode.bottom = this._equationNode.height + Y_OFFSET;
+        this.equationParentNode.translation = this.tailLocation;
+        this.equationNode.left = X_OFFSET;
+        this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
       }
     }
   }
@@ -152,7 +152,7 @@ define( function( require ) {
     },
 
     setEquationVisible: function( visible ) {
-      this._equationParentNode.visible = visible;
+      this.equationParentNode.visible = visible;
     }
   } );
 } );

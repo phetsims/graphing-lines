@@ -150,8 +150,8 @@ define( function( require ) {
     this._valueNode = valueNode;
 
     // initial state
-    this._setCoordinatesVector2( pointTool.location );
-    this._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
+    this.setCoordinatesVector2( pointTool.location );
+    this.setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
 
     // location and display
     var update = function() {
@@ -162,21 +162,21 @@ define( function( require ) {
 
       // display value and highlighting
       if ( graph.contains( location ) ) {
-        thisNode._setCoordinatesVector2( location );
+        thisNode.setCoordinatesVector2( location );
         if ( linesVisibleProperty.get() ) {
           // use the line's color to highlight
-          thisNode._setForeground( !pointTool.onLine ? GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR : GLColors.POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR );
-          thisNode._setBackground( !pointTool.onLine ? GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
+          thisNode.setForeground( !pointTool.onLine ? GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR : GLColors.POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR );
+          thisNode.setBackground( !pointTool.onLine ? GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
         }
         else {
-          thisNode._setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
-          thisNode._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
+          thisNode.setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
+          thisNode.setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
         }
       }
       else {
-        thisNode._setCoordinatesString( pointUnknownString );
-        thisNode._setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
-        thisNode._setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
+        thisNode.setCoordinatesString( pointUnknownString );
+        thisNode.setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
+        thisNode.setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
       }
     };
     pointTool.locationProperty.link( update.bind( thisNode ) );
@@ -192,24 +192,24 @@ define( function( require ) {
 
   return inherit( Node, PointToolNode, {
 
-    // Sets the displayed value to a point
-    _setCoordinatesVector2: function( p ) {
-      this._setCoordinatesString( StringUtils.format( pointXYString, Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
+    // @private Sets the displayed value to a point
+    setCoordinatesVector2: function( p ) {
+      this.setCoordinatesString( StringUtils.format( pointXYString, Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
     },
 
-    // Sets the displayed value to an arbitrary string
-    _setCoordinatesString: function( s ) {
+    // @private Sets the displayed value to an arbitrary string
+    setCoordinatesString: function( s ) {
       this._valueNode.text = s;
       this._valueNode.centerX = this._bodyNode.centerX;  // horizontally centered
     },
 
-    // Sets the foreground, the color of the displayed value
-    _setForeground: function( color ) {
+    // @private Sets the foreground, the color of the displayed value
+    setForeground: function( color ) {
       this._valueNode.fill = color;
     },
 
-    // Sets the background, the color of the display area behind the value
-    _setBackground: function( color ) {
+    // @private Sets the background, the color of the display area behind the value
+    setBackground: function( color ) {
       this._backgroundNode.fill = color;
     }
   } );

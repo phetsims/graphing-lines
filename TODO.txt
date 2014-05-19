@@ -2,6 +2,9 @@ TODO list for graphing-lines (HTML5 port)
 
 DESIGN
 
+HIGHEST
+- performance stinks on iPad
+
 HIGH
 - make manipulators bigger, or make them smaller with a 'halo'
 - add a tab on right side of point tool, so you can see values while moving on tablet
@@ -11,7 +14,6 @@ HIGH
 - increase x-margins for 'Save Lines' and 'Erase Lines' buttons (increase default x-margin in sun?)
 - increase font size in interactive equations for all screens
 - add option to show 'best time' on vegas.LevelStartButton
-- performance stinks on iPad
 - consolidate equation fontSize and fontWeight in GLConstants
 - address lots of TODO items in the code
 

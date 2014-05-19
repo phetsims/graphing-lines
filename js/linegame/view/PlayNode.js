@@ -1,4 +1,4 @@
-// Copyright 2002-2013, University of Colorado Boulder
+// Copyright 2002-2014, University of Colorado Boulder
 
 /**
  * Portion of the scenegraph that corresponds to the "play" game phase. (See GamePhase.PLAY)

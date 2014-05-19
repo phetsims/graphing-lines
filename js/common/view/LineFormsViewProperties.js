@@ -1,4 +1,4 @@
-// Copyright 2002-2013, University of Colorado Boulder
+// Copyright 2002-2014, University of Colorado Boulder
 
 /**
  * Properties that are specific to the view for the "Slope", "Slope-Intercept" and "Point-Slope" tabs.

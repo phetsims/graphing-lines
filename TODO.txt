@@ -6,12 +6,12 @@ HIGHEST
 - performance stinks on iPad
 
 HIGH
+- frequent exception in game level 2, "Uncaught RangeError: Maximum call stack size exceeded"
 - add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 
 MEDIUM
 - add bestScores {Array<Property{Number}>} to LineGameModel, for populating stars in LevelStartButtons
-- replace 'GameSettingsPanel' with vegas components (see BAA.StartGameLevelNode)
 - new icons on game level buttons
 - game reward, see build-an-atom#62
 

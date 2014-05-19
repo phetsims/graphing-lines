@@ -1,3 +1,4 @@
+5/19/14 replace vegas.GameSettingsPanel with custom node that uses vegas.LevelStartButton
 5/19/14 update copyright header in all source files
 5/19/14 PointSlopeEquationNode: replace options.interactiveX1 and options.interactiveY1 with options.interactivePoint
 5/19/14 remove _.omit experiment in NumberBackgroundNode

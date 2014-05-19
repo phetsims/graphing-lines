@@ -89,9 +89,11 @@ define( function( require ) {
     thisModel.timer = new GameTimer();
     thisModel.numberOfLevels = factories.length;
     thisModel.maxPointsPerChallenge = 2;
+    thisModel.bestScoreProperties = []; //TODO populate property value when a game is completed
     thisModel.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
-    thisModel.bestTimes = []; // best times for each level, in ms
+    thisModel.bestTimes = []; // best times for each level, in ms  //TODO make these properties, for display on buttons?
     for ( var level = 0; level < thisModel.numberOfLevels; level++ ) {
+      thisModel.bestScoreProperties.push( new Property( 0 ) );
       thisModel.bestTimes.push( null ); // null if a level has no best time yet
     }
 

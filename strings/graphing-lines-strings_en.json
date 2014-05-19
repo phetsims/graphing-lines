@@ -28,5 +28,6 @@
   "point.xy": "({0}, {1})",
   "point.unknown": "( ?, ? )",
   "slopeIs": "Slope is",
-  "pointsAwarded": "+{0}"
+  "pointsAwarded": "+{0}",
+  "chooseYourGameLevel": "Choose Your Game Level"
 }

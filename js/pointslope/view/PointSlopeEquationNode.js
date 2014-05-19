@@ -92,7 +92,8 @@ define( function( require ) {
     yNode = new Text( symbolYString, staticOptions );
     yOperatorNode = new Node(); // parent for + or - node
     if ( options.interactivePoint ) {
-      y1Node = new NumberPicker( y1Property, y1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
+      y1Node = new NumberPicker( y1Property, y1RangeProperty,
+        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: 30 } );
     }
     else {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -114,7 +115,8 @@ define( function( require ) {
     xNode = new Text( symbolXString, staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
     if ( options.interactivePoint ) {
-      x1Node = new NumberPicker( x1Property, x1RangeProperty, { color: GLColors.POINT_X1_Y1, font: interactiveFont } );
+      x1Node = new NumberPicker( x1Property, x1RangeProperty,
+        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
     }
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );

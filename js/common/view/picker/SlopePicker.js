@@ -11,6 +11,7 @@ define( function( require ) {
 
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
@@ -24,7 +25,8 @@ define( function( require ) {
   function SlopePicker( variableComponent, fixedComponent, variableRange, options ) {
 
     options = _.extend( {
-       color: GLColors.SLOPE
+      color: GLColors.SLOPE,
+      touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X
     }, options );
 
     // "up" function, skips over undefined line condition (slope=0/0)

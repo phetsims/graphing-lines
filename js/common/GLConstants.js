@@ -18,6 +18,7 @@ define( function( require ) {
     LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ),
     X_AXIS_RANGE: new Range( -10, 10 ),
     Y_AXIS_RANGE: new Range( -10, 10 ),
-    INTERACTIVE_EQUATION_FONT_SIZE: 34
+    INTERACTIVE_EQUATION_FONT_SIZE: 34,
+    PICKER_TOUCH_AREA_EXPAND_X: 30
   };
 } );

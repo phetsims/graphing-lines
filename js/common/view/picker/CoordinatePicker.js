@@ -12,6 +12,7 @@ define( function( require ) {
 
   // imports
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var inherit = require( 'PHET_CORE/inherit' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
@@ -27,7 +28,8 @@ define( function( require ) {
   function CoordinatePicker( a1, b1, a2, b2, range, options ) {
 
     options = _.extend( {
-      color: GLColors.POINT_X1_Y1
+      color: GLColors.POINT_X1_Y1,
+      touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X
     }, options );
 
     // computes value when 'up' button is pressed

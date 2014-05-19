@@ -107,7 +107,8 @@ define( function( require ) {
     xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
-    yInterceptNode = new NumberPicker( yInterceptProperty, yInterceptRangeProperty, { color: GLColors.INTERCEPT, font: interactiveFont } );
+    yInterceptNode = new NumberPicker( yInterceptProperty, yInterceptRangeProperty,
+      { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptFractionLineNode = new LineNode( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );

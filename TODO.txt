@@ -13,7 +13,7 @@ USABILITY
 - add a tab on right side of point tool, so you can see values while moving on tablet
 
 HIGH
-- add option to show 'best time' on vegas.LevelStartButton
+- vegas#7, add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 
 MEDIUM

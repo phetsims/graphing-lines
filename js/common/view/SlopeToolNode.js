@@ -20,6 +20,7 @@ define( function( require ) {
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   var Path = require( 'SCENERY/nodes/Path' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -110,11 +111,33 @@ define( function( require ) {
    * @constructor
    */
   function SlopeToolNode( lineProperty, mvt ) {
+
     var thisNode = this;
+    Node.call( this );
+
     thisNode.lineProperty = lineProperty;
     thisNode.mvt = mvt;
-    Node.call( this, { pickable: false } );
+
+    // Rise and run values
+    var numberOptions = {
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      decimalPlaces: 0,
+      textFill: Color.BLACK,
+      backgroundFill: GLColors.SLOPE,
+      xMargin: 6,
+      yMargin: 6,
+      cornerRadius: 5
+    };
+    var riseProperty = new Property( lineProperty.get().rise );
+    var runProperty = new Property( lineProperty.get().run );
+    thisNode.riseValueNode = new NumberBackgroundNode( riseProperty, numberOptions ); // @private
+    thisNode.runValueNode = new NumberBackgroundNode( runProperty, numberOptions ); // @private
+
     lineProperty.link( function( line ) {
+
+      riseProperty.set( lineProperty.get().rise );
+      runProperty.set( lineProperty.get().run );
+
       // slope tool can be invisible, update only if visible
       if ( thisNode.visible ) {
         thisNode.update( line, mvt );
@@ -152,21 +175,10 @@ define( function( require ) {
       var p1View = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       var p2View = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
 
-      var numberOptions = {
-        font: new PhetFont( { size: 16, weight: 'bold' } ),
-        decimalPlaces: 0,
-        textFill: Color.BLACK,
-        backgroundFill: GLColors.SLOPE,
-        xMargin: 6,
-        yMargin: 6,
-        cornerRadius: 5
-      };
-
       // rise
       var offsetFactor = 0.6;
       var delimiterLengthFactor = 0.5;
       var riseLineNode, riseTailDelimiterNode, riseTipDelimiterNode;
-      var riseValueNode = new NumberBackgroundNode( line.rise, numberOptions );
       var xOffset = offsetFactor * gridXSpacing;
       var riseDelimiterLength = delimiterLengthFactor * gridXSpacing;
       var tipFudgeY = ( line.rise > 0 ) ? LINE_WIDTH : -LINE_WIDTH;
@@ -175,22 +187,21 @@ define( function( require ) {
         // value to left of line
         arrowX = p1View.x - xOffset;
         riseLineNode = new ArrowNode( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
-        riseValueNode.right = riseLineNode.left - VALUE_X_SPACING;
-        riseValueNode.centerY = riseLineNode.centerY;
+        this.riseValueNode.right = riseLineNode.left - VALUE_X_SPACING;
+        this.riseValueNode.centerY = riseLineNode.centerY;
       }
       else {
         // value to right of line
         arrowX = p1View.x + xOffset;
         riseLineNode = new ArrowNode( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
-        riseValueNode.left = riseLineNode.right + VALUE_X_SPACING;
-        riseValueNode.centerY = riseLineNode.centerY;
+        this.riseValueNode.left = riseLineNode.right + VALUE_X_SPACING;
+        this.riseValueNode.centerY = riseLineNode.centerY;
       }
       riseTailDelimiterNode = new DimensionalDelimiterNode( arrowX - ( riseDelimiterLength / 2 ), p1View.y, arrowX + ( riseDelimiterLength / 2 ), p1View.y );
       riseTipDelimiterNode = new DimensionalDelimiterNode( arrowX - ( riseDelimiterLength / 2 ), p2View.y, arrowX + ( riseDelimiterLength / 2 ), p2View.y );
 
       // run
-      var runLineNode, runTailDelimiterNode, runTipDelimiterNode, runValueNode;
-      runValueNode = new NumberBackgroundNode( line.run, numberOptions );
+      var runLineNode, runTailDelimiterNode, runTipDelimiterNode;
       var yOffset = offsetFactor * gridYSpacing;
       var runDelimiterLength = delimiterLengthFactor * gridYSpacing;
       var tipFudgeX = ( line.run > 0 ) ? -1 : 1;
@@ -199,15 +210,15 @@ define( function( require ) {
         // value above line
         arrowY = p2View.y + yOffset;
         runLineNode = new ArrowNode( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
-        runValueNode.centerX = runLineNode.centerX;
-        runValueNode.bottom = runLineNode.top - VALUE_Y_SPACING;
+        this.runValueNode.centerX = runLineNode.centerX;
+        this.runValueNode.bottom = runLineNode.top - VALUE_Y_SPACING;
       }
       else {
         // value below line
         arrowY = p2View.y - yOffset;
         runLineNode = new ArrowNode( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
-        runValueNode.centerX = runLineNode.centerX;
-        runValueNode.top = runLineNode.bottom + VALUE_Y_SPACING;
+        this.runValueNode.centerX = runLineNode.centerX;
+        this.runValueNode.top = runLineNode.bottom + VALUE_Y_SPACING;
       }
       runTailDelimiterNode = new DimensionalDelimiterNode( p1View.x, arrowY - ( runDelimiterLength / 2 ), p1View.x, arrowY + ( runDelimiterLength / 2 ) );
       runTipDelimiterNode = new DimensionalDelimiterNode( p2View.x, arrowY - ( runDelimiterLength / 2 ), p2View.x, arrowY + ( runDelimiterLength / 2 ) );
@@ -219,8 +230,8 @@ define( function( require ) {
       this.addChild( runTailDelimiterNode );
       this.addChild( runTipDelimiterNode );
       this.addChild( runLineNode );
-      this.addChild( riseValueNode );
-      this.addChild( runValueNode );
+      this.addChild( this.riseValueNode );
+      this.addChild( this.runValueNode );
     }
   } );
 } );

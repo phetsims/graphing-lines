@@ -17,11 +17,11 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   /**
-   * @param {Number} value
+   * @param {Property<Number>} valueProperty
    * @param options
    * @constructor
    */
-  function NumberBackgroundNode( value, options ) {
+  function NumberBackgroundNode( valueProperty, options ) {
 
     options = _.extend( {
       decimalPlaces: 0,
@@ -36,30 +36,27 @@ define( function( require ) {
       cornerRadius: 6
     }, options );
 
-    this.decimalPlaces = options.decimalPlaces; // @private
-
-    this.textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
-
-    var backgroundWidth = Math.max( options.minWidth, this.textNode.width + options.xMargin + options.xMargin );
-    var backgroundHeight = Math.max( options.minHeight, this.textNode.height + options.yMargin + options.yMargin );
-    // @private
-    this.backgroundNode = new Rectangle( 0, 0, backgroundWidth, backgroundHeight, options.cornerRadius, options.cornerRadius, {
-      fill: options.backgroundFill,
-      stroke: options.backgroundStroke
-    } );
-
-    options.children = [ this.backgroundNode, this.textNode ];
+    // text and background
+    var textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
+    var backgroundNode = new Rectangle( 0, 0, 1, 1, { fill: options.backgroundFill, stroke: options.backgroundStroke } ); // @private
+    options.children = [ backgroundNode, textNode ];
     Node.call( this, options );
 
-    this.setValue( value );
+    valueProperty.link( function( value ) {
+
+      // format the value
+      textNode.text = Util.toFixed( value, options.decimalPlaces );
+
+      // adjust the background to fit the value
+      var backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
+      var backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
+      backgroundNode.setRect( 0, 0, backgroundWidth, backgroundHeight, options.cornerRadius, options.cornerRadius );
+
+      // center the value in the background
+      textNode.centerX = backgroundNode.centerX;
+      textNode.centerY = backgroundNode.centerY;
+    } );
   }
 
-  return inherit( Node, NumberBackgroundNode, {
-
-    setValue: function( value ) {
-      this.textNode.text = Util.toFixed( value, this.decimalPlaces );
-      this.textNode.centerX = this.backgroundNode.centerX;
-      this.textNode.centerY = this.backgroundNode.centerY;
-    }
-  } );
+  return inherit( Node, NumberBackgroundNode );
 } );

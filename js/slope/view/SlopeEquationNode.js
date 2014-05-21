@@ -68,6 +68,10 @@ define( function( require ) {
     var x2Property = new Property( interactiveLineProperty.get().x2 );
     var y2Property = new Property( interactiveLineProperty.get().y2 );
 
+    // internal properties that are connected to number displays
+    var riseProperty = new Property( interactiveLineProperty.get().rise );
+    var runProperty = new Property( interactiveLineProperty.get().run );
+
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
 
@@ -94,8 +98,8 @@ define( function( require ) {
       minHeight: y2Node.height - 20
     };
     var unsimplifiedEqualsNode = new Text( "=", staticOptions );
-    var unsimplifiedRiseNode = new NumberBackgroundNode( interactiveLineProperty.get().rise, unsimplifiedSlopeOptions );
-    var unsimplifiedRunNode = new NumberBackgroundNode( interactiveLineProperty.get().run, unsimplifiedSlopeOptions );
+    var unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
+    var unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
     var unsimplifiedFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
     var undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
@@ -194,8 +198,8 @@ define( function( require ) {
 
       // Update the unsimplified slope
       {
-        unsimplifiedRiseNode.setValue( line.rise );
-        unsimplifiedRunNode.setValue( line.run );
+        riseProperty.set( line.rise );
+        runProperty.set( line.run );
 
         // fraction line length
         var unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );

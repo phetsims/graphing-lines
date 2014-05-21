@@ -29,7 +29,7 @@ define( function( require ) {
 
     options = _.extend( {
       stroke: 'black',
-      lineWidth: 1.25,
+      lineWidth: 1,
       arrowTipSize: new Dimension2( 6, 8 ), // use even-number dimensions, or tip will look asymmetrical due to rounding
       delimiterLength: 10
     }, options );

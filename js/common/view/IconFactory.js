@@ -49,7 +49,7 @@ define( function( require ) {
       return parentNode;
     },
 
-    // Creates an icon for a line between 2 points on a grid with fixed dimensions.
+    // Creates an icon that shows a line on a graph.
     createGraphIcon: function( width, color, x1, y1, x2, y2 ) {
       var axisRange = new Range( -3, 3 );
       var graph = new Graph( axisRange, axisRange );

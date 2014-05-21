@@ -44,51 +44,63 @@ define( function( require ) {
   //----------------------------------------------------------------------------------------
 
   function ArrowNode( tailX, tailY, tipX, tipY ) {
-
-    Node.call( this );
-
-    var lineNode = new Line( tailX, tailY, tipX, tipY, { lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );
-    this.addChild( lineNode );
-
-    var tipShape = new Shape();
-    if ( tailX === tipX ) {
-      // vertical arrow
-      if ( tipY > tailY ) {
-        // pointing down
-        tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
-        tipShape.lineTo( tipX, tipY );
-        tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
-      }
-      else {
-        // pointing up
-        tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
-        tipShape.lineTo( tipX, tipY );
-        tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
-      }
-    }
-    else if ( tailY === tipY ) {
-      // horizontal arrow
-      if ( tailX > tipX ) {
-        // pointing left
-        tipShape.moveTo( tipX + ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
-        tipShape.lineTo( tipX, tipY );
-        tipShape.lineTo( tipX + ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
-      }
-      else {
-        // pointing right
-        tipShape.moveTo( tipX - ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
-        tipShape.lineTo( tipX, tipY );
-        tipShape.lineTo( tipX - ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
-      }
-    }
-    else {
-      throw new Error( "this implementation supports only horizontal and vertical arrows" );
-    }
-    var tipNode = new Path( tipShape, { lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );
-    this.addChild( tipNode );
+    this.lineNode = new Line( 0, 0, 0, 1, { lineWidth: LINE_WIDTH, stroke: LINE_COLOR } );  // @private
+    this.tipNode = new Path( null, { lineWidth: LINE_WIDTH, stroke: LINE_COLOR } ); // @private
+    Node.call( this, { children: [ this.lineNode, this.tipNode ] } );
+    this.setTailAndTip( tailX, tailY, tipX, tipY );
   }
 
-  inherit( Node, ArrowNode );
+  inherit( Node, ArrowNode, {
+
+      /**
+       * Sets the tail and tip of the arrow.
+       * @param {Number} tailX
+       * @param {Number} tailY
+       * @param {Number} tipX
+       * @param {Number} tipY
+       */
+      setTailAndTip: function( tailX, tailY, tipX, tipY ) {
+
+        this.lineNode.setLine( tailX, tailY, tipX, tipY );
+
+        var tipShape = new Shape();
+        if ( tailX === tipX ) {
+          // vertical arrow
+          if ( tipY > tailY ) {
+            // pointing down
+            tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
+            tipShape.lineTo( tipX, tipY );
+            tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
+          }
+          else {
+            // pointing up
+            tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
+            tipShape.lineTo( tipX, tipY );
+            tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
+          }
+        }
+        else if ( tailY === tipY ) {
+          // horizontal arrow
+          if ( tailX > tipX ) {
+            // pointing left
+            tipShape.moveTo( tipX + ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
+            tipShape.lineTo( tipX, tipY );
+            tipShape.lineTo( tipX + ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
+          }
+          else {
+            // pointing right
+            tipShape.moveTo( tipX - ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
+            tipShape.lineTo( tipX, tipY );
+            tipShape.lineTo( tipX - ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
+          }
+        }
+        else {
+          throw new Error( "this implementation supports only horizontal and vertical arrows" );
+        }
+        this.tipNode.shape = tipShape;
+      }
+    }
+  );
 
   //----------------------------------------------------------------------------------------
 
@@ -119,6 +131,10 @@ define( function( require ) {
     var runProperty = new Property( lineProperty.get().run );
     thisNode.riseValueNode = new NumberBackgroundNode( riseProperty, numberOptions ); // @private
     thisNode.runValueNode = new NumberBackgroundNode( runProperty, numberOptions ); // @private
+
+    // Arrows
+    this.riseArrowNode = new ArrowNode( 0, 0, 0, 50 ); // @private
+    this.runArrowNode = new ArrowNode( 0, 0, 0, 50 ); // @private
 
     // Delimiter lines, like those on the ends of a length line in a dimensional drawing.
     var delimiterOptions = { stroke: LINE_COLOR, lineWidth: LINE_WIDTH };
@@ -173,7 +189,6 @@ define( function( require ) {
       // rise
       var offsetFactor = 0.6;
       var delimiterLengthFactor = 0.5;
-      var riseLineNode, riseTailDelimiterNode, riseTipDelimiterNode;
       var xOffset = offsetFactor * gridXSpacing;
       var riseDelimiterLength = delimiterLengthFactor * gridXSpacing;
       var tipFudgeY = ( line.rise > 0 ) ? LINE_WIDTH : -LINE_WIDTH;
@@ -181,22 +196,21 @@ define( function( require ) {
       if ( line.run > 0 ) {
         // value to left of line
         arrowX = p1View.x - xOffset;
-        riseLineNode = new ArrowNode( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
-        this.riseValueNode.right = riseLineNode.left - VALUE_X_SPACING;
-        this.riseValueNode.centerY = riseLineNode.centerY;
+        this.riseArrowNode.setTailAndTip( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
+        this.riseValueNode.right = this.riseArrowNode.left - VALUE_X_SPACING;
+        this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
       else {
         // value to right of line
         arrowX = p1View.x + xOffset;
-        riseLineNode = new ArrowNode( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
-        this.riseValueNode.left = riseLineNode.right + VALUE_X_SPACING;
-        this.riseValueNode.centerY = riseLineNode.centerY;
+        this.riseArrowNode.setTailAndTip( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
+        this.riseValueNode.left = this.riseArrowNode.right + VALUE_X_SPACING;
+        this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
       this.riseTailDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), p1View.y, arrowX + ( riseDelimiterLength / 2 ), p1View.y );
       this.riseTipDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), p2View.y, arrowX + ( riseDelimiterLength / 2 ), p2View.y );
 
       // run
-      var runLineNode, runTailDelimiterNode, runTipDelimiterNode;
       var yOffset = offsetFactor * gridYSpacing;
       var runDelimiterLength = delimiterLengthFactor * gridYSpacing;
       var tipFudgeX = ( line.run > 0 ) ? -1 : 1;
@@ -204,16 +218,16 @@ define( function( require ) {
       if ( line.rise > 0 ) {
         // value above line
         arrowY = p2View.y + yOffset;
-        runLineNode = new ArrowNode( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
-        this.runValueNode.centerX = runLineNode.centerX;
-        this.runValueNode.bottom = runLineNode.top - VALUE_Y_SPACING;
+        this.runArrowNode.setTailAndTip( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
+        this.runValueNode.centerX = this.runArrowNode.centerX;
+        this.runValueNode.bottom = this.runArrowNode.top - VALUE_Y_SPACING;
       }
       else {
         // value below line
         arrowY = p2View.y - yOffset;
-        runLineNode = new ArrowNode( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
-        this.runValueNode.centerX = runLineNode.centerX;
-        this.runValueNode.top = runLineNode.bottom + VALUE_Y_SPACING;
+        this.runArrowNode.setTailAndTip( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
+        this.runValueNode.centerX = this.runArrowNode.centerX;
+        this.runValueNode.top = this.runArrowNode.bottom + VALUE_Y_SPACING;
       }
       this.runTailDelimiterNode.setLine( p1View.x, arrowY - ( runDelimiterLength / 2 ), p1View.x, arrowY + ( runDelimiterLength / 2 ) );
       this.runTipDelimiterNode.setLine( p2View.x, arrowY - ( runDelimiterLength / 2 ), p2View.x, arrowY + ( runDelimiterLength / 2 ) );
@@ -221,10 +235,10 @@ define( function( require ) {
       // rendering order
       this.addChild( this.riseTailDelimiterNode );
       this.addChild( this.riseTipDelimiterNode );
-      this.addChild( riseLineNode );
+      this.addChild( this.riseArrowNode );
       this.addChild( this.runTailDelimiterNode );
       this.addChild( this.runTipDelimiterNode );
-      this.addChild( runLineNode );
+      this.addChild( this.runArrowNode );
       this.addChild( this.riseValueNode );
       this.addChild( this.runValueNode );
     }

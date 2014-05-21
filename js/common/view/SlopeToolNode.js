@@ -52,55 +52,54 @@ define( function( require ) {
 
   inherit( Node, ArrowNode, {
 
-      /**
-       * Sets the tail and tip of the arrow.
-       * @param {Number} tailX
-       * @param {Number} tailY
-       * @param {Number} tipX
-       * @param {Number} tipY
-       */
-      setTailAndTip: function( tailX, tailY, tipX, tipY ) {
+    /**
+     * Sets the tail and tip of the arrow.
+     * @param {Number} tailX
+     * @param {Number} tailY
+     * @param {Number} tipX
+     * @param {Number} tipY
+     */
+    setTailAndTip: function( tailX, tailY, tipX, tipY ) {
 
-        this.lineNode.setLine( tailX, tailY, tipX, tipY );
+      this.lineNode.setLine( tailX, tailY, tipX, tipY );
 
-        var tipShape = new Shape();
-        if ( tailX === tipX ) {
-          // vertical arrow
-          if ( tipY > tailY ) {
-            // pointing down
-            tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
-            tipShape.lineTo( tipX, tipY );
-            tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
-          }
-          else {
-            // pointing up
-            tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
-            tipShape.lineTo( tipX, tipY );
-            tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
-          }
-        }
-        else if ( tailY === tipY ) {
-          // horizontal arrow
-          if ( tailX > tipX ) {
-            // pointing left
-            tipShape.moveTo( tipX + ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
-            tipShape.lineTo( tipX, tipY );
-            tipShape.lineTo( tipX + ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
-          }
-          else {
-            // pointing right
-            tipShape.moveTo( tipX - ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
-            tipShape.lineTo( tipX, tipY );
-            tipShape.lineTo( tipX - ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
-          }
+      var tipShape = new Shape();
+      if ( tailX === tipX ) {
+        // vertical arrow
+        if ( tipY > tailY ) {
+          // pointing down
+          tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
+          tipShape.lineTo( tipX, tipY );
+          tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY - ARROW_TIP_SIZE.height );
         }
         else {
-          throw new Error( "this implementation supports only horizontal and vertical arrows" );
+          // pointing up
+          tipShape.moveTo( tipX - ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
+          tipShape.lineTo( tipX, tipY );
+          tipShape.lineTo( tipX + ( ARROW_TIP_SIZE.width / 2 ), tipY + ARROW_TIP_SIZE.height );
         }
-        this.tipNode.shape = tipShape;
       }
+      else if ( tailY === tipY ) {
+        // horizontal arrow
+        if ( tailX > tipX ) {
+          // pointing left
+          tipShape.moveTo( tipX + ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
+          tipShape.lineTo( tipX, tipY );
+          tipShape.lineTo( tipX + ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
+        }
+        else {
+          // pointing right
+          tipShape.moveTo( tipX - ARROW_TIP_SIZE.height, tipY - ( ARROW_TIP_SIZE.width / 2 ) );
+          tipShape.lineTo( tipX, tipY );
+          tipShape.lineTo( tipX - ARROW_TIP_SIZE.height, tipY + ( ARROW_TIP_SIZE.width / 2 ) );
+        }
+      }
+      else {
+        throw new Error( "this implementation supports only horizontal and vertical arrows" );
+      }
+      this.tipNode.shape = tipShape;
     }
-  );
+  } );
 
   //----------------------------------------------------------------------------------------
 
@@ -243,4 +242,5 @@ define( function( require ) {
       this.addChild( this.runValueNode );
     }
   } );
-} );
+} )
+;

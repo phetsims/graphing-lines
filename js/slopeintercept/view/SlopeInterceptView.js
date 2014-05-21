@@ -9,11 +9,11 @@ define( function( require ) {
   'use strict';
 
   // imports
+  var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
   var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsView = require( 'GRAPHING_LINES/common/view/LineFormsView' );
   var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
-  var SlopeInterceptEquationControls = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationControls' );
   var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptGraphNode' );
 
   /**
@@ -24,7 +24,7 @@ define( function( require ) {
     var viewProperties = new LineFormsViewProperties();
     LineFormsView.call( this, model, viewProperties,
       new SlopeInterceptGraphNode( model, viewProperties ),
-      new SlopeInterceptEquationControls( model, viewProperties ),
+      EquationControls.createSlopeInterceptEquationControls( model, viewProperties ),
       new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, model.standardLines ) );
   }
 

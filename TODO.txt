@@ -6,7 +6,6 @@ PERFORMANCE
 - consider making Line mutable, to reduce affects of garbage collection
 - changing a line results in allocation of: Line, LineNode, EquationNode
 - EquationNode subtypes do lots of addChild/removeChild
-- SlopeToolNode does removeAllChildren when its line changes
 - LineNode could mutate its ArrowNode
 
 USABILITY

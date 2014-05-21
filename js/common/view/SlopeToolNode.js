@@ -22,7 +22,6 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var Shape = require( 'KITE/Shape' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   //----------------------------------------------------------------------------------------
   // constants
@@ -111,7 +110,6 @@ define( function( require ) {
   function SlopeToolNode( lineProperty, mvt ) {
 
     var thisNode = this;
-    Node.call( this );
 
     thisNode.lineProperty = lineProperty; // @private
     thisNode.mvt = mvt; // @private
@@ -132,15 +130,29 @@ define( function( require ) {
     thisNode.runValueNode = new NumberBackgroundNode( runProperty, numberOptions ); // @private
 
     // Arrows
-    this.riseArrowNode = new ArrowNode( 0, 0, 0, 50 ); // @private
-    this.runArrowNode = new ArrowNode( 0, 0, 0, 50 ); // @private
+    thisNode.riseArrowNode = new ArrowNode( 0, 0, 0, 50 ); // @private
+    thisNode.runArrowNode = new ArrowNode( 0, 0, 0, 50 ); // @private
 
     // Delimiter lines, like those on the ends of a length line in a dimensional drawing.
     var delimiterOptions = { stroke: LINE_COLOR, lineWidth: LINE_WIDTH };
-    this.riseTipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
-    this.riseTailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
-    this.runTipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
-    this.runTailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    thisNode.riseTipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    thisNode.riseTailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    thisNode.runTipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    thisNode.runTailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+
+    // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
+    thisNode.parentNode = new Node( { children: [
+      thisNode.riseTipDelimiterNode,
+      thisNode.riseTailDelimiterNode,
+      thisNode.riseArrowNode,
+      thisNode.riseValueNode,
+      thisNode.runTipDelimiterNode,
+      thisNode.runTailDelimiterNode,
+      thisNode.runArrowNode,
+      thisNode.runValueNode
+    ] } );
+
+    Node.call( thisNode, { children: [ thisNode.parentNode ] } );
 
     lineProperty.link( function( line ) {
 
@@ -172,18 +184,19 @@ define( function( require ) {
     // @private
     update: function( line, mvt ) {
 
-      this.removeAllChildren();
-
       // Show nothing for horizontal or vertical lines.
-      if ( line.rise === 0 || line.run === 0 ) {
+      this.parentNode.visible = ( line.rise !== 0 && line.run !== 0 );
+      if ( !this.parentNode.visible ) {
         return;
       }
 
       // view coordinates
       var gridXSpacing = mvt.modelToViewDeltaX( 1 );
       var gridYSpacing = mvt.modelToViewDeltaY( 1 );
-      var p1View = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-      var p2View = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+      var x1 = mvt.modelToViewX( line.x1 );
+      var y1 = mvt.modelToViewY( line.y1 );
+      var x2 = mvt.modelToViewX( line.x2 );
+      var y2 = mvt.modelToViewY( line.y2 );
 
       // rise
       var offsetFactor = 0.6;
@@ -194,20 +207,20 @@ define( function( require ) {
       var arrowX;
       if ( line.run > 0 ) {
         // value to left of line
-        arrowX = p1View.x - xOffset;
-        this.riseArrowNode.setTailAndTip( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
+        arrowX = x1 - xOffset;
+        this.riseArrowNode.setTailAndTip( arrowX, y1, arrowX, y2 + tipFudgeY );
         this.riseValueNode.right = this.riseArrowNode.left - VALUE_X_SPACING;
         this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
       else {
         // value to right of line
-        arrowX = p1View.x + xOffset;
-        this.riseArrowNode.setTailAndTip( arrowX, p1View.y, arrowX, p2View.y + tipFudgeY );
+        arrowX = x1 + xOffset;
+        this.riseArrowNode.setTailAndTip( arrowX, y1, arrowX, y2 + tipFudgeY );
         this.riseValueNode.left = this.riseArrowNode.right + VALUE_X_SPACING;
         this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
-      this.riseTailDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), p1View.y, arrowX + ( riseDelimiterLength / 2 ), p1View.y );
-      this.riseTipDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), p2View.y, arrowX + ( riseDelimiterLength / 2 ), p2View.y );
+      this.riseTailDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), y1, arrowX + ( riseDelimiterLength / 2 ), y1 );
+      this.riseTipDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), y2, arrowX + ( riseDelimiterLength / 2 ), y2 );
 
       // run
       var yOffset = offsetFactor * gridYSpacing;
@@ -216,30 +229,20 @@ define( function( require ) {
       var arrowY;
       if ( line.rise > 0 ) {
         // value above line
-        arrowY = p2View.y + yOffset;
-        this.runArrowNode.setTailAndTip( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
+        arrowY = y2 + yOffset;
+        this.runArrowNode.setTailAndTip( x1, arrowY, x2 + tipFudgeX, arrowY );
         this.runValueNode.centerX = this.runArrowNode.centerX;
         this.runValueNode.bottom = this.runArrowNode.top - VALUE_Y_SPACING;
       }
       else {
         // value below line
-        arrowY = p2View.y - yOffset;
-        this.runArrowNode.setTailAndTip( p1View.x, arrowY, p2View.x + tipFudgeX, arrowY );
+        arrowY = y2 - yOffset;
+        this.runArrowNode.setTailAndTip( x1, arrowY, x2 + tipFudgeX, arrowY );
         this.runValueNode.centerX = this.runArrowNode.centerX;
         this.runValueNode.top = this.runArrowNode.bottom + VALUE_Y_SPACING;
       }
-      this.runTailDelimiterNode.setLine( p1View.x, arrowY - ( runDelimiterLength / 2 ), p1View.x, arrowY + ( runDelimiterLength / 2 ) );
-      this.runTipDelimiterNode.setLine( p2View.x, arrowY - ( runDelimiterLength / 2 ), p2View.x, arrowY + ( runDelimiterLength / 2 ) );
-
-      // rendering order
-      this.addChild( this.riseTailDelimiterNode );
-      this.addChild( this.riseTipDelimiterNode );
-      this.addChild( this.riseArrowNode );
-      this.addChild( this.runTailDelimiterNode );
-      this.addChild( this.runTipDelimiterNode );
-      this.addChild( this.runArrowNode );
-      this.addChild( this.riseValueNode );
-      this.addChild( this.runValueNode );
+      this.runTailDelimiterNode.setLine( x1, arrowY - ( runDelimiterLength / 2 ), x1, arrowY + ( runDelimiterLength / 2 ) );
+      this.runTipDelimiterNode.setLine( x2, arrowY - ( runDelimiterLength / 2 ), x2, arrowY + ( runDelimiterLength / 2 ) );
     }
   } );
 } )

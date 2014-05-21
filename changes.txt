@@ -1,5 +1,4 @@
-5/20/14 make arrows mutable in SlopeToolNode
-5/20/14 make dimensional delimiters mutable in SlopeToolNode
+5/20/14 make SlopeToolNode mutable, so that it doesn't need to create new nodes when the line changes
 5/20/14 make NumberBackgroundNode dynamically synchronize to a valueProperty
 # 5/21/14 1.0.0-dev.3
 5/19/14 add GLConstants.MANIPULATOR_DIAMETER

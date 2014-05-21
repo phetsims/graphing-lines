@@ -18,12 +18,12 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineNode = require( 'SCENERY/nodes/Line' ); //NOTE: name collision!
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
+  var SceneryLine = require( 'SCENERY/nodes/Line' ); // NOTE: name collision with graphing-lines.Line
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -84,7 +84,7 @@ define( function( require ) {
     var numeratorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line, correct length will be set later
-    var interactiveFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions  );
+    var interactiveFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions  );
     // x2 - x1
     var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var denominatorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
@@ -100,7 +100,7 @@ define( function( require ) {
     var unsimplifiedEqualsNode = new Text( "=", staticOptions );
     var unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
     var unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
-    var unsimplifiedFractionLineNode = new LineNode( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
+    var unsimplifiedFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
     var undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
 
@@ -251,7 +251,7 @@ define( function( require ) {
 
     // fraction line
     var length = Math.max( numeratorNode.width, denominatorNode.width );
-    var fractionLineNode = new LineNode( 0, 0, length, equationNode.fractionLineThickness, { stroke: options.fill } );
+    var fractionLineNode = new SceneryLine( 0, 0, length, equationNode.fractionLineThickness, { stroke: options.fill } );
 
     // rendering order
     equationNode.addChild( leftSideNode );
@@ -337,7 +337,7 @@ define( function( require ) {
         var runNode = new Text( runString, { font: font, fill: color } );
 
         var lineLength = Math.max( riseNode.width, runNode.width );
-        var fractionLineNode = new LineNode( 0, 0, lineLength, 0, { stroke: color, lineWidth: equationNode.fractionLineThickness } );
+        var fractionLineNode = new SceneryLine( 0, 0, lineLength, 0, { stroke: color, lineWidth: equationNode.fractionLineThickness } );
 
         equationNode.addChild( fractionLineNode );
         equationNode.addChild( riseNode );

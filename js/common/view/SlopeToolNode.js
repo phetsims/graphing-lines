@@ -21,7 +21,6 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
 
   // constants
-  var LINE_WIDTH = 1.25;
   var VALUE_X_SPACING = 6;
   var VALUE_Y_SPACING = 6;
 
@@ -54,7 +53,7 @@ define( function( require ) {
 
     // Arrows
     var arrowOptions = {
-      lineWidth: LINE_WIDTH,
+      lineWidth: 1.25,
       stroke: GLColors.SLOPE,
       arrowTipSize: new Dimension2( 6, 8 ),
       delimiterLength: 0.5 * mvt.modelToViewDeltaX( 1 )
@@ -119,15 +118,14 @@ define( function( require ) {
       // rise
       var offsetFactor = 0.6;
       var xOffset = offsetFactor * gridXSpacing;
-      var tipFudgeY = ( line.rise > 0 ) ? LINE_WIDTH : -LINE_WIDTH; //TODO why do we need this?
       if ( line.run > 0 ) {
-        this.riseArrowNode.setTailAndTip( x1 - xOffset, y1, x1 - xOffset, y2 + tipFudgeY );
+        this.riseArrowNode.setTailAndTip( x1 - xOffset, y1, x1 - xOffset, y2 );
         // value to left of line
         this.riseValueNode.right = this.riseArrowNode.left - VALUE_X_SPACING;
         this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
       else {
-        this.riseArrowNode.setTailAndTip( x1 + xOffset, y1, x1 + xOffset, y2 + tipFudgeY );
+        this.riseArrowNode.setTailAndTip( x1 + xOffset, y1, x1 + xOffset, y2 );
         // value to right of line
         this.riseValueNode.left = this.riseArrowNode.right + VALUE_X_SPACING;
         this.riseValueNode.centerY = this.riseArrowNode.centerY;
@@ -135,15 +133,14 @@ define( function( require ) {
 
       // run
       var yOffset = offsetFactor * gridYSpacing;
-      var tipFudgeX = ( line.run > 0 ) ? -1 : 1; //TODO why do we need this?
       if ( line.rise > 0 ) {
-        this.runArrowNode.setTailAndTip( x1, y2 + yOffset, x2 + tipFudgeX, y2 + yOffset );
+        this.runArrowNode.setTailAndTip( x1, y2 + yOffset, x2, y2 + yOffset );
         // value above line
         this.runValueNode.centerX = this.runArrowNode.centerX;
         this.runValueNode.bottom = this.runArrowNode.top - VALUE_Y_SPACING;
       }
       else {
-        this.runArrowNode.setTailAndTip( x1, y2 - yOffset, x2 + tipFudgeX, y2 - yOffset );
+        this.runArrowNode.setTailAndTip( x1, y2 - yOffset, x2, y2 - yOffset );
         // value below line
         this.runValueNode.centerX = this.runArrowNode.centerX;
         this.runValueNode.top = this.runArrowNode.bottom + VALUE_Y_SPACING;

@@ -27,8 +27,6 @@ define( function( require ) {
 
     assert && assert( typeof pointSize === 'number' );
 
-    Node.call( this );
-
     this.DECIMAL_PLACES = 0;
 
     /*
@@ -66,7 +64,7 @@ define( function( require ) {
     this.slopeYSpacing = 0.4 * pointSize; // y spacing between rise and run values (with blue backgrounds) and fraction line
     this.ySpacing = 0.1 * pointSize; // all other y spacing
 
-    this.mutate( options );
+    Node.call( this, options );
   }
 
   return inherit( Node, EquationNode, {

@@ -36,7 +36,7 @@ define( function( require ) {
     thisNode.lineProperty = lineProperty; // @private
     thisNode.mvt = mvt; // @private
 
-    // Rise and run values
+    // Values
     var numberOptions = {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
       decimalPlaces: 0,
@@ -46,10 +46,10 @@ define( function( require ) {
       yMargin: 6,
       cornerRadius: 5
     };
-    var riseProperty = new Property( lineProperty.get().rise );
-    var runProperty = new Property( lineProperty.get().run );
-    thisNode.riseValueNode = new NumberBackgroundNode( riseProperty, numberOptions ); // @private
-    thisNode.runValueNode = new NumberBackgroundNode( runProperty, numberOptions ); // @private
+    thisNode.riseProperty = new Property( lineProperty.get().rise );
+    thisNode.runProperty = new Property( lineProperty.get().run );
+    thisNode.riseValueNode = new NumberBackgroundNode( thisNode.riseProperty, numberOptions ); // @private
+    thisNode.runValueNode = new NumberBackgroundNode( thisNode.runProperty, numberOptions ); // @private
 
     // Arrows
     var arrowOptions = {
@@ -72,15 +72,7 @@ define( function( require ) {
     Node.call( thisNode, { children: [ thisNode.parentNode ] } );
 
     lineProperty.link( function( line ) {
-
-      // values
-      riseProperty.set( lineProperty.get().rise );
-      runProperty.set( lineProperty.get().run );
-
-      // slope tool can be invisible, update only if visible
-      if ( thisNode.visible ) {
-        thisNode.update( line, mvt );
-      }
+      thisNode.update( line, mvt );
     } );
   }
 
@@ -92,14 +84,18 @@ define( function( require ) {
      * @override
      */
     setVisible: function( visible ) {
-      if ( visible && !this.visible ) {
+      var doUpdate = ( visible && !this.visible );
+      Node.prototype.setVisible.call( this, visible );
+      if ( doUpdate ) {
         this.update( this.lineProperty.get(), this.mvt );
       }
-      Node.prototype.setVisible.call( this, visible );
     },
 
     // @private
     update: function( line, mvt ) {
+
+      // update only if visible
+      if ( !this.visible ) { return; }
 
       // Show nothing for horizontal or vertical lines.
       this.parentNode.visible = ( line.rise !== 0 && line.run !== 0 );
@@ -107,7 +103,11 @@ define( function( require ) {
         return;
       }
 
-      // view coordinates
+      // update internal properties before doing any layout
+      this.riseProperty.set( line.rise );
+      this.runProperty.set( line.run );
+
+      // compute view coordinates
       var gridXSpacing = mvt.modelToViewDeltaX( 1 );
       var gridYSpacing = mvt.modelToViewDeltaY( 1 );
       var x1 = mvt.modelToViewX( line.x1 );
@@ -119,14 +119,16 @@ define( function( require ) {
       var offsetFactor = 0.6;
       var xOffset = offsetFactor * gridXSpacing;
       if ( line.run > 0 ) {
+        // vertical arrow to left of point
         this.riseArrowNode.setTailAndTip( x1 - xOffset, y1, x1 - xOffset, y2 );
-        // value to left of line
+        // value to left of arrow
         this.riseValueNode.right = this.riseArrowNode.left - VALUE_X_SPACING;
         this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
       else {
+        // vertical arrow to right of point
         this.riseArrowNode.setTailAndTip( x1 + xOffset, y1, x1 + xOffset, y2 );
-        // value to right of line
+        // value to right of arrow
         this.riseValueNode.left = this.riseArrowNode.right + VALUE_X_SPACING;
         this.riseValueNode.centerY = this.riseArrowNode.centerY;
       }
@@ -134,14 +136,16 @@ define( function( require ) {
       // run
       var yOffset = offsetFactor * gridYSpacing;
       if ( line.rise > 0 ) {
+        // horizontal arrow below point
         this.runArrowNode.setTailAndTip( x1, y2 + yOffset, x2, y2 + yOffset );
-        // value above line
+        // value above arrow
         this.runValueNode.centerX = this.runArrowNode.centerX;
         this.runValueNode.bottom = this.runArrowNode.top - VALUE_Y_SPACING;
       }
       else {
+        // horizontal arrow above point
         this.runArrowNode.setTailAndTip( x1, y2 - yOffset, x2, y2 - yOffset );
-        // value below line
+        // value below arrow
         this.runValueNode.centerX = this.runArrowNode.centerX;
         this.runValueNode.top = this.runArrowNode.bottom + VALUE_Y_SPACING;
       }

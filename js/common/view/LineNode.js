@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Base type and factory for line nodes.
+ * Visual representation of a line.
  * By default, a line is not labeled with an equation. Clients are responsible for decorating the line
  * with an equation in the correct form (slope, slope-intercept, point-slope.) The line's equation is
  * positioned towards the tip, parallel with the line.
@@ -16,10 +16,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -40,13 +37,13 @@ define( function( require ) {
     options = _.extend( {
       /*
        * By default, a line does not display an equation.
-       * Subtypes must provide this method to return an equation in the correct form.
+       * Clients must provide this method to return an equation in the correct form.
        * @param {Line} line
        * @param {Number} fontSize
        * @param {Color} color
        */
       createEquationNode: function( line, fontSize, color ) {
-        return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds
+        return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds for layout
       }
     }, options );
 
@@ -162,34 +159,6 @@ define( function( require ) {
 
     setEquationVisible: function( visible ) {
       this.equationParentNode.visible = visible;
-    }
-  }, {
-
-    // @static Creates a line node, labeled with an equation in slope form.
-    createSlopeLineNode: function( line, graph, mvt ) {
-      return new LineNode( line, graph, mvt, {
-        createEquationNode: function( line, fontSize, color ) {
-          return SlopeEquationNode.createStaticEquation( line, fontSize, color );
-        }
-      } );
-    },
-
-    // @static Creates a line node, labeled with an equation in slope-intercept form.
-    createSlopeInterceptLineNode: function( line, graph, mvt ) {
-      return new LineNode( line, graph, mvt, {
-        createEquationNode: function( line, fontSize, color ) {
-          return SlopeInterceptEquationNode.createStaticEquation( line, fontSize, color );
-        }
-      } );
-    },
-
-    // @static Creates a line node, labeled with an equation in point-slope form.
-    createPointSlopeLineNode: function( line, graph, mvt ) {
-      return new LineNode( line, graph, mvt, {
-        createEquationNode: function( line, fontSize, color ) {
-          return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
-        }
-      } );
     }
   } );
 } );

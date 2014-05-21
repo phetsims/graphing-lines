@@ -14,11 +14,11 @@ define( function( require ) {
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
@@ -62,30 +62,24 @@ define( function( require ) {
     var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeVisibleProperty,
       { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
-    // brute-force vertical layout, because scenery.VBox was not production-quality when I wrote this
-    var contentNode = new Node();
-    var previousNode = slopeCheckBox;
-    var Y_SPACING = 20;
-    contentNode.addChild( slopeCheckBox );
-    if ( options.includeStandardLines ) {
-      contentNode.addChild( positiveCheckBox );
-      positiveCheckBox.left = slopeCheckBox.left;
-      positiveCheckBox.top = slopeCheckBox.bottom + Y_SPACING;
-      negativeCheckBox.left = slopeCheckBox.left;
-      negativeCheckBox.top = positiveCheckBox.bottom + Y_SPACING;
-      contentNode.addChild( negativeCheckBox );
-      previousNode = negativeCheckBox;
+    // vertical layout
+    var children = [ slopeCheckBox, positiveCheckBox, negativeCheckBox, hideLinesCheckBox ];
+    if ( !options.includeStandardLines ) {
+      children.splice( children.indexOf( positiveCheckBox ), 1 );
+      children.splice( children.indexOf( negativeCheckBox ), 1 );
     }
-    contentNode.addChild( hideLinesCheckBox );
-    hideLinesCheckBox.left = previousNode.left;
-    hideLinesCheckBox.top = previousNode.bottom + Y_SPACING;
+    var contentNode = new VBox( {
+      children: children,
+      spacing: 20,
+      align: 'left'
+    } );
 
     Panel.call( thisNode, contentNode, {
       fill: GLColors.EQUATION_CONTROL_PANEL,
       stroke: 'black',
       lineWidth: 1,
-      xMargin: 10,
-      yMargin: 10,
+      xMargin: 20,
+      yMargin: 15,
       cornerRadius: 10
     } );
 

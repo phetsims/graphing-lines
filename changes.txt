@@ -1,3 +1,4 @@
+5/20/14 use VBox to do layout of GraphControls
 5/20/14 remove fudge factors from SlopeToolNode
 5/20/14 generalize the arrows using in SlopeToolNode as DimensionalArrowNode
 5/20/14 make SlopeToolNode mutable, so that it doesn't need to create new nodes when the line changes

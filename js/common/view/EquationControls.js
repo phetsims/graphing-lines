@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Base type and factory for interactive-equation control panel.
+ * Control panel for interactive-equation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -18,9 +18,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
-  var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
 
   // strings
@@ -144,41 +141,5 @@ define( function( require ) {
     Panel.call( this, content, options );
   }
 
-  return inherit( Panel, EquationControls, {}, {
-
-    // @static Creates a control panel for an equation in slope form.
-    createSlopeEquationControls: function( model, viewProperties ) {
-      return new EquationControls(
-        SlopeEquationNode.createGeneralFormNode(),
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty,
-        new SlopeEquationNode( model.interactiveLineProperty, model.x1RangeProperty, model.y1RangeProperty ) );
-    },
-
-    // @static Creates a control panel for an equation in slope-intercept form.
-    createSlopeInterceptEquationControls: function( model, viewProperties ) {
-      return new EquationControls(
-        SlopeInterceptEquationNode.createGeneralFormNode(),
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty,
-        new SlopeInterceptEquationNode( model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.y1RangeProperty ) );
-    },
-
-    // @static Creates a control panel for an equation in point-slope form.
-    createPointSlopeEquationControls: function( model, viewProperties ) {
-      return new EquationControls(
-        PointSlopeEquationNode.createGeneralFormNode(),
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty,
-        new PointSlopeEquationNode( model.interactiveLineProperty,
-          model.x1RangeProperty, model.y1RangeProperty, model.riseRangeProperty, model.runRangeProperty )
-      );
-    }
-  } );
+  return inherit( Panel, EquationControls );
 } );

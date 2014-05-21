@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsView = require( 'GRAPHING_LINES/common/view/LineFormsView' );
   var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeGraphNode' );
 
   /**
@@ -24,9 +25,26 @@ define( function( require ) {
   function PointSlopeView( model ) {
     var viewProperties = new LineFormsViewProperties();
     LineFormsView.call( this, model, viewProperties,
+
+      // graph
       new PointSlopeGraphNode( model, viewProperties ),
-      EquationControls.createPointSlopeEquationControls( model, viewProperties ),
-      new GraphControls( viewProperties.linesVisibleProperty, viewProperties.slopeVisibleProperty, model.standardLines ) );
+
+      // graph controls
+      new GraphControls(
+        viewProperties.linesVisibleProperty,
+        viewProperties.slopeVisibleProperty,
+        model.standardLines ),
+
+      // equation controls
+      new EquationControls(
+        PointSlopeEquationNode.createGeneralFormNode(),
+        model.interactiveLineProperty,
+        model.savedLines,
+        viewProperties.interactiveEquationVisibleProperty,
+        viewProperties.linesVisibleProperty,
+        new PointSlopeEquationNode( model.interactiveLineProperty,
+          model.x1RangeProperty, model.y1RangeProperty, model.riseRangeProperty, model.runRangeProperty ) )
+    );
   }
 
   return inherit( LineFormsView, PointSlopeView );

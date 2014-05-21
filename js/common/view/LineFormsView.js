@@ -20,11 +20,11 @@ define( function( require ) {
    * @param {LineFormsModel} model
    * @param {LineFormsViewProperties} viewProperties
    * @param {Node} graphNode
-   * @param {Node} equationControls
    * @param {Node} graphControls
+   * @param {Node} equationControls
    * @constructor
    */
-  function LineFormsView( model, viewProperties, graphNode, equationControls, graphControls ) {
+  function LineFormsView( model, viewProperties, graphNode, graphControls, equationControls ) {
 
     var thisView = this;
     ScreenView.call( thisView, { renderer: GLConstants.RENDERER } );

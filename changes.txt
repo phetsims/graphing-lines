@@ -1,3 +1,4 @@
+5/20/14 delete EquationControls factory functions, instantiate EquationControls directly in LineFormsView subtype constructors
 5/20/14 replace EquationControls subtypes with factory functions
 5/20/14 replace LineNode subtypes with factory functions
 5/20/14 change createEquationNode override to an option, for LineNode subtypes

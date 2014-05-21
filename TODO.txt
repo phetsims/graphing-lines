@@ -13,6 +13,7 @@ USABILITY
 - add a tab on right side of point tool, so you can see values while moving on tablet
 
 HIGH
+- remove Graph.lines, move to model, so that GraphNode can be independent and drawn in its own layer
 - vegas#7, add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

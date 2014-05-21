@@ -27,20 +27,20 @@ define( function( require ) {
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   // constants
-  var Y_EQUALS_X = StringUtils.format( "{0} = {1}", symbolYString, symbolXString );
-  var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", symbolYString, symbolXString );
+  var Y_EQUALS_X = StringUtils.format( "{0} = {1}", symbolYString, symbolXString );  // y = x
+  var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", symbolYString, symbolXString ); // y = -x
 
   /**
    * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?
    * @param {Property<Boolean>} slopeVisibleProperty are the slope (rise/run) brackets visible on the graphed line?
-   * @param {ObservableArray<Lines>} standardLines standard lines (eg, y=x) that are available for viewing
+   * @param {ObservableArray<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
    * @param {*} options should check boxes for standard lines be accessible?
    * @constructor
    */
   function GraphControls( linesVisibleProperty, slopeVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
-      includeStandardLines: true
+      includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
     }, options );
 
     var thisNode = this;
@@ -106,12 +106,12 @@ define( function( require ) {
       }
     };
 
-    // Add/remove standard line "y = x"
+    // Add/remove standard line 'y = x'
     yEqualsXVisibleProperty.link( function( visible ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_X_LINE );
     } );
 
-    // Add/remove standard line "y = -x"
+    // Add/remove standard line 'y = -x'
     yEqualsNegativeXVisibleProperty.link( function( visible ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_NEGATIVE_X_LINE );
     } );

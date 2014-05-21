@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * A translucent red "X", to be placed on top of an equation whose slope is undefined.
+ * A translucent red 'X', to be placed on top of an equation whose slope is undefined.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,14 +9,9 @@ define( function( require ) {
   'use strict';
 
   // imports
-  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
-
-  // constants
-  var LINE_COLOR = new Color( 255, 0, 0, 0.3 );
-  var LINE_WIDTH = 4;
 
   /**
    * @param {Number} width
@@ -26,14 +21,18 @@ define( function( require ) {
    */
   function UndefinedSlopeIndicator( width, height, options ) {
 
-    options = _.extend( {}, options );
+    options = _.extend( {
+      stroke: 'rgba( 255, 0, 0, 0.3 )',
+      lineWidth: 4
+    }, options );
 
-    var lineOptions = { stroke: LINE_COLOR, lineWidth: LINE_WIDTH };
-    this.line1 = new Line( 0, 0, width, height, lineOptions );
-    this.line2 = new Line( 0, height, width, 0, lineOptions );
-    options.children = [ this.line1, this.line2 ];
+    this.line1 = new Line( 0, 0, 0, 1, options ); // @private
+    this.line2 = new Line( 0, 0, 0, 1, options ); // @private
 
-    Node.call( this, options );
+    Node.call( this, { children: [ this.line1, this.line2 ] } );
+
+    // initialize
+    this.setSize( width, height );
   }
 
   return inherit( Node, UndefinedSlopeIndicator, {

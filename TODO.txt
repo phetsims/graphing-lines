@@ -7,6 +7,7 @@ PERFORMANCE
 - changing a line results in allocation of: Line, LineNode, EquationNode
 - EquationNode subtypes do lots of addChild/removeChild
 - LineNode could mutate its ArrowNode
+- don't add/remove standard lines from the model, just change their visibility in the view
 
 USABILITY
 - make manipulators bigger, or make them smaller with a 'halo'

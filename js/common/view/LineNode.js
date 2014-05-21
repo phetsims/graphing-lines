@@ -1,9 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Visual representation of a line.
- * <p>
- * By default, a line is not labeled with an equation. Subtypes are responsible for decorating the line
+ * Base type and factory for line nodes.
+ * By default, a line is not labeled with an equation. Clients are responsible for decorating the line
  * with an equation in the correct form (slope, slope-intercept, point-slope.) The line's equation is
  * positioned towards the tip, parallel with the line.
  *

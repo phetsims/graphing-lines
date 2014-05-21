@@ -1,3 +1,4 @@
+5/20/14 replace LineNode subtypes with factory functions
 5/20/14 change createEquationNode override to an option, for LineNode subtypes
 5/20/14 use VBox to do layout of GraphControls
 5/20/14 remove fudge factors from SlopeToolNode

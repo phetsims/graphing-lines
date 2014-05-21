@@ -17,7 +17,10 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
+  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -160,6 +163,34 @@ define( function( require ) {
 
     setEquationVisible: function( visible ) {
       this.equationParentNode.visible = visible;
+    }
+  }, {
+
+    // @static Creates a line node, labeled with an equation in slope form.
+    createSlopeLineNode: function( line, graph, mvt ) {
+      return new LineNode( line, graph, mvt, {
+        createEquationNode: function( line, fontSize, color ) {
+          return SlopeEquationNode.createStaticEquation( line, fontSize, color );
+        }
+      } );
+    },
+
+    // @static Creates a line node, labeled with an equation in slope-intercept form.
+    createSlopeInterceptLineNode: function( line, graph, mvt ) {
+      return new LineNode( line, graph, mvt, {
+        createEquationNode: function( line, fontSize, color ) {
+          return SlopeInterceptEquationNode.createStaticEquation( line, fontSize, color );
+        }
+      } );
+    },
+
+    // @static Creates a line node, labeled with an equation in point-slope form.
+    createPointSlopeLineNode: function( line, graph, mvt ) {
+      return new LineNode( line, graph, mvt, {
+        createEquationNode: function( line, fontSize, color ) {
+          return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
+        }
+      } );
     }
   } );
 } );

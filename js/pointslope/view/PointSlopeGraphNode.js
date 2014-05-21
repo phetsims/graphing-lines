@@ -12,7 +12,7 @@ define( function( require ) {
   // imports
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
-  var PointSlopeLineNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeLineNode' );
+  var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
 
@@ -26,7 +26,7 @@ define( function( require ) {
     var thisNode = this;
     LineFormsGraphNode.call( thisNode, model, viewProperties,
       function( line, graph, mvt ) {
-        return new PointSlopeLineNode( line, graph, mvt );
+        return LineNode.createPointSlopeLineNode( line, graph, mvt );
       } );
 
     var manipulatorDiameter = model.mvt.modelToViewDeltaX( model.manipulatorDiameter );

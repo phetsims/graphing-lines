@@ -23,7 +23,6 @@ define( function( require ) {
    * @constructor
    */
   function SlopeUndefinedNode( line, options ) {
-    options = _.extend( { pickable: false }, options );
     Text.call( this, StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), options );
   }
 

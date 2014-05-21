@@ -6,7 +6,7 @@ PERFORMANCE
 - consider making Line mutable, to reduce affects of garbage collection
 - changing a line results in allocation of: Line, LineNode, EquationNode
 - EquationNode subtypes do lots of addChild/removeChild
-- LineNode could mutate its ArrowNode
+- make LineNode mutable via lineProperty constructor param, instantiate one interactive line in LineFormsGraphNode constructor
 
 USABILITY
 - make manipulators bigger, or make them smaller with a 'halo'

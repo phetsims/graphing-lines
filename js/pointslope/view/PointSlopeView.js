@@ -23,7 +23,9 @@ define( function( require ) {
    * @constructor
    */
   function PointSlopeView( model ) {
+
     var viewProperties = new LineFormsViewProperties();
+
     LineFormsView.call( this, model, viewProperties,
 
       // graph

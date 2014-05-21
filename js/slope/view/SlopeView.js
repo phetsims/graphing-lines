@@ -22,7 +22,9 @@ define( function( require ) {
    * @constructor
    */
   function SlopeView( model ) {
+
     var viewProperties = new LineFormsViewProperties();
+
     LineFormsView.call( this, model, viewProperties,
 
       // graph

@@ -40,19 +40,6 @@ define( function( require ) {
   var ARROW_TIP_SIZE = new Dimension2( 6, 8 ); // use even-number dimensions, or tip will look asymmetrical due to rounding
 
   //----------------------------------------------------------------------------------------
-  // Delimiter line that is at the end of a length line in a dimensional drawing.
-  //----------------------------------------------------------------------------------------
-
-  function DimensionalDelimiterNode( x1, y1, x2, y2 ) {
-    Line.call( this, x1, y1, x2, y2, {
-      stroke: LINE_COLOR,
-      lineWidth: LINE_WIDTH
-    } );
-  }
-
-  inherit( Line, DimensionalDelimiterNode );
-
-  //----------------------------------------------------------------------------------------
   // Arrow with a very specific tip style.
   //----------------------------------------------------------------------------------------
 
@@ -115,8 +102,8 @@ define( function( require ) {
     var thisNode = this;
     Node.call( this );
 
-    thisNode.lineProperty = lineProperty;
-    thisNode.mvt = mvt;
+    thisNode.lineProperty = lineProperty; // @private
+    thisNode.mvt = mvt; // @private
 
     // Rise and run values
     var numberOptions = {
@@ -133,8 +120,16 @@ define( function( require ) {
     thisNode.riseValueNode = new NumberBackgroundNode( riseProperty, numberOptions ); // @private
     thisNode.runValueNode = new NumberBackgroundNode( runProperty, numberOptions ); // @private
 
+    // Delimiter lines, like those on the ends of a length line in a dimensional drawing.
+    var delimiterOptions = { stroke: LINE_COLOR, lineWidth: LINE_WIDTH };
+    this.riseTipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    this.riseTailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    this.runTipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+    this.runTailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions ); // @private
+
     lineProperty.link( function( line ) {
 
+      // values
       riseProperty.set( lineProperty.get().rise );
       runProperty.set( lineProperty.get().run );
 
@@ -197,8 +192,8 @@ define( function( require ) {
         this.riseValueNode.left = riseLineNode.right + VALUE_X_SPACING;
         this.riseValueNode.centerY = riseLineNode.centerY;
       }
-      riseTailDelimiterNode = new DimensionalDelimiterNode( arrowX - ( riseDelimiterLength / 2 ), p1View.y, arrowX + ( riseDelimiterLength / 2 ), p1View.y );
-      riseTipDelimiterNode = new DimensionalDelimiterNode( arrowX - ( riseDelimiterLength / 2 ), p2View.y, arrowX + ( riseDelimiterLength / 2 ), p2View.y );
+      this.riseTailDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), p1View.y, arrowX + ( riseDelimiterLength / 2 ), p1View.y );
+      this.riseTipDelimiterNode.setLine( arrowX - ( riseDelimiterLength / 2 ), p2View.y, arrowX + ( riseDelimiterLength / 2 ), p2View.y );
 
       // run
       var runLineNode, runTailDelimiterNode, runTipDelimiterNode;
@@ -220,15 +215,15 @@ define( function( require ) {
         this.runValueNode.centerX = runLineNode.centerX;
         this.runValueNode.top = runLineNode.bottom + VALUE_Y_SPACING;
       }
-      runTailDelimiterNode = new DimensionalDelimiterNode( p1View.x, arrowY - ( runDelimiterLength / 2 ), p1View.x, arrowY + ( runDelimiterLength / 2 ) );
-      runTipDelimiterNode = new DimensionalDelimiterNode( p2View.x, arrowY - ( runDelimiterLength / 2 ), p2View.x, arrowY + ( runDelimiterLength / 2 ) );
+      this.runTailDelimiterNode.setLine( p1View.x, arrowY - ( runDelimiterLength / 2 ), p1View.x, arrowY + ( runDelimiterLength / 2 ) );
+      this.runTipDelimiterNode.setLine( p2View.x, arrowY - ( runDelimiterLength / 2 ), p2View.x, arrowY + ( runDelimiterLength / 2 ) );
 
       // rendering order
-      this.addChild( riseTailDelimiterNode );
-      this.addChild( riseTipDelimiterNode );
+      this.addChild( this.riseTailDelimiterNode );
+      this.addChild( this.riseTipDelimiterNode );
       this.addChild( riseLineNode );
-      this.addChild( runTailDelimiterNode );
-      this.addChild( runTipDelimiterNode );
+      this.addChild( this.runTailDelimiterNode );
+      this.addChild( this.runTipDelimiterNode );
       this.addChild( runLineNode );
       this.addChild( this.riseValueNode );
       this.addChild( this.runValueNode );

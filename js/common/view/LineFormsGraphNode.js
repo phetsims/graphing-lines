@@ -78,7 +78,7 @@ define( function( require ) {
 
   return inherit( GraphNode, LineFormsGraphNode, {
 
-    // Updates the visibility of lines and associated decorations
+    // @private Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
       // interactive line
       this.interactiveLineParentNode.visible = ( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
@@ -91,7 +91,7 @@ define( function( require ) {
       this.slopeToolNode.visible = ( this.viewProperties.slopeVisible && this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
     },
 
-    // Updates the line and its associated decorations
+    // @private Updates the line and its associated decorations
     updateInteractiveLine: function( line ) {
       // replace the line node
       this.interactiveLineParentNode.removeAllChildren();
@@ -100,7 +100,7 @@ define( function( require ) {
       this.interactiveLineParentNode.addChild( this.interactiveLineNode );
     },
 
-    // Called when a standard line is added to the model.
+    // @private Called when a standard line is added to the model.
     standardLineAdded: function( line ) {
       this.standardLinesParentNode.addChild( this.createLineNode( line, this.model.graph, this.model.mvt ) );
     },
@@ -110,18 +110,18 @@ define( function( require ) {
       this.removeLineNode( line, this.standardLinesParentNode );
     },
 
-    // Called when a saved line is added to the model.
+    // @private Called when a saved line is added to the model.
     savedLineAdded: function( line ) {
       var lineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
       this.savedLinesParentNode.addChild( lineNode );
     },
 
-    // Called when a saved line is removed from the model.
+    // @private Called when a saved line is removed from the model.
     savedLineRemoved: function( line ) {
       this.removeLineNode( line, this.savedLinesParentNode );
     },
 
-     // Removes the node that corresponds to the specified line.
+     // @private Removes the node that corresponds to the specified line.
     removeLineNode: function( line, parentNode ) {
       for ( var i = 0; i < parentNode.getChildrenCount(); i++ ) {
         var node = parentNode.getChildAt( i );

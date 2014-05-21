@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Properties that are specific to the view for the "Slope", "Slope-Intercept" and "Point-Slope" tabs.
+ * Properties that are specific to subtypes of LineFormsView.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

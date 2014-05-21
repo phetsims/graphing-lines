@@ -30,9 +30,24 @@ define( function( require ) {
    * @param {Line} line
    * @param {Graph} graph
    * @param {ModelViewTransform2} mvt
+   * @param {*} options
    * @constructor
    */
-  function LineNode( line, graph, mvt ) {
+  function LineNode( line, graph, mvt, options ) {
+
+    options = _.extend( {
+      /*
+       * By default, a line does not display an equation.
+       * Subtypes must provide this method to return an equation in the correct form.
+       * @param {Line} line
+       * @param {Number} fontSize
+       * @param {Color} color
+       */
+      createEquationNode: function( line, fontSize, color ) {
+        return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds
+      }
+    }, options );
+
     Node.call( this, { pickable: false } );
 
     this.line = line;
@@ -92,7 +107,7 @@ define( function( require ) {
     this.equationParentNode = new Node(); // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
     this.addChild( this.equationParentNode );
     this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
-    this.equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
+    this.equationNode = options.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
     this.equationParentNode.addChild( this.equationNode );
 
     // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
@@ -142,14 +157,6 @@ define( function( require ) {
   }
 
   return inherit( Node, LineNode, {
-
-    /*
-     * By default, a line does not display an equation.
-     * Subtypes must override this method to return an equation in the correct form.
-     */
-    createEquationNode: function( line, fontSize, color ) {
-      return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds
-    },
 
     setEquationVisible: function( visible ) {
       this.equationParentNode.visible = visible;

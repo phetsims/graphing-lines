@@ -20,21 +20,13 @@ define( function( require ) {
    * @constructor
    */
   function PointSlopeLineNode( line, graph, mvt ) {
-    LineNode.call( this, line, graph, mvt );
+    LineNode.call( this, line, graph, mvt, {
+      createEquationNode: function( line, fontSize, color ) {
+        return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
+      }
+    } );
   }
 
-  return inherit( LineNode, PointSlopeLineNode, {
-
-    /*
-     * Creates the line's equation in point-slope form.
-     * @override
-     * @param {Line} line
-     * @param {Number} fontSize
-     * @param {Color} color
-     */
-    createEquationNode: function( line, fontSize, color ) {
-      return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
-    }
-  } );
+  return inherit( LineNode, PointSlopeLineNode );
 } );
 

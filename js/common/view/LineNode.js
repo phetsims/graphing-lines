@@ -16,7 +16,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -71,7 +70,7 @@ define( function( require ) {
 
     lineProperty.link( function( line ) {
       thisNode.update( line );
-    } )
+    } );
   }
 
   return inherit( Node, LineNode, {

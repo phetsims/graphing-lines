@@ -12,7 +12,6 @@ define( function( require ) {
   // modules
   var AnswerGraphNode = require( 'GRAPHING_LINES/linegame/view/AnswerGraphNode' );
   var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
-  var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );

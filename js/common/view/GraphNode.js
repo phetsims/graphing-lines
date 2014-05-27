@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -32,16 +31,16 @@ define( function( require ) {
   //----------------------------------------------------------------------------------------
 
   // grid
-  var GRID_BACKGROUND = Color.WHITE;
+  var GRID_BACKGROUND = 'white';
   var MINOR_GRID_LINE_WIDTH = 1.0;
-  var MINOR_GRID_LINE_COLOR = new Color( 230, 230, 230 );
+  var MINOR_GRID_LINE_COLOR = 'rgb( 230, 230, 230 )';
   var MAJOR_GRID_LINE_WIDTH = 1.0;
-  var MAJOR_GRID_LINE_COLOR = new Color( 192, 192, 192 );
+  var MAJOR_GRID_LINE_COLOR = 'rgb( 192, 192, 192 )';
 
   // axes                                                                                                                                          n
   var AXIS_ARROW_SIZE = new Dimension2( 10, 10 );
   var AXIS_THICKNESS = 1;
-  var AXIS_COLOR = Color.BLACK;
+  var AXIS_COLOR = 'black';
   var AXIS_EXTENT = 1.0; // how far the arrow extends past the min/max ticks, in model coordinates
   var AXIS_LABEL_FONT = new PhetFont( { size: 16, weight: 'bold' } );
   var AXIS_LABEL_SPACING = 2; // space between end of axis and label
@@ -50,10 +49,10 @@ define( function( require ) {
   var MAJOR_TICK_SPACING = 5; // model units
   var MINOR_TICK_LENGTH = 3; // how far a minor tick extends from the axis
   var MINOR_TICK_LINE_WIDTH = 0.5;
-  var MINOR_TICK_COLOR = Color.BLACK;
+  var MINOR_TICK_COLOR = 'black';
   var MAJOR_TICK_LENGTH = 6; // how far a major tick extends from the axis
   var MAJOR_TICK_LINE_WIDTH = 1;
-  var MAJOR_TICK_COLOR = Color.BLACK;
+  var MAJOR_TICK_COLOR = 'black';
   var MAJOR_TICK_FONT = new PhetFont( 16 );
   var TICK_LABEL_SPACING = 2;
   var MINUS_SIGN_WIDTH = new Text( "-", { font: MAJOR_TICK_FONT } ).width;

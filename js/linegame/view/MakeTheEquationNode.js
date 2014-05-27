@@ -95,7 +95,7 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, new Color( 0, 0, 0, 0.1 ) );
+      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, 'rgba( 0, 0, 0, 0.1 )' );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;
       thisNode.addChild( devAnswerNode );
@@ -141,7 +141,7 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Graph} graph
    * @param {Number} fontSize
-   * @param {Color} staticColor
+   * @param {Color|String} staticColor
    */
    var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
     var interactivePoint, interactiveSlope, interactiveIntercept;

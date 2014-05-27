@@ -15,7 +15,7 @@ define( function( require ) {
 
   /**
    * @param {Number} diameter
-   * @param {Color} color
+   * @param {Color|String} color
    * @param {*} options
    * @constructor
    */

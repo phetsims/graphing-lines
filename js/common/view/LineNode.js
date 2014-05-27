@@ -41,7 +41,7 @@ define( function( require ) {
        * Clients must provide this method to return an equation in the correct form.
        * @param {Line} line
        * @param {Number} fontSize
-       * @param {Color} color
+       * @param {Color|String} color
        */
       createEquationNode: function( line, fontSize, color ) {
         return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds for layout

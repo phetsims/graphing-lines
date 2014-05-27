@@ -278,7 +278,7 @@ define( function( require ) {
    *
    * @param {Line} line
    * @param {Number} fontSize
-   * @param {Color} color
+   * @param {Color|String} color
    */
   SlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
 

@@ -85,7 +85,7 @@ define( function( require ) {
     subContent.addChild( eraseLinesButton );
 
     // horizontal separators, resized later
-    var separatorColor = new Color( 212, 212, 212 );
+    var separatorColor = 'rgb( 212, 212, 212 )';
     var titleSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor, pickable: false } );
     var buttonsSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor, pickable: false } );
     subContent.addChild( titleSeparator );

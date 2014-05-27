@@ -70,7 +70,7 @@ define( function( require ) {
 
   /**
    * @param {Number} diameter
-   * @param {Color} color
+   * @param {Color|String} color
    * @param {Property<Vector2>} pointProperty
    * @param {Array<Property<Vector2>>} otherPointProperties
    * @param {Range} xRange

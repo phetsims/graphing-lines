@@ -216,7 +216,7 @@ define( function( require ) {
    * @param {EquationForm} equationForm
    * @param {Line} line
    * @param {Font} font
-   * @param {Color} color
+   * @param {Color|String} color
    */
   ChallengeNode.createEquationNode = function( equationForm, line, fontSize, color ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {

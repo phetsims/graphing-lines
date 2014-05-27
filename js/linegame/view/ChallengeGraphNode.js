@@ -12,7 +12,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -35,7 +34,7 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( new Color( 0, 0, 0, 0.1 ) ) ), challenge.graph, challenge.mvt ) );
+      thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.mvt ) );
     }
 
     var pointDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.POINT_DIAMETER );

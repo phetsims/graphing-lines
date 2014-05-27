@@ -30,7 +30,7 @@ define( function( require ) {
    * @param y1
    * @param x2
    * @param y2
-   * @param {Color} color
+   * @param {Color|String} color
    * @constructor
    */
   function Line( x1, y1, x2, y2, color ) {

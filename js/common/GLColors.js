@@ -13,7 +13,7 @@ define( function( require ) {
 
   return {
     SCREEN_BACKGROUND: 'rgb( 255, 255, 214 )',
-    INTERACTIVE_LINE: Color.BLACK,
+    INTERACTIVE_LINE: 'black',
     SAVED_LINE_NORMAL: new Color( 160, 160, 160 ),
     SAVED_LINE_HIGHLIGHT: new Color( 0, 0, 255 ),
     Y_EQUALS_X: new Color( 16, 178, 15 ),
@@ -25,15 +25,15 @@ define( function( require ) {
     POINT_2: new Color( 200, 0, 200 ),
     POINT_3: new Color( 200, 0, 200 ),
     INTERCEPT: new Color( 200, 0, 200 ),
-    SAVE_LINE_BUTTON: Color.WHITE,
-    ERASE_LINES_BUTTON: Color.WHITE,
+    SAVE_LINE_BUTTON: 'white',
+    ERASE_LINES_BUTTON: 'white',
     PICKER_BUTTON_DISABLED: new Color( 190, 190, 190 ),
     PICKER_BACKGROUND_DISABLED: new Color( 245, 245, 245 ),
-    POINT_TOOL_FOREGROUND_NORMAL_COLOR: Color.BLACK,
-    POINT_TOOL_BACKGROUND_NORMAL_COLOR: Color.WHITE,
-    POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR: Color.WHITE,
-    STATIC_EQUATION_ELEMENT: Color.BLACK,
-    EQUATION_CONTROL_PANEL: new Color( 238, 238, 238 ),
-    GRAPH_CONTROL_PANEL: new Color( 238, 238, 238 )
+    POINT_TOOL_FOREGROUND_NORMAL_COLOR: 'black',
+    POINT_TOOL_BACKGROUND_NORMAL_COLOR: 'white',
+    POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR: 'white',
+    STATIC_EQUATION_ELEMENT: 'black',
+    EQUATION_CONTROL_PANEL: 'rgb( 238, 238, 238 )',
+    GRAPH_CONTROL_PANEL: 'rgb( 238, 238, 238 )'
   };
 } );

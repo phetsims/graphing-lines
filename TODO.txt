@@ -2,7 +2,7 @@ TODO list for graphing-lines (HTML5 port)
 
 PERFORMANCE
 - performance stinks on iPad
-- put graph in its own layer, since it doesn't change
+- put graph in its own layer, since it doesn't change (move Graph.lines to model, don't extend GraphNode, ...?)
 - EquationNode: mutate instead of alloc when Line changes?
 - EquationNode subtypes do lots of addChild/removeChild, change visibility instead?
 - last resort: consider making Line mutable, to reduce affects of garbage collection

@@ -60,7 +60,7 @@ define( function( require ) {
 
         // if the point is unique, set it
         if ( !same ) {
-          pointProperty.set( new Vector2( x, y ) );
+          pointProperty.set( p );
         }
       }
     } );

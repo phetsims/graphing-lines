@@ -1,4 +1,4 @@
-5/27/14 use string representations of colors
+5/27/14 use string representations for all colors
 5/27/14 make LineNode mutable via lineProperty constructor param
 5/27/14 change 'imports' to 'modules' in require comments
 5/20/14 delete LineNode factory functions, move them to constructors of LineFormsGraphNode subtypes

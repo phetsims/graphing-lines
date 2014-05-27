@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -25,12 +24,12 @@ define( function( require ) {
     POINTS_AWARDED_FONT: new PhetFont( { size: 36, weight: 'bold' } ),
 
     // colors
-    TITLE_COLOR: Color.BLACK,
-    ANSWER_COLOR: new Color( 0, 180, 0 ), // color of the correct answer
-    GUESS_COLOR: Color.BLACK, // color of the user's guess
-    FACE_COLOR: new Color( 255, 255, 0, 0.7 ), // translucent yellow
-    POINTS_AWARDED_COLOR: Color.BLACK,
-    BUTTON_COLOR: Color.YELLOW,
+    TITLE_COLOR: 'black',
+    ANSWER_COLOR: 'rgb( 0, 180, 0 )', // color of the correct answer
+    GUESS_COLOR: 'black', // color of the user's guess
+    FACE_COLOR: 'rgba( 255, 255, 0, 0.7 )', // translucent yellow
+    POINTS_AWARDED_COLOR: 'black',
+    BUTTON_COLOR: 'yellow',
 
     // sizes
     GRAPH_WIDTH: 400, // graph width in view coordinates

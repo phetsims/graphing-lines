@@ -61,7 +61,7 @@ define( function( require ) {
       headFill: LineGameConstants.FACE_COLOR,
       eyeFill: 'black',
       mouthFill: 'black',
-      headStroke: LineGameConstants.FACE_COLOR.darkerColor(),
+      headStroke: Color.toColor( LineGameConstants.FACE_COLOR ).darkerColor(),
       headLineWidth: 1
     } );
 

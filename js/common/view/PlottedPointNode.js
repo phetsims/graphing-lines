@@ -21,12 +21,13 @@ define( function( require ) {
    */
   function PlottedPointNode( diameter, color, options ) {
 
+    var mainColor = Color.toColor( color );
     options = _.extend( {
       pickable: false,
       highlightColor: Color.WHITE,
-      mainColor: color,
-      shadowColor: color.darkerColor(),
-      stroke: color.darkerColor().darkerColor(),
+      mainColor: mainColor,
+      shadowColor: mainColor.darkerColor(),
+      stroke: mainColor.darkerColor().darkerColor(),
       lineWidth: 1
     }, options );
 

@@ -8,9 +8,6 @@
 define( function( require ) {
   'use strict';
 
-  // modules
-  var Color = require( 'SCENERY/util/Color' );
-
   return {
     SCREEN_BACKGROUND: 'rgb( 255, 255, 214 )',
     INTERACTIVE_LINE: 'black',
@@ -18,17 +15,17 @@ define( function( require ) {
     SAVED_LINE_HIGHLIGHT: 'rgb( 0, 0, 255 )',
     Y_EQUALS_X: 'rgb( 16, 178, 15 )',
     Y_EQUALS_NEGATIVE_X: 'rgb( 16, 178, 15 )',
-    SLOPE: new Color( 117, 217, 255 ),
-    POINT_X1_Y1: new Color( 200, 0, 200 ),
-    POINT_X2_Y2: new Color( 210, 255, 0 ),
-    POINT_1: new Color( 200, 0, 200 ),
-    POINT_2: new Color( 200, 0, 200 ),
-    POINT_3: new Color( 200, 0, 200 ),
-    INTERCEPT: new Color( 200, 0, 200 ),
+    SLOPE: 'rgb( 117, 217, 255 )',
+    POINT_X1_Y1: 'rgb( 200, 0, 200 )',
+    POINT_X2_Y2: 'rgb( 210, 255, 0 )',
+    POINT_1: 'rgb( 200, 0, 200 )',
+    POINT_2: 'rgb( 200, 0, 200 )',
+    POINT_3: 'rgb( 200, 0, 200 )',
+    INTERCEPT: 'rgb( 200, 0, 200 )',
     SAVE_LINE_BUTTON: 'white',
     ERASE_LINES_BUTTON: 'white',
-    PICKER_BUTTON_DISABLED: new Color( 190, 190, 190 ),
-    PICKER_BACKGROUND_DISABLED: new Color( 245, 245, 245 ),
+    PICKER_BUTTON_DISABLED: 'rgb( 190, 190, 190 )',
+    PICKER_BACKGROUND_DISABLED: 'rgb( 245, 245, 245 )',
     POINT_TOOL_FOREGROUND_NORMAL_COLOR: 'black',
     POINT_TOOL_BACKGROUND_NORMAL_COLOR: 'white',
     POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR: 'white',

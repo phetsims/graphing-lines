@@ -15,19 +15,20 @@ define( function( require ) {
 
   /**
    * @param {number} diameter diameter of the sphere
-   * @param {Color} color base color used to shade the sphere
+   * @param {Color|String} color base color used to shade the sphere
    * @param {*} options
    * @constructor
    */
   function Manipulator( diameter, color, options ) {
 
+    var mainColor = Color.toColor( color );
     options = _.extend( {
-      mainColor: color,
+      mainColor: mainColor,
       highlightColor: Color.WHITE,
-      shadowColor: color.darkerColor(),
+      shadowColor: mainColor.darkerColor(),
       cursor: 'pointer',  // all manipulators are interactive
       lineWidth: 1,
-      stroke: color.darkerColor().darkerColor()
+      stroke: mainColor.darkerColor()
     }, options );
 
     ShadedSphereNode.call( this, diameter, options );

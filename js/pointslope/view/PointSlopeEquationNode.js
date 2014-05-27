@@ -66,8 +66,8 @@ define( function( require ) {
 
     var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
-    var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
+    var staticOptions = { font: staticFont, fill: options.staticColor };
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
     // internal properties that are connected to pickers
     var x1Property = new Property( interactiveLineProperty.get().x1 );
@@ -371,7 +371,7 @@ define( function( require ) {
     options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
     var pattern = '({0} - {1}<sub>1</sub>) = {2}({3} - {4}<sub>1</sub>)';
     var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
-    return new SubSupText( html, { font: options.font, pickable: false } );
+    return new SubSupText( html, { font: options.font } );
   };
 
   PointSlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {

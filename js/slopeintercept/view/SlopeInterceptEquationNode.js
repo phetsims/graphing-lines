@@ -67,8 +67,8 @@ define( function( require ) {
 
     var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
-    var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
+    var staticOptions = { font: staticFont, fill: options.staticColor };
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
     // internal properties that are connected to pickers
     var riseProperty = new Property( interactiveLineProperty.get().rise );

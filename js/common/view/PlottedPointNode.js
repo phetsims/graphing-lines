@@ -23,7 +23,6 @@ define( function( require ) {
 
     var mainColor = Color.toColor( color );
     options = _.extend( {
-      pickable: false,
       highlightColor: Color.WHITE,
       mainColor: mainColor,
       shadowColor: mainColor.darkerColor(),

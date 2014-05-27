@@ -59,8 +59,8 @@ define( function( require ) {
 
     var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
-    var staticOptions = { font: staticFont, fill: options.staticColor, pickable: false };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness, pickable: false };
+    var staticOptions = { font: staticFont, fill: options.staticColor };
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
     // internal properties that are connected to pickers
     var x1Property = new Property( interactiveLineProperty.get().x1 );
@@ -233,7 +233,7 @@ define( function( require ) {
       fill: 'black'
     }, options );
 
-    var equationNode = new EquationNode( options.fontSize, { pickable: false } );
+    var equationNode = new EquationNode( options.fontSize );
 
     var font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
@@ -282,7 +282,7 @@ define( function( require ) {
    */
   SlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
 
-    var equationNode = new EquationNode( fontSize, { pickable: false } );
+    var equationNode = new EquationNode( fontSize );
 
     var font = new PhetFont( { size: fontSize, weight: 'bold' } );
 

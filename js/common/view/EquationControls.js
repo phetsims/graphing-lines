@@ -86,8 +86,8 @@ define( function( require ) {
 
     // horizontal separators, resized later
     var separatorColor = 'rgb( 212, 212, 212 )';
-    var titleSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor, pickable: false } );
-    var buttonsSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor, pickable: false } );
+    var titleSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor } );
+    var buttonsSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor } );
     subContent.addChild( titleSeparator );
     subContent.addChild( buttonsSeparator );
 

@@ -1,3 +1,4 @@
+5/27/14 delete various vestigial occurrences of pickable:false
 5/27/14 change slopeToolEnabled from a constructor parameter to an option (default true) for ChallengeGraphNode and its subtypes
 5/27/14 make plotted points persistent in game
 5/27/14 use string representations for all colors

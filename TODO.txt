@@ -5,7 +5,6 @@ PERFORMANCE
 - put graph in its own layer, since it doesn't change
 - changing a line results in allocation of: Line, LineNode, EquationNode
 - EquationNode subtypes do lots of addChild/removeChild
-- make LineNode mutable via lineProperty constructor param, instantiate one interactive line in LineFormsGraphNode constructor
 - last resort: consider making Line mutable, to reduce affects of garbage collection
 
 USABILITY

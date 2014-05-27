@@ -1,3 +1,4 @@
+5/27/14 make LineNode mutable via lineProperty constructor param
 5/27/14 change 'imports' to 'modules' in require comments
 5/20/14 delete LineNode factory functions, move them to constructors of LineFormsGraphNode subtypes
 5/20/14 delete EquationControls factory functions, instantiate EquationControls directly in LineFormsView subtype constructors

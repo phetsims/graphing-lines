@@ -19,6 +19,7 @@ define( function( require ) {
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlottedPointNode = require( 'GRAPHING_LINES/common/view/PlottedPointNode' );
+  var Property = require( 'AXON/Property' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -34,26 +35,26 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      thisNode.addChild( new LineNode( challenge.answer.withColor( new Color( 0, 0, 0, 0.1 ) ), challenge.graph, challenge.mvt ) );
+      thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( new Color( 0, 0, 0, 0.1 ) ) ), challenge.graph, challenge.mvt ) );
     }
 
     var pointDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.POINT_DIAMETER );
 
     // answer
-    {
-      thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
-      var answerNode = new LineNode( challenge.answer, challenge.graph, challenge.mvt );
-      thisNode.answerParentNode.addChild( answerNode );
+    thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
+    var answerNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.mvt );
+    thisNode.answerParentNode.addChild( answerNode );
 
-      // point (x1,y1) for answer
-      thisNode.answerPointNode = new PlottedPointNode( pointDiameter, challenge.answer.color );
-      thisNode.answerParentNode.addChild( thisNode.answerPointNode );
-      thisNode.answerPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( challenge.answer.x1, challenge.answer.y1 ) );
-    }
+    // point (x1,y1) for answer
+    thisNode.answerPointNode = new PlottedPointNode( pointDiameter, challenge.answer.color );
+    thisNode.answerParentNode.addChild( thisNode.answerPointNode );
+    thisNode.answerPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( challenge.answer.x1, challenge.answer.y1 ) );
 
     // guess
     thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
     thisNode.guessPointVisible = true;
+    thisNode.guessPointNode = null;
+    thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.mvt ) );
 
     // slope tool
     thisNode.slopeToolNode = slopeToolEnabled ? new SlopeToolNode( challenge.guessProperty, challenge.mvt ) : new Node();
@@ -66,14 +67,14 @@ define( function( require ) {
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {
 
-      thisNode.guessParentNode.removeAllChildren();
-      thisNode.guessPointNode = null;
+      if ( thisNode.guessPointNode ) {
+        thisNode.guessParentNode.removeChild( thisNode.guessPointNode );
+        thisNode.guessPointNode = null;
+      }
+
+      //TODO can this point be mutated?
+      // plot (x1,y1)
       if ( line ) {
-
-        // draw the line
-        thisNode.guessParentNode.addChild( new LineNode( line, challenge.graph, challenge.mvt ) );
-
-        // plot (x1,y1)
         thisNode.guessPointNode = new PlottedPointNode( pointDiameter, line.color );
         thisNode.guessPointNode.visible = thisNode.guessPointVisible;
         thisNode.guessParentNode.addChild( thisNode.guessPointNode );

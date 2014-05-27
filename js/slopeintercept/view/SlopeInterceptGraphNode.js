@@ -26,9 +26,9 @@ define( function( require ) {
 
     var thisNode = this;
     LineFormsGraphNode.call( thisNode, model, viewProperties,
-      // createLineNode: {Line} line, {Graph} graph, {ModelViewTransform2} mvt
-      function( line, graph, mvt ) {
-        return new LineNode( line, graph, mvt, {
+      // createLineNode: {Property<Line>} lineProperty, {Graph} graph, {ModelViewTransform2} mvt
+      function( lineProperty, graph, mvt ) {
+        return new LineNode( lineProperty, graph, mvt, {
           createEquationNode: function( line, fontSize, color ) {
             return SlopeInterceptEquationNode.createStaticEquation( line, fontSize, color );
           }

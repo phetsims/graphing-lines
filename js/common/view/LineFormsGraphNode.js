@@ -22,6 +22,7 @@ define( function( require ) {
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
 
   /**
@@ -39,17 +40,16 @@ define( function( require ) {
     thisNode.viewProperties = viewProperties;
     this.createLineNode = createLineNode;
 
-    // Parent nodes for each category of line (standard, saved, interactive) to maintain rendering order
+    // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
+    thisNode.interactiveLineNode = createLineNode( model.interactiveLineProperty, model.graph, model.mvt );
     thisNode.standardLinesParentNode = new Node( {pickable: false } );
     thisNode.savedLinesParentNode = new Node();
-    thisNode.interactiveLineParentNode = new Node( { pickable: false });
-    thisNode.interactiveLineNode = null;
 
     // Slope tool
     thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt );
 
     // Rendering order
-    thisNode.addChild( this.interactiveLineParentNode );
+    thisNode.addChild( this.interactiveLineNode );
     thisNode.addChild( this.savedLinesParentNode );
     thisNode.addChild( this.standardLinesParentNode );
     thisNode.addChild( this.slopeToolNode );
@@ -59,9 +59,6 @@ define( function( require ) {
 
     // Add/remove saved lines
     model.savedLines.addListeners( thisNode.savedLineAdded.bind( thisNode ), thisNode.savedLineRemoved.bind( thisNode ) );
-
-    // When the interactive line changes, update the graph.
-    model.interactiveLineProperty.link( thisNode.updateInteractiveLine.bind( thisNode ) );
 
     // Visibility of lines
     viewProperties.linesVisibleProperty.link( thisNode.updateLinesVisibility.bind( thisNode ) );
@@ -81,7 +78,7 @@ define( function( require ) {
     // @private Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
       // interactive line
-      this.interactiveLineParentNode.visible = ( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
+      this.interactiveLineNode.visible = ( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
 
       // saved & standard lines
       this.savedLinesParentNode.visible = this.viewProperties.linesVisible;
@@ -91,18 +88,9 @@ define( function( require ) {
       this.slopeToolNode.visible = ( this.viewProperties.slopeVisible && this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
     },
 
-    // @private Updates the line and its associated decorations
-    updateInteractiveLine: function( line ) {
-      // replace the line node
-      this.interactiveLineParentNode.removeAllChildren();
-      this.interactiveLineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
-      this.interactiveLineNode.setEquationVisible( this.viewProperties.interactiveEquationVisible );
-      this.interactiveLineParentNode.addChild( this.interactiveLineNode );
-    },
-
     // @private Called when a standard line is added to the model.
     standardLineAdded: function( line ) {
-      this.standardLinesParentNode.addChild( this.createLineNode( line, this.model.graph, this.model.mvt ) );
+      this.standardLinesParentNode.addChild( this.createLineNode( new Property( line ), this.model.graph, this.model.mvt ) );
     },
 
     // Called when a standard line is removed from the model.
@@ -112,8 +100,7 @@ define( function( require ) {
 
     // @private Called when a saved line is added to the model.
     savedLineAdded: function( line ) {
-      var lineNode = this.createLineNode( line, this.model.graph, this.model.mvt );
-      this.savedLinesParentNode.addChild( lineNode );
+      this.savedLinesParentNode.addChild( this.createLineNode( new Property( line ), this.model.graph, this.model.mvt ) );
     },
 
     // @private Called when a saved line is removed from the model.
@@ -125,7 +112,7 @@ define( function( require ) {
     removeLineNode: function( line, parentNode ) {
       for ( var i = 0; i < parentNode.getChildrenCount(); i++ ) {
         var node = parentNode.getChildAt( i );
-        if ( node.line === line ) {
+        if ( node.lineProperty.get() === line ) {
           parentNode.removeChild( node );
           break;
         }

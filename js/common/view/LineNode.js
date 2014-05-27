@@ -16,6 +16,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -26,13 +27,13 @@ define( function( require ) {
   var EQUATION_FONT_SIZE = 18;
 
   /**
-   * @param {Line} line
+   * @param {Property<Line>} lineProperty
    * @param {Graph} graph
    * @param {ModelViewTransform2} mvt
    * @param {*} options
    * @constructor
    */
-  function LineNode( line, graph, mvt, options ) {
+  function LineNode( lineProperty, graph, mvt, options ) {
 
     options = _.extend( {
       /*
@@ -47,118 +48,146 @@ define( function( require ) {
       }
     }, options );
 
-    Node.call( this, { pickable: false } );
+    var thisNode = this;
 
-    this.line = line;
-
-    var xExtent = mvt.viewToModelDeltaX( LINE_EXTENT );
-    var yExtent = Math.abs( mvt.viewToModelDeltaY( LINE_EXTENT ) );
-    var tailX, tailY, tipX, tipY;
-
-    if ( line.run === 0 ) {
-      // x = 0
-      tailX = line.x1;
-      tailY = graph.yRange.max + yExtent;
-      tipX = line.x1;
-      tipY = graph.yRange.min - yExtent;
-    }
-    else if ( line.rise === 0 ) {
-      // y = b
-      tailX = graph.xRange.min - xExtent;
-      tailY = line.y1;
-      tipX = graph.xRange.max + yExtent;
-      tipY = line.y1;
-    }
-    else {
-      // tail is the left-most end point. Compute x such that the point is inside the grid.
-      tailX = graph.xRange.min - xExtent;
-      tailY = line.solveY( tailX );
-      if ( tailY < graph.yRange.min - yExtent ) {
-        tailX = line.solveX( graph.yRange.min - yExtent );
-        tailY = line.solveY( tailX );
-      }
-      else if ( tailY > graph.yRange.max + yExtent ) {
-        tailX = line.solveX( graph.yRange.max + yExtent );
-        tailY = line.solveY( tailX );
-      }
-
-      // tip is the right-most end point. Compute x such that the point is inside the grid.
-      tipX = graph.xRange.max + xExtent;
-      tipY = line.solveY( tipX );
-      if ( tipY < graph.yRange.min - yExtent ) {
-        tipX = line.solveX( graph.yRange.min - yExtent );
-        tipY = line.solveY( tipX );
-      }
-      else if ( tipY > graph.yRange.max + yExtent ) {
-        tipX = line.solveX( graph.yRange.max + yExtent );
-        tipY = line.solveY( tipX );
-      }
-    }
+    thisNode.lineProperty = lineProperty;
+    thisNode.graph = graph; // @private
+    thisNode.mvt = mvt; // @private
+    thisNode.createEquationNode = options.createEquationNode;
+    thisNode.xExtent = mvt.viewToModelDeltaX( LINE_EXTENT ); // @private
+    thisNode.yExtent = Math.abs( mvt.viewToModelDeltaY( LINE_EXTENT ) ); // @private
 
     // double-headed arrow
-    this.tailLocation = mvt.modelToViewPosition( new Vector2( tailX, tailY ) );
-    this.tipLocation = mvt.modelToViewPosition( new Vector2( tipX, tipY ) );
-    this.arrowNode = new ArrowNode( this.tailLocation.x, this.tailLocation.y, this.tipLocation.x, this.tipLocation.y,
-      { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, fill: line.color, stroke: null } );
-    this.addChild( this.arrowNode );
+    thisNode.arrowNode = new ArrowNode( 0, 0, 0, 1,
+      { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
 
-    // equation
-    this.equationParentNode = new Node(); // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
-    this.addChild( this.equationParentNode );
-    this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
-    this.equationNode = options.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
-    this.equationParentNode.addChild( this.equationNode );
+    // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
+    thisNode.equationParentNode = new Node();
 
-    // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
-    var X_OFFSET = 30;
-    var Y_OFFSET = 12;
-    if ( line.undefinedSlope() ) {
-      // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
-      if ( line.rise < 0 ) {
-        this.equationParentNode.translation = this.tipLocation;
-        this.equationNode.right = -X_OFFSET;
-        this.equationNode.bottom = -Y_OFFSET;
-      }
-      else {
-        this.equationParentNode.translation = this.tailLocation;
-        this.equationNode.left = X_OFFSET;
-        this.equationNode.bottom = -Y_OFFSET;
-      }
-    }
-    else if ( line.rise <= 0 ) {
-      if ( line.run >= 0 ) {
-        // equation above the line, at tip
-        this.equationParentNode.translation = this.tipLocation;
-        this.equationNode.right = -X_OFFSET;
-        this.equationNode.bottom = -Y_OFFSET;
-      }
-      else {
-        // equation above the line, at tail
-        this.equationParentNode.translation = this.tailLocation;
-        this.equationNode.left = X_OFFSET;
-        this.equationNode.bottom = -Y_OFFSET;
-      }
-    }
-    else {
-      if ( line.run > 0 ) {
-        // equation below the line, at tip
-        this.equationParentNode.translation = this.tipLocation;
-        this.equationNode.right = -X_OFFSET;
-        this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
-      }
-      else {
-        // equation below the line, at tail
-        this.equationParentNode.translation = this.tailLocation;
-        this.equationNode.left = X_OFFSET;
-        this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
-      }
-    }
+    // intermediate parent, to hide line components in the case of a null line
+    thisNode.parentNode = new Node( { children: [ this.arrowNode, this.equationParentNode ] } );
+
+    Node.call( thisNode, { children: [ thisNode.parentNode ] } );
+
+    lineProperty.link( function( line ) {
+      thisNode.update( line );
+    } )
   }
 
   return inherit( Node, LineNode, {
 
     setEquationVisible: function( visible ) {
       this.equationParentNode.visible = visible;
+    },
+
+    // @private updates the line and equation
+    update: function( line ) {
+
+      // line may be null, for example the user's guess in 'Place The Points' challenge
+      this.parentNode.visible = line;
+      if ( !line ) { return; }
+
+      var xRange = this.graph.xRange;
+      var yRange = this.graph.yRange;
+      var tailX, tailY, tipX, tipY;
+
+      if ( line.run === 0 ) {
+        // x = 0
+        tailX = line.x1;
+        tailY = yRange.max + this.yExtent;
+        tipX = line.x1;
+        tipY = yRange.min - this.yExtent;
+      }
+      else if ( line.rise === 0 ) {
+        // y = b
+        tailX = xRange.min - this.xExtent;
+        tailY = line.y1;
+        tipX = xRange.max + this.yExtent;
+        tipY = line.y1;
+      }
+      else {
+        // tail is the left-most end point. Compute x such that the point is inside the grid.
+        tailX = xRange.min - this.xExtent;
+        tailY = line.solveY( tailX );
+        if ( tailY < yRange.min - this.yExtent ) {
+          tailX = line.solveX( yRange.min - this.yExtent );
+          tailY = line.solveY( tailX );
+        }
+        else if ( tailY > yRange.max + this.yExtent ) {
+          tailX = line.solveX( yRange.max + this.yExtent );
+          tailY = line.solveY( tailX );
+        }
+
+        // tip is the right-most end point. Compute x such that the point is inside the grid.
+        tipX = xRange.max + this.xExtent;
+        tipY = line.solveY( tipX );
+        if ( tipY < yRange.min - this.yExtent ) {
+          tipX = line.solveX( yRange.min - this.yExtent );
+          tipY = line.solveY( tipX );
+        }
+        else if ( tipY > yRange.max + this.yExtent ) {
+          tipX = line.solveX( yRange.max + this.yExtent );
+          tipY = line.solveY( tipX );
+        }
+      }
+
+      // line (arrow)
+      //TODO transform x and y components individually to alloc less memory
+      var tailLocation = this.mvt.modelToViewPosition( new Vector2( tailX, tailY ) );
+      var tipLocation = this.mvt.modelToViewPosition( new Vector2( tipX, tipY ) );
+      this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
+      this.arrowNode.fill = line.color;
+
+      // equation
+      this.equationParentNode.removeAllChildren(); //TODO can this be eliminated?
+      this.equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
+      this.equationParentNode.addChild( this.equationNode );
+      this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
+
+      // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
+      var X_OFFSET = 30;
+      var Y_OFFSET = 12;
+      if ( line.undefinedSlope() ) {
+        // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
+        if ( line.rise < 0 ) {
+          this.equationParentNode.translation = tipLocation;
+          this.equationNode.right = -X_OFFSET;
+          this.equationNode.bottom = -Y_OFFSET;
+        }
+        else {
+          this.equationParentNode.translation = tailLocation;
+          this.equationNode.left = X_OFFSET;
+          this.equationNode.bottom = -Y_OFFSET;
+        }
+      }
+      else if ( line.rise <= 0 ) {
+        if ( line.run >= 0 ) {
+          // equation above the line, at tip
+          this.equationParentNode.translation = tipLocation;
+          this.equationNode.right = -X_OFFSET;
+          this.equationNode.bottom = -Y_OFFSET;
+        }
+        else {
+          // equation above the line, at tail
+          this.equationParentNode.translation = tailLocation;
+          this.equationNode.left = X_OFFSET;
+          this.equationNode.bottom = -Y_OFFSET;
+        }
+      }
+      else {
+        if ( line.run > 0 ) {
+          // equation below the line, at tip
+          this.equationParentNode.translation = tipLocation;
+          this.equationNode.right = -X_OFFSET;
+          this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+        }
+        else {
+          // equation below the line, at tail
+          this.equationParentNode.translation = tailLocation;
+          this.equationNode.left = X_OFFSET;
+          this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+        }
+      }
     }
   } );
 } );

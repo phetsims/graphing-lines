@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );

@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var AnswerGraphNode = require( 'GRAPHING_LINES/linegame/view/AnswerGraphNode' );
   var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
   var Color = require( 'SCENERY/util/Color' );

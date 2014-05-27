@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var ObservableArray = require( 'AXON/ObservableArray' );
 
   /**

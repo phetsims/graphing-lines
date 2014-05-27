@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );

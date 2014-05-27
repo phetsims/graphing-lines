@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );

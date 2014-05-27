@@ -18,7 +18,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );

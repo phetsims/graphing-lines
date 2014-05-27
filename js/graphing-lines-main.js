@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
   var PointSlopeScreen = require( 'GRAPHING_LINES/pointSlope/PointSlopeScreen' );
   var Sim = require( 'JOIST/Sim' );

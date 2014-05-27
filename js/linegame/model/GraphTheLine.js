@@ -9,7 +9,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );

@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Color = require( 'SCENERY/util/Color' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );

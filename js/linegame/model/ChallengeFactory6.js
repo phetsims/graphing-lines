@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
   var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
   var Color = require( 'SCENERY/util/Color' );

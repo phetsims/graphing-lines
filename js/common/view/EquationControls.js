@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Color = require( 'SCENERY/util/Color' );
   var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );

@@ -14,7 +14,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );

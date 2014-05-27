@@ -10,7 +10,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'GRAPHING_LINES/common/model/Fraction' );

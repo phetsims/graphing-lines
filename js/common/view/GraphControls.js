@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var CheckBox = require( 'SUN/CheckBox' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );

@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );

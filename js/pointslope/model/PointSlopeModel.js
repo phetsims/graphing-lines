@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );

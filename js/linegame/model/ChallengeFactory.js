@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var Vector2 = require( 'DOT/Vector2' );
 
   function ChallengeFactory() {}

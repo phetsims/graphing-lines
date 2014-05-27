@@ -8,7 +8,7 @@
 define( function( require ) {
   'use strict';
 
-  // imports
+  // modules
   var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
   var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
   var inherit = require( 'PHET_CORE/inherit' );

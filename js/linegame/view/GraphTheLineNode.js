@@ -95,6 +95,7 @@ define( function( require ) {
       thisNode.guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
+    //TODO this does removeChild and some heavyweight allocation whenever the guess changes
     // sync with guess
     challenge.guessProperty.link( function( line ) {
 

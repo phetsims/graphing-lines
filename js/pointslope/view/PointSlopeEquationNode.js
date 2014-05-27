@@ -123,7 +123,7 @@ define( function( require ) {
     }
     xRightParenNode = new Text( ")", staticOptions );
 
-    //TODO can we update less? move this to prototype?
+    //TODO can we make fewer scenegraph changes here?
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the

@@ -113,7 +113,7 @@ define( function( require ) {
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
 
-    //TODO can we update less? move this to prototype?
+    //TODO can we make fewer scenegraph changes here?
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the

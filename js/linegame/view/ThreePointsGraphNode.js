@@ -23,7 +23,7 @@ define( function( require ) {
   function ThreePointsGraphNode( challenge ) {
 
     var thisNode = this;
-    ChallengeGraphNode.call( thisNode, challenge, false /* slopeToolEnabled */ );
+    ChallengeGraphNode.call( thisNode, challenge, { slopeToolEnabled: false } );
 
     // manipulators
     var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );

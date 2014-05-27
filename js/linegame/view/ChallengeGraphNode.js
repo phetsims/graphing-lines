@@ -24,10 +24,14 @@ define( function( require ) {
 
   /**
    * @param {Challenge} challenge
-   * @param {boolean} slopeToolEnabled
+   * @param {*} options
    * @constructor
    */
-  function ChallengeGraphNode( challenge, slopeToolEnabled ) {
+  function ChallengeGraphNode( challenge, options ) {
+
+    options = _.extend( {
+      slopeToolEnabled: true
+    }, options );
 
     var thisNode = this;
     GraphNode.call( thisNode, challenge.graph, challenge.mvt );
@@ -57,12 +61,16 @@ define( function( require ) {
     thisNode.guessPointVisible = true;
 
     // slope tool
-    thisNode.slopeToolNode = slopeToolEnabled ? new SlopeToolNode( challenge.guessProperty, challenge.mvt ) : new Node();
+    if ( options.slopeToolEnabled ) {
+      thisNode.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.mvt );
+    }
 
     // rendering order
     thisNode.addChild( thisNode.guessParentNode );
     thisNode.addChild( thisNode.answerParentNode );
-    thisNode.addChild( thisNode.slopeToolNode );
+    if ( thisNode.slopeToolNode ) {
+      thisNode.addChild( thisNode.slopeToolNode );
+    }
 
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {
@@ -101,6 +109,10 @@ define( function( require ) {
     },
 
     // Sets the visibility of the slope tool for the guess.
-    setSlopeToolVisible: function( visible ) { this.slopeToolNode.visible = visible; }
+    setSlopeToolVisible: function( visible ) {
+      if ( this.slopeToolNode ) {
+        this.slopeToolNode.visible = visible;
+      }
+    }
   } );
 } );

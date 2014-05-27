@@ -25,7 +25,7 @@ define( function( require ) {
   function TwoPointsGraphNode( challenge ) {
 
     var thisNode = this;
-    ChallengeGraphNode.call( thisNode, challenge, true /* slopeToolEnabled */ );
+    ChallengeGraphNode.call( thisNode, challenge );
 
     thisNode.setGuessVisible( true );
 

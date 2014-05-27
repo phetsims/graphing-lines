@@ -18,7 +18,7 @@ define( function( require ) {
    * @constructor
    */
   function AnswerGraphNode( challenge ) {
-    ChallengeGraphNode.call( this, challenge, true /* slopeToolEnabled */ );
+    ChallengeGraphNode.call( this, challenge );
     this.setAnswerVisible( true );
   }
 

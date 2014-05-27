@@ -45,15 +45,16 @@ define( function( require ) {
     thisNode.answerParentNode.addChild( answerNode );
 
     // point (x1,y1) for answer
-    thisNode.answerPointNode = new PlottedPointNode( pointDiameter, challenge.answer.color );
+    thisNode.answerPointNode = new PlottedPointNode( pointDiameter, LineGameConstants.ANSWER_COLOR );
     thisNode.answerParentNode.addChild( thisNode.answerPointNode );
     thisNode.answerPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( challenge.answer.x1, challenge.answer.y1 ) );
 
     // guess
     thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
-    thisNode.guessPointVisible = true;
-    thisNode.guessPointNode = null;
     thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.mvt ) );
+    thisNode.guessPointNode = new PlottedPointNode( pointDiameter, LineGameConstants.GUESS_COLOR );
+    thisNode.guessParentNode.addChild( thisNode.guessPointNode );
+    thisNode.guessPointVisible = true;
 
     // slope tool
     thisNode.slopeToolNode = slopeToolEnabled ? new SlopeToolNode( challenge.guessProperty, challenge.mvt ) : new Node();
@@ -65,18 +66,9 @@ define( function( require ) {
 
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {
-
-      if ( thisNode.guessPointNode ) {
-        thisNode.guessParentNode.removeChild( thisNode.guessPointNode );
-        thisNode.guessPointNode = null;
-      }
-
-      //TODO can this point be mutated?
-      // plot (x1,y1)
       if ( line ) {
-        thisNode.guessPointNode = new PlottedPointNode( pointDiameter, line.color );
+        // plot (x1,y1)
         thisNode.guessPointNode.visible = thisNode.guessPointVisible;
-        thisNode.guessParentNode.addChild( thisNode.guessPointNode );
         thisNode.guessPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       }
     } );

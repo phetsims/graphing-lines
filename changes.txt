@@ -1,3 +1,4 @@
+5/27/14 make plotted points persistent in game
 5/27/14 use string representations for all colors
 5/27/14 make LineNode mutable via lineProperty constructor param
 5/27/14 change 'imports' to 'modules' in require comments

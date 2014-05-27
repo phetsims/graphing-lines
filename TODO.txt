@@ -5,6 +5,7 @@ PERFORMANCE
 - put graph in its own layer, since it doesn't change (move Graph.lines to model, don't extend GraphNode, ...?)
 - EquationNode: mutate instead of alloc when Line changes?
 - EquationNode subtypes do lots of addChild/removeChild, change visibility instead?
+- GraphTheLineNode creates complex children whenever the guess changes, line 99
 - last resort: consider making Line mutable, to reduce affects of garbage collection
 
 USABILITY

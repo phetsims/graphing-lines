@@ -42,7 +42,7 @@ define( function( require ) {
 
     // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
     thisNode.interactiveLineNode = createLineNode( model.interactiveLineProperty, model.graph, model.mvt );
-    thisNode.standardLinesParentNode = new Node( {pickable: false } );
+    thisNode.standardLinesParentNode = new Node();
     thisNode.savedLinesParentNode = new Node();
 
     // Slope tool

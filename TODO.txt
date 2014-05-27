@@ -3,8 +3,8 @@ TODO list for graphing-lines (HTML5 port)
 PERFORMANCE
 - performance stinks on iPad
 - put graph in its own layer, since it doesn't change
-- changing a line results in allocation of: Line, LineNode, EquationNode
-- EquationNode subtypes do lots of addChild/removeChild
+- changing a line results in allocation of: Line, EquationNode
+- EquationNode subtypes do lots of addChild/removeChild, change visibility instead?
 - last resort: consider making Line mutable, to reduce affects of garbage collection
 
 USABILITY

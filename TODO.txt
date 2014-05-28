@@ -13,7 +13,6 @@ USABILITY
 - get new point tool image from AP
 
 HIGH
-- put 'Level N' above icon in level-selection buttons
 - vegas#7, add option to show 'best time' on vegas.LevelStartButton (display time below button, pickable:false)
 - address TODO items in the code
 

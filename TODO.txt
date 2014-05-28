@@ -16,7 +16,7 @@ USABILITY
 HIGH
 - put 'Level N' above icon in level-selection buttons
 - fix horizontal alignment of value in NumberPicker
-- vegas#7, add option to show 'best time' on vegas.LevelStartButton
+- vegas#7, add option to show 'best time' on vegas.LevelStartButton (display time below button, pickable:false)
 - address TODO items in the code
 - make sure that level-selection button stars reflect best score, not most recent score
 

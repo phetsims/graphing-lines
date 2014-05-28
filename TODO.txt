@@ -7,6 +7,7 @@ PERFORMANCE
 - GraphTheLineNode creates complex children whenever the guess changes, line 99
 - put graph in its own layer, since it doesn't change (quick test indicates negligible benefits)
 - last resort: consider making Line mutable, to reduce affects of garbage collection
+- reduce startup time
 
 USABILITY
 - make manipulators bigger, or make them smaller with a 'halo'

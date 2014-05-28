@@ -14,12 +14,12 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   /**
-   * @param {Number} diameter
+   * @param {Number} radius
    * @param {Color|String} color
    * @param {*} options
    * @constructor
    */
-  function PlottedPointNode( diameter, color, options ) {
+  function PlottedPointNode( radius, color, options ) {
 
     var mainColor = Color.toColor( color );
     options = _.extend( {
@@ -30,7 +30,7 @@ define( function( require ) {
       lineWidth: 1
     }, options );
 
-    ShadedSphereNode.call( this, diameter, options );
+    ShadedSphereNode.call( this, 2 * radius, options );
   }
 
   return inherit( ShadedSphereNode, PlottedPointNode );

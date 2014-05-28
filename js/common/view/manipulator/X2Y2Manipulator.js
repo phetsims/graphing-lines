@@ -59,17 +59,17 @@ define( function( require ) {
   inherit( SimpleDragHandler, X2Y2DragHandler );
 
   /**
-   * @param {Number} diameter
+   * @param {Number} radius
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x2RangeProperty
    * @param {Property<Range>} y2RangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function X2Y2Manipulator( diameter, lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
+  function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, diameter, GLColors.POINT_X2_Y2 );
+    Manipulator.call( thisNode, radius, GLColors.POINT_X2_Y2 );
 
     // move the manipulator to match the line's (x2,y2) point
     lineProperty.link( function( line ) {

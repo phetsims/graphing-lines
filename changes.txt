@@ -1,3 +1,5 @@
+5/28/14 use radius instead of diameter for specifying manipulators
+5/28/14 add halo to manipulators
 5/28/14 change 'Choose You Game Level' to 'Choose Your Level'
 5/28/14 expand pointer areas for manipulators by 50%
 5/28/14 PointToolNode: move tip to left edge, left-justify value (new background image needed with grippy piece)

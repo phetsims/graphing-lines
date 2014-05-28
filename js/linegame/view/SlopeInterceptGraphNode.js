@@ -37,17 +37,17 @@ define( function( require ) {
     var runRangeProperty = new Property( parameterRange.run( challenge.guess, challenge.graph ) );
     var y1RangeProperty = new Property( challenge.graph.yRange );
 
-    var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
+    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // intercept manipulator
-    var yInterceptManipulator = new YInterceptManipulator( manipulatorDiameter, challenge.guessProperty, y1RangeProperty, challenge.mvt );
+    var yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.mvt );
     var interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
       thisNode.addChild( yInterceptManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorDiameter, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
+    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {
       thisNode.addChild( slopeManipulator );

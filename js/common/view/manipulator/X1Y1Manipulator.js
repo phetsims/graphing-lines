@@ -64,7 +64,7 @@ define( function( require ) {
   inherit( SimpleDragHandler, X1Y1DragHandler );
 
   /**
-   * @param {Number} diameter
+   * @param {Number} radius
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x1RangeProperty
    * @param {Property<Range>} y1RangeProperty
@@ -72,10 +72,10 @@ define( function( require ) {
    * @param {Boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
    * @constructor
    */
-  function X1Y1Manipulator( diameter, lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
+  function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, diameter, GLColors.POINT_X1_Y1 );
+    Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1 );
 
     // move the manipulator to match the line's (x1,y1) point
     lineProperty.link( function( line ) {

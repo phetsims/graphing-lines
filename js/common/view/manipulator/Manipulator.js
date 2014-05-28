@@ -2,6 +2,7 @@
 
 /**
  * Base type for all line manipulators.
+ * A pseudo-3D sphere with a halo that appears during interactions.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ButtonListener = require( 'SCENERY/input/ButtonListener' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -17,14 +19,12 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   /**
-   * @param {number} diameter diameter of the sphere
+   * @param {number} radius radius of the sphere
    * @param {Color|String} color base color used to shade the sphere
    * @param {*} options
    * @constructor
    */
-  function Manipulator( diameter, color, options ) {
-
-    var radius = diameter / 2;
+  function Manipulator( radius, color, options ) {
 
     var mainColor = Color.toColor( color );
     options = _.extend( {
@@ -36,10 +36,19 @@ define( function( require ) {
       stroke: mainColor.darkerColor()
     }, options );
 
-    var haloNode = new Circle( 1.75 * radius, { fill: mainColor.withAlpha( 0.15 ), pickable: false } );
-    var sphereNode = new ShadedSphereNode( diameter, options );
+    var haloNode = new Circle( 1.75 * radius,
+      { fill: mainColor.withAlpha( 0.15 ), pickable: false, visible: false } );
+    var sphereNode = new ShadedSphereNode( 2 * radius, options );
 
     Node.call( this, { children: [ haloNode, sphereNode ] } );
+
+    // halo visibility
+    sphereNode.addInputListener( new ButtonListener( {
+        up: function( event ) { haloNode.visible = false; },
+        down: function( event ) { haloNode.visible = true; },
+        over: function( event ) { haloNode.visible = true; }
+      } )
+    );
 
     // expand pointer areas
     this.mouseArea = this.touchArea = Shape.circle( 0, 0, 1.5 * radius );

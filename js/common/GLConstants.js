@@ -20,6 +20,6 @@ define( function( require ) {
     Y_AXIS_RANGE: new Range( -10, 10 ),
     INTERACTIVE_EQUATION_FONT_SIZE: 34,
     PICKER_TOUCH_AREA_EXPAND_X: 30,
-    MANIPULATOR_DIAMETER: 0.85
+    MANIPULATOR_RADIUS: 0.425
   };
 } );

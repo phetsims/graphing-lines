@@ -29,12 +29,12 @@ define( function( require ) {
 
     thisNode.setGuessVisible( true );
 
-    var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
+    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
-    var x1y1Manipulator = new X1Y1Manipulator( manipulatorDiameter, challenge.guessProperty,
+    var x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.mvt, false /* constantSlope */ );
 
-    var x2y2Manipulator = new X2Y2Manipulator( manipulatorDiameter, challenge.guessProperty,
+    var x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.mvt );
 
     // Rendering order

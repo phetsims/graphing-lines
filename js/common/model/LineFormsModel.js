@@ -32,8 +32,8 @@ define( function( require ) {
     var thisModel = this;
     PropertySet.call( thisModel, { interactiveLine: interactiveLine } );
 
-    // diameter of the manipulators
-    thisModel.manipulatorDiameter = GLConstants.MANIPULATOR_DIAMETER;
+    // radius of the manipulators
+    thisModel.manipulatorRadius = GLConstants.MANIPULATOR_RADIUS;
 
     // graph
     thisModel.graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );

@@ -58,17 +58,17 @@ define( function( require ) {
   inherit( SimpleDragHandler, SlopeDragHandler );
 
   /**
-   * @param {Number} diameter
+   * @param {Number} radius
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} riseRangeProperty
    * @param {Property<Range>} runRangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SlopeManipulator( diameter, lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
+  function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, diameter, GLColors.SLOPE );
+    Manipulator.call( thisNode, radius, GLColors.SLOPE );
 
     // move the manipulator to match the line's slope
     lineProperty.link( function( line ) {

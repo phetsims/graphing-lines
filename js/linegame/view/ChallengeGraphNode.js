@@ -41,7 +41,7 @@ define( function( require ) {
       thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.mvt ) );
     }
 
-    var pointDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.POINT_DIAMETER );
+    var pointRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
     // answer
     thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
@@ -49,14 +49,14 @@ define( function( require ) {
     thisNode.answerParentNode.addChild( answerNode );
 
     // point (x1,y1) for answer
-    thisNode.answerPointNode = new PlottedPointNode( pointDiameter, LineGameConstants.ANSWER_COLOR );
+    thisNode.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
     thisNode.answerParentNode.addChild( thisNode.answerPointNode );
     thisNode.answerPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( challenge.answer.x1, challenge.answer.y1 ) );
 
     // guess
     thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
     thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.mvt ) );
-    thisNode.guessPointNode = new PlottedPointNode( pointDiameter, LineGameConstants.GUESS_COLOR );
+    thisNode.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
     thisNode.guessParentNode.addChild( thisNode.guessPointNode );
     thisNode.guessPointVisible = true;
 

@@ -26,12 +26,12 @@ define( function( require ) {
     ChallengeGraphNode.call( thisNode, challenge, { slopeToolEnabled: false } );
 
     // manipulators
-    var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
-    var p1Manipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_1,
+    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    var p1Manipulator = new PointManipulator( manipulatorRadius, GLColors.POINT_1,
       challenge.p1Property, [ challenge.p2Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
-    var p2Manipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_2,
+    var p2Manipulator = new PointManipulator( manipulatorRadius, GLColors.POINT_2,
       challenge.p2Property, [ challenge.p1Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
-    var p3Manipulator = new PointManipulator( manipulatorDiameter, GLColors.POINT_3,
+    var p3Manipulator = new PointManipulator( manipulatorRadius, GLColors.POINT_3,
       challenge.p3Property, [ challenge.p1Property, challenge.p2Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
 
     // rendering order

@@ -35,15 +35,15 @@ define( function( require ) {
         } );
       } );
 
-    var manipulatorDiameter = model.mvt.modelToViewDeltaX( model.manipulatorDiameter );
+    var manipulatorRadius = model.mvt.modelToViewDeltaX( model.manipulatorRadius );
 
     // slope manipulator
     var slopeManipulator = new SlopeManipulator(
-      manipulatorDiameter, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.mvt );
+      manipulatorRadius, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.mvt );
 
     // intercept manipulator
     var yInterceptManipulator = new YInterceptManipulator(
-      manipulatorDiameter, model.interactiveLineProperty, model.y1RangeProperty, model.mvt );
+      manipulatorRadius, model.interactiveLineProperty, model.y1RangeProperty, model.mvt );
 
     // rendering order
     thisNode.addChild( slopeManipulator );

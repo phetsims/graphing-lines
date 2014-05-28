@@ -38,17 +38,17 @@ define( function( require ) {
     var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guess, challenge.graph ) );
     var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guess, challenge.graph ) );
 
-    var manipulatorDiameter = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_DIAMETER );
+    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // point manipulator
-    var pointManipulator = new X1Y1Manipulator( manipulatorDiameter, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.mvt, true /* constantSlope */ );
+    var pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.mvt, true /* constantSlope */ );
     var pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
       thisNode.addChild( pointManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorDiameter, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
+    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );

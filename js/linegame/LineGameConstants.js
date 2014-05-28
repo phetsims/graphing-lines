@@ -34,8 +34,8 @@ define( function( require ) {
     // sizes
     GRAPH_WIDTH: 400, // graph width in view coordinates
     FACE_DIAMETER: 120,
-    MANIPULATOR_DIAMETER: GLConstants.MANIPULATOR_DIAMETER, // diameter of the manipulators, in model units
-    POINT_DIAMETER: 0.5, // diameter of plotted points, in model units
+    MANIPULATOR_RADIUS: GLConstants.MANIPULATOR_RADIUS, // radius of the manipulators, in model units
+    POINT_RADIUS: 0.25, // radius of plotted points, in model units
     POINT_TOOL_SCALE: 0.80
   };
 } );

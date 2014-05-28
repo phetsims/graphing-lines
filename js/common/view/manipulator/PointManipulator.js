@@ -69,7 +69,7 @@ define( function( require ) {
   inherit( SimpleDragHandler, PointDragHandler );
 
   /**
-   * @param {Number} diameter
+   * @param {Number} radius
    * @param {Color|String} color
    * @param {Property<Vector2>} pointProperty
    * @param {Array<Property<Vector2>>} otherPointProperties
@@ -78,10 +78,10 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function PointManipulator( diameter, color, pointProperty, otherPointProperties, xRange, yRange, mvt ) {
+  function PointManipulator( radius, color, pointProperty, otherPointProperties, xRange, yRange, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, diameter, color );
+    Manipulator.call( thisNode, radius, color );
 
     // move the manipulator to match the point
     pointProperty.link( function( point ) {

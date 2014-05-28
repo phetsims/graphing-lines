@@ -55,16 +55,16 @@ define( function( require ) {
   inherit( SimpleDragHandler, YInterceptDragHandler );
 
   /**
-   * @param {Number} diameter
+   * @param {Number} radius
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} y1RangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function YInterceptManipulator( diameter, lineProperty, y1RangeProperty, mvt ) {
+  function YInterceptManipulator( radius, lineProperty, y1RangeProperty, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, diameter, GLColors.INTERCEPT );
+    Manipulator.call( thisNode, radius, GLColors.INTERCEPT );
 
     // move the manipulator to match the line's (x1,y1) point
     lineProperty.link( function( line ) {

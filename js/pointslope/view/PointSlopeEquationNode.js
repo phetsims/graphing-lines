@@ -145,7 +145,7 @@ define( function( require ) {
       }
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
         // use slope-intercept form for y=x and y=-x, using a line with the proper slope and (x1,y1)=(0,0)
-        thisNode.addChild( SlopeInterceptEquationNode.createStaticEquation(
+        thisNode.addChild( SlopeInterceptEquationNode.createLabel(
           Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.fontSize, options.staticColor ) );
         return;
       }
@@ -374,7 +374,13 @@ define( function( require ) {
     return new SubSupText( html, { font: options.font } );
   };
 
-  PointSlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
+  /**
+   * Creates a non-interactive equation, used to label the specified line.
+   * @param {Line} line
+   * @param {Number} fontSize
+   * @param {Color|String} color
+   */
+  PointSlopeEquationNode.createLabel = function( line, fontSize, color ) {
     return new PointSlopeEquationNode( new Property( line ),
       new Property( new Range( 0, 1 ) ),
       new Property( new Range( 0, 1 ) ),

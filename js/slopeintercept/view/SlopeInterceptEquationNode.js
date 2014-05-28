@@ -384,7 +384,13 @@ define( function( require ) {
 
   };
 
-  SlopeInterceptEquationNode.createStaticEquation = function( line, fontSize, color ) {
+  /**
+   * Creates a non-interactive equation, used to label the specified line.
+   * @param {Line} line
+   * @param {Number} fontSize
+   * @param {Color|String} color
+   */
+  SlopeInterceptEquationNode.createLabel = function( line, fontSize, color ) {
     return new SlopeInterceptEquationNode( new Property( line ),
       new Property( new Range( 0, 1 ) ),
       new Property( new Range( 0, 1 ) ),

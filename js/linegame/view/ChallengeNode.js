@@ -212,7 +212,7 @@ define( function( require ) {
   }
 
   /**
-   * Creates a static (non-interactive) equation.
+   * Creates a non-interactive equation, used to label the specified line.
    * @param {EquationForm} equationForm
    * @param {Line} line
    * @param {Font} font
@@ -220,10 +220,10 @@ define( function( require ) {
    */
   ChallengeNode.createEquationNode = function( equationForm, line, fontSize, color ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return SlopeInterceptEquationNode.createStaticEquation( line, fontSize, color );
+      return SlopeInterceptEquationNode.createLabel( line, fontSize, color );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return new PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
+      return new PointSlopeEquationNode.createLabel( line, fontSize, color );
     }
     else {
       throw new Error( "unsupported equation form: " + equationForm );

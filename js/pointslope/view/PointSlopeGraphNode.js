@@ -30,7 +30,7 @@ define( function( require ) {
       function( lineProperty, graph, mvt ) {
         return new LineNode( lineProperty, graph, mvt, {
           createEquationNode: function( line, fontSize, color ) {
-            return PointSlopeEquationNode.createStaticEquation( line, fontSize, color );
+            return PointSlopeEquationNode.createLabel( line, fontSize, color );
           }
         } );
       } );

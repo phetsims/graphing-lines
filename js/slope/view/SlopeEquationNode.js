@@ -273,14 +273,14 @@ define( function( require ) {
   };
 
   /**
-   * Creates a static equation for the specified line.
+   * Creates a non-interactive equation, used to label the specified line.
    * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
    *
    * @param {Line} line
    * @param {Number} fontSize
    * @param {Color|String} color
    */
-  SlopeEquationNode.createStaticEquation = function( line, fontSize, color ) {
+  SlopeEquationNode.createLabel = function( line, fontSize, color ) {
 
     var equationNode = new EquationNode( fontSize );
 

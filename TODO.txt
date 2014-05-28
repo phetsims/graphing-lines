@@ -10,7 +10,7 @@ PERFORMANCE
 - reduce startup time
 
 USABILITY
-- make manipulators have a 'halo' that appears on mouseOver or touchDown, specify halo color since alpha needs to be different depending on color
+- specify halo color for manipulators, since alpha needs to be different depending on color
 - get new point tool image from AP
 
 HIGH

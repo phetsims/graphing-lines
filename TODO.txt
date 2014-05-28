@@ -19,7 +19,7 @@ HIGH
 - make Game graphs bigger (as big as possible)
 
 MEDIUM
-- game reward, see build-an-atom#62
+- game reward, see vegas#4
 
 LOW
 

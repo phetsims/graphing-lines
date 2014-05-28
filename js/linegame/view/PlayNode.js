@@ -39,7 +39,7 @@ define( function( require ) {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
       },
       { font: new PhetFont( 20 ) } );
-    scoreboardNode.centerX = layoutBounds.centerX;
+    scoreboardNode.left = layoutBounds.left + 30;
     scoreboardNode.bottom = layoutBounds.bottom - 20;
     thisNode.addChild( scoreboardNode );
 

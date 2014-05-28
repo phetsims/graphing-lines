@@ -79,9 +79,9 @@ define( function( require ) {
       answerBoxNode.right = ( challengeSize.width / 2 ) - 50;
       answerBoxNode.bottom = challenge.mvt.modelToViewY( 0 ) - 10;
 
-      // face centered below equation boxes
-      thisNode.faceNode.centerX = answerBoxNode.centerX;
-      thisNode.faceNode.bottom = thisNode.checkButton.bottom;
+      // face to left of buttons
+      thisNode.faceNode.right = thisNode.buttonsParent.left - 20;
+      thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
 
       // title above answer equation, left justified
       titleNode.left = answerBoxNode.left;

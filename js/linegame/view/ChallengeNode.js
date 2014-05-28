@@ -73,16 +73,20 @@ define( function( require ) {
       font: LineGameConstants.BUTTON_FONT,
       baseColor: LineGameConstants.BUTTON_COLOR,
       xMargin: 20,
-      yMargin: 5 };
-    thisNode.checkButton = new TextPushButton( checkString, buttonOptions );
+      yMargin: 5,
+      centerX: 0 // center aligned
+    };
+    var checkButton = new TextPushButton( checkString, buttonOptions );
     var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
     var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
     var nextButton = new TextPushButton( nextString, buttonOptions );
+    thisNode.buttonsParent = new Node( { children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ] } );
 
     // developer buttons, no i18n
-    var devButtonOptions = { font: new PhetFont( 12 ), baseColor: Color.WHITE };
-    var skipButton = new TextPushButton( "dev: Skip", devButtonOptions );
-    var replayButton = new TextPushButton( "dev: Replay", devButtonOptions );
+    var devButtonOptions = { font: new PhetFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
+    var skipButton = new TextPushButton( "dev: Skip", devButtonOptions ); // This button lets you skip the current challenge.
+    var replayButton = new TextPushButton( "dev: Replay", devButtonOptions ); // This button lets you repeat the current challenge.
+    var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
 
     // point tools
     var linesVisibleProperty = new Property( true );
@@ -100,13 +104,9 @@ define( function( require ) {
       if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
         thisNode.addChild( descriptionNode );
       }
-      thisNode.addChild( thisNode.checkButton );
-      thisNode.addChild( tryAgainButton );
-      thisNode.addChild( showAnswerButton );
-      thisNode.addChild( nextButton );
+      thisNode.addChild( thisNode.buttonsParent );
       if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-        thisNode.addChild( skipButton ); // This button lets you skip the current challenge.
-        thisNode.addChild( replayButton ); // This button lets you repeat the current challenge.
+        thisNode.addChild( devButtonsParent );
       }
       thisNode.addChild( pointToolParent );
       thisNode.addChild( thisNode.faceNode );
@@ -114,31 +114,17 @@ define( function( require ) {
     }
 
     // layout
-    {
-      descriptionNode.left = 10;
-      descriptionNode.top = 10;
-
-      // buttons at bottom center
-      var buttonCenterX = challengeSize.width / 2;
-      var buttonBottom = challengeSize.height - 20;
-      thisNode.checkButton.centerX = buttonCenterX;
-      thisNode.checkButton.bottom = buttonBottom;
-      tryAgainButton.centerX = buttonCenterX;
-      tryAgainButton.bottom = buttonBottom;
-      showAnswerButton.centerX = buttonCenterX;
-      showAnswerButton.bottom = buttonBottom;
-      nextButton.centerX = buttonCenterX;
-      nextButton.bottom = buttonBottom;
-
-      // dev buttons to right of main buttons
-      skipButton.left = showAnswerButton.right + 15;
-      skipButton.centerY = thisNode.checkButton.centerY;
-      replayButton.left = skipButton.left;
-      replayButton.centerY = skipButton.centerY;
-    }
+    descriptionNode.left = 10;
+    descriptionNode.top = 10;
+    // buttons at bottom
+    thisNode.buttonsParent.right = ( 0.5 * challengeSize.width ) - 20;
+    thisNode.buttonsParent.bottom = challengeSize.height - 20;
+    // dev buttons to right of main buttons
+    devButtonsParent.left = thisNode.buttonsParent.right + 15;
+    devButtonsParent.centerY = thisNode.buttonsParent.centerY;
 
     // "Check" button
-    thisNode.checkButton.addListener( function() {
+    checkButton.addListener( function() {
       if ( challenge.isCorrect() ) {
         thisNode.faceNode.smile();
         audioPlayer.correctAnswer();
@@ -200,7 +186,7 @@ define( function( require ) {
       thisNode.pointsAwardedNode.visible = ( thisNode.faceNode.visible && challenge.isCorrect() );
 
       // visibility of buttons
-      thisNode.checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
+      checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
       tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
       showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
       nextButton.visible = ( state === PlayState.NEXT );

@@ -32,7 +32,7 @@ define( function( require ) {
     BUTTON_COLOR: 'yellow',
 
     // sizes
-    GRAPH_WIDTH: 400, // graph width in view coordinates
+    GRAPH_WIDTH: 500, // graph width in view coordinates
     FACE_DIAMETER: 120,
     MANIPULATOR_RADIUS: GLConstants.MANIPULATOR_RADIUS, // radius of the manipulators, in model units
     POINT_RADIUS: 0.25, // radius of plotted points, in model units

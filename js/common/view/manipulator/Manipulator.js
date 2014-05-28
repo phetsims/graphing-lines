@@ -9,8 +9,10 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Circle = require( 'SCENERY/nodes/Circle' );
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   var Shape = require( 'KITE/Shape' );
 
@@ -22,6 +24,8 @@ define( function( require ) {
    */
   function Manipulator( diameter, color, options ) {
 
+    var radius = diameter / 2;
+
     var mainColor = Color.toColor( color );
     options = _.extend( {
       mainColor: mainColor,
@@ -32,12 +36,15 @@ define( function( require ) {
       stroke: mainColor.darkerColor()
     }, options );
 
-    ShadedSphereNode.call( this, diameter, options );
+
+    var haloNode = new Circle( 1.75 * radius, { fill: mainColor.withAlpha( 0.15 ) } );
+    var sphereNode = new ShadedSphereNode( diameter, options );
+
+    Node.call( this, { children: [ haloNode, sphereNode ] } );
 
     // expand pointer areas
-    var radius = diameter / 2;
     this.mouseArea = this.touchArea = Shape.circle( 0, 0, 1.5 * radius );
   }
 
-  return inherit( ShadedSphereNode, Manipulator );
+  return inherit( Node, Manipulator );
 } );

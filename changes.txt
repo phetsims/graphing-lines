@@ -1,3 +1,4 @@
+5/28/14 try another workaround for namespace collision between scenery.Line and graphing-lines.Line
 5/28/14 rename interactiveLineProperty to lineProperty everywhere, except where the qualification is needed in model to differentiate between other lines
 5/27/14 delete various vestigial occurrences of pickable:false
 5/27/14 change slopeToolEnabled from a constructor parameter to an option (default true) for ChallengeGraphNode and its subtypes

@@ -31,7 +31,7 @@ define( function( require ) {
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
-  var SceneryLine = require( 'SCENERY/nodes/Line' ); // NOTE: name collision with graphing-lines.Line
+  var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -103,7 +103,7 @@ define( function( require ) {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
@@ -111,7 +111,7 @@ define( function( require ) {
       { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-    yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
 
     //TODO can we make fewer scenegraph changes here?
     /*

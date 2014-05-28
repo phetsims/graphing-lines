@@ -28,7 +28,7 @@ define( function( require ) {
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range');
-  var SceneryLine = require( 'SCENERY/nodes/Line' ); // NOTE: name collision with graphing-lines.Line
+  var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
@@ -110,7 +110,7 @@ define( function( require ) {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    fractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     xLeftParenNode = new Text( "(", staticOptions );
     xNode = new Text( symbolXString, staticOptions );
     xOperatorNode = new Node(); // parent for + or - node

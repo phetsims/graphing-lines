@@ -17,7 +17,6 @@ HIGH
 - fix horizontal alignment of value in NumberPicker
 - vegas#7, add option to show 'best time' on vegas.LevelStartButton (display time below button, pickable:false)
 - address TODO items in the code
-- adjust initial location of point tools, now that their tip is not horizontally centered
 - make Game graphs bigger (as big as possible)
 
 MEDIUM

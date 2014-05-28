@@ -1,3 +1,4 @@
+5/28/14 adjust initial location of point tools, now that their tips are not horizontally centered
 5/28/14 verified that level-selection button stars reflect best score, not most recent score
 5/28/14 specify halo alpha for each manipulator color, since alpha needs to be different depending on color
 5/28/14 replace color for 3 different points with GLColor.POINT

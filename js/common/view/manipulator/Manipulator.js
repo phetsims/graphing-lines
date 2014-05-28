@@ -12,6 +12,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  var Shape = require( 'KITE/Shape' );
 
   /**
    * @param {number} diameter diameter of the sphere
@@ -32,6 +33,10 @@ define( function( require ) {
     }, options );
 
     ShadedSphereNode.call( this, diameter, options );
+
+    // expand pointer areas
+    var radius = diameter / 2;
+    this.mouseArea = this.touchArea = Shape.circle( 0, 0, 1.5 * radius );
   }
 
   return inherit( ShadedSphereNode, Manipulator );

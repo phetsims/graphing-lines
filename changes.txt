@@ -1,3 +1,4 @@
+5/28/14 change 'Choose You Game Level' to 'Choose Your Level'
 5/28/14 expand pointer areas for manipulators by 50%
 5/28/14 PointToolNode: move tip to left edge, left-justify value (new background image needed with grippy piece)
 # 5/28/14 1.0.0-dev.4

@@ -33,7 +33,7 @@ define( function( require ) {
   ];
 
   // strings
-  var chooseYourGameLevelString = require( 'string!GRAPHING_LINES/chooseYourGameLevel' );
+  var chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
 
   // constants
   var X_MARGIN = 40;
@@ -66,7 +66,7 @@ define( function( require ) {
     Node.call( this );
 
     // Title
-    var title = new Text( chooseYourGameLevelString, { font: new PhetFont( 40 ) } );
+    var title = new Text( chooseYourLevelString, { font: new PhetFont( 40 ) } );
     this.addChild( title );
 
     // Level-selection buttons, arranged in 2 rows

@@ -336,15 +336,16 @@ define( function( require ) {
     };
 
     // sync the model with the controls
-    var lineUpdater = function() {
+    var updateLine = function() {
       if ( !updatingControls ) {
         lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
       }
     };
-    x1Property.link( lineUpdater.bind( thisNode ) );
-    y1Property.link( lineUpdater.bind( thisNode ) );
-    riseProperty.link( lineUpdater.bind( thisNode ) );
-    runProperty.link( lineUpdater.bind( thisNode ) );
+    //TODO updateLine will fire 4 times on startup
+    x1Property.link( updateLine.bind( thisNode ) );
+    y1Property.link( updateLine.bind( thisNode ) );
+    riseProperty.link( updateLine.bind( thisNode ) );
+    runProperty.link( updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

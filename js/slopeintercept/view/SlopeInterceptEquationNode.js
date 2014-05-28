@@ -330,7 +330,7 @@ define( function( require ) {
     //***************************************************************
 
     // sync the model with the controls
-    var lineUpdater = function() {
+    var updateLine = function() {
       if ( !updatingControls ) {
         if ( options.interactiveIntercept ) {
           lineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), lineProperty.get().color ) );
@@ -341,9 +341,10 @@ define( function( require ) {
         }
       }
     };
-    riseProperty.link( lineUpdater.bind( thisNode ) );
-    runProperty.link( lineUpdater.bind( thisNode ) );
-    yInterceptProperty.link( lineUpdater.bind( thisNode ) );
+    //TODO updateLine will fire 3 times on startup
+    riseProperty.link( updateLine.bind( thisNode ) );
+    runProperty.link( updateLine.bind( thisNode ) );
+    yInterceptProperty.link( updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

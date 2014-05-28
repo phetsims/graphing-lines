@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -70,7 +71,6 @@ define( function( require ) {
 
   /**
    * @param {Number} radius
-   * @param {Color|String} color
    * @param {Property<Vector2>} pointProperty
    * @param {Array<Property<Vector2>>} otherPointProperties
    * @param {Range} xRange
@@ -78,10 +78,10 @@ define( function( require ) {
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function PointManipulator( radius, color, pointProperty, otherPointProperties, xRange, yRange, mvt ) {
+  function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, radius, color );
+    Manipulator.call( thisNode, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
     // move the manipulator to match the point
     pointProperty.link( function( point ) {

@@ -27,11 +27,11 @@ define( function( require ) {
 
     // manipulators
     var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
-    var p1Manipulator = new PointManipulator( manipulatorRadius, GLColors.POINT_1,
+    var p1Manipulator = new PointManipulator( manipulatorRadius,
       challenge.p1Property, [ challenge.p2Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
-    var p2Manipulator = new PointManipulator( manipulatorRadius, GLColors.POINT_2,
+    var p2Manipulator = new PointManipulator( manipulatorRadius,
       challenge.p2Property, [ challenge.p1Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
-    var p3Manipulator = new PointManipulator( manipulatorRadius, GLColors.POINT_3,
+    var p3Manipulator = new PointManipulator( manipulatorRadius,
       challenge.p3Property, [ challenge.p1Property, challenge.p2Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.mvt );
 
     // rendering order

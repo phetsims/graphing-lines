@@ -69,7 +69,7 @@ define( function( require ) {
   function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.POINT_X2_Y2 );
+    Manipulator.call( thisNode, radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
 
     // move the manipulator to match the line's (x2,y2) point
     lineProperty.link( function( line ) {

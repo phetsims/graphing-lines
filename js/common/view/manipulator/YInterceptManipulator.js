@@ -64,7 +64,7 @@ define( function( require ) {
   function YInterceptManipulator( radius, lineProperty, y1RangeProperty, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.INTERCEPT );
+    Manipulator.call( thisNode, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
 
     // move the manipulator to match the line's (x1,y1) point
     lineProperty.link( function( line ) {

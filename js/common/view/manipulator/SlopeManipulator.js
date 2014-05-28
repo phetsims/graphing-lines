@@ -68,7 +68,7 @@ define( function( require ) {
   function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.SLOPE );
+    Manipulator.call( thisNode, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
     lineProperty.link( function( line ) {

@@ -31,13 +31,14 @@ define( function( require ) {
       mainColor: mainColor,
       highlightColor: Color.WHITE,
       shadowColor: mainColor.darkerColor(),
+      haloAlpha: 0.5, // alpha channel of the halo, 0.0 - 1.0
       cursor: 'pointer',  // all manipulators are interactive
       lineWidth: 1,
       stroke: mainColor.darkerColor()
     }, options );
 
     var haloNode = new Circle( 1.75 * radius,
-      { fill: mainColor.withAlpha( 0.15 ), pickable: false, visible: false } );
+      { fill: mainColor.withAlpha( options.haloAlpha ), pickable: false, visible: false } );
     var sphereNode = new ShadedSphereNode( 2 * radius, options );
 
     Node.call( this, { children: [ haloNode, sphereNode ] } );

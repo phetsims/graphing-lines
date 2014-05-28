@@ -75,7 +75,7 @@ define( function( require ) {
   function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
 
     var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1 );
+    Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
 
     // move the manipulator to match the line's (x1,y1) point
     lineProperty.link( function( line ) {

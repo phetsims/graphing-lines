@@ -18,9 +18,7 @@ define( function( require ) {
     SLOPE: 'rgb( 117, 217, 255 )',
     POINT_X1_Y1: 'rgb( 200, 0, 200 )',
     POINT_X2_Y2: 'rgb( 210, 255, 0 )',
-    POINT_1: 'rgb( 200, 0, 200 )',
-    POINT_2: 'rgb( 200, 0, 200 )',
-    POINT_3: 'rgb( 200, 0, 200 )',
+    POINT: 'rgb( 200, 0, 200 )',
     INTERCEPT: 'rgb( 200, 0, 200 )',
     SAVE_LINE_BUTTON: 'white',
     ERASE_LINES_BUTTON: 'white',
@@ -31,6 +29,15 @@ define( function( require ) {
     POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR: 'white',
     STATIC_EQUATION_ELEMENT: 'black',
     EQUATION_CONTROL_PANEL: 'rgb( 238, 238, 238 )',
-    GRAPH_CONTROL_PANEL: 'rgb( 238, 238, 238 )'
+    GRAPH_CONTROL_PANEL: 'rgb( 238, 238, 238 )',
+
+    // alpha channel (0-1) of the halo around the various manipulators
+    HALO_ALPHA: {
+      slope: 0.3,
+      intercept: 0.15,
+      x1y1: 0.15,
+      x2y2: 0.35,
+      point: 0.15
+    }
   };
 } );

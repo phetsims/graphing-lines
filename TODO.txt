@@ -10,7 +10,6 @@ PERFORMANCE
 - reduce startup time
 
 USABILITY
-- specify halo color for manipulators, since alpha needs to be different depending on color
 - get new point tool image from AP
 
 HIGH

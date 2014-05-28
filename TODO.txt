@@ -10,9 +10,10 @@ PERFORMANCE
 
 USABILITY
 - make manipulators bigger, or make them smaller with a 'halo'
-- add a tab on right side of point tool, so you can see values while moving on tablet
+- get new point tool image from AP
+
+HIGH
 - fix horizontal alignment of value in NumberPicker
-- remove Graph.lines, move to model, so that GraphNode can be independent and drawn in its own layer
 - vegas#7, add option to show 'best time' on vegas.LevelStartButton
 - address TODO items in the code
 

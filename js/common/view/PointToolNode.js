@@ -122,22 +122,20 @@ define( function( require ) {
     if ( pointTool.orientation === 'down' ) {
       tipNode.centerX = 0;
       tipNode.bottom = 0;
-      bodyNode.centerX = tipNode.centerX;
-      bodyNode.bottom = tipNode.top;
+      bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
+      bodyNode.bottom = tipNode.top + 1;
       backgroundNode.centerX = bodyNode.centerX;
       backgroundNode.top = bodyNode.top + BACKGROUND_MARGIN;
-      valueNode.centerX = backgroundNode.centerX;
       valueNode.centerY = backgroundNode.centerY;
     }
     else if ( pointTool.orientation === 'up' ) {
       tipNode.rotation = Math.PI;
       tipNode.centerX = 0;
       tipNode.top = 0;
-      bodyNode.centerX = tipNode.centerX;
-      bodyNode.top = tipNode.bottom;
+      bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
+      bodyNode.top = tipNode.bottom - 1;
       backgroundNode.centerX = bodyNode.centerX;
       backgroundNode.top = bodyNode.top + BACKGROUND_MARGIN;
-      valueNode.centerX = backgroundNode.centerX;
       valueNode.centerY = backgroundNode.centerY;
     }
     else {
@@ -200,7 +198,7 @@ define( function( require ) {
     // @private Sets the displayed value to an arbitrary string
     setCoordinatesString: function( s ) {
       this._valueNode.text = s;
-      this._valueNode.centerX = this._bodyNode.centerX;  // horizontally centered
+      this._valueNode.left = this._bodyNode.left + 15;  // left justified
     },
 
     // @private Sets the foreground, the color of the displayed value

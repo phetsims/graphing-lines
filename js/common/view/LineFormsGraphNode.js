@@ -28,7 +28,7 @@ define( function( require ) {
   /**
    * @param {LineFormsModel } model
    * @param {LineFormsViewProperties} viewProperties
-   * @param {Function} createLineNode function with parameters {Line} line, {Graph} graph, and {ModelViewTransform2} mvt
+   * @param {Function} createLineNode function with parameters {Property<Line>} lineProperty, {Graph} graph, and {ModelViewTransform2} mvt
    * @constructor
    */
   function LineFormsGraphNode( model, viewProperties, createLineNode ) {

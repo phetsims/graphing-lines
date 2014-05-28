@@ -1,3 +1,4 @@
+5/28/14 increase size of point tools in game
 5/28/14 put 'Level N' above icon in level-selection buttons, increase size of buttons
 5/28/14 make game graphs 20% larger (repositioning of buttons, face, scoreboard and point tools required)
 5/28/14 implement option.align in scenery-phet.NumberPicker, default to 'center'

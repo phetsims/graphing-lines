@@ -39,8 +39,8 @@ define( function( require ) {
       xRange,
       yRange,
       LineGameConstants.ORIGIN_OFFSET,
-      new Vector2( 2, -10.5 ), /* point tool location 1 (up) */
-      new Vector2( 6.5, -12.5 ), /* point tool location 2 (down) */
+      new Vector2( 1.5, -10.5 ), /* point tool location 1 (up) */
+      new Vector2( 6.5, -13 ), /* point tool location 2 (down) */
       new Bounds2( -13, -13, 14, 15 ),
       new Bounds2( -13, -16, 14, 12 )
     );

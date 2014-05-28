@@ -36,6 +36,6 @@ define( function( require ) {
     FACE_DIAMETER: 120,
     MANIPULATOR_RADIUS: GLConstants.MANIPULATOR_RADIUS, // radius of the manipulators, in model units
     POINT_RADIUS: 0.25, // radius of plotted points, in model units
-    POINT_TOOL_SCALE: 0.80
+    POINT_TOOL_SCALE: 0.95
   };
 } );

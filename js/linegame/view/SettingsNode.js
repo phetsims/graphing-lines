@@ -47,6 +47,7 @@ define( function( require ) {
   // Creates a level selection button
   var createLevelStartButton = function( level, model ) {
 
+    // 'Level N' centered above icon
     var label = new Text( StringUtils.format( pattern_0level, level + 1 ), { font: new PhetFont( 60 ) } );
     var image = new Image( levelImages[level], { centerX: label.centerX, top: label.bottom + 20 } );
     var icon = new Node( { children: [ label, image ] } );

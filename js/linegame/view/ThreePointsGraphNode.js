@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );

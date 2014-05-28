@@ -36,8 +36,7 @@ define( function( require ) {
       stroke: mainColor.darkerColor()
     }, options );
 
-
-    var haloNode = new Circle( 1.75 * radius, { fill: mainColor.withAlpha( 0.15 ) } );
+    var haloNode = new Circle( 1.75 * radius, { fill: mainColor.withAlpha( 0.15 ), pickable: false } );
     var sphereNode = new ShadedSphereNode( diameter, options );
 
     Node.call( this, { children: [ haloNode, sphereNode ] } );

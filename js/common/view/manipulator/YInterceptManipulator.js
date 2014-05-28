@@ -56,22 +56,22 @@ define( function( require ) {
 
   /**
    * @param {Number} diameter
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Range>} y1RangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function YInterceptManipulator( diameter, interactiveLineProperty, y1RangeProperty, mvt ) {
+  function YInterceptManipulator( diameter, lineProperty, y1RangeProperty, mvt ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, diameter, GLColors.INTERCEPT );
 
     // move the manipulator to match the line's (x1,y1) point
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    thisNode.addInputListener( new YInterceptDragHandler( interactiveLineProperty, y1RangeProperty, mvt ) );
+    thisNode.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, mvt ) );
   }
 
   return inherit( Manipulator, YInterceptManipulator );

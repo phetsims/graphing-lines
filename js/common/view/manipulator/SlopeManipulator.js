@@ -59,23 +59,23 @@ define( function( require ) {
 
   /**
    * @param {Number} diameter
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Range>} riseRangeProperty
    * @param {Property<Range>} runRangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function SlopeManipulator( diameter, interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) {
+  function SlopeManipulator( diameter, lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, diameter, GLColors.SLOPE );
 
     // move the manipulator to match the line's slope
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    thisNode.addInputListener( new SlopeDragHandler( interactiveLineProperty, riseRangeProperty, runRangeProperty, mvt ) );
+    thisNode.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, mvt ) );
   }
 
   return inherit( Manipulator, SlopeManipulator );

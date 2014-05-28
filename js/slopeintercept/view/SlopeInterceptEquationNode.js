@@ -46,14 +46,14 @@ define( function( require ) {
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Number>} riseRangeProperty
    * @param {Property<Number>} runRangeProperty
    * @param {Property<Number>} yInterceptRangeProperty
    * @param {*} options
    * @constructor
    */
-  function SlopeInterceptEquationNode( interactiveLineProperty, riseRangeProperty, runRangeProperty, yInterceptRangeProperty, options ) {
+  function SlopeInterceptEquationNode( lineProperty, riseRangeProperty, runRangeProperty, yInterceptRangeProperty, options ) {
 
     options = _.extend( {
       interactiveSlope: true,
@@ -71,10 +71,10 @@ define( function( require ) {
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
     // internal properties that are connected to pickers
-    var riseProperty = new Property( interactiveLineProperty.get().rise );
-    var runProperty = new Property( interactiveLineProperty.get().run );
-    var yInterceptProperty = new Property( interactiveLineProperty.get().y1 );
-    var fractionalIntercept = interactiveLineProperty.get().getYIntercept();
+    var riseProperty = new Property( lineProperty.get().rise );
+    var runProperty = new Property( lineProperty.get().run );
+    var yInterceptProperty = new Property( lineProperty.get().y1 );
+    var fractionalIntercept = lineProperty.get().getYIntercept();
     var yInterceptNumeratorProperty = new Property( fractionalIntercept.numerator );
     var yInterceptDenominatorProperty = new Property( fractionalIntercept.denominator );
 
@@ -333,11 +333,11 @@ define( function( require ) {
     var lineUpdater = function() {
       if ( !updatingControls ) {
         if ( options.interactiveIntercept ) {
-          interactiveLineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), interactiveLineProperty.get().color ) );
+          lineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), lineProperty.get().color ) );
         }
         else {
-          var line = interactiveLineProperty.get();
-          interactiveLineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), interactiveLineProperty.get().color ) );
+          var line = lineProperty.get();
+          lineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), lineProperty.get().color ) );
         }
       }
     };
@@ -346,7 +346,7 @@ define( function( require ) {
     yInterceptProperty.link( lineUpdater.bind( thisNode ) );
 
     // sync the controls and layout with the model
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
 
       // If intercept is interactive, then (x1,y1) must be on a grid line on the y intercept.
       assert && assert( !options.interactiveIntercept || ( line.x1 === 0 && Util.isInteger( line.y1 ) ) );
@@ -361,7 +361,7 @@ define( function( require ) {
           yInterceptProperty.set( line.y1 );
         }
         else {
-          var fractionalIntercept = interactiveLineProperty.get().getYIntercept();
+          var fractionalIntercept = lineProperty.get().getYIntercept();
           yInterceptNumeratorProperty.set( fractionalIntercept.numerator );
           yInterceptDenominatorProperty.set( fractionalIntercept.denominator );
         }

@@ -44,7 +44,7 @@ define( function( require ) {
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Number>} x1RangeProperty
    * @param {Property<Number>} y1RangeProperty
    * @param {Property<Number>} riseRangeProperty
@@ -52,7 +52,7 @@ define( function( require ) {
    * @param {*} options
    * @constructor
    */
-  function PointSlopeEquationNode( interactiveLineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty, options ) {
+  function PointSlopeEquationNode( lineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty, options ) {
 
     options = _.extend( {
       interactivePoint: true,
@@ -70,10 +70,10 @@ define( function( require ) {
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
     // internal properties that are connected to pickers
-    var x1Property = new Property( interactiveLineProperty.get().x1 );
-    var y1Property = new Property( interactiveLineProperty.get().y1 );
-    var riseProperty = new Property( interactiveLineProperty.get().rise );
-    var runProperty = new Property( interactiveLineProperty.get().run );
+    var x1Property = new Property( lineProperty.get().x1 );
+    var y1Property = new Property( lineProperty.get().y1 );
+    var riseProperty = new Property( lineProperty.get().rise );
+    var runProperty = new Property( lineProperty.get().run );
 
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
@@ -338,7 +338,7 @@ define( function( require ) {
     // sync the model with the controls
     var lineUpdater = function() {
       if ( !updatingControls ) {
-        interactiveLineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), interactiveLineProperty.get().color ) );
+        lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
       }
     };
     x1Property.link( lineUpdater.bind( thisNode ) );
@@ -347,7 +347,7 @@ define( function( require ) {
     runProperty.link( lineUpdater.bind( thisNode ) );
 
     // sync the controls and layout with the model
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;

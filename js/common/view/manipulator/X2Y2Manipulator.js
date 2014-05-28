@@ -60,23 +60,23 @@ define( function( require ) {
 
   /**
    * @param {Number} diameter
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x2RangeProperty
    * @param {Property<Range>} y2RangeProperty
    * @param {ModelViewTransform2} mvt
    * @constructor
    */
-  function X2Y2Manipulator( diameter, interactiveLineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
+  function X2Y2Manipulator( diameter, lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, diameter, GLColors.POINT_X2_Y2 );
 
     // move the manipulator to match the line's (x2,y2) point
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    thisNode.addInputListener( new X2Y2DragHandler( interactiveLineProperty, x2RangeProperty, y2RangeProperty, mvt ) );
+    thisNode.addInputListener( new X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, mvt ) );
   }
 
   return inherit( Manipulator, X2Y2Manipulator );

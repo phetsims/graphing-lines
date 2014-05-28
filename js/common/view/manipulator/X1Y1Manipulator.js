@@ -65,24 +65,24 @@ define( function( require ) {
 
   /**
    * @param {Number} diameter
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x1RangeProperty
    * @param {Property<Range>} y1RangeProperty
    * @param {ModelViewTransform2} mvt
    * @param {Boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
    * @constructor
    */
-  function X1Y1Manipulator( diameter, interactiveLineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
+  function X1Y1Manipulator( diameter, lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, diameter, GLColors.POINT_X1_Y1 );
 
     // move the manipulator to match the line's (x1,y1) point
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
       thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    thisNode.addInputListener( new X1Y1DragHandler( interactiveLineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) );
+    thisNode.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) );
   }
 
   return inherit( Manipulator, X1Y1Manipulator );

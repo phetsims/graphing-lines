@@ -41,13 +41,13 @@ define( function( require ) {
   /**
    * Creates an interactive equation. x1, y1, x2 and y2 are interactive.
    *
-   * @param {Property<Line>} interactiveLineProperty
+   * @param {Property<Line>} lineProperty
    * @param {Property<Number>} xRangeProperty
    * @param {Property<Number>} yRangeProperty
    * @param {*} options
    * @constructor
    */
-  function SlopeEquationNode( interactiveLineProperty, xRangeProperty, yRangeProperty, options ) {
+  function SlopeEquationNode( lineProperty, xRangeProperty, yRangeProperty, options ) {
 
     options = _.extend( {
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
@@ -63,14 +63,14 @@ define( function( require ) {
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
     // internal properties that are connected to pickers
-    var x1Property = new Property( interactiveLineProperty.get().x1 );
-    var y1Property = new Property( interactiveLineProperty.get().y1 );
-    var x2Property = new Property( interactiveLineProperty.get().x2 );
-    var y2Property = new Property( interactiveLineProperty.get().y2 );
+    var x1Property = new Property( lineProperty.get().x1 );
+    var y1Property = new Property( lineProperty.get().y1 );
+    var x2Property = new Property( lineProperty.get().x2 );
+    var y2Property = new Property( lineProperty.get().y2 );
 
     // internal properties that are connected to number displays
-    var riseProperty = new Property( interactiveLineProperty.get().rise );
-    var runProperty = new Property( interactiveLineProperty.get().run );
+    var riseProperty = new Property( lineProperty.get().rise );
+    var runProperty = new Property( lineProperty.get().run );
 
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
@@ -175,7 +175,7 @@ define( function( require ) {
     // sync the model with the controls
     var updateLine = function() {
       if ( !updatingControls ) {
-        interactiveLineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), interactiveLineProperty.get().color ) );
+        lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
       }
     };
     x1Property.link( updateLine.bind( thisNode ) );
@@ -184,7 +184,7 @@ define( function( require ) {
     y2Property.link( updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
-    interactiveLineProperty.link( function( line ) {
+    lineProperty.link( function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;

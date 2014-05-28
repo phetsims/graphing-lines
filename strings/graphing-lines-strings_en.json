@@ -29,5 +29,6 @@
   "point.unknown": "( ?, ? )",
   "slopeIs": "Slope is",
   "pointsAwarded": "+{0}",
-  "chooseYourLevel": "Choose Your Level"
+  "chooseYourLevel": "Choose Your Level",
+  "pattern_0level": "Level {0}"
 }

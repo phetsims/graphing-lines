@@ -18,6 +18,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
   var Util = require( 'DOT/Util' );
@@ -34,18 +35,24 @@ define( function( require ) {
 
   // strings
   var chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
+  var pattern_0level = require( 'string!GRAPHING_LINES/pattern_0level' );
 
   // constants
   var X_MARGIN = 40;
   var Y_MARGIN = 40;
   var CHALLENGES_PER_GAME = 6;
   var BUTTONS_X_SPACING = 50;
-  var BUTTONS_Y_SPACING = 50;
+  var BUTTONS_Y_SPACING = 40;
 
   // Creates a level selection button
   var createLevelStartButton = function( level, model ) {
+
+    var label = new Text( StringUtils.format( pattern_0level, level ), { font: new PhetFont( 60 ) } );
+    var image = new Image( levelImages[level], { centerX: label.centerX, top: label.bottom + 20 } );
+    var icon = new Node( { children: [ label, image ] } );
+
     return new LevelStartButton(
-      new Image( levelImages[level] ),
+      icon,
       CHALLENGES_PER_GAME,
       function() {
         model.levelProperty.set( level );
@@ -53,7 +60,12 @@ define( function( require ) {
       },
       model.bestScoreProperties[ level ],
       model.getPerfectScore(),
-      { backgroundColor: 'rgb( 180, 205, 255 )', highlightedBackgroundColor: 'rgb( 220, 230, 255 )' } );
+      {
+        backgroundColor: 'rgb( 180, 205, 255 )',
+        highlightedBackgroundColor: 'rgb( 220, 230, 255 )',
+        buttonWidth: 175,
+        buttonHeight: 225
+      } );
   };
 
   /**
@@ -108,7 +120,7 @@ define( function( require ) {
 
     // layout
     buttonsParent.centerX = layoutBounds.width / 2;
-    buttonsParent.centerY = layoutBounds.height / 2;
+    buttonsParent.bottom = layoutBounds.height - Y_MARGIN;
     title.centerX = buttonsParent.centerX;
     title.centerY = buttonsParent.top / 2;
     soundToggleButton.left = X_MARGIN;

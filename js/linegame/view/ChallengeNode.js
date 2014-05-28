@@ -117,7 +117,7 @@ define( function( require ) {
     descriptionNode.left = 10;
     descriptionNode.top = 10;
     // buttons at bottom
-    thisNode.buttonsParent.right = ( 0.5 * challengeSize.width ) - 20;
+    thisNode.buttonsParent.right = ( 0.5 * challengeSize.width ) - 50;
     thisNode.buttonsParent.bottom = challengeSize.height - 20;
     // dev buttons to right of main buttons
     devButtonsParent.left = thisNode.buttonsParent.right + 15;

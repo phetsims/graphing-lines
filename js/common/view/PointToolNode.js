@@ -31,8 +31,8 @@ define( function( require ) {
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
-  var FOREGROUND_NORMAL_COLOR = 'black';
   var BACKGROUND_NORMAL_COLOR = 'white';
+  var FOREGROUND_NORMAL_COLOR = 'black';
   var FOREGROUND_HIGHLIGHT_COLOR = 'white';
 
   /**

@@ -6,11 +6,10 @@ PERFORMANCE
 - EquationNode subtypes do lots of addChild/removeChild, change visibility instead?
 - GraphTheLineNode creates complex children whenever the guess changes, line 99
 - put graph in its own layer, since it doesn't change (quick test indicates negligible benefits)
-- last resort: consider making Line mutable, to reduce affects of garbage collection
 - reduce startup time
 
 USABILITY
-- get new point tool image from AP
+- get new point tool image from AP, graphing-lines#2
 
 HIGH
 - vegas#7, add option to show 'best time' on vegas.LevelStartButton (display time below button, pickable:false)

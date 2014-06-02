@@ -39,7 +39,7 @@ define( function( require ) {
   function EquationControls( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
 
     options = _.extend( {
-      fill: GLColors.EQUATION_CONTROL_PANEL,
+      fill: GLColors.CONTROL_PANEL_BACKGROUND,
       xMargin: 10,
       yMargin: 10
     }, options );
@@ -51,7 +51,7 @@ define( function( require ) {
     var saveLineButton = new TextPushButton( saveLineString, {
       listener: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
       font: BUTTON_FONT,
-      baseColor: GLColors.SAVE_LINE_BUTTON,
+      baseColor: 'white',
       xMargin: 10
     } );
 
@@ -59,7 +59,7 @@ define( function( require ) {
     var eraseLinesButton = new TextPushButton( eraseLinesString, {
       listener: function() { savedLines.clear(); },
       font: BUTTON_FONT,
-      baseColor: GLColors.ERASE_LINES_BUTTON,
+      baseColor: 'white',
       xMargin: 10
     } );
 

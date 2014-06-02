@@ -32,6 +32,9 @@ define( function( require ) {
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
+  var FOREGROUND_NORMAL_COLOR = 'black';
+  var BACKGROUND_NORMAL_COLOR = 'white';
+  var FOREGROUND_HIGHLIGHT_COLOR = 'white';
 
   /**
    * Drag handler for the pointer tool.
@@ -149,7 +152,7 @@ define( function( require ) {
 
     // initial state
     this.setCoordinatesVector2( pointTool.location );
-    this.setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
+    this.setBackground( BACKGROUND_NORMAL_COLOR );
 
     // location and display
     var update = function() {
@@ -163,18 +166,18 @@ define( function( require ) {
         thisNode.setCoordinatesVector2( location );
         if ( linesVisibleProperty.get() ) {
           // use the line's color to highlight
-          thisNode.setForeground( !pointTool.onLine ? GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR : GLColors.POINT_TOOL_FOREGROUND_HIGHLIGHT_COLOR );
-          thisNode.setBackground( !pointTool.onLine ? GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
+          thisNode.setForeground( !pointTool.onLine ? FOREGROUND_NORMAL_COLOR : FOREGROUND_HIGHLIGHT_COLOR );
+          thisNode.setBackground( !pointTool.onLine ? BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
         }
         else {
-          thisNode.setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
-          thisNode.setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
+          thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
+          thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
         }
       }
       else {
         thisNode.setCoordinatesString( pointUnknownString );
-        thisNode.setForeground( GLColors.POINT_TOOL_FOREGROUND_NORMAL_COLOR );
-        thisNode.setBackground( GLColors.POINT_TOOL_BACKGROUND_NORMAL_COLOR );
+        thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
+        thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
       }
     };
     pointTool.locationProperty.link( update.bind( thisNode ) );

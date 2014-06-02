@@ -75,7 +75,7 @@ define( function( require ) {
     } );
 
     Panel.call( thisNode, contentNode, {
-      fill: GLColors.EQUATION_CONTROL_PANEL,
+      fill: GLColors.CONTROL_PANEL_BACKGROUND,
       stroke: 'black',
       lineWidth: 1,
       xMargin: 20,

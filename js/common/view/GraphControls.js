@@ -11,11 +11,11 @@ define( function( require ) {
   // modules
   var CheckBox = require( 'SUN/CheckBox' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var VBox = require( 'SCENERY/nodes/VBox' );
@@ -51,7 +51,7 @@ define( function( require ) {
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // check boxes
-    var TEXT_OPTIONS = { font: new PhetFont( 18 ) };
+    var TEXT_OPTIONS = { font: new GLFont( 18 ) };
     var ICON_SIZE = 60;
     var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
     hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );

@@ -73,7 +73,7 @@ define( function( require ) {
      * Gets the max width for the rise and run pickers used in an interactive equation.
      * @param {Property<Range>} riseRangeProperty
      * @param {Property<Range>} runRangeProperty
-     * @param {PhetFont} font
+     * @param {GLFont} font
      * @param {Number} decimalPlaces
      */
     computeMaxSlopePickerWidth: function( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {

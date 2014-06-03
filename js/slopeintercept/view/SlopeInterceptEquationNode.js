@@ -21,13 +21,13 @@ define( function( require ) {
   var DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
@@ -65,8 +65,8 @@ define( function( require ) {
     var thisNode = this;
     EquationNode.call( this, options.fontSize );
 
-    var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
+    var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
+    var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
@@ -378,7 +378,7 @@ define( function( require ) {
 
   // Creates a node that displays the general form of this equation: y = mx + b
   SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
-    options = _.extend( { font: new PhetFont( { size: 20, weight: 'bold' } )}, options );
+    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } )}, options );
     var text = StringUtils.format( "{0} = {1}{2} + {3}",
       symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
     return new Text( text, { font: options.font, pickable: false } );

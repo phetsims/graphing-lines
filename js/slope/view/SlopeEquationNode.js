@@ -15,13 +15,13 @@ define( function( require ) {
   var CoordinatePicker = require( 'GRAPHING_LINES/common/view/picker/CoordinatePicker' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -57,8 +57,8 @@ define( function( require ) {
     var thisNode = this;
     EquationNode.call( this, options.fontSize );
 
-    var interactiveFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
-    var staticFont = new PhetFont( { size: options.fontSize, weight: 'bold' } );
+    var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
+    var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
 
@@ -236,7 +236,7 @@ define( function( require ) {
 
     var equationNode = new EquationNode( options.fontSize );
 
-    var font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
+    var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // m =
     var leftSideNode = new Text( StringUtils.format( "{0}      {1} =", slopeString, symbolSlopeString ), { font: font, fill: options.fill } );
@@ -285,7 +285,7 @@ define( function( require ) {
 
     var equationNode = new EquationNode( fontSize );
 
-    var font = new PhetFont( { size: fontSize, weight: 'bold' } );
+    var font = new GLFont( { size: fontSize, weight: 'bold' } );
 
     // m is
     var slopeIsNode = new Text( slopeIsString, { font: font, fill: color } );

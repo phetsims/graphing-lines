@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -112,7 +112,7 @@ define( function( require ) {
     var backgroundNode = new Rectangle( 0, 0, bodyNode.width - ( 2 * BACKGROUND_MARGIN ), bodyNode.height - ( 2 * BACKGROUND_MARGIN ), { pickable: false } );
 
     // displayed value
-    var valueNode = new Text( "?", { font: new PhetFont( { size: 15, weight: 'bold' } ), pickable: false } );
+    var valueNode = new Text( "?", { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
 
     // rendering order
     thisNode.addChild( tipNode );

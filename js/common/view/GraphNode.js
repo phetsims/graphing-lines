@@ -12,11 +12,11 @@ define( function( require ) {
   // modules
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Shape = require( 'KITE/Shape' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -42,7 +42,7 @@ define( function( require ) {
   var AXIS_THICKNESS = 1;
   var AXIS_COLOR = 'black';
   var AXIS_EXTENT = 1.0; // how far the arrow extends past the min/max ticks, in model coordinates
-  var AXIS_LABEL_FONT = new PhetFont( { size: 16, weight: 'bold' } );
+  var AXIS_LABEL_FONT = new GLFont( { size: 16, weight: 'bold' } );
   var AXIS_LABEL_SPACING = 2; // space between end of axis and label
 
   // ticks
@@ -53,7 +53,7 @@ define( function( require ) {
   var MAJOR_TICK_LENGTH = 6; // how far a major tick extends from the axis
   var MAJOR_TICK_LINE_WIDTH = 1;
   var MAJOR_TICK_COLOR = 'black';
-  var MAJOR_TICK_FONT = new PhetFont( 16 );
+  var MAJOR_TICK_FONT = new GLFont( 16 );
   var TICK_LABEL_SPACING = 2;
   var MINUS_SIGN_WIDTH = new Text( "-", { font: MAJOR_TICK_FONT } ).width;
 

@@ -10,10 +10,10 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -40,7 +40,7 @@ define( function( require ) {
     // title, scale to fit in the box
     var titleNode = new Text( title, {
       fill: titleColor,
-      font: new PhetFont( { size: 24, weight: 'bold' } )
+      font: new GLFont( { size: 24, weight: 'bold' } )
     } );
     var maxTitleWidth = boxSize.width - ( 2 * X_MARGIN );
     if ( titleNode.width > maxTitleWidth ) {

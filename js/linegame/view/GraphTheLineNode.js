@@ -14,10 +14,10 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeGraphNode' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -31,7 +31,7 @@ define( function( require ) {
   var yourLineString = require( 'string!GRAPHING_LINES/yourLine' );
 
   // constants
-  var NOT_A_LINE = new Text( notALineString, { font: new PhetFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
+  var NOT_A_LINE = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
   /**
    * @param {GraphTheLine} challenge

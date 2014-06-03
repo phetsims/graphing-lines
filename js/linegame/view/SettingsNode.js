@@ -11,10 +11,10 @@ define( function( require ) {
 
   // modules
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelStartButton = require( 'VEGAS/LevelStartButton' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
@@ -48,7 +48,7 @@ define( function( require ) {
   var createLevelStartButton = function( level, model ) {
 
     // 'Level N' centered above icon
-    var label = new Text( StringUtils.format( pattern_0level, level + 1 ), { font: new PhetFont( 60 ) } );
+    var label = new Text( StringUtils.format( pattern_0level, level + 1 ), { font: new GLFont( 60 ) } );
     var image = new Image( levelImages[level], { centerX: label.centerX, top: label.bottom + 20 } );
     var icon = new Node( { children: [ label, image ] } );
 
@@ -79,7 +79,7 @@ define( function( require ) {
     Node.call( this );
 
     // Title
-    var title = new Text( chooseYourLevelString, { font: new PhetFont( 40 ) } );
+    var title = new Text( chooseYourLevelString, { font: new GLFont( 40 ) } );
     this.addChild( title );
 
     // Level-selection buttons, arranged in 2 rows

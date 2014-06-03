@@ -14,10 +14,10 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Property = require( 'AXON/Property' );
 
   // constants
@@ -38,7 +38,7 @@ define( function( require ) {
 
     // Values
     var numberOptions = {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
+      font: new GLFont( { size: 16, weight: 'bold' } ),
       decimalPlaces: 0,
       textFill: 'black',
       backgroundFill: GLColors.SLOPE,

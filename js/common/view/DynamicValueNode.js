@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
 
@@ -24,7 +24,7 @@ define( function( require ) {
 
     options = _.extend( {
       fill: 'black',
-      font: new PhetFont( 12 ),
+      font: new GLFont( 12 ),
       decimalPlaces: 0,
       absoluteValue: false
     }, options );

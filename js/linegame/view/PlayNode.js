@@ -12,9 +12,9 @@ define( function( require ) {
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Scoreboard = require( 'VEGAS/Scoreboard' );
 
   /**
@@ -38,7 +38,7 @@ define( function( require ) {
       function() {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
       },
-      { font: new PhetFont( 20 ) } );
+      { font: new GLFont( 20 ) } );
     scoreboardNode.left = layoutBounds.left + 30;
     scoreboardNode.bottom = layoutBounds.bottom - 20;
     thisNode.addChild( scoreboardNode );

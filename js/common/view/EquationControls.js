@@ -11,12 +11,12 @@ define( function( require ) {
   // modules
   var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var HStrut = require( 'SUN/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
 
   // strings
@@ -24,7 +24,7 @@ define( function( require ) {
   var eraseLinesString = require( 'string!GRAPHING_LINES/eraseLines' );
 
   // constants
-  var BUTTON_FONT = new PhetFont( 18 );
+  var BUTTON_FONT = new GLFont( 18 );
 
   /**
    * @param {Node} titleNode

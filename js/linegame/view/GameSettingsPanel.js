@@ -11,11 +11,11 @@ define( function( require ) {
 
   // modules
   var AquaRadioButton = require( 'SUN/AquaRadioButton' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
@@ -30,9 +30,9 @@ define( function( require ) {
 
     options = _.extend( {
       fill: 'rgb( 180, 205, 255 )',
-      titleFont: new PhetFont( 38 ),
-      labelFont: new PhetFont( 24 ),
-      controlFont: new PhetFont( 24 ),
+      titleFont: new GLFont( 38 ),
+      labelFont: new GLFont( 24 ),
+      controlFont: new GLFont( 24 ),
       startButtonColor: 'rgb(235, 235, 235)',
       xMargin: 20,
       yMargin: 20

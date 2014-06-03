@@ -19,10 +19,10 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
@@ -54,7 +54,7 @@ define( function( require ) {
     thisNode.subtypeParent = new Node(); // subtypes should add children to this node, to preserve rendering order
 
     // description (dev)
-    var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new PhetFont( 16 ), fill: 'black' } );
+    var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
 
     // smiley/frowning face
     thisNode.faceNode = new FaceNode( LineGameConstants.FACE_DIAMETER, {
@@ -83,7 +83,7 @@ define( function( require ) {
     thisNode.buttonsParent = new Node( { children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ] } );
 
     // developer buttons, no i18n
-    var devButtonOptions = { font: new PhetFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
+    var devButtonOptions = { font: new GLFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
     var skipButton = new TextPushButton( "dev: Skip", devButtonOptions ); // This button lets you skip the current challenge.
     var replayButton = new TextPushButton( "dev: Replay", devButtonOptions ); // This button lets you repeat the current challenge.
     var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );

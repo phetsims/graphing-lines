@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Main entry point for the 'Beer's Law Lab' sim.
+ * Main entry point for the 'Graphing Lines' sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

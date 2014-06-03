@@ -12,8 +12,6 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
-  var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
   var YInterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/YInterceptManipulator' );
@@ -26,15 +24,7 @@ define( function( require ) {
   function SlopeInterceptGraphNode( model, viewProperties ) {
 
     var thisNode = this;
-    LineFormsGraphNode.call( thisNode, model, viewProperties,
-      // createLineNode: {Property<Line>} lineProperty, {Graph} graph, {ModelViewTransform2} mvt
-      function( lineProperty, graph, mvt ) {
-        return new LineNode( lineProperty, graph, mvt, {
-          createEquationNode: function( lineProperty, fontSize ) {
-            return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, fontSize );
-          }
-        } );
-      } );
+    LineFormsGraphNode.call( thisNode, model, viewProperties, SlopeInterceptEquationNode );
 
     var manipulatorRadius = model.mvt.modelToViewDeltaX( model.manipulatorRadius );
 

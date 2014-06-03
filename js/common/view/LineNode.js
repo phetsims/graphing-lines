@@ -16,7 +16,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -35,15 +34,8 @@ define( function( require ) {
   function LineNode( lineProperty, graph, mvt, options ) {
 
     options = _.extend( {
-      /*
-       * By default, a line does not display an equation.
-       * Clients must provide this method to return an equation in the correct form.
-       * @param {Line} line
-       * @param {Number} fontSize
-       */
-      createEquationNode: function( line, fontSize ) {
-        return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds for layout
-      }
+      // type for creating an equation node, must have static function createDynamicLabel( {Property<Line>} lineProperty, {Number} fontSize )
+      equationType: null
     }, options );
 
     var thisNode = this;
@@ -54,19 +46,22 @@ define( function( require ) {
     thisNode.xExtent = mvt.viewToModelDeltaX( LINE_EXTENT ); // @private
     thisNode.yExtent = Math.abs( mvt.viewToModelDeltaY( LINE_EXTENT ) ); // @private
 
+    // parent of all children
+    thisNode.parentNode = new Node();
+
     // double-headed arrow
     thisNode.arrowNode = new ArrowNode( 0, 0, 0, 1,
       { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
+    thisNode.parentNode.addChild( thisNode.arrowNode );
 
-    // equation
-    thisNode.equationNode = options.createEquationNode( lineProperty, EQUATION_FONT_SIZE );
-
-    //TODO can this intermediate node go away?
-    // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
-    thisNode.equationParentNode = new Node( { children: [ this.equationNode ] } );
-
-    // intermediate parent, to hide line components in the case of a null line
-    thisNode.parentNode = new Node( { children: [ this.arrowNode, this.equationParentNode ] } );
+    // optional equation
+    if ( options.equationType ) {
+      thisNode.equationNode = options.equationType.createDynamicLabel( lineProperty, EQUATION_FONT_SIZE );
+      //TODO can this intermediate node go away?
+      // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
+      thisNode.equationParentNode = new Node( { children: [ this.equationNode ] } );
+      thisNode.parentNode.addChild( thisNode.equationParentNode );
+    }
 
     Node.call( thisNode, { children: [ thisNode.parentNode ] } );
 
@@ -88,6 +83,7 @@ define( function( require ) {
       this.parentNode.visible = line;
       if ( !line ) { return; }
 
+      // compute the new tip and tail for the line
       var xRange = this.graph.xRange;
       var yRange = this.graph.yRange;
       var tailX, tailY, tipX, tipY;
@@ -139,51 +135,54 @@ define( function( require ) {
       this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
       this.arrowNode.fill = line.color;
 
-      // equation orientation
-      this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
+      // If this line has an equation, update its orientation and position.
+      if ( this.equationParentNode ) {
 
-      // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
-      var X_OFFSET = 30;
-      var Y_OFFSET = 12;
-      if ( line.undefinedSlope() ) {
-        // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
-        if ( line.rise < 0 ) {
-          this.equationParentNode.translation = tipLocation;
-          this.equationNode.right = -X_OFFSET;
-          this.equationNode.bottom = -Y_OFFSET;
+        this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
+
+        // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
+        var X_OFFSET = 30;
+        var Y_OFFSET = 12;
+        if ( line.undefinedSlope() ) {
+          // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
+          if ( line.rise < 0 ) {
+            this.equationParentNode.translation = tipLocation;
+            this.equationNode.right = -X_OFFSET;
+            this.equationNode.bottom = -Y_OFFSET;
+          }
+          else {
+            this.equationParentNode.translation = tailLocation;
+            this.equationNode.left = X_OFFSET;
+            this.equationNode.bottom = -Y_OFFSET;
+          }
+        }
+        else if ( line.rise <= 0 ) {
+          if ( line.run >= 0 ) {
+            // equation above the line, at tip
+            this.equationParentNode.translation = tipLocation;
+            this.equationNode.right = -X_OFFSET;
+            this.equationNode.bottom = -Y_OFFSET;
+          }
+          else {
+            // equation above the line, at tail
+            this.equationParentNode.translation = tailLocation;
+            this.equationNode.left = X_OFFSET;
+            this.equationNode.bottom = -Y_OFFSET;
+          }
         }
         else {
-          this.equationParentNode.translation = tailLocation;
-          this.equationNode.left = X_OFFSET;
-          this.equationNode.bottom = -Y_OFFSET;
-        }
-      }
-      else if ( line.rise <= 0 ) {
-        if ( line.run >= 0 ) {
-          // equation above the line, at tip
-          this.equationParentNode.translation = tipLocation;
-          this.equationNode.right = -X_OFFSET;
-          this.equationNode.bottom = -Y_OFFSET;
-        }
-        else {
-          // equation above the line, at tail
-          this.equationParentNode.translation = tailLocation;
-          this.equationNode.left = X_OFFSET;
-          this.equationNode.bottom = -Y_OFFSET;
-        }
-      }
-      else {
-        if ( line.run > 0 ) {
-          // equation below the line, at tip
-          this.equationParentNode.translation = tipLocation;
-          this.equationNode.right = -X_OFFSET;
-          this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
-        }
-        else {
-          // equation below the line, at tail
-          this.equationParentNode.translation = tailLocation;
-          this.equationNode.left = X_OFFSET;
-          this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+          if ( line.run > 0 ) {
+            // equation below the line, at tip
+            this.equationParentNode.translation = tipLocation;
+            this.equationNode.right = -X_OFFSET;
+            this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+          }
+          else {
+            // equation below the line, at tail
+            this.equationParentNode.translation = tailLocation;
+            this.equationNode.left = X_OFFSET;
+            this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+          }
         }
       }
     }

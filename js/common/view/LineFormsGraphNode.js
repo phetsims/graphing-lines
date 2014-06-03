@@ -21,6 +21,7 @@ define( function( require ) {
   // modules
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
@@ -28,20 +29,21 @@ define( function( require ) {
   /**
    * @param {LineFormsModel } model
    * @param {LineFormsViewProperties} viewProperties
-   * @param {Function} createLineNode function with parameters {Property<Line>} lineProperty, {Graph} graph, and {ModelViewTransform2} mvt
+   * @param {Type} equationType a subtype of EquationNode
    * @constructor
    */
-  function LineFormsGraphNode( model, viewProperties, createLineNode ) {
+  function LineFormsGraphNode( model, viewProperties, equationType ) {
 
     var thisNode = this;
     GraphNode.call( thisNode, model.graph, model.mvt );
 
     thisNode.model = model;
     thisNode.viewProperties = viewProperties;
-    this.createLineNode = createLineNode;
+    this.equationType = equationType;
 
     // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
-    thisNode.interactiveLineNode = createLineNode( model.interactiveLineProperty, model.graph, model.mvt );
+    thisNode.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.mvt,
+      { equationType: equationType } );
     thisNode.standardLinesParentNode = new Node();
     thisNode.savedLinesParentNode = new Node();
 
@@ -90,7 +92,8 @@ define( function( require ) {
 
     // @private Called when a standard line is added to the model.
     standardLineAdded: function( line ) {
-      this.standardLinesParentNode.addChild( this.createLineNode( new Property( line ), this.model.graph, this.model.mvt ) );
+      this.standardLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.mvt,
+        { equationType: this.equationType } ) );
     },
 
     // Called when a standard line is removed from the model.
@@ -100,7 +103,8 @@ define( function( require ) {
 
     // @private Called when a saved line is added to the model.
     savedLineAdded: function( line ) {
-      this.savedLinesParentNode.addChild( this.createLineNode( new Property( line ), this.model.graph, this.model.mvt ) );
+      this.savedLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.mvt,
+        { equationType: this.equationType } ) );
     },
 
     // @private Called when a saved line is removed from the model.

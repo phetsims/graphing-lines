@@ -10,7 +10,7 @@ USABILITY
 
 HIGH
 - improve responsiveness of interactive line manipulators
- - reduce startup time
+- reduce startup time
 - get new point tool image from AP, graphing-lines#2
 
 MEDIUM

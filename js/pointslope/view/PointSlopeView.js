@@ -19,7 +19,6 @@ define( function( require ) {
 
   /**
    * @param {PointSlopeModel} model
-   * @param {LineFormsViewProperties} viewProperties
    * @constructor
    */
   function PointSlopeView( model ) {

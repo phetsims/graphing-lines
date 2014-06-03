@@ -376,7 +376,7 @@ define( function( require ) {
   };
 
   /**
-   * Creates a non-interactive equation, used to label the specified line.
+   * Creates a non-interactive equation, used to label a static line.
    * @param {Line} line
    * @param {Number} fontSize
    * @param {Color|String} color
@@ -392,6 +392,22 @@ define( function( require ) {
         fontSize: fontSize,
         staticColor: color
       } );
+  };
+
+  //TODO this is a temporary, until PointSlopeEquationNode is mutable
+  /**
+   * Creates a non-interactive equation, used to label a dynamic line.
+   * @param {Property<Line>} lineProperty
+   * @param {Number} fontSize
+   * @returns {Node}
+   */
+  PointSlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
+    var parent = new Node();
+    lineProperty.link( function( line ) {
+      parent.removeAllChildren();
+      parent.addChild( PointSlopeEquationNode.createLabel( line, fontSize, line.color ) );
+    } );
+    return parent;
   };
 
   return inherit( EquationNode, PointSlopeEquationNode );

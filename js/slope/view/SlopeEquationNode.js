@@ -274,7 +274,7 @@ define( function( require ) {
   };
 
   /**
-   * Creates a non-interactive equation, used to label the specified line.
+   * Creates a non-interactive equation, used to label a static line.
    * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
    *
    * @param {Line} line
@@ -354,6 +354,22 @@ define( function( require ) {
       }
     }
     return equationNode;
+  };
+
+  //TODO this is a temporary, until SlopeEquationNode is mutable
+  /**
+   * Creates a non-interactive equation, used to label a dynamic line.
+   * @param {Property<Line>} lineProperty
+   * @param {Number} fontSize
+   * @returns {Node}
+   */
+  SlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
+    var parent = new Node();
+    lineProperty.link( function( line ) {
+      parent.removeAllChildren();
+      parent.addChild( SlopeEquationNode.createLabel( line, fontSize, line.color ) );
+    } );
+    return parent;
   };
 
   return inherit( EquationNode, SlopeEquationNode );

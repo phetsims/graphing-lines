@@ -31,13 +31,7 @@ define( function( require ) {
       function( lineProperty, graph, mvt ) {
         return new LineNode( lineProperty, graph, mvt, {
           createEquationNode: function( lineProperty, fontSize ) {
-            //TODO this is a temporary adapter until PointSlopeEquationNode is mutable
-            var parent = new Node();
-            lineProperty.link( function( line ) {
-              parent.removeAllChildren();
-              parent.addChild( PointSlopeEquationNode.createLabel( line, fontSize, line.color ) );
-            } );
-            return parent;
+            return PointSlopeEquationNode.createDynamicLabel( lineProperty, fontSize );
           }
         } );
       } );

@@ -13,6 +13,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
   var X2Y2Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X2Y2Manipulator' );
@@ -29,8 +30,14 @@ define( function( require ) {
       // createLineNode: {Property<Line>} lineProperty, {Graph} graph, {ModelViewTransform2} mvt
       function( lineProperty, graph, mvt ) {
         return new LineNode( lineProperty, graph, mvt, {
-          createEquationNode: function( line, fontSize, color ) {
-            return SlopeEquationNode.createLabel( line, fontSize, color );
+          createEquationNode: function( lineProperty, fontSize ) {
+            //TODO this is a temporary adapter until SlopeEquationNode is mutable
+            var parent = new Node();
+            lineProperty.link( function( line ) {
+              parent.removeAllChildren();
+              parent.addChild( SlopeEquationNode.createLabel( line, fontSize, line.color ) );
+            } );
+            return parent;
           }
         } );
       } );

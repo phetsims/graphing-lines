@@ -40,9 +40,8 @@ define( function( require ) {
        * Clients must provide this method to return an equation in the correct form.
        * @param {Line} line
        * @param {Number} fontSize
-       * @param {Color|String} color
        */
-      createEquationNode: function( line, fontSize, color ) {
+      createEquationNode: function( line, fontSize ) {
         return new Rectangle( 0, 0, 1, 1 ); // must have well-defined bounds for layout
       }
     }, options );
@@ -52,7 +51,6 @@ define( function( require ) {
     thisNode.lineProperty = lineProperty;
     thisNode.graph = graph; // @private
     thisNode.mvt = mvt; // @private
-    thisNode.createEquationNode = options.createEquationNode;
     thisNode.xExtent = mvt.viewToModelDeltaX( LINE_EXTENT ); // @private
     thisNode.yExtent = Math.abs( mvt.viewToModelDeltaY( LINE_EXTENT ) ); // @private
 
@@ -60,8 +58,12 @@ define( function( require ) {
     thisNode.arrowNode = new ArrowNode( 0, 0, 0, 1,
       { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
 
+    // equation
+    thisNode.equationNode = options.createEquationNode( lineProperty, EQUATION_FONT_SIZE );
+
+    //TODO can this intermediate node go away?
     // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
-    thisNode.equationParentNode = new Node();
+    thisNode.equationParentNode = new Node( { children: [ this.equationNode ] } );
 
     // intermediate parent, to hide line components in the case of a null line
     thisNode.parentNode = new Node( { children: [ this.arrowNode, this.equationParentNode ] } );
@@ -137,10 +139,7 @@ define( function( require ) {
       this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
       this.arrowNode.fill = line.color;
 
-      // equation
-      this.equationParentNode.removeAllChildren(); //TODO can this be eliminated?
-      this.equationNode = this.createEquationNode( line, EQUATION_FONT_SIZE, line.color );
-      this.equationParentNode.addChild( this.equationNode );
+      // equation orientation
       this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
 
       // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.

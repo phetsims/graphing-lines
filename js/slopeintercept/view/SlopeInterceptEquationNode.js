@@ -409,7 +409,6 @@ define( function( require ) {
       } );
   };
 
-  //TODO this is temporary, until SlopeInterceptEquationNode is mutable
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property<Line>} lineProperty
@@ -417,12 +416,14 @@ define( function( require ) {
    * @returns {Node}
    */
   SlopeInterceptEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
-    var parent = new Node();
-    lineProperty.link( function( line ) {
-      parent.removeAllChildren();
-      parent.addChild( SlopeInterceptEquationNode.createLabel( line, fontSize, line.color ) );
-    } );
-    return parent;
+    return new SlopeInterceptEquationNode( lineProperty,
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ), {
+        interactiveSlope: false,
+        interactiveIntercept: false,
+        fontSize: fontSize
+      } );
   };
 
   return inherit( EquationNode, SlopeInterceptEquationNode );

@@ -348,7 +348,6 @@ define( function( require ) {
     return equationNode;
   };
 
-  //TODO this is a temporary, until SlopeEquationNode is mutable
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property<Line>} lineProperty

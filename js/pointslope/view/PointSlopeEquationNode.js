@@ -398,7 +398,6 @@ define( function( require ) {
       } );
   };
 
-  //TODO this is a temporary, until PointSlopeEquationNode is mutable
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property<Line>} lineProperty
@@ -406,12 +405,15 @@ define( function( require ) {
    * @returns {Node}
    */
   PointSlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
-    var parent = new Node();
-    lineProperty.link( function( line ) {
-      parent.removeAllChildren();
-      parent.addChild( PointSlopeEquationNode.createLabel( line, fontSize, line.color ) );
-    } );
-    return parent;
+    return new PointSlopeEquationNode( lineProperty,
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ),
+      new Property( new Range( 0, 1 ) ), {
+        interactivePoint: false,
+        interactiveSlope: false,
+        fontSize: fontSize
+      } );
   };
 
   return inherit( EquationNode, PointSlopeEquationNode );

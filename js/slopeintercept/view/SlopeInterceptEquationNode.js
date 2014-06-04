@@ -398,9 +398,8 @@ define( function( require ) {
    * Creates a non-interactive equation, used to label a static line.
    * @param {Line} line
    * @param {Number} fontSize
-   * @param {Color|String} color
    */
-  SlopeInterceptEquationNode.createStaticLabel = function( line, fontSize, color ) {  //TODO remove color param
+  SlopeInterceptEquationNode.createStaticLabel = function( line, fontSize ) {
     return SlopeInterceptEquationNode.createDynamicLabel( new Property( line ), fontSize );
   };
 

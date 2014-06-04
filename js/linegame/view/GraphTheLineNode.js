@@ -56,7 +56,7 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE, challenge.answer.color ) );
+      ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
 
     // Guess
     thisNode.guessBoxNode = new EquationBoxNode( yourLineString, Color.BLACK, boxSize, new Rectangle( 0, 0, 1, 1 ) ); // placeholder for equation, must have well-defined bounds
@@ -101,7 +101,7 @@ define( function( require ) {
 
       // update the equation (line is null if ManipulationMode.THREE_POINTS and points don't make a line)
       thisNode.subtypeParent.removeChild( thisNode.guessBoxNode );
-      var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT_SIZE, line.color );
+      var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
       var color = ( !line ) ? LineGameConstants.GUESS_COLOR : line.color;
       thisNode.guessBoxNode = new EquationBoxNode( yourLineString, color, boxSize, equationNode );
 

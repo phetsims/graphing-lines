@@ -202,14 +202,13 @@ define( function( require ) {
    * @param {EquationForm} equationForm
    * @param {Line} line
    * @param {Font} font
-   * @param {Color|String} color
    */
-  ChallengeNode.createEquationNode = function( equationForm, line, fontSize, color ) {
+  ChallengeNode.createEquationNode = function( equationForm, line, fontSize ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return SlopeInterceptEquationNode.createStaticLabel( line, fontSize, color );
+      return SlopeInterceptEquationNode.createStaticLabel( line, fontSize );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return new PointSlopeEquationNode.createStaticLabel( line, fontSize, color );
+      return new PointSlopeEquationNode.createStaticLabel( line, fontSize );
     }
     else {
       throw new Error( "unsupported equation form: " + equationForm );

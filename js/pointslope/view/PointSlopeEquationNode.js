@@ -149,7 +149,7 @@ define( function( require ) {
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
         // use slope-intercept form for y=x and y=-x, using a line with the proper slope and (x1,y1)=(0,0)
         thisNode.addChild( SlopeInterceptEquationNode.createStaticLabel(
-          Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.fontSize, options.staticColor ) );
+          Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.fontSize ) );
         return;
       }
 
@@ -386,9 +386,8 @@ define( function( require ) {
    * Creates a non-interactive equation, used to label a static line.
    * @param {Line} line
    * @param {Number} fontSize
-   * @param {Color|String} color
    */
-  PointSlopeEquationNode.createStaticLabel = function( line, fontSize, color ) {   //TODO remove color param
+  PointSlopeEquationNode.createStaticLabel = function( line, fontSize ) {
     return PointSlopeEquationNode.createDynamicLabel( new Property( line ), fontSize );
   };
 

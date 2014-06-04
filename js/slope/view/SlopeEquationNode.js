@@ -268,6 +268,8 @@ define( function( require ) {
   /**
    * Creates a non-interactive equation, used to label a static line.
    * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
+   * Note that while this is a sentence, it's order is not localized, due to the fact that it is
+   * composed of multiple scenery.Text nodes.
    *
    * @param {Line} line
    * @param {Number} fontSize

@@ -397,7 +397,7 @@ define( function( require ) {
    * @param {Number} fontSize
    * @param {Color|String} color
    */
-  SlopeInterceptEquationNode.createLabel = function( line, fontSize, color ) {
+  SlopeInterceptEquationNode.createStaticLabel = function( line, fontSize, color ) {
     return new SlopeInterceptEquationNode( new Property( line ),
       new Property( new Range( 0, 1 ) ),
       new Property( new Range( 0, 1 ) ),

@@ -206,10 +206,10 @@ define( function( require ) {
    */
   ChallengeNode.createEquationNode = function( equationForm, line, fontSize, color ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return SlopeInterceptEquationNode.createLabel( line, fontSize, color );
+      return SlopeInterceptEquationNode.createStaticLabel( line, fontSize, color );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return new PointSlopeEquationNode.createLabel( line, fontSize, color );
+      return new PointSlopeEquationNode.createStaticLabel( line, fontSize, color );
     }
     else {
       throw new Error( "unsupported equation form: " + equationForm );

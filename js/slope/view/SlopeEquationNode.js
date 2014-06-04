@@ -273,7 +273,7 @@ define( function( require ) {
    * @param {Number} fontSize
    * @param {Color|String} color
    */
-  SlopeEquationNode.createLabel = function( line, fontSize, color ) {
+  SlopeEquationNode.createStaticLabel = function( line, fontSize, color ) {
 
     var equationNode = new EquationNode( fontSize );
 
@@ -358,7 +358,7 @@ define( function( require ) {
     var parent = new Node();
     lineProperty.link( function( line ) {
       parent.removeAllChildren();
-      parent.addChild( SlopeEquationNode.createLabel( line, fontSize, line.color ) );
+      parent.addChild( SlopeEquationNode.createStaticLabel( line, fontSize, line.color ) );
     } );
     return parent;
   };

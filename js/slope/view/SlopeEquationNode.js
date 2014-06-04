@@ -211,7 +211,7 @@ define( function( require ) {
   }
 
   /**
-   * Creates a node that displays the general form of this equation: m = (y2-y1)/(x2-x1)
+   * Creates a node that displays the general form of the slope equation: m = (y2-y1)/(x2-x1)
    */
   SlopeEquationNode.createGeneralFormNode = function( options ) {
 

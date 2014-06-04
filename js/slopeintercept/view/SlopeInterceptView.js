@@ -43,7 +43,12 @@ define( function( require ) {
         model.savedLines,
         viewProperties.interactiveEquationVisibleProperty,
         viewProperties.linesVisibleProperty,
-        new SlopeInterceptEquationNode( model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.y1RangeProperty ) )
+        new SlopeInterceptEquationNode( model.interactiveLineProperty, {
+          riseRangeProperty: model.riseRangeProperty,
+          runRangeProperty: model.runRangeProperty,
+          yInterceptRangeProperty: model.y1RangeProperty
+        } )
+      )
     );
   }
 

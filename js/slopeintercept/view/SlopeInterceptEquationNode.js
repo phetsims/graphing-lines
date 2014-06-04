@@ -47,17 +47,17 @@ define( function( require ) {
 
   /**
    * @param {Property<Line>} lineProperty
-   * @param {Property<Number>} riseRangeProperty
-   * @param {Property<Number>} runRangeProperty
-   * @param {Property<Number>} yInterceptRangeProperty
    * @param {*} options
    * @constructor
    */
-  function SlopeInterceptEquationNode( lineProperty, riseRangeProperty, runRangeProperty, yInterceptRangeProperty, options ) {
+  function SlopeInterceptEquationNode( lineProperty, options ) {
 
     options = _.extend( {
       interactiveSlope: true,
       interactiveIntercept: true,
+      riseRangeProperty: new Property( new Range( 0, 1 ) ),
+      runRangeProperty: new Property( new Range( 0, 1 ) ),
+      yInterceptRangeProperty: new Property( new Range( 0, 1 ) ),
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
@@ -90,15 +90,15 @@ define( function( require ) {
     var slopeFractionLineNode, yInterceptFractionLineNode;
 
     // Determine the max width of the rise and run pickers.
-    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
+    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // nodes: y = -(rise/run)x + -b
     yNode = new Text( symbolYString, staticOptions );
     equalsNode = new Text( "=", staticOptions );
     slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopePicker( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
-      runNode = new SlopePicker( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
+      riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
     }
     else {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -108,7 +108,7 @@ define( function( require ) {
     xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     operatorNode = new Node(); // parent for + or - node
     yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
-    yInterceptNode = new NumberPicker( yInterceptProperty, yInterceptRangeProperty,
+    yInterceptNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
       { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
     yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -416,14 +416,11 @@ define( function( require ) {
    * @returns {Node}
    */
   SlopeInterceptEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
-    return new SlopeInterceptEquationNode( lineProperty,
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ), {
-        interactiveSlope: false,
-        interactiveIntercept: false,
-        fontSize: fontSize
-      } );
+    return new SlopeInterceptEquationNode( lineProperty, {
+      interactiveSlope: false,
+      interactiveIntercept: false,
+      fontSize: fontSize
+    } );
   };
 
   return inherit( EquationNode, SlopeInterceptEquationNode );

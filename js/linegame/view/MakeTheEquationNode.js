@@ -147,7 +147,10 @@ define( function( require ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       interactiveIntercept = ( manipulationMode === ManipulationMode.INTERCEPT ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
-      return new SlopeInterceptEquationNode( lineProperty, new Property( graph.yRange ), new Property( graph.xRange ), new Property( graph.yRange ), {
+      return new SlopeInterceptEquationNode( lineProperty, {
+        riseRangeProperty: new Property( graph.yRange ),
+        runRangeProperty: new Property( graph.xRange ),
+        yInterceptRangeProperty: new Property( graph.yRange ),
         interactiveSlope: interactiveSlope,
         interactiveIntercept: interactiveIntercept,
         fontSize: fontSize,

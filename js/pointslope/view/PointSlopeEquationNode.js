@@ -64,6 +64,7 @@ define( function( require ) {
     var thisNode = this;
     EquationNode.call( thisNode, options.fontSize );
 
+    var fullyInteractive = ( options.interactivePoint && options.interactiveSlope );
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
@@ -123,7 +124,6 @@ define( function( require ) {
     }
     xRightParenNode = new Text( ")", staticOptions );
 
-    //TODO can we make fewer scenegraph changes here?
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the
@@ -326,6 +326,7 @@ define( function( require ) {
         }
       }
 
+      //TODO move this out of updateLayout, allocate and change visibility only for fully-interactive lines
       // undefined-slope indicator, added after layout has been done
       if ( line.undefinedSlope() ) {
         var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height );
@@ -360,9 +361,12 @@ define( function( require ) {
       }
       updatingControls = false;
 
-      // Update the layout
-      updateLayout( line );
+      // Fully-interactive equations have a constant form, no need to update layout when line changes.
+      if ( !fullyInteractive ) { updateLayout( line ); }
     } );
+
+    // Update layout once for fully-interactive equations.
+    if ( fullyInteractive ) { updateLayout( lineProperty.get() ); }
 
     thisNode.mutate( options );
   }

@@ -9,6 +9,7 @@ PERFORMANCE
 USABILITY
 
 HIGH
+- allocate and show undefined-slope indicator for fully-interactive equations
 - improve responsiveness of interactive line manipulators
 - reduce startup time
 - get new point tool image from AP, graphing-lines#2

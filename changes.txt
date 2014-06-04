@@ -1,3 +1,4 @@
+6/3/14 don't do updateLayout for fully-interactive equations, because their form is constant
 6/3/14 clean up how property equation form is specified when creating LineNode
 6/3/14 move createDynamicEquation to EquationNode subtypes
 6/3/14 add a temporary adapter that updates the equation node when lineProperty changes

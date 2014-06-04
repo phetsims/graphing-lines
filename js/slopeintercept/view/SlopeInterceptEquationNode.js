@@ -65,6 +65,7 @@ define( function( require ) {
     var thisNode = this;
     EquationNode.call( this, options.fontSize );
 
+    var fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
@@ -113,7 +114,6 @@ define( function( require ) {
     yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
 
-    //TODO can we make fewer scenegraph changes here?
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the
@@ -121,10 +121,12 @@ define( function( require ) {
      */
     var updateLayout = function( line ) {
 
+      var interactive = ( options.interactiveSlope || options.interactiveIntercept );
+
       // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
       thisNode.removeAllChildren();
       operatorNode.removeAllChildren();
-      if ( line.undefinedSlope() && !options.interactiveSlope && !options.interactiveIntercept ) {
+      if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
         thisNode.addChild( new SlopeUndefinedNode( line, staticOptions ) );
         return;
@@ -318,6 +320,7 @@ define( function( require ) {
         }
       }
 
+      //TODO move this out of updateLayout, allocate and change visibility only for fully-interactive lines
       // Add the undefined-slope indicator after layout has been done, so that it covers the entire equation.
       if ( line.undefinedSlope() ) {
         var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height, staticOptions );
@@ -369,11 +372,14 @@ define( function( require ) {
       }
       updatingControls = false;
 
-      // Update the layout.
-      updateLayout( line );
-
-      thisNode.mutate( options );
+      // Fully-interactive equations have a constant form, no need to update layout when line changes.
+      if ( !fullyInteractive ) { updateLayout( line ); }
     } );
+
+    // Update layout once for fully-interactive equations.
+    if ( fullyInteractive ) { updateLayout( lineProperty.get() ); }
+
+    thisNode.mutate( options );
   }
 
   // Creates a node that displays the general form of this equation: y = mx + b
@@ -403,7 +409,7 @@ define( function( require ) {
       } );
   };
 
-  //TODO this is a temporary, until SlopeInterceptEquationNode is mutable
+  //TODO this is temporary, until SlopeInterceptEquationNode is mutable
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property<Line>} lineProperty

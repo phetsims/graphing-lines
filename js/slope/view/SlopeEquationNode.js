@@ -128,50 +128,6 @@ define( function( require ) {
     parentNode.addChild( unsimplifiedFractionLineNode );
     parentNode.addChild( unsimplifiedRunNode );
 
-    // static layout
-    {
-      // m =
-      mNode.x = 0;
-      mNode.y = 0;
-      interactiveEqualsNode.left = mNode.right + thisNode.relationalOperatorXSpacing;
-      interactiveEqualsNode.y = mNode.y;
-      // fraction line
-      interactiveFractionLineNode.left = interactiveEqualsNode.right + thisNode.relationalOperatorXSpacing;
-      interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + thisNode.fractionLineYFudgeFactor;
-      // y2 - y1
-      y2Node.left = interactiveFractionLineNode.left;
-      y2Node.bottom = interactiveFractionLineNode.top - thisNode.pickersYSpacing;
-      numeratorOperatorNode.left = y2Node.right + thisNode.operatorXSpacing;
-      numeratorOperatorNode.centerY = y2Node.centerY;
-      y1Node.left = numeratorOperatorNode.right + thisNode.operatorXSpacing;
-      y1Node.y = y2Node.y;
-      // fix fraction line length
-      var fractionLineLength = y1Node.right - y2Node.left;
-      interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 1 );
-      // x2 - x1
-      x2Node.left = y2Node.left;
-      x2Node.top = interactiveFractionLineNode.bottom + thisNode.pickersYSpacing;
-      denominatorOperatorNode.left = x2Node.right + thisNode.operatorXSpacing;
-      denominatorOperatorNode.centerY = x2Node.centerY;
-      x1Node.left = denominatorOperatorNode.right + thisNode.operatorXSpacing;
-      x1Node.y = x2Node.y;
-      // = rise/run
-      unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + thisNode.relationalOperatorXSpacing;
-      unsimplifiedEqualsNode.y = interactiveEqualsNode.y;
-      unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + thisNode.relationalOperatorXSpacing;
-      unsimplifiedFractionLineNode.y = interactiveFractionLineNode.y;
-      // all other layout is done dynamically, in updateLayout
-    }
-
-    // dynamic layout
-    var updateLayout = function( line ) {
-      // horizontally center rise and run above fraction line
-      unsimplifiedRiseNode.centerX = unsimplifiedFractionLineNode.centerX;
-      unsimplifiedRiseNode.bottom = unsimplifiedFractionLineNode.top - thisNode.slopeYSpacing;
-      unsimplifiedRunNode.centerX = unsimplifiedFractionLineNode.centerX;
-      unsimplifiedRunNode.top = unsimplifiedFractionLineNode.bottom + thisNode.slopeYSpacing;
-    };
-
     // sync the model with the controls
     var updateLine = function() {
       if ( !updatingControls ) {
@@ -207,9 +163,6 @@ define( function( require ) {
         unsimplifiedFractionLineNode.setLine( 0, 0, unsimplifiedFractionLineLength, 1  );
       }
 
-      // do layout before adding undefined-slope indicator
-      updateLayout( line );
-
       // undefined-slope indicator
       if ( line.undefinedSlope() ) {
         undefinedSlopeIndicator.visible = true;
@@ -221,6 +174,45 @@ define( function( require ) {
         undefinedSlopeIndicator.visible = false;
       }
     } );
+
+    // layout, after registering observers
+    // m =
+    mNode.x = 0;
+    mNode.y = 0;
+    interactiveEqualsNode.left = mNode.right + thisNode.relationalOperatorXSpacing;
+    interactiveEqualsNode.y = mNode.y;
+    // fraction line
+    interactiveFractionLineNode.left = interactiveEqualsNode.right + thisNode.relationalOperatorXSpacing;
+    interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + thisNode.fractionLineYFudgeFactor;
+    // y2 - y1
+    y2Node.left = interactiveFractionLineNode.left;
+    y2Node.bottom = interactiveFractionLineNode.top - thisNode.pickersYSpacing;
+    numeratorOperatorNode.left = y2Node.right + thisNode.operatorXSpacing;
+    numeratorOperatorNode.centerY = y2Node.centerY;
+    y1Node.left = numeratorOperatorNode.right + thisNode.operatorXSpacing;
+    y1Node.y = y2Node.y;
+    // fix fraction line length
+    var fractionLineLength = y1Node.right - y2Node.left;
+    interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 1 );
+    // x2 - x1
+    x2Node.left = y2Node.left;
+    x2Node.top = interactiveFractionLineNode.bottom + thisNode.pickersYSpacing;
+    denominatorOperatorNode.left = x2Node.right + thisNode.operatorXSpacing;
+    denominatorOperatorNode.centerY = x2Node.centerY;
+    x1Node.left = denominatorOperatorNode.right + thisNode.operatorXSpacing;
+    x1Node.y = x2Node.y;
+    // = rise/run
+    unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + thisNode.relationalOperatorXSpacing;
+    unsimplifiedEqualsNode.y = interactiveEqualsNode.y;
+    unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + thisNode.relationalOperatorXSpacing;
+    unsimplifiedFractionLineNode.y = interactiveFractionLineNode.y;
+    // horizontally center rise and run above fraction line
+    unsimplifiedRiseNode.centerX = unsimplifiedFractionLineNode.centerX;
+    unsimplifiedRiseNode.bottom = unsimplifiedFractionLineNode.top - thisNode.slopeYSpacing;
+    unsimplifiedRunNode.centerX = unsimplifiedFractionLineNode.centerX;
+    unsimplifiedRunNode.top = unsimplifiedFractionLineNode.bottom + thisNode.slopeYSpacing;
+
+    thisNode.mutate( options );
   }
 
   /**

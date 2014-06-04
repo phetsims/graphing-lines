@@ -1,3 +1,4 @@
+6/3/14 SlopeEquationNode: preallocate nodes needed to represent all simplified forms, dynamically add children, set text/fill/stroke
 6/3/14 rename createLabel to createStaticLabel, for consistency with createDynamicLabel
 6/3/14 change how equation on interactive line is created
 6/3/14 don't do updateLayout for fully-interactive equations, because their form is constant

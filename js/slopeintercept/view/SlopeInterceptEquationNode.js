@@ -53,11 +53,14 @@ define( function( require ) {
   function SlopeInterceptEquationNode( lineProperty, options ) {
 
     options = _.extend( {
+      // components that can be interactive
       interactiveSlope: true,
       interactiveIntercept: true,
+      // dynamic range of components
       riseRangeProperty: new Property( new Range( 0, 1 ) ),
       runRangeProperty: new Property( new Range( 0, 1 ) ),
       yInterceptRangeProperty: new Property( new Range( 0, 1 ) ),
+      // style
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
@@ -397,16 +400,8 @@ define( function( require ) {
    * @param {Number} fontSize
    * @param {Color|String} color
    */
-  SlopeInterceptEquationNode.createStaticLabel = function( line, fontSize, color ) {
-    return new SlopeInterceptEquationNode( new Property( line ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ), {
-        interactiveSlope: false,
-        interactiveIntercept: false,
-        fontSize: fontSize,
-        staticColor: color
-      } );
+  SlopeInterceptEquationNode.createStaticLabel = function( line, fontSize, color ) {  //TODO remove color param
+    return SlopeInterceptEquationNode.createDynamicLabel( new Property( line ), fontSize );
   };
 
   /**

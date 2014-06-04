@@ -148,20 +148,24 @@ define( function( require ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       interactiveIntercept = ( manipulationMode === ManipulationMode.INTERCEPT ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       return new SlopeInterceptEquationNode( lineProperty, {
+        interactiveSlope: interactiveSlope,
+        interactiveIntercept: interactiveIntercept,
         riseRangeProperty: new Property( graph.yRange ),
         runRangeProperty: new Property( graph.xRange ),
         yInterceptRangeProperty: new Property( graph.yRange ),
-        interactiveSlope: interactiveSlope,
-        interactiveIntercept: interactiveIntercept,
         fontSize: fontSize,
         staticColor: staticColor } );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
       interactivePoint = ( manipulationMode === ManipulationMode.POINT ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
-      return new PointSlopeEquationNode( lineProperty, new Property( graph.xRange ), new Property( graph.yRange ), new Property( graph.yRange ), new Property( graph.xRange ), {
+      return new PointSlopeEquationNode( lineProperty, {
         interactivePoint: interactivePoint,
         interactiveSlope: interactiveSlope,
+        x1RangeProperty: new Property( graph.xRange ),
+        y1RangeProperty: new Property( graph.yRange ),
+        riseRangeProperty: new Property( graph.yRange ),
+        runRangeProperty: new Property( graph.xRange ),
         fontSize: fontSize,
         staticColor: staticColor } );
     }

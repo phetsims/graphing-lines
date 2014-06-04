@@ -1,3 +1,5 @@
+6/4/14 implement createStaticLabel using createDynamicLabel
+6/4/14 PointSlopeEquationNode: move constructor params to options (x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty)
 6/4/14 SlopeInterceptEquationNode: move constructor params to options (riseRangeProperty, runRangeProperty, yInterceptRangeProperty)
 6/4/14 SlopeEquationNode: preallocate nodes needed to represent all simplified forms, dynamically add children, set text/fill/stroke
 6/4/14 rename createLabel to createStaticLabel, for consistency with createDynamicLabel

@@ -43,8 +43,13 @@ define( function( require ) {
         model.savedLines,
         viewProperties.interactiveEquationVisibleProperty,
         viewProperties.linesVisibleProperty,
-        new PointSlopeEquationNode( model.interactiveLineProperty,
-          model.x1RangeProperty, model.y1RangeProperty, model.riseRangeProperty, model.runRangeProperty ) )
+        new PointSlopeEquationNode( model.interactiveLineProperty, {
+          x1RangeProperty: model.x1RangeProperty,
+          y1RangeProperty: model.y1RangeProperty,
+          riseRangeProperty: model.riseRangeProperty,
+          runRangeProperty: model.runRangeProperty
+        } )
+      )
     );
   }
 

@@ -45,18 +45,21 @@ define( function( require ) {
 
   /**
    * @param {Property<Line>} lineProperty
-   * @param {Property<Number>} x1RangeProperty
-   * @param {Property<Number>} y1RangeProperty
-   * @param {Property<Number>} riseRangeProperty
-   * @param {Property<Number>} runRangeProperty
    * @param {*} options
    * @constructor
    */
-  function PointSlopeEquationNode( lineProperty, x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty, options ) {
+  function PointSlopeEquationNode( lineProperty, options ) {
 
     options = _.extend( {
+      // components that can be interactive
       interactivePoint: true,
       interactiveSlope: true,
+      // dynamic range of components
+      x1RangeProperty: new Property( new Range( 0, 1 ) ),
+      y1RangeProperty: new Property( new Range( 0, 1 ) ),
+      riseRangeProperty: new Property( new Range( 0, 1 ) ),
+      runRangeProperty: new Property( new Range( 0, 1 ) ),
+      // style
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
@@ -80,7 +83,7 @@ define( function( require ) {
     var updatingControls = false;
 
     // Determine the max width of the rise and run pickers.
-    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( riseRangeProperty, runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
+    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation "(y - y1) = m(x - x1)"
     var yLeftParenNode, yNode, yOperatorNode, y1Node, yRightParenNode, equalsNode;
@@ -93,7 +96,7 @@ define( function( require ) {
     yNode = new Text( symbolYString, staticOptions );
     yOperatorNode = new Node(); // parent for + or - node
     if ( options.interactivePoint ) {
-      y1Node = new NumberPicker( y1Property, y1RangeProperty,
+      y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
         { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: 30 } );
     }
     else {
@@ -104,8 +107,8 @@ define( function( require ) {
     equalsNode = new Text( "=", staticOptions );
     slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
     if ( options.interactiveSlope ) {
-      riseNode = new SlopePicker( riseProperty, runProperty, riseRangeProperty, { font: interactiveFont } );
-      runNode = new SlopePicker( runProperty, riseProperty, runRangeProperty, { font: interactiveFont } );
+      riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
+      runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
     }
     else {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -116,7 +119,7 @@ define( function( require ) {
     xNode = new Text( symbolXString, staticOptions );
     xOperatorNode = new Node(); // parent for + or - node
     if ( options.interactivePoint ) {
-      x1Node = new NumberPicker( x1Property, x1RangeProperty,
+      x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
         { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
     }
     else {
@@ -385,17 +388,8 @@ define( function( require ) {
    * @param {Number} fontSize
    * @param {Color|String} color
    */
-  PointSlopeEquationNode.createStaticLabel = function( line, fontSize, color ) {
-    return new PointSlopeEquationNode( new Property( line ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ), {
-        interactivePoint: false,
-        interactiveSlope: false,
-        fontSize: fontSize,
-        staticColor: color
-      } );
+  PointSlopeEquationNode.createStaticLabel = function( line, fontSize, color ) {   //TODO remove color param
+    return PointSlopeEquationNode.createDynamicLabel( new Property( line ), fontSize );
   };
 
   /**
@@ -405,11 +399,7 @@ define( function( require ) {
    * @returns {Node}
    */
   PointSlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
-    return new PointSlopeEquationNode( lineProperty,
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ),
-      new Property( new Range( 0, 1 ) ), {
+    return new PointSlopeEquationNode( lineProperty, {
         interactivePoint: false,
         interactiveSlope: false,
         fontSize: fontSize

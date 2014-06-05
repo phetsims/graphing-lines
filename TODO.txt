@@ -8,6 +8,7 @@ PERFORMANCE
 USABILITY
 
 HIGH
+- Slope-Intercept, Point-Slope: equations for standard and saved lines don't have correct color
 - improve responsiveness of interactive line manipulators
 - position equation on line based on visibleBounds, current approach of putting invisible nodes at (0,0) may have i18n problems
 - reduce startup time

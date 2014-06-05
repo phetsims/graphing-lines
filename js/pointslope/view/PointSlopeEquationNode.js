@@ -31,7 +31,6 @@ define( function( require ) {
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -39,6 +38,7 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   // strings
+  var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
   var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
   var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
@@ -143,7 +143,7 @@ define( function( require ) {
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new SlopeUndefinedNode( line.x1, staticOptions ) );
+        thisNode.addChild( new Text( StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), staticOptions ) );
         return;
       }
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {

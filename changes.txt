@@ -1,3 +1,4 @@
+6/4/14 delete SlopeUndefinedNode, replace with Text node
 6/4/14 change constructor for SlopeUndefinedNode
 6/4/14 remove color param from createStaticLabel and related clients
 6/4/14 implement createStaticLabel using createDynamicLabel

@@ -33,13 +33,13 @@ define( function( require ) {
   var Range = require( 'DOT/Range' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
-  var SlopeUndefinedNode = require( 'GRAPHING_LINES/common/view/SlopeUndefinedNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
 
   // strings
+  var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
   var symbolInterceptString = require( 'string!GRAPHING_LINES/symbol.intercept' );
   var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
   var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
@@ -131,7 +131,7 @@ define( function( require ) {
       operatorNode.removeAllChildren();
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new SlopeUndefinedNode( line.x1, staticOptions ) );
+        thisNode.addChild( new Text( StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), staticOptions ) );
         return;
       }
 

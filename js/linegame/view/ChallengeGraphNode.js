@@ -51,7 +51,7 @@ define( function( require ) {
     // point (x1,y1) for answer
     thisNode.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
     thisNode.answerParentNode.addChild( thisNode.answerPointNode );
-    thisNode.answerPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( challenge.answer.x1, challenge.answer.y1 ) );
+    thisNode.answerPointNode.translation = challenge.mvt.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 
     // guess
     thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess

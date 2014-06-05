@@ -14,7 +14,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
   var X2Y2Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X2Y2Manipulator' );
 
@@ -44,8 +43,8 @@ define( function( require ) {
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {
       // move the manipulators
-      x1y1Manipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-      x2y2Manipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+      x1y1Manipulator.translation = challenge.mvt.modelToViewXY( line.x1, line.y1 );
+      x2y2Manipulator.translation = challenge.mvt.modelToViewXY( line.x2, line.y2 );
     } );
   }
 

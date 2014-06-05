@@ -18,7 +18,6 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
   var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Challenge} challenge
@@ -58,8 +57,8 @@ define( function( require ) {
     challenge.guessProperty.link( function( line ) {
 
       // move the manipulators
-      pointManipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-      slopeManipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+      pointManipulator.translation = challenge.mvt.modelToViewXY( line.x1, line.y1 );
+      slopeManipulator.translation = challenge.mvt.modelToViewXY( line.x2, line.y2 );
 
       // adjust ranges
       if ( challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {

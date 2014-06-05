@@ -54,8 +54,8 @@ define( function( require ) {
       var graph = new Graph( axisRange, axisRange );
       var mvt = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
       var graphNode = new GraphNode( graph, mvt );
-      var p1 = mvt.modelToViewPosition( new Vector2( x1, y1 ) );
-      var p2 = mvt.modelToViewPosition( new Vector2( x2, y2 ) );
+      var p1 = mvt.modelToViewXY( x1, y1 );
+      var p2 = mvt.modelToViewXY( x2, y2 );
       graphNode.addChild( new Path( Shape.lineSegment( p1.x, p1.y, p2.x, p2.y ), {
         stroke: color, lineWidth: 4
       } ) );

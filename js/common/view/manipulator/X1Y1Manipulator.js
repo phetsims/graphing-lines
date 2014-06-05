@@ -37,7 +37,7 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         var line = lineProperty.get();
-        var location = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+        var location = mvt.modelToViewXY( line.x1, line.y1 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 

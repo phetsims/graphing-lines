@@ -16,7 +16,6 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var HEAD_SIZE = new Dimension2( 10, 10 );
@@ -129,9 +128,8 @@ define( function( require ) {
       }
 
       // line (arrow)
-      //TODO transform x and y components individually to alloc less memory
-      var tailLocation = this.mvt.modelToViewPosition( new Vector2( tailX, tailY ) );
-      var tipLocation = this.mvt.modelToViewPosition( new Vector2( tipX, tipY ) );
+      var tailLocation = this.mvt.modelToViewXY( tailX, tailY );
+      var tipLocation = this.mvt.modelToViewXY( tipX, tipY );
       this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
       this.arrowNode.fill = line.color;
 

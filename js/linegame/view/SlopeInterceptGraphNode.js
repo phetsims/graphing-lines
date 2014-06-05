@@ -17,7 +17,6 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var SlopeInterceptParameterRange = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptParameterRange' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
-  var Vector2 = require( 'DOT/Vector2' );
   var YInterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/YInterceptManipulator' );
 
   /**
@@ -57,8 +56,8 @@ define( function( require ) {
     challenge.guessProperty.link( function( line ) {
 
       // move the manipulators
-      slopeManipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
-      yInterceptManipulator.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+      slopeManipulator.translation = challenge.mvt.modelToViewXY( line.x2, line.y2 );
+      yInterceptManipulator.translation = challenge.mvt.modelToViewXY( line.x1, line.y1 );
 
       // adjust ranges
       if ( challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {

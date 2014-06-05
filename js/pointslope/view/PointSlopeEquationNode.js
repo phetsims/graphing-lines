@@ -141,6 +141,7 @@ define( function( require ) {
     var updateLayout = function( line ) {
 
       var interactive = options.interactivePoint || options.interactiveSlope;
+      var lineColor = line.color;
 
       // start with all children invisible and at (0,0) so they won't affect bounds
       var len = thisNode.children.length;
@@ -153,12 +154,14 @@ define( function( require ) {
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
+        slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
         return;
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
         // use slope-intercept form for y=x
         yNode.visible = equalsNode.visible = xNode.visible = true;
+        yNode.fill = equalsNode.fill = xNode.fill = lineColor;
         equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
         xNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
         return;
@@ -166,6 +169,7 @@ define( function( require ) {
       else if ( !interactive && line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) {
         // use slope-intercept form for y=-x
         yNode.visible = equalsNode.visible = slopeMinusSignNode.visible = xNode.visible = true;
+        yNode.fill = equalsNode.fill = slopeMinusSignNode.fill = xNode.fill = lineColor;
         equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
         slopeMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
         slopeMinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
@@ -180,6 +184,7 @@ define( function( require ) {
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
         yNode.visible = equalsNode.visible = y1Node.visible = true;
+        yNode.fill = equalsNode.fill = y1Node.fill = lineColor;
         equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
         if ( options.interactivePoint || line.y1 >= 0 ) {
           // y = y1
@@ -189,6 +194,7 @@ define( function( require ) {
         else {
           // y = -y1
           y1MinusSignNode.visible = true;
+          y1MinusSignNode.fill = lineColor;
           y1MinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           y1MinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           y1Node.left = y1MinusSignNode.right + thisNode.integerSignXSpacing;
@@ -201,6 +207,7 @@ define( function( require ) {
 
         // (y - y1)
         yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
+        yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
         yLeftParenNode.x = 0;
         yLeftParenNode.y = 0;
         yNode.left = yLeftParenNode.right + thisNode.parenXSpacing;
@@ -214,6 +221,7 @@ define( function( require ) {
 
         // =
         equalsNode.visible = true;
+        equalsNode.fill = lineColor;
         equalsNode.left = yRightParenNode.right + thisNode.relationalOperatorXSpacing;
         equalsNode.y = yNode.y + thisNode.equalsSignFudgeFactor;
 
@@ -222,6 +230,7 @@ define( function( require ) {
         if ( options.interactiveSlope ) {
           // (rise/run), where rise and run are pickers, and the sign is integrated into the pickers
           riseNode.visible = runNode.visible = fractionLineNode.visible = true;
+          riseNode.fill = runNode.fill = fractionLineNode.fill = lineColor;
           fractionLineNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           fractionLineNode.centerY = equalsNode.centerY;
           riseNode.centerX = fractionLineNode.centerX;
@@ -255,6 +264,7 @@ define( function( require ) {
           else {
             // -
             slopeMinusSignNode.visible = true;
+            slopeMinusSignNode.fill = lineColor;
             slopeMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
             slopeMinusSignNode.centerY = equalsNode.centerY + thisNode.slopeSignYFudgeFactor + thisNode.slopeSignYOffset;
             previousNode = slopeMinusSignNode;
@@ -264,6 +274,7 @@ define( function( require ) {
           if ( line.undefinedSlope() || fractionalSlope ) {
             // rise/run
             riseNode.visible = runNode.visible = fractionLineNode.visible = true;
+            riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
             fractionLineNode.left = previousNode.right + previousXOffset;
             fractionLineNode.centerY = equalsNode.centerY;
             riseNode.centerX = fractionLineNode.centerX;
@@ -276,6 +287,7 @@ define( function( require ) {
           else if ( zeroSlope ) {
             // 0
             riseNode.visible = true;
+            riseNode.fill = lineColor;
             riseNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
             riseNode.y = yNode.y;
             previousNode = riseNode;
@@ -288,6 +300,7 @@ define( function( require ) {
           else if ( integerSlope ) {
             // N
             riseNode.visible = true;
+            riseNode.fill = lineColor;
             riseNode.left = previousNode.right + previousXOffset;
             riseNode.y = yNode.y;
             previousNode = riseNode;
@@ -302,6 +315,7 @@ define( function( require ) {
         if ( options.interactivePoint || options.interactiveSlope || line.rise !== 0 ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
+          xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
           xLeftParenNode.left = previousNode.right + previousXOffset;
           xLeftParenNode.y = yNode.y;
           xNode.left = xLeftParenNode.right + thisNode.parenXSpacing;

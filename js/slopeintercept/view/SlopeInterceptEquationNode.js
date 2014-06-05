@@ -126,6 +126,7 @@ define( function( require ) {
     var updateLayout = function( line ) {
 
       var interactive = ( options.interactiveSlope || options.interactiveIntercept );
+      var lineColor = line.color;
 
       // start with all children invisible and at (0,0) so they won't affect bounds
       var len = thisNode.children.length;
@@ -138,6 +139,7 @@ define( function( require ) {
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
+        slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
         return;
       }
@@ -153,8 +155,8 @@ define( function( require ) {
       var lineWidth;
 
       // y =
-      yNode.visible = true;
-      equalsNode.visible = true;
+      yNode.visible = equalsNode.visible = true;
+      yNode.fill = equalsNode.fill = lineColor;
       equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
       equalsNode.y = yNode.y;
 
@@ -165,6 +167,7 @@ define( function( require ) {
 
         // (rise/run)x
         riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
+        riseNode.fill = runNode.fill = slopeFractionLineNode.stroke = xNode.fill = lineColor;
         slopeFractionLineNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
         slopeFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;
         riseNode.centerX = slopeFractionLineNode.centerX;
@@ -188,6 +191,7 @@ define( function( require ) {
         else {
           // -
           slopeMinusSignNode.visible = true;
+          slopeMinusSignNode.fill = lineColor;
           slopeMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           slopeMinusSignNode.centerY = equalsNode.centerY + thisNode.slopeSignYFudgeFactor + thisNode.slopeSignYOffset;
           previousNode = slopeMinusSignNode;
@@ -197,6 +201,7 @@ define( function( require ) {
         if ( line.undefinedSlope() || fractionalSlope ) {
           // rise/run x
           riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
+          riseNode.fill = runNode.fill = slopeFractionLineNode.stroke = xNode.fill = lineColor;
           // adjust fraction line width
           lineWidth = Math.max( riseNode.width, runNode.width );
           slopeFractionLineNode.setLine( 0, 0, lineWidth, 0 );
@@ -216,12 +221,14 @@ define( function( require ) {
         else if ( unitySlope ) {
           // x
           xNode.visible = true;
+          xNode.fill = lineColor;
           xNode.left = previousNode.right + previousXOffset;
           xNode.y = yNode.y;
         }
         else if ( integerSlope ) {
           // Nx
           riseNode.visible = xNode.visible = true;
+          riseNode.fill = xNode.fill = lineColor;
           riseNode.left = previousNode.right + previousXOffset;
           riseNode.y = yNode.y;
           xNode.left = riseNode.right + thisNode.integerSlopeXSpacing;
@@ -238,6 +245,7 @@ define( function( require ) {
         if ( zeroSlope && !options.interactiveSlope ) {
           // y = b
           yInterceptNode.visible = true;
+          yInterceptNode.fill = lineColor;
           yInterceptNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           yInterceptNode.centerY = yNode.centerY;
         }
@@ -245,6 +253,7 @@ define( function( require ) {
           // y = (rise/run)x + b
           plusNode.visible = yInterceptNode.visible = true;
           minusNode.visible = false;
+          plusNode.fill = yInterceptNode.fill = lineColor;
           plusNode.left = xNode.right + thisNode.operatorXSpacing;
           plusNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           yInterceptNode.left = plusNode.right + thisNode.operatorXSpacing;
@@ -264,6 +273,7 @@ define( function( require ) {
           if ( zeroSlope && !options.interactiveSlope ) {
             // y = 0
             yInterceptNumeratorNode.visible = true;
+            yInterceptNumeratorNode.fill = lineColor;
             yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
             yInterceptNumeratorNode.centerY = yNode.centerY;
           }
@@ -274,12 +284,14 @@ define( function( require ) {
         else if ( positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = b
           yInterceptNumeratorNode.visible = true;
+          yInterceptNumeratorNode.fill = lineColor;
           yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
         else if ( !positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = -b
           yInterceptMinusSignNode.visible = yInterceptNumeratorNode.visible = true;
+          yInterceptMinusSignNode.fill = yInterceptNumeratorNode.fill = lineColor;
           yInterceptMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           yInterceptMinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           yInterceptNumeratorNode.left = yInterceptMinusSignNode.right + thisNode.integerSignXSpacing;
@@ -289,18 +301,21 @@ define( function( require ) {
           // y = mx +/- b
           var operatorNode = ( positiveIntercept ) ? plusNode : minusNode;
           operatorNode.visible = true;
+          operatorNode.fill = lineColor;
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
 
           if ( integerIntercept ) {
             // b is an integer
             yInterceptNumeratorNode.visible = true;
+            yInterceptNumeratorNode.fill = lineColor;
             yInterceptNumeratorNode.left = operatorNode.right + thisNode.operatorXSpacing;
             yInterceptNumeratorNode.centerY = yNode.centerY;
           }
           else {
             // b is an improper fraction
             yInterceptNumeratorNode.visible = yInterceptDenominatorNode.visible = yInterceptFractionLineNode.visible = true;
+            yInterceptNumeratorNode.fill = yInterceptDenominatorNode.fill = yInterceptFractionLineNode.stroke = lineColor;
             // adjust fraction line width
             lineWidth = Math.max( yInterceptNumeratorNode.width, yInterceptDenominatorNode.width );
             yInterceptFractionLineNode.setLine( 0, 0, lineWidth, 0 );

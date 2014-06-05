@@ -143,7 +143,7 @@ define( function( require ) {
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new SlopeUndefinedNode( line, staticOptions ) );
+        thisNode.addChild( new SlopeUndefinedNode( line.x1, staticOptions ) );
         return;
       }
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {

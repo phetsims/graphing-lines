@@ -131,7 +131,7 @@ define( function( require ) {
       operatorNode.removeAllChildren();
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new SlopeUndefinedNode( line, staticOptions ) );
+        thisNode.addChild( new SlopeUndefinedNode( line.x1, staticOptions ) );
         return;
       }
 

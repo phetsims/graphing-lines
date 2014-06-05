@@ -1,3 +1,4 @@
+6/4/14 change constructor for SlopeUndefinedNode
 6/4/14 remove color param from createStaticLabel and related clients
 6/4/14 implement createStaticLabel using createDynamicLabel
 6/4/14 PointSlopeEquationNode: move constructor params to options (x1RangeProperty, y1RangeProperty, riseRangeProperty, runRangeProperty)

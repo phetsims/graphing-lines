@@ -18,12 +18,12 @@ define( function( require ) {
   var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
 
   /**
-   * @param {Line} line
+   * @param {Number} x
    * @param {*} options
    * @constructor
    */
-  function SlopeUndefinedNode( line, options ) {
-    Text.call( this, StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), options );
+  function SlopeUndefinedNode( x, options ) {
+    Text.call( this, StringUtils.format( slopeUndefinedString, symbolXString, x ), options );
   }
 
   return inherit( Text, SlopeUndefinedNode );

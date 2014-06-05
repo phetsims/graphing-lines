@@ -56,8 +56,7 @@ define( function( require ) {
     // optional equation
     if ( options.equationType ) {
       thisNode.equationNode = options.equationType.createDynamicLabel( lineProperty, EQUATION_FONT_SIZE );
-      //TODO can this intermediate node go away?
-      // intermediate node to handle line orientation, makes positioning the equation a little easier to grok
+      // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
       thisNode.equationParentNode = new Node( { children: [ this.equationNode ] } );
       thisNode.parentNode.addChild( thisNode.equationParentNode );
     }
@@ -133,7 +132,11 @@ define( function( require ) {
       this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
       this.arrowNode.fill = line.color;
 
-      // If this line has an equation, update its orientation and position.
+      /*
+       * If this line has an equation, update its orientation and position.
+       * Rotation is applied to equationParentNode.
+       * Translation is applied to equationNode, relative to a horizontal line whose tip points right.
+       */
       if ( this.equationParentNode ) {
 
         this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );

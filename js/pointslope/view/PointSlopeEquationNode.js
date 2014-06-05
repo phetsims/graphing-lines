@@ -30,12 +30,12 @@ define( function( require ) {
   var Range = require( 'DOT/Range');
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var SubSupText = require( 'SCENERY_PHET/SubSupText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
@@ -88,9 +88,8 @@ define( function( require ) {
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     var yLeftParenNode = new Text( "(", staticOptions );
     var yNode = new Text( symbolYString, staticOptions );
-    var yOperatorNode = new Node(); // parent for + or - node
-    var yPlus = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
-    var yMinus = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var yPlusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var yMinusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var y1Node;
     if ( options.interactivePoint ) {
       y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
@@ -115,9 +114,8 @@ define( function( require ) {
     var fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     var xLeftParenNode = new Text( "(", staticOptions );
     var xNode = new Text( symbolXString, staticOptions );
-    var xOperatorNode = new Node(); // parent for + or - node
-    var xPlus = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
-    var xMinus = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var xPlusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var xMinusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var x1Node;
     if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
@@ -129,6 +127,12 @@ define( function( require ) {
     var xRightParenNode = new Text( ")", staticOptions );
     var slopeUndefinedNode = new Text( '?', staticOptions );
 
+    // add all nodes, we'll set which ones are visible bases on desired simplification
+    thisNode.children = [
+      yLeftParenNode, yNode, yPlusNode, yMinusNode, y1Node, yRightParenNode, y1MinusSignNode, equalsNode,
+      slopeMinusSignNode, riseNode, runNode, fractionLineNode, xLeftParenNode, xNode, xPlusNode, xMinusNode, x1Node, xRightParenNode,
+      slopeUndefinedNode
+    ];
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the
@@ -138,37 +142,44 @@ define( function( require ) {
 
       var interactive = options.interactivePoint || options.interactiveSlope;
 
-      // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
-      thisNode.removeAllChildren();
-      xOperatorNode.removeAllChildren();
-      yOperatorNode.removeAllChildren();
+      // start with all children invisible and at (0,0) so they won't affect bounds
+      var len = thisNode.children.length;
+      for ( var i = 0; i < len; i++ ) {
+        var child = thisNode.children[i];
+        child.visible = false;
+        child.translation = Vector2.ZERO; //TODO eliminate need for this by position equation using visibleBounds
+      }
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( slopeUndefinedNode );
+        slopeUndefinedNode.visible = true;
         slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
         return;
       }
-      else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
-        // use slope-intercept form for y=x and y=-x, using a line with the proper slope and (x1,y1)=(0,0)
-        thisNode.addChild( SlopeInterceptEquationNode.createStaticLabel(
-          Line.createSlopeIntercept( line.rise, line.run, 0, line.color ), options.fontSize ) );
+      else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
+        // use slope-intercept form for y=x
+        yNode.visible = equalsNode.visible = xNode.visible = true;
+        equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
+        xNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
+        return;
+      }
+      else if ( !interactive && line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) {
+        // use slope-intercept form for y=-x
+        yNode.visible = equalsNode.visible = slopeMinusSignNode.visible = xNode.visible = true;
+        equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
+        slopeMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
+        slopeMinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
+        xNode.left = slopeMinusSignNode.right + thisNode.integerSignXSpacing;
         return;
       }
 
-      // Change the x operator to account for the signs of x1.
-      xOperatorNode.addChild( ( options.interactivePoint || line.x1 >= 0 ) ? xMinus : xPlus );
-
-      // Change the y operator to account for the signs of y1.
-      yOperatorNode.addChild( ( options.interactivePoint || line.y1 >= 0 ) ? yMinus : yPlus );
+      // Select the operators based on the signs of x1 and y1.
+      var xOperatorNode = ( options.interactivePoint || line.x1 >= 0 ) ? xMinusNode : xPlusNode;
+      var yOperatorNode = ( options.interactivePoint || line.y1 >= 0 ) ? yMinusNode : yPlusNode;
 
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
-        thisNode.addChild( yNode );
-        thisNode.addChild( equalsNode );
-        thisNode.addChild( y1Node );
-        yNode.x = 0;
-        yNode.y = 0;
+        yNode.visible = equalsNode.visible = y1Node.visible = true;
         equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
         if ( options.interactivePoint || line.y1 >= 0 ) {
           // y = y1
@@ -177,7 +188,7 @@ define( function( require ) {
         }
         else {
           // y = -y1
-          thisNode.addChild( y1MinusSignNode );
+          y1MinusSignNode.visible = true;
           y1MinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           y1MinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           y1Node.left = y1MinusSignNode.right + thisNode.integerSignXSpacing;
@@ -189,11 +200,7 @@ define( function( require ) {
         var previousNode;
 
         // (y - y1)
-        thisNode.addChild( yLeftParenNode );
-        thisNode.addChild( yNode );
-        thisNode.addChild( yOperatorNode );
-        thisNode.addChild( y1Node );
-        thisNode.addChild( yRightParenNode );
+        yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
         yLeftParenNode.x = 0;
         yLeftParenNode.y = 0;
         yNode.left = yLeftParenNode.right + thisNode.parenXSpacing;
@@ -206,7 +213,7 @@ define( function( require ) {
         yRightParenNode.y = yNode.y;
 
         // =
-        thisNode.addChild( equalsNode );
+        equalsNode.visible = true;
         equalsNode.left = yRightParenNode.right + thisNode.relationalOperatorXSpacing;
         equalsNode.y = yNode.y + thisNode.equalsSignFudgeFactor;
 
@@ -214,9 +221,7 @@ define( function( require ) {
         var previousXOffset;
         if ( options.interactiveSlope ) {
           // (rise/run), where rise and run are pickers, and the sign is integrated into the pickers
-          thisNode.addChild( riseNode );
-          thisNode.addChild( fractionLineNode );
-          thisNode.addChild( runNode );
+          riseNode.visible = runNode.visible = fractionLineNode.visible = true;
           fractionLineNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
           fractionLineNode.centerY = equalsNode.centerY;
           riseNode.centerX = fractionLineNode.centerX;
@@ -249,7 +254,7 @@ define( function( require ) {
           }
           else {
             // -
-            thisNode.addChild( slopeMinusSignNode );
+            slopeMinusSignNode.visible = true;
             slopeMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
             slopeMinusSignNode.centerY = equalsNode.centerY + thisNode.slopeSignYFudgeFactor + thisNode.slopeSignYOffset;
             previousNode = slopeMinusSignNode;
@@ -258,9 +263,7 @@ define( function( require ) {
 
           if ( line.undefinedSlope() || fractionalSlope ) {
             // rise/run
-            thisNode.addChild( riseNode );
-            thisNode.addChild( fractionLineNode );
-            thisNode.addChild( runNode );
+            riseNode.visible = runNode.visible = fractionLineNode.visible = true;
             fractionLineNode.left = previousNode.right + previousXOffset;
             fractionLineNode.centerY = equalsNode.centerY;
             riseNode.centerX = fractionLineNode.centerX;
@@ -272,7 +275,7 @@ define( function( require ) {
           }
           else if ( zeroSlope ) {
             // 0
-            thisNode.addChild( riseNode );
+            riseNode.visible = true;
             riseNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
             riseNode.y = yNode.y;
             previousNode = riseNode;
@@ -284,7 +287,7 @@ define( function( require ) {
           }
           else if ( integerSlope ) {
             // N
-            thisNode.addChild( riseNode );
+            riseNode.visible = true;
             riseNode.left = previousNode.right + previousXOffset;
             riseNode.y = yNode.y;
             previousNode = riseNode;
@@ -298,11 +301,7 @@ define( function( require ) {
         // x term
         if ( options.interactivePoint || options.interactiveSlope || line.rise !== 0 ) {
           // (x - x1)
-          thisNode.addChild( xLeftParenNode );
-          thisNode.addChild( xNode );
-          thisNode.addChild( xOperatorNode );
-          thisNode.addChild( x1Node );
-          thisNode.addChild( xRightParenNode );
+          xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
           xLeftParenNode.left = previousNode.right + previousXOffset;
           xLeftParenNode.y = yNode.y;
           xNode.left = xLeftParenNode.right + thisNode.parenXSpacing;

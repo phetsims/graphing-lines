@@ -8,7 +8,6 @@ USABILITY
 
 HIGH
 - make value display transparent in point_tool_body.png
-- improve responsiveness of interactive line manipulators
 - reduce startup time
 - get new point tool image from AP, graphing-lines#2
 

@@ -23,11 +23,10 @@ define( function( require ) {
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range');
+  var Range = require( 'DOT/Range' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -409,10 +408,10 @@ define( function( require ) {
    */
   PointSlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
     return new PointSlopeEquationNode( lineProperty, {
-        interactivePoint: false,
-        interactiveSlope: false,
-        fontSize: fontSize
-      } );
+      interactivePoint: false,
+      interactiveSlope: false,
+      fontSize: fontSize
+    } );
   };
 
   return inherit( EquationNode, PointSlopeEquationNode );

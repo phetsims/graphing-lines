@@ -116,7 +116,7 @@ define( function( require ) {
     removeLineNode: function( line, parentNode ) {
       for ( var i = 0; i < parentNode.getChildrenCount(); i++ ) {
         var node = parentNode.getChildAt( i );
-        if ( node.lineProperty.get() === line ) {
+        if ( line.same( node.lineProperty.get() ) ) {
           parentNode.removeChild( node );
           break;
         }

@@ -1,3 +1,4 @@
+6/4/14 Slope-Intercept, Point-Slope: fix removal of standard and saved lines
 6/4/14 Slope-Intercept, Point-Slope: fix color of equations for standard and saved lines
 6/4/14 PointSlopeEquationNode: use visible instead of add/removeChild when updating to match the line
 6/4/14 SlopeInterceptEquationNode: use visible instead of add/removeChild when updating to match the line

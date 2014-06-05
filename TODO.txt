@@ -7,6 +7,7 @@ PERFORMANCE
 USABILITY
 
 HIGH
+- make value display transparent in point_tool_body.png
 - improve responsiveness of interactive line manipulators
 - position equation on line based on visibleBounds, current approach of putting invisible nodes at (0,0) may have i18n problems
 - reduce startup time

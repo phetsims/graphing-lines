@@ -1,3 +1,4 @@
+6/5/14 new image for point tool body
 6/5/14 center the game settings interface on the screen
 6/5/14 delete vestigial GameSettingsPanel
 # 1.0.0-dev.6 6/4/14

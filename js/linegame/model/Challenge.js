@@ -45,7 +45,9 @@ define( function( require ) {
 
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
-    PropertySet.call( this, { guess: createInitialGuess( answer, manipulationMode ) } );
+    PropertySet.call( this, {
+      guess: createInitialGuess( answer, manipulationMode ) // {Line}
+    } );
 
     this.title = title;
     this.description = description;
@@ -73,6 +75,7 @@ define( function( require ) {
    * Creates an initial guess, based on the answer and what the user can manipulate.
    * @param {Line} answer
    * @param {ManipulationMode} manipulationMode
+   * @returns {Line}
    */
   var createInitialGuess = function( answer, manipulationMode ) {
     if ( manipulationMode === ManipulationMode.SLOPE ) {

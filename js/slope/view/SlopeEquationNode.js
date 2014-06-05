@@ -298,7 +298,7 @@ define( function( require ) {
       for ( var i = 0; i < len; i++ ) {
         var child = equationNode.children[i];
         child.visible = false;
-        child.translation = Vector2.ZERO;
+        child.translation = Vector2.ZERO; //TODO eliminate need for this by position equation using visibleBounds
       }
 
       // 'Slope is'

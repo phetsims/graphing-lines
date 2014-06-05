@@ -29,6 +29,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var slopeString = require( 'string!GRAPHING_LINES/slope' );
@@ -284,31 +285,36 @@ define( function( require ) {
     var runNode = new Text( '?', textOptions );
     var fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: equationNode.fractionLineThickness } );
 
-    // do layout that doesn't change
-    slopeIsNode.x = 0;
-    slopeIsNode.y = 0;
-    undefinedNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
-    undefinedNode.y = slopeIsNode.y;
+    // add all nodes, we'll set which ones are visible bases on desired simplification
+    equationNode.children = [ slopeIsNode, undefinedNode, minusSignNode, riseNode, runNode, fractionLineNode ];
 
-    // add and layout only those nodes that are relevant for the current line
+    // update visibility, layout and properties of nodes to match the current line
     var update = function( line ) {
 
       var lineColor = line.color;
 
-      equationNode.removeAllChildren();
+      // start with all children invisible and at (0,0) so they won't affect bounds
+      var len = equationNode.children.length;
+      for ( var i = 0; i < len; i++ ) {
+        var child = equationNode.children[i];
+        child.visible = false;
+        child.translation = Vector2.ZERO;
+      }
 
       // 'Slope is'
-      equationNode.addChild( slopeIsNode );
+      slopeIsNode.visible = true;
       slopeIsNode.fill = lineColor;
 
       if ( line.undefinedSlope() ) {
         // 'undefined'
-        equationNode.addChild( undefinedNode );
-        equationNode.fill = lineColor;
+        undefinedNode.visible = true;
+        undefinedNode.fill = lineColor;
+        undefinedNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+        undefinedNode.y = slopeIsNode.y;
       }
       else if ( line.getSlope() === 0 ) {
         // 0
-        equationNode.addChild( riseNode );
+        riseNode.visible = true;
         riseNode.text = '0';
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
@@ -318,7 +324,7 @@ define( function( require ) {
         var nextXOffset;
         if ( line.getSlope() < 0 ) {
           // minus sign
-          equationNode.addChild( minusSignNode );
+          minusSignNode.visible = true;
           minusSignNode.fill = lineColor;
           minusSignNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
           minusSignNode.centerY = slopeIsNode.centerY + equationNode.slopeSignYFudgeFactor + equationNode.slopeSignYOffset;
@@ -331,7 +337,7 @@ define( function( require ) {
 
         if ( Util.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
-          equationNode.addChild( riseNode );
+          riseNode.visible = true;
           riseNode.text = Util.toFixed( line.getSlope(), 0 );
           riseNode.fill = lineColor;
           riseNode.left = nextXOffset;
@@ -339,9 +345,7 @@ define( function( require ) {
         }
         else {
           // fractional slope
-          equationNode.addChild( fractionLineNode );
-          equationNode.addChild( riseNode );
-          equationNode.addChild( runNode );
+          riseNode.visible = runNode.visible = fractionLineNode.visible = true;
 
           riseNode.text = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
           runNode.text = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );

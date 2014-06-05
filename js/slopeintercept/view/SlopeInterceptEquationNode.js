@@ -114,7 +114,6 @@ define( function( require ) {
     var yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     var slopeUndefinedNode = new Text( '?', staticOptions );
 
-
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the

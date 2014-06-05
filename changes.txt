@@ -1,3 +1,4 @@
+6/4/14 SlopeInterceptEquationNode: use visible instead of add/removeChild when updating to match the line
 6/4/14 SlopeEquationNode: use visible instead of add/removeChild when updating to match the line
 6/4/14 allocate and show undefined-slope indicator only for fully-interactive equations
 6/4/14 SlopeInterceptEquationNode, PointSlopeEquationNode: pre-alloc and reuse nodes where possible

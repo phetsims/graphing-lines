@@ -66,7 +66,7 @@ define( function( require ) {
     }, options );
 
     var thisNode = this;
-    EquationNode.call( this, options.fontSize );
+    EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
@@ -85,20 +85,14 @@ define( function( require ) {
     // flag that allows us to update all controls atomically when the model changes
     var updatingControls = false;
 
-    // Nodes that appear in all possible forms of the equation "y = mx + b"
-    var yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, xNode, operatorNode;
-    var yInterceptNode; // used for interactive, integer y-intercept
-    var yInterceptNumeratorNode, yInterceptDenominatorNode; // used for non-interactive, fractional y-intercept
-    var yInterceptMinusSignNode; // for "y = -b" case
-    var slopeFractionLineNode, yInterceptFractionLineNode;
-
     // Determine the max width of the rise and run pickers.
     var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
-    // nodes: y = -(rise/run)x + -b
-    yNode = new Text( symbolYString, staticOptions );
-    equalsNode = new Text( "=", staticOptions );
-    slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
+    // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
+    var yNode = new Text( symbolYString, staticOptions );
+    var equalsNode = new Text( "=", staticOptions );
+    var slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
+    var riseNode, runNode;
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
@@ -107,15 +101,19 @@ define( function( require ) {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
-    operatorNode = new Node(); // parent for + or - node
-    yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
-    yInterceptNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
+    var slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    var xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
+    var operatorNode = new Node(); // parent for + or - node
+    var plusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var minusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
+    var yInterceptNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
       { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
-    yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-    yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-    yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    var yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    var yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    var yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    var slopeUndefinedNode = new Text( '?', staticOptions );
+
 
     /*
      * Updates the layout to match the desired form of the equation.
@@ -129,9 +127,11 @@ define( function( require ) {
       // Start by removing all nodes, then we'll selectively add nodes based on the desired form of the equation.
       thisNode.removeAllChildren();
       operatorNode.removeAllChildren();
+
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new Text( StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), staticOptions ) );
+        thisNode.addChild( slopeUndefinedNode );
+        slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
         return;
       }
 
@@ -247,7 +247,7 @@ define( function( require ) {
           // y = (rise/run)x + b
           thisNode.addChild( operatorNode );
           thisNode.addChild( yInterceptNode );
-          operatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize } , staticOptions ) ) );
+          operatorNode.addChild( plusNode );
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
           yInterceptNode.left = operatorNode.right + thisNode.operatorXSpacing;
@@ -292,9 +292,7 @@ define( function( require ) {
         else {
           // y = mx +/- b
           thisNode.addChild( operatorNode );
-          operatorNode.addChild( positiveIntercept ?
-                                 new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) :
-                                 new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
+          operatorNode.addChild( positiveIntercept ? plusNode : minusNode );
           operatorNode.left = xNode.right + thisNode.operatorXSpacing;
           operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
 

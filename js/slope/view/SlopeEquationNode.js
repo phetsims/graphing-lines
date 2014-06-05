@@ -55,7 +55,7 @@ define( function( require ) {
     }, options );
 
     var thisNode = this;
-    EquationNode.call( this, options.fontSize );
+    EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );

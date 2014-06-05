@@ -65,7 +65,7 @@ define( function( require ) {
     }, options );
 
     var thisNode = this;
-    EquationNode.call( thisNode, options.fontSize );
+    EquationNode.call( thisNode, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var fullyInteractive = ( options.interactivePoint && options.interactiveSlope );
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
@@ -85,16 +85,13 @@ define( function( require ) {
     // Determine the max width of the rise and run pickers.
     var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
-    // Nodes that appear in all possible forms of the equation "(y - y1) = m(x - x1)"
-    var yLeftParenNode, yNode, yOperatorNode, y1Node, yRightParenNode, equalsNode;
-    var slopeMinusSignNode, riseNode, runNode, xLeftParenNode, xNode, xOperatorNode, x1Node, xRightParenNode;
-    var y1MinusSignNode; // for "y = -y1" case
-    var fractionLineNode;
-
-    // nodes: (y-y1) = m(x-x1)
-    yLeftParenNode = new Text( "(", staticOptions );
-    yNode = new Text( symbolYString, staticOptions );
-    yOperatorNode = new Node(); // parent for + or - node
+    // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
+    var yLeftParenNode = new Text( "(", staticOptions );
+    var yNode = new Text( symbolYString, staticOptions );
+    var yOperatorNode = new Node(); // parent for + or - node
+    var yPlus = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var yMinus = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var y1Node;
     if ( options.interactivePoint ) {
       y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
         { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: 30 } );
@@ -102,10 +99,11 @@ define( function( require ) {
     else {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    yRightParenNode = new Text( ")", staticOptions );
-    y1MinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) ); // for y=-y1 case
-    equalsNode = new Text( "=", staticOptions );
-    slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
+    var yRightParenNode = new Text( ")", staticOptions );
+    var y1MinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) ); // for y=-y1 case
+    var equalsNode = new Text( "=", staticOptions );
+    var slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
+    var riseNode, runNode;
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
@@ -114,10 +112,13 @@ define( function( require ) {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    xLeftParenNode = new Text( "(", staticOptions );
-    xNode = new Text( symbolXString, staticOptions );
-    xOperatorNode = new Node(); // parent for + or - node
+    var fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    var xLeftParenNode = new Text( "(", staticOptions );
+    var xNode = new Text( symbolXString, staticOptions );
+    var xOperatorNode = new Node(); // parent for + or - node
+    var xPlus = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var xMinus = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var x1Node;
     if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
         { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
@@ -125,7 +126,8 @@ define( function( require ) {
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    xRightParenNode = new Text( ")", staticOptions );
+    var xRightParenNode = new Text( ")", staticOptions );
+    var slopeUndefinedNode = new Text( '?', staticOptions );
 
     /*
      * Updates the layout to match the desired form of the equation.
@@ -143,7 +145,8 @@ define( function( require ) {
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        thisNode.addChild( new Text( StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ), staticOptions ) );
+        thisNode.addChild( slopeUndefinedNode );
+        slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
         return;
       }
       else if ( ( line.same( Line.Y_EQUALS_X_LINE ) || line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) && !interactive ) {
@@ -154,20 +157,10 @@ define( function( require ) {
       }
 
       // Change the x operator to account for the signs of x1.
-      if ( options.interactivePoint || line.x1 >= 0 ) {
-        xOperatorNode.addChild( new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
-      }
-      else {
-        xOperatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
-      }
+      xOperatorNode.addChild( ( options.interactivePoint || line.x1 >= 0 ) ? xMinus : xPlus );
 
       // Change the y operator to account for the signs of y1.
-      if ( options.interactivePoint || line.y1 >= 0 ) {
-        yOperatorNode.addChild( new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
-      }
-      else {
-        yOperatorNode.addChild( new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) ) );
-      }
+      yOperatorNode.addChild( ( options.interactivePoint || line.y1 >= 0 ) ? yMinus : yPlus );
 
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation

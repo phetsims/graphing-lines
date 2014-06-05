@@ -138,6 +138,14 @@ define( function( require ) {
 
         this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
 
+        // equations have some invisible nodes, compensate so that layout is for visible nodes
+        var equationBounds = this.equationNode.bounds;
+        var equationVisibleBounds = this.equationNode.visibleBounds;
+        var leftOffset = equationVisibleBounds.left - equationBounds.left;
+        var rightOffset = equationBounds.right - equationVisibleBounds.right;
+        var topOffset = equationVisibleBounds.top - equationBounds.top;
+        var bottomOffset = equationBounds.bottom - equationVisibleBounds.bottom;
+
         // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
         var X_OFFSET = 30;
         var Y_OFFSET = 12;
@@ -145,41 +153,41 @@ define( function( require ) {
           // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
           if ( line.rise < 0 ) {
             this.equationParentNode.translation = tipLocation;
-            this.equationNode.right = -X_OFFSET;
-            this.equationNode.bottom = -Y_OFFSET;
+            this.equationNode.right = -X_OFFSET + rightOffset;
+            this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
           else {
             this.equationParentNode.translation = tailLocation;
-            this.equationNode.left = X_OFFSET;
-            this.equationNode.bottom = -Y_OFFSET;
+            this.equationNode.left = X_OFFSET - leftOffset;
+            this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
         }
         else if ( line.rise <= 0 ) {
           if ( line.run >= 0 ) {
-            // equation above the line, at tip
+            // quadrant 4: equation above the line, at tip (right)
             this.equationParentNode.translation = tipLocation;
-            this.equationNode.right = -X_OFFSET;
-            this.equationNode.bottom = -Y_OFFSET;
+            this.equationNode.right = -X_OFFSET + rightOffset;
+            this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
           else {
-            // equation above the line, at tail
+            // quadrant 3: equation above the line, at tail (left)
             this.equationParentNode.translation = tailLocation;
-            this.equationNode.left = X_OFFSET;
-            this.equationNode.bottom = -Y_OFFSET;
+            this.equationNode.left = X_OFFSET - leftOffset;
+            this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
         }
         else {
           if ( line.run > 0 ) {
-            // equation below the line, at tip
+            // quadrant 1: equation below the line, at tip (right)
             this.equationParentNode.translation = tipLocation;
-            this.equationNode.right = -X_OFFSET;
-            this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+            this.equationNode.right = -X_OFFSET + rightOffset;
+            this.equationNode.top = Y_OFFSET - topOffset;
           }
           else {
-            // equation below the line, at tail
+            // quadrant 2: equation below the line, at tail (left)
             this.equationParentNode.translation = tailLocation;
-            this.equationNode.left = X_OFFSET;
-            this.equationNode.bottom = this.equationNode.height + Y_OFFSET;
+            this.equationNode.left = X_OFFSET - leftOffset;
+            this.equationNode.top = Y_OFFSET - topOffset;
           }
         }
       }

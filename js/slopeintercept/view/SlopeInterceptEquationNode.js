@@ -127,12 +127,10 @@ define( function( require ) {
       var interactive = ( options.interactiveSlope || options.interactiveIntercept );
       var lineColor = line.color;
 
-      // start with all children invisible and at (0,0) so they won't affect bounds
+      // start with all children invisible
       var len = thisNode.children.length;
       for ( var i = 0; i < len; i++ ) {
-        var child = thisNode.children[i];
-        child.visible = false;
-        child.translation = Vector2.ZERO; //TODO eliminate need for this by position equation using visibleBounds
+        thisNode.children[i].visible = false;
       }
 
       if ( line.undefinedSlope() && !interactive ) {

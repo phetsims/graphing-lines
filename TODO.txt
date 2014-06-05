@@ -8,7 +8,7 @@ PERFORMANCE
 USABILITY
 
 HIGH
-- Slope-Intercept, Point-Slope: 'Erase Lines' doesn't erase the saved lines
+- Slope-Intercept, Point-Slope: 'Erase Lines' doesn't erase the saved lines, standard lines don't go away when unchecked
 - improve responsiveness of interactive line manipulators
 - position equation on line based on visibleBounds, current approach of putting invisible nodes at (0,0) may have i18n problems
 - reduce startup time

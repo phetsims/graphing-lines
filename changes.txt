@@ -1,3 +1,4 @@
+6/5/14 delete vestigial GameSettingsPanel
 # 1.0.0-dev.6 6/4/14
 6/4/14 Slope-Intercept, Point-Slope: fix removal of standard and saved lines
 6/4/14 Slope-Intercept, Point-Slope: fix color of equations for standard and saved lines

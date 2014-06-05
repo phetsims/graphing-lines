@@ -1,6 +1,5 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO this will be replaced by vegas stuff
 /**
  * Control panel that provides settings for a game.
  *

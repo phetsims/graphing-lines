@@ -39,7 +39,6 @@ define( function( require ) {
 
   // constants
   var X_MARGIN = 40;
-  var Y_MARGIN = 40;
   var CHALLENGES_PER_GAME = 6;
   var BUTTONS_X_SPACING = 50;
   var BUTTONS_Y_SPACING = 40;
@@ -71,10 +70,11 @@ define( function( require ) {
 
   /**
    * @param {LineGameModel} model
-   * @param {Bounds2} layoutBounds
+   * @param {Number} screenWidth
+   * @param {*} options
    * @constructor
    */
-  function SettingsNode( model, layoutBounds ) {
+  function SettingsNode( model, screenWidth, options ) {
 
     Node.call( this );
 
@@ -120,16 +120,18 @@ define( function( require ) {
     this.addChild( resetButton );
 
     // layout
-    buttonsParent.centerX = layoutBounds.width / 2;
-    buttonsParent.bottom = layoutBounds.height - Y_MARGIN;
-    title.centerX = buttonsParent.centerX;
-    title.centerY = buttonsParent.top / 2;
+    title.centerX = screenWidth / 2;
+    title.top = 0;
+    buttonsParent.centerX = title.centerX;
+    buttonsParent.top = title.bottom + 50;
     soundToggleButton.left = X_MARGIN;
-    soundToggleButton.bottom = layoutBounds.height - Y_MARGIN;
+    soundToggleButton.bottom = buttonsParent.bottom;
     timerToggleButton.left = X_MARGIN;
     timerToggleButton.bottom = soundToggleButton.top - 15;
-    resetButton.right = layoutBounds.width - X_MARGIN;
-    resetButton.bottom = layoutBounds.height - Y_MARGIN;
+    resetButton.right = screenWidth - X_MARGIN;
+    resetButton.bottom = buttonsParent.bottom;
+
+    this.mutate( options );
   }
 
   return inherit( Node, SettingsNode );

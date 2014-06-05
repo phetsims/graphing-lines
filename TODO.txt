@@ -1,8 +1,7 @@
 TODO list for graphing-lines (HTML5 port)
 
 PERFORMANCE
-- EquationNode subtypes: mutate instead of alloc when Line changes?
-- EquationNode subtypes do lots of addChild/removeChild, change visibility instead?
+- SlopeInterceptEquationNode, PointSlopeEquationNode: pre-alloc and reuse nodes where possible
 - GraphTheLineNode creates complex children whenever the guess changes, line 99
 - put graph in its own layer, since it doesn't change (quick test indicates negligible benefits)
 

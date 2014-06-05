@@ -1,4 +1,5 @@
-6/4/4 SlopeInterceptEquationNode, PointSlopeEquationNode: pre-alloc and reuse nodes where possible
+6/4/14 allocate and show undefined-slope indicator only for fully-interactive equations
+6/4/14 SlopeInterceptEquationNode, PointSlopeEquationNode: pre-alloc and reuse nodes where possible
 6/4/14 delete SlopeUndefinedNode, replace with Text node
 6/4/14 change constructor for SlopeUndefinedNode
 6/4/14 remove color param from createStaticLabel and related clients

@@ -321,15 +321,6 @@ define( function( require ) {
           throw new Error( "programming error, didn't handle some x-term case" );
         }
       }
-
-      //TODO move this out of updateLayout, allocate and change visibility only for fully-interactive lines
-      // undefined-slope indicator, added after layout has been done
-      if ( line.undefinedSlope() ) {
-        var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height );
-        undefinedSlopeIndicator.x = 0;
-        undefinedSlopeIndicator.centerY = fractionLineNode.centerY + thisNode.undefinedSlopeYFudgeFactor;
-        thisNode.addChild( undefinedSlopeIndicator );
-      }
     };
 
     // sync the model with the controls
@@ -361,8 +352,21 @@ define( function( require ) {
       if ( !fullyInteractive ) { updateLayout( line ); }
     } );
 
-    // Update layout once for fully-interactive equations.
-    if ( fullyInteractive ) { updateLayout( lineProperty.get() ); }
+    // For fully-interactive equations ...
+    if ( fullyInteractive ) {
+
+      // update layout once
+      updateLayout( lineProperty.get() );
+
+      // add undefinedSlopeIndicator
+      var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height, staticOptions );
+      thisNode.addChild( undefinedSlopeIndicator );
+      undefinedSlopeIndicator.centerX = thisNode.centerX;
+      undefinedSlopeIndicator.centerY = fractionLineNode.centerY - thisNode.undefinedSlopeYFudgeFactor;
+      lineProperty.link( function( line ) {
+        undefinedSlopeIndicator.visible = line.undefinedSlope();
+      } );
+    }
 
     thisNode.mutate( options );
   }

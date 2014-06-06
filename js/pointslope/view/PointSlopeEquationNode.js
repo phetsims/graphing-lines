@@ -339,11 +339,7 @@ define( function( require ) {
         lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
       }
     };
-    //TODO updateLine will fire 4 times on startup
-    x1Property.link( updateLine.bind( thisNode ) );
-    y1Property.link( updateLine.bind( thisNode ) );
-    riseProperty.link( updateLine.bind( thisNode ) );
-    runProperty.link( updateLine.bind( thisNode ) );
+    Property.multilink( [ x1Property, y1Property, riseProperty, runProperty ], updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

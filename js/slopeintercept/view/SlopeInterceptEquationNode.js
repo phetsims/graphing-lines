@@ -342,10 +342,7 @@ define( function( require ) {
         }
       }
     };
-    //TODO updateLine will fire 3 times on startup
-    riseProperty.link( updateLine.bind( thisNode ) );
-    runProperty.link( updateLine.bind( thisNode ) );
-    yInterceptProperty.link( updateLine.bind( thisNode ) );
+    Property.multilink( [ riseProperty, runProperty, yInterceptProperty ], updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

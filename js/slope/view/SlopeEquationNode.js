@@ -135,11 +135,7 @@ define( function( require ) {
         lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
       }
     };
-    //TODO updateLine will fire 4 times on startup
-    x1Property.link( updateLine.bind( thisNode ) );
-    y1Property.link( updateLine.bind( thisNode ) );
-    x2Property.link( updateLine.bind( thisNode ) );
-    y2Property.link( updateLine.bind( thisNode ) );
+    Property.multilink( [ x1Property, y1Property, x2Property, y2Property ], updateLine.bind( thisNode ) );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

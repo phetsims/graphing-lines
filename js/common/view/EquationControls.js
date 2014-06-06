@@ -17,6 +17,7 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
+  var Property = require( 'AXON/Property' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
 
   // strings
@@ -64,12 +65,12 @@ define( function( require ) {
     } );
 
     // Sets the enabled states of the Save and Erase buttons
-    var enableButtons = function() {
-      saveLineButton.enabled = linesVisibleProperty.get();
-      eraseLinesButton.enabled = ( linesVisibleProperty.get() && ( savedLines.length > 0 ) );
-    };
-    savedLines.lengthProperty.link( enableButtons.bind( this ) );
-    linesVisibleProperty.link( enableButtons.bind( this ) );
+    Property.multilink( [ savedLines.lengthProperty, linesVisibleProperty ],
+      function() {
+        saveLineButton.enabled = linesVisibleProperty.get();
+        eraseLinesButton.enabled = ( linesVisibleProperty.get() && ( savedLines.length > 0 ) );
+      }
+    );
 
     // Top-level content
     var content = new Node();

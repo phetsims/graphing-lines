@@ -14,6 +14,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
@@ -96,7 +97,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-     // tool body
+    // tool body
     var bodyNode = new Image( bodyImage );
 
     /*
@@ -154,34 +155,32 @@ define( function( require ) {
     this.setBackground( BACKGROUND_NORMAL_COLOR );
 
     // location and display
-    var update = function() {
+    Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
+      function() {
 
-      // move to location
-      var location = pointTool.location;
-      thisNode.translation = mvt.modelToViewPosition( location );
+        // move to location
+        var location = pointTool.location;
+        thisNode.translation = mvt.modelToViewPosition( location );
 
-      // display value and highlighting
-      if ( graph.contains( location ) ) {
-        thisNode.setCoordinatesVector2( location );
-        if ( linesVisibleProperty.get() ) {
-          // use the line's color to highlight
-          thisNode.setForeground( !pointTool.onLine ? FOREGROUND_NORMAL_COLOR : FOREGROUND_HIGHLIGHT_COLOR );
-          thisNode.setBackground( !pointTool.onLine ? BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
+        // display value and highlighting
+        if ( graph.contains( location ) ) {
+          thisNode.setCoordinatesVector2( location );
+          if ( linesVisibleProperty.get() ) {
+            // use the line's color to highlight
+            thisNode.setForeground( !pointTool.onLine ? FOREGROUND_NORMAL_COLOR : FOREGROUND_HIGHLIGHT_COLOR );
+            thisNode.setBackground( !pointTool.onLine ? BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
+          }
+          else {
+            thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
+            thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
+          }
         }
         else {
+          thisNode.setCoordinatesString( pointUnknownString );
           thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
           thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
         }
-      }
-      else {
-        thisNode.setCoordinatesString( pointUnknownString );
-        thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
-        thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
-      }
-    };
-    pointTool.locationProperty.link( update.bind( thisNode ) );
-    pointTool.onLineProperty.link( update.bind( thisNode ) );
-    linesVisibleProperty.link( update.bind( thisNode ) );
+      } );
 
     // interactivity
     thisNode.cursor = 'pointer';

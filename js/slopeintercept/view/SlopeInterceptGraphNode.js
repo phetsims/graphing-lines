@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
+  var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
   var YInterceptManipulator = require( 'GRAPHING_LINES/common/view/manipulator/YInterceptManipulator' );
@@ -41,11 +42,10 @@ define( function( require ) {
     thisNode.addChild( yInterceptManipulator );
 
     // visibility of manipulators
-    var updateVisibility = function() {
-      slopeManipulator.visible = yInterceptManipulator.visibile = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
-    };
-    viewProperties.linesVisibleProperty.link( updateVisibility.bind( thisNode ) );
-    viewProperties.interactiveLineVisibleProperty.link( updateVisibility.bind( thisNode ) );
+    Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.interactiveLineVisibleProperty ],
+      function() {
+        slopeManipulator.visible = yInterceptManipulator.visibile = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
+      } );
   }
 
   return inherit( LineFormsGraphNode, SlopeInterceptGraphNode );

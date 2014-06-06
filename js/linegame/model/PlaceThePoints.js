@@ -18,6 +18,7 @@ define( function( require ) {
   var LineGameConstants =  require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -39,20 +40,18 @@ define( function( require ) {
     this.addProperty( 'p3', new Vector2( 3, 2 ) );
 
     // update the guess when the points change
-    var updateGuess = function() {
-      var line = new Line( thisChallenge.p1.x, thisChallenge.p1.y, thisChallenge.p2.x, thisChallenge.p2.y, LineGameConstants.GUESS_COLOR );
-      if ( line.onLinePoint( thisChallenge.p3 ) ) {
-        // all 3 points are on a line
-        thisChallenge.guess = line;
-      }
-      else {
-        // the 3 points don't form a line
-        thisChallenge.guess = null;
-      }
-    };
-    thisChallenge.p1Property.link( updateGuess.bind( thisChallenge ) );
-    thisChallenge.p2Property.link( updateGuess.bind( thisChallenge ) );
-    thisChallenge.p3Property.link( updateGuess.bind( thisChallenge ) );
+    Property.multilink( [ thisChallenge.p1Property, thisChallenge.p2Property, thisChallenge.p3Property ],
+      function() {
+        var line = new Line( thisChallenge.p1.x, thisChallenge.p1.y, thisChallenge.p2.x, thisChallenge.p2.y, LineGameConstants.GUESS_COLOR );
+        if ( line.onLinePoint( thisChallenge.p3 ) ) {
+          // all 3 points are on a line
+          thisChallenge.guess = line;
+        }
+        else {
+          // the 3 points don't form a line
+          thisChallenge.guess = null;
+        }
+      } );
   }
 
   return inherit( GraphTheLine, PlaceThePoints, {

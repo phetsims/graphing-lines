@@ -16,6 +16,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
+  var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -47,20 +48,19 @@ define( function( require ) {
     thisModel.standardLines = new ObservableArray();
 
     // Update the lines seen by the graph.
-    var updateGraphLines = function() {
-      thisModel.graph.lines.clear();
-      // add lines in the order that they would be rendered
-      thisModel.graph.lines.add( thisModel.interactiveLine );
-      thisModel.savedLines.forEach( function( line ) {
-        thisModel.graph.lines.add( line );
-      } );
-      thisModel.standardLines.forEach( function( line ) {
-        thisModel.graph.lines.add( line );
-      } );
-    };
-    thisModel.interactiveLineProperty.link( updateGraphLines.bind( thisModel ) );
-    thisModel.savedLines.lengthProperty.link( updateGraphLines.bind( thisModel ) );
-    thisModel.standardLines.lengthProperty.link( updateGraphLines.bind( thisModel ) );
+    Property.multilink( [ thisModel.interactiveLineProperty, thisModel.savedLines.lengthProperty, thisModel.standardLines.lengthProperty ],
+      function() {
+        thisModel.graph.lines.clear();
+        // add lines in the order that they would be rendered
+        thisModel.graph.lines.add( thisModel.interactiveLine );
+        thisModel.savedLines.forEach( function( line ) {
+          thisModel.graph.lines.add( line );
+        } );
+        thisModel.standardLines.forEach( function( line ) {
+          thisModel.graph.lines.add( line );
+        } );
+      }
+    );
 
     // point tools
     thisModel.pointTool1 = new PointTool( new Vector2( -5, -10.5 ), 'up', thisModel.graph.lines,

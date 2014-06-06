@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
 
   /**
@@ -33,20 +34,20 @@ define( function( require ) {
     thisTool.dragBounds = dragBounds;
 
     // Update when the point tool moves or the lines change.
-    var updateOnLine = function() {
-      var line;
-      // Lines are in rendering order, reverse iterate so we get the one that's on top.
-      for ( var i = lines.length - 1; i >= 0; i-- ) {
-        line = lines.get( i );
-        if ( thisTool.isOnLine( line ) ) {
-          thisTool.onLine = line;
-          return;
+    Property.multilink( [ thisTool.locationProperty, lines.lengthProperty ],
+      function() {
+        var line;
+        // Lines are in rendering order, reverse iterate so we get the one that's on top.
+        for ( var i = lines.length - 1; i >= 0; i-- ) {
+          line = lines.get( i );
+          if ( thisTool.isOnLine( line ) ) {
+            thisTool.onLine = line;
+            return;
+          }
         }
+        thisTool.onLine = null;
       }
-      thisTool.onLine = null;
-    };
-    thisTool.locationProperty.link( updateOnLine.bind( thisTool ) );
-    lines.lengthProperty.link( updateOnLine.bind( thisTool ) );
+    );
   }
 
   return inherit( PropertySet, PointTool, {

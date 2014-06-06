@@ -14,6 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
+  var Property = require( 'AXON/Property' );
 
   /**
    * @param {PlaceThePoints} challenge
@@ -39,14 +40,12 @@ define( function( require ) {
     thisNode.addChild( p3Manipulator );
 
     // Move the manipulators to match points
-    var updateManipulators = function() {
-      p1Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p1 );
-      p2Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p2 );
-      p3Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p3 );
-    };
-    challenge.p1Property.link( updateManipulators.bind( thisNode ) );
-    challenge.p2Property.link( updateManipulators.bind( thisNode ) );
-    challenge.p3Property.link( updateManipulators.bind( thisNode ) );
+    Property.multilink( [ challenge.p1Property, challenge.p2Property, challenge.p3Property ],
+      function() {
+        p1Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p1 );
+        p2Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p2 );
+        p3Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p3 );
+      } );
   }
 
   return inherit( ChallengeGraphNode, ThreePointsGraphNode );

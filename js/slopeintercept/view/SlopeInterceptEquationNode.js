@@ -331,18 +331,19 @@ define( function( require ) {
     //***************************************************************
 
     // sync the model with the controls
-    var updateLine = function() {
-      if ( !updatingControls ) {
-        if ( options.interactiveIntercept ) {
-          lineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), lineProperty.get().color ) );
-        }
-        else {
-          var line = lineProperty.get();
-          lineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), lineProperty.get().color ) );
+    Property.multilink( [ riseProperty, runProperty, yInterceptProperty ],
+      function() {
+        if ( !updatingControls ) {
+          if ( options.interactiveIntercept ) {
+            lineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), lineProperty.get().color ) );
+          }
+          else {
+            var line = lineProperty.get();
+            lineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), lineProperty.get().color ) );
+          }
         }
       }
-    };
-    Property.multilink( [ riseProperty, runProperty, yInterceptProperty ], updateLine.bind( thisNode ) );
+    );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

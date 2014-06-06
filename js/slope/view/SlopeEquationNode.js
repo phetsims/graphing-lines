@@ -130,12 +130,13 @@ define( function( require ) {
     parentNode.addChild( unsimplifiedRunNode );
 
     // sync the model with the controls
-    var updateLine = function() {
-      if ( !updatingControls ) {
-        lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
+    Property.multilink( [ x1Property, y1Property, x2Property, y2Property ],
+      function() {
+        if ( !updatingControls ) {
+          lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
+        }
       }
-    };
-    Property.multilink( [ x1Property, y1Property, x2Property, y2Property ], updateLine.bind( thisNode ) );
+    );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

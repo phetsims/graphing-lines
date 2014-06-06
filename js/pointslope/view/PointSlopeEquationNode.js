@@ -334,12 +334,13 @@ define( function( require ) {
     };
 
     // sync the model with the controls
-    var updateLine = function() {
-      if ( !updatingControls ) {
-        lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
+    Property.multilink( [ x1Property, y1Property, riseProperty, runProperty ],
+      function() {
+        if ( !updatingControls ) {
+          lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
+        }
       }
-    };
-    Property.multilink( [ x1Property, y1Property, riseProperty, runProperty ], updateLine.bind( thisNode ) );
+    );
 
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {

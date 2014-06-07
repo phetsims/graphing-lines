@@ -36,7 +36,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );

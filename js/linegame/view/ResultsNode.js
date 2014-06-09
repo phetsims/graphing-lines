@@ -45,7 +45,7 @@ define( function( require ) {
           model.level,
           model.score,
           model.getPerfectScore(),
-          model.getPerfectScore() / model.maxPointsPerChallenge, // number of stars in the progress indicator
+            model.getPerfectScore() / model.maxPointsPerChallenge, // number of stars in the progress indicator
           model.timerEnabled,
           model.timer.elapsedTime,
           model.bestTimeProperties[ model.level ].get(),
@@ -68,17 +68,17 @@ define( function( require ) {
 
   return inherit( Node, ResultsNode, {
 
-     // Sets the bounds of the reward node, called when the canvas is resized so that the reward fills the browser window.
+    // Sets the bounds of the reward node, called when the canvas is resized so that the reward fills the browser window.
     setRewardBounds: function( bounds ) {
-        this.rewardNode.set( bounds );
+      this.rewardNode.set( bounds );
     },
 
     isRewardRunning: function() {
-        return this.rewardNode.isRunning();
+      return this.rewardNode.isRunning();
     },
 
     setRewardRunning: function( running ) {
-        this.rewardNode.setRunning( running );
+      this.rewardNode.setRunning( running );
     }
   } );
 } );

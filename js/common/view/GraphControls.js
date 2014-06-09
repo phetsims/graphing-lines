@@ -94,8 +94,8 @@ define( function( require ) {
     } );
 
     notLinesVisibleProperty.link( function( visible ) {
-       linesVisibleProperty.set( !visible );
-    });
+      linesVisibleProperty.set( !visible );
+    } );
 
     var setStandardLineVisible = function( visible, line ) {
       if ( visible && !standardLines.contains( line ) ) {

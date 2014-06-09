@@ -19,6 +19,6 @@ define( function() {
     SHOW_ANSWER: 'SHOW_ANSWER',
     NEXT: 'NEXT',
     NONE: 'NONE' // use this value when game is not in the "play" phase
-  });
+  } );
 } );
 

@@ -167,5 +167,5 @@ define( function( require ) {
              " manipulationMode=" + this.manipulationMode +
              " ]";
     }
-  });
+  } );
 } );

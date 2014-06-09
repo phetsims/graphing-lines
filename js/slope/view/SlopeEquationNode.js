@@ -84,7 +84,7 @@ define( function( require ) {
     var numeratorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
     // fraction line, correct length will be set later
-    var interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions  );
+    var interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
     var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var denominatorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );

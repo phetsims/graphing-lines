@@ -35,7 +35,7 @@ define( function( require ) {
 
       // dashed line where the line would be, tweaked visually
       var lineNode = new Path( Shape.lineSegment( slopeToolNode.left + ( 0.4 * slopeToolNode.width ), slopeToolNode.bottom,
-        slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
+          slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
         { lineWidth: 1,
           lineDash: [ 6, 6 ],
           stroke: 'black'

@@ -111,7 +111,7 @@ define( function( require ) {
       this.removeLineNode( line, this.savedLinesParentNode );
     },
 
-     // @private Removes the node that corresponds to the specified line.
+    // @private Removes the node that corresponds to the specified line.
     removeLineNode: function( line, parentNode ) {
       for ( var i = 0; i < parentNode.getChildrenCount(); i++ ) {
         var node = parentNode.getChildAt( i );

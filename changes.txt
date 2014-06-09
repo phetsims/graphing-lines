@@ -1,3 +1,4 @@
+6/9/14 eliminate expensive creation of model types in IconFactory
 6/5/14 define observer functions inline in Property.multilink calls
 6/5/14 use Property.multilink to reduce axon thrashing at startup
 6/5/14 compensate for difference between bounds and visibleBounds when positioning equation on line

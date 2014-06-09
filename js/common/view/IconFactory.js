@@ -15,9 +15,9 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
   var Shape = require( 'KITE/Shape' );
-  var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -28,11 +28,9 @@ define( function( require ) {
 
       var parentNode = new Node();
 
-      var model = new SlopeInterceptModel();
-      model.interactiveLine = Line.createSlopeIntercept( 1, 2, 0 ); // bigger values will make slope tool look smaller in icon
-
       // slope tool
-      var slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt );
+      var slopeToolNode = new SlopeToolNode( new Property( Line.createSlopeIntercept( 1, 2, 0 ) ),
+        ModelViewTransform2.createOffsetXYScaleMapping( Vector2.ZERO, 26, -26 ) );
       parentNode.addChild( slopeToolNode );
 
       // dashed line where the line would be, tweaked visually

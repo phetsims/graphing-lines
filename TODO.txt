@@ -7,7 +7,6 @@ PERFORMANCE
 USABILITY
 
 HIGH
-- eliminate creation of model types in IconFactory
 - make value display transparent in point_tool_body.png
 - reduce startup time
 - get new point tool image from AP, graphing-lines#2

@@ -19,7 +19,9 @@ define( function( require ) {
   // strings
   var simTitle = require( 'string!GRAPHING_LINES/graphing-lines.name' );
 
-  var simOptions = {
+  var screens = [ new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ];
+
+  var options = {
     credits: {
       leadDesign: 'Ariel Paul',
       softwareDevelopment: 'Chris Malley',
@@ -29,17 +31,15 @@ define( function( require ) {
 
   // Appending '?dev' to the URL will enable developer-only features.
   if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-    simOptions = _.extend( {
+    options = _.extend( {
       // add dev-specific options here
       showHomeScreen: false,
       screenIndex: 3
-    }, simOptions );
+    }, options );
   }
 
   SimLauncher.launch( function() {
-    var sim = new Sim( simTitle, [
-      new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ],
-      simOptions );
+    var sim = new Sim( simTitle, screens, options );
     sim.start();
   } );
 } );

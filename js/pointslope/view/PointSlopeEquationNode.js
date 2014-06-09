@@ -333,7 +333,7 @@ define( function( require ) {
     };
 
     // sync the model with the controls
-    Property.multilink( [ x1Property, y1Property, riseProperty, runProperty ],
+    Property.lazyMultilink( [ x1Property, y1Property, riseProperty, runProperty ],
       function() {
         if ( !updatingControls ) {
           lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );

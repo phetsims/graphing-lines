@@ -129,7 +129,7 @@ define( function( require ) {
     parentNode.addChild( unsimplifiedRunNode );
 
     // sync the model with the controls
-    Property.multilink( [ x1Property, y1Property, x2Property, y2Property ],
+    Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
       function() {
         if ( !updatingControls ) {
           lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );

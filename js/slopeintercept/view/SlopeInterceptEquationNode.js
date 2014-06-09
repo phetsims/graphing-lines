@@ -330,7 +330,7 @@ define( function( require ) {
     //***************************************************************
 
     // sync the model with the controls
-    Property.multilink( [ riseProperty, runProperty, yInterceptProperty ],
+    Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
       function() {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {

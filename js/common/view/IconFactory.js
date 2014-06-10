@@ -55,7 +55,7 @@ define( function( require ) {
       var p1 = mvt.modelToViewXY( x1, y1 );
       var p2 = mvt.modelToViewXY( x2, y2 );
       graphNode.addChild( new Path( Shape.lineSegment( p1.x, p1.y, p2.x, p2.y ), {
-        stroke: color, lineWidth: 4
+        stroke: color, lineWidth: 5
       } ) );
       graphNode.scale( width / graphNode.width );
       return graphNode;

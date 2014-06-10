@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Bounds2 = require( 'DOT/Bounds2' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -35,6 +36,7 @@ define( function( require ) {
   var BACKGROUND_NORMAL_COLOR = 'white';
   var FOREGROUND_NORMAL_COLOR = 'black';
   var FOREGROUND_HIGHLIGHT_COLOR = 'white';
+  var VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
 
   /**
    * Drag handler for the pointer tool.
@@ -132,7 +134,7 @@ define( function( require ) {
       valueNode.centerY = backgroundNode.centerY;
     }
     else if ( pointTool.orientation === 'up' ) {
-      tipNode.rotation = Math.PI;
+      tipNode.setScaleMagnitude( 1, -1 ); // reflect around x-axis, so that lighting will be correct
       tipNode.centerX = 0;
       tipNode.top = 0;
       bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
@@ -199,7 +201,7 @@ define( function( require ) {
     // @private Sets the displayed value to an arbitrary string
     setCoordinatesString: function( s ) {
       this._valueNode.text = s;
-      this._valueNode.left = this._bodyNode.left + 15;  // left justified
+      this._valueNode.centerX = this._bodyNode.left + VALUE_WINDOW_CENTER_X;  // centered
     },
 
     // @private Sets the foreground, the color of the displayed value

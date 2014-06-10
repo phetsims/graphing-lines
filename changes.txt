@@ -1,3 +1,5 @@
+6/10/14 center value in point tool 'window'
+6/10/14 reflect point tool's tip, so that lighting stays consistent
 6/10/14 integrate new point tool images from BG (required cropping of empty and transparent border pixels)
 6/9/14 use lazyMultilink in EquationNode subtypes, to prevent an unnecessary notification cycle at startup
 6/9/14 format code

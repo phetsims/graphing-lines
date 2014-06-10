@@ -41,10 +41,7 @@ define( function( require ) {
 
     // Creates an icon for the 'Slope' screen
     createSlopeScreenIcon: function() {
-      return createScreenIcon( new SlopeEquationNode( new Property( new Line( 1, 2, 3, 4 ) ),
-        new Property( new Range( -10, 10 ) ), //TODO add default ranges as options to SlopeEquationNode
-        new Property( new Range( -10, 10 ) )
-      ) );
+      return createScreenIcon( new SlopeEquationNode( new Property( new Line( 1, 2, 3, 4 ) ) ) );
     },
 
     // Creates an icon for the 'Slope-Intercept' screen

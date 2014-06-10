@@ -44,7 +44,11 @@ define( function( require ) {
         model.savedLines,
         viewProperties.interactiveEquationVisibleProperty,
         viewProperties.linesVisibleProperty,
-        new SlopeEquationNode( model.interactiveLineProperty, model.x1RangeProperty, model.y1RangeProperty ) )
+        new SlopeEquationNode( model.interactiveLineProperty, {
+          x1RangeProperty: model.x1RangeProperty,
+          y1RangeProperty: model.y1RangeProperty
+        } )
+      )
     );
   }
 

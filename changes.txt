@@ -1,3 +1,4 @@
+6/10/14 move ranges from constructor params to options for SlopeEquationNode, so that interface is similar to other equations
 6/10/14 programmatically create icons for first 3 screens
 # 1.0.0-dev.8 6/10/14
 6/10/14 light gray stroke (default) added to number pickers as part of scenery-phet#50

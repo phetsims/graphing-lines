@@ -1,3 +1,4 @@
+6/10/14 light gray stroke (default) added to number pickers as part of scenery-phet#50
 6/10/14 increase lineWidth from 4 to 5 for standard-line icons next to check boxes
 6/10/14 integrate another new point_tool_body.png from BG
 6/10/14 verified minimal axon activity for Slope, Slope-Intercept and Point-Slope screens

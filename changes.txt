@@ -1,3 +1,4 @@
+6/10/14 programmatically create icons for first 3 screens
 # 1.0.0-dev.8 6/10/14
 6/10/14 light gray stroke (default) added to number pickers as part of scenery-phet#50
 6/10/14 increase lineWidth from 4 to 5 for standard-line icons next to check boxes

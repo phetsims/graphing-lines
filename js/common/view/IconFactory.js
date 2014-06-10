@@ -9,19 +9,53 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var Property = require( 'AXON/Property' );
   var Range = require( 'DOT/Range' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var Screen = require( 'JOIST/Screen' );
   var Shape = require( 'KITE/Shape' );
+  var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
+  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  // Creates a screen icon, all of which have the same background.
+  var createScreenIcon = function( contentNode ) {
+    var size = Screen.HOME_SCREEN_ICON_SIZE;
+    var background = new Rectangle( 0, 0, size.width, size.height, { fill: GLColors.CONTROL_PANEL_BACKGROUND } );
+    contentNode.setScaleMagnitude( Math.min( 0.9 * background.width / contentNode.width, 0.85 * background.height / contentNode.height ) );
+    contentNode.center = background.center;
+    return new Node( { children: [ background, contentNode ], pickable: false } );
+  };
+
   return {
+
+    // Creates an icon for the 'Slope' screen
+    createSlopeScreenIcon: function() {
+      return createScreenIcon( new SlopeEquationNode( new Property( new Line( 1, 2, 3, 4 ) ),
+        new Property( new Range( -10, 10 ) ), //TODO add default ranges as options to SlopeEquationNode
+        new Property( new Range( -10, 10 ) )
+      ) );
+    },
+
+    // Creates an icon for the 'Slope-Intercept' screen
+    createSlopeInterceptScreenIcon: function() {
+      return createScreenIcon( new SlopeInterceptEquationNode( new Property( Line.createSlopeIntercept( 2, 3, 1 ) ) ) );
+    },
+
+    // Creates an icon for the 'Point-Slope' screen
+    createPointSlopeScreenIcon: function() {
+      return createScreenIcon( new PointSlopeEquationNode( new Property( Line.createPointSlope( 1, 2, 3, 4 ) ) ) );
+    },
 
     // Creates an icon for the slope-tool feature
     createSlopeToolIcon: function( width ) {

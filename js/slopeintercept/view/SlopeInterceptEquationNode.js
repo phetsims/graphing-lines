@@ -29,7 +29,6 @@ define( function( require ) {
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -56,9 +55,9 @@ define( function( require ) {
       interactiveSlope: true,
       interactiveIntercept: true,
       // dynamic range of components
-      riseRangeProperty: new Property( new Range( 0, 1 ) ),
-      runRangeProperty: new Property( new Range( 0, 1 ) ),
-      yInterceptRangeProperty: new Property( new Range( 0, 1 ) ),
+      riseRangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
+      runRangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
+      yInterceptRangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       // style
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'

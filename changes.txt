@@ -1,3 +1,4 @@
+6/10/14 verified minimal axon activity for Slope, Slope-Intercept and Point-Slope screens
 6/10/14 integrate another new point_tool_body.png from BG (required cropping of empty and transparent border pixels)
 6/10/14 adjust initial location of point tools in game to accommodate new images
 # 1.0.0-dev.7 6/10/14

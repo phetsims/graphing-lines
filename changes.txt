@@ -1,3 +1,4 @@
+6/10/14 integrate new point tool images from BG (required cropping of empty and transparent border pixels)
 6/9/14 use lazyMultilink in EquationNode subtypes, to prevent an unnecessary notification cycle at startup
 6/9/14 format code
 6/9/14 eliminate expensive creation of model types in IconFactory

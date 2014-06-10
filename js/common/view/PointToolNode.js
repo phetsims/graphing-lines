@@ -116,9 +116,9 @@ define( function( require ) {
     var valueNode = new Text( "?", { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
 
     // rendering order
-    thisNode.addChild( tipNode );
     thisNode.addChild( backgroundNode );
     thisNode.addChild( bodyNode );
+    thisNode.addChild( tipNode );
     thisNode.addChild( valueNode );
 
     // orientation
@@ -126,7 +126,7 @@ define( function( require ) {
       tipNode.centerX = 0;
       tipNode.bottom = 0;
       bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
-      bodyNode.bottom = tipNode.top + 1;
+      bodyNode.bottom = tipNode.top;
       backgroundNode.centerX = bodyNode.centerX;
       backgroundNode.top = bodyNode.top + BACKGROUND_MARGIN;
       valueNode.centerY = backgroundNode.centerY;
@@ -136,7 +136,7 @@ define( function( require ) {
       tipNode.centerX = 0;
       tipNode.top = 0;
       bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
-      bodyNode.top = tipNode.bottom - 1;
+      bodyNode.top = tipNode.bottom;
       backgroundNode.centerX = bodyNode.centerX;
       backgroundNode.top = bodyNode.top + BACKGROUND_MARGIN;
       valueNode.centerY = backgroundNode.centerY;

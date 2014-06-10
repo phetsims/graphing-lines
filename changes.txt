@@ -1,5 +1,5 @@
-# 1.0.0-dev.7 6/10/14
 6/10/14 adjust initial location of point tools in game to accommodate new images
+# 1.0.0-dev.7 6/10/14
 6/10/14 center value in point tool 'window'
 6/10/14 reflect point tool's tip, so that lighting stays consistent
 6/10/14 integrate new point tool images from BG (required cropping of empty and transparent border pixels)

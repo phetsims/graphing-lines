@@ -29,11 +29,19 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   // Creates a screen icon, all of which have the same background.
-  var createScreenIcon = function( contentNode ) {
-    var size = Screen.HOME_SCREEN_ICON_SIZE;
-    var background = new Rectangle( 0, 0, size.width, size.height, { fill: GLColors.CONTROL_PANEL_BACKGROUND } );
-    contentNode.setScaleMagnitude( Math.min( 0.9 * background.width / contentNode.width, 0.85 * background.height / contentNode.height ) );
+  var createScreenIcon = function( contentNode, options ) {
+
+    options = _.extend( {
+      size: Screen.HOME_SCREEN_ICON_SIZE,
+      xScaleFactor: 0.85,
+      yScaleFactor: 0.85
+    }, options );
+
+    var background = new Rectangle( 0, 0, options.size.width, options.size.height, { fill: GLColors.CONTROL_PANEL_BACKGROUND } );
+
+    contentNode.setScaleMagnitude( Math.min( options.xScaleFactor * background.width / contentNode.width, options.yScaleFactor * background.height / contentNode.height ) );
     contentNode.center = background.center;
+
     return new Node( { children: [ background, contentNode ], pickable: false } );
   };
 
@@ -41,17 +49,17 @@ define( function( require ) {
 
     // Creates an icon for the 'Slope' screen
     createSlopeScreenIcon: function() {
-      return createScreenIcon( new SlopeEquationNode( new Property( new Line( 1, 2, 3, 4 ) ) ) );
+      return createScreenIcon( new SlopeEquationNode( new Property( new Line( 1, 2, 3, 4 ) ) ), { xScaleFactor: 0.75 } );
     },
 
     // Creates an icon for the 'Slope-Intercept' screen
     createSlopeInterceptScreenIcon: function() {
-      return createScreenIcon( new SlopeInterceptEquationNode( new Property( Line.createSlopeIntercept( 2, 3, 1 ) ) ) );
+      return createScreenIcon( new SlopeInterceptEquationNode( new Property( Line.createSlopeIntercept( 2, 3, 1 ) ) ), { xScaleFactor: 0.6 } );
     },
 
     // Creates an icon for the 'Point-Slope' screen
     createPointSlopeScreenIcon: function() {
-      return createScreenIcon( new PointSlopeEquationNode( new Property( Line.createPointSlope( 1, 2, 3, 4 ) ) ) );
+      return createScreenIcon( new PointSlopeEquationNode( new Property( Line.createPointSlope( 1, 2, 3, 4 ) ) ), { xScaleFactor: 0.9 } );
     },
 
     // Creates an icon for the slope-tool feature

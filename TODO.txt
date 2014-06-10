@@ -11,7 +11,7 @@ HIGH
 - revise point tool images
 
 MEDIUM
-- create screen icons programmatically
+- create 'Game' screen icon programmatically
 - add game reward, see vegas#4
 - add option to show 'best time' on vegas.LevelStartButton, vegas#7
 - address TODO items in the code

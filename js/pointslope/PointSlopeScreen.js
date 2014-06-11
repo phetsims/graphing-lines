@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );

@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );

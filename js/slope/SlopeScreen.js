@@ -13,7 +13,6 @@ define( function( require ) {
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Screen = require( 'JOIST/SCREEN' );
   var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
   var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
 

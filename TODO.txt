@@ -11,6 +11,7 @@ HIGH
 - revise point tool images
 
 MEDIUM
+- use FaceWithPointsNode
 - create 'Game' screen icon programmatically
 - add game reward, see vegas#4
 - add option to show 'best time' on vegas.LevelStartButton, vegas#7

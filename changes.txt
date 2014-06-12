@@ -1,3 +1,4 @@
+6/12/14 delete blue-stopwatch.png, no longer used
 6/12/14 replace images of 'check mark' and 'heavy ballot X' with Text nodes that render their Unicode chars
 6/12/14 #3 hide y-intercept manipulator when 'Hide lines' is checked (typo in yInterceptManipulator.visible)
 6/10/14 add 'scaling factor' options to IconFactory.createScreenIcon, so that icons can be scaled such that all of them having similar-sized pickers

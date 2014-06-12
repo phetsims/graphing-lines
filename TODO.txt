@@ -8,7 +8,6 @@ USABILITY
 
 HIGH
 - reduce startup time
-- revise point tool images
 
 MEDIUM
 - use FaceWithPointsNode

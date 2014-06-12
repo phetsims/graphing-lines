@@ -17,6 +17,7 @@ MEDIUM
 - address TODO items in the code
 
 LOW
+- delete assets/screen-icons.ai when they are all created programmatically
 
 MIGRATE TO COMMON
 

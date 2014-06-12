@@ -17,10 +17,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
 
-  // images
-  var correctImage = require( 'image!GRAPHING_LINES/Check-Mark-u2713.png' );
-  var incorrectImage = require( 'image!GRAPHING_LINES/Heavy-Ballot-X-u2718.png' );
-
   // constants
   var X_MARGIN = 20;
   var Y_MARGIN = 10;
@@ -54,8 +50,15 @@ define( function( require ) {
     } );
 
     // icons for 'correct' and 'incorrect'
-    thisNode.correctIconNode = new Image( correctImage );
-    thisNode.incorrectIconNode = new Image( incorrectImage );
+    var glyphFont = new GLFont( 72 );
+    thisNode.correctIconNode = new Node( { children: [
+      new Text( '\u2713', { font: glyphFont, fill: 'black', x: 3, y: 1 } ), // drop shadow
+      new Text( '\u2713', { font: glyphFont, fill: 'rgb(137,244,0)' } )
+    ] } );
+    thisNode.incorrectIconNode = new Node( { children: [
+      new Text( '\u2718', { font: glyphFont, fill: 'black', x: 1, y: 3 } ), // drop shadow
+      new Text( '\u2718', { font: glyphFont, fill: 'rgb(252,104,0)' } )
+    ] } );
 
     // rendering order
     thisNode.addChild( boxNode );
@@ -73,8 +76,8 @@ define( function( require ) {
       equationNode.left = X_MARGIN;
       equationNode.centerY = titleNode.bottom + ( ( boxSize.height - titleNode.bottom ) / 2 );
       // icons in upper-right corner
-      var iconXMargin = 10;
-      var iconYMargin = 5;
+      var iconXMargin = 5;
+      var iconYMargin = 1;
       thisNode.correctIconNode.right = boxNode.right - iconXMargin;
       thisNode.correctIconNode.top = boxNode.top + iconYMargin;
       thisNode.incorrectIconNode.right = boxNode.right - iconXMargin;

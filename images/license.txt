@@ -1,10 +1,10 @@
-LineGame-screen-icon.png source=PhET author=Sharon Siman-Tov
-point_tool_body.png author=PhET notes=created by Bryce Gruneich
-point_tool_tip.png author=PhET notes=created by Bryce Gruneich
 Level_1.png source=PhET author=Sharon Siman-Tov
 Level_2.png source=PhET author=Sharon Siman-Tov
 Level_3.png source=PhET author=Sharon Siman-Tov
 Level_4.png source=PhET author=Sharon Siman-Tov
 Level_5.png source=PhET author=Sharon Siman-Tov
 Level_6.png source=PhET author=Sharon Siman-Tov
+LineGame-screen-icon.png source=PhET author=Sharon Siman-Tov
+point_tool_body.png source=PhET author=Bryce Gruneich
+point_tool_tip.png source=PhET author=Bryce Gruneich
 

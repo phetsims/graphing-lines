@@ -23,6 +23,7 @@ define( function( require ) {
 
     // interactive aspects of lines
     SLOPE: 'rgb( 117, 217, 255 )',
+    SLOPE_TOOL_DIMENSIONAL_LINES: 'rgb( 76, 199, 255 )',
     INTERCEPT: 'rgb( 200, 0, 200 )',
     POINT_X1_Y1: 'rgb( 200, 0, 200 )',
     POINT_X2_Y2: 'rgb( 210, 255, 0 )',

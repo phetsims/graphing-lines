@@ -53,10 +53,10 @@ define( function( require ) {
 
     // Arrows
     var arrowOptions = {
-      lineWidth: 1.25,
-      stroke: GLColors.SLOPE,
-      arrowTipSize: new Dimension2( 6, 8 ),
-      delimiterLength: 0.5 * mvt.modelToViewDeltaX( 1 )
+      lineWidth: 1.75,
+      stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
+      arrowTipSize: new Dimension2( 10, 10 ),
+      delimiterLength: 0.5 * mvt.modelToViewDeltaX( 1 ) // half of one cell in the graph
     };
     thisNode.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
     thisNode.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private

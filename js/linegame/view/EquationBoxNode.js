@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );

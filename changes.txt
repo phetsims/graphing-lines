@@ -1,4 +1,4 @@
-6/12/14 use scenery-phet.FaceWithPointsNode in game
+6/13/14 use scenery-phet.FaceWithPointsNode in game
 6/12/14 clean up images/license.txt
 6/12/14 delete blue-stopwatch.png, no longer used
 6/12/14 replace images of 'check mark' and 'heavy ballot X' with Text nodes that render their Unicode chars

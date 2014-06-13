@@ -1,12 +1,8 @@
 TODO list for graphing-lines (HTML5 port)
 
-PERFORMANCE
-- 11% in setTipAndTail (in ArrowNode or DimensionalArrowNode? use MutableArrowNode?)
-- GraphTheLineNode creates complex children whenever the guess changes, line 99 (make createStaticLabel go away?)
-
-USABILITY
-
 HIGH
+- improve look of slope tool
+- GraphTheLineNode creates complex children whenever the guess changes, line 99 (make createStaticLabel go away?)
 - reduce startup time
 
 MEDIUM

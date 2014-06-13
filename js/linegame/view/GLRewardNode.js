@@ -8,11 +8,11 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
 
-  function RewardNode() {
+  function GLRewardNode() {
     Node.call( this );
   }
 
-  return inherit( Node, RewardNode, {
+  return inherit( Node, GLRewardNode, {
 
     isRunning: function() {
       return false; //TODO

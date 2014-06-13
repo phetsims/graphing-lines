@@ -15,7 +15,7 @@ define( function( require ) {
   var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var RewardNode = require( 'GRAPHING_LINES/linegame/view/RewardNode' );
+  var GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
 
   /**
    * @param {LineGameModel} model
@@ -27,7 +27,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    thisNode.rewardNode = new RewardNode();
+    thisNode.rewardNode = new GLRewardNode();
 
     // show results when we enter this phase
     model.gamePhaseProperty.link( function( gamePhase ) {

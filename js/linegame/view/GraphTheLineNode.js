@@ -11,7 +11,6 @@ define( function( require ) {
 
   // modules
   var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
-  var Color = require( 'SCENERY/util/Color' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
@@ -23,7 +22,6 @@ define( function( require ) {
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeGraphNode' );
   var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptGraphNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TwoPointsGraphNode = require( 'GRAPHING_LINES/linegame/view/TwoPointsGraphNode' );

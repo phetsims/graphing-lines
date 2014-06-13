@@ -1,4 +1,4 @@
-TODO list for graphing-lines (HTML5 port)
+TODO list for graphing-lines
 
 - reduce startup time
 - add game reward, see vegas#4

@@ -4,6 +4,7 @@
  * Arrow like those shown in dimensional line drawings.
  * The arrow has a head at the tip, and there are delimiters (perpendicular lines) at the tip and tail.
  * The arrow head is different than scenery-phet.ArrowNode.
+ * Currently supports only horizontal and vertical arrows.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -103,7 +104,6 @@ define( function( require ) {
         this.tailDelimiterNode.setLine( tailX, tailY - this.delimiterLength / 2, tailX, tailY + this.delimiterLength / 2 );
       }
       else {
-        //TODO if this is moved to common code, add support for general arrows
         throw new Error( "this implementation supports only horizontal and vertical arrows" );
       }
       this.tipNode.shape = tipShape;

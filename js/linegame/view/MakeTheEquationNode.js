@@ -53,7 +53,7 @@ define( function( require ) {
     // Answer
     var answerBoxNode =
       new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
-        ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
+        ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
     answerBoxNode.visible = false;
 
     // Guess
@@ -94,7 +94,7 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, 14 /* fontSize */ );
+      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), 14 /* fontSize */ );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;
       thisNode.addChild( devAnswerNode );

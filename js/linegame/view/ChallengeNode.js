@@ -186,15 +186,15 @@ define( function( require ) {
   /**
    * Creates a non-interactive equation, used to label the specified line.
    * @param {EquationForm} equationForm
-   * @param {Line} line
+   * @param {Property<Line>} lineProperty
    * @param {Font} font
    */
-  ChallengeNode.createEquationNode = function( equationForm, line, fontSize ) {
+  ChallengeNode.createEquationNode = function( equationForm, lineProperty, fontSize ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return SlopeInterceptEquationNode.createStaticLabel( line, fontSize );
+      return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, fontSize );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return new PointSlopeEquationNode.createStaticLabel( line, fontSize );
+      return new PointSlopeEquationNode.createDynamicLabel( lineProperty, fontSize );
     }
     else {
       throw new Error( "unsupported equation form: " + equationForm );

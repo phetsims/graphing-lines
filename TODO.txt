@@ -1,7 +1,6 @@
 TODO list for graphing-lines (HTML5 port)
 
 HIGH
-- GraphTheLineNode creates complex children whenever the guess changes, line 99 (make createStaticLabel go away?)
 - reduce startup time
 
 MEDIUM

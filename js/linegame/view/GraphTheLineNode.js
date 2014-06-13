@@ -16,10 +16,13 @@ define( function( require ) {
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeGraphNode' );
+  var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptGraphNode' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -29,9 +32,6 @@ define( function( require ) {
   var lineToGraphString = require( 'string!GRAPHING_LINES/lineToGraph' );
   var notALineString = require( 'string!GRAPHING_LINES/notALine' );
   var yourLineString = require( 'string!GRAPHING_LINES/yourLine' );
-
-  // constants
-  var NOT_A_LINE = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
   /**
    * @param {GraphTheLine} challenge
@@ -56,10 +56,18 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( challenge.equationForm, challenge.answer, LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
+      ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
+
+    // Guess equation
+    var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
+    thisNode.equatioNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
+
+    // 'Not A Line', for situations where 3-points do not define a line
+    thisNode.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
     // Guess
-    thisNode.guessBoxNode = new EquationBoxNode( yourLineString, Color.BLACK, boxSize, new Rectangle( 0, 0, 1, 1 ) ); // placeholder for equation, must have well-defined bounds
+    thisNode.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
+      new Node( { children: [ thisNode.equatioNode, thisNode.notALineNode ] } ) );
 
     // Graph
     thisNode.graphNode = this.createGraphNode( challenge );
@@ -86,6 +94,10 @@ define( function( require ) {
       // title above answer equation, left justified
       titleNode.left = answerBoxNode.left;
       titleNode.bottom = answerBoxNode.top - 20;
+
+      // guess below the answer
+      thisNode.guessBoxNode.left = answerBoxNode.left;
+      thisNode.guessBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
     }
 
     // Update visibility of the correct/incorrect icons.
@@ -95,21 +107,15 @@ define( function( require ) {
       thisNode.guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
-    //TODO this does removeChild and some heavyweight allocation whenever the guess changes
     // sync with guess
     challenge.guessProperty.link( function( line ) {
 
-      // update the equation (line is null if ManipulationMode.THREE_POINTS and points don't make a line)
-      thisNode.subtypeParent.removeChild( thisNode.guessBoxNode );
-      var equationNode = ( !line ) ? NOT_A_LINE : ChallengeNode.createEquationNode( challenge.equationForm, line, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
-      var color = ( !line ) ? LineGameConstants.GUESS_COLOR : line.color;
-      thisNode.guessBoxNode = new EquationBoxNode( yourLineString, color, boxSize, equationNode );
-
-      // adjust position of guess equation so that it's below the answer
-      thisNode.guessBoxNode.left = answerBoxNode.left;
-      thisNode.guessBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
-      thisNode.subtypeParent.addChild( thisNode.guessBoxNode );
-      thisNode.guessBoxNode.visible = ( model.playState === PlayState.NEXT );
+      // line is null if ManipulationMode.THREE_POINTS and points don't make a line
+      if ( line ) {
+        guessLineProperty.set( line ); // updates equationNode
+      }
+      thisNode.equatioNode.visible = ( line ? true : false );
+      thisNode.notALineNode.visible = !thisNode.equatioNode.visible;
 
       // visibility of correct/incorrect icons
       updateIcons();
@@ -124,9 +130,10 @@ define( function( require ) {
       // Graph the answer line at the end of the challenge.
       thisNode.graphNode.setAnswerVisible( playState === PlayState.NEXT );
 
+      thisNode.guessBoxNode.visible = ( model.playState === PlayState.NEXT );
+
       // show stuff when the user got the challenge wrong
       if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-        thisNode.guessBoxNode.visible = true;
         thisNode.graphNode.setAnswerPointVisible( true );
         thisNode.graphNode.setGuessPointVisible( true );
         thisNode.graphNode.setSlopeToolVisible( true );

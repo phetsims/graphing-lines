@@ -78,7 +78,7 @@ define( function( require ) {
     update: function( line ) {
 
       // line may be null, for example the user's guess in 'Place The Points' challenge
-      this.parentNode.visible = line;
+      this.parentNode.visible = ( line ? true : false );
       if ( !line ) { return; }
 
       // compute the new tip and tail for the line

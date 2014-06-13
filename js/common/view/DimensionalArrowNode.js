@@ -36,6 +36,7 @@ define( function( require ) {
 
     this.arrowTipSize = options.arrowTipSize; // @private
     this.delimiterLength = options.delimiterLength; // @private
+    this.lineWidth = options.lineWidth; // @private
 
     // nodes with dummy initial shapes
     this.lineNode = new Line( 0, 0, 0, 1, options );  // @private
@@ -52,7 +53,8 @@ define( function( require ) {
   return inherit( Node, DimensionalArrowNode, {
 
     /**
-     * Sets the tail and tip of the arrow.
+     * Sets the tail and tip of the arrow, accounting for the lineWidth when positioning the arrow head.
+     *
      * @param {Number} tailX
      * @param {Number} tailY
      * @param {Number} tipX
@@ -64,20 +66,21 @@ define( function( require ) {
 
       var tipWidth = this.arrowTipSize.width;
       var tipHeight = this.arrowTipSize.height;
+      var tipOffset = this.lineWidth / 2;
       var tipShape = new Shape();
       if ( tailX === tipX ) {
         // vertical arrow
         if ( tipY > tailY ) {
           // pointing down
-          tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY - tipHeight );
-          tipShape.lineTo( tipX, tipY );
-          tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY - tipHeight );
+          tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY - tipHeight - tipOffset);
+          tipShape.lineTo( tipX, tipY - tipOffset );
+          tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY - tipHeight - tipOffset);
         }
         else {
           // pointing up
-          tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY + tipHeight );
-          tipShape.lineTo( tipX, tipY );
-          tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY + tipHeight );
+          tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY + tipHeight + tipOffset );
+          tipShape.lineTo( tipX, tipY + tipOffset );
+          tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY + tipHeight + tipOffset );
         }
         this.tipDelimiterNode.setLine( tipX - this.delimiterLength / 2, tipY, tipX + this.delimiterLength / 2, tipY );
         this.tailDelimiterNode.setLine( tailX - this.delimiterLength / 2, tailY, tailX + this.delimiterLength / 2, tailY );
@@ -86,15 +89,15 @@ define( function( require ) {
         // horizontal arrow
         if ( tailX > tipX ) {
           // pointing left
-          tipShape.moveTo( tipX + tipHeight, tipY - ( tipWidth / 2 ) );
-          tipShape.lineTo( tipX, tipY );
-          tipShape.lineTo( tipX + tipHeight, tipY + ( tipWidth / 2 ) );
+          tipShape.moveTo( tipX + tipHeight + tipOffset, tipY - ( tipWidth / 2 ) );
+          tipShape.lineTo( tipX + tipOffset, tipY );
+          tipShape.lineTo( tipX + tipHeight + tipOffset, tipY + ( tipWidth / 2 ) );
         }
         else {
           // pointing right
-          tipShape.moveTo( tipX - tipHeight, tipY - ( tipWidth / 2 ) );
-          tipShape.lineTo( tipX, tipY );
-          tipShape.lineTo( tipX - tipHeight, tipY + ( tipWidth / 2 ) );
+          tipShape.moveTo( tipX - tipHeight - tipOffset, tipY - ( tipWidth / 2 ) );
+          tipShape.lineTo( tipX - tipOffset, tipY );
+          tipShape.lineTo( tipX - tipHeight - tipOffset, tipY + ( tipWidth / 2 ) );
         }
         this.tipDelimiterNode.setLine( tipX, tipY - this.delimiterLength / 2, tipX, tipY + this.delimiterLength / 2 );
         this.tailDelimiterNode.setLine( tailX, tailY - this.delimiterLength / 2, tailX, tailY + this.delimiterLength / 2 );

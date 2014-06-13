@@ -1,3 +1,4 @@
+6/13/14 create 'Game' screen icon programmatically
 6/13/14 use scenery-phet.FaceWithPointsNode in game
 6/12/14 clean up images/license.txt
 6/12/14 delete blue-stopwatch.png, no longer used

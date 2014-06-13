@@ -9,7 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -59,6 +61,17 @@ define( function( require ) {
     // Creates an icon for the 'Point-Slope' screen
     createPointSlopeScreenIcon: function() {
       return createScreenIcon( new PointSlopeEquationNode( new Property( Line.createPointSlope( 1, 2, 3, 4 ) ) ), { xScaleFactor: 0.9 } );
+    },
+
+    // Creates an icon for the 'Game' screen
+    createGameScreenIcon: function() {
+       var faceNode = new FaceWithPointsNode( {
+         faceDiameter: 75,
+         pointsFont: new GLFont( { size: 24, weight: 'bold' } ),
+         pointsAlignment: 'rightCenter',
+         points: 2
+       } );
+      return createScreenIcon( faceNode, { xScaleFactor: 0.65 } );
     },
 
     // Creates an icon for the slope-tool feature

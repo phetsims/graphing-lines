@@ -18,7 +18,7 @@ define( function( require ) {
   // modules
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
+  var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -28,13 +28,11 @@ define( function( require ) {
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
 
   // strings
   var checkString = require( 'string!VEGAS/check' );
-  var pointsAwardedString = require( 'string!GRAPHING_LINES/pointsAwarded' );
   var nextString = require( 'string!VEGAS/next' );
   var showAnswerString = require( 'string!VEGAS/showAnswer' );
   var tryAgainString = require( 'string!VEGAS/tryAgain' );
@@ -57,16 +55,11 @@ define( function( require ) {
     var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
 
     // smiley/frowning face
-    thisNode.faceNode = new FaceNode( LineGameConstants.FACE_DIAMETER, {
-      headFill: LineGameConstants.FACE_COLOR,
-      eyeFill: 'black',
-      mouthFill: 'black',
-      headStroke: Color.toColor( LineGameConstants.FACE_COLOR ).darkerColor(),
-      headLineWidth: 1
+    thisNode.faceNode = new FaceWithPointsNode( {
+      faceDiameter: LineGameConstants.FACE_DIAMETER,
+      faceOpacity: 0.7,
+      pointsAlignment: 'rightCenter'
     } );
-
-    // points awarded
-    thisNode.pointsAwardedNode = new Text( "", { font: LineGameConstants.POINTS_AWARDED_FONT, fill: LineGameConstants.POINTS_AWARDED_COLOR } );
 
     // buttons
     var buttonOptions = {
@@ -110,7 +103,6 @@ define( function( require ) {
       }
       thisNode.addChild( pointToolParent );
       thisNode.addChild( thisNode.faceNode );
-      thisNode.addChild( thisNode.pointsAwardedNode );
     }
 
     // layout
@@ -130,16 +122,13 @@ define( function( require ) {
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playState === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
         model.score = model.score + points;
-        thisNode.pointsAwardedNode.text = StringUtils.format( pointsAwardedString, points );
-        // points to right of face
-        thisNode.pointsAwardedNode.left = thisNode.faceNode.right + 10;
-        thisNode.pointsAwardedNode.centerY = thisNode.faceNode.centerY;
+        thisNode.faceNode.setPoints( points );
         model.playState = PlayState.NEXT;
       }
       else {
         thisNode.faceNode.frown();
+        thisNode.faceNode.setPoints( 0 );
         audioPlayer.wrongAnswer();
-        thisNode.pointsAwardedNode.text = "";
         if ( model.playState === PlayState.FIRST_CHECK ) {
           model.playState = PlayState.TRY_AGAIN;
         }
@@ -181,9 +170,6 @@ define( function( require ) {
       thisNode.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
                                     state === PlayState.SHOW_ANSWER ||
                                     ( state === PlayState.NEXT && challenge.isCorrect() ) );
-
-      // visibility of points
-      thisNode.pointsAwardedNode.visible = ( thisNode.faceNode.visible && challenge.isCorrect() );
 
       // visibility of buttons
       checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );

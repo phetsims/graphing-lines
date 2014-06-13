@@ -27,7 +27,6 @@ define( function( require ) {
     TITLE_COLOR: 'black',
     ANSWER_COLOR: 'rgb( 0, 180, 0 )', // color of the correct answer
     GUESS_COLOR: 'black', // color of the user's guess
-    FACE_COLOR: 'rgba( 255, 255, 0, 0.7 )', // translucent yellow
     POINTS_AWARDED_COLOR: 'black',
     BUTTON_COLOR: 'yellow',
 

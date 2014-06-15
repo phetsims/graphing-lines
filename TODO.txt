@@ -3,4 +3,4 @@ TODO list for graphing-lines
 - reduce startup time
 - integrate vegas.GameReward, see vegas#4
 - address TODO items in the code
-
+- revisit layout of Game screen, it's pretty ugly

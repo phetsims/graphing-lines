@@ -1,3 +1,4 @@
+6/15/14 wire up 'best time' feature to vegas.LevelStartButton
 # 1.0.0-dev.9 6/14/14
 6/13/14 use a mutable equation node in 'Graph The Line' challenges to improve performance
 6/13/14 'Node.visible = truthy' triggers an assertion, change to Node.visible = {boolean}'

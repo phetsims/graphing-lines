@@ -64,7 +64,9 @@ define( function( require ) {
         backgroundColor: 'rgb( 180, 205, 255 )',
         highlightedBackgroundColor: 'rgb( 220, 230, 255 )',
         buttonWidth: 175,
-        buttonHeight: 225
+        buttonHeight: 225,
+        bestTimeProperty: model.bestTimeProperties[ level ],
+        bestTimeVisibleProperty: model.timerEnabledProperty
       } );
   };
 

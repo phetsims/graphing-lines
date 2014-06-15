@@ -2,6 +2,6 @@ TODO list for graphing-lines
 
 - reduce startup time
 - integrate vegas.GameReward, see vegas#4
-- add option to show 'best time' on vegas.LevelStartButton, vegas#7
 - address TODO items in the code
+- smiley face overlaps guess box in GraphTheLine challenges
 

@@ -1,3 +1,4 @@
+6/14/14 #66 don't delete shaker particles that are in mid-air when the amount of solute in solution goes to zero
 6/13/14 use a mutable equation node in 'Graph The Line' challenges to improve performance
 6/13/14 'Node.visible = truthy' triggers an assertion, change to Node.visible = {boolean}'
 6/13/14 slope tool: use a slightly darker color for dimensional lines, increase lineWidth from 1.25 to 1.75, increase size of arrow heads from (6,8) to (10,10)

@@ -50,7 +50,7 @@ define( function( require ) {
       titleNode.scale = maxTitleWidth / titleNode.width;
     }
 
-    var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
+    var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
 
     // Answer
     var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,

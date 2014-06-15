@@ -73,7 +73,7 @@ define( function( require ) {
       titleNode.top = Y_MARGIN;
       // equation left-justified, vertically centered in space below title
       equationNode.left = X_MARGIN;
-      equationNode.centerY = titleNode.bottom + ( ( boxSize.height - titleNode.bottom ) / 2 );
+      equationNode.centerY = titleNode.bottom + ( ( boxNode.bottom - titleNode.bottom ) / 2 );
       // icons in upper-right corner
       var iconXMargin = 5;
       var iconYMargin = 1;

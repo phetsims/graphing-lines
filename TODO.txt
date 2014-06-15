@@ -3,5 +3,4 @@ TODO list for graphing-lines
 - reduce startup time
 - integrate vegas.GameReward, see vegas#4
 - address TODO items in the code
-- smiley face overlaps guess box in GraphTheLine challenges
 

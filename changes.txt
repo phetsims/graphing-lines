@@ -1,3 +1,4 @@
+6/19/14 move ShadowText to scenery-phet, use it for 'correct' and 'incorrect' icons
 6/15/14 confirmed that best time is only recorded when the game timer is enabled (see LineGameModel.updateBestTime, line 204)
 6/15/14 fix vertical alignment of answer and guess equations in 'Graph The Line' challenges
 6/15/14 make equation boxes slightly shorter so that smiley face doesn't overlap the 'guess' box in 'Graph The Line' challenges

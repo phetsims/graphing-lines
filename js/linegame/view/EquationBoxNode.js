@@ -15,6 +15,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
+  var ShadowText = require( 'SCENERY_PHET/ShadowText' );
 
   // constants
   var X_MARGIN = 20;
@@ -49,15 +50,9 @@ define( function( require ) {
     } );
 
     // icons for 'correct' and 'incorrect'
-    var glyphFont = new GLFont( 72 );
-    thisNode.correctIconNode = new Node( { children: [
-      new Text( '\u2713', { font: glyphFont, fill: 'black', x: 3, y: 1 } ), // drop shadow
-      new Text( '\u2713', { font: glyphFont, fill: 'rgb(137,244,0)' } )
-    ] } );
-    thisNode.incorrectIconNode = new Node( { children: [
-      new Text( '\u2718', { font: glyphFont, fill: 'black', x: 1, y: 3 } ), // drop shadow
-      new Text( '\u2718', { font: glyphFont, fill: 'rgb(252,104,0)' } )
-    ] } );
+    var iconFont = new GLFont( 72 );
+    thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } );
+    thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } );
 
     // rendering order
     thisNode.addChild( boxNode );

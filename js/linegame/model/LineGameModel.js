@@ -77,7 +77,7 @@ define( function( require ) {
     PropertySet.call( thisModel, {
       level: 0,
       soundEnabled: true,
-      timerEnabled: true,
+      timerEnabled: false,
       score: 0, // how many points the user has earned for the current game
       challenge: DUMMY_CHALLENGE,
       challengeIndex: 0,

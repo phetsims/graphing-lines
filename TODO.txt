@@ -1,6 +1,8 @@
 TODO list for graphing-lines
 
-- reduce startup time
+- move scoreboard to a bar at top of screen
+- rearrange game layout, center 'Check' button, align lhs with top of graph
+- add wipe transitions to game
 - integrate vegas.GameReward, see vegas#4
+- reduce startup time
 - address TODO items in the code
-- revisit layout of Game screen, it's pretty ugly

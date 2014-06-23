@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Scoreboard for a game.
+ * Scoreboard 'bar' that appears across the top of the screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

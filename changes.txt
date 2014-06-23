@@ -1,3 +1,4 @@
+6/19/14 game: move 'Check' (and other buttons) to centerBottom
 6/19/14 implement a non-standard scoreboard "bar" at the top of the screen (had to copy most of vegas.Scoreboard)
 6/19/14 design decision: default to game timer off in all sims
 6/19/14 move ShadowText to scenery-phet, use it for 'correct' and 'incorrect' icons

@@ -84,7 +84,7 @@ define( function( require ) {
       answerBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
 
       // face to left of buttons
-      thisNode.faceNode.right = thisNode.buttonsParent.left - 20;
+      thisNode.faceNode.centerX = guessBoxNode.centerX;
       thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
 
       // title above guess equation, left justified

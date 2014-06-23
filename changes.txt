@@ -1,3 +1,5 @@
+6/19/14 game: center face under left-side boxes
+6/19/14 game: set opacity of face to 1 (yellow face on yellow background)
 6/19/14 game: move 'Check' (and other buttons) to centerBottom
 6/19/14 implement a non-standard scoreboard "bar" at the top of the screen (had to copy most of vegas.Scoreboard)
 6/19/14 design decision: default to game timer off in all sims

@@ -86,7 +86,7 @@ define( function( require ) {
       answerBoxNode.bottom = challenge.mvt.modelToViewY( 0 ) - 10;
 
       // face to left of buttons
-      thisNode.faceNode.right = thisNode.buttonsParent.left - 20;
+      thisNode.faceNode.centerX = answerBoxNode.centerX;
       thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
 
       // title above answer equation, left justified

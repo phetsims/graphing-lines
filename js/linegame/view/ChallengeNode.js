@@ -57,7 +57,7 @@ define( function( require ) {
     // smiley/frowning face
     thisNode.faceNode = new FaceWithPointsNode( {
       faceDiameter: LineGameConstants.FACE_DIAMETER,
-      faceOpacity: 0.7,
+      faceOpacity: 1,
       pointsAlignment: 'rightCenter'
     } );
 

@@ -15,7 +15,7 @@ define( function( require ) {
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var Scoreboard = require( 'VEGAS/Scoreboard' );
+  var GLScoreboard = require( 'GRAPHING_LINES/linegame/view/GLScoreboard' );
 
   /**
    * @param {LineGameModel} model
@@ -28,7 +28,8 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    var scoreboardNode = new Scoreboard(
+    var scoreboardNode = new GLScoreboard(
+      layoutBounds.width,
       model.challengeIndexProperty,
       model.challengesPerGameProperty,
       model.levelProperty,
@@ -39,21 +40,24 @@ define( function( require ) {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
       },
       { font: new GLFont( 20 ) } );
-    scoreboardNode.left = layoutBounds.left + 30;
-    scoreboardNode.bottom = layoutBounds.bottom - 20;
+    scoreboardNode.centerX = layoutBounds.centerX;
+    scoreboardNode.top = 0;
     thisNode.addChild( scoreboardNode );
 
     // compute the size of the area available for the challenges
-    var challengeSize = new Dimension2( layoutBounds.width, scoreboardNode.top );
+    var challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - scoreboardNode.bottom );
 
-    // challenge parent, to maintain rendering order
-    var challengeParent = new Node();
-    thisNode.addChild( challengeParent );
+    // challenge
+    var challengeNode = null;
 
     // Set up a new challenge
     model.challengeProperty.link( function( challenge ) {
-      challengeParent.removeAllChildren();
-      challengeParent.addChild( challenge.createView( model, challengeSize, audioPlayer ) );
+      if ( challengeNode ) {
+        thisNode.removeChild( challengeNode );
+      }
+      challengeNode = challenge.createView( model, challengeSize, audioPlayer );
+      thisNode.addChild( challengeNode );
+      challengeNode.top = scoreboardNode.bottom;
     } );
   }
 

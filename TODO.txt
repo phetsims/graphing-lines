@@ -1,6 +1,5 @@
 TODO list for graphing-lines
 
-- move scoreboard to a bar at top of screen
 - rearrange game layout, center 'Check' button, align lhs with top of graph
 - add wipe transitions to game
 - integrate vegas.GameReward, see vegas#4

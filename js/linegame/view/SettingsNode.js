@@ -35,7 +35,7 @@ define( function( require ) {
 
   // strings
   var chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
-  var pattern_0level = require( 'string!GRAPHING_LINES/pattern_0level' );
+  var pattern_Level_0 = require( 'string!GRAPHING_LINES/pattern_Level_0' );
 
   // constants
   var X_MARGIN = 40;
@@ -47,7 +47,7 @@ define( function( require ) {
   var createLevelStartButton = function( level, model ) {
 
     // 'Level N' centered above icon
-    var label = new Text( StringUtils.format( pattern_0level, level + 1 ), { font: new GLFont( 60 ) } );
+    var label = new Text( StringUtils.format( pattern_Level_0, level + 1 ), { font: new GLFont( 60 ) } );
     var image = new Image( levelImages[level], { centerX: label.centerX, top: label.bottom + 20 } );
     var icon = new Node( { children: [ label, image ] } );
 

@@ -1,3 +1,4 @@
+# 1.0.0-dev.10 6/23/14
 6/23/14 create/add dev nodes conditionally
 6/23/14 delete vestigial createStaticLabel functions
 6/23/14 fix problem with positioning challenges below new scoreboard, so that graph is always in exactly the same place

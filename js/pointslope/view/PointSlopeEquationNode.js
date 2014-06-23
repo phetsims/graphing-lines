@@ -385,15 +385,6 @@ define( function( require ) {
   };
 
   /**
-   * Creates a non-interactive equation, used to label a static line.
-   * @param {Line} line
-   * @param {Number} fontSize
-   */
-  PointSlopeEquationNode.createStaticLabel = function( line, fontSize ) {
-    return PointSlopeEquationNode.createDynamicLabel( new Property( line ), fontSize );
-  };
-
-  /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property<Line>} lineProperty
    * @param {Number} fontSize

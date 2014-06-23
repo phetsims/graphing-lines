@@ -5,4 +5,3 @@ TODO list for graphing-lines
 - reduce startup time
 - address TODO items in the code
 - create/add dev nodes conditionally
-- delete createStaticLabel functions

@@ -13,9 +13,10 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var GLScoreboard = require( 'GRAPHING_LINES/linegame/view/GLScoreboard' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var GLScoreboard = require( 'GRAPHING_LINES/linegame/view/GLScoreboard' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
   /**
    * @param {LineGameModel} model
@@ -47,17 +48,15 @@ define( function( require ) {
     // compute the size of the area available for the challenges
     var challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - scoreboardNode.bottom );
 
-    // challenge
-    var challengeNode = null;
+    // challenge parent, to keep challenge below scoreboard
+    var challengeParent = new Rectangle( 0, 0, 0, 1 );
+    challengeParent.top = scoreboardNode.bottom;
+    thisNode.addChild( challengeParent );
 
     // Set up a new challenge
     model.challengeProperty.link( function( challenge ) {
-      if ( challengeNode ) {
-        thisNode.removeChild( challengeNode );
-      }
-      challengeNode = challenge.createView( model, challengeSize, audioPlayer );
-      thisNode.addChild( challengeNode );
-      challengeNode.top = scoreboardNode.bottom;
+      challengeParent.removeAllChildren();
+      challengeParent.addChild( challenge.createView( model, challengeSize, audioPlayer ) );
     } );
   }
 

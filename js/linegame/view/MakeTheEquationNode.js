@@ -75,21 +75,20 @@ define( function( require ) {
     {
       // graphNode is positioned automatically based on mvt's origin offset.
 
-      // guess equation in left half of challenge space
+      // left align the title and boxes
       guessBoxNode.right = ( 0.5 * challengeSize.width ) - 50;
-      guessBoxNode.bottom = challenge.mvt.modelToViewY( 0 ) - 10;
-
-      // answer below guess
       answerBoxNode.left = guessBoxNode.left;
-      answerBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
+      titleNode.left = guessBoxNode.left;
 
-      // face to left of buttons
+      // stack title and boxes vertically, title top-aligned with graph's grid
+      var ySpacing = 30;
+      titleNode.top = challenge.mvt.modelToViewY( challenge.graph.yRange.max );
+      guessBoxNode.top = titleNode.bottom + ySpacing;
+      answerBoxNode.top = guessBoxNode.bottom + ySpacing;
+
+      // face centered below boxes, bottom-aligned with buttons
       thisNode.faceNode.centerX = guessBoxNode.centerX;
       thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
-
-      // title above guess equation, left justified
-      titleNode.left = guessBoxNode.left;
-      titleNode.bottom = guessBoxNode.top - 20;
     }
 
     // To reduce brain damage during development, show the answer equation in translucent gray.

@@ -81,21 +81,20 @@ define( function( require ) {
     {
       // graphNode is positioned automatically based on mvt's origin offset.
 
-      // equation in left half of challenge space
+      // left align the title and boxes
       answerBoxNode.right = ( challengeSize.width / 2 ) - 50;
-      answerBoxNode.bottom = challenge.mvt.modelToViewY( 0 ) - 10;
+      thisNode.guessBoxNode.left = answerBoxNode.left;
+      titleNode.left = answerBoxNode.left;
 
-      // face to left of buttons
+      // stack title and boxes vertically, title top-aligned with graph's grid
+      var ySpacing = 30;
+      titleNode.top = challenge.mvt.modelToViewY( challenge.graph.yRange.max );
+      answerBoxNode.top = titleNode.bottom + ySpacing;
+      thisNode.guessBoxNode.top = answerBoxNode.bottom + ySpacing;
+
+      // face centered below boxes, bottom-aligned with buttons
       thisNode.faceNode.centerX = answerBoxNode.centerX;
       thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
-
-      // title above answer equation, left justified
-      titleNode.left = answerBoxNode.left;
-      titleNode.bottom = answerBoxNode.top - 20;
-
-      // guess below the answer
-      thisNode.guessBoxNode.left = answerBoxNode.left;
-      thisNode.guessBoxNode.top = challenge.mvt.modelToViewY( 0 ) + 10;
     }
 
     // Update visibility of the correct/incorrect icons.

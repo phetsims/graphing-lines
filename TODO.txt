@@ -1,9 +1,9 @@
 TODO list for graphing-lines
 
-- fix vertical positioning of equations in 'Graph The Line' boxes
 - 'Place The Points' challenges shift down compared to others
 - add wipe transitions to game
 - integrate vegas.GameReward, see vegas#4
 - reduce startup time
 - address TODO items in the code
 - create/add dev nodes conditionally
+- delete createStaticLabel functions

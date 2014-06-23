@@ -104,16 +104,21 @@ define( function( require ) {
     var plusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var minusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
-    var yInterceptNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
-      { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
-    var yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    var yInterceptNumeratorNode; // also used for integer values
+    if ( options.interactiveIntercept ) {
+      yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
+        { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
+    }
+    else {
+      yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    }
     var yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     var yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     var slopeUndefinedNode = new Text( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     thisNode.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
-      yInterceptMinusSignNode, yInterceptNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedNode ];
+      yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedNode ];
 
     /*
      * Updates the layout to match the desired form of the equation.
@@ -239,20 +244,20 @@ define( function( require ) {
         // intercept is interactive and will be an integer
         if ( zeroSlope && !options.interactiveSlope ) {
           // y = b
-          yInterceptNode.visible = true;
-          yInterceptNode.fill = lineColor;
-          yInterceptNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
-          yInterceptNode.centerY = yNode.centerY;
+          yInterceptNumeratorNode.visible = true;
+          yInterceptNumeratorNode.fill = lineColor;
+          yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
+          yInterceptNumeratorNode.centerY = yNode.centerY;
         }
         else {
           // y = (rise/run)x + b
-          plusNode.visible = yInterceptNode.visible = true;
+          plusNode.visible = yInterceptNumeratorNode.visible = true;
           minusNode.visible = false;
-          plusNode.fill = yInterceptNode.fill = lineColor;
+          plusNode.fill = yInterceptNumeratorNode.fill = lineColor;
           plusNode.left = xNode.right + thisNode.operatorXSpacing;
           plusNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
-          yInterceptNode.left = plusNode.right + thisNode.operatorXSpacing;
-          yInterceptNode.centerY = yNode.centerY;
+          yInterceptNumeratorNode.left = plusNode.right + thisNode.operatorXSpacing;
+          yInterceptNumeratorNode.centerY = yNode.centerY;
         }
       }
       else {

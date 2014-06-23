@@ -1,9 +1,10 @@
-6/19/14 game: limit titles to be as wide as boxes, for i18n
-6/19/14 game: top-align instructions with graph's grid
-6/19/14 game: center face under left-side boxes
-6/19/14 game: set opacity of face to 1 (yellow face on yellow background)
-6/19/14 game: move 'Check' (and other buttons) to centerBottom
-6/19/14 implement a non-standard scoreboard "bar" at the top of the screen (had to copy most of vegas.Scoreboard)
+6/23/14 fix vertical positioning of equations in 'Graph The Line' boxes by removing an extraneous picker from SlopeInterceptEquationNode
+6/23/14 game: limit titles to be as wide as boxes, for i18n
+6/23/14 game: top-align instructions with graph's grid
+6/23/14 game: center face under left-side boxes
+6/23/14 game: set opacity of face to 1 (yellow face on yellow background)
+6/23/14 game: move 'Check' (and other buttons) to centerBottom
+6/23/14 implement a non-standard scoreboard "bar" at the top of the screen (had to copy most of vegas.Scoreboard)
 6/19/14 design decision: default to game timer off in all sims
 6/19/14 move ShadowText to scenery-phet, use it for 'correct' and 'incorrect' icons
 6/15/14 confirmed that best time is only recorded when the game timer is enabled (see LineGameModel.updateBestTime, line 204)

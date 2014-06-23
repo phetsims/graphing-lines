@@ -1,6 +1,6 @@
 TODO list for graphing-lines
 
-- rearrange game layout, center 'Check' button, align lhs with top of graph
+- fix vertical positioning of equations in 'Graph The Line' boxes
 - add wipe transitions to game
 - integrate vegas.GameReward, see vegas#4
 - reduce startup time

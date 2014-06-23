@@ -4,4 +4,3 @@ TODO list for graphing-lines
 - integrate vegas.GameReward, see vegas#4
 - reduce startup time
 - address TODO items in the code
-- create/add dev nodes conditionally

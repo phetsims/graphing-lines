@@ -51,9 +51,6 @@ define( function( require ) {
 
     thisNode.subtypeParent = new Node(); // subtypes should add children to this node, to preserve rendering order
 
-    // description (dev)
-    var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
-
     // smiley/frowning face
     thisNode.faceNode = new FaceWithPointsNode( {
       faceDiameter: LineGameConstants.FACE_DIAMETER,
@@ -75,12 +72,6 @@ define( function( require ) {
     var nextButton = new TextPushButton( nextString, buttonOptions );
     thisNode.buttonsParent = new Node( { children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ] } );
 
-    // developer buttons, no i18n
-    var devButtonOptions = { font: new GLFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
-    var skipButton = new TextPushButton( "dev: Skip", devButtonOptions ); // This button lets you skip the current challenge.
-    var replayButton = new TextPushButton( "dev: Replay", devButtonOptions ); // This button lets you repeat the current challenge.
-    var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
-
     // point tools
     var linesVisibleProperty = new Property( true );
     var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.mvt, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
@@ -94,26 +85,15 @@ define( function( require ) {
     // rendering order
     {
       thisNode.addChild( thisNode.subtypeParent );
-      if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-        thisNode.addChild( descriptionNode );
-      }
       thisNode.addChild( thisNode.buttonsParent );
-      if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-        thisNode.addChild( devButtonsParent );
-      }
       thisNode.addChild( pointToolParent );
       thisNode.addChild( thisNode.faceNode );
     }
 
     // layout
-    descriptionNode.left = 10;
-    descriptionNode.top = 10;
     // buttons at center-bottom
     thisNode.buttonsParent.centerX = ( 0.5 * challengeSize.width );
     thisNode.buttonsParent.bottom = challengeSize.height - 20;
-    // dev buttons to right of main buttons
-    devButtonsParent.left = thisNode.buttonsParent.right + 15;
-    devButtonsParent.centerY = thisNode.buttonsParent.centerY;
 
     // "Check" button
     checkButton.addListener( function() {
@@ -153,16 +133,6 @@ define( function( require ) {
       model.playState = PlayState.FIRST_CHECK;
     } );
 
-    // "Skip" button
-    skipButton.addListener( function() {
-      model.skipCurrentChallenge();
-    } );
-
-    // "Repeat" button
-    replayButton.addListener( function() {
-      model.replayCurrentChallenge();
-    } );
-
     // play-state changes
     model.playStateProperty.link( function( state ) {
 
@@ -176,11 +146,32 @@ define( function( require ) {
       tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
       showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
       nextButton.visible = ( state === PlayState.NEXT );
-
-      // visibility of dev buttons
-      skipButton.visible = !nextButton.visible;
-      replayButton.visible = nextButton.visible;
     } );
+
+    // dev-mode options
+    if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+
+      // description at leftTop
+      var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      descriptionNode.left = 10;
+      descriptionNode.top = 10;
+      thisNode.addChild( descriptionNode );
+
+      // developer buttons (no i18n) to right of main buttons
+      var devButtonOptions = { font: new GLFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
+      var skipButton = new TextPushButton( "dev: Skip",
+        _.extend( { listener: model.skipCurrentChallenge.bind( model ) }, devButtonOptions ) ); // skips the current challenge.
+      var replayButton = new TextPushButton( "dev: Replay",
+        _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
+      var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
+      devButtonsParent.left = thisNode.buttonsParent.right + 15;
+      devButtonsParent.centerY = thisNode.buttonsParent.centerY;
+      thisNode.addChild( devButtonsParent );
+      model.playStateProperty.link( function( state ) {
+        replayButton.visible = ( state === PlayState.NEXT );
+        skipButton.visible = !replayButton.visible;
+      } );
+    }
   }
 
   /**

@@ -1,3 +1,4 @@
+6/19/14 game: limit titles to be as wide as boxes, for i18n
 6/19/14 game: top-align instructions with graph's grid
 6/19/14 game: center face under left-side boxes
 6/19/14 game: set opacity of face to 1 (yellow face on yellow background)

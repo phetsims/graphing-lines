@@ -41,14 +41,13 @@ define( function( require ) {
     var thisNode = this;
     ChallengeNode.call( thisNode, challenge, model, challengeSize, audioPlayer );
 
+    var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
+
     // title, possibly scaled for i18n
     var titleNode = new Text( challenge.title, { font: LineGameConstants.TITLE_FONT, fill: LineGameConstants.TITLE_COLOR } );
-    var maxTitleWidth = 0.45 * challengeSize.width;
-    if ( titleNode.width > maxTitleWidth ) {
-      titleNode.scale = maxTitleWidth / titleNode.width;
+    if ( titleNode.width > boxSize.width ) {
+      titleNode.scale = boxSize.width / titleNode.width;
     }
-
-    var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
     // Answer
     var answerBoxNode =

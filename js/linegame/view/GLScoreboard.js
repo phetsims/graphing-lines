@@ -118,7 +118,7 @@ define( function( require ) {
     var startOverButton = new TextPushButton( options.startOverButtonText, {
       listener: startOverCallback,
       font: options.font,
-      textFill: options.textFill,
+      textFill: 'black',
       baseColor: options.startOverButtonBaseColor,
       xMargin: options.startOverButtonXMargin,
       yMargin: options.startOverButtonYMargin

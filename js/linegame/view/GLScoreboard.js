@@ -89,7 +89,7 @@ define( function( require ) {
     // Timer, always takes up space even when hidden.
     var timerNode = new Node( { pickable: false } );
     var clockIcon = new SimpleClockIcon( options.clockIconRadius );
-    var timeValue = new Text( '', { font: options.font } );
+    var timeValue = new Text( '', textOptions );
     timerNode.addChild( clockIcon );
     timerNode.addChild( timeValue );
     timeValue.left = clockIcon.right + 8;

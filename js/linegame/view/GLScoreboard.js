@@ -52,6 +52,7 @@ define( function( require ) {
       textFill: 'white',
       // "Start Over" button
       startOverButtonText: startOverString,
+      startOverButtonTextFill: 'black',
       startOverButtonBaseColor: new Color( 229, 243, 255 ),
       startOverButtonXMargin: 10,
       startOverButtonYMargin: 5,
@@ -118,7 +119,7 @@ define( function( require ) {
     var startOverButton = new TextPushButton( options.startOverButtonText, {
       listener: startOverCallback,
       font: options.font,
-      textFill: 'black',
+      textFill: options.startOverButtonTextFill,
       baseColor: options.startOverButtonBaseColor,
       xMargin: options.startOverButtonXMargin,
       yMargin: options.startOverButtonYMargin

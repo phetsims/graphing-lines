@@ -1,3 +1,4 @@
+6/24/14 PointToolNode: move constants to options, for customization in game reward
 # 1.0.0-dev.10 6/23/14
 6/23/14 add Amanda to credits
 6/23/14 create/add dev nodes conditionally

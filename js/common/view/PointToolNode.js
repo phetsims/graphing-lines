@@ -32,9 +32,6 @@ define( function( require ) {
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
-  var BACKGROUND_NORMAL_COLOR = 'white';
-  var FOREGROUND_NORMAL_COLOR = 'black';
-  var FOREGROUND_HIGHLIGHT_COLOR = 'white';
   var VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
 
   /**
@@ -95,6 +92,12 @@ define( function( require ) {
    */
   function PointToolNode( pointTool, mvt, graph, linesVisibleProperty, options ) {
 
+    options = _.extend( {
+      backgroundNormalColor: 'white',
+      foregroundNormalColor: 'black',
+      foregroundHighlightColor: 'white'
+    }, options );
+
     var thisNode = this;
     Node.call( thisNode );
 
@@ -153,7 +156,7 @@ define( function( require ) {
 
     // initial state
     this.setCoordinatesVector2( pointTool.location );
-    this.setBackground( BACKGROUND_NORMAL_COLOR );
+    this.setBackground( options.backgroundNormalColor );
 
     // location and display
     Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
@@ -168,18 +171,18 @@ define( function( require ) {
           thisNode.setCoordinatesVector2( location );
           if ( linesVisibleProperty.get() ) {
             // use the line's color to highlight
-            thisNode.setForeground( !pointTool.onLine ? FOREGROUND_NORMAL_COLOR : FOREGROUND_HIGHLIGHT_COLOR );
-            thisNode.setBackground( !pointTool.onLine ? BACKGROUND_NORMAL_COLOR : pointTool.onLine.color );
+            thisNode.setForeground( !pointTool.onLine ? options.foregroundNormalColor : options.foregroundHighlightColor );
+            thisNode.setBackground( !pointTool.onLine ? options.backgroundNormalColor : pointTool.onLine.color );
           }
           else {
-            thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
-            thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
+            thisNode.setForeground( options.foregroundNormalColor );
+            thisNode.setBackground( options.backgroundNormalColor );
           }
         }
         else {
           thisNode.setCoordinatesString( pointUnknownString );
-          thisNode.setForeground( FOREGROUND_NORMAL_COLOR );
-          thisNode.setBackground( BACKGROUND_NORMAL_COLOR );
+          thisNode.setForeground( options.foregroundNormalColor );
+          thisNode.setBackground( options.backgroundNormalColor );
         }
       } );
 

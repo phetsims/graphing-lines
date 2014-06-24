@@ -34,21 +34,17 @@ define( function( require ) {
     model.gamePhaseProperty.link( function( gamePhase ) {
       if ( gamePhase === GamePhase.RESULTS ) {
 
-        // game reward, shown for perfect score
-        if ( model.isPerfectScore() ) {
+        // game reward, shown for perfect score (or with 'reward' query parameter)
+        if ( model.isPerfectScore() || window.phetcommon.getQueryParameter( 'reward' ) ) {
 
           audioPlayer.gameOverPerfectScore();
 
-//          thisNode.rewardNode = new GLRewardNode( model.level );
-//          thisNode.addChild( thisNode.rewardNode );
+          thisNode.rewardNode = new GLRewardNode( model.level );
+          thisNode.addChild( thisNode.rewardNode );
         }
         else {
           audioPlayer.gameOverImperfectScore();
         }
-
-        //XXX
-        thisNode.rewardNode = new GLRewardNode( model.level );
-        thisNode.addChild( thisNode.rewardNode );
 
         // game results
         thisNode.addChild( new LevelCompletedNode(

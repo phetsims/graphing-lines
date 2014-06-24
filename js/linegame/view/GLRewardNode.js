@@ -3,6 +3,7 @@
 /**
  * The reward that is displayed when a game is completed with a perfect score.
  * Various images (based on game level) move from top to bottom in the play area.
+ * Run with the 'reward' query parameter to show the reward at the end of every game, regardless of score.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

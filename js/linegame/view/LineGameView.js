@@ -33,7 +33,7 @@ define( function( require ) {
     // one parent node for each "phase" of the game
     thisView.settingsNode = new SettingsNode( model, thisView.layoutBounds.width, { center: thisView.layoutBounds.center } );
     thisView.playNode = new PlayNode( model, thisView.layoutBounds, audioPlayer );
-    thisView.resultsNode = new ResultsNode( model, thisView.layoutBounds );
+    thisView.resultsNode = new ResultsNode( model, thisView.layoutBounds, audioPlayer );
 
     // rendering order
     thisView.addChild( thisView.resultsNode );
@@ -42,23 +42,20 @@ define( function( require ) {
 
     // game "phase" changes
     model.gamePhaseProperty.link( function( gamePhase ) {
-
-      // visibility of scenegraph branches
       thisView.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
       thisView.playNode.visible = ( gamePhase === GamePhase.PLAY );
       thisView.resultsNode.visible = ( gamePhase === GamePhase.RESULTS );
-
-      // play audio when game ends
-      if ( gamePhase === GamePhase.RESULTS ) {
-        if ( model.score === model.getPerfectScore() ) {
-          audioPlayer.gameOverPerfectScore();
-        }
-        else {
-          audioPlayer.gameOverImperfectScore();
-        }
-      }
     } );
   }
 
-  return inherit( ScreenView, LineGameView, { layoutBounds: GLConstants.LAYOUT_BOUNDS } );
+  return inherit( ScreenView, LineGameView, {
+
+    layoutBounds: GLConstants.LAYOUT_BOUNDS,
+
+    step: function( elapsedTime ) {
+      if ( this.resultsNode.visible ) {
+        this.resultsNode.step( elapsedTime );
+      }
+    }
+  } );
 } );

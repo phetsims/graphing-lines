@@ -1,29 +1,211 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
-//TODO port
+/**
+ * The reward that is displayed when a game is completed with a perfect score.
+ * Various images (based on game level) move from top to bottom in the play area.
+ *
+ * @author Chris Malley (PixelZoom, Inc.)
+ */
 define( function( require ) {
   'use strict';
 
   // modules
+  var Bounds2 = require( 'DOT/Bounds2' );
+  var Dimension2 = require( 'DOT/Dimension2' );
+  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var ObservableArray = require( 'AXON/ObservableArray' );
+  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
+  var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
+  var Property = require( 'AXON/Property' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var RewardNode = require( 'VEGAS/RewardNode' );
+  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
+  var Vector2 = require( 'DOT/Vector2' );
 
-  function GLRewardNode() {
-    Node.call( this );
+  // images
+  var logoImage = require( 'image!BRAND/logo.png' );
+
+  // constants
+  var NUMBER_OF_NODES = 150;
+  var NODE_COLORS = [ 'yellow', 'red', 'orange', 'magenta', 'cyan', 'green' ];
+  var EQUATION_FONT_SIZE = 24;
+  var GRAPH_WIDTH = 50;
+  var FACE_DIAMETER = 40;
+  var LOGO_SIZE = new Dimension2( 125, 75 );
+
+  /**
+   * @param level game level, starting at zero
+   * @constructor
+   */
+  function GLRewardNode( level ) {
+    var nodes = nodeFactoryFunctions[level]();
+    RewardNode.call( this, { nodes: nodes } );
   }
 
-  return inherit( Node, GLRewardNode, {
+  var getRandomX = function() {
+    return getRandomNonZeroInteger( GLConstants.X_AXIS_RANGE.min, GLConstants.X_AXIS_RANGE.max );
+  };
 
-    isRunning: function() {
-      return false; //TODO
-    },
+  var getRandomY = function() {
+    return getRandomNonZeroInteger( GLConstants.Y_AXIS_RANGE.min, GLConstants.Y_AXIS_RANGE.max );
+  };
 
-    setRunning: function( running ) {
-      //TODO
-    },
+  var getRandomNonZeroInteger = function( min, max ) {
+    var i = Math.floor( min + ( Math.random() * ( max - min ) ) );
+    if ( i == 0 ) { i = 1; }
+    return i;
+  };
 
-    setLevel: function( level ) {
-      //TODO
+  // Creates a random equation with the specified color.
+  var createEquationNode = function( color ) {
+    var node;
+    if ( Math.random() < 0.5 ) {
+      node = SlopeInterceptEquationNode.createDynamicLabel(
+        new Property( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ),
+        EQUATION_FONT_SIZE );
     }
-  } );
+    else {
+      node = PointSlopeEquationNode.createDynamicLabel(
+        new Property( Line.createPointSlope( getRandomX(), getRandomY(), getRandomX(), getRandomY(), color ) ),
+        EQUATION_FONT_SIZE );
+    }
+    return node;
+  };
+
+  // Creates an array of random equations with the specified colors.
+  var createEquationNodes = function( colors ) {
+    var nodes = [];
+    colors.forEach( function( color ) {
+      nodes.push( createEquationNode( color ) );
+    } );
+    return nodes;
+  };
+
+  // Creates a random graph with the specified color.
+  var createGraphNode = function( color ) {
+    var node;
+    if ( Math.random() < 0.5 ) {
+      node = IconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
+    }
+    else {
+      node = IconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, 3, 3, -3 ); // y = -x
+    }
+    return node;
+  };
+
+  // Creates an array of random graphs with the specified colors.
+  var createGraphNodes = function( colors ) {
+    var nodes = [];
+    colors.forEach( function( color ) {
+      nodes.push( createGraphNode( color ) );
+    } );
+    return nodes;
+  };
+
+  //TODO this creates way too much model stuff
+  // Creates a random point tool with the specified color.
+  var createPointToolNode = function( color ) {
+    var point = new Vector2( getRandomX(), getRandomY() );
+    var orientation = ( Math.random() < 0.5 ? 'down' : 'up' );
+    var pointTool = new PointTool( point, orientation, new ObservableArray(), new Bounds2( 0, 0, 1, 1 ) );
+    var mvt = ModelViewTransform2.createIdentity();
+    var graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
+    var pointToolNode = new PointToolNode( pointTool, mvt, graph, new Property( true ), { backgroundNormalColor: color } );
+    pointToolNode.scale( 0.75 );
+    return pointToolNode;
+  };
+
+  // Creates an array of random point tools with the specified colors.
+  var createPointToolNodes = function( colors ) {
+    var nodes = [];
+    colors.forEach( function( color ) {
+      nodes.push( createPointToolNode( color ) );
+    } );
+    return nodes;
+  };
+
+  // Creates an array of smiley faces with the specified colors.
+  var createFaceNodes = function( colors, diameter ) {
+    var nodes = [];
+    colors.forEach( function( color ) {
+      nodes.push( new FaceNode( diameter, { headFill: color } ) );
+    } );
+    return nodes;
+  };
+
+  //TODO color is not used, replace with paper airplane
+  // Creates a PhET logo.
+  var createLogoNode = function( color, size ) {
+    var backgroundNode = new Rectangle( 0, 0, size.width, size.height, { fill: 'black' } );
+    var logoNode = new Image( logoImage );
+    logoNode.setScaleMagnitude( Math.min( 0.82 * backgroundNode.width / logoNode.width, 0.82 * backgroundNode.height / logoNode.height ) );
+    logoNode.center = backgroundNode.center;
+    return new Node( { children: [ backgroundNode, logoNode ] } );
+  };
+
+  // Creates an array of PhET logos with the specified colors.
+  var createLogoNodes = function( colors, size ) {
+    var nodes = [];
+    colors.forEach( function( color ) {
+      nodes.push( createLogoNode( color, size ) );
+    } );
+    return nodes;
+  };
+
+  // Level 1 = equations
+  var createNodesLevel1 = function() {
+    return RewardNode.createRandomNodes( createEquationNodes( NODE_COLORS ), NUMBER_OF_NODES );
+  };
+
+  // Level 2 = graphs
+  var createNodesLevel2 = function() {
+    return RewardNode.createRandomNodes( createGraphNodes( NODE_COLORS ), NUMBER_OF_NODES );
+  };
+
+  // Level 3 = point tools
+  var createNodesLevel3 = function() {
+    return RewardNode.createRandomNodes( createPointToolNodes( NODE_COLORS ), NUMBER_OF_NODES );
+  };
+
+  // Level 4 = smiley faces
+  var createNodesLevel4 = function() {
+    return RewardNode.createRandomNodes( createFaceNodes( NODE_COLORS, FACE_DIAMETER ), NUMBER_OF_NODES );
+  };
+
+  // Level 5 = PhET logos
+  var createNodesLevel5 = function() {
+    return RewardNode.createRandomNodes( createLogoNodes( NODE_COLORS, LOGO_SIZE ), NUMBER_OF_NODES );
+  };
+
+  // Level 6 = all of the above
+  var createNodesLevel6 = function() {
+    var nodes = createEquationNodes( NODE_COLORS )
+      .concat( createGraphNodes( NODE_COLORS ) )
+      .concat( createPointToolNodes( NODE_COLORS ) )
+      .concat( createFaceNodes( NODE_COLORS, FACE_DIAMETER ) )
+      .concat( createLogoNodes( NODE_COLORS, LOGO_SIZE ) );
+    return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
+  };
+
+  // Functions for creating nodes, indexed by level.
+  var nodeFactoryFunctions = [
+    createNodesLevel1,
+    createNodesLevel2,
+    createNodesLevel3,
+    createNodesLevel4,
+    createNodesLevel5,
+    createNodesLevel6
+  ];
+
+  return inherit( RewardNode, GLRewardNode );
 } );

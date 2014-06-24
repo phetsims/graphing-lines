@@ -20,14 +20,15 @@ define( function( require ) {
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
+   * @param {GameAudioPlayer} audioPlayer
    * @constructor
    */
-  function ResultsNode( model, layoutBounds ) {
+  function ResultsNode( model, layoutBounds, audioPlayer ) {
 
     var thisNode = this;
     Node.call( thisNode );
 
-    thisNode.rewardNode = new GLRewardNode();
+    thisNode.rewardNode = null;
 
     // show results when we enter this phase
     model.gamePhaseProperty.link( function( gamePhase ) {
@@ -35,10 +36,19 @@ define( function( require ) {
 
         // game reward, shown for perfect score
         if ( model.isPerfectScore() ) {
-          thisNode.rewardNode.setLevel( model.level );
-          thisNode.addChild( thisNode.rewardNode );
-          thisNode.setRewardRunning( true );
+
+          audioPlayer.gameOverPerfectScore();
+
+//          thisNode.rewardNode = new GLRewardNode( model.level );
+//          thisNode.addChild( thisNode.rewardNode );
         }
+        else {
+          audioPlayer.gameOverImperfectScore();
+        }
+
+        //XXX
+        thisNode.rewardNode = new GLRewardNode( model.level );
+        thisNode.addChild( thisNode.rewardNode );
 
         // game results
         thisNode.addChild( new LevelCompletedNode(
@@ -61,24 +71,16 @@ define( function( require ) {
       }
       else {
         thisNode.removeAllChildren();
-        thisNode.setRewardRunning( false );
+        thisNode.rewardNode = null;
       }
     } );
   }
 
   return inherit( Node, ResultsNode, {
-
-    // Sets the bounds of the reward node, called when the canvas is resized so that the reward fills the browser window.
-    setRewardBounds: function( bounds ) {
-      this.rewardNode.set( bounds );
-    },
-
-    isRewardRunning: function() {
-      return this.rewardNode.isRunning();
-    },
-
-    setRewardRunning: function( running ) {
-      this.rewardNode.setRunning( running );
+    step: function( elapsedTime ) {
+      if ( this.rewardNode ) {
+        this.rewardNode.step( elapsedTime );
+      }
     }
   } );
 } );

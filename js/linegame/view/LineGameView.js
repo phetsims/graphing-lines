@@ -58,8 +58,6 @@ define( function( require ) {
         }
       }
     } );
-
-    //TODO add functionality to adjust the bounds of the reward, see java.LineGameCanvas
   }
 
   return inherit( ScreenView, LineGameView, { layoutBounds: GLConstants.LAYOUT_BOUNDS } );

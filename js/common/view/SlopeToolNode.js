@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Slope indicator that the design team referred to as the "slope tool".
+ * Slope indicator that the design team referred to as the 'slope tool'.
  * It displays the rise and run values of the slope.
  * Drawn in the global coordinate frame of the view.
  *

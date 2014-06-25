@@ -78,7 +78,7 @@ define( function( require ) {
     // Nodes that could appear is all possible ways to write the equation
     // m =
     var mNode = new Text( symbolSlopeString, staticOptions );
-    var interactiveEqualsNode = new Text( "=", staticOptions );
+    var interactiveEqualsNode = new Text( '=', staticOptions );
     // y2 - y2
     var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
     var numeratorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
@@ -97,7 +97,7 @@ define( function( require ) {
       minWidth: y2Node.width,
       minHeight: y2Node.height - 20
     };
-    var unsimplifiedEqualsNode = new Text( "=", staticOptions );
+    var unsimplifiedEqualsNode = new Text( '=', staticOptions );
     var unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
     var unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
     var unsimplifiedFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
@@ -223,7 +223,7 @@ define( function( require ) {
     var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // m =
-    var leftSideNode = new Text( StringUtils.format( "{0}      {1} =", slopeString, symbolSlopeString ), { font: font, fill: options.fill } );
+    var leftSideNode = new Text( StringUtils.format( '{0}      {1} =', slopeString, symbolSlopeString ), { font: font, fill: options.fill } );
 
     // pattern for numerator and denominator
     var pattern = '{0}<sub>2</sub> - {1}<sub>1</sub>';

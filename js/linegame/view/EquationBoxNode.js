@@ -1,8 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Box around an equation in the "Line Game".
- * Has an icon that indicates "correct" (check mark) or "incorrect" (red "X").
+ * Box around an equation in the 'Line Game'.
+ * Has an icon that indicates 'correct' (check mark) or 'incorrect' (red 'X').
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

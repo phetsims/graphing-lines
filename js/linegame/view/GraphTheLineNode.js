@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * View for "Graph the Line" challenges.
+ * View for 'Graph the Line' challenges.
  * User manipulates a graphed line on the right, equations are displayed on the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -159,7 +159,7 @@ define( function( require ) {
         return new TwoPointsGraphNode( challenge );
       }
       else {
-        throw new Error( "unsupported manipulationMode: " + challenge.manipulationMode );
+        throw new Error( 'unsupported manipulationMode: ' + challenge.manipulationMode );
       }
     }
   } );

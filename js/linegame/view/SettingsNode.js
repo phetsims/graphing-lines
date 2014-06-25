@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Portion of the scenegraph that corresponds to the "settings" game phase. (See GamePhase.SETTINGS)
+ * Portion of the scenegraph that corresponds to the 'settings' game phase. (See GamePhase.SETTINGS)
  * The displays a panel with controls used to configure a game.
  *
  * @author Chris Malley (PixelZoom, Inc.)

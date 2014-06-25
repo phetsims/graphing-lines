@@ -92,7 +92,7 @@ define( function( require ) {
     thisNode.buttonsParent.centerX = ( 0.5 * challengeSize.width );
     thisNode.buttonsParent.bottom = challengeSize.height - 20;
 
-    // "Check" button
+    // 'Check' button
     checkButton.addListener( function() {
       if ( challenge.isCorrect() ) {
         thisNode.faceNode.smile();
@@ -115,17 +115,17 @@ define( function( require ) {
       }
     } );
 
-    // "Try Again" button
+    // 'Try Again' button
     tryAgainButton.addListener( function() {
       model.playState = PlayState.SECOND_CHECK;
     } );
 
-    // "Show Answer" button
+    // 'Show Answer' button
     showAnswerButton.addListener( function() {
       model.playState = PlayState.NEXT;
     } );
 
-    // "Next" button
+    // 'Next' button
     nextButton.addListener( function() {
       model.playState = PlayState.FIRST_CHECK;
     } );
@@ -149,16 +149,16 @@ define( function( require ) {
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
 
       // description at leftTop
-      var descriptionNode = new Text( this.constructor.name + ": " + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      var descriptionNode = new Text( this.constructor.name + ': ' + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
       descriptionNode.left = 10;
       descriptionNode.top = 10;
       thisNode.addChild( descriptionNode );
 
       // developer buttons (no i18n) to right of main buttons
       var devButtonOptions = { font: new GLFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
-      var skipButton = new TextPushButton( "dev: Skip",
+      var skipButton = new TextPushButton( 'dev: Skip',
         _.extend( { listener: model.skipCurrentChallenge.bind( model ) }, devButtonOptions ) ); // skips the current challenge.
-      var replayButton = new TextPushButton( "dev: Replay",
+      var replayButton = new TextPushButton( 'dev: Replay',
         _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
       var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
       devButtonsParent.left = thisNode.buttonsParent.right + 15;
@@ -185,7 +185,7 @@ define( function( require ) {
       return new PointSlopeEquationNode.createDynamicLabel( lineProperty, fontSize );
     }
     else {
-      throw new Error( "unsupported equation form: " + equationForm );
+      throw new Error( 'unsupported equation form: ' + equationForm );
     }
   };
 

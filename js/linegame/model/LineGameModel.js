@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for the "Line Game" screen. Responsibilities include:
+ * Model for the 'Line Game' screen. Responsibilities include:
  * <ul>
  * <li>creation of challenges (delegated to factory)</li>
  * <li>management of game state</li>
@@ -35,7 +35,7 @@ define( function( require ) {
 
   // constants
   var USE_HARD_CODED_CHALLENGES = window.phetcommon.getQueryParameter( 'hardcoded' ); // for debugging
-  var DUMMY_CHALLENGE = new GraphTheLine( "", Line.createSlopeIntercept( 1, 1, 1 ),
+  var DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
   // a challenge factory for each level
@@ -119,7 +119,7 @@ define( function( require ) {
           thisModel.updateBestTime();
         }
         else {
-          throw new Error( "unsupported game phase: " + gamePhase );
+          throw new Error( 'unsupported game phase: ' + gamePhase );
         }
       } );
 

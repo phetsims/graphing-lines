@@ -55,7 +55,7 @@ define( function( require ) {
   var MAJOR_TICK_COLOR = 'black';
   var MAJOR_TICK_FONT = new GLFont( 16 );
   var TICK_LABEL_SPACING = 2;
-  var MINUS_SIGN_WIDTH = new Text( "-", { font: MAJOR_TICK_FONT } ).width;
+  var MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
 
   //----------------------------------------------------------------------------------------
   // A major or minor line in the grid

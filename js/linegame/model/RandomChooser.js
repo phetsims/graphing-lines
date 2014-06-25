@@ -2,7 +2,7 @@
 
 /**
  * Functions for randomly choosing values from arrays or arrays-of-arrays.
- * Used for generating challenges in "Line Game".
+ * Used for generating challenges in 'Line Game'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

@@ -1,8 +1,8 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * View for "Place the Points" challenges.
- * This is a specialization of the "Graph the Line" view.
+ * View for 'Place the Points' challenges.
+ * This is a specialization of the 'Graph the Line' view.
  * User manipulates 3 arbitrary points, equations are displayed on the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)

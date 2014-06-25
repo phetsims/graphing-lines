@@ -49,7 +49,7 @@ define( function( require ) {
       // all text
       font: new PhetFont( 20 ),
       textFill: 'white',
-      // "Start Over" button
+      // 'Start Over' button
       startOverButtonText: startOverString,
       startOverButtonTextFill: 'black',
       startOverButtonBaseColor: new Color( 229, 243, 255 ),

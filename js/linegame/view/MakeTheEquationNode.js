@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * View for "Make the Equation" challenges.
+ * View for 'Make the Equation' challenges.
  * User manipulates an equation on the right, graph is displayed on the left.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -168,7 +168,7 @@ define( function( require ) {
         staticColor: staticColor } );
     }
     else {
-      throw new Error( "unsupported equation form: " + equationForm );
+      throw new Error( 'unsupported equation form: ' + equationForm );
     }
   };
 

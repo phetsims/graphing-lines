@@ -67,7 +67,7 @@ define( function( require ) {
     this.pointTool1 = new PointTool( pointToolLocation1, 'up', this.graph.lines, pointToolDragBounds1 );
     this.pointTool2 = new PointTool( pointToolLocation2, 'down', this.graph.lines, pointToolDragBounds2 );
 
-    // When the guess changes, update the lines that are "seen" by the point tools.
+    // When the guess changes, update the lines that are 'seen' by the point tools.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );
   }
 
@@ -133,7 +133,7 @@ define( function( require ) {
     },
 
     /**
-     * Updates the collection of lines that are "seen" by the point tools.
+     * Updates the collection of lines that are 'seen' by the point tools.
      * @abstract
      */
     updateGraphLines: function() {
@@ -148,7 +148,7 @@ define( function( require ) {
       this.setAnswerVisible( false );
     },
 
-    // Visibility of the answer affects what is "seen" by the point tools.
+    // Visibility of the answer affects what is 'seen' by the point tools.
     setAnswerVisible: function( visible ) {
       this.answerVisible = visible;
       this.updateGraphLines();
@@ -160,12 +160,12 @@ define( function( require ) {
     },
 
     toString: function() {
-      return this.constructor.name + "[" +
-             " title=" + this.title +
-             " answer=" + this.answer.toString() +
-             " equationForm=" + this.equationForm +
-             " manipulationMode=" + this.manipulationMode +
-             " ]";
+      return this.constructor.name + '[' +
+             ' title=' + this.title +
+             ' answer=' + this.answer.toString() +
+             ' equationForm=' + this.equationForm +
+             ' manipulationMode=' + this.manipulationMode +
+             ' ]';
     }
   } );
 } );

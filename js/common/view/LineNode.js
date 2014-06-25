@@ -153,7 +153,7 @@ define( function( require ) {
         var X_OFFSET = 30;
         var Y_OFFSET = 12;
         if ( line.undefinedSlope() ) {
-          // this puts the "undefined slope" label to the right of the y-axis, at the same end of the line as the slope manipulator
+          // this puts the 'undefined slope' label to the right of the y-axis, at the same end of the line as the slope manipulator
           if ( line.rise < 0 ) {
             this.equationParentNode.translation = tipLocation;
             this.equationNode.right = -X_OFFSET + rightOffset;

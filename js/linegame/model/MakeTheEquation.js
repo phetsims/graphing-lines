@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for "Make the Equation" challenges.
+ * Model for 'Make the Equation' challenges.
  * In this challenge, the user is given a graphed line and must make the equation.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -60,7 +60,7 @@ define( function( require ) {
     },
 
     /**
-     * Updates the collection of lines that are "seen" by the point tools.
+     * Updates the collection of lines that are 'seen' by the point tools.
      * @override
      */
     updateGraphLines: function() {

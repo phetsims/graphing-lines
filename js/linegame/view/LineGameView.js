@@ -30,7 +30,7 @@ define( function( require ) {
     // audio
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
-    // one parent node for each "phase" of the game
+    // one parent node for each 'phase' of the game
     thisView.settingsNode = new SettingsNode( model, thisView.layoutBounds );
     thisView.playNode = new PlayNode( model, thisView.layoutBounds, audioPlayer );
     thisView.resultsNode = new ResultsNode( model, thisView.layoutBounds, audioPlayer );
@@ -40,7 +40,7 @@ define( function( require ) {
     thisView.addChild( thisView.playNode );
     thisView.addChild( thisView.settingsNode );
 
-    // game "phase" changes
+    // game 'phase' changes
     model.gamePhaseProperty.link( function( gamePhase ) {
       thisView.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
       thisView.playNode.visible = ( gamePhase === GamePhase.PLAY );

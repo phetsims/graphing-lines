@@ -30,7 +30,7 @@ define( function( require ) {
     }, options );
 
     var thisNode = this;
-    Text.call( this, "", options );
+    Text.call( this, '', options );
 
     valueProperty.link( function( value ) {
       thisNode.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );

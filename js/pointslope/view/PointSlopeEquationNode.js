@@ -7,7 +7,7 @@
  * Point and/or slope may be interactive.
  * Pickers are used to increment/decrement parts of the equation that are specified as being interactive.
  * Non-interactive parts of the equation are expressed in a form that is typical of how the equation
- * would normally be written. For example, if the slope is -1, then only the sign is written, not "-1".
+ * would normally be written. For example, if the slope is -1, then only the sign is written, not '-1'.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -83,7 +83,7 @@ define( function( require ) {
     var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
-    var yLeftParenNode = new Text( "(", staticOptions );
+    var yLeftParenNode = new Text( '(', staticOptions );
     var yNode = new Text( symbolYString, staticOptions );
     var yPlusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var yMinusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
@@ -95,9 +95,9 @@ define( function( require ) {
     else {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    var yRightParenNode = new Text( ")", staticOptions );
+    var yRightParenNode = new Text( ')', staticOptions );
     var y1MinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) ); // for y=-y1 case
-    var equalsNode = new Text( "=", staticOptions );
+    var equalsNode = new Text( '=', staticOptions );
     var slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
     var riseNode, runNode;
     if ( options.interactiveSlope ) {
@@ -109,7 +109,7 @@ define( function( require ) {
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     var fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    var xLeftParenNode = new Text( "(", staticOptions );
+    var xLeftParenNode = new Text( '(', staticOptions );
     var xNode = new Text( symbolXString, staticOptions );
     var xPlusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
     var xMinusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
@@ -121,7 +121,7 @@ define( function( require ) {
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    var xRightParenNode = new Text( ")", staticOptions );
+    var xRightParenNode = new Text( ')', staticOptions );
     var slopeUndefinedNode = new Text( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
@@ -302,7 +302,7 @@ define( function( require ) {
             previousXOffset = thisNode.integerSlopeXSpacing;
           }
           else {
-            throw new Error( "programming error, didn't handle some slope case" );
+            throw new Error( 'programming error, forgot to handle some slope case' );
           }
         }
 
@@ -326,7 +326,7 @@ define( function( require ) {
           // no x term
         }
         else {
-          throw new Error( "programming error, didn't handle some x-term case" );
+          throw new Error( 'programming error, forgot to handle some x-term case' );
         }
       }
     };

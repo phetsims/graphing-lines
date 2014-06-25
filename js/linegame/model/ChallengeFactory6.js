@@ -45,7 +45,7 @@ define( function( require ) {
 
       // Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
       yIntercept = RandomChooser.choose( yIntercepts );
-      challenges.push( new PlaceThePoints( "slope=0",
+      challenges.push( new PlaceThePoints( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
 
@@ -82,10 +82,10 @@ define( function( require ) {
           // challenge, with mismatched representations
           line = new Line( x1, y1, x2, y2, Color.BLACK );
           if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-            challenges.push( new GraphTheLine( "slope-intercept, Graph-the-Line " + i, line, equationForm, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
+            challenges.push( new GraphTheLine( 'slope-intercept, Graph-the-Line ' + i, line, equationForm, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
           }
           else {
-            challenges.push( new GraphTheLine( "point-slope, Graph-the-Line " + i, line, equationForm, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
+            challenges.push( new GraphTheLine( 'point-slope, Graph-the-Line ' + i, line, equationForm, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
           }
         }
       }

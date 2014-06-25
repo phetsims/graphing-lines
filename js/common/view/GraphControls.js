@@ -27,8 +27,8 @@ define( function( require ) {
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   // constants
-  var Y_EQUALS_X = StringUtils.format( "{0} = {1}", symbolYString, symbolXString );  // y = x
-  var Y_EQUALS_NEGATIVE_X = StringUtils.format( "{0} = -{1}", symbolYString, symbolXString ); // y = -x
+  var Y_EQUALS_X = StringUtils.format( '{0} = {1}', symbolYString, symbolXString );  // y = x
+  var Y_EQUALS_NEGATIVE_X = StringUtils.format( '{0} = -{1}', symbolYString, symbolXString ); // y = -x
 
   /**
    * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?

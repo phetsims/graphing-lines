@@ -2,7 +2,7 @@
 
 /**
  * Drag handler for an arbitrary point (Vector2).
- * Used exclusively in "Place the Points" game challenges.
+ * Used exclusively in 'Place the Points' game challenges.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

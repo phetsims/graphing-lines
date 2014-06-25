@@ -104,7 +104,7 @@ define( function( require ) {
         this.tailDelimiterNode.setLine( tailX, tailY - this.delimiterLength / 2, tailX, tailY + this.delimiterLength / 2 );
       }
       else {
-        throw new Error( "this implementation supports only horizontal and vertical arrows" );
+        throw new Error( 'this implementation supports only horizontal and vertical arrows' );
       }
       this.tipNode.shape = tipShape;
     }

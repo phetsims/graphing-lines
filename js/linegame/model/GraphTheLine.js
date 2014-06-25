@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Model for "Graph the Line" challenges.
+ * Model for 'Graph the Line' challenges.
  * In this challenge, the user is given an equation and must graph the line.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -60,7 +60,7 @@ define( function( require ) {
     },
 
     /**
-     * Updates the collection of lines that are "seen" by the point tools.
+     * Updates the collection of lines that are 'seen' by the point tools.
      * @override
      */
     updateGraphLines: function() {

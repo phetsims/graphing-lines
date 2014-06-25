@@ -33,7 +33,7 @@ define( function( require ) {
     },
 
     toString: function() {
-      return "Fraction[numerator=" + this.numerator + " denominator=" + this.denominator + "]";
+      return 'Fraction[numerator=' + this.numerator + ' denominator=' + this.denominator + ']';
     }
   };
 

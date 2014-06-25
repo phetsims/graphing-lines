@@ -7,7 +7,7 @@
  * Slope and/or intercept may be interactive.
  * Pickers are used to increment/decrement parts of the equation that are specified as being interactive.
  * Non-interactive parts of the equation are expressed in a form that is typical of how the equation
- * would normally be written.  For example, if the slope is -1, then only the sign is written, not "-1".
+ * would normally be written.  For example, if the slope is -1, then only the sign is written, not '-1'.
  * <p>
  * Note that both m and b may be improper fractions. b may be an improper fraction only if the y-intercept
  * is not interactive.
@@ -88,7 +88,7 @@ define( function( require ) {
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     var yNode = new Text( symbolYString, staticOptions );
-    var equalsNode = new Text( "=", staticOptions );
+    var equalsNode = new Text( '=', staticOptions );
     var slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
     var riseNode, runNode;
     if ( options.interactiveSlope ) {
@@ -160,7 +160,7 @@ define( function( require ) {
       equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
       equalsNode.y = yNode.y;
 
-      // Layout the "mx" part of the equation.
+      // Layout the 'mx' part of the equation.
       if ( options.interactiveSlope ) {
 
         // slope is interactive, will be displayed as a fraction
@@ -235,11 +235,11 @@ define( function( require ) {
           xNode.y = yNode.y;
         }
         else {
-          throw new Error( "programming error, didn't handle some slope case" );
+          throw new Error( 'programming error, forgot to handle some slope case' );
         }
       }
 
-      // Layout the "+ b" part of the equation.
+      // Layout the '+ b' part of the equation.
       if ( options.interactiveIntercept ) {
         // intercept is interactive and will be an integer
         if ( zeroSlope && !options.interactiveSlope ) {
@@ -397,7 +397,7 @@ define( function( require ) {
   // Creates a node that displays the general form of this equation: y = mx + b
   SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
     options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } )}, options );
-    var text = StringUtils.format( "{0} = {1}{2} + {3}",
+    var text = StringUtils.format( '{0} = {1}{2} + {3}',
       symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
     return new Text( text, { font: options.font, pickable: false } );
 

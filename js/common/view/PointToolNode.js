@@ -108,7 +108,7 @@ define( function( require ) {
      * Pointy tip, separate from the body and not pickable.
      * Because picking bounds are rectangular, making the tip pickable made it difficult
      * to pick a line manipulator when the tip and manipulator were on the same grid point.
-     * Making the tip non-pickable was determined to be an acceptable and "natural feeling" solution.
+     * Making the tip non-pickable was determined to be an acceptable and 'natural feeling' solution.
      */
     thisNode.tipNode = new Image( tipImage, { pickable: false } );
 
@@ -119,7 +119,7 @@ define( function( require ) {
       { pickable: false } );
 
     // displayed value
-    thisNode.valueNode = new Text( "?", { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
+    thisNode.valueNode = new Text( '?', { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
 
     // orientation
     if ( pointTool.orientation === 'down' ) {

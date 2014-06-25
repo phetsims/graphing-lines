@@ -17,7 +17,7 @@ define( function( require ) {
   var PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
 
   // constants
-  var DESCRIPTION = "dev-hardcoded";
+  var DESCRIPTION = 'dev-hardcoded';
 
   return {
     /**
@@ -71,7 +71,7 @@ define( function( require ) {
           challenges.push( new PlaceThePoints( DESCRIPTION, Line.createPointSlope( 5, 4, 3, 2 ), EquationForm.POINT_SLOPE, xRange, yRange ) );
           break;
         default:
-          throw new Error( "unsupported level: " + level );
+          throw new Error( 'unsupported level: ' + level );
       }
       return challenges;
     }

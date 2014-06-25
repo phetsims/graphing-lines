@@ -26,19 +26,15 @@ define( function( require ) {
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
-  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Node = require( 'SCENERY/nodes/Node' );
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PaperAirplaneNode = require( 'SCENERY_PHET/PaperAirplaneNode' );
-  var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RewardNode = require( 'VEGAS/RewardNode' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var Vector2 = require( 'DOT/Vector2' );
@@ -61,7 +57,7 @@ define( function( require ) {
   }
 
   //-----------------------------------------------------------------------------------------------
-  // misc utility functions
+  // Misc. utility functions
   //-----------------------------------------------------------------------------------------------
 
   var getRandomX = function() {
@@ -74,12 +70,13 @@ define( function( require ) {
 
   var getRandomNonZeroInteger = function( min, max ) {
     var i = Math.floor( min + ( Math.random() * ( max - min ) ) );
-    if ( i == 0 ) { i = 1; }
+    if ( i === 0 ) { i = 1; }
     return i;
   };
 
   //-----------------------------------------------------------------------------------------------
-  // functions that create specific types of nodes
+  // Functions that create specific types of nodes.
+  // All of these function must have a {Color|String} color parameter.
   //-----------------------------------------------------------------------------------------------
 
   // Creates a random equation with the specified color.
@@ -98,15 +95,6 @@ define( function( require ) {
     return node;
   };
 
-  // Creates an array of random equations with the specified colors.
-  var createEquationNodes = function( colors ) {
-    var nodes = [];
-    colors.forEach( function( color ) {
-      nodes.push( createEquationNode( color ) );
-    } );
-    return nodes;
-  };
-
   // Creates a random graph with the specified color.
   var createGraphNode = function( color ) {
     var node;
@@ -117,15 +105,6 @@ define( function( require ) {
       node = IconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, 3, 3, -3 ); // y = -x
     }
     return node;
-  };
-
-  // Creates an array of random graphs with the specified colors.
-  var createGraphNodes = function( colors ) {
-    var nodes = [];
-    colors.forEach( function( color ) {
-      nodes.push( createGraphNode( color ) );
-    } );
-    return nodes;
   };
 
   //TODO this creates way too much model stuff
@@ -141,69 +120,68 @@ define( function( require ) {
     return pointToolNode;
   };
 
-  // Creates an array of random point tools with the specified colors.
-  var createPointToolNodes = function( colors ) {
-    var nodes = [];
-    colors.forEach( function( color ) {
-      nodes.push( createPointToolNode( color ) );
-    } );
-    return nodes;
+  // Creates a smiley face with the specified color.
+  var createFaceNode = function( color ) {
+    return new FaceNode( FACE_DIAMETER, { headFill: color } );
   };
 
-  // Creates an array of smiley faces with the specified colors.
-  var createFaceNodes = function( colors, diameter ) {
-    var nodes = [];
-    colors.forEach( function( color ) {
-      nodes.push( new FaceNode( diameter, { headFill: color } ) );
-    } );
-    return nodes;
-  };
-
-  // Creates an array of paper airplanes (as in the PhET logo) with the specified colors.
-  var createAirplaneNodes = function( colors, size ) {
-    var nodes = [];
-    colors.forEach( function( color ) {
-      nodes.push( new PaperAirplaneNode( { fill: color, size: size } ) );
-    } );
-    return nodes;
+  // Creates a paper airplane with the specified color.
+  var createAirplaneNode = function( color ) {
+    return new PaperAirplaneNode( { fill: color, size: AIRPLANE_SIZE } );
   };
 
   //-----------------------------------------------------------------------------------------------
-  // functions that create nodes for each level
+  // Functions that create nodes for each level
   //-----------------------------------------------------------------------------------------------
+
+  /**
+   * Creates an array of nodes for a specified array of colors.
+   * The functions above serve as the creationFunction argument.
+   *
+   * @param {function} creationFunction a function with one parameter of type {Color|String}
+   * @param {[Color|String]} colors
+   * @returns {[Node]}
+   */
+  var createNodes = function( creationFunction, colors ) {
+    var nodes = [];
+    colors.forEach( function( color ) {
+      nodes.push( creationFunction( color ) );
+    } );
+    return nodes;
+  };
 
   // Level 1 = equations
   var createNodesLevel1 = function() {
-    return RewardNode.createRandomNodes( createEquationNodes( NODE_COLORS ), NUMBER_OF_NODES );
+    return RewardNode.createRandomNodes( createNodes( createEquationNode, NODE_COLORS ), NUMBER_OF_NODES );
   };
 
   // Level 2 = graphs
   var createNodesLevel2 = function() {
-    return RewardNode.createRandomNodes( createGraphNodes( NODE_COLORS ), NUMBER_OF_NODES );
+    return RewardNode.createRandomNodes( createNodes( createGraphNode, NODE_COLORS ), NUMBER_OF_NODES );
   };
 
   // Level 3 = point tools
   var createNodesLevel3 = function() {
-    return RewardNode.createRandomNodes( createPointToolNodes( NODE_COLORS ), NUMBER_OF_NODES );
+    return RewardNode.createRandomNodes( createNodes( createPointToolNode, NODE_COLORS ), NUMBER_OF_NODES );
   };
 
   // Level 4 = smiley faces
   var createNodesLevel4 = function() {
-    return RewardNode.createRandomNodes( createFaceNodes( NODE_COLORS, FACE_DIAMETER ), NUMBER_OF_NODES );
+    return RewardNode.createRandomNodes( createNodes( createFaceNode, NODE_COLORS ), NUMBER_OF_NODES );
   };
 
   // Level 5 = paper airplanes, as in the PhET logos
   var createNodesLevel5 = function() {
-    return RewardNode.createRandomNodes( createAirplaneNodes( NODE_COLORS, AIRPLANE_SIZE ), NUMBER_OF_NODES );
+    return RewardNode.createRandomNodes( createNodes( createAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
   };
 
   // Level 6 = all of the above
   var createNodesLevel6 = function() {
-    var nodes = createEquationNodes( NODE_COLORS )
-      .concat( createGraphNodes( NODE_COLORS ) )
-      .concat( createPointToolNodes( NODE_COLORS ) )
-      .concat( createFaceNodes( NODE_COLORS, FACE_DIAMETER ) )
-      .concat( createAirplaneNodes( NODE_COLORS, AIRPLANE_SIZE ) );
+    var nodes = createNodes( createEquationNode, NODE_COLORS )
+      .concat( createNodes( createGraphNode, NODE_COLORS ) )
+      .concat( createNodes( createPointToolNode, NODE_COLORS ) )
+      .concat( createNodes( createFaceNode, NODE_COLORS ) )
+      .concat( createNodes( createAirplaneNode, NODE_COLORS ) );
     return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
   };
 

@@ -22,6 +22,7 @@ define( function( require ) {
     PICKER_TOUCH_AREA_EXPAND_X: 30,
     MANIPULATOR_RADIUS: 0.425,
     SCREEN_X_MARGIN: 40,
-    SCREEN_Y_MARGIN: 20
+    SCREEN_Y_MARGIN: 20,
+    RESET_ALL_BUTTON_SCALE: 1.32
   };
 } );

@@ -44,7 +44,7 @@ define( function( require ) {
         model.reset();
         viewProperties.reset();
       },
-      scale: 1.32
+      scale: GLConstants.RESET_ALL_BUTTON_SCALE
     } );
     resetAllButton.right = thisView.layoutBounds.width - GLConstants.SCREEN_X_MARGIN;
     resetAllButton.bottom = thisView.layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;

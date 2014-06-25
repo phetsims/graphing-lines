@@ -113,9 +113,9 @@ define( function( require ) {
     var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, toggleOptions );
 
     // Reset All button, at rightBottom
-    var resetButton = new ResetAllButton( {
+    var resetAllButton = new ResetAllButton( {
       listener: function() { model.reset(); },
-      scale: 1.32,
+      scale: GLConstants.RESET_ALL_BUTTON_SCALE,
       right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
@@ -136,7 +136,7 @@ define( function( require ) {
         left: GLConstants.SCREEN_X_MARGIN,
         bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
       } ),
-      resetButton
+      resetAllButton
     ];
     Node.call( this, options );
   }

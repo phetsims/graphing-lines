@@ -42,7 +42,7 @@ define( function( require ) {
       },
       {
         font: new GLFont( 20 ),
-        leftMargin: 65, // visually aligned with left edge of challenge boxes
+        leftMargin: 40, // visually aligned with left edge of challenge boxes
         rightMargin: 50 // visually aligned with right edge of challenge graph
       } );
     scoreboardNode.centerX = layoutBounds.centerX;

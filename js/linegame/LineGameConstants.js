@@ -14,7 +14,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   return {
-    ORIGIN_OFFSET: new Vector2( 800, 300 ), // graph (0,0) will be positioned at these view coordinates
+    ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates
 
     // fonts
     TITLE_FONT: new GLFont( { size: 40, weight: 'bold' } ),

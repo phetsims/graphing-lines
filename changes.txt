@@ -1,3 +1,4 @@
+6/25/14 move graph a tad to the left in game, center boxes in remaining space to the left
 6/25/14 move graph a tad to the right in first 3 screens
 6/25/14 use VBox to clean up layout of level-section screen
 6/25/14 cleanup handling of margins across ScreenViews

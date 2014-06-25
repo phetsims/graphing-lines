@@ -75,7 +75,7 @@ define( function( require ) {
       // graphNode is positioned automatically based on mvt's origin offset.
 
       // left align the title and boxes
-      guessBoxNode.right = ( 0.5 * challengeSize.width ) - 50;
+      guessBoxNode.centerX = graphNode.left / 2
       answerBoxNode.left = guessBoxNode.left;
       titleNode.left = guessBoxNode.left;
 

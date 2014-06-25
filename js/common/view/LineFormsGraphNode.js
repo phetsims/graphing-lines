@@ -63,7 +63,7 @@ define( function( require ) {
     model.savedLines.addListeners( thisNode.savedLineAdded.bind( thisNode ), thisNode.savedLineRemoved.bind( thisNode ) );
 
     // Visibility of lines
-    Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.interactiveLineVisibleProperty, viewProperties.slopeVisibleProperty ],
+    viewProperties.multilink( [ 'linesVisible', 'interactiveLineVisible', 'slopeVisible' ],
       thisNode.updateLinesVisibility.bind( thisNode ) );
 
     // Visibility of the equation on the interactive line

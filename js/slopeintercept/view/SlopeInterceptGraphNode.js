@@ -42,9 +42,9 @@ define( function( require ) {
     thisNode.addChild( yInterceptManipulator );
 
     // visibility of manipulators
-    Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.interactiveLineVisibleProperty ],
-      function() {
-        slopeManipulator.visible = yInterceptManipulator.visible = (viewProperties.linesVisible && viewProperties.interactiveLineVisible);
+    viewProperties.multilink( [ 'linesVisible', 'interactiveLineVisible' ],
+      function( linesVisible, interactiveLineVisible ) {
+        slopeManipulator.visible = yInterceptManipulator.visible = ( linesVisible && interactiveLineVisible );
       } );
   }
 

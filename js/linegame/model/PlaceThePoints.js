@@ -40,10 +40,10 @@ define( function( require ) {
     this.addProperty( 'p3', new Vector2( 3, 2 ) );
 
     // update the guess when the points change
-    Property.multilink( [ thisChallenge.p1Property, thisChallenge.p2Property, thisChallenge.p3Property ],
-      function() {
-        var line = new Line( thisChallenge.p1.x, thisChallenge.p1.y, thisChallenge.p2.x, thisChallenge.p2.y, LineGameConstants.GUESS_COLOR );
-        if ( line.onLinePoint( thisChallenge.p3 ) ) {
+    thisChallenge.multilink( [ 'p1', 'p2', 'p3' ],
+      function( p1, p2, p3 ) {
+        var line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
+        if ( line.onLinePoint( p3 ) ) {
           // all 3 points are on a line
           thisChallenge.guess = line;
         }

@@ -40,11 +40,11 @@ define( function( require ) {
     thisNode.addChild( p3Manipulator );
 
     // Move the manipulators to match points
-    Property.multilink( [ challenge.p1Property, challenge.p2Property, challenge.p3Property ],
-      function() {
-        p1Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p1 );
-        p2Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p2 );
-        p3Manipulator.translation = challenge.mvt.modelToViewPosition( challenge.p3 );
+    challenge.multilink( [ 'p1', 'p2', 'p3' ],
+      function( p1, p2, p3 ) {
+        p1Manipulator.translation = challenge.mvt.modelToViewPosition( p1 );
+        p2Manipulator.translation = challenge.mvt.modelToViewPosition( p2 );
+        p3Manipulator.translation = challenge.mvt.modelToViewPosition( p3 );
       } );
   }
 

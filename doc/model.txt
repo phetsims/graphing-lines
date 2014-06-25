@@ -2,7 +2,7 @@
 
 1. General
 
-   Our model describes a line using 2 points, (x1,y1) and (x2,y2).
+   The model describes a line using 2 points, (x1,y1) and (x2,y2).
    All tabs use this internal representation, but present the line in different forms.
    See Line.js for more details.
 

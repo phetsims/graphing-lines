@@ -51,6 +51,10 @@ define( function( require ) {
     RewardNode.call( this, { nodes: nodes } );
   }
 
+  //-----------------------------------------------------------------------------------------------
+  // misc utility functions
+  //-----------------------------------------------------------------------------------------------
+
   var getRandomX = function() {
     return getRandomNonZeroInteger( GLConstants.X_AXIS_RANGE.min, GLConstants.X_AXIS_RANGE.max );
   };
@@ -64,6 +68,10 @@ define( function( require ) {
     if ( i == 0 ) { i = 1; }
     return i;
   };
+
+  //-----------------------------------------------------------------------------------------------
+  // functions that create specific types of nodes
+  //-----------------------------------------------------------------------------------------------
 
   // Creates a random equation with the specified color.
   var createEquationNode = function( color ) {
@@ -150,6 +158,10 @@ define( function( require ) {
     } );
     return nodes;
   };
+
+  //-----------------------------------------------------------------------------------------------
+  // functions that create nodes for each level
+  //-----------------------------------------------------------------------------------------------
 
   // Level 1 = equations
   var createNodesLevel1 = function() {

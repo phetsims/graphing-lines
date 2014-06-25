@@ -41,10 +41,9 @@ define( function( require ) {
     thisNode.addChild( yInterceptManipulator );
 
     // visibility of manipulators
-    viewProperties.multilink( [ 'linesVisible', 'interactiveLineVisible' ],
-      function( linesVisible, interactiveLineVisible ) {
-        slopeManipulator.visible = yInterceptManipulator.visible = ( linesVisible && interactiveLineVisible );
-      } );
+    viewProperties.linesVisibleProperty.link( function( linesVisible ) {
+      slopeManipulator.visible = yInterceptManipulator.visible = linesVisible;
+    } );
   }
 
   return inherit( LineFormsGraphNode, SlopeInterceptGraphNode );

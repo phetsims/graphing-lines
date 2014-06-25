@@ -15,9 +15,8 @@ define( function( require ) {
   function LineFormsViewProperties() {
     PropertySet.call( this, {
       linesVisible: true, // determines whether all lines are visible on the graph
-      interactiveLineVisible: true, // determines whether the interactive line is visible on the graph
       interactiveEquationVisible: true, // determines whether the interactive line is visible in the control panel
-      slopeVisible: true // determines whether the slope tool is visible on the graph
+      slopeToolVisible: true // determines whether the slope tool is visible on the graph
     } );
   }
 

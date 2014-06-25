@@ -41,10 +41,9 @@ define( function( require ) {
     thisNode.addChild( slopeManipulator );
 
     // visibility of manipulators
-    viewProperties.multilink( [ 'linesVisible', 'interactiveLineVisible' ],
-      function( linesVisible, interactiveLineVisible ) {
-        x1y1Manipulator.visible = slopeManipulator.visible = ( linesVisible && interactiveLineVisible );
-      } );
+    viewProperties.linesVisibleProperty.link( function( linesVisible ) {
+      x1y1Manipulator.visible = slopeManipulator.visible = linesVisible;
+    } );
   }
 
   return inherit( LineFormsGraphNode, PointSlopeGraphNode );

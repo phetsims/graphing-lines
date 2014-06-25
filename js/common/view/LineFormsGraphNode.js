@@ -63,7 +63,7 @@ define( function( require ) {
     model.savedLines.addListeners( thisNode.savedLineAdded.bind( thisNode ), thisNode.savedLineRemoved.bind( thisNode ) );
 
     // Visibility of lines
-    viewProperties.multilink( [ 'linesVisible', 'interactiveLineVisible', 'slopeVisible' ],
+    viewProperties.multilink( [ 'linesVisible', 'slopeToolVisible' ],
       thisNode.updateLinesVisibility.bind( thisNode ) );
 
     // Visibility of the equation on the interactive line
@@ -79,14 +79,14 @@ define( function( require ) {
     // @private Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
       // interactive line
-      this.interactiveLineNode.visible = ( this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
+      this.interactiveLineNode.visible = this.viewProperties.linesVisible;
 
       // saved & standard lines
       this.savedLinesParentNode.visible = this.viewProperties.linesVisible;
       this.standardLinesParentNode.visible = this.viewProperties.linesVisible;
 
       // slope tool
-      this.slopeToolNode.visible = ( this.viewProperties.slopeVisible && this.viewProperties.linesVisible && this.viewProperties.interactiveLineVisible );
+      this.slopeToolNode.visible = ( this.viewProperties.slopeToolVisible && this.viewProperties.linesVisible );
     },
 
     // @private Called when a standard line is added to the model.

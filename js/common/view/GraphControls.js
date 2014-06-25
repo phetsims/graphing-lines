@@ -32,12 +32,12 @@ define( function( require ) {
 
   /**
    * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?
-   * @param {Property<Boolean>} slopeVisibleProperty are the slope (rise/run) brackets visible on the graphed line?
+   * @param {Property<Boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
    * @param {ObservableArray<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
    * @param {*} options should check boxes for standard lines be accessible?
    * @constructor
    */
-  function GraphControls( linesVisibleProperty, slopeVisibleProperty, standardLines, options ) {
+  function GraphControls( linesVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
       includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
@@ -59,7 +59,7 @@ define( function( require ) {
       { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
     var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
       { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
-    var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeVisibleProperty,
+    var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
       { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // vertical layout

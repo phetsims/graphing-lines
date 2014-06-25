@@ -1,3 +1,4 @@
+6/24/14 replace PHET logo with paper airplanes in game reward
 6/24/14 add 'reward' query parameter, to show reward at end of every game, regardless of score
 6/24/14 first pass at integrating vegas.RewardNode
 6/24/14 move responsibility for playing 'results' audio into ResultsNode

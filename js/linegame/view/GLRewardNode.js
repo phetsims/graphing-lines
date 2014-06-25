@@ -23,6 +23,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ObservableArray = require( 'AXON/ObservableArray' );
+  var PaperAirplaneNode = require( 'SCENERY_PHET/PaperAirplaneNode' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
@@ -33,16 +34,13 @@ define( function( require ) {
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // images
-  var logoImage = require( 'image!BRAND/logo.png' );
-
   // constants
   var NUMBER_OF_NODES = 150;
   var NODE_COLORS = [ 'yellow', 'red', 'orange', 'magenta', 'cyan', 'green' ];
   var EQUATION_FONT_SIZE = 24;
   var GRAPH_WIDTH = 50;
   var FACE_DIAMETER = 40;
-  var LOGO_SIZE = new Dimension2( 125, 75 );
+  var AIRPLANE_SIZE = new Dimension2( 60, 54 );
 
   /**
    * @param level game level, starting at zero
@@ -144,21 +142,11 @@ define( function( require ) {
     return nodes;
   };
 
-  //TODO color is not used, replace with paper airplane
-  // Creates a PhET logo.
-  var createLogoNode = function( color, size ) {
-    var backgroundNode = new Rectangle( 0, 0, size.width, size.height, { fill: 'black' } );
-    var logoNode = new Image( logoImage );
-    logoNode.setScaleMagnitude( Math.min( 0.82 * backgroundNode.width / logoNode.width, 0.82 * backgroundNode.height / logoNode.height ) );
-    logoNode.center = backgroundNode.center;
-    return new Node( { children: [ backgroundNode, logoNode ] } );
-  };
-
-  // Creates an array of PhET logos with the specified colors.
-  var createLogoNodes = function( colors, size ) {
+  // Creates an array of paper airplanes (as in the PhET logo) with the specified colors.
+  var createAirplaneNodes = function( colors, size ) {
     var nodes = [];
     colors.forEach( function( color ) {
-      nodes.push( createLogoNode( color, size ) );
+      nodes.push( new PaperAirplaneNode( { fill: color, size: size } ) );
     } );
     return nodes;
   };
@@ -183,9 +171,9 @@ define( function( require ) {
     return RewardNode.createRandomNodes( createFaceNodes( NODE_COLORS, FACE_DIAMETER ), NUMBER_OF_NODES );
   };
 
-  // Level 5 = PhET logos
+  // Level 5 = paper airplanes, as in the PhET logos
   var createNodesLevel5 = function() {
-    return RewardNode.createRandomNodes( createLogoNodes( NODE_COLORS, LOGO_SIZE ), NUMBER_OF_NODES );
+    return RewardNode.createRandomNodes( createAirplaneNodes( NODE_COLORS, AIRPLANE_SIZE ), NUMBER_OF_NODES );
   };
 
   // Level 6 = all of the above
@@ -194,7 +182,7 @@ define( function( require ) {
       .concat( createGraphNodes( NODE_COLORS ) )
       .concat( createPointToolNodes( NODE_COLORS ) )
       .concat( createFaceNodes( NODE_COLORS, FACE_DIAMETER ) )
-      .concat( createLogoNodes( NODE_COLORS, LOGO_SIZE ) );
+      .concat( createAirplaneNodes( NODE_COLORS, AIRPLANE_SIZE ) );
     return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
   };
 

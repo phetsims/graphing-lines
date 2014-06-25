@@ -38,7 +38,7 @@ define( function( require ) {
     pointToolParent.addChild( pointTool1 );
     pointToolParent.addChild( pointTool2 );
 
-    // Reset All button
+    // Reset All button, at bottom-right
     var resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
@@ -46,6 +46,8 @@ define( function( require ) {
       },
       scale: 1.32
     } );
+    resetAllButton.right = thisView.layoutBounds.width - 40;
+    resetAllButton.bottom = thisView.layoutBounds.height - 20;
 
     // Parent for all controls, to simplify layout
     var controlsParent = new Node();
@@ -62,7 +64,7 @@ define( function( require ) {
 
     // position of control panels:
     var xMargin = 10;
-    var yMargin = 10;
+    var yMargin = 20;
     var ySpacing = 15;
 
     // get the amount of canvas width that's available for the control panels
@@ -81,17 +83,10 @@ define( function( require ) {
     equationControls.y = 0;
     graphControls.centerX = equationControls.centerX;
     graphControls.top = equationControls.bottom + ySpacing;
-    resetAllButton.right = thisView.layoutBounds.width - 40;
-    resetAllButton.bottom = thisView.layoutBounds.height - 33;
-
-    // if the entire control panel is too tall, scale all controls
-    if ( controlsParent.height > thisView.layoutBounds.getHeight() - ( 2 * yMargin ) ) {
-      controlsParent.setScaleMagnitude( (thisView.layoutBounds.getHeight() - ( 2 * yMargin )) / controlsParent.height );
-    }
 
     // center controls in the space to the right of the graph
     controlsParent.centerX = graphNode.right + xMargin + ( availableControlPanelWidth / 2 );
-    controlsParent.centerY = thisView.layoutBounds.height / 2;
+    controlsParent.top = yMargin;
   }
 
   return inherit( ScreenView, LineFormsView, { layoutBounds: GLConstants.LAYOUT_BOUNDS } );

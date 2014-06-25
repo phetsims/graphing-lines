@@ -149,10 +149,9 @@ define( function( require ) {
       throw new Error( 'unsupported point tool orientation: ' + pointTool.orientation );
     }
 
-    // things needed by prototype functions
-    this._bodyNode = bodyNode;
-    this._backgroundNode = backgroundNode;
-    this._valueNode = valueNode;
+    this.bodyNode = bodyNode; // @private
+    this.backgroundNode = backgroundNode; // @private
+    this.valueNode = valueNode; // @private
 
     // initial state
     this.setCoordinatesVector2( pointTool.location );
@@ -202,18 +201,18 @@ define( function( require ) {
 
     // @private Sets the displayed value to an arbitrary string
     setCoordinatesString: function( s ) {
-      this._valueNode.text = s;
-      this._valueNode.centerX = this._bodyNode.left + VALUE_WINDOW_CENTER_X;  // centered
+      this.valueNode.text = s;
+      this.valueNode.centerX = this.bodyNode.left + VALUE_WINDOW_CENTER_X;  // centered
     },
 
     // @private Sets the foreground, the color of the displayed value
     setForeground: function( color ) {
-      this._valueNode.fill = color;
+      this.valueNode.fill = color;
     },
 
     // @private Sets the background, the color of the display area behind the value
     setBackground: function( color ) {
-      this._backgroundNode.fill = color;
+      this.backgroundNode.fill = color;
     }
   } );
 } );

@@ -15,7 +15,7 @@ define( function( require ) {
 
   /**
    * @param {Vector} location initial location of the tool
-   * @param {String} orientation, 'up' or 'down'
+   * @param {String} orientation direction that the tip points, either 'up' or 'down'
    * @param {ObservableArray<Line>} lines Lines that the tool might intersect, provided in the order that they would be rendered
    * @param {Bounds2} dragBounds tool can be dragged within these bounds
    * @constructor

@@ -1,3 +1,4 @@
+6/24/14 reduce vertical spacing between control panels, so that screens 2 & 3 look more balanced
 # 1.0.0-dev.11 6/24/14
 6/24/14 #5 use PropertySet.multilink where possible
 6/24/14 create point tool differently in game reward, because PointToolNode has too many dependencies

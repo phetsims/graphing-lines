@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
@@ -19,8 +19,11 @@ define( function( require ) {
   // strings
   var pointSlopeString = require( 'string!GRAPHING_LINES/tab.pointSlope' );
 
+  // images
+  var screenImage = require( 'image!GRAPHING_LINES/Point-Slope-screen.png' );
+
   function PointSlopeScreen() {
-    Screen.call( this, pointSlopeString, IconFactory.createPointSlopeScreenIcon(),
+    Screen.call( this, pointSlopeString, new Image( screenImage ),
       function() { return new PointSlopeModel(); },
       function( model ) { return new PointSlopeView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

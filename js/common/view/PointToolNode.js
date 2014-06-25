@@ -93,65 +93,65 @@ define( function( require ) {
   function PointToolNode( pointTool, mvt, graph, linesVisibleProperty, options ) {
 
     options = _.extend( {
+      cursor: 'pointer',
       backgroundNormalColor: 'white',
       foregroundNormalColor: 'black',
       foregroundHighlightColor: 'white'
     }, options );
 
     var thisNode = this;
-    Node.call( thisNode );
 
-    // tool body
-    var bodyNode = new Image( bodyImage );
+    thisNode.bodyNode = new Image( bodyImage ); // @private body of the tool
 
     /*
+     * @private
      * Pointy tip, separate from the body and not pickable.
      * Because picking bounds are rectangular, making the tip pickable made it difficult
      * to pick a line manipulator when the tip and manipulator were on the same grid point.
      * Making the tip non-pickable was determined to be an acceptable and "natural feeling" solution.
      */
-    var tipNode = new Image( tipImage, { pickable: false } );
+    thisNode.tipNode = new Image( tipImage, { pickable: false } );
 
-    // background behind the displayed value, shows through a transparent hole in the display area portion of the body image
+    // @private background behind the displayed value, shows through a transparent hole in the display area portion of the body image
     var BACKGROUND_MARGIN = 5;
-    var backgroundNode = new Rectangle( 0, 0, bodyNode.width - ( 2 * BACKGROUND_MARGIN ), bodyNode.height - ( 2 * BACKGROUND_MARGIN ), { pickable: false } );
+    thisNode.backgroundNode = new Rectangle( 0, 0,
+        thisNode.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), thisNode.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
+      { pickable: false } );
 
     // displayed value
-    var valueNode = new Text( "?", { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
-
-    // rendering order
-    thisNode.addChild( backgroundNode );
-    thisNode.addChild( bodyNode );
-    thisNode.addChild( tipNode );
-    thisNode.addChild( valueNode );
+    thisNode.valueNode = new Text( "?", { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
 
     // orientation
     if ( pointTool.orientation === 'down' ) {
-      tipNode.centerX = 0;
-      tipNode.bottom = 0;
-      bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
-      bodyNode.bottom = tipNode.top;
-      backgroundNode.centerX = bodyNode.centerX;
-      backgroundNode.top = bodyNode.top + BACKGROUND_MARGIN;
-      valueNode.centerY = backgroundNode.centerY;
+      thisNode.tipNode.centerX = 0;
+      thisNode.tipNode.bottom = 0;
+      thisNode.bodyNode.left = thisNode.tipNode.left - ( 0.1 * thisNode.bodyNode.width );
+      thisNode.bodyNode.bottom = thisNode.tipNode.top;
+      thisNode.backgroundNode.centerX = thisNode.bodyNode.centerX;
+      thisNode.backgroundNode.top = thisNode.bodyNode.top + BACKGROUND_MARGIN;
+      thisNode.valueNode.centerY = thisNode.backgroundNode.centerY;
     }
     else if ( pointTool.orientation === 'up' ) {
-      tipNode.setScaleMagnitude( 1, -1 ); // reflect around x-axis, so that lighting will be correct
-      tipNode.centerX = 0;
-      tipNode.top = 0;
-      bodyNode.left = tipNode.left - ( 0.1 * bodyNode.width );
-      bodyNode.top = tipNode.bottom;
-      backgroundNode.centerX = bodyNode.centerX;
-      backgroundNode.top = bodyNode.top + BACKGROUND_MARGIN;
-      valueNode.centerY = backgroundNode.centerY;
+      thisNode.tipNode.setScaleMagnitude( 1, -1 ); // reflect around x-axis, so that lighting will be correct
+      thisNode.tipNode.centerX = 0;
+      thisNode.tipNode.top = 0;
+      thisNode.bodyNode.left = thisNode.tipNode.left - ( 0.1 * thisNode.bodyNode.width );
+      thisNode.bodyNode.top = thisNode.tipNode.bottom;
+      thisNode.backgroundNode.centerX = thisNode.bodyNode.centerX;
+      thisNode.backgroundNode.top = thisNode.bodyNode.top + BACKGROUND_MARGIN;
+      thisNode.valueNode.centerY = thisNode.backgroundNode.centerY;
     }
     else {
       throw new Error( 'unsupported point tool orientation: ' + pointTool.orientation );
     }
 
-    this.bodyNode = bodyNode; // @private
-    this.backgroundNode = backgroundNode; // @private
-    this.valueNode = valueNode; // @private
+    options.children = [
+      this.backgroundNode,
+      this.bodyNode,
+      this.tipNode,
+      this.valueNode
+    ];
+    Node.call( thisNode, options );
 
     // initial state
     this.setCoordinatesVector2( pointTool.location );
@@ -186,10 +186,7 @@ define( function( require ) {
       } );
 
     // interactivity
-    thisNode.cursor = 'pointer';
     thisNode.addInputListener( new PointToolDragHandler( pointTool, mvt, graph ) );
-
-    thisNode.mutate( options );
   }
 
   return inherit( Node, PointToolNode, {

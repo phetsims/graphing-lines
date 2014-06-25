@@ -1,3 +1,4 @@
+6/25/14 delete AnswerGraphNode
 6/25/14 add visibility options to ChallengeGraphNode
 6/25/14 remove braces in challenge factories where code blocks are obvious
 6/25/14 move scale of ResetAllButton to GLConstants

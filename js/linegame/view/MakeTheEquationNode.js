@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var AnswerGraphNode = require( 'GRAPHING_LINES/linegame/view/AnswerGraphNode' );
   var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
+  var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
@@ -62,7 +62,7 @@ define( function( require ) {
           GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guess.color ) );
 
     // Graph
-    var graphNode = new AnswerGraphNode( challenge );
+    var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );
 
     // rendering order
     thisNode.subtypeParent.addChild( titleNode );

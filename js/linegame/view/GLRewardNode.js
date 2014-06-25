@@ -5,6 +5,15 @@
  * Various images (based on game level) move from top to bottom in the play area.
  * Run with the 'reward' query parameter to show the reward at the end of every game, regardless of score.
  *
+ * Here's what you'll see at each level:
+ *
+ * Level 1 = equations
+ * Level 2 = graphs
+ * Level 3 = point tools
+ * Level 4 = smiley faces
+ * Level 5 = paper airplanes
+ * Level 6 = all of the above
+ *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 define( function( require ) {

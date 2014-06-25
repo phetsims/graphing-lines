@@ -51,8 +51,8 @@ define( function( require ) {
 
     // icons for 'correct' and 'incorrect'
     var iconFont = new GLFont( 72 );
-    thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } );
-    thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } );
+    thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
+    thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
 
     // rendering order
     thisNode.addChild( boxNode );
@@ -62,21 +62,19 @@ define( function( require ) {
     thisNode.addChild( thisNode.incorrectIconNode );
 
     // layout
-    {
-      // title in upper left
-      titleNode.left = X_MARGIN;
-      titleNode.top = Y_MARGIN;
-      // equation left-justified, vertically centered in space below title
-      equationNode.left = X_MARGIN;
-      equationNode.centerY = titleNode.bottom + ( ( boxNode.bottom - titleNode.bottom ) / 2 );
-      // icons in upper-right corner
-      var iconXMargin = 5;
-      var iconYMargin = 1;
-      thisNode.correctIconNode.right = boxNode.right - iconXMargin;
-      thisNode.correctIconNode.top = boxNode.top + iconYMargin;
-      thisNode.incorrectIconNode.right = boxNode.right - iconXMargin;
-      thisNode.incorrectIconNode.top = boxNode.top + iconYMargin;
-    }
+    // title in upper left
+    titleNode.left = X_MARGIN;
+    titleNode.top = Y_MARGIN;
+    // equation left-justified, vertically centered in space below title
+    equationNode.left = X_MARGIN;
+    equationNode.centerY = titleNode.bottom + ( ( boxNode.bottom - titleNode.bottom ) / 2 );
+    // icons in upper-right corner
+    var iconXMargin = 5;
+    var iconYMargin = 1;
+    thisNode.correctIconNode.right = boxNode.right - iconXMargin;
+    thisNode.correctIconNode.top = boxNode.top + iconYMargin;
+    thisNode.incorrectIconNode.right = boxNode.right - iconXMargin;
+    thisNode.incorrectIconNode.top = boxNode.top + iconYMargin;
 
     // icons are initially hidden
     thisNode.correctIconNode.visible = false;

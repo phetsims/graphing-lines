@@ -49,9 +49,9 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    thisNode.subtypeParent = new Node(); // subtypes should add children to this node, to preserve rendering order
+    thisNode.subtypeParent = new Node(); // @protected subtypes should add children to this node, to preserve rendering order
 
-    // smiley/frowning face
+    // @protected smiley/frowning face
     thisNode.faceNode = new FaceWithPointsNode( {
       faceDiameter: LineGameConstants.FACE_DIAMETER,
       faceOpacity: 1,
@@ -70,7 +70,7 @@ define( function( require ) {
     var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
     var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
     var nextButton = new TextPushButton( nextString, buttonOptions );
-    thisNode.buttonsParent = new Node( { children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ] } );
+    thisNode.buttonsParent = new Node( { children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ] } ); // @protected
 
     // point tools
     var linesVisibleProperty = new Property( true );
@@ -83,14 +83,11 @@ define( function( require ) {
     pointToolParent.addChild( pointToolNode2 );
 
     // rendering order
-    {
-      thisNode.addChild( thisNode.subtypeParent );
-      thisNode.addChild( thisNode.buttonsParent );
-      thisNode.addChild( pointToolParent );
-      thisNode.addChild( thisNode.faceNode );
-    }
+    thisNode.addChild( thisNode.subtypeParent );
+    thisNode.addChild( thisNode.buttonsParent );
+    thisNode.addChild( pointToolParent );
+    thisNode.addChild( thisNode.faceNode );
 
-    // layout
     // buttons at center-bottom
     thisNode.buttonsParent.centerX = ( 0.5 * challengeSize.width );
     thisNode.buttonsParent.bottom = challengeSize.height - 20;

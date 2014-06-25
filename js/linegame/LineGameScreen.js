@@ -17,10 +17,10 @@ define( function( require ) {
   var Screen = require( 'JOIST/SCREEN' );
 
   // strings
-  var lineGameString = require( 'string!GRAPHING_LINES/tab.lineGame' );
+  var title = require( 'string!GRAPHING_LINES/tab.lineGame' );
 
   function GameScreen() {
-    Screen.call( this, lineGameString, IconFactory.createGameScreenIcon(),
+    Screen.call( this, title, IconFactory.createGameScreenIcon(),
       function() { return new LineGameModel(); },
       function( model ) { return new LineGameView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

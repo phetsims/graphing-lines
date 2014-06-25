@@ -17,13 +17,13 @@ define( function( require ) {
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeIntercept/view/SlopeInterceptView' );
 
   // strings
-  var slopeInterceptString = require( 'string!GRAPHING_LINES/tab.slopeIntercept' );
+  var title = require( 'string!GRAPHING_LINES/tab.slopeIntercept' );
 
   // images
   var screenImage = require( 'image!GRAPHING_LINES/Slope-Intercept-screen.png' );
 
   function SlopeInterceptScreen() {
-    Screen.call( this, slopeInterceptString, new Image( screenImage ),
+    Screen.call( this, title, new Image( screenImage ),
       function() { return new SlopeInterceptModel(); },
       function( model ) { return new SlopeInterceptView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

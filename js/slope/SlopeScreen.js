@@ -17,13 +17,13 @@ define( function( require ) {
   var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
 
   // strings
-  var slopeString = require( 'string!GRAPHING_LINES/tab.slope' );
+  var title = require( 'string!GRAPHING_LINES/tab.slope' );
 
   // images
   var screenImage = require( 'image!GRAPHING_LINES/Slope-screen.png' );
 
   function SlopeScreen() {
-    Screen.call( this, slopeString, new Image( screenImage ),
+    Screen.call( this, title, new Image( screenImage ),
       function() { return new SlopeModel(); },
       function( model ) { return new SlopeView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

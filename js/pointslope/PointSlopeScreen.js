@@ -17,13 +17,13 @@ define( function( require ) {
   var Screen = require( 'JOIST/SCREEN' );
 
   // strings
-  var pointSlopeString = require( 'string!GRAPHING_LINES/tab.pointSlope' );
+  var title = require( 'string!GRAPHING_LINES/tab.pointSlope' );
 
   // images
   var screenImage = require( 'image!GRAPHING_LINES/Point-Slope-screen.png' );
 
   function PointSlopeScreen() {
-    Screen.call( this, pointSlopeString, new Image( screenImage ),
+    Screen.call( this, title, new Image( screenImage ),
       function() { return new PointSlopeModel(); },
       function( model ) { return new PointSlopeView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

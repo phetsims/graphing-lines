@@ -193,7 +193,11 @@ define( function( require ) {
     return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
   };
 
-  // Functions for creating nodes, indexed by level.
+  /*
+   * Functions for creating nodes, indexed by level.
+   * In the model, level starts at zero. In the view, it's presented as starting from 1.
+   * The function names correspond to the view presentation.
+   */
   var nodeFactoryFunctions = [
     createNodesLevel1,
     createNodesLevel2,

@@ -84,7 +84,7 @@ define( function( require ) {
       graphControls.centerX = equationControls.centerX;
       graphControls.top = equationControls.bottom + ySpacing;
       resetAllButton.centerX = graphControls.centerX;
-      resetAllButton.top = graphControls.bottom + ySpacing;
+      resetAllButton.bottom = thisView.layoutBounds.height - 40;
 
       // if the entire control panel is too tall, scale all controls
       if ( controlsParent.height > thisView.layoutBounds.getHeight() - ( 2 * yMargin ) ) {

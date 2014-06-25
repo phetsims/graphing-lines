@@ -20,31 +20,39 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
+  var Node = require( 'SCENERY/nodes/Node' );
   var PaperAirplaneNode = require( 'SCENERY_PHET/PaperAirplaneNode' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
-  var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-  var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
   var Property = require( 'AXON/Property' );
+  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var RewardNode = require( 'VEGAS/RewardNode' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var Vector2 = require( 'DOT/Vector2' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
+
+  // strings
+  var patternPointXY = require( 'string!GRAPHING_LINES/point.xy' );
+
+  // images
+  var pointToolBodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
+  var pointToolTipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
 
   // constants
   var NUMBER_OF_NODES = 150;
   var NODE_COLORS = [ 'yellow', 'red', 'orange', 'magenta', 'cyan', 'green' ];
   var EQUATION_FONT_SIZE = 24;
-  var GRAPH_WIDTH = 50;
-  var FACE_DIAMETER = 40;
+  var GRAPH_WIDTH = 60;
+  var POINT_TOOL_FONT = new GLFont( 15 );
+  var POINT_TOOL_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
+  var FACE_DIAMETER = 60;
   var AIRPLANE_SIZE = new Dimension2( 60, 54 );
 
   /**
@@ -107,17 +115,17 @@ define( function( require ) {
     return node;
   };
 
-  //TODO this creates way too much model stuff
-  // Creates a random point tool with the specified color.
+  /*
+   * Creates a random point tool with the specified color.
+   * This does not use PointToolNode because it has too many model dependencies.
+   */
   var createPointToolNode = function( color ) {
-    var point = new Vector2( getRandomX(), getRandomY() );
-    var orientation = ( Math.random() < 0.5 ? 'down' : 'up' );
-    var pointTool = new PointTool( point, orientation, new ObservableArray(), new Bounds2( 0, 0, 1, 1 ) );
-    var mvt = ModelViewTransform2.createIdentity();
-    var graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
-    var pointToolNode = new PointToolNode( pointTool, mvt, graph, new Property( true ), { backgroundNormalColor: color } );
-    pointToolNode.scale( 0.75 );
-    return pointToolNode;
+    var body = new Image( pointToolBodyImage );
+    var tip = new Image( pointToolTipImage, { top: body.bottom, centerX: 0.25 * body.width } );
+    var background = new Rectangle( 0, 0, 0.95 * body.width, 0.95 * body.height, { fill: color, center: body.center } );
+    var value = new Text( StringUtils.format( patternPointXY, getRandomX(), getRandomY() ),
+      { font: POINT_TOOL_FONT, centerX: POINT_TOOL_WINDOW_CENTER_X, centerY: body.centerY } );
+    return new Node( { children: [ background, body, tip, value ] } );
   };
 
   // Creates a smiley face with the specified color.

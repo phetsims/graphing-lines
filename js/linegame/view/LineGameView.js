@@ -31,7 +31,7 @@ define( function( require ) {
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
     // one parent node for each "phase" of the game
-    thisView.settingsNode = new SettingsNode( model, thisView.layoutBounds, { center: thisView.layoutBounds.center } );
+    thisView.settingsNode = new SettingsNode( model, thisView.layoutBounds );
     thisView.playNode = new PlayNode( model, thisView.layoutBounds, audioPlayer );
     thisView.resultsNode = new ResultsNode( model, thisView.layoutBounds, audioPlayer );
 

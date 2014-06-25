@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -38,8 +39,6 @@ define( function( require ) {
   var pattern_Level_0 = require( 'string!GRAPHING_LINES/pattern_Level_0' );
 
   // constants
-  var X_MARGIN = 40;
-  var Y_MARGIN = 40;
   var CHALLENGES_PER_GAME = 6;
   var BUTTONS_X_SPACING = 50;
   var BUTTONS_Y_SPACING = 40;
@@ -84,12 +83,10 @@ define( function( require ) {
 
     // Title
     var title = new Text( chooseYourLevelString, { font: new GLFont( 40 ) } );
-    this.addChild( title );
 
     // Level-selection buttons, arranged in 2 rows
     assert && assert( Util.isInteger( model.numberOfLevels / 2 ) ); // assumes an even number of buttons
     var buttonsParent = new Node();
-    this.addChild( buttonsParent );
     var button, previousButton;
     for ( var level = 0; level < model.numberOfLevels; level++ ) {
 
@@ -109,6 +106,12 @@ define( function( require ) {
       previousButton = button;
     }
 
+    // title and level-selection buttons
+    var titleAndButtonsNode = new Node( { children: [ title, buttonsParent ] } );
+    this.addChild( titleAndButtonsNode );
+    buttonsParent.centerX = title.centerX;
+    buttonsParent.top = title.bottom + 40;
+
     // Timer and Sound controls
     var toggleOptions = { stroke: 'gray', scale: 1.3 };
     var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, toggleOptions );
@@ -124,16 +127,13 @@ define( function( require ) {
     this.addChild( resetButton );
 
     // layout
-    title.centerX = layoutBounds.centerX;
-    title.top = 0;
-    buttonsParent.centerX = title.centerX;
-    buttonsParent.top = title.bottom + 50;
-    soundToggleButton.left = X_MARGIN;
-    soundToggleButton.bottom = layoutBounds.height - Y_MARGIN;
-    timerToggleButton.left = X_MARGIN;
+    titleAndButtonsNode.center = layoutBounds.center;
+    soundToggleButton.left = GLConstants.SCREEN_X_MARGIN;
+    soundToggleButton.bottom = layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
+    timerToggleButton.left = GLConstants.SCREEN_X_MARGIN;
     timerToggleButton.bottom = soundToggleButton.top - 15;
-    resetButton.right = layoutBounds.width - X_MARGIN;
-    resetButton.bottom = layoutBounds.height - Y_MARGIN;
+    resetButton.right = layoutBounds.width - GLConstants.SCREEN_X_MARGIN;
+    resetButton.bottom = layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
 
     this.mutate( options );
   }

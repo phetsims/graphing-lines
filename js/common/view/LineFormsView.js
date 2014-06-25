@@ -46,8 +46,8 @@ define( function( require ) {
       },
       scale: 1.32
     } );
-    resetAllButton.right = thisView.layoutBounds.width - 40;
-    resetAllButton.bottom = thisView.layoutBounds.height - 20;
+    resetAllButton.right = thisView.layoutBounds.width - GLConstants.SCREEN_X_MARGIN;
+    resetAllButton.bottom = thisView.layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
 
     // Parent for all controls, to simplify layout
     var controlsParent = new Node();

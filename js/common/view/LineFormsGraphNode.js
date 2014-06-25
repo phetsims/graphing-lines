@@ -37,18 +37,18 @@ define( function( require ) {
     var thisNode = this;
     GraphNode.call( thisNode, model.graph, model.mvt );
 
-    thisNode.model = model;
-    thisNode.viewProperties = viewProperties;
-    this.equationType = equationType;
+    thisNode.model = model; // @private
+    thisNode.viewProperties = viewProperties; // @private
+    this.equationType = equationType; // @private
 
     // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
     thisNode.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.mvt,
-      { equationType: equationType } );
-    thisNode.standardLinesParentNode = new Node();
-    thisNode.savedLinesParentNode = new Node();
+      { equationType: equationType } ); // @private
+    thisNode.standardLinesParentNode = new Node(); // @private
+    thisNode.savedLinesParentNode = new Node(); // @private
 
     // Slope tool
-    thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt );
+    thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt ); // @private
 
     // Rendering order
     thisNode.addChild( this.interactiveLineNode );
@@ -95,7 +95,7 @@ define( function( require ) {
         { equationType: this.equationType } ) );
     },
 
-    // Called when a standard line is removed from the model.
+    // @private Called when a standard line is removed from the model.
     standardLineRemoved: function( line ) {
       this.removeLineNode( line, this.standardLinesParentNode );
     },

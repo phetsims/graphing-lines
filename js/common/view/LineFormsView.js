@@ -29,7 +29,7 @@ define( function( require ) {
     var thisView = this;
     ScreenView.call( thisView, { renderer: GLConstants.RENDERER } );
 
-    thisView.viewProperties = viewProperties;
+    thisView.viewProperties = viewProperties; // @private
 
     // Create point tool nodes
     var pointTool1 = new PointToolNode( model.pointTool1, model.mvt, model.graph, viewProperties.linesVisibleProperty );

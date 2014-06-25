@@ -30,6 +30,11 @@ define( function( require ) {
   function ChallengeGraphNode( challenge, options ) {
 
     options = _.extend( {
+      answerVisible: false,
+      answerPointVisible: false,
+      guessVisible: false,
+      guessPointVisible: false,
+      slopeToolVisible: false,
       slopeToolEnabled: true
     }, options );
 
@@ -81,12 +86,12 @@ define( function( require ) {
       }
     } );
 
-    // invisible by default
-    thisNode.setAnswerVisible( false );
-    thisNode.setAnswerPointVisible( false );
-    thisNode.setGuessVisible( false );
-    thisNode.setGuessPointVisible( false );
-    thisNode.setSlopeToolVisible( false );
+    // initial state
+    thisNode.setAnswerVisible( options.answerVisible );
+    thisNode.setAnswerPointVisible( options.answerPointVisible );
+    thisNode.setGuessVisible( options.guessVisible );
+    thisNode.setGuessPointVisible( options.guessPointVisible );
+    thisNode.setSlopeToolVisible( options.slopeToolVisible );
   }
 
   return inherit( GraphNode, ChallengeGraphNode, {

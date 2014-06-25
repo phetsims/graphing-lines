@@ -26,7 +26,14 @@ define( function( require ) {
   var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  // Creates a screen icon, all of which have the same background.
+  /**
+   * Creates a screen icon, all of which have the same rectangular background.
+   * This was factored out because at various times one or more screen icons were created programmatically.
+   *
+   * @param {Node} contentNode the node to be placed on a background
+   * @param {*} options
+   * @returns {Node}
+   */
   var createScreenIcon = function( contentNode, options ) {
 
     options = _.extend( {

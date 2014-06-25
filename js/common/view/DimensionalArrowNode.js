@@ -73,9 +73,9 @@ define( function( require ) {
         // vertical arrow
         if ( tipY > tailY ) {
           // pointing down
-          tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY - tipHeight - tipOffset);
+          tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY - tipHeight - tipOffset );
           tipShape.lineTo( tipX, tipY - tipOffset );
-          tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY - tipHeight - tipOffset);
+          tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY - tipHeight - tipOffset );
         }
         else {
           // pointing up

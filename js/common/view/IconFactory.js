@@ -54,12 +54,12 @@ define( function( require ) {
 
     // Creates an icon for the 'Game' screen
     createGameScreenIcon: function() {
-       var faceNode = new FaceWithPointsNode( {
-         faceDiameter: 75,
-         pointsFont: new GLFont( { size: 24, weight: 'bold' } ),
-         pointsAlignment: 'rightCenter',
-         points: 2
-       } );
+      var faceNode = new FaceWithPointsNode( {
+        faceDiameter: 75,
+        pointsFont: new GLFont( { size: 24, weight: 'bold' } ),
+        pointsAlignment: 'rightCenter',
+        points: 2
+      } );
       return createScreenIcon( faceNode, { xScaleFactor: 0.65 } );
     },
 

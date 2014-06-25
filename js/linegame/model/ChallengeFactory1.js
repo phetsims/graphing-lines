@@ -98,7 +98,7 @@ define( function( require ) {
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
       challenges.push( new GraphTheLine( '1 of 3 required slopes',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
+        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
 
       // Graph-the-Line, slope-intercept form, intercept variable
       slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope

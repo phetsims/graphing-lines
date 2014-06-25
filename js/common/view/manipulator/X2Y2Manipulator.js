@@ -41,14 +41,17 @@ define( function( require ) {
       },
 
       drag: function( event ) {
+
         var line = lineProperty.get();
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
         var location = mvt.viewToModelPosition( parentPoint );
+
         // constrain to range, snap to grid
         var x2 = Math.round( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
         var y2 = Math.round( Util.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
-        // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
+
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
+          // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
           // Keep (x1,y1) constant, change (x2,y2) and slope.
           lineProperty.set( new Line( line.x1, line.y1, x2, y2, line.color ) );
         }

@@ -1,6 +1,4 @@
 TODO list for graphing-lines
 
-- add wipe transitions to game
-- integrate vegas.GameReward, see vegas#4
-- reduce startup time
+- reduce startup time (it got worse recently)
 - address TODO items in the code

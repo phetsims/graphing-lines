@@ -52,6 +52,7 @@ define( function( require ) {
         y1Range = new Range( -9, 4 );
         assert && assert( x1Range.max > 0 && y1Range.max > 0 );
         assert && assert( x1Range.min < 0 && y1Range.min < 0 );
+
         // all points in Quadrant 1
         quadrant1Points = [];
         for ( x = 1; x < xRange.max; x++ ) {
@@ -59,6 +60,7 @@ define( function( require ) {
             quadrant1Points.push( new Vector2( x, y ) );
           }
         }
+
         // all points in Quadrant 3
         quadrant3Points = [];
         for ( x = x1Range.min; x < 0; x++ ) {
@@ -66,6 +68,7 @@ define( function( require ) {
             quadrant3Points.push( new Vector2( x, y ) );
           }
         }
+
         pointArrays = [ quadrant1Points, quadrant3Points ];
         pointArrayIndices = RandomChooser.rangeToArray( new Range( 0, pointArrays.length - 1 ) );
       }
@@ -91,40 +94,32 @@ define( function( require ) {
       pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
       // Graph-the-Line, slope-intercept form, slope variable
-      {
-        slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope
-        yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
-        challenges.push( new GraphTheLine( "1 of 3 required slopes",
-          Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+      slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope
+      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
+      challenges.push( new GraphTheLine( "1 of 3 required slopes",
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
           EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
-      }
 
       // Graph-the-Line, slope-intercept form, intercept variable
-      {
-        slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
-        yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // first required y-intercept, unique
-        challenges.push( new GraphTheLine( "1 of 2 required y-intercepts",
-          Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
-      }
+      slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
+      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // first required y-intercept, unique
+      challenges.push( new GraphTheLine( "1 of 2 required y-intercepts",
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
 
       // Make-the-Equation, slope-intercept form, slope variable
-      {
-        slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // second required slope, unique
-        yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
-        challenges.push( new MakeTheEquation( "2 of 3 required slopes",
-          Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
-      }
+      slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // second required slope, unique
+      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
+      challenges.push( new MakeTheEquation( "2 of 3 required slopes",
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
 
       // Make-the-Equation, slope-intercept form, intercept variable
-      {
-        slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
-        yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // second required y-intercept, unique
-        challenges.push( new MakeTheEquation( "2 of 2 required y-intercepts",
-          Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
-      }
+      slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
+      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // second required y-intercept, unique
+      challenges.push( new MakeTheEquation( "2 of 2 required y-intercepts",
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
 
       // Graph-the-Line, point-slope form, point or slope variable (random choice)
       {

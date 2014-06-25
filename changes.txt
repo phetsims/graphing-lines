@@ -1,3 +1,4 @@
+6/25/14 remove braces in challenge factories where code blocks are obvious
 6/25/14 move scale of ResetAllButton to GLConstants
 6/25/14 clean up PointToolNode
 6/25/14 move graph a tad to the left in game, center boxes in remaining space to the left

@@ -46,32 +46,28 @@ define( function( require ) {
     var runList = RandomChooser.rangeToArray( range, { excludeZero: true } );  // prevent undefined slope
 
     // slope-intercept form, slope and intercept variable
-    {
-      x1 = 0; // y-intercept must be an integer
-      y1 = RandomChooser.choose( yList );
-      rise = RandomChooser.choose( riseList );
+    x1 = 0; // y-intercept must be an integer
+    y1 = RandomChooser.choose( yList );
+    rise = RandomChooser.choose( riseList );
+    run = RandomChooser.choose( runList );
+    if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
       run = RandomChooser.choose( runList );
-      if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
-        run = RandomChooser.choose( runList );
-      }
-      challenges.push( new PlaceThePoints( "slope-intercept, random points",
-        new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
-        EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
     }
+    challenges.push( new PlaceThePoints( "slope-intercept, random points",
+      new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
+      EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
 
     // point-slope form, point and slope variable
-    {
-      x1 = RandomChooser.choose( xList );
-      y1 = RandomChooser.choose( yList );
-      rise = RandomChooser.choose( riseList );
+    x1 = RandomChooser.choose( xList );
+    y1 = RandomChooser.choose( yList );
+    rise = RandomChooser.choose( riseList );
+    run = RandomChooser.choose( runList );
+    if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
       run = RandomChooser.choose( runList );
-      if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
-        run = RandomChooser.choose( runList );
-      }
-      challenges.push( new PlaceThePoints( "point-slope, random points",
-        new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
-        EquationForm.POINT_SLOPE, xRange, yRange ) );
     }
+    challenges.push( new PlaceThePoints( "point-slope, random points",
+      new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
+      EquationForm.POINT_SLOPE, xRange, yRange ) );
   };
 
   return inherit( ChallengeFactory, ChallengeFactory5, {
@@ -95,20 +91,16 @@ define( function( require ) {
       yIntercepts = RandomChooser.rangeToArray( new Range( -10, 10 ) );
 
       // Make-the-Equation, slope-intercept form, slope=0
-      {
-        yIntercept = RandomChooser.choose( yIntercepts );
-        challenges.push( new MakeTheEquation( "slope=0",
-          Line.createSlopeIntercept( 0, 1, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
-      }
+      yIntercept = RandomChooser.choose( yIntercepts );
+      challenges.push( new MakeTheEquation( "slope=0",
+        Line.createSlopeIntercept( 0, 1, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
 
       // Graph-the-Line, slope-intercept form, slope=0
-      {
-        yIntercept = RandomChooser.choose( yIntercepts );
-        challenges.push( new GraphTheLine( "slope=0",
-          Line.createSlopeIntercept( 0, 1, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
-      }
+      yIntercept = RandomChooser.choose( yIntercepts );
+      challenges.push( new GraphTheLine( "slope=0",
+        Line.createSlopeIntercept( 0, 1, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
 
       // Graph-the-Line, slope-intercept or point-slope form (random choice), 2 variables
       {

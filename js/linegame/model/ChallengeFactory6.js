@@ -44,12 +44,10 @@ define( function( require ) {
       yIntercepts = RandomChooser.rangeToArray( new Range( -10, 10 ) );
 
       // Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
-      {
-        yIntercept = RandomChooser.choose( yIntercepts );
-        challenges.push( new PlaceThePoints( "slope=0",
-          Line.createSlopeIntercept( 0, 1, yIntercept ),
-          EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
-      }
+      yIntercept = RandomChooser.choose( yIntercepts );
+      challenges.push( new PlaceThePoints( "slope=0",
+        Line.createSlopeIntercept( 0, 1, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
 
       // 2 Place-the-Point challenges (same as level 5)
       ChallengeFactory5.addPlaceThePointsChallenges( challenges, xRange, yRange );

@@ -51,12 +51,12 @@ define( function( require ) {
     var controlsParent = new Node();
     controlsParent.addChild( equationControls );
     controlsParent.addChild( graphControls );
-    controlsParent.addChild( resetAllButton );
 
     // rendering order
     thisView.addChild( controlsParent );
     thisView.addChild( graphNode );
     thisView.addChild( pointToolParent );
+    thisView.addChild( resetAllButton );
 
     // layout - position of graphNode is determined by model
 
@@ -81,8 +81,8 @@ define( function( require ) {
     equationControls.y = 0;
     graphControls.centerX = equationControls.centerX;
     graphControls.top = equationControls.bottom + ySpacing;
-    resetAllButton.centerX = graphControls.centerX;
-    resetAllButton.bottom = thisView.layoutBounds.height - 40;
+    resetAllButton.right = thisView.layoutBounds.width - 40;
+    resetAllButton.bottom = thisView.layoutBounds.height - 33;
 
     // if the entire control panel is too tall, scale all controls
     if ( controlsParent.height > thisView.layoutBounds.getHeight() - ( 2 * yMargin ) ) {

@@ -1,3 +1,4 @@
+6/25/14 put 'Reset All' button in lower-right of all screens
 6/25/14 rename view property 'slopeVisible' to 'slopeToolVisible'
 6/25/14 remove vestigial view property 'interactiveLineVisible'
 6/25/14 right-align 'Start Over' button in scoreboard with challenge graph

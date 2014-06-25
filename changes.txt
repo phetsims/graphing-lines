@@ -1,3 +1,7 @@
+6/25/14 right-align 'Start Over' button in scoreboard with challenge graph
+6/25/14 left-align 'Level' label in scoreboard with challenge boxes
+6/25/14 same position for 'Reset All' button in first 3 screens (relative to bottom of screen instead of bottom of control panel)
+6/25/14 use 'cheer' for perfect-score sound (change in vegas.GameAudioPlayer)
 # 1.0.0-dev.12 6/25/14
 6/25/14 #6 new icons for the first 3 screens
 6/24/14 reduce vertical spacing between control panels, so that screens 2 & 3 look more balanced

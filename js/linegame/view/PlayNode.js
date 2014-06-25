@@ -40,7 +40,11 @@ define( function( require ) {
       function() {
         model.gamePhaseProperty.set( GamePhase.SETTINGS );
       },
-      { font: new GLFont( 20 ) } );
+      {
+        font: new GLFont( 20 ),
+        leftMargin: 65, // visually aligned with left edge of challenge boxes
+        rightMargin: 50 // visually aligned with right edge of challenge graph
+      } );
     scoreboardNode.centerX = layoutBounds.centerX;
     scoreboardNode.top = 0;
     thisNode.addChild( scoreboardNode );

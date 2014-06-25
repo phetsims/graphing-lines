@@ -59,7 +59,8 @@ define( function( require ) {
       clockIconRadius: 15,
       // Background
       xSpacing: 50,
-      xMargin: 20,
+      leftMargin: 20,
+      rightMargin: 20,
       yMargin: 10,
       backgroundFill: 'rgb( 49, 117, 202 )',
       backgroundStroke: null,
@@ -131,8 +132,8 @@ define( function( require ) {
 
     // layout
     leftParentNode.centerY = startOverButton.centerY = backgroundNode.centerY; // vertically aligned
-    leftParentNode.left = backgroundNode.centerX - ( screenWidth / 2 ) + options.xMargin; // left end
-    startOverButton.right = backgroundNode.centerX + ( screenWidth / 2 ) - options.xMargin; // right end
+    leftParentNode.left = backgroundNode.centerX - ( screenWidth / 2 ) + options.leftMargin; // left end
+    startOverButton.right = backgroundNode.centerX + ( screenWidth / 2 ) - options.rightMargin; // right end
 
     options.children = [ backgroundNode, leftParentNode, startOverButton ];
     Node.call( thisNode, options );

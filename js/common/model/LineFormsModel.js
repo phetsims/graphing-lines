@@ -22,7 +22,7 @@ define( function( require ) {
 
   // constants
   var GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
-  var ORIGIN_OFFSET = new Vector2( 305, 340 ); // offset of the graph's origin in view coordinates
+  var ORIGIN_OFFSET = new Vector2( 315, 340 ); // offset of the graph's origin in view coordinates
 
   /**
    * @param {Line} interactiveLine

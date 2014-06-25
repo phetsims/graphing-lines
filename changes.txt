@@ -1,3 +1,4 @@
+# 1.0.0-dev.11 6/24/14
 6/24/14 create point tool differently in game reward, because PointToolNode has too many dependencies
 6/24/14 replace PHET logo with paper airplanes in game reward
 6/24/14 add 'reward' query parameter, to show reward at end of every game, regardless of score

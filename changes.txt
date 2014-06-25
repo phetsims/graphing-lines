@@ -1,3 +1,4 @@
+6/25/14 use VBox to clean up layout of level-section screen
 6/25/14 cleanup handling of margins across ScreenViews
 6/25/14 position control panels relative to top of screen, not vertically centered
 6/25/14 put 'Reset All' button in lower-right of all screens

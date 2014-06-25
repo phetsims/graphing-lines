@@ -23,6 +23,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
   var Util = require( 'DOT/Util' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images, ordered by level
   var levelImages = [
@@ -79,7 +80,7 @@ define( function( require ) {
    */
   function SettingsNode( model, layoutBounds, options ) {
 
-    Node.call( this );
+    options = options || {};
 
     // Title
     var title = new Text( chooseYourLevelString, { font: new GLFont( 40 ) } );
@@ -106,36 +107,38 @@ define( function( require ) {
       previousButton = button;
     }
 
-    // title and level-selection buttons
-    var titleAndButtonsNode = new Node( { children: [ title, buttonsParent ] } );
-    this.addChild( titleAndButtonsNode );
-    buttonsParent.centerX = title.centerX;
-    buttonsParent.top = title.bottom + 40;
-
     // Timer and Sound controls
     var toggleOptions = { stroke: 'gray', scale: 1.3 };
     var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, toggleOptions );
-    this.addChild( timerToggleButton );
     var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, toggleOptions );
-    this.addChild( soundToggleButton );
 
-    // Reset All button
+    // Reset All button, at rightBottom
     var resetButton = new ResetAllButton( {
       listener: function() { model.reset(); },
-      scale: 1.32
+      scale: 1.32,
+      right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
+      bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
-    this.addChild( resetButton );
 
-    // layout
-    titleAndButtonsNode.center = layoutBounds.center;
-    soundToggleButton.left = GLConstants.SCREEN_X_MARGIN;
-    soundToggleButton.bottom = layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
-    timerToggleButton.left = GLConstants.SCREEN_X_MARGIN;
-    timerToggleButton.bottom = soundToggleButton.top - 15;
-    resetButton.right = layoutBounds.width - GLConstants.SCREEN_X_MARGIN;
-    resetButton.bottom = layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
-
-    this.mutate( options );
+    options.children = [
+      // title and level-selection buttons centered
+      new VBox( {
+        children: [ title, buttonsParent ],
+        align: 'center',
+        spacing: 40,
+        center: layoutBounds.center
+      } ),
+      // timer and sound buttons at leftBottom
+      new VBox( {
+        children: [ timerToggleButton, soundToggleButton ],
+        align: 'center',
+        spacing: 15,
+        left: GLConstants.SCREEN_X_MARGIN,
+        bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
+      } ),
+      resetButton
+    ];
+    Node.call( this, options );
   }
 
   return inherit( Node, SettingsNode );

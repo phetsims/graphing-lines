@@ -1,3 +1,4 @@
 TODO list for graphing-lines
 
 - reduce startup time (it got worse recently)
+- code review

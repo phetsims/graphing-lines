@@ -62,7 +62,7 @@ define( function( require ) {
       }
     );
 
-    // point tools
+    // point tools, drag bounds determined by 'eye balling' so that the point tool nodes remain on screen.
     thisModel.pointTool1 = new PointTool( new Vector2( -5, -10.5 ), 'up', thisModel.graph.lines,
       new Bounds2( thisModel.graph.xRange.min - 1, thisModel.graph.yRange.min - 1, thisModel.graph.xRange.max + 3, thisModel.graph.yRange.max + 3 ) );
     thisModel.pointTool2 = new PointTool( new Vector2( 3, -13 ), 'down', thisModel.graph.lines,

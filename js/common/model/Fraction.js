@@ -24,12 +24,12 @@ define( function( require ) {
 
   Fraction.prototype = {
 
-    valueOf: function() {
+    getValue: function() {
       return this.numerator / this.denominator;
     },
 
     isInteger: function() {
-      return Util.isInteger( this.valueOf() );
+      return Util.isInteger( this.getValue() );
     },
 
     toString: function() {

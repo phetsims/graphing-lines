@@ -158,11 +158,11 @@ define( function( require ) {
         run = RandomChooser.choose( runList );
         excluded = true;
         while ( excluded && runList.length > 0 ) {
-          slope = new Fraction( rise, run ).valueOf();
+          slope = new Fraction( rise, run ).getValue();
           excluded = false;
           // is this an excluded or undefined slope?
           for ( i = 0; i < excludedSlopes.length; i++ ) {
-            if ( run === 0 || slope === excludedSlopes[i].valueOf() ) {
+            if ( run === 0 || slope === excludedSlopes[i].getValue() ) {
               excluded = true;
               run = RandomChooser.choose( runList ); // choose a new run, and remove it from runList
               break;

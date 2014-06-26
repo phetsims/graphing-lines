@@ -265,9 +265,9 @@ define( function( require ) {
 
         // y-intercept properties
         var fractionalIntercept = line.getYIntercept();
-        var zeroIntercept = ( fractionalIntercept.valueOf() === 0 );
+        var zeroIntercept = ( fractionalIntercept.getValue() === 0 );
         var integerIntercept = fractionalIntercept.isInteger();
-        var positiveIntercept = ( fractionalIntercept.valueOf() > 0 );
+        var positiveIntercept = ( fractionalIntercept.getValue() > 0 );
 
         if ( zeroIntercept ) {
           if ( zeroSlope && !options.interactiveSlope ) {

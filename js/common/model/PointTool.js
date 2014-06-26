@@ -58,19 +58,8 @@ define( function( require ) {
      * @returns {boolean}
      */
     isOnLine: function( line ) {
-      if ( line.run === 0 && this.location.x === line.x1 ) {
-        // slope is undefined, tool is on the line
-        return true;
-      }
-      else if ( line.rise === 0 && this.location.y === line.y1 ) {
-        // slope is zero, tool is on the line
-        return true;
-      }
-      else if ( line.run !== 0 && line.rise !== 0 && this.location.y === line.solveY( this.location.x ) ) {
-        // not one of the 2 special cases above, and the tool is on the line
-        return true;
-      }
-      return false;
+      return ( line.run === 0 && this.location.x === line.x1 ) || // slope is undefined, tool is on the line
+             ( this.location.y === line.solveY( this.location.x ) ); // tool is on the line
     }
   } );
 } );

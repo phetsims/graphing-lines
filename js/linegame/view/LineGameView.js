@@ -25,7 +25,7 @@ define( function( require ) {
   function LineGameView( model ) {
 
     var thisView = this;
-    ScreenView.call( thisView, { renderer: 'svg' } );
+    ScreenView.call( thisView, { renderer: GLConstants.RENDERER } );
 
     // audio
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );

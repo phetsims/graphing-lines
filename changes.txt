@@ -1,3 +1,4 @@
+6/25/14 #9 fix: fraction line missing in 'Make The Equation' challenges with Firefox
 6/25/14 add BG and SST to credits
 # 1.0.0-dev.13 6/25/14
 6/25/14 replace " with ' throughout

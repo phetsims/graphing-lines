@@ -59,7 +59,7 @@ define( function( require ) {
     var guessBoxNode =
       new EquationBoxNode( yourEquationString, challenge.guess.color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-          GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guess.color ) );
+          GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guess.color ) );
 
     // Graph
     var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );

@@ -14,7 +14,7 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
   /**
-   * @param {Vector} location initial location of the tool
+   * @param {Vector2} location initial location of the tool
    * @param {String} orientation direction that the tip points, either 'up' or 'down'
    * @param {ObservableArray<Line>} lines Lines that the tool might intersect, provided in the order that they would be rendered
    * @param {Bounds2} dragBounds tool can be dragged within these bounds

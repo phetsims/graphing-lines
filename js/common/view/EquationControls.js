@@ -92,17 +92,15 @@ define( function( require ) {
     subContent.addChild( titleSeparator );
     subContent.addChild( buttonsSeparator );
 
-    // layout
+    // layout, relative to expand/collapse button
     var xSpacing = 10;
     var ySpacing = 10;
-    var titleHeight = Math.max( titleNode.height, expandCollapseButton.height );
-    expandCollapseButton.centerY = titleHeight / 2;
     titleNode.centerX = content.centerX;
     if ( titleNode.left <= expandCollapseButton.right ) {
       titleNode.left = expandCollapseButton.right + xSpacing; // adapt for i18n
     }
-    titleNode.centerY = titleHeight / 2;
-    titleSeparator.top = titleHeight + ySpacing;
+    titleNode.centerY = expandCollapseButton.centerY;
+    titleSeparator.top = titleNode.bottom + ySpacing;
     interactiveEquationNode.centerX = content.centerX;
     interactiveEquationNode.top = titleSeparator.bottom + ySpacing;
     buttonsSeparator.top = interactiveEquationNode.bottom + ySpacing;

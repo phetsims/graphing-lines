@@ -1,3 +1,4 @@
+6/26/14 change request: center game buttons on left edge of graph
 6/26/14 #10 fix SST's name in credits
 6/25/14 #9 fix: fraction line missing in 'Make The Equation' challenges with Firefox
 6/25/14 add BG and SST to credits

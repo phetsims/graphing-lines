@@ -89,7 +89,7 @@ define( function( require ) {
     thisNode.addChild( thisNode.faceNode );
 
     // buttons at center-bottom
-    thisNode.buttonsParent.centerX = ( 0.5 * challengeSize.width );
+    thisNode.buttonsParent.centerX = challenge.mvt.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
     thisNode.buttonsParent.bottom = challengeSize.height - 20;
 
     // 'Check' button

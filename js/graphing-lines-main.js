@@ -25,7 +25,9 @@ define( function( require ) {
     credits: {
       leadDesign: 'Ariel Paul',
       softwareDevelopment: 'Chris Malley',
-      designTeam: 'Karina Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins'
+      designTeam: 'Bryce Gruneich, Karina Hensberry, Patricia Loeblein,\nAmanda McGarry, Kathy Perkins',
+      graphicArts: 'Sharon Simon-Tov',
+      interviews: 'Bryce Gruneich'
     }
   };
 

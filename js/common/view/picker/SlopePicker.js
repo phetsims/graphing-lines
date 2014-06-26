@@ -29,12 +29,12 @@ define( function( require ) {
       touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X
     }, options );
 
-    // 'up' function, skips over undefined line condition (slope=0/0)
+    // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients
     options.upFunction = function() {
       return ( variableComponent.get() === -1 && fixedComponent.get() === 0 ) ? 1 : variableComponent.get() + 1;
     };
 
-    // 'down' function, skips over undefined line condition (slope=0/0)
+    // 'down' function, skips over undefined line condition (slope=0/0) - not changeable by clients
     options.downFunction = function() {
       return ( variableComponent.get() === 1 && fixedComponent.get() === 0 ) ? -1 : variableComponent.get() - 1;
     };

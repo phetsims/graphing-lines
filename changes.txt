@@ -1,3 +1,4 @@
+# 1.0.0-dev.13 6/25/14
 6/25/14 replace " with ' throughout
 6/25/14 move graph up a tad in first 3 screens
 6/25/14 delete AnswerGraphNode

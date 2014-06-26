@@ -84,50 +84,37 @@ define( function( require ) {
     subContent.addChild( saveLineButton );
     subContent.addChild( eraseLinesButton );
 
-    // horizontal separators, resized later
+    // horizontal separators
+    var separatorWidth = content.width + 5;
     var separatorColor = 'rgb( 212, 212, 212 )';
-    var titleSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor } );
-    var buttonsSeparator = new Line( 0, 0, 1, 0, { stroke: separatorColor } );
+    var titleSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: separatorColor } );
+    var buttonsSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: separatorColor } );
     subContent.addChild( titleSeparator );
     subContent.addChild( buttonsSeparator );
 
-    // do vertical layout first, don't care about horizontal positions here
+    // layout
     var xSpacing = 10;
     var ySpacing = 10;
     var titleHeight = Math.max( titleNode.height, expandCollapseButton.height );
-    expandCollapseButton.x = 0;
     expandCollapseButton.centerY = titleHeight / 2;
-    titleNode.left = expandCollapseButton.right + xSpacing;
-    titleNode.centerY = titleHeight / 2;
-    titleSeparator.x = 0;
-    titleSeparator.top = titleHeight + ySpacing;
-    interactiveEquationNode.x = 0;
-    interactiveEquationNode.top = titleSeparator.bottom + ySpacing;
-    buttonsSeparator.x = 0;
-    buttonsSeparator.top = interactiveEquationNode.bottom + ySpacing;
-    saveLineButton.x = 0;
-    saveLineButton.top = buttonsSeparator.bottom + ySpacing;
-    eraseLinesButton.x = 0;
-    eraseLinesButton.top = buttonsSeparator.bottom + ySpacing;
-
-    // Horizontal strut, to prevent control panel from resizing when minimized.  Do this after vertical layout!
-    var panelWidth = content.width + 5;
-    var strutNode = new HStrut( panelWidth );
-    content.addChild( strutNode );
-    strutNode.moveToBack();
-
-    // Set width of separators
-    titleSeparator.setLine( 0, 0, panelWidth, 0 );
-    buttonsSeparator.setLine( 0, 0, panelWidth, 0 );
-
-    // now do horizontal layout
     titleNode.centerX = content.centerX;
     if ( titleNode.left <= expandCollapseButton.right ) {
-      titleNode.left = expandCollapseButton.right + xSpacing;
+      titleNode.left = expandCollapseButton.right + xSpacing; // adapt for i18n
     }
+    titleNode.centerY = titleHeight / 2;
+    titleSeparator.top = titleHeight + ySpacing;
     interactiveEquationNode.centerX = content.centerX;
+    interactiveEquationNode.top = titleSeparator.bottom + ySpacing;
+    buttonsSeparator.top = interactiveEquationNode.bottom + ySpacing;
     saveLineButton.right = content.centerX - ( xSpacing / 2 );
+    saveLineButton.top = buttonsSeparator.bottom + ySpacing;
     eraseLinesButton.left = content.centerX + ( xSpacing / 2 );
+    eraseLinesButton.top = buttonsSeparator.bottom + ySpacing;
+
+    // Add a horizontal strut, to prevent control panel from resizing when minimized. Do this last!
+    var strutNode = new HStrut( separatorWidth );
+    content.addChild( strutNode );
+    strutNode.moveToBack();
 
     maximizedProperty.link( function( maximized ) {
       if ( maximized && content.indexOfChild( subContent ) === -1 ) {

@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Fraction = require( 'GRAPHING_LINES/common/model/Fraction' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Util = require( 'DOT/Util' );
 
   // Euclid's algorithm for computing the greatest common divisor (GCD) of two integers
@@ -44,7 +45,7 @@ define( function( require ) {
     this.color = color || 'black';
   }
 
-  Line.prototype = {
+  inherit( Object, Line, {
 
     // Convenience method for creating a line with a different color.
     withColor: function( color ) {
@@ -166,27 +167,32 @@ define( function( require ) {
       var gcd = getGreatestCommonDivisor( numerator, denominator );
       return new Fraction( numerator / gcd, denominator / gcd );
     }
-  };
+  }, {
 
-  // standard lines
-  Line.Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.Y_EQUALS_X );  // y = x
-  Line.Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.Y_EQUALS_NEGATIVE_X ); // y = -x
+    /*
+     * Creates a line by describing it in point-slope form: (y - y1) = m(x - x1)
+     * Need to use a factory method because params are identical to primary constructor.
+     * @static
+     */
+    createPointSlope: function( x1, y1, rise, run, color ) {
+      return new Line( x1, y1, x1 + run, y1 + rise, color );
+    },
 
-  /*
-   * Creates a line by describing it in point-slope form: (y - y1) = m(x - x1)
-   * Need to use a factory method because params are identical to primary constructor.
-   */
-  Line.createPointSlope = function( x1, y1, rise, run, color ) {
-    return new Line( x1, y1, x1 + run, y1 + rise, color );
-  };
+    /*
+     * Creates a line by describing it in slope-intercept form: y = mx + b
+     * Using a factory method instead of a constructor to be consistent with createPointSlope.
+     * @static
+     */
+    createSlopeIntercept: function( rise, run, yIntercept, color ) {
+      return Line.createPointSlope( 0, yIntercept, rise, run, color );
+    }
+  } );
 
-  /*
-   * Creates a line by describing it in slope-intercept form: y = mx + b
-   * Using a factory method instead of a constructor to be consistent with createPointSlope.
-   */
-  Line.createSlopeIntercept = function( rise, run, yIntercept, color ) {
-    return Line.createPointSlope( 0, yIntercept, rise, run, color );
-  };
+  // @static y = x (a standard line)
+  Line.Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.Y_EQUALS_X );
+
+  // @static y = -x (a standard line)
+  Line.Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.Y_EQUALS_NEGATIVE_X );
 
   return Line;
 } );

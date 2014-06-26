@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var ObservableArray = require( 'AXON/ObservableArray' );
 
   /**
@@ -22,7 +23,7 @@ define( function( require ) {
     this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
   }
 
-  Graph.prototype = {
+  return inherit( Object, Graph, {
 
     getWidth: function() { return this.xRange.getLength(); },
 
@@ -36,7 +37,5 @@ define( function( require ) {
     contains: function( point ) {
       return this.xRange.contains( point.x ) && this.yRange.contains( point.y );
     }
-  };
-
-  return Graph;
+  } );
 } );

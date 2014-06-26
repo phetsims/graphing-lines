@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Util = require( 'DOT/Util' );
 
   /**
@@ -22,7 +23,7 @@ define( function( require ) {
     this.denominator = denominator;
   }
 
-  Fraction.prototype = {
+  return inherit( Object, Fraction, {
 
     getValue: function() {
       return this.numerator / this.denominator;
@@ -35,7 +36,5 @@ define( function( require ) {
     toString: function() {
       return 'Fraction[numerator=' + this.numerator + ' denominator=' + this.denominator + ']';
     }
-  };
-
-  return Fraction;
+  } );
 } );

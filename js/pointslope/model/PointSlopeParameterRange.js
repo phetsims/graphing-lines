@@ -10,11 +10,12 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var inherit = require( 'PHET_CORE/inherit' );
   var Range = require( 'DOT/Range' );
 
   function PointSlopeParameterRange() {}
 
-  PointSlopeParameterRange.prototype = {
+  return inherit( Object, PointSlopeParameterRange, {
 
     // Range for the x component of the point (x1,y1)
     x1: function( line, graph ) {
@@ -43,7 +44,5 @@ define( function( require ) {
       var max = graph.xRange.max - line.x1;
       return new Range( min, max );
     }
-  };
-
-  return PointSlopeParameterRange;
+  } );
 } );

@@ -1,5 +1,6 @@
 TODO list for graphing-lines
 
+- add BG and Sharon to credits?
 - create screen icons programmatically
 - reduce startup time (it got worse recently)
 - code review

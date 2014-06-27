@@ -81,7 +81,7 @@ define( function( require ) {
       // graphNode is positioned automatically based on modelViewTransform's origin offset.
 
       // left align the title and boxes
-      answerBoxNode.centerX = this.graphNode.left / 2;
+      answerBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
       thisNode.guessBoxNode.left = answerBoxNode.left;
       titleNode.left = answerBoxNode.left;
 

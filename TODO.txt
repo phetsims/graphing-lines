@@ -1,6 +1,5 @@
 TODO list for graphing-lines
 
-- layout of 'Place The Points' challenge (level 6) is messed up in 1.0.0-dev.13, OK in 1.0.0-dev.12
 - create screen icons programmatically
 - reduce startup time
 - code review

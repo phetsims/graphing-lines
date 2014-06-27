@@ -26,15 +26,15 @@ define( function( require ) {
     var thisNode = this;
     LineFormsGraphNode.call( thisNode, model, viewProperties, SlopeInterceptEquationNode );
 
-    var manipulatorRadius = model.mvt.modelToViewDeltaX( model.manipulatorRadius );
+    var manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 
     // slope manipulator
     var slopeManipulator = new SlopeManipulator(
-      manipulatorRadius, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.mvt );
+      manipulatorRadius, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.modelViewTransform );
 
     // intercept manipulator
     var yInterceptManipulator = new YInterceptManipulator(
-      manipulatorRadius, model.interactiveLineProperty, model.y1RangeProperty, model.mvt );
+      manipulatorRadius, model.interactiveLineProperty, model.y1RangeProperty, model.modelViewTransform );
 
     // rendering order
     thisNode.addChild( slopeManipulator );

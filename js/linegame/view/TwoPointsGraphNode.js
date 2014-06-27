@@ -28,13 +28,13 @@ define( function( require ) {
 
     thisNode.setGuessVisible( true );
 
-    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     var x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
-      new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.mvt, false /* constantSlope */ );
+      new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform, false /* constantSlope */ );
 
     var x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
-      new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.mvt );
+      new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform );
 
     // Rendering order
     thisNode.addChild( x1y1Manipulator );
@@ -43,8 +43,8 @@ define( function( require ) {
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {
       // move the manipulators
-      x1y1Manipulator.translation = challenge.mvt.modelToViewXY( line.x1, line.y1 );
-      x2y2Manipulator.translation = challenge.mvt.modelToViewXY( line.x2, line.y2 );
+      x1y1Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
+      x2y2Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
     } );
   }
 

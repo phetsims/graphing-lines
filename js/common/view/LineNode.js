@@ -26,11 +26,11 @@ define( function( require ) {
   /**
    * @param {Property<Line>} lineProperty
    * @param {Graph} graph
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {*} options
    * @constructor
    */
-  function LineNode( lineProperty, graph, mvt, options ) {
+  function LineNode( lineProperty, graph, modelViewTransform, options ) {
 
     options = _.extend( {
       // type for creating an equation node, must have static function createDynamicLabel( {Property<Line>} lineProperty, {Number} fontSize )
@@ -41,9 +41,9 @@ define( function( require ) {
 
     thisNode.lineProperty = lineProperty;
     thisNode.graph = graph; // @private
-    thisNode.mvt = mvt; // @private
-    thisNode.xExtent = mvt.viewToModelDeltaX( LINE_EXTENT ); // @private
-    thisNode.yExtent = Math.abs( mvt.viewToModelDeltaY( LINE_EXTENT ) ); // @private
+    thisNode.modelViewTransform = modelViewTransform; // @private
+    thisNode.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
+    thisNode.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
 
     // parent of all children
     thisNode.parentNode = new Node();
@@ -127,8 +127,8 @@ define( function( require ) {
       }
 
       // line (arrow)
-      var tailLocation = this.mvt.modelToViewXY( tailX, tailY );
-      var tipLocation = this.mvt.modelToViewXY( tipX, tipY );
+      var tailLocation = this.modelViewTransform.modelToViewXY( tailX, tailY );
+      var tipLocation = this.modelViewTransform.modelToViewXY( tipX, tipY );
       this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
       this.arrowNode.fill = line.color;
 

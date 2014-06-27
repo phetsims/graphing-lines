@@ -22,10 +22,10 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} riseRangeProperty
    * @param {Property<Range>} runRangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
+  function SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
 
     var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
@@ -36,13 +36,13 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         var line = lineProperty.get();
-        var location = mvt.modelToViewXY( line.x2, line.y2 );
+        var location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = mvt.viewToModelPosition( parentPoint );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
         var line = lineProperty.get();
         var run = Math.round( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
@@ -62,20 +62,20 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} riseRangeProperty
    * @param {Property<Range>} runRangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, mvt ) {
+  function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
     lineProperty.link( function( line ) {
-      thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    thisNode.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, mvt ) );
+    thisNode.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
   }
 
   return inherit( Manipulator, SlopeManipulator );

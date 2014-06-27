@@ -37,11 +37,11 @@ define( function( require ) {
   /**
    * Drag handler for the pointer tool.
    * @param {PointTool} pointTool
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {Graph} graph
    * @constructor
    */
-  function PointToolDragHandler( pointTool, mvt, graph ) {
+  function PointToolDragHandler( pointTool, modelViewTransform, graph ) {
 
     var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
 
@@ -61,7 +61,7 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         // Note the mouse-click offset when dragging starts.
-        var location = mvt.modelToViewPosition( pointTool.location );
+        var location = modelViewTransform.modelToViewPosition( pointTool.location );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
         // Move the tool that we're dragging to the foreground.
         event.currentTarget.moveToFront();
@@ -69,7 +69,7 @@ define( function( require ) {
 
       drag: function( event ) {
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = mvt.viewToModelPosition( parentPoint );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
         location = constrainBounds( location, pointTool.dragBounds );
         if ( graph.contains( location ) ) {
           // snap to the graph's grid
@@ -84,13 +84,13 @@ define( function( require ) {
 
   /**
    * @param {PointTool} pointTool
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {Graph} graph
    * @param {Property<Boolean>} linesVisibleProperty
    * @param {*} options
    * @constructor
    */
-  function PointToolNode( pointTool, mvt, graph, linesVisibleProperty, options ) {
+  function PointToolNode( pointTool, modelViewTransform, graph, linesVisibleProperty, options ) {
 
     options = _.extend( {
       cursor: 'pointer',
@@ -163,7 +163,7 @@ define( function( require ) {
 
         // move to location
         var location = pointTool.location;
-        thisNode.translation = mvt.modelToViewPosition( location );
+        thisNode.translation = modelViewTransform.modelToViewPosition( location );
 
         // display value and highlighting
         if ( graph.contains( location ) ) {
@@ -186,7 +186,7 @@ define( function( require ) {
       } );
 
     // interactivity
-    thisNode.addInputListener( new PointToolDragHandler( pointTool, mvt, graph ) );
+    thisNode.addInputListener( new PointToolDragHandler( pointTool, modelViewTransform, graph ) );
   }
 
   return inherit( Node, PointToolNode, {

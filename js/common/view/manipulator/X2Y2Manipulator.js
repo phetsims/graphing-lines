@@ -22,10 +22,10 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x2RangeProperty
    * @param {Property<Range>} y2RangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
+  function X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
 
     var startOffset; // where the drag started, relative to (x2,y2), in parent view coordinates
 
@@ -36,7 +36,7 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         var line = lineProperty.get();
-        var location = mvt.modelToViewXY( line.x2, line.y2 );
+        var location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
@@ -44,7 +44,7 @@ define( function( require ) {
 
         var line = lineProperty.get();
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = mvt.viewToModelPosition( parentPoint );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
         var x2 = Math.round( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
@@ -66,20 +66,20 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x2RangeProperty
    * @param {Property<Range>} y2RangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, mvt ) {
+  function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
 
     // move the manipulator to match the line's (x2,y2) point
     lineProperty.link( function( line ) {
-      thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    thisNode.addInputListener( new X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, mvt ) );
+    thisNode.addInputListener( new X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) );
   }
 
   return inherit( Manipulator, X2Y2Manipulator );

@@ -37,17 +37,17 @@ define( function( require ) {
     var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guess, challenge.graph ) );
     var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guess, challenge.graph ) );
 
-    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // point manipulator
-    var pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.mvt, true /* constantSlope */ );
+    var pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
     var pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
       thisNode.addChild( pointManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
+    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );
@@ -57,8 +57,8 @@ define( function( require ) {
     challenge.guessProperty.link( function( line ) {
 
       // move the manipulators
-      pointManipulator.translation = challenge.mvt.modelToViewXY( line.x1, line.y1 );
-      slopeManipulator.translation = challenge.mvt.modelToViewXY( line.x2, line.y2 );
+      pointManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
+      slopeManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
 
       // adjust ranges
       if ( challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {

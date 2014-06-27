@@ -22,10 +22,10 @@ define( function( require ) {
    * Drag handler for y-intercept manipulator.
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function YInterceptDragHandler( lineProperty, y1RangeProperty, mvt ) {
+  function YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) {
 
     var startOffset; // where the drag started, relative to the y-intercept, in parent view coordinates
 
@@ -36,14 +36,14 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         var line = lineProperty.get();
-        var location = mvt.modelToViewXY( line.x1, line.y1 );
+        var location = modelViewTransform.modelToViewXY( line.x1, line.y1 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
 
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = mvt.viewToModelPosition( parentPoint );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
         var y1 = Math.round( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
@@ -61,20 +61,20 @@ define( function( require ) {
    * @param {Number} radius
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function YInterceptManipulator( radius, lineProperty, y1RangeProperty, mvt ) {
+  function YInterceptManipulator( radius, lineProperty, y1RangeProperty, modelViewTransform ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
 
     // move the manipulator to match the line's (x1,y1) point
     lineProperty.link( function( line ) {
-      thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    thisNode.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, mvt ) );
+    thisNode.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
   }
 
   return inherit( Manipulator, YInterceptManipulator );

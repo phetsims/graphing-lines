@@ -23,10 +23,10 @@ define( function( require ) {
    * @param {Array<Property<Vector2>>} otherPointProperties points that the point can't be on
    * @param {Range} xRange
    * @param {Range} yRange
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, mvt ) {
+  function PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
     var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
@@ -36,14 +36,14 @@ define( function( require ) {
 
       // note where the drag started
       start: function( event ) {
-        var location = mvt.modelToViewPosition( pointProperty.get() );
+        var location = modelViewTransform.modelToViewPosition( pointProperty.get() );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
 
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = mvt.viewToModelPosition( parentPoint );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
         var x = Math.round( Util.clamp( location.x, xRange.min, xRange.max ) );
@@ -75,20 +75,20 @@ define( function( require ) {
    * @param {Array<Property<Vector2>>} otherPointProperties
    * @param {Range} xRange
    * @param {Range} yRange
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, mvt ) {
+  function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
     // move the manipulator to match the point
     pointProperty.link( function( point ) {
-      thisNode.translation = mvt.modelToViewPosition( point );
+      thisNode.translation = modelViewTransform.modelToViewPosition( point );
     } );
 
-    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, mvt ) );
+    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
   }
 
   return inherit( Manipulator, PointManipulator );

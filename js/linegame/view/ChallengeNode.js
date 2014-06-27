@@ -74,8 +74,8 @@ define( function( require ) {
 
     // point tools
     var linesVisibleProperty = new Property( true );
-    var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.mvt, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
-    var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.mvt, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
 
     // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
     var pointToolParent = new Node();
@@ -89,7 +89,7 @@ define( function( require ) {
     thisNode.addChild( thisNode.faceNode );
 
     // buttons at center-bottom
-    thisNode.buttonsParent.centerX = challenge.mvt.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
+    thisNode.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
     thisNode.buttonsParent.bottom = challengeSize.height - 20;
 
     // 'Check' button

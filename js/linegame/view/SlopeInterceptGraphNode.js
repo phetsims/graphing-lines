@@ -36,17 +36,17 @@ define( function( require ) {
     var runRangeProperty = new Property( parameterRange.run( challenge.guess, challenge.graph ) );
     var y1RangeProperty = new Property( challenge.graph.yRange );
 
-    var manipulatorRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // intercept manipulator
-    var yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.mvt );
+    var yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
     var interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
       thisNode.addChild( yInterceptManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.mvt );
+    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {
       thisNode.addChild( slopeManipulator );
@@ -56,8 +56,8 @@ define( function( require ) {
     challenge.guessProperty.link( function( line ) {
 
       // move the manipulators
-      slopeManipulator.translation = challenge.mvt.modelToViewXY( line.x2, line.y2 );
-      yInterceptManipulator.translation = challenge.mvt.modelToViewXY( line.x1, line.y1 );
+      slopeManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
+      yInterceptManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
 
       // adjust ranges
       if ( challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {

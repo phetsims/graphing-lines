@@ -22,11 +22,11 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x1RangeProperty
    * @param {Property<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {Boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
    * @constructor
    */
-  function X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
+  function X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
 
     var startOffset; // where the drag started, relative to (x1,y1), in parent view coordinates
 
@@ -37,14 +37,14 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         var line = lineProperty.get();
-        var location = mvt.modelToViewXY( line.x1, line.y1 );
+        var location = modelViewTransform.modelToViewXY( line.x1, line.y1 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
 
         var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = mvt.viewToModelPosition( parentPoint );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
         var x1 = Math.round( Util.clamp( location.x, x1RangeProperty.get().min, x1RangeProperty.get().max ) );
@@ -71,21 +71,21 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Property<Range>} x1RangeProperty
    * @param {Property<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @param {Boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
    * @constructor
    */
-  function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) {
+  function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
 
     var thisNode = this;
     Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
 
     // move the manipulator to match the line's (x1,y1) point
     lineProperty.link( function( line ) {
-      thisNode.translation = mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    thisNode.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, mvt, constantSlope ) );
+    thisNode.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
   }
 
   return inherit( Manipulator, X1Y1Manipulator );

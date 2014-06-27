@@ -32,8 +32,8 @@ define( function( require ) {
     thisView.viewProperties = viewProperties; // @private
 
     // Create point tool nodes
-    var pointTool1 = new PointToolNode( model.pointTool1, model.mvt, model.graph, viewProperties.linesVisibleProperty );
-    var pointTool2 = new PointToolNode( model.pointTool2, model.mvt, model.graph, viewProperties.linesVisibleProperty );
+    var pointTool1 = new PointToolNode( model.pointTool1, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
+    var pointTool2 = new PointToolNode( model.pointTool2, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
     var pointToolParent = new Node(); // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order.
     pointToolParent.addChild( pointTool1 );
     pointToolParent.addChild( pointTool2 );

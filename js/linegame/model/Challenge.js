@@ -57,8 +57,8 @@ define( function( require ) {
     this.manipulationMode = manipulationMode;
 
     // model-view transform, created in the model because each challenge subclass may have its own transform
-    var mvtScale = LineGameConstants.GRAPH_WIDTH / xRange.getLength(); // view units / model units
-    this.mvt = ModelViewTransform2.createOffsetXYScaleMapping( originOffset, mvtScale, -mvtScale ); // graph on right, y inverted
+    var modelViewTransformScale = LineGameConstants.GRAPH_WIDTH / xRange.getLength(); // view units / model units
+    this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( originOffset, modelViewTransformScale, -modelViewTransformScale ); // graph on right, y inverted
 
     // Graph
     this.graph = new Graph( xRange, yRange );

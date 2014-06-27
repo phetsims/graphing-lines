@@ -90,10 +90,10 @@ define( function( require ) {
     createGraphIcon: function( width, color, x1, y1, x2, y2 ) {
       var axisRange = new Range( -3, 3 );
       var graph = new Graph( axisRange, axisRange );
-      var mvt = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
-      var graphNode = new GraphNode( graph, mvt );
-      var p1 = mvt.modelToViewXY( x1, y1 );
-      var p2 = mvt.modelToViewXY( x2, y2 );
+      var modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
+      var graphNode = new GraphNode( graph, modelViewTransform );
+      var p1 = modelViewTransform.modelToViewXY( x1, y1 );
+      var p2 = modelViewTransform.modelToViewXY( x2, y2 );
       graphNode.addChild( new Path( Shape.lineSegment( p1.x, p1.y, p2.x, p2.y ), {
         stroke: color, lineWidth: 5
       } ) );

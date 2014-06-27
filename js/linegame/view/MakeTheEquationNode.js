@@ -72,7 +72,7 @@ define( function( require ) {
 
     // layout
     {
-      // graphNode is positioned automatically based on mvt's origin offset.
+      // graphNode is positioned automatically based on modelViewTransform's origin offset.
 
       // left align the title and boxes
       guessBoxNode.centerX = graphNode.left / 2;
@@ -81,7 +81,7 @@ define( function( require ) {
 
       // stack title and boxes vertically, title top-aligned with graph's grid
       var ySpacing = 30;
-      titleNode.top = challenge.mvt.modelToViewY( challenge.graph.yRange.max );
+      titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
       guessBoxNode.top = titleNode.bottom + ySpacing;
       answerBoxNode.top = guessBoxNode.bottom + ySpacing;
 

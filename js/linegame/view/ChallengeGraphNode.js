@@ -39,35 +39,35 @@ define( function( require ) {
     }, options );
 
     var thisNode = this;
-    GraphNode.call( thisNode, challenge.graph, challenge.mvt );
+    GraphNode.call( thisNode, challenge.graph, challenge.modelViewTransform );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
-      thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.mvt ) );
+      thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
     }
 
-    var pointRadius = challenge.mvt.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
+    var pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
     // answer
     thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
-    var answerNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.mvt );
+    var answerNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
     thisNode.answerParentNode.addChild( answerNode );
 
     // point (x1,y1) for answer
     thisNode.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
     thisNode.answerParentNode.addChild( thisNode.answerPointNode );
-    thisNode.answerPointNode.translation = challenge.mvt.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
+    thisNode.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 
     // guess
     thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
-    thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.mvt ) );
+    thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform ) );
     thisNode.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
     thisNode.guessParentNode.addChild( thisNode.guessPointNode );
     thisNode.guessPointVisible = true;
 
     // slope tool
     if ( options.slopeToolEnabled ) {
-      thisNode.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.mvt );
+      thisNode.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform );
     }
 
     // rendering order
@@ -82,7 +82,7 @@ define( function( require ) {
       if ( line ) {
         // plot (x1,y1)
         thisNode.guessPointNode.visible = thisNode.guessPointVisible;
-        thisNode.guessPointNode.translation = challenge.mvt.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+        thisNode.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       }
     } );
 

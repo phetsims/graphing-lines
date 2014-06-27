@@ -131,16 +131,16 @@ define( function( require ) {
 
   /**
    * @param {Graph} graph
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function XAxisNode( graph, mvt ) {
+  function XAxisNode( graph, modelViewTransform ) {
 
     Node.call( this );
 
     // horizontal line with arrows at both ends
-    var tailLocation = new Vector2( mvt.modelToViewX( graph.xRange.min - AXIS_EXTENT ), mvt.modelToViewY( 0 ) );
-    var tipLocation = new Vector2( mvt.modelToViewX( graph.xRange.max + AXIS_EXTENT ), mvt.modelToViewY( 0 ) );
+    var tailLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.min - AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
+    var tipLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.max + AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
     var lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
       doubleHead: true,
       headHeight: AXIS_ARROW_SIZE.height,
@@ -161,8 +161,8 @@ define( function( require ) {
     for ( var i = 0; i < numberOfTicks; i++ ) {
       var modelX = graph.xRange.min + i;
       if ( modelX !== 0 ) { // skip the origin
-        var x = mvt.modelToViewX( modelX );
-        var y = mvt.modelToViewY( 0 );
+        var x = modelViewTransform.modelToViewX( modelX );
+        var y = modelViewTransform.modelToViewY( 0 );
         if ( Math.abs( modelX ) % MAJOR_TICK_SPACING === 0 ) {
           // major tick
           this.addChild( new MajorTickNode( x, y, modelX, true ) );
@@ -183,16 +183,16 @@ define( function( require ) {
 
   /**
    * @param {Graph} graph
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function YAxisNode( graph, mvt ) {
+  function YAxisNode( graph, modelViewTransform ) {
 
     Node.call( this );
 
     // vertical line with arrows at both ends
-    var tailLocation = new Vector2( mvt.modelToViewX( 0 ), mvt.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
-    var tipLocation = new Vector2( mvt.modelToViewX( 0 ), mvt.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
+    var tailLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
+    var tipLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
     var lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
       doubleHead: true,
       headHeight: AXIS_ARROW_SIZE.height,
@@ -213,8 +213,8 @@ define( function( require ) {
     for ( var i = 0; i < numberOfTicks; i++ ) {
       var modelY = graph.yRange.min + i;
       if ( modelY !== 0 ) { // skip the origin
-        var x = mvt.modelToViewX( 0 );
-        var y = mvt.modelToViewY( modelY );
+        var x = modelViewTransform.modelToViewX( 0 );
+        var y = modelViewTransform.modelToViewY( modelY );
         if ( Math.abs( modelY ) % MAJOR_TICK_SPACING === 0 ) {
           // major tick
           this.addChild( new MajorTickNode( x, y, modelY, false ) );
@@ -235,16 +235,16 @@ define( function( require ) {
 
   /**
    * @param {Graph} graph
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function GridNode( graph, mvt ) {
+  function GridNode( graph, modelViewTransform ) {
     Node.call( this );
 
     // background
     var backgroundNode = new Rectangle(
-      mvt.modelToViewX( graph.xRange.min ), mvt.modelToViewY( graph.yRange.max ),
-      mvt.modelToViewDeltaX( graph.getWidth() ), mvt.modelToViewDeltaY( -graph.getHeight() ),
+      modelViewTransform.modelToViewX( graph.xRange.min ), modelViewTransform.modelToViewY( graph.yRange.max ),
+      modelViewTransform.modelToViewDeltaX( graph.getWidth() ), modelViewTransform.modelToViewDeltaY( -graph.getHeight() ),
       { fill: GRID_BACKGROUND } );
     this.addChild( backgroundNode );
 
@@ -252,12 +252,12 @@ define( function( require ) {
     var horizontalGridLinesNode = new Node();
     this.addChild( horizontalGridLinesNode );
     var numberOfHorizontalGridLines = graph.getHeight() + 1;
-    var minX = mvt.modelToViewX( graph.xRange.min );
-    var maxX = mvt.modelToViewX( graph.xRange.max );
+    var minX = modelViewTransform.modelToViewX( graph.xRange.min );
+    var maxX = modelViewTransform.modelToViewX( graph.xRange.max );
     for ( var i = 0; i < numberOfHorizontalGridLines; i++ ) {
       var modelY = graph.yRange.min + i;
       if ( modelY !== 0 ) { // skip origin, x axis will live here
-        var yOffset = mvt.modelToViewY( modelY );
+        var yOffset = modelViewTransform.modelToViewY( modelY );
         var isMajorX = Math.abs( modelY ) % MAJOR_TICK_SPACING === 0;
         horizontalGridLinesNode.addChild( new GridLineNode( minX, yOffset, maxX, yOffset, isMajorX ) );
       }
@@ -267,12 +267,12 @@ define( function( require ) {
     var verticalGridLinesNode = new Node();
     this.addChild( verticalGridLinesNode );
     var numberOfVerticalGridLines = graph.getWidth() + 1;
-    var minY = mvt.modelToViewY( graph.yRange.max ); // yes, swap min and max
-    var maxY = mvt.modelToViewY( graph.yRange.min );
+    var minY = modelViewTransform.modelToViewY( graph.yRange.max ); // yes, swap min and max
+    var maxY = modelViewTransform.modelToViewY( graph.yRange.min );
     for ( var j = 0; j < numberOfVerticalGridLines; j++ ) {
       var modelX = graph.xRange.min + j;
       if ( modelX !== 0 ) { // skip origin, y axis will live here
-        var xOffset = mvt.modelToViewX( modelX );
+        var xOffset = modelViewTransform.modelToViewX( modelX );
         var isMajorY = Math.abs( modelX ) % MAJOR_TICK_SPACING === 0;
         verticalGridLinesNode.addChild( new GridLineNode( xOffset, minY, xOffset, maxY, isMajorY ) );
       }
@@ -285,15 +285,15 @@ define( function( require ) {
 
   /**
    * @param {Graph} graph
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function GraphNode( graph, mvt ) {
+  function GraphNode( graph, modelViewTransform ) {
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
     Node.call( this );
-    this.addChild( new GridNode( graph, mvt ) );
-    this.addChild( new XAxisNode( graph, mvt ) );
-    this.addChild( new YAxisNode( graph, mvt ) );
+    this.addChild( new GridNode( graph, modelViewTransform ) );
+    this.addChild( new XAxisNode( graph, modelViewTransform ) );
+    this.addChild( new YAxisNode( graph, modelViewTransform ) );
   }
 
   return inherit( Node, GraphNode );

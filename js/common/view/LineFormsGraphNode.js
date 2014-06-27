@@ -35,20 +35,20 @@ define( function( require ) {
   function LineFormsGraphNode( model, viewProperties, equationType ) {
 
     var thisNode = this;
-    GraphNode.call( thisNode, model.graph, model.mvt );
+    GraphNode.call( thisNode, model.graph, model.modelViewTransform );
 
     thisNode.model = model; // @private
     thisNode.viewProperties = viewProperties; // @private
     this.equationType = equationType; // @private
 
     // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
-    thisNode.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.mvt,
+    thisNode.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform,
       { equationType: equationType } ); // @private
     thisNode.standardLinesParentNode = new Node(); // @private
     thisNode.savedLinesParentNode = new Node(); // @private
 
     // Slope tool
-    thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.mvt ); // @private
+    thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
 
     // Rendering order
     thisNode.addChild( this.interactiveLineNode );
@@ -91,7 +91,7 @@ define( function( require ) {
 
     // @private Called when a standard line is added to the model.
     standardLineAdded: function( line ) {
-      this.standardLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.mvt,
+      this.standardLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform,
         { equationType: this.equationType } ) );
     },
 
@@ -102,7 +102,7 @@ define( function( require ) {
 
     // @private Called when a saved line is added to the model.
     savedLineAdded: function( line ) {
-      this.savedLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.mvt,
+      this.savedLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform,
         { equationType: this.equationType } ) );
     },
 

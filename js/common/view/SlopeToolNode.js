@@ -26,15 +26,15 @@ define( function( require ) {
 
   /**
    * @param {Property<Line>} lineProperty
-   * @param {ModelViewTransform2} mvt
+   * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
-  function SlopeToolNode( lineProperty, mvt ) {
+  function SlopeToolNode( lineProperty, modelViewTransform ) {
 
     var thisNode = this;
 
     thisNode.lineProperty = lineProperty; // @private
-    thisNode.mvt = mvt; // @private
+    thisNode.modelViewTransform = modelViewTransform; // @private
 
     // Values
     var numberOptions = {
@@ -56,7 +56,7 @@ define( function( require ) {
       lineWidth: 1.75,
       stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
       arrowTipSize: new Dimension2( 10, 10 ),
-      delimiterLength: 0.5 * mvt.modelToViewDeltaX( 1 ) // half of one cell in the graph
+      delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
     };
     thisNode.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
     thisNode.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
@@ -72,7 +72,7 @@ define( function( require ) {
     Node.call( thisNode, { children: [ thisNode.parentNode ] } );
 
     lineProperty.link( function( line ) {
-      thisNode.update( line, mvt );
+      thisNode.update( line, modelViewTransform );
     } );
   }
 
@@ -87,12 +87,12 @@ define( function( require ) {
       var doUpdate = ( visible && !this.visible );
       Node.prototype.setVisible.call( this, visible );
       if ( doUpdate ) {
-        this.update( this.lineProperty.get(), this.mvt );
+        this.update( this.lineProperty.get(), this.modelViewTransform );
       }
     },
 
     // @private
-    update: function( line, mvt ) {
+    update: function( line, modelViewTransform ) {
 
       // update only if visible
       if ( !this.visible ) { return; }
@@ -108,12 +108,12 @@ define( function( require ) {
       this.runProperty.set( line.run );
 
       // compute view coordinates
-      var gridXSpacing = mvt.modelToViewDeltaX( 1 );
-      var gridYSpacing = mvt.modelToViewDeltaY( 1 );
-      var x1 = mvt.modelToViewX( line.x1 );
-      var y1 = mvt.modelToViewY( line.y1 );
-      var x2 = mvt.modelToViewX( line.x2 );
-      var y2 = mvt.modelToViewY( line.y2 );
+      var gridXSpacing = modelViewTransform.modelToViewDeltaX( 1 );
+      var gridYSpacing = modelViewTransform.modelToViewDeltaY( 1 );
+      var x1 = modelViewTransform.modelToViewX( line.x1 );
+      var y1 = modelViewTransform.modelToViewY( line.y1 );
+      var x2 = modelViewTransform.modelToViewX( line.x2 );
+      var y2 = modelViewTransform.modelToViewY( line.y2 );
 
       // rise
       var offsetFactor = 0.6;

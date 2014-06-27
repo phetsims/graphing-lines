@@ -332,7 +332,7 @@ define( function( require ) {
         if ( Util.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
           riseNode.visible = true;
-          riseNode.text = Util.toFixed( line.getSlope(), 0 );
+          riseNode.text = Util.toFixed( Math.abs( line.getSlope() ), 0 );
           riseNode.fill = lineColor;
           riseNode.left = nextXOffset;
           riseNode.y = slopeIsNode.y;

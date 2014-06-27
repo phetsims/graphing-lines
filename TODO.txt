@@ -1,5 +1,4 @@
 TODO list for graphing-lines
 
-- Slope screen: if slope is a negative integer, line is labeled "Slope is - -3" (double negative sign)
 - create screen icons programmatically
 - code review

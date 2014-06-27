@@ -1,3 +1,4 @@
+6/26/14 set all fudge factors in EquationNode to zero, it looks better
 6/26/14 fix layout of 'Place The Points' challenges, broken by commit 263f16b9ba88520cebd832c2fb7d934fa7a24681
 6/26/14 #15 code review: replace mvt with modelViewTransform throughout
 6/26/14 simplify PointTool.isOnLine

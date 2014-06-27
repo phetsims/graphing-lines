@@ -36,12 +36,17 @@ define( function( require ) {
      */
     this.slopeSignYOffset = 0;
 
-    // fudge factors for horizontal lines, to vertically center them with equals sign (set by visual inspection)
-    this.slopeSignYFudgeFactor = 0.07 * pointSize;
-    this.operatorYFudgeFactor = 0.07 * pointSize;
-    this.fractionLineYFudgeFactor = 0.07 * pointSize;
-    this.undefinedSlopeYFudgeFactor = 0.07 * pointSize;
-    this.equalsSignFudgeFactor = 0.1 * pointSize;
+    /*
+     * Fudge factors for horizontal lines, to vertically center them with equals sign (set by visual inspection).
+     * Note that these are currently all zero, and that looks good in JavaScript.
+     * In Java, they were a function of pointSize.
+     * We're keeping this feature in case future 'tweaks' are needed.
+     */
+    this.slopeSignYFudgeFactor = 0;
+    this.operatorYFudgeFactor = 0;
+    this.fractionLineYFudgeFactor = 0;
+    this.undefinedSlopeYFudgeFactor = 0;
+    this.equalsSignFudgeFactor = 0;
 
     // thickness of the fraction divisor line
     this.fractionLineThickness = 0.06 * pointSize;

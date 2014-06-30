@@ -50,8 +50,7 @@ define( function( require ) {
       {
         x1Range = new Range( -9, 4 );
         y1Range = new Range( -9, 4 );
-        assert && assert( x1Range.max > 0 && y1Range.max > 0 );
-        assert && assert( x1Range.min < 0 && y1Range.min < 0 );
+        assert && assert( xRange.containsRange( x1Range ) && yRange.containsRange( y1Range ) );
 
         // all points in Quadrant 1
         quadrant1Points = [];
@@ -83,7 +82,7 @@ define( function( require ) {
 
       // for y-intercept manipulation challenges, one must be positive, one negative
       yInterceptRange = new Range( -6, 4 );
-      assert && assert( yInterceptRange.min < 0 && yInterceptRange.max > 0 );
+      assert && assert( yRange.containsRange( yInterceptRange ) );
       yInterceptArrays = [
         RandomChooser.rangeToArray( new Range( yInterceptRange.min, -1 ) ),
         RandomChooser.rangeToArray( new Range( 1, yInterceptRange.max ) )

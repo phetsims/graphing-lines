@@ -63,8 +63,10 @@ define( function( require ) {
           equationForm = RandomChooser.choose( equationForms );
 
           // random points
-          xList = RandomChooser.rangeToArray( new Range( -7, 7 ) );
-          yList = RandomChooser.rangeToArray( new Range( -7, 7 ) );
+          var range = new Range( -7, 7 );
+          assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
+          xList = RandomChooser.rangeToArray( range );
+          yList = RandomChooser.rangeToArray( range );
           x1 = 0; // y-intercept must be an integer since we're mismatching representations
           y1 = RandomChooser.choose( yList );
           x2 = RandomChooser.choose( xList );

@@ -57,14 +57,14 @@ define( function( require ) {
 
     // Guess equation
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    thisNode.equatioNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
+    thisNode.equationNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
 
     // 'Not A Line', for situations where 3-points do not define a line
     thisNode.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
     // Guess
     thisNode.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
-      new Node( { children: [ thisNode.equatioNode, thisNode.notALineNode ] } ) );
+      new Node( { children: [ thisNode.equationNode, thisNode.notALineNode ] } ) );
 
     // Graph
     thisNode.graphNode = this.createGraphNode( challenge );
@@ -110,8 +110,8 @@ define( function( require ) {
       if ( line ) {
         guessLineProperty.set( line ); // updates equationNode
       }
-      thisNode.equatioNode.visible = !!line; // cast to boolean
-      thisNode.notALineNode.visible = !thisNode.equatioNode.visible;
+      thisNode.equationNode.visible = !!line; // cast to boolean
+      thisNode.notALineNode.visible = !thisNode.equationNode.visible;
 
       // visibility of correct/incorrect icons
       updateIcons();

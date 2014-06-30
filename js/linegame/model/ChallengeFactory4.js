@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Creates game challenges for Level 4, as specified in the design document).
+ * Creates game challenges for Level 4, as specified in the design document.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

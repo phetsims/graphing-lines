@@ -64,7 +64,7 @@ define( function( require ) {
 
           // random points
           var range = new Range( -7, 7 );
-          assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
+          assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
           xList = RandomChooser.rangeToArray( range );
           yList = RandomChooser.rangeToArray( range );
           x1 = 0; // y-intercept must be an integer since we're mismatching representations

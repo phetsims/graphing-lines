@@ -40,7 +40,7 @@ define( function( require ) {
 
     // all ranges limited to [-5,5]
     var range = new Range( -5, 5 );
-    assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
+    assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
     var xList = RandomChooser.rangeToArray( range );
     var yList = RandomChooser.rangeToArray( range );
     var riseList = RandomChooser.rangeToArray( range, { excludeZero: true } ); // prevent zero slope
@@ -110,7 +110,7 @@ define( function( require ) {
 
         // random points
         var range = new Range( -5, 5 );
-        assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
+        assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
         xList = RandomChooser.rangeToArray( range );
         yList = RandomChooser.rangeToArray( range);
         x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : RandomChooser.choose( xList );

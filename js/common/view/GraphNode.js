@@ -37,7 +37,7 @@ define( function( require ) {
   var MAJOR_GRID_LINE_WIDTH = 1.0;
   var MAJOR_GRID_LINE_COLOR = 'rgb( 192, 192, 192 )';
 
-  // axes                                                                                                                                          n
+  // axes
   var AXIS_ARROW_SIZE = new Dimension2( 10, 10 );
   var AXIS_THICKNESS = 1;
   var AXIS_COLOR = 'black';

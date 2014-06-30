@@ -88,7 +88,7 @@ define( function( require ) {
       var x1, y1, x2, y2, xList, yList, rise, run, i;
 
       // for y-intercept manipulation challenges
-      yIntercepts = RandomChooser.rangeToArray( new Range( -10, 10 ) );
+      yIntercepts = RandomChooser.rangeToArray( yRange );
 
       // Make-the-Equation, slope-intercept form, slope=0
       yIntercept = RandomChooser.choose( yIntercepts );

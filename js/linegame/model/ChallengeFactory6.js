@@ -41,7 +41,7 @@ define( function( require ) {
       var yIntercepts, equationForms, equationForm, slope, yIntercept, line;
       var x1, y1, x2, y2, xList, yList, i;
 
-      yIntercepts = RandomChooser.rangeToArray( new Range( -10, 10 ) );
+      yIntercepts = RandomChooser.rangeToArray( yRange );
 
       // Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
       yIntercept = RandomChooser.choose( yIntercepts );

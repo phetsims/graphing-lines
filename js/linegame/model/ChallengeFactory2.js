@@ -98,7 +98,7 @@ define( function( require ) {
 
       // all variables, manually hoisted
       var challenges = [];
-      var slopeArrays, slopeArrayIndices, yInterceptArrays, yInterceptArrayIndices, yInterceptRange;
+      var slopeArrays, slopeArrayIndices, yInterceptArrays, yInterceptArrayIndices;
       var pointSlopeManipulationModes;
       var slope, yIntercept, point, description, manipulationMode;
 
@@ -107,11 +107,9 @@ define( function( require ) {
       slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
 
       // for y-intercept manipulation challenges, one must be positive, one negative
-      yInterceptRange = new Range( -10, 10 );
-      assert && assert( yInterceptRange.min < 0 && yInterceptRange.max > 0 );
       yInterceptArrays = [
-        RandomChooser.rangeToArray( new Range( yInterceptRange.min, -1 ) ),
-        RandomChooser.rangeToArray( new Range( 1, yInterceptRange.max ) )
+        RandomChooser.rangeToArray( new Range( yRange.min, -1 ) ),
+        RandomChooser.rangeToArray( new Range( 1, yRange.max ) )
       ];
       yInterceptArrayIndices = RandomChooser.rangeToArray( new Range( 0, yInterceptArrays.length - 1 ) );
 

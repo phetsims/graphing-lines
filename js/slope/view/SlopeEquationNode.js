@@ -72,7 +72,12 @@ define( function( require ) {
     var riseProperty = new Property( lineProperty.get().rise );
     var runProperty = new Property( lineProperty.get().run );
 
-    // flag that allows us to update all controls atomically when the model changes
+    /*
+     * Flag that allows us to update all controls atomically when the model changes.
+     * When a picker's value changes, it results in the creation of a new Line.
+     * So if you don't change the pickers atomically to match a new Line instance,
+     * the new Line will be inadvertently replaced with an incorrect line.
+     */
     var updatingControls = false;
 
     // Nodes that could appear is all possible ways to write the equation

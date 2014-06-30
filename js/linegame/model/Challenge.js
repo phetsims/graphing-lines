@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Bounds2 = require( 'DOT/Bounds2' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -18,6 +19,7 @@ define( function( require ) {
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var PropertySet = require( 'AXON/PropertySet' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var putPointsOnLineString = require( 'string!GRAPHING_LINES/putPointsOnLine' );
@@ -33,15 +35,9 @@ define( function( require ) {
    * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change
    * @param {Range} xRange range of the graph's x axis
    * @param {Range} yRange range of the graph's y axis
-   * @param {Vector2} originOffset offset of the origin (center of the graph) in view coordinates
-   * @param {Vector2} pointToolLocation1 location of point tool 1 in model coordinates
-   * @param {Vector2} pointToolLocation2 location of point tool 2 in model coordinates
-   * @param {Bounds2} pointToolDragBounds1 drag bounds of point tool 1 in model coordinates
-   * @param {Bounds2} pointToolDragBounds2 drag bounds of point tool 2 in model coordinates
    * @constructor
    */
-  function Challenge( title, description, answer, equationForm, manipulationMode, xRange, yRange, originOffset,
-                      pointToolLocation1, pointToolLocation2, pointToolDragBounds1, pointToolDragBounds2 ) {
+  function Challenge( title, description, answer, equationForm, manipulationMode, xRange, yRange ) {
 
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
@@ -58,14 +54,14 @@ define( function( require ) {
 
     // model-view transform, created in the model because each challenge subclass may have its own transform
     var modelViewTransformScale = LineGameConstants.GRAPH_WIDTH / xRange.getLength(); // view units / model units
-    this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( originOffset, modelViewTransformScale, -modelViewTransformScale ); // graph on right, y inverted
+    this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( LineGameConstants.ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // graph on right, y inverted
 
     // Graph
     this.graph = new Graph( xRange, yRange );
 
     // Point tools
-    this.pointTool1 = new PointTool( pointToolLocation1, 'up', this.graph.lines, pointToolDragBounds1 );
-    this.pointTool2 = new PointTool( pointToolLocation2, 'down', this.graph.lines, pointToolDragBounds2 );
+    this.pointTool1 = new PointTool( new Vector2( 1.5, -10.5 ), 'up', this.graph.lines, new Bounds2( -13, -13, 14, 15 ) );
+    this.pointTool2 = new PointTool( new Vector2( 1.5, -10.5 ), 'down', this.graph.lines, new Bounds2( -13, -16, 14, 12 ) );
 
     // When the guess changes, update the lines that are 'seen' by the point tools.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );

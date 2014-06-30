@@ -10,12 +10,9 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var Vector2 = require( 'DOT/Vector2' );
 
   // strings
   var graphTheLineString = require( 'string!GRAPHING_LINES/graphTheLine' );
@@ -37,12 +34,7 @@ define( function( require ) {
       equationForm,
       manipulationMode,
       xRange,
-      yRange,
-      LineGameConstants.ORIGIN_OFFSET,
-      new Vector2( 1.5, -10.5 ), /* point tool location 1 (up) */
-      new Vector2( 7, -13 ), /* point tool location 2 (down) */
-      new Bounds2( -13, -13, 14, 15 ),
-      new Bounds2( -13, -16, 14, 12 )
+      yRange
     );
   }
 

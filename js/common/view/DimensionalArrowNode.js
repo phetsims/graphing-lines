@@ -37,7 +37,8 @@ define( function( require ) {
       stroke: 'black',
       lineWidth: 1,
       arrowTipSize: new Dimension2( 6, 8 ), // use even-number dimensions, or tip will look asymmetrical due to rounding
-      delimiterLength: 10
+      delimiterLength: 10,
+      delimitersVisible: true
     }, options );
 
     this.arrowTipSize = options.arrowTipSize; // @private
@@ -47,10 +48,11 @@ define( function( require ) {
     // nodes with dummy initial shapes
     this.lineNode = new Line( 0, 0, 0, 1, options );  // @private
     this.tipNode = new Path( null, options ); // @private
-    this.tipDelimiterNode = new Line( 0, 0, 0, 1, options ); // @private
-    this.tailDelimiterNode = new Line( 0, 0, 0, 1, options ); // @private
+    this.tipDelimiterNode = new Line( 0, 0, 0, 1, _.extend( { visible: options.delimitersVisible }, options ) ); // @private
+    this.tailDelimiterNode = new Line( 0, 0, 0, 1, _.extend( { visible: options.delimitersVisible }, options ) ); // @private
 
-    Node.call( this, { children: [ this.tipDelimiterNode, this.tailDelimiterNode, this.lineNode, this.tipNode ] } );
+    options.children = [ this.tipDelimiterNode, this.tailDelimiterNode, this.lineNode, this.tipNode ];
+    Node.call( this, options );
 
     // initialize
     this.setTailAndTip( tailX, tailY, tipX, tipY );
@@ -68,8 +70,6 @@ define( function( require ) {
      */
     setTailAndTip: function( tailX, tailY, tipX, tipY ) {
 
-      this.lineNode.setLine( tailX, tailY, tipX, tipY );
-
       var tipWidth = this.arrowTipSize.width;
       var tipHeight = this.arrowTipSize.height;
       var tipOffset = this.lineWidth / 2;
@@ -77,12 +77,14 @@ define( function( require ) {
       if ( tailX === tipX ) {
         // vertical arrow
         if ( tipY > tailY ) {
+          this.lineNode.setLine( tailX, tailY, tipX, tipY - ( this.lineWidth / 2 ) );
           // pointing down
           tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY - tipHeight - tipOffset );
           tipShape.lineTo( tipX, tipY - tipOffset );
           tipShape.lineTo( tipX + ( tipWidth / 2 ), tipY - tipHeight - tipOffset );
         }
         else {
+          this.lineNode.setLine( tailX, tailY, tipX, tipY + ( this.lineWidth / 2 ) );
           // pointing up
           tipShape.moveTo( tipX - ( tipWidth / 2 ), tipY + tipHeight + tipOffset );
           tipShape.lineTo( tipX, tipY + tipOffset );
@@ -92,14 +94,17 @@ define( function( require ) {
         this.tailDelimiterNode.setLine( tailX - this.delimiterLength / 2, tailY, tailX + this.delimiterLength / 2, tailY );
       }
       else if ( tailY === tipY ) {
+        this.lineNode.setLine( tailX, tailY, tipX, tipY );
         // horizontal arrow
         if ( tailX > tipX ) {
+          this.lineNode.setLine( tailX, tailY, tipX + ( this.lineWidth / 2 ), tipY );
           // pointing left
           tipShape.moveTo( tipX + tipHeight + tipOffset, tipY - ( tipWidth / 2 ) );
           tipShape.lineTo( tipX + tipOffset, tipY );
           tipShape.lineTo( tipX + tipHeight + tipOffset, tipY + ( tipWidth / 2 ) );
         }
         else {
+          this.lineNode.setLine( tailX, tailY, tipX - ( this.lineWidth / 2 ), tipY );
           // pointing right
           tipShape.moveTo( tipX - tipHeight - tipOffset, tipY - ( tipWidth / 2 ) );
           tipShape.lineTo( tipX - tipOffset, tipY );

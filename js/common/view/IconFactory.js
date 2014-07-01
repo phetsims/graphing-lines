@@ -79,7 +79,7 @@ define( function( require ) {
     // Creates the icon for the 'Slope-Intercept' screen. Positions and sizes are 'eye balled'.
     createSlopeInterceptScreenIcon: function() {
       var lineNode = new ArrowNode( 0.1 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.9 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_OPTIONS );
-      var axisNode = new scenery.Line( 0, 0, 0, SCREEN_ICON_BASE_SIZE.height, { stroke: 'rgb(134,134,134)', lineWidth: 10, lineCap: 'square' } );
+      var axisNode = new scenery.Line( 0, -0.05 * SCREEN_ICON_BASE_SIZE.height, 0, 1.05 * SCREEN_ICON_BASE_SIZE.height, { stroke: 'rgb(134,134,134)', lineWidth: 10 } );
       var riseNode = new DimensionalArrowNode( 0, 0.5 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
       var runNode = new DimensionalArrowNode( 0, 0, 0.45 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
       var interceptNode = new Manipulator( MANIPULATOR_RADIUS, GLColors.INTERCEPT );

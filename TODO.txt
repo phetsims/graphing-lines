@@ -1,4 +1,1 @@
 TODO list for graphing-lines
-
-- create screen icons programmatically
-- code review

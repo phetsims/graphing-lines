@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var Image = require( 'SCENERY/nodes/Image' );
+  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/SCREEN' );
   var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
@@ -19,11 +19,9 @@ define( function( require ) {
   // strings
   var title = require( 'string!GRAPHING_LINES/tab.slope' );
 
-  // images
-  var screenImage = require( 'image!GRAPHING_LINES/Slope-screen.png' );
-
   function SlopeScreen() {
-    Screen.call( this, title, new Image( screenImage ),
+    Screen.call( this, title,
+      IconFactory.createSlopeScreenIcon(),
       function() { return new SlopeModel(); },
       function( model ) { return new SlopeView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

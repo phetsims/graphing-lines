@@ -13,7 +13,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLScoreboard = require( 'GRAPHING_LINES/linegame/view/GLScoreboard' );
+  var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -29,7 +29,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    var scoreboardNode = new GLScoreboard(
+    var scoreboardNode = new ScoreboardBar(
       layoutBounds.width,
       model.challengeIndexProperty,
       model.challengesPerGameProperty,

@@ -1,3 +1,4 @@
+7/7/14 vegas#24 migrate ScoreboardBar to vegas
 # 1.0.0-dev.16 7/1/14
 7/1/14 move equation a bit further away from end of line (offset 60 vs 30), so it doesn't interfere with axis labels quite so often
 7/1/14 #24 fix initial position of 'down' point tool in game

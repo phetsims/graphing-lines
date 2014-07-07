@@ -29,8 +29,5 @@
   "point.unknown": "( ?, ? )",
   "slopeIs": "Slope is",
   "chooseYourLevel": "Choose Your Level",
-  "pattern_Level_0": "Level {0}",
-  "startOver": "Start Over",
-  "pattern_Score_0": "Score: {0}",
-  "pattern_Challenge_0_of_1": "Challenge {0} of {1}"
+  "pattern_Level_0": "Level {0}"
 }

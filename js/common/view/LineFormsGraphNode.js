@@ -51,9 +51,9 @@ define( function( require ) {
     thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
 
     // Rendering order
-    thisNode.addChild( this.interactiveLineNode );
     thisNode.addChild( this.savedLinesParentNode );
     thisNode.addChild( this.standardLinesParentNode );
+    thisNode.addChild( this.interactiveLineNode );
     thisNode.addChild( this.slopeToolNode );
 
     // Add/remove standard lines

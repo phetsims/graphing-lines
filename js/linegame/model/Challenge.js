@@ -97,25 +97,6 @@ define( function( require ) {
     }
   };
 
-  // Creates a standard title for the challenge, based on what the user can manipulate.
-  Challenge.createTitle = function( defaultTitle, manipulationMode ) {
-    if ( manipulationMode === ManipulationMode.SLOPE ) {
-      return setTheSlopeString;
-    }
-    else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
-      return setTheYInterceptString;
-    }
-    else if ( manipulationMode === ManipulationMode.POINT ) {
-      return setThePointString;
-    }
-    else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
-      return putPointsOnLineString;
-    }
-    else {
-      return defaultTitle;
-    }
-  };
-
   return inherit( PropertySet, Challenge, {
 
     /**
@@ -164,6 +145,29 @@ define( function( require ) {
              ' equationForm=' + this.equationForm +
              ' manipulationMode=' + this.manipulationMode +
              ' ]';
+    }
+  }, {
+    /*
+     * Creates a standard title for the challenge, based on what the user can manipulate.
+     * @static
+     * @protected
+     */
+    createTitle: function( defaultTitle, manipulationMode ) {
+      if ( manipulationMode === ManipulationMode.SLOPE ) {
+        return setTheSlopeString;
+      }
+      else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
+        return setTheYInterceptString;
+      }
+      else if ( manipulationMode === ManipulationMode.POINT ) {
+        return setThePointString;
+      }
+      else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
+        return putPointsOnLineString;
+      }
+      else {
+        return defaultTitle;
+      }
     }
   } );
 } );

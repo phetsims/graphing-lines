@@ -290,10 +290,13 @@ define( function( require ) {
    */
   function GraphNode( graph, modelViewTransform ) {
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
-    Node.call( this );
-    this.addChild( new GridNode( graph, modelViewTransform ) );
-    this.addChild( new XAxisNode( graph, modelViewTransform ) );
-    this.addChild( new YAxisNode( graph, modelViewTransform ) );
+    Node.call( this, {
+        children: [
+          new GridNode( graph, modelViewTransform ),
+          new XAxisNode( graph, modelViewTransform ),
+          new YAxisNode( graph, modelViewTransform )
+        ] }
+    );
   }
 
   return inherit( Node, GraphNode );

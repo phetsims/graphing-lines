@@ -89,7 +89,7 @@ define( function( require ) {
     var updatingControls = false;
 
     // Determine the max width of the rise and run pickers.
-    var maxSlopePickerWidth = thisNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
+    var maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     var yNode = new Text( symbolYString, staticOptions );

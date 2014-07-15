@@ -73,6 +73,8 @@ define( function( require ) {
   }
 
   return inherit( Node, EquationNode, {
+    // prototype functions go here
+  }, {
 
     /**
      * Gets the max width for the rise and run pickers used in an interactive equation.
@@ -80,6 +82,7 @@ define( function( require ) {
      * @param {Property<Range>} runRangeProperty
      * @param {GLFont} font
      * @param {Number} decimalPlaces
+     * @static
      */
     computeMaxSlopePickerWidth: function( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {
 

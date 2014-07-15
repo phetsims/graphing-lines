@@ -10,7 +10,6 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function ChallengeFactory() {}
@@ -91,69 +90,6 @@ define( function( require ) {
       assert && assert( graphYRange.contains( y1 ) && !graphYRange.contains( y2 ) );
 
       return new Vector2( x1, y1 );
-    },
-
-    /**
-     * Chooses a y-intercept for a slope, so that the point (x2,y2) defined by
-     * the slope will be within the bounds of the graph.  See issue #37.
-     *
-     * @param {Fraction} slope
-     * @param {Range} yRange range of the graph's y axis
-     * @param {Array<Array<*>>} arrays arrays of yIntercepts, from which the value may be chosen
-     * @param {Array<Number>} indices indices of the arrays that will be considered when choosing a value, optional
-     * @returns {*}
-     */
-    chooseYInterceptForSlope: function( slope, yRange, arrays, indices ) {
-
-      indices = indices || RandomChooser.rangeToArray( { min: 0, max: arrays.length - 1 } );
-
-      var yIntercept;
-      var found = false;
-
-      var rejectedIndices = [];
-      while ( !found && indices.length > 0 ) {
-
-        // randomly choose an array
-        var index = RandomChooser.randomIndex( indices );
-        var array = arrays[ indices[ index ] ];
-        indices.splice( index, 1 ); // remove the array's index
-
-        // find a value that works, remember values that don't work
-        var rejectedValues = [];
-        while ( !found && array.length > 0 ) {
-          yIntercept = RandomChooser.choose( array );
-          if ( yRange.contains( yIntercept + slope.numerator ) ) {
-            found = true;
-          }
-          else {
-            rejectedValues.push( yIntercept );
-          }
-        }
-
-        // if this array didn't work, remember it's index
-        if ( !found ) {
-          rejectedIndices.push( array );
-        }
-
-        // put the rejected values back into the pool
-        rejectedValues.forEach( function( value ) {
-          array.push( value );
-        } );
-      }
-
-      // put rejected indices back into the pool
-      rejectedIndices.forEach( function( index ) {
-        indices.push( index );
-      } );
-
-      // last-ditch effort, if this happens then specifications for the y-Intercept arrays should be reconsidered
-      if ( !found ) {
-        yIntercept = yRange.max - Math.abs( slope.rise );
-        console.log( 'WARNING: ChallengeFactory.chooseYInterceptForSlope defaulted to yIntercept=' + yIntercept + ' for slope=' + slope );
-      }
-
-      assert && assert( yRange.contains( yIntercept + slope.rise ) );
-      return yIntercept;
     }
   } );
 } );

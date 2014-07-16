@@ -1,3 +1,4 @@
+7/16/14 #37 fix Challenge.createInitialGuess so that slope manipulator is initially on the graph is all cases
 # 1.0.0-dev.17 7/11/14
 7/10/14 #33 move interactive line in front of standard and saves lines on graph
 7/10/14 #36 add spaces around '=' in 'x = 3 (slope undefined)'

@@ -42,7 +42,7 @@ define( function( require ) {
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
     PropertySet.call( this, {
-      guess: createInitialGuess( answer, manipulationMode ) // {Line} the user's current guess
+      guess: createInitialGuess( answer, manipulationMode, xRange, yRange ) // {Line} the user's current guess
     } );
 
     this.title = title;
@@ -71,12 +71,14 @@ define( function( require ) {
    * Creates an initial guess, based on the answer and what the user can manipulate.
    * @param {Line} answer
    * @param {ManipulationMode} manipulationMode
+   * @param {Range} xRange
+   * @param {Range} yRange
    * @returns {Line}
    */
-  var createInitialGuess = function( answer, manipulationMode ) {
+  var createInitialGuess = function( answer, manipulationMode, xRange, yRange ) {
     if ( manipulationMode === ManipulationMode.SLOPE ) {
       // slope is variable, so use the answer's point
-      return Line.createPointSlope( answer.x1, answer.y1, 1, 1, LineGameConstants.GUESS_COLOR );
+      return Line.createPointSlope( answer.x1, answer.y1, ( answer.y1 === yRange.max ? -1 : 1 ), ( answer.x1 === xRange.max ? -1 : 1 ), LineGameConstants.GUESS_COLOR );
     }
     else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
       // intercept is variable, so use the answer's slope

@@ -1,3 +1,4 @@
+7/16/14 check in dependencies.json for 1.0.0-rc.2
 # 1.0.0-rc.2 7/16/14
 7/16/14 #37 fix Challenge.createInitialGuess so that slope manipulator is initially on the graph is all cases
 # 1.0.0-dev.17 7/11/14

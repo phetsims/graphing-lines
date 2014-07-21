@@ -1,3 +1,4 @@
+7/21/14 check in dependencies.json for 1.0.0
 # 1.0.0 7/21/14
 7/16/14 check in dependencies.json for 1.0.0-rc.2
 # 1.0.0-rc.2 7/16/14

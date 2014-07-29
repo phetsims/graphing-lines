@@ -1,3 +1,4 @@
+7/29/14 check is graphing-lines-128.png (website thumbnail)
 7/15/14 make EquationNode.computeMaxSlopePickerWidth static
 7/15/14 move definition of Challenge.createTitle into inherit call
 7/15/14 #37 fix Challenge.createInitialGuess so that slope manipulator is initially on the graph is all cases

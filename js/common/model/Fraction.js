@@ -18,7 +18,7 @@ define( function( require ) {
    * @constructor
    */
   function Fraction( numerator, denominator ) {
-    assert && assert( Util.isInteger( numerator ) ) && assert( Util.isInteger( numerator ) );
+    assert && assert( Util.isInteger( numerator ) ) && assert( Util.isInteger( denominator ) );
     this.numerator = numerator;
     this.denominator = denominator;
   }

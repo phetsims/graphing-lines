@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Fraction = require( 'GRAPHING_LINES/common/model/Fraction' );
+  var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Util = require( 'DOT/Util' );

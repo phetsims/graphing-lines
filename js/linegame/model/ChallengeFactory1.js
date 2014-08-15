@@ -12,7 +12,7 @@ define( function( require ) {
   // modules
   var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var Fraction = require( 'GRAPHING_LINES/common/model/Fraction' );
+  var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );

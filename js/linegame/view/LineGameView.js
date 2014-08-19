@@ -25,7 +25,7 @@ define( function( require ) {
   function LineGameView( model ) {
 
     var thisView = this;
-    ScreenView.call( thisView, { renderer: GLConstants.RENDERER } );
+    ScreenView.call( thisView, GLConstants.SCREEN_VIEW_OPTIONS );
 
     // audio
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
@@ -49,8 +49,6 @@ define( function( require ) {
   }
 
   return inherit( ScreenView, LineGameView, {
-
-    layoutBounds: GLConstants.LAYOUT_BOUNDS,
 
     step: function( elapsedTime ) {
       if ( this.resultsNode.visible ) {

@@ -27,7 +27,7 @@ define( function( require ) {
   function LineFormsView( model, viewProperties, graphNode, graphControls, equationControls ) {
 
     var thisView = this;
-    ScreenView.call( thisView, { renderer: GLConstants.RENDERER } );
+    ScreenView.call( thisView, GLConstants.SCREEN_VIEW_OPTIONS );
 
     thisView.viewProperties = viewProperties; // @private
 
@@ -89,5 +89,5 @@ define( function( require ) {
     controlsParent.top = yMargin;
   }
 
-  return inherit( ScreenView, LineFormsView, { layoutBounds: GLConstants.LAYOUT_BOUNDS } );
+  return inherit( ScreenView, LineFormsView );
 } );

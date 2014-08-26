@@ -46,7 +46,7 @@ define( function( require ) {
     }, options );
 
     // Expand/collapse button
-    var expandCollapseButton = new ExpandCollapseButton( 30, maximizedProperty );
+    var expandCollapseButton = new ExpandCollapseButton( maximizedProperty, { sideLength: 30 } );
 
     // Save Line button
     var saveLineButton = new TextPushButton( saveLineString, {

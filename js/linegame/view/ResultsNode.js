@@ -11,11 +11,12 @@ define( function( require ) {
 
   // modules
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  var GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
 
   /**
    * @param {LineGameModel} model
@@ -35,7 +36,7 @@ define( function( require ) {
       if ( gamePhase === GamePhase.RESULTS ) {
 
         // game reward, shown for perfect score (or with 'reward' query parameter)
-        if ( model.isPerfectScore() || window.phetcommon.getQueryParameter( 'reward' ) ) {
+        if ( model.isPerfectScore() || GLQueryParameters.REWARD ) {
 
           audioPlayer.gameOverPerfectScore();
 

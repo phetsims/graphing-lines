@@ -13,6 +13,7 @@ define( function( require ) {
 
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
@@ -42,7 +43,7 @@ define( function( require ) {
     GraphNode.call( thisNode, challenge.graph, challenge.modelViewTransform );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
-    if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+    if ( GLQueryParameters.DEV ) {
       thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
     }
 

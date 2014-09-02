@@ -20,6 +20,7 @@ define( function( require ) {
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -146,7 +147,7 @@ define( function( require ) {
     } );
 
     // dev-mode options
-    if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+    if ( GLQueryParameters.DEV ) {
 
       // description at leftTop
       var descriptionNode = new Text( this.constructor.name + ': ' + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );

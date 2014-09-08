@@ -29,7 +29,7 @@ define( function( require ) {
    * @param {Number} tailY
    * @param {Number} tipX
    * @param {Number} tipY
-   * @param {*} options
+   * @param {Object} options
    */
   function DimensionalArrowNode( tailX, tailY, tipX, tipY, options ) {
 

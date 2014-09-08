@@ -27,7 +27,7 @@ define( function( require ) {
    * @param {Property<Line>} lineProperty
    * @param {Graph} graph
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function LineNode( lineProperty, graph, modelViewTransform, options ) {

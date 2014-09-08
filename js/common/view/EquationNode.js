@@ -20,7 +20,7 @@ define( function( require ) {
 
   /**
    * @param {Number} pointSize point size of the font used to render the equation
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function EquationNode( pointSize, options ) {

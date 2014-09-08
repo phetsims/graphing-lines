@@ -22,7 +22,7 @@ define( function( require ) {
    * @param {Property<Number>} a2 the coordinate in the second point that is on the same axis as a1
    * @param {Property<Number>} b2 the coordinate in the second point that is on the same axis as b1
    * @param {Property<Range>} range
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function CoordinatePicker( a1, b1, a2, b2, range, options ) {

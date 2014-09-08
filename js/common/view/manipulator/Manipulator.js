@@ -21,7 +21,7 @@ define( function( require ) {
   /**
    * @param {number} radius radius of the sphere
    * @param {Color|String} color base color used to shade the sphere
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function Manipulator( radius, color, options ) {

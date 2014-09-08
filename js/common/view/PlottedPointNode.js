@@ -16,7 +16,7 @@ define( function( require ) {
   /**
    * @param {Number} radius
    * @param {Color|String} color
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function PlottedPointNode( radius, color, options ) {

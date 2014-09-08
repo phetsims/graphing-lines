@@ -16,7 +16,7 @@ define( function( require ) {
   /**
    * @param {Number} width
    * @param {Number} height
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function UndefinedSlopeIndicator( width, height, options ) {

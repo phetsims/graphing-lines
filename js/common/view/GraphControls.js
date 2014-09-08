@@ -34,7 +34,7 @@ define( function( require ) {
    * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?
    * @param {Property<Boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
    * @param {ObservableArray<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
-   * @param {*} options should check boxes for standard lines be accessible?
+   * @param {Object} options should check boxes for standard lines be accessible?
    * @constructor
    */
   function GraphControls( linesVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {

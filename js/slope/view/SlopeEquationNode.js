@@ -42,7 +42,7 @@ define( function( require ) {
    * Creates an interactive equation. x1, y1, x2 and y2 are interactive.
    *
    * @param {Property<Line>} lineProperty
-   * @param {*} options
+   * @param {Object} options
    * @constructor
    */
   function SlopeEquationNode( lineProperty, options ) {

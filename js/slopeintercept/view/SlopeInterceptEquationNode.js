@@ -45,7 +45,7 @@ define( function( require ) {
 
   /**
    * @param {Property<Line>} lineProperty
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function SlopeInterceptEquationNode( lineProperty, options ) {

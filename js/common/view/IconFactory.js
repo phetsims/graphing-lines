@@ -42,7 +42,7 @@ define( function( require ) {
    * This was factored out because at various times one or more screen icons were created programmatically.
    *
    * @param {Node} contentNode the node to be placed on a background
-   * @param {Object} options
+   * @param {Object} [options]
    * @returns {Node}
    */
   var createScreenIcon = function( contentNode, options ) {

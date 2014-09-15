@@ -25,7 +25,7 @@ define( function( require ) {
 
   /**
    * @param {Challenge} challenge
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function ChallengeGraphNode( challenge, options ) {

@@ -18,7 +18,7 @@ define( function( require ) {
 
   /**
    * @param {Property<Number>} valueProperty
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function NumberBackgroundNode( valueProperty, options ) {

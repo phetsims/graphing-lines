@@ -34,7 +34,7 @@ define( function( require ) {
    * @param {Property<Boolean>} maximizedProperty
    * @param {Property<Boolean>} linesVisibleProperty
    * @param {Node} interactiveEquationNode
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function EquationControls( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {

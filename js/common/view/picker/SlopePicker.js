@@ -19,7 +19,7 @@ define( function( require ) {
    * @param {Property<Number>} variableComponent the part of the slope we're manipulating
    * @param {Property<Number>} fixedComponent the part of the slope we're not manipulating
    * @param {Property<Range>} variableRange the range of variableComponent
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function SlopePicker( variableComponent, fixedComponent, variableRange, options ) {

@@ -19,7 +19,7 @@ define( function( require ) {
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
 
   /**
-   * @param {Number} pointSize point size of the font used to render the equation
+   * @param {number} pointSize point size of the font used to render the equation
    * @param {Object} [options]
    * @constructor
    */
@@ -78,10 +78,10 @@ define( function( require ) {
 
     /**
      * Gets the max width for the rise and run pickers used in an interactive equation.
-     * @param {Property<Range>} riseRangeProperty
-     * @param {Property<Range>} runRangeProperty
+     * @param {Property.<Range>} riseRangeProperty
+     * @param {Property.<Range>} runRangeProperty
      * @param {GLFont} font
-     * @param {Number} decimalPlaces
+     * @param {number} decimalPlaces
      * @static
      */
     computeMaxSlopePickerWidth: function( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {

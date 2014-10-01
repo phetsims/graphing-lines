@@ -136,9 +136,9 @@ define( function( require ) {
    * Creates an interactive equation.
    * @param {EquationForm} equationForm
    * @param {ManipulationMode} manipulationMode
-   * @param {Property<Line>} lineProperty
+   * @param {Property.<Line>} lineProperty
    * @param {Graph} graph
-   * @param {Number} fontSize
+   * @param {number} fontSize
    * @param {Color|String} staticColor
    */
   var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {

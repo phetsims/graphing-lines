@@ -19,9 +19,9 @@ define( function( require ) {
 
   /**
    * Drag handler for slope manipulator.
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} riseRangeProperty
-   * @param {Property<Range>} runRangeProperty
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} riseRangeProperty
+   * @param {Property.<Range>} runRangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
@@ -58,10 +58,10 @@ define( function( require ) {
   inherit( SimpleDragHandler, SlopeDragHandler );
 
   /**
-   * @param {Number} radius
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} riseRangeProperty
-   * @param {Property<Range>} runRangeProperty
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} riseRangeProperty
+   * @param {Property.<Range>} runRangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */

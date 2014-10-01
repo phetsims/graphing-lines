@@ -16,9 +16,9 @@ define( function( require ) {
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
-   * @param {Property<Number>} variableComponent the part of the slope we're manipulating
-   * @param {Property<Number>} fixedComponent the part of the slope we're not manipulating
-   * @param {Property<Range>} variableRange the range of variableComponent
+   * @param {Property.<number>} variableComponent the part of the slope we're manipulating
+   * @param {Property.<number>} fixedComponent the part of the slope we're not manipulating
+   * @param {Property.<Range>} variableRange the range of variableComponent
    * @param {Object} [options]
    * @constructor
    */

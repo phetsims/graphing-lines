@@ -18,7 +18,7 @@ define( function( require ) {
   var graphTheLineString = require( 'string!GRAPHING_LINES/graphTheLine' );
 
   /**
-   * @param {String} description brief description of the challenge, visible in dev versions
+   * @param {string} description brief description of the challenge, visible in dev versions
    * @param {Line} answer  the correct answer
    * @param {EquationForm} equationForm specifies the form of the equation
    * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change

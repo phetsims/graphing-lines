@@ -20,8 +20,8 @@ define( function( require ) {
 
   /**
    * Drag handler for y-intercept manipulator.
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} y1RangeProperty
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} y1RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
@@ -58,9 +58,9 @@ define( function( require ) {
   inherit( SimpleDragHandler, YInterceptDragHandler );
 
   /**
-   * @param {Number} radius
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} y1RangeProperty
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} y1RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */

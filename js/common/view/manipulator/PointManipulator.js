@@ -19,8 +19,8 @@ define( function( require ) {
 
   /**
    * Drag handler for arbitrary point.
-   * @param {Property<Vector2>} pointProperty
-   * @param {Array<Property<Vector2>>} otherPointProperties points that the point can't be on
+   * @param {Property.<Vector2>} pointProperty
+   * @param {Property.<Vector2>[]} otherPointProperties points that the point can't be on
    * @param {Range} xRange
    * @param {Range} yRange
    * @param {ModelViewTransform2} modelViewTransform
@@ -70,9 +70,9 @@ define( function( require ) {
   inherit( SimpleDragHandler, PointDragHandler );
 
   /**
-   * @param {Number} radius
-   * @param {Property<Vector2>} pointProperty
-   * @param {Array<Property<Vector2>>} otherPointProperties
+   * @param {number} radius
+   * @param {Property.<Vector2>} pointProperty
+   * @param {Property.<Vector2>[]} otherPointProperties
    * @param {Range} xRange
    * @param {Range} yRange
    * @param {ModelViewTransform2} modelViewTransform

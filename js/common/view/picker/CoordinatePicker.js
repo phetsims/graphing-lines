@@ -17,11 +17,11 @@ define( function( require ) {
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
-   * @param {Property<Number>} a1 the coordinate that this picker changes
-   * @param {Property<Number>} b1 the other coordinate of the point that has coordinate a1
-   * @param {Property<Number>} a2 the coordinate in the second point that is on the same axis as a1
-   * @param {Property<Number>} b2 the coordinate in the second point that is on the same axis as b1
-   * @param {Property<Range>} range
+   * @param {Property.<number>} a1 the coordinate that this picker changes
+   * @param {Property.<number>} b1 the other coordinate of the point that has coordinate a1
+   * @param {Property.<number>} a2 the coordinate in the second point that is on the same axis as a1
+   * @param {Property.<number>} b2 the coordinate in the second point that is on the same axis as b1
+   * @param {Property.<Range>} range
    * @param {Object} [options]
    * @constructor
    */

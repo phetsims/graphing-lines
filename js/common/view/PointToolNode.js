@@ -86,7 +86,7 @@ define( function( require ) {
    * @param {PointTool} pointTool
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Graph} graph
-   * @param {Property<Boolean>} linesVisibleProperty
+   * @param {Property.<Boolean>} linesVisibleProperty
    * @param {Object} [options]
    * @constructor
    */

@@ -41,7 +41,7 @@ define( function( require ) {
   /**
    * Creates an interactive equation. x1, y1, x2 and y2 are interactive.
    *
-   * @param {Property<Line>} lineProperty
+   * @param {Property.<Line>} lineProperty
    * @param {Object} [options]
    * @constructor
    */
@@ -268,8 +268,8 @@ define( function( require ) {
    * Note that while this is a sentence, it's order is not localized, due to the fact that it is
    * composed of multiple scenery.Text nodes.
    *
-   * @param {Property<Line>} lineProperty
-   * @param {Number} fontSize
+   * @param {Property.<Line>} lineProperty
+   * @param {number} fontSize
    * @returns {Node}
    */
   SlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {

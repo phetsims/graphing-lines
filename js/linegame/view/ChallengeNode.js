@@ -175,7 +175,7 @@ define( function( require ) {
   /**
    * Creates a non-interactive equation, used to label the specified line.
    * @param {EquationForm} equationForm
-   * @param {Property<Line>} lineProperty
+   * @param {Property.<Line>} lineProperty
    * @param {Font} font
    */
   ChallengeNode.createEquationNode = function( equationForm, lineProperty, fontSize ) {

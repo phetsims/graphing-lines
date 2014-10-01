@@ -85,12 +85,12 @@ define( function( require ) {
       playState: PlayState.NONE
     } );
 
-    thisModel.challenges = []; // Array<Challenge>
+    thisModel.challenges = []; // {Challenge[]}
     thisModel.timer = new GameTimer();
     thisModel.numberOfLevels = factories.length;
     thisModel.maxPointsPerChallenge = 2;
-    thisModel.bestScoreProperties = []; // best scores for each level, array of Property<Number>
-    thisModel.bestTimeProperties = []; // best times for each level, in ms, array of Property<Number>
+    thisModel.bestScoreProperties = []; // best scores for each level, array of Property.<number>
+    thisModel.bestTimeProperties = []; // best times for each level, in ms, array of Property.<number>
     thisModel.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
     for ( var level = 0; level < thisModel.numberOfLevels; level++ ) {
       thisModel.bestScoreProperties.push( new Property( 0 ) );

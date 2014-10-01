@@ -22,7 +22,7 @@ define( function( require ) {
   var Y_MARGIN = 10;
 
   /**
-   * @param {String} title
+   * @param {string} title
    * @param {Color|String} titleColor
    * @param {Dimension2} boxSize
    * @param {Node} equationNode

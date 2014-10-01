@@ -41,7 +41,7 @@ define( function( require ) {
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
-   * @param {Property<Line>} lineProperty
+   * @param {Property.<Line>} lineProperty
    * @param {Object} [options]
    * @constructor
    */
@@ -391,8 +391,8 @@ define( function( require ) {
 
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
-   * @param {Property<Line>} lineProperty
-   * @param {Number} fontSize
+   * @param {Property.<Line>} lineProperty
+   * @param {number} fontSize
    * @returns {Node}
    */
   PointSlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {

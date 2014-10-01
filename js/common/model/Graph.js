@@ -32,7 +32,7 @@ define( function( require ) {
     /**
      * Does the graph contain the specified point?
      * @param {Vector2} point
-     * @returns {Boolean}
+     * @returns {boolean}
      */
     contains: function( point ) {
       return this.xRange.contains( point.x ) && this.yRange.contains( point.y );

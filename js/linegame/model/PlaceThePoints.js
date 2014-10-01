@@ -21,7 +21,7 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
-   * @param {String} description brief description of the challenge, visible in dev versions
+   * @param {string} description brief description of the challenge, visible in dev versions
    * @param {Line} answer  the correct answer
    * @param {EquationForm} equationForm specifies the form of the equation
    * @param {Range} xRange range of the graph's x axis

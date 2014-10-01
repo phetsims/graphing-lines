@@ -30,7 +30,7 @@ define( function( require ) {
    * Adds 2 'Place the Point' challenges, 1 slope-intercept form, 1 point-slope form.
    * Pulled out into a method that can be reused in level=6.
    *
-   * @param {Array<Challenge>} challenges add challenges to this list
+   * @param {Challenge[]} challenges add challenges to this list
    * @param {Range} xRange range of the graph's x axis
    * @param {Range} yRange range of the graph's y axis
    */

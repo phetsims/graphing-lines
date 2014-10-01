@@ -19,11 +19,11 @@ define( function( require ) {
 
   /**
    * Drag handler for (x1,y1) manipulator.
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} x1RangeProperty
-   * @param {Property<Range>} y1RangeProperty
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} x1RangeProperty
+   * @param {Property.<Range>} y1RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {Boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
+   * @param {boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
    * @constructor
    */
   function X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
@@ -67,12 +67,12 @@ define( function( require ) {
   inherit( SimpleDragHandler, X1Y1DragHandler );
 
   /**
-   * @param {Number} radius
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} x1RangeProperty
-   * @param {Property<Range>} y1RangeProperty
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} x1RangeProperty
+   * @param {Property.<Range>} y1RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
-   * @param {Boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
+   * @param {boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
    * @constructor
    */
   function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {

@@ -13,7 +13,7 @@ define( function() {
 
     /**
      *  Chooses a value from an array, removes the value from the array.
-     *  @param {Array<*>} array the array from which the value will be chosen
+     *  @param {*[]} array the array from which the value will be chosen
      *  @return {*} a value
      */
     choose: function( array ) {
@@ -29,8 +29,8 @@ define( function() {
      * Use this when values are organized into 2 or more sets, and a value should be chosen from each set.
      * By removing an index from arrayIndices, one of the arrays is excluded from further consideration.
      *
-     * @param {Array<Array<*>>} arrays arrays from which the value may be chosen
-     * @param {Array<Number>} indices indices of the arrays that will be considered when choosing a value, optional
+     * @param {*[[]]} arrays arrays from which the value may be chosen
+     * @param {Array<number>} indices indices of the arrays that will be considered when choosing a value, optional
      * @return a value from one of the arrays
      */
     chooseFromArrays: function( arrays, indices ) {
@@ -51,7 +51,7 @@ define( function() {
      * Converts an integer range to a ordered array of integer values that are in that range.
      * @param {{min:Number, max:Number}} range
      * @param {boolean} excludeZero
-     * @returns {Array<Number>}
+     * @returns {number[]}
      */
     rangeToArray: function( range, options ) {
       options = _.extend( { excludeZero: false }, options );

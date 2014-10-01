@@ -29,10 +29,10 @@ define( function( require ) {
 
   /**
    * @param {Node} titleNode
-   * @param {Property<Line>} interactiveLineProperty
-   * @param {ObservableArray<Line>} savedLines
-   * @param {Property<Boolean>} maximizedProperty
-   * @param {Property<Boolean>} linesVisibleProperty
+   * @param {Property.<Line>} interactiveLineProperty
+   * @param {ObservableArray.<Line>} savedLines
+   * @param {Property.<boolean>} maximizedProperty
+   * @param {Property.<boolean>} linesVisibleProperty
    * @param {Node} interactiveEquationNode
    * @param {Object} [options]
    * @constructor

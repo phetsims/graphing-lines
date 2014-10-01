@@ -25,10 +25,10 @@ define( function( require ) {
   var Shape = require( 'KITE/Shape' );
 
   /**
-   * @param {Number} tailX
-   * @param {Number} tailY
-   * @param {Number} tipX
-   * @param {Number} tipY
+   * @param {number} tailX
+   * @param {number} tailY
+   * @param {number} tipX
+   * @param {number} tipY
    * @param {Object} [options]
    */
   function DimensionalArrowNode( tailX, tailY, tipX, tipY, options ) {
@@ -63,10 +63,10 @@ define( function( require ) {
     /**
      * Sets the tail and tip of the arrow, accounting for the lineWidth when positioning the arrow head.
      *
-     * @param {Number} tailX
-     * @param {Number} tailY
-     * @param {Number} tipX
-     * @param {Number} tipY
+     * @param {number} tailX
+     * @param {number} tailY
+     * @param {number} tipX
+     * @param {number} tipY
      */
     setTailAndTip: function( tailX, tailY, tipX, tipY ) {
 

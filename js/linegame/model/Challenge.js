@@ -28,8 +28,8 @@ define( function( require ) {
   var setTheYInterceptString = require( 'string!GRAPHING_LINES/setTheYIntercept' );
 
   /**
-   * @param {String} title title that is visible to the user
-   * @param {String} description brief description of the challenge, visible in dev versions
+   * @param {string} title title that is visible to the user
+   * @param {string} description brief description of the challenge, visible in dev versions
    * @param {Line} answer the correct answer
    * @param {EquationForm} equationForm specifies the form of the equation
    * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change

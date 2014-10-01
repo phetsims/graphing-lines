@@ -24,7 +24,7 @@ define( function( require ) {
   var EQUATION_FONT_SIZE = 18;
 
   /**
-   * @param {Property<Line>} lineProperty
+   * @param {Property.<Line>} lineProperty
    * @param {Graph} graph
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
@@ -33,7 +33,7 @@ define( function( require ) {
   function LineNode( lineProperty, graph, modelViewTransform, options ) {
 
     options = _.extend( {
-      // type for creating an equation node, must have static function createDynamicLabel( {Property<Line>} lineProperty, {Number} fontSize )
+      // type for creating an equation node, must have static function createDynamicLabel( {Property.<Line>} lineProperty, {number} fontSize )
       equationType: null
     }, options );
 

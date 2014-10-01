@@ -19,9 +19,9 @@ define( function( require ) {
 
   /**
    * Drag handler for (x2,y2) manipulator.
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} x2RangeProperty
-   * @param {Property<Range>} y2RangeProperty
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} x2RangeProperty
+   * @param {Property.<Range>} y2RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */
@@ -62,10 +62,10 @@ define( function( require ) {
   inherit( SimpleDragHandler, X2Y2DragHandler );
 
   /**
-   * @param {Number} radius
-   * @param {Property<Line>} lineProperty
-   * @param {Property<Range>} x2RangeProperty
-   * @param {Property<Range>} y2RangeProperty
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} x2RangeProperty
+   * @param {Property.<Range>} y2RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */

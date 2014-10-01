@@ -25,7 +25,7 @@ define( function( require ) {
   var VALUE_Y_SPACING = 6;
 
   /**
-   * @param {Property<Line>} lineProperty
+   * @param {Property.<Line>} lineProperty
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
    */

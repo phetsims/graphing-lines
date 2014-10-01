@@ -17,7 +17,7 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
 
   /**
-   * @param {Property<Number>} valueProperty
+   * @param {Property.<number>} valueProperty
    * @param {Object} [options]
    * @constructor
    */

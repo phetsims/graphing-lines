@@ -14,7 +14,7 @@ define( function( require ) {
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   /**
-   * @param {Number} radius
+   * @param {number} radius
    * @param {Color|String} color
    * @param {Object} [options]
    * @constructor

@@ -31,9 +31,9 @@ define( function( require ) {
   var Y_EQUALS_NEGATIVE_X = StringUtils.format( '{0} = -{1}', symbolYString, symbolXString ); // y = -x
 
   /**
-   * @param {Property<Boolean>} linesVisibleProperty are lines visible on the graph?
-   * @param {Property<Boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
-   * @param {ObservableArray<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
+   * @param {Property.<boolean>} linesVisibleProperty are lines visible on the graph?
+   * @param {Property.<boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
+   * @param {ObservableArray.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
    * @param {Object} [options] should check boxes for standard lines be accessible?
    * @constructor
    */

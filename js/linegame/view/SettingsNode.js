@@ -17,11 +17,11 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelStartButton = require( 'VEGAS/LevelStartButton' );
   var Node = require( 'SCENERY/nodes/Node' );
-  var ResetAllButton = require( 'SCENERY_PHET/ResetAllButton' );
-  var SoundToggleButton = require( 'SCENERY_PHET/SoundToggleButton' );
+  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TimerToggleButton = require( 'SCENERY_PHET/TimerToggleButton' );
+  var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
   var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 

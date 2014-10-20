@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
   var PointSlopeScreen = require( 'GRAPHING_LINES/pointSlope/PointSlopeScreen' );
   var Sim = require( 'JOIST/Sim' );
@@ -31,7 +32,7 @@ define( function( require ) {
   };
 
   // Appending '?dev' to the URL will enable developer-only features.
-  if ( window.phetcommon.getQueryParameter( 'dev' ) ) {
+  if ( GLQueryParameters.DEV ) {
     options = _.extend( {
       // add dev-specific options here
       showHomeScreen: false,

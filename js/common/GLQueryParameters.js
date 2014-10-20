@@ -15,6 +15,9 @@ define( function( require ) {
     DEV: getQueryParameter( 'dev' ) || false,
 
     // shows the game reward regardless of score
-    REWARD: getQueryParameter( 'reward' ) || false
+    REWARD: getQueryParameter( 'reward' ) || false,
+
+    // use hard-coded challenges in the game, for debugging
+    HARD_CODED: getQueryParameter( 'hardCoded' ) || false
   };
 } );

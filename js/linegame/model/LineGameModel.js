@@ -25,6 +25,7 @@ define( function( require ) {
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GameTimer = require( 'VEGAS/GameTimer' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -34,7 +35,6 @@ define( function( require ) {
   var PropertySet = require( 'AXON/PropertySet' );
 
   // constants
-  var USE_HARD_CODED_CHALLENGES = window.phetcommon.getQueryParameter( 'hardcoded' ); // for debugging
   var DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
@@ -223,7 +223,8 @@ define( function( require ) {
     initChallenges: function() {
       this.challengeIndex = -1;
       var level = this.level;
-      if ( USE_HARD_CODED_CHALLENGES ) {
+      if ( GLQueryParameters.HARD_CODED ) {
+        console.log( 'using hard-coded challenges for debugging' );
         this.challenges = ChallengeFactoryHardCoded.createChallenges( level, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
       else {

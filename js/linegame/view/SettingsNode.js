@@ -15,7 +15,7 @@ define( function( require ) {
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LevelStartButton = require( 'VEGAS/LevelStartButton' );
+  var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
@@ -45,14 +45,14 @@ define( function( require ) {
   var BUTTONS_Y_SPACING = 40;
 
   // Creates a level selection button
-  var createLevelStartButton = function( level, model ) {
+  var createLevelSelectionButton = function( level, model ) {
 
     // 'Level N' centered above icon
     var label = new Text( StringUtils.format( pattern_Level_0, level + 1 ), { font: new GLFont( 60 ) } );
     var image = new Image( levelImages[level], { centerX: label.centerX, top: label.bottom + 20 } );
     var icon = new Node( { children: [ label, image ] } );
 
-    return new LevelStartButton(
+    return new LevelSelectionButton(
       icon,
       CHALLENGES_PER_GAME,
       function() {
@@ -62,10 +62,10 @@ define( function( require ) {
       model.bestScoreProperties[ level ],
       model.getPerfectScore(),
       {
-        backgroundColor: 'rgb( 180, 205, 255 )',
-        highlightedBackgroundColor: 'rgb( 220, 230, 255 )',
+        baseColor: 'rgb( 180, 205, 255 )',
         buttonWidth: 175,
         buttonHeight: 210,
+        iconToProgressIndicatorYSpace: 10,
         bestTimeProperty: model.bestTimeProperties[ level ],
         bestTimeVisibleProperty: model.timerEnabledProperty
       } );
@@ -90,7 +90,7 @@ define( function( require ) {
     var button, previousButton;
     for ( var level = 0; level < model.numberOfLevels; level++ ) {
 
-      button = createLevelStartButton( level, model );
+      button = createLevelSelectionButton( level, model );
       buttonsParent.addChild( button );
 
       if ( previousButton ) {

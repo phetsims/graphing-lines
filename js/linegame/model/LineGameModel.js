@@ -157,7 +157,7 @@ define( function( require ) {
       this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
     },
 
-    // resets the best score to zero for every level
+    // @private resets the best score to zero for every level
     resetBestScores: function() {
       this.bestScoreProperties.forEach( function( property ) {
         property.set( 0 );

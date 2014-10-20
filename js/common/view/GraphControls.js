@@ -14,11 +14,11 @@ define( function( require ) {
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
@@ -68,8 +68,9 @@ define( function( require ) {
       children.splice( children.indexOf( positiveCheckBox ), 1 );
       children.splice( children.indexOf( negativeCheckBox ), 1 );
     }
-    var contentNode = new VBox( {
+    var contentNode = new LayoutBox( {
       children: children,
+      orientation: 'vertical',
       spacing: 20,
       align: 'left'
     } );

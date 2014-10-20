@@ -15,6 +15,7 @@ define( function( require ) {
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -23,7 +24,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
   var Util = require( 'DOT/Util' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images, ordered by level
   var levelImages = [
@@ -120,15 +120,17 @@ define( function( require ) {
 
     options.children = [
       // title and level-selection buttons centered
-      new VBox( {
+      new LayoutBox( {
         children: [ title, buttonsParent ],
+        orientation: 'vertical',
         align: 'center',
         spacing: 40,
         center: layoutBounds.center
       } ),
       // timer and sound buttons at leftBottom
-      new VBox( {
+      new LayoutBox( {
         children: [ timerToggleButton, soundToggleButton ],
+        orientation: 'vertical',
         align: 'center',
         spacing: 15,
         left: GLConstants.SCREEN_X_MARGIN,

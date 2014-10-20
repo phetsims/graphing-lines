@@ -65,7 +65,6 @@ define( function( require ) {
         baseColor: 'rgb( 180, 205, 255 )',
         buttonWidth: 175,
         buttonHeight: 210,
-        iconToProgressIndicatorYSpace: 10,
         bestTimeProperty: model.bestTimeProperties[ level ],
         bestTimeVisibleProperty: model.timerEnabledProperty
       } );

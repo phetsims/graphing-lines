@@ -74,7 +74,6 @@ define( function( require ) {
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
-   * @param {number} screenHeight
    * @param {Object} [options]
    * @constructor
    */

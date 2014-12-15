@@ -147,8 +147,8 @@ define( function( require ) {
    * The functions above serve as the creationFunction argument.
    *
    * @param {function} creationFunction a function with one parameter of type {Color|String}
-   * @param {[Color|String]} colors
-   * @returns {[Node]}
+   * @param {Color|String[]} colors
+   * @returns {Node[]}
    */
   var createNodes = function( creationFunction, colors ) {
     var nodes = [];

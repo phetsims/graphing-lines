@@ -148,7 +148,7 @@ define( function( require ) {
       // start with all children invisible
       var len = thisNode.children.length;
       for ( var i = 0; i < len; i++ ) {
-        thisNode.children[i].visible = false;
+        thisNode.children[ i ].visible = false;
       }
 
       if ( line.undefinedSlope() && !interactive ) {
@@ -383,7 +383,7 @@ define( function( require ) {
 
   // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
   PointSlopeEquationNode.createGeneralFormNode = function( options ) {
-    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } )}, options );
+    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
     var pattern = '({0} - {1}<sub>1</sub>) = {2}({3} - {4}<sub>1</sub>)';
     var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
     return new SubSupText( html, { font: options.font } );

@@ -147,7 +147,8 @@ define( function( require ) {
       headWidth: AXIS_ARROW_SIZE.width,
       tailWidth: AXIS_THICKNESS,
       fill: AXIS_COLOR,
-      stroke: null } );
+      stroke: null
+    } );
     this.addChild( lineNode );
 
     // label at positive (right) end
@@ -199,7 +200,8 @@ define( function( require ) {
       headWidth: AXIS_ARROW_SIZE.width,
       tailWidth: AXIS_THICKNESS,
       fill: AXIS_COLOR,
-      stroke: null } );
+      stroke: null
+    } );
     this.addChild( lineNode );
 
     // label at positive (top) end
@@ -295,7 +297,8 @@ define( function( require ) {
           new GridNode( graph, modelViewTransform ),
           new XAxisNode( graph, modelViewTransform ),
           new YAxisNode( graph, modelViewTransform )
-        ] }
+        ]
+      }
     );
   }
 

@@ -60,7 +60,7 @@ define( function( require ) {
    * @constructor
    */
   function GLRewardNode( level ) {
-    var nodes = nodeFactoryFunctions[level]();
+    var nodes = nodeFactoryFunctions[ level ]();
     RewardNode.call( this, { nodes: nodes } );
   }
 

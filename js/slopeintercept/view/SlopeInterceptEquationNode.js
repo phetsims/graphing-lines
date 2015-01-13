@@ -138,7 +138,7 @@ define( function( require ) {
       // start with all children invisible
       var len = thisNode.children.length;
       for ( var i = 0; i < len; i++ ) {
-        thisNode.children[i].visible = false;
+        thisNode.children[ i ].visible = false;
       }
 
       if ( line.undefinedSlope() && !interactive ) {
@@ -401,7 +401,7 @@ define( function( require ) {
 
   // Creates a node that displays the general form of this equation: y = mx + b
   SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
-    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } )}, options );
+    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
     var text = StringUtils.format( '{0} = {1}{2} + {3}',
       symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
     return new Text( text, { font: options.font, pickable: false } );

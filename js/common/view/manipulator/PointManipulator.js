@@ -53,7 +53,7 @@ define( function( require ) {
         // is this point the same as one of the others?
         var same = false;
         for ( var i = 0; i < otherPointProperties.length; i++ ) {
-          if ( p.equals( otherPointProperties[i].get() ) ) {
+          if ( p.equals( otherPointProperties[ i ].get() ) ) {
             same = true;
             break;
           }

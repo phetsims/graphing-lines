@@ -85,15 +85,27 @@ define( function( require ) {
     var mNode = new Text( symbolSlopeString, staticOptions );
     var interactiveEqualsNode = new Text( '=', staticOptions );
     // y2 - y2
-    var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.yRangeProperty, {
+      font: interactiveFont,
+      color: GLColors.POINT_X2_Y2
+    } );
     var numeratorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
-    var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.yRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.yRangeProperty, {
+      font: interactiveFont,
+      color: GLColors.POINT_X1_Y1
+    } );
     // fraction line, correct length will be set later
     var interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
-    var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X2_Y2 } );
+    var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.xRangeProperty, {
+      font: interactiveFont,
+      color: GLColors.POINT_X2_Y2
+    } );
     var denominatorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
-    var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.xRangeProperty, { font: interactiveFont, color: GLColors.POINT_X1_Y1 } );
+    var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.xRangeProperty, {
+      font: interactiveFont,
+      color: GLColors.POINT_X1_Y1
+    } );
     // = unsimplified value
     var unsimplifiedSlopeOptions = {
       font: staticFont,
@@ -297,7 +309,7 @@ define( function( require ) {
       // start with all children invisible
       var len = equationNode.children.length;
       for ( var i = 0; i < len; i++ ) {
-        equationNode.children[i].visible = false;
+        equationNode.children[ i ].visible = false;
       }
 
       // 'Slope is'

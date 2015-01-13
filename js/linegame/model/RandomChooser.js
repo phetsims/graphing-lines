@@ -19,7 +19,7 @@ define( function() {
     choose: function( array ) {
       var index = RandomChooser.randomIndex( array );
       assert && assert( index !== -1 );
-      var value = array[index];
+      var value = array[ index ];
       array.splice( index, 1 );
       return value;
     },

@@ -9,7 +9,7 @@
 
 require.config( {
 
-  deps: ['graphing-lines-main'],
+  deps: [ 'graphing-lines-main' ],
 
   paths: {
 

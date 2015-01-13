@@ -49,7 +49,7 @@ define( function( require ) {
 
     // 'Level N' centered above icon
     var label = new Text( StringUtils.format( pattern_Level_0, level + 1 ), { font: new GLFont( 60 ) } );
-    var image = new Image( levelImages[level], { centerX: label.centerX, top: label.bottom + 20 } );
+    var image = new Image( levelImages[ level ], { centerX: label.centerX, top: label.bottom + 20 } );
     var icon = new Node( { children: [ label, image ] } );
 
     return new LevelSelectionButton(
@@ -114,7 +114,7 @@ define( function( require ) {
     var resetAllButton = new ResetAllButton( {
       listener: function() { model.reset(); },
       scale: GLConstants.RESET_ALL_BUTTON_SCALE,
-      right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
+      right:  layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
 

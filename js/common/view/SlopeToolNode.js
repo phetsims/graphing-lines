@@ -62,12 +62,14 @@ define( function( require ) {
     thisNode.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
 
     // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
-    thisNode.parentNode = new Node( { children: [
-      thisNode.riseArrowNode,
-      thisNode.riseValueNode,
-      thisNode.runArrowNode,
-      thisNode.runValueNode
-    ] } );
+    thisNode.parentNode = new Node( {
+      children: [
+        thisNode.riseArrowNode,
+        thisNode.riseValueNode,
+        thisNode.runArrowNode,
+        thisNode.runValueNode
+      ]
+    } );
 
     Node.call( thisNode, { children: [ thisNode.parentNode ] } );
 

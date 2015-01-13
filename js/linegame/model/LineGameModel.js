@@ -138,7 +138,7 @@ define( function( require ) {
         else {
           // next challenge
           thisModel.challengeIndex = thisModel.challengeIndex + 1;
-          thisModel.challenge = thisModel.challenges[thisModel.challengeIndex];
+          thisModel.challenge = thisModel.challenges[ thisModel.challengeIndex ];
         }
       }
       else if ( playState === PlayState.NEXT ) {
@@ -229,7 +229,7 @@ define( function( require ) {
       }
       else {
         assert && assert( level >= 0 && level < factories.length );
-        this.challenges = factories[level].createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
+        this.challenges = factories[ level ].createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
       this.challengesPerGame = this.challenges.length;
     }

@@ -115,7 +115,7 @@ define( function( require ) {
     // @private background behind the displayed value, shows through a transparent hole in the display area portion of the body image
     var BACKGROUND_MARGIN = 5;
     thisNode.backgroundNode = new Rectangle( 0, 0,
-        thisNode.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), thisNode.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
+      thisNode.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), thisNode.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
       { pickable: false } );
 
     // displayed value

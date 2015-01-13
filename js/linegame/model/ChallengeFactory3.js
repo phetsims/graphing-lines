@@ -52,7 +52,7 @@ define( function( require ) {
       yInterceptArrayIndices = RandomChooser.rangeToArray( new Range( 0, yInterceptArrays.length - 1 ) );
 
       // equation form for 3rd challenge of each type
-      equationForms = [ EquationForm.SLOPE_INTERCEPT , EquationForm.POINT_SLOPE ];
+      equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ];
 
       // Graph-the-Line, slope-intercept form, slope and intercept variable
       slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope

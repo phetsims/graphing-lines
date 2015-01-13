@@ -34,7 +34,14 @@ define( function( require ) {
   // constants
   var SCREEN_ICON_BASE_SIZE = new Dimension2( 548, 373 );
   var ARROW_OPTIONS = { doubleHead: true, stroke: 'black', lineWidth: 18, headWidth: 30, headHeight: 30 };
-  var DIMENSIONAL_ARROW_OPTIONS = { stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES, lineWidth: 18, arrowTipSize: new Dimension2( 55, 45 ), delimitersVisible: false, lineCap: 'round', lineJoin: 'round' };
+  var DIMENSIONAL_ARROW_OPTIONS = {
+    stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
+    lineWidth: 18,
+    arrowTipSize: new Dimension2( 55, 45 ),
+    delimitersVisible: false,
+    lineCap: 'round',
+    lineJoin: 'round'
+  };
   var MANIPULATOR_RADIUS = 40;
 
   /**
@@ -63,7 +70,7 @@ define( function( require ) {
 
   return {
 
-     // Creates the icon for the 'Slope' screen. Positions and sizes are 'eye balled'.
+    // Creates the icon for the 'Slope' screen. Positions and sizes are 'eye balled'.
     createSlopeScreenIcon: function() {
       var lineNode = new ArrowNode( 0.25 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.75 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_OPTIONS );
       var riseNode = new DimensionalArrowNode( 0, 0.65 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
@@ -79,7 +86,10 @@ define( function( require ) {
     // Creates the icon for the 'Slope-Intercept' screen. Positions and sizes are 'eye balled'.
     createSlopeInterceptScreenIcon: function() {
       var lineNode = new ArrowNode( 0.1 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.9 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_OPTIONS );
-      var axisNode = new scenery.Line( 0, -0.05 * SCREEN_ICON_BASE_SIZE.height, 0, 1.05 * SCREEN_ICON_BASE_SIZE.height, { stroke: 'rgb(134,134,134)', lineWidth: 10 } );
+      var axisNode = new scenery.Line( 0, -0.05 * SCREEN_ICON_BASE_SIZE.height, 0, 1.05 * SCREEN_ICON_BASE_SIZE.height, {
+        stroke: 'rgb(134,134,134)',
+        lineWidth: 10
+      } );
       var riseNode = new DimensionalArrowNode( 0, 0.5 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
       var runNode = new DimensionalArrowNode( 0, 0, 0.45 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
       var interceptNode = new Manipulator( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
@@ -137,7 +147,8 @@ define( function( require ) {
       // dashed line where the line would be, tweaked visually
       var lineNode = new Path( Shape.lineSegment( slopeToolNode.left + ( 0.4 * slopeToolNode.width ), slopeToolNode.bottom,
           slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
-        { lineWidth: 1,
+        {
+          lineWidth: 1,
           lineDash: [ 6, 6 ],
           stroke: 'black'
         } );

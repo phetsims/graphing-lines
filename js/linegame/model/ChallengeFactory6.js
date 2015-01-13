@@ -94,5 +94,6 @@ define( function( require ) {
 
       // shuffle and return
       return _.shuffle( challenges );
-    }  } );
+    }
+  } );
 } );

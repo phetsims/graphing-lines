@@ -112,7 +112,7 @@ define( function( require ) {
         var range = new Range( -5, 5 );
         assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
         xList = RandomChooser.rangeToArray( range );
-        yList = RandomChooser.rangeToArray( range);
+        yList = RandomChooser.rangeToArray( range );
         x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : RandomChooser.choose( xList );
         y1 = RandomChooser.choose( yList );
         x2 = RandomChooser.choose( xList );
@@ -165,7 +165,7 @@ define( function( require ) {
           excluded = false;
           // is this an excluded or undefined slope?
           for ( i = 0; i < excludedSlopes.length; i++ ) {
-            if ( run === 0 || slope === excludedSlopes[i].getValue() ) {
+            if ( run === 0 || slope === excludedSlopes[ i ].getValue() ) {
               excluded = true;
               run = RandomChooser.choose( runList ); // choose a new run, and remove it from runList
               break;
@@ -201,5 +201,6 @@ define( function( require ) {
 
       // shuffle and return
       return _.shuffle( challenges );
-    }  } );
+    }
+  } );
 } );

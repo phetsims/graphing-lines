@@ -153,7 +153,8 @@ define( function( require ) {
         runRangeProperty: new Property( graph.xRange ),
         yInterceptRangeProperty: new Property( graph.yRange ),
         fontSize: fontSize,
-        staticColor: staticColor } );
+        staticColor: staticColor
+      } );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
       interactivePoint = ( manipulationMode === ManipulationMode.POINT ) || ( manipulationMode === ManipulationMode.POINT_SLOPE );
@@ -166,7 +167,8 @@ define( function( require ) {
         riseRangeProperty: new Property( graph.yRange ),
         runRangeProperty: new Property( graph.xRange ),
         fontSize: fontSize,
-        staticColor: staticColor } );
+        staticColor: staticColor
+      } );
     }
     else {
       throw new Error( 'unsupported equation form: ' + equationForm );

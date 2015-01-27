@@ -183,7 +183,7 @@ define( function( require ) {
       return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, fontSize );
     }
     else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return new PointSlopeEquationNode.createDynamicLabel( lineProperty, fontSize );
+      return PointSlopeEquationNode.createDynamicLabel( lineProperty, fontSize );
     }
     else {
       throw new Error( 'unsupported equation form: ' + equationForm );

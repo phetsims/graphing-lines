@@ -9,7 +9,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
   var PointSlopeScreen = require( 'GRAPHING_LINES/pointSlope/PointSlopeScreen' );
   var Sim = require( 'JOIST/Sim' );

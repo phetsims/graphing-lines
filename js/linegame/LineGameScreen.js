@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
-  var Screen = require( 'JOIST/SCREEN' );
+  var Screen = require( 'JOIST/Screen' );
 
   // strings
   var title = require( 'string!GRAPHING_LINES/tab.lineGame' );

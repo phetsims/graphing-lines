@@ -12,8 +12,8 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
-  var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
+  var PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
+  var PointSlopeView = require( 'GRAPHING_LINES/pointslope/view/PointSlopeView' );
   var Screen = require( 'JOIST/Screen' );
 
   // strings

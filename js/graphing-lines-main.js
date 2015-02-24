@@ -10,10 +10,10 @@ define( function( require ) {
 
   // modules
   var LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
-  var PointSlopeScreen = require( 'GRAPHING_LINES/pointSlope/PointSlopeScreen' );
+  var PointSlopeScreen = require( 'GRAPHING_LINES/pointslope/PointSlopeScreen' );
   var Sim = require( 'JOIST/Sim' );
   var SimLauncher = require( 'JOIST/SimLauncher' );
-  var SlopeInterceptScreen = require( 'GRAPHING_LINES/slopeIntercept/SlopeInterceptScreen' );
+  var SlopeInterceptScreen = require( 'GRAPHING_LINES/slopeintercept/SlopeInterceptScreen' );
   var SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
 
   // strings

@@ -14,7 +14,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointSlope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointSlope/view/PointSlopeView' );
-  var Screen = require( 'JOIST/SCREEN' );
+  var Screen = require( 'JOIST/Screen' );
 
   // strings
   var title = require( 'string!GRAPHING_LINES/tab.pointSlope' );

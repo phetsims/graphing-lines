@@ -30,6 +30,7 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PaperAirplaneNode = require( 'SCENERY_PHET/PaperAirplaneNode' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var Property = require( 'AXON/Property' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -47,7 +48,7 @@ define( function( require ) {
 
   // constants
   var NUMBER_OF_NODES = 150;
-  var NODE_COLORS = [ 'yellow', 'red', 'orange', 'magenta', 'cyan', 'green' ];
+  var NODE_COLORS = [ 'yellow', PhetColorScheme.RED_COLORBLIND, 'orange', 'magenta', 'cyan', 'green' ];
   var EQUATION_FONT_SIZE = 24;
   var GRAPH_WIDTH = 60;
   var POINT_TOOL_FONT = new GLFont( 15 );

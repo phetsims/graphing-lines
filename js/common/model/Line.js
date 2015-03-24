@@ -15,17 +15,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Util = require( 'DOT/Util' );
 
-  // Euclid's algorithm for computing the greatest common divisor (GCD) of two integers
-  var getGreatestCommonDivisor = function( a, b ) {
-    assert && assert( Util.isInteger( a ) && Util.isInteger( b ) );
-    if ( b === 0 ) {
-      return a;
-    }
-    else {
-      return getGreatestCommonDivisor( b, a % b );
-    }
-  };
-
   /**
    * @param x1
    * @param y1
@@ -107,7 +96,7 @@ define( function( require ) {
     // Gets the simplified rise.
     getSimplifiedRise: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return ( this.rise / getGreatestCommonDivisor( Math.floor( this.rise ), Math.floor( this.run ) ) );
+        return ( this.rise / Util.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
       }
       else {
         return this.rise;
@@ -117,7 +106,7 @@ define( function( require ) {
     // Gets the simplified run.
     getSimplifiedRun: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return ( this.run / getGreatestCommonDivisor( Math.floor( this.rise ), Math.floor( this.run ) ) );
+        return ( this.run / Util.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
       }
       else {
         return this.run;
@@ -164,7 +153,7 @@ define( function( require ) {
       }
       var numerator = Math.floor( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
       var denominator = Math.floor( this.run );
-      var gcd = getGreatestCommonDivisor( numerator, denominator );
+      var gcd = Util.gcd( numerator, denominator );
       return new Fraction( numerator / gcd, denominator / gcd );
     }
   }, {

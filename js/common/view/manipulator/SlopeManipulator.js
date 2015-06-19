@@ -45,8 +45,8 @@ define( function( require ) {
         var location = modelViewTransform.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
         var line = lineProperty.get();
-        var run = Math.round( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
-        var rise = Math.round( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
+        var run = Util.roundSymmetric( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
+        var rise = Util.roundSymmetric( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
           lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );

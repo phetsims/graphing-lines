@@ -46,7 +46,7 @@ define( function( require ) {
         var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var y1 = Math.round( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
+        var y1 = Util.roundSymmetric( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
         var line = lineProperty.get();
 
         // Keep slope constant, change y1.

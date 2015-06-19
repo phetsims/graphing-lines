@@ -46,8 +46,8 @@ define( function( require ) {
         var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var x = Math.round( Util.clamp( location.x, xRange.min, xRange.max ) );
-        var y = Math.round( Util.clamp( location.y, yRange.min, yRange.max ) );
+        var x = Util.roundSymmetric( Util.clamp( location.x, xRange.min, xRange.max ) );
+        var y = Util.roundSymmetric( Util.clamp( location.y, yRange.min, yRange.max ) );
         var p = new Vector2( x, y );
 
         // is this point the same as one of the others?

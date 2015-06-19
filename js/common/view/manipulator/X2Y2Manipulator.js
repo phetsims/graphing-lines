@@ -47,8 +47,8 @@ define( function( require ) {
         var location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var x2 = Math.round( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
-        var y2 = Math.round( Util.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
+        var x2 = Util.roundSymmetric( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
+        var y2 = Util.roundSymmetric( Util.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
 
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)

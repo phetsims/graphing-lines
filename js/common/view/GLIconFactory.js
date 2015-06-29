@@ -55,7 +55,7 @@ define( function( require ) {
       riseNode.bottom = lineNode.bottom - ( 0.2 * lineNode.height );
       runNode.left = riseNode.centerX;
       runNode.centerY = riseNode.top - 5;
-      return new ScreenIcon( iconNode, { maxIconWidthFactor: 1, maxIconHeightFactor: 1 } );
+      return new ScreenIcon( iconNode, { maxIconWidthProportion: 1, maxIconHeightProportion: 1 } );
     },
 
     // Creates the icon for the 'Slope-Intercept' screen. Positions and sizes are 'eye balled'.
@@ -76,7 +76,7 @@ define( function( require ) {
       runNode.centerY = riseNode.top - 5;
       interceptNode.centerX = 0.35 * SCREEN_ICON_BASE_SIZE.width;
       interceptNode.centerY = 0.68 * SCREEN_ICON_BASE_SIZE.height;
-      return new ScreenIcon( iconNode, { maxIconWidthFactor: 1, maxIconHeightFactor: 1 } );
+      return new ScreenIcon( iconNode, { maxIconWidthProportion: 1, maxIconHeightProportion: 1 } );
     },
 
     // Creates the icon for the 'Point-Slope' screen. Positions and sizes are 'eye balled'.
@@ -95,7 +95,7 @@ define( function( require ) {
       pointNode.centerY = 0.58 * SCREEN_ICON_BASE_SIZE.height;
       slopeNode.centerX = 0.75 * SCREEN_ICON_BASE_SIZE.width;
       slopeNode.centerY = 0.36 * SCREEN_ICON_BASE_SIZE.height;
-      return new ScreenIcon( iconNode, { maxIconWidthFactor: 1, maxIconHeightFactor: 1 } );
+      return new ScreenIcon( iconNode, { maxIconWidthProportion: 1, maxIconHeightProportion: 1 } );
     },
 
     // Creates the icon for the 'Line Game' screen
@@ -106,7 +106,7 @@ define( function( require ) {
         pointsAlignment: 'rightCenter',
         points: 2
       } );
-      return new ScreenIcon( faceNode, { maxIconWidthFactor: 0.65 } );
+      return new ScreenIcon( faceNode, { maxIconWidthProportion: 0.65 } );
     },
 
     // Creates an icon for the slope-tool feature

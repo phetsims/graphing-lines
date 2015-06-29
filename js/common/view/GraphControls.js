@@ -12,7 +12,7 @@ define( function( require ) {
   var CheckBox = require( 'SUN/CheckBox' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -56,11 +56,11 @@ define( function( require ) {
     var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
     hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );
     var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
-      { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
+      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
     var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
-      { icon: IconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
+      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
     var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
-      { icon: IconFactory.createSlopeToolIcon( ICON_SIZE ) } );
+      { icon: GLIconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // vertical layout
     var children = [ slopeCheckBox, positiveCheckBox, negativeCheckBox, hideLinesCheckBox ];

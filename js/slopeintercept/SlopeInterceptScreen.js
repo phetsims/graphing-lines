@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Screen = require( 'JOIST/Screen' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
@@ -21,7 +21,7 @@ define( function( require ) {
 
   function SlopeInterceptScreen() {
     Screen.call( this, title,
-      IconFactory.createSlopeInterceptScreenIcon(),
+      GLIconFactory.createSlopeInterceptScreenIcon(),
       function() { return new SlopeInterceptModel(); },
       function( model ) { return new SlopeInterceptView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

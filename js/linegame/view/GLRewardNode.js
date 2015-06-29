@@ -24,7 +24,7 @@ define( function( require ) {
   var FaceNode = require( 'SCENERY_PHET/FaceNode' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -108,10 +108,10 @@ define( function( require ) {
   var createGraphNode = function( color ) {
     var node;
     if ( Math.random() < 0.5 ) {
-      node = IconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
+      node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
     }
     else {
-      node = IconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, 3, 3, -3 ); // y = -x
+      node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, 3, 3, -3 ); // y = -x
     }
     return node;
   };

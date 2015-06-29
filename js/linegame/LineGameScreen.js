@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
@@ -20,7 +20,7 @@ define( function( require ) {
   var title = require( 'string!GRAPHING_LINES/tab.lineGame' );
 
   function GameScreen() {
-    Screen.call( this, title, IconFactory.createGameScreenIcon(),
+    Screen.call( this, title, GLIconFactory.createGameScreenIcon(),
       function() { return new LineGameModel(); },
       function( model ) { return new LineGameView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

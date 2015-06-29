@@ -10,7 +10,7 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var IconFactory = require( 'GRAPHING_LINES/common/view/IconFactory' );
+  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointslope/view/PointSlopeView' );
@@ -21,7 +21,7 @@ define( function( require ) {
 
   function PointSlopeScreen() {
     Screen.call( this, title,
-      IconFactory.createPointSlopeScreenIcon(),
+      GLIconFactory.createPointSlopeScreenIcon(),
       function() { return new PointSlopeModel(); },
       function( model ) { return new PointSlopeView( model ); },
       { backgroundColor: GLColors.SCREEN_BACKGROUND }

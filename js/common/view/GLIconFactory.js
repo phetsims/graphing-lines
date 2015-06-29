@@ -1,7 +1,7 @@
 // Copyright 2002-2014, University of Colorado Boulder
 
 /**
- * Factory for creating icons that appear in control panels.
+ * Factory for creating icons that appear in this sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

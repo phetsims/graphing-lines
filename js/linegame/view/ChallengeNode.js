@@ -71,7 +71,11 @@ define( function( require ) {
     var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
     var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
     var nextButton = new TextPushButton( nextString, buttonOptions );
-    thisNode.buttonsParent = new Node( { children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ] } ); // @protected
+    // @protected
+    thisNode.buttonsParent = new Node( {
+      children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ],
+      maxWidth: 400 // determined empirically
+    } );
 
     // point tools
     var linesVisibleProperty = new Property( true );

@@ -119,7 +119,11 @@ define( function( require ) {
       { pickable: false } );
 
     // displayed value
-    thisNode.valueNode = new Text( '?', { font: new GLFont( { size: 15, weight: 'bold' } ), pickable: false } );
+    thisNode.valueNode = new Text( '?', {
+      font: new GLFont( { size: 15, weight: 'bold' } ),
+      pickable: false,
+      maxWidth: 60 // constrain width, determined empirically, dependent on bodyImage
+    } );
 
     // orientation
     if ( pointTool.orientation === 'down' ) {

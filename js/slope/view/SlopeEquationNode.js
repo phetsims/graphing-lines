@@ -288,7 +288,7 @@ define( function( require ) {
 
     var equationNode = new EquationNode( fontSize );
 
-    var textOptions = { font: new GLFont( { size: fontSize, weight: 'bold' } ) };
+    var textOptions = { font: new GLFont( { size: fontSize, weight: 'bold' } ), maxWidth: 130 };
 
     // allocate nodes needed to represent all simplified forms
     var slopeIsNode = new Text( slopeIsString, textOptions );
@@ -297,6 +297,9 @@ define( function( require ) {
     var riseNode = new Text( '?', textOptions );
     var runNode = new Text( '?', textOptions );
     var fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: equationNode.fractionLineThickness } );
+
+    console.log( 'slopeIsNode=' + slopeIsNode.width );
+    console.log( 'undefinedNode=' + undefinedNode.width );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     equationNode.children = [ slopeIsNode, undefinedNode, minusSignNode, riseNode, runNode, fractionLineNode ];

@@ -298,9 +298,6 @@ define( function( require ) {
     var runNode = new Text( '?', textOptions );
     var fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: equationNode.fractionLineThickness } );
 
-    console.log( 'slopeIsNode=' + slopeIsNode.width );
-    console.log( 'undefinedNode=' + undefinedNode.width );
-
     // add all nodes, we'll set which ones are visible bases on desired simplification
     equationNode.children = [ slopeIsNode, undefinedNode, minusSignNode, riseNode, runNode, fractionLineNode ];
 

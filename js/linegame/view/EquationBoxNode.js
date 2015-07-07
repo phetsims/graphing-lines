@@ -33,26 +33,22 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    // title, scale to fit in the box
+    // icons for 'correct' and 'incorrect'
+    var iconFont = new GLFont( 72 );
+    thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
+    thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
+
     var titleNode = new Text( title, {
       fill: titleColor,
-      font: new GLFont( { size: 24, weight: 'bold' } )
+      font: new GLFont( { size: 24, weight: 'bold' } ),
+      maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( thisNode.correctIconNode.width, thisNode.incorrectIconNode.width )
     } );
-    var maxTitleWidth = boxSize.width - ( 2 * X_MARGIN );
-    if ( titleNode.width > maxTitleWidth ) {
-      titleNode.scale = maxTitleWidth / titleNode.width;
-    }
 
     var boxNode = new Rectangle( 0, 0, boxSize.width, boxSize.height, 20, 20, {
       fill: 'rgb( 238, 238, 238 )',
       stroke: 'black',
       lineWidth: 1
     } );
-
-    // icons for 'correct' and 'incorrect'
-    var iconFont = new GLFont( 72 );
-    thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
-    thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
 
     // rendering order
     thisNode.addChild( boxNode );

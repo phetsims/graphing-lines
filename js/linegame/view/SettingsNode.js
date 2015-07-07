@@ -81,7 +81,10 @@ define( function( require ) {
     options = options || {};
 
     // Title
-    var title = new Text( chooseYourLevelString, { font: new GLFont( 40 ) } );
+    var title = new Text( chooseYourLevelString, {
+      font: new GLFont( 40 ),
+      maxWidth: 0.85 * layoutBounds.width
+    } );
 
     // Level-selection buttons, arranged in 2 rows
     assert && assert( Util.isInteger( model.numberOfLevels / 2 ) ); // assumes an even number of buttons

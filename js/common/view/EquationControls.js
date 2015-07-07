@@ -20,6 +20,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
   var saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
@@ -27,6 +28,8 @@ define( function( require ) {
 
   // constants
   var BUTTON_FONT = new GLFont( 18 );
+  var TITLE_X_SPACING = 5;
+  var Y_SPACING = 10;
 
   /**
    * @param {Node} titleNode
@@ -80,44 +83,28 @@ define( function( require ) {
       }
     );
 
-    // Top-level content
-    var content = new Node();
-    content.addChild( titleNode );
-    content.addChild( expandCollapseButton );
+    var contentWidth = Math.max( buttons.width, interactiveEquationNode.width, ( expandCollapseButton.width + titleNode.width + TITLE_X_SPACING ) );
 
-    // Stuff that is hidden when minimized must be attached to this node.
-    var subContent = new Node();
-    content.addChild( subContent );
-    subContent.addChild( interactiveEquationNode );
-    subContent.addChild( buttons );
-
-    // horizontal separators
-    var separatorWidth = content.width + 5;
+        // Stuff that is hidden when minimized must be attached to this node.
     var separatorColor = 'rgb( 212, 212, 212 )';
-    var titleSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: separatorColor } );
-    var buttonsSeparator = new Line( 0, 0, separatorWidth, 0, { stroke: separatorColor } );
-    subContent.addChild( titleSeparator );
-    subContent.addChild( buttonsSeparator );
+    var subContent = new VBox( {
+      spacing: Y_SPACING,
+      align: 'center',
+      children: [
+        new Line( 0, 0, contentWidth, 0, { stroke: separatorColor } ),
+        interactiveEquationNode,
+        new Line( 0, 0, contentWidth, 0, { stroke: separatorColor } ),
+        buttons
+      ]
+    } );
 
-    // layout, relative to expand/collapse button
-    var xSpacing = 10;
-    var ySpacing = 10;
-    titleNode.centerX = content.centerX;
-    if ( titleNode.left <= expandCollapseButton.right ) {
-      titleNode.left = expandCollapseButton.right + xSpacing; // adapt for i18n
-    }
+    // Top-level content, with strut to prevent panel from resizing
+    var content = new Node( {
+      children: [ new HStrut( contentWidth ), expandCollapseButton, titleNode, subContent  ]
+    } );
+    titleNode.centerX = contentWidth / 2;
     titleNode.centerY = expandCollapseButton.centerY;
-    titleSeparator.top = titleNode.bottom + ySpacing;
-    interactiveEquationNode.centerX = content.centerX;
-    interactiveEquationNode.top = titleSeparator.bottom + ySpacing;
-    buttonsSeparator.top = interactiveEquationNode.bottom + ySpacing;
-    buttons.centerX = content.centerX;
-    buttons.top = buttonsSeparator.bottom + ySpacing;
-
-    // Add a horizontal strut, to prevent control panel from resizing when minimized. Do this last!
-    var strutNode = new HStrut( separatorWidth );
-    content.addChild( strutNode );
-    strutNode.moveToBack();
+    subContent.top = Math.max( expandCollapseButton.bottom, titleNode.bottom ) + Y_SPACING;
 
     maximizedProperty.link( function( maximized ) {
       if ( maximized && content.indexOfChild( subContent ) === -1 ) {

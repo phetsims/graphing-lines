@@ -152,7 +152,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    var labelNode = new Text( symbolXString, { font: AXIS_LABEL_FONT } );
+    var labelNode = new Text( symbolXString, { font: AXIS_LABEL_FONT, maxWidth: 30  } );
     this.addChild( labelNode );
     labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
     labelNode.centerY = lineNode.centerY;
@@ -205,7 +205,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    var labelNode = new Text( symbolYString, { font: AXIS_LABEL_FONT } );
+    var labelNode = new Text( symbolYString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.centerX = lineNode.centerX;
     labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;

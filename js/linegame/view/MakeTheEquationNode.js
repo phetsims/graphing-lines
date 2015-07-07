@@ -45,10 +45,11 @@ define( function( require ) {
     var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
     // title, possibly scaled for i18n
-    var titleNode = new Text( challenge.title, { font: LineGameConstants.TITLE_FONT, fill: LineGameConstants.TITLE_COLOR } );
-    if ( titleNode.width > boxSize.width ) {
-      titleNode.scale = boxSize.width / titleNode.width;
-    }
+    var titleNode = new Text( challenge.title, {
+      font: LineGameConstants.TITLE_FONT,
+      fill: LineGameConstants.TITLE_COLOR,
+      maxWidth: boxSize.width
+    } );
 
     // Answer
     var answerBoxNode =

@@ -12,6 +12,7 @@ define( function( require ) {
   var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
@@ -64,6 +65,13 @@ define( function( require ) {
       xMargin: 10
     } );
 
+    // horizontal layout of buttons
+    var buttons = new HBox( {
+      spacing: 20,
+      maxWidth: 320,
+      children: [ saveLineButton, eraseLinesButton ]
+    } );
+
     // Sets the enabled states of the Save and Erase buttons
     Property.multilink( [ savedLines.lengthProperty, linesVisibleProperty ],
       function() {
@@ -81,8 +89,7 @@ define( function( require ) {
     var subContent = new Node();
     content.addChild( subContent );
     subContent.addChild( interactiveEquationNode );
-    subContent.addChild( saveLineButton );
-    subContent.addChild( eraseLinesButton );
+    subContent.addChild( buttons );
 
     // horizontal separators
     var separatorWidth = content.width + 5;
@@ -104,10 +111,8 @@ define( function( require ) {
     interactiveEquationNode.centerX = content.centerX;
     interactiveEquationNode.top = titleSeparator.bottom + ySpacing;
     buttonsSeparator.top = interactiveEquationNode.bottom + ySpacing;
-    saveLineButton.right = content.centerX - ( xSpacing / 2 );
-    saveLineButton.top = buttonsSeparator.bottom + ySpacing;
-    eraseLinesButton.left = content.centerX + ( xSpacing / 2 );
-    eraseLinesButton.top = buttonsSeparator.bottom + ySpacing;
+    buttons.centerX = content.centerX;
+    buttons.top = buttonsSeparator.bottom + ySpacing;
 
     // Add a horizontal strut, to prevent control panel from resizing when minimized. Do this last!
     var strutNode = new HStrut( separatorWidth );

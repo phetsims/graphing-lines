@@ -34,8 +34,10 @@ define( function( require ) {
       new GraphControls(
         viewProperties.linesVisibleProperty,
         viewProperties.slopeToolVisibleProperty,
-        model.standardLines,
-        { includeStandardLines: false } ),
+        model.standardLines, {
+          includeStandardLines: false,
+          maxWidth: 400
+        } ),
 
       // equation controls
       new EquationControls(

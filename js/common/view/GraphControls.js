@@ -40,6 +40,12 @@ define( function( require ) {
   function GraphControls( linesVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
+      fill: GLColors.CONTROL_PANEL_BACKGROUND,
+      stroke: 'black',
+      lineWidth: 1,
+      xMargin: 20,
+      yMargin: 15,
+      cornerRadius: 10,
       includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
     }, options );
 
@@ -75,16 +81,7 @@ define( function( require ) {
       align: 'left'
     } );
 
-    Panel.call( thisNode, contentNode, {
-      fill: GLColors.CONTROL_PANEL_BACKGROUND,
-      stroke: 'black',
-      lineWidth: 1,
-      xMargin: 20,
-      yMargin: 15,
-      cornerRadius: 10
-    } );
-
-    thisNode.mutate( options );
+    Panel.call( thisNode, contentNode, options );
 
     // when lines are not visible, hide related controls
     linesVisibleProperty.link( function( visible ) {

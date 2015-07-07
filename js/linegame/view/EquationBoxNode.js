@@ -50,6 +50,8 @@ define( function( require ) {
       lineWidth: 1
     } );
 
+    equationNode.maxWidth = boxSize.width - ( 2 * X_MARGIN ); // constrain with for i18n
+
     // rendering order
     thisNode.addChild( boxNode );
     thisNode.addChild( titleNode );

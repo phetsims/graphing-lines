@@ -24,7 +24,7 @@ define( function( require ) {
   var options = {
     credits: {
       leadDesign: 'Ariel Paul',
-      softwareDevelopment: 'Chris Malley',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein,\nAmanda McGarry, Kathy Perkins',
       graphicArts: 'Sharon Siman-Tov'
     }

@@ -2,6 +2,7 @@
   "name": "graphing-lines",
   "version": "1.0.0-dev.16",
   "license": "GPLv3",
+  "requirejsNamespace": "GRAPHING_LINES",
   "simTitleStringKey": "GRAPHING_LINES/graphing-lines.name",
   "phetLibs": [
     "graphing-lines",

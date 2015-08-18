@@ -17,7 +17,6 @@
     "requirejsNamespace": "GRAPHING_LINES",
     "simTitleStringKey": "GRAPHING_LINES/graphing-lines.name",
     "phetLibs": [
-      "graphing-lines",
       "vegas",
       "vibe"
     ]

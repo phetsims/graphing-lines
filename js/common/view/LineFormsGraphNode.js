@@ -66,6 +66,11 @@ define( function( require ) {
     viewProperties.multilink( [ 'linesVisible', 'slopeToolVisible' ],
       thisNode.updateLinesVisibility.bind( thisNode ) );
 
+    // Visibility of the grid
+    viewProperties.gridVisibleProperty.link( function( visible ) {
+      thisNode.setGridVisible( visible );
+    } );
+
     // Visibility of the equation on the interactive line
     thisNode.viewProperties.interactiveEquationVisibleProperty.link( function( visible ) {
       if ( thisNode.interactiveLineNode ) {

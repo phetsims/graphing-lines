@@ -246,13 +246,15 @@ define( function( require ) {
     // background
     var backgroundNode = new Rectangle(
       modelViewTransform.modelToViewX( graph.xRange.min ), modelViewTransform.modelToViewY( graph.yRange.max ),
-      modelViewTransform.modelToViewDeltaX( graph.getWidth() ), modelViewTransform.modelToViewDeltaY( -graph.getHeight() ),
-      { fill: GRID_BACKGROUND } );
+      modelViewTransform.modelToViewDeltaX( graph.getWidth() ), modelViewTransform.modelToViewDeltaY( -graph.getHeight() ), {
+        fill: GRID_BACKGROUND,
+        stroke: MAJOR_GRID_LINE_COLOR
+      } );
     this.addChild( backgroundNode );
 
-    // horizontal grid lines, one line for each unit of grid spacing
-    var horizontalGridLinesNode = new Node();
-    this.addChild( horizontalGridLinesNode );
+    // @private horizontal grid lines, one line for each unit of grid spacing
+    this.horizontalGridLinesNode = new Node();
+    this.addChild( this.horizontalGridLinesNode );
     var numberOfHorizontalGridLines = graph.getHeight() + 1;
     var minX = modelViewTransform.modelToViewX( graph.xRange.min );
     var maxX = modelViewTransform.modelToViewX( graph.xRange.max );
@@ -261,13 +263,13 @@ define( function( require ) {
       if ( modelY !== 0 ) { // skip origin, x axis will live here
         var yOffset = modelViewTransform.modelToViewY( modelY );
         var isMajorX = Math.abs( modelY ) % MAJOR_TICK_SPACING === 0;
-        horizontalGridLinesNode.addChild( new GridLineNode( minX, yOffset, maxX, yOffset, isMajorX ) );
+        this.horizontalGridLinesNode.addChild( new GridLineNode( minX, yOffset, maxX, yOffset, isMajorX ) );
       }
     }
 
-    // vertical grid lines, one line for each unit of grid spacing
-    var verticalGridLinesNode = new Node();
-    this.addChild( verticalGridLinesNode );
+    // @private vertical grid lines, one line for each unit of grid spacing
+    this.verticalGridLinesNode = new Node();
+    this.addChild( this.verticalGridLinesNode );
     var numberOfVerticalGridLines = graph.getWidth() + 1;
     var minY = modelViewTransform.modelToViewY( graph.yRange.max ); // yes, swap min and max
     var maxY = modelViewTransform.modelToViewY( graph.yRange.min );
@@ -276,12 +278,18 @@ define( function( require ) {
       if ( modelX !== 0 ) { // skip origin, y axis will live here
         var xOffset = modelViewTransform.modelToViewX( modelX );
         var isMajorY = Math.abs( modelX ) % MAJOR_TICK_SPACING === 0;
-        verticalGridLinesNode.addChild( new GridLineNode( xOffset, minY, xOffset, maxY, isMajorY ) );
+        this.verticalGridLinesNode.addChild( new GridLineNode( xOffset, minY, xOffset, maxY, isMajorY ) );
       }
     }
   }
 
-  inherit( Node, GridNode );
+  inherit( Node, GridNode, {
+
+    // Sets visibility of grid lines
+    setLinesVisible: function( visible ) {
+      this.horizontalGridLinesNode.visible = this.verticalGridLinesNode.visible = visible;
+    }
+  } );
 
   //----------------------------------------------------------------------------------------
 
@@ -291,10 +299,14 @@ define( function( require ) {
    * @constructor
    */
   function GraphNode( graph, modelViewTransform ) {
+
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
+
+    this.gridNode = new GridNode( graph, modelViewTransform ); // @private
+
     Node.call( this, {
         children: [
-          new GridNode( graph, modelViewTransform ),
+          this.gridNode,
           new XAxisNode( graph, modelViewTransform ),
           new YAxisNode( graph, modelViewTransform )
         ]
@@ -302,5 +314,11 @@ define( function( require ) {
     );
   }
 
-  return inherit( Node, GraphNode );
+  return inherit( Node, GraphNode, {
+
+    // @public Sets the visibility of the grid
+    setGridVisible: function( visible ) {
+      this.gridNode.setLinesVisible( visible );
+    }
+  } );
 } );

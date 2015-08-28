@@ -21,6 +21,7 @@ define( function( require ) {
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
+  var hideGridString = require( 'string!GRAPHING_LINES/hideGrid' );
   var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
   var slopeString = require( 'string!GRAPHING_LINES/slope' );
   var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
@@ -32,12 +33,13 @@ define( function( require ) {
 
   /**
    * @param {Property.<boolean>} linesVisibleProperty are lines visible on the graph?
+   * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
    * @param {Property.<boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
    * @param {ObservableArray.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
    * @param {Object} [options] should check boxes for standard lines be accessible?
    * @constructor
    */
-  function GraphControls( linesVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
+  function GraphControls( linesVisibleProperty, gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
@@ -53,6 +55,7 @@ define( function( require ) {
 
     // private properties for standard-line check boxes
     var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
+    var notGridVisibleProperty = new Property( !gridVisibleProperty.get() );
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
@@ -61,6 +64,8 @@ define( function( require ) {
     var ICON_SIZE = 60;
     var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
     hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );
+    var hideGridCheckBox = CheckBox.createTextCheckBox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
+    hideGridCheckBox.touchArea = hideGridCheckBox.localBounds.dilatedXY( 15, 10 );
     var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
       { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
     var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
@@ -69,7 +74,7 @@ define( function( require ) {
       { icon: GLIconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // vertical layout
-    var children = [ slopeCheckBox, positiveCheckBox, negativeCheckBox, hideLinesCheckBox ];
+    var children = [ slopeCheckBox, positiveCheckBox, negativeCheckBox, hideLinesCheckBox, hideGridCheckBox ];
     if ( !options.includeStandardLines ) {
       children.splice( children.indexOf( positiveCheckBox ), 1 );
       children.splice( children.indexOf( negativeCheckBox ), 1 );
@@ -93,6 +98,10 @@ define( function( require ) {
 
     notLinesVisibleProperty.link( function( visible ) {
       linesVisibleProperty.set( !visible );
+    } );
+
+    notGridVisibleProperty.link( function( visible ) {
+      gridVisibleProperty.set( !visible );
     } );
 
     var setStandardLineVisible = function( visible, line ) {

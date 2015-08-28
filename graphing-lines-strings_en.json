@@ -91,5 +91,8 @@
   },
   "pattern_Level_0": {
     "value": "Level {0}"
+  },
+  "hideGrid": {
+    "value": "Hide grid"
   }
 }

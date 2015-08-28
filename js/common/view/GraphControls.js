@@ -56,6 +56,8 @@ define( function( require ) {
     // private properties for standard-line check boxes
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
+
+    // private properties for 'Hide' check boxes, where 'visible' needs to be inverted
     var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
     var notGridVisibleProperty = new Property( !gridVisibleProperty.get() );
 

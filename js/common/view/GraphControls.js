@@ -54,33 +54,40 @@ define( function( require ) {
     var thisNode = this;
 
     // private properties for standard-line check boxes
-    var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
-    var notGridVisibleProperty = new Property( !gridVisibleProperty.get() );
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
+    var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
+    var notGridVisibleProperty = new Property( !gridVisibleProperty.get() );
 
     // check boxes
     var TEXT_OPTIONS = { font: new GLFont( 18 ) };
     var ICON_SIZE = 60;
-    var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
-    hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );
-    var hideGridCheckBox = CheckBox.createTextCheckBox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
-    hideGridCheckBox.touchArea = hideGridCheckBox.localBounds.dilatedXY( 15, 10 );
-    var positiveCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
-      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
-    var negativeCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
-      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
+
+    // 'Slope' check box
     var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
       { icon: GLIconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
+    // 'y = x' check box
+    var yEqualsXCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
+      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
+
+    // 'y = -x' check box
+    var yEqualsNegativeXCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
+      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
+
+    // 'Hide lines' check box
+    var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
+    hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );
+
+    // 'Hide grid' check box
+    var hideGridCheckBox = CheckBox.createTextCheckBox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
+    hideGridCheckBox.touchArea = hideGridCheckBox.localBounds.dilatedXY( 15, 10 );
+
     // vertical layout
-    var children = [ slopeCheckBox, positiveCheckBox, negativeCheckBox, hideLinesCheckBox, hideGridCheckBox ];
-    if ( !options.includeStandardLines ) {
-      children.splice( children.indexOf( positiveCheckBox ), 1 );
-      children.splice( children.indexOf( negativeCheckBox ), 1 );
-    }
     var contentNode = new LayoutBox( {
-      children: children,
+      children: ( options.includeStandardLines ) ?
+        [ slopeCheckBox, yEqualsXCheckBox, yEqualsNegativeXCheckBox, hideLinesCheckBox, hideGridCheckBox ] :
+        [ slopeCheckBox, hideLinesCheckBox, hideGridCheckBox ],
       orientation: 'vertical',
       spacing: 20,
       align: 'left'
@@ -91,8 +98,8 @@ define( function( require ) {
     // when lines are not visible, hide related controls
     linesVisibleProperty.link( function( visible ) {
       notLinesVisibleProperty.set( !visible );
-      positiveCheckBox.enabled = visible;
-      negativeCheckBox.enabled = visible;
+      yEqualsXCheckBox.enabled = visible;
+      yEqualsNegativeXCheckBox.enabled = visible;
       slopeCheckBox.enabled = visible;
     } );
 

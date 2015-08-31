@@ -13,6 +13,7 @@ define( function( require ) {
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
 
   // strings
   var graphTheLineString = require( 'string!GRAPHING_LINES/graphTheLine' );
@@ -56,11 +57,15 @@ define( function( require ) {
      * @override
      */
     updateGraphLines: function() {
+
       this.graph.lines.clear();
-      // add lines in the order that they would be rendered
-      if ( this.guess ) {
+
+      // Add lines in the order that they would be rendered.
+      // Account for guesses that might be NotALine (not a valid line).
+      if ( this.guess instanceof Line ) {
         this.graph.lines.push( this.guess );
       }
+
       if ( this.answerVisible ) {
         this.graph.lines.push( this.answer );
       }

@@ -63,7 +63,7 @@ define( function( require ) {
     this.pointTool1 = new PointTool( new Vector2( 1.5, -10.5 ), 'up', this.graph.lines, new Bounds2( -13, -13, 14, 15 ) );
     this.pointTool2 = new PointTool( new Vector2( 7, -13 ), 'down', this.graph.lines, new Bounds2( -13, -16, 14, 12 ) );
 
-    // When the guess changes, update the lines that are 'seen' by the point tools.
+    // {Line|NotALine} When the guess changes, update the lines that are 'seen' by the point tools.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );
   }
 

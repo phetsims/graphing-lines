@@ -15,6 +15,7 @@ define( function( require ) {
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
@@ -24,7 +25,7 @@ define( function( require ) {
   var EQUATION_FONT_SIZE = 18;
 
   /**
-   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Line|NotALine>} lineProperty
    * @param {Graph} graph
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Object} [options]
@@ -77,9 +78,9 @@ define( function( require ) {
     // @private updates the line and equation
     update: function( line ) {
 
-      // line may be null, for example the user's guess in 'Place The Points' challenge
+      // line may be NotALine, for example the user's guess in 'Place The Points' challenge
       this.parentNode.visible = !!line; // cast to boolean
-      if ( !line ) { return; }
+      if ( ! ( line instanceof Line ) ) { return; }
 
       // compute the new tip and tail for the line
       var xRange = this.graph.xRange;

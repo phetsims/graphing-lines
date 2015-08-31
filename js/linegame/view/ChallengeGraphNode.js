@@ -15,6 +15,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -80,7 +81,7 @@ define( function( require ) {
 
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {
-      if ( line ) {
+      if ( line instanceof Line ) {
         // plot (x1,y1)
         thisNode.guessPointNode.visible = thisNode.guessPointVisible;
         thisNode.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );

@@ -107,8 +107,8 @@ define( function( require ) {
     // sync with guess
     challenge.guessProperty.link( function( line ) {
 
-      // line is null if ManipulationMode.THREE_POINTS and points don't make a line
-      if ( line ) {
+      // line is NotAline if ManipulationMode.THREE_POINTS and points don't make a line
+      if ( line instanceof Line ) {
         guessLineProperty.set( line ); // updates equationNode
       }
       thisNode.equationNode.visible = !!line; // cast to boolean

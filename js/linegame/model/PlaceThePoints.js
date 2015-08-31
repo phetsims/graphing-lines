@@ -17,6 +17,7 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  var NotALine = require( 'GRAPHING_LINES/linegame/model/NotALine' );
   var PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -48,7 +49,7 @@ define( function( require ) {
         }
         else {
           // the 3 points don't form a line
-          thisChallenge.guess = null;
+          thisChallenge.guess = new NotALine();
         }
       } );
   }

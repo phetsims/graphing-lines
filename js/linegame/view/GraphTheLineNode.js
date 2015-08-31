@@ -122,7 +122,12 @@ define( function( require ) {
     model.playStateProperty.link( function( playState ) {
 
       // states in which the graph is interactive
-      thisNode.graphNode.pickable = ( playState === PlayState.FIRST_CHECK || playState === PlayState.SECOND_CHECK || ( playState === PlayState.NEXT && !challenge.isCorrect() ) );
+      thisNode.graphNode.pickable = (
+        playState === PlayState.FIRST_CHECK ||
+        playState === PlayState.SECOND_CHECK ||
+        playState === PlayState.TRY_AGAIN ||
+        ( playState === PlayState.NEXT && !challenge.isCorrect() )
+      );
 
       // Graph the answer line at the end of the challenge.
       thisNode.graphNode.setAnswerVisible( playState === PlayState.NEXT );

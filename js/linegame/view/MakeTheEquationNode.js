@@ -115,7 +115,12 @@ define( function( require ) {
     model.playStateProperty.link( function( playState ) {
 
       // states in which the equation is interactive
-      guessBoxNode.pickable = ( playState === PlayState.FIRST_CHECK || playState === PlayState.SECOND_CHECK || ( playState === PlayState.NEXT && !challenge.isCorrect() ) );
+      guessBoxNode.pickable = (
+        playState === PlayState.FIRST_CHECK ||
+        playState === PlayState.SECOND_CHECK ||
+        playState === PlayState.TRY_AGAIN ||
+        ( playState === PlayState.NEXT && !challenge.isCorrect() )
+      );
 
       // Graph the guess line at the end of the challenge.
       graphNode.setGuessVisible( playState === PlayState.NEXT );

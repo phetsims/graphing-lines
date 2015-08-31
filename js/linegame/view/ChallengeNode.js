@@ -150,6 +150,13 @@ define( function( require ) {
       nextButton.visible = ( state === PlayState.NEXT );
     } );
 
+    // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
+    model.challenge.guessProperty.link( function( guess ) {
+      if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
+        model.playStateProperty.set( PlayState.SECOND_CHECK );
+      }
+    } );
+
     // dev-mode options
     if ( GLQueryParameters.DEV ) {
 

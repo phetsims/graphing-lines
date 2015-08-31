@@ -79,8 +79,9 @@ define( function( require ) {
     update: function( line ) {
 
       // line may be NotALine, for example the user's guess in 'Place The Points' challenge
-      this.parentNode.visible = !!line; // cast to boolean
-      if ( ! ( line instanceof Line ) ) { return; }
+      var isALine = ( line instanceof Line );
+      this.parentNode.visible = isALine; // cast to boolean
+      if ( !isALine ) { return; }
 
       // compute the new tip and tail for the line
       var xRange = this.graph.xRange;

@@ -30,7 +30,7 @@ define( function( require ) {
 
     LineFormsModel.call( thisModel, interactiveLine );
 
-    // ranges
+    // @public ranges
     thisModel.x1RangeProperty = new Property( thisModel.graph.xRange );
     thisModel.y1RangeProperty = new Property( thisModel.graph.yRange );
     thisModel.riseRangeProperty = new Property( thisModel.graph.yRange );

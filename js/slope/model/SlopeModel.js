@@ -19,7 +19,7 @@ define( function( require ) {
 
     LineFormsModel.call( this, new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
 
-    // ranges
+    // @public ranges
     this.x1RangeProperty = new Property( this.graph.xRange );
     this.y1RangeProperty = new Property( this.graph.yRange );
     this.x2RangeProperty = new Property( this.graph.xRange );

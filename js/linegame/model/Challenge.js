@@ -42,9 +42,10 @@ define( function( require ) {
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
     PropertySet.call( this, {
-      guess: createInitialGuess( answer, manipulationMode, xRange, yRange ) // {Line} the user's current guess
+      guess: createInitialGuess( answer, manipulationMode, xRange, yRange ) // @public {Line} the user's current guess
     } );
 
+    // @public (read-only)
     this.title = title;
     this.description = description;
     this.answer = answer.withColor( LineGameConstants.ANSWER_COLOR );
@@ -52,14 +53,14 @@ define( function( require ) {
     this.equationForm = equationForm;
     this.manipulationMode = manipulationMode;
 
-    // model-view transform, created in the model because each challenge subclass may have its own transform
+    // @public model-view transform, created in the model because each challenge subclass may have its own transform
     var modelViewTransformScale = LineGameConstants.GRAPH_WIDTH / xRange.getLength(); // view units / model units
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( LineGameConstants.ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // graph on right, y inverted
 
-    // Graph
+    // @public Graph
     this.graph = new Graph( xRange, yRange );
 
-    // Point tools
+    // @public Point tools
     this.pointTool1 = new PointTool( new Vector2( 1.5, -10.5 ), 'up', this.graph.lines, new Bounds2( -13, -13, 14, 15 ) );
     this.pointTool2 = new PointTool( new Vector2( 7, -13 ), 'down', this.graph.lines, new Bounds2( -13, -16, 14, 12 ) );
 
@@ -106,6 +107,7 @@ define( function( require ) {
      * @param {LineGameModel} model the game model
      * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
      * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
+     * @public
      */
     createView: function( model, challengeSize, audioPlayer ) {
       throw new Error( 'must be implemented by subtype' );
@@ -114,12 +116,13 @@ define( function( require ) {
     /**
      * Updates the collection of lines that are 'seen' by the point tools.
      * @abstract
+     * @public
      */
     updateGraphLines: function() {
       throw new Error( 'must be implemented by subtype' );
     },
 
-    // Resets the challenge
+    // @public Resets the challenge
     reset: function() {
       PropertySet.prototype.reset.call( this );
       this.pointTool1.reset();
@@ -127,17 +130,18 @@ define( function( require ) {
       this.setAnswerVisible( false );
     },
 
-    // Visibility of the answer affects what is 'seen' by the point tools.
+    // @public Visibility of the answer affects what is 'seen' by the point tools.
     setAnswerVisible: function( visible ) {
       this.answerVisible = visible;
       this.updateGraphLines();
     },
 
-    // True if the guess and answer are descriptions of the same line.
+    // @public True if the guess and answer are descriptions of the same line.
     isCorrect: function() {
       return this.answer.same( this.guess );
     },
 
+    // @public
     toString: function() {
       return this.constructor.name + '[' +
              ' title=' + this.title +

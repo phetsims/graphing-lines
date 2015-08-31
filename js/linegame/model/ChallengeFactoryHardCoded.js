@@ -26,6 +26,8 @@ define( function( require ) {
      * @param {Range} xRange range of the graph's x axis
      * @param {Range} yRange range of the graph's y axis
      * @return {Challenge[]} array of challenges
+     * @override
+     * @public
      */
     createChallenges: function( level, xRange, yRange ) {
       var challenges = [];

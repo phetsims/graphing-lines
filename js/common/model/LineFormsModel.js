@@ -31,19 +31,21 @@ define( function( require ) {
   function LineFormsModel( interactiveLine ) {
 
     var thisModel = this;
-    PropertySet.call( thisModel, { interactiveLine: interactiveLine } );
+    PropertySet.call( thisModel, {
+      interactiveLine: interactiveLine // @public
+    } );
 
-    // radius of the manipulators
+    // @public (read-only) radius of the manipulators
     thisModel.manipulatorRadius = GLConstants.MANIPULATOR_RADIUS;
 
-    // graph
+    // @public graph
     thisModel.graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
-    // model-view transform, created in the model because it's dependent on graph axes ranges
+    // @public model-view transform, created in the model because it's dependent on graph axes ranges
     var modelViewTransformScale = GRID_VIEW_UNITS / Math.max( thisModel.graph.xRange.getLength(), thisModel.graph.yRange.getLength() ); // view units / model units
     thisModel.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // y is inverted
 
-    // static lines
+    // @public static lines
     thisModel.savedLines = new ObservableArray();
     thisModel.standardLines = new ObservableArray();
 
@@ -62,7 +64,7 @@ define( function( require ) {
       }
     );
 
-    // point tools, drag bounds determined by 'eye balling' so that the point tool nodes remain on screen.
+    // @public point tools, drag bounds determined by 'eye balling' so that the point tool nodes remain on screen.
     thisModel.pointTool1 = new PointTool( new Vector2( -5, -10.5 ), 'up', thisModel.graph.lines,
       new Bounds2( thisModel.graph.xRange.min - 1, thisModel.graph.yRange.min - 1, thisModel.graph.xRange.max + 3, thisModel.graph.yRange.max + 3 ) );
     thisModel.pointTool2 = new PointTool( new Vector2( 3, -13 ), 'down', thisModel.graph.lines,
@@ -71,7 +73,7 @@ define( function( require ) {
 
   return inherit( PropertySet, LineFormsModel, {
 
-    // @override
+    // @override @public
     reset: function() {
       PropertySet.prototype.reset.call( this );
       this.savedLines.clear();

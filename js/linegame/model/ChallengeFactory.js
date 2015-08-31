@@ -19,10 +19,10 @@ define( function( require ) {
     /**
      * Creates challenges for the factory's game level.
      *
-     * @abstract
      * @param {Range} xRange range of the graph's x axis
      * @param {Range} yRange range of the graph's y axis
      * @return {Challenge[]} array of challenges
+     * @public
      */
     createChallenges: function( xRange, yRange ) {
       throw new Error( 'must be implemented by subtypes' );

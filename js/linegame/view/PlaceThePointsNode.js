@@ -46,9 +46,10 @@ define( function( require ) {
 
     /**
      * Creates the graph portion of the view.
-     * @override
      * @param {Challenge} challenge
      * @returns {ChallengeGraphNode}
+     * @override
+     * @public
      */
     createGraphNode: function( challenge ) {
       return new ThreePointsGraphNode( challenge );

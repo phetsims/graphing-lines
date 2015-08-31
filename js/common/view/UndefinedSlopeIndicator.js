@@ -37,7 +37,7 @@ define( function( require ) {
 
   return inherit( Node, UndefinedSlopeIndicator, {
 
-    // sets the size of the 'X'
+    // @public sets the size of the 'X'
     setSize: function( width, height ) {
       this.line1.setLine( 0, 0, width, height );
       this.line2.setLine( 0, height, width, 0 );

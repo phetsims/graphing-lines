@@ -50,24 +50,24 @@ define( function( require ) {
 
     var pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
-    // answer
+    // @private answer
     thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
     var answerNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
     thisNode.answerParentNode.addChild( answerNode );
 
-    // point (x1,y1) for answer
+    // @private point (x1,y1) for answer
     thisNode.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
     thisNode.answerParentNode.addChild( thisNode.answerPointNode );
     thisNode.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 
-    // guess
+    // @private guess
     thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
     thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform ) );
     thisNode.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
     thisNode.guessParentNode.addChild( thisNode.guessPointNode );
     thisNode.guessPointVisible = true;
 
-    // slope tool
+    // @private slope tool
     if ( options.slopeToolEnabled ) {
       thisNode.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform );
     }
@@ -98,16 +98,16 @@ define( function( require ) {
 
   return inherit( GraphNode, ChallengeGraphNode, {
 
-    // Sets the visibility of the answer.
+    // @public Sets the visibility of the answer.
     setAnswerVisible: function( visible ) { this.answerParentNode.visible = visible; },
 
-    // Sets the visibility of the guess.
+    // @public Sets the visibility of the guess.
     setGuessVisible: function( visible ) { this.guessParentNode.visible = visible; },
 
-    // Sets the visibility of (x1,y1) for the answer.
+    // @public Sets the visibility of (x1,y1) for the answer.
     setAnswerPointVisible: function( visible ) { this.answerPointNode.visible = visible; },
 
-    // Sets the visibility of (x1,y1) for the guess.
+    // @public Sets the visibility of (x1,y1) for the guess.
     setGuessPointVisible: function( visible ) {
       this.guessPointVisible = visible;
       if ( this.guessPointNode ) {
@@ -115,7 +115,7 @@ define( function( require ) {
       }
     },
 
-    // Sets the visibility of the slope tool for the guess.
+    // @public Sets the visibility of the slope tool for the guess.
     setSlopeToolVisible: function( visible ) {
       if ( this.slopeToolNode ) {
         this.slopeToolNode.visible = visible;

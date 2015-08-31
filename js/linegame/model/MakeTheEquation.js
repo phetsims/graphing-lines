@@ -46,6 +46,7 @@ define( function( require ) {
      * @param {LineGameModel} model the game model
      * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
      * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
+     * @public
      */
     createView: function( model, challengeSize, audioPlayer ) {
       return new MakeTheEquationNode( this, model, challengeSize, audioPlayer );
@@ -54,6 +55,7 @@ define( function( require ) {
     /**
      * Updates the collection of lines that are 'seen' by the point tools.
      * @override
+     * @protected
      */
     updateGraphLines: function() {
       this.graph.lines.clear();

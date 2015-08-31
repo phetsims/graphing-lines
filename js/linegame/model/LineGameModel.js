@@ -58,7 +58,7 @@ define( function( require ) {
    * @constructor
    */
   function GamePhaseProperty( value, hook ) {
-    this.hook = hook;
+    this.hook = hook; // @private
     Property.call( this, value );
   }
 
@@ -75,6 +75,8 @@ define( function( require ) {
     var thisModel = this;
 
     PropertySet.call( thisModel, {
+
+      // @public
       level: 0,
       soundEnabled: true,
       timerEnabled: false,
@@ -85,6 +87,7 @@ define( function( require ) {
       playState: PlayState.NONE
     } );
 
+    // @public
     thisModel.challenges = []; // {Challenge[]}
     thisModel.timer = new GameTimer();
     thisModel.numberOfLevels = factories.length;
@@ -97,6 +100,7 @@ define( function( require ) {
       thisModel.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 
+    // @public
     thisModel.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
       /*
        * This function will be called prior to setting the property value.
@@ -149,7 +153,7 @@ define( function( require ) {
 
   return inherit( PropertySet, LineGameModel, {
 
-    // @override
+    // @override @public
     reset: function() {
       PropertySet.prototype.reset.call( this );
       this.gamePhaseProperty.reset();
@@ -164,16 +168,17 @@ define( function( require ) {
       } );
     },
 
+    // @public
     isPerfectScore: function() {
       return this.score === this.getPerfectScore();
     },
 
-    // Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
+    // @public Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
     getPerfectScore: function() {
       return this.challenges.length * this.computePoints( 1 );
     },
 
-    // Compute points to be awarded for a correct answer.
+    // @public Compute points to be awarded for a correct answer.
     computePoints: function( attempts ) {
       return Math.max( 0, this.maxPointsPerChallenge - attempts + 1 );
     },
@@ -182,6 +187,7 @@ define( function( require ) {
      * Skips the current challenge.
      * This is a developer feature.
      * Score and best times are meaningless after using this.
+     * @public
      */
     skipCurrentChallenge: function() {
       this.playState = PlayState.NEXT;
@@ -192,6 +198,7 @@ define( function( require ) {
      * Replays the current challenge.
      * This is a developer feature.
      * Score and best times are meaningless after using this.
+     * @public
      */
     replayCurrentChallenge: function() {
       this.challenge.reset();
@@ -200,7 +207,7 @@ define( function( require ) {
       this.playState = PlayState.FIRST_CHECK;
     },
 
-    // Updates the best time for the current level, at the end of a timed game with a perfect score.
+    // @private Updates the best time for the current level, at the end of a timed game with a perfect score.
     updateBestTime: function() {
       assert && assert( !this.timer.isRunning );
       if ( this.timerEnabled && this.isPerfectScore() ) {
@@ -219,7 +226,7 @@ define( function( require ) {
       }
     },
 
-    // initializes a new set of challenges for the current level
+    // @private initializes a new set of challenges for the current level
     initChallenges: function() {
       this.challengeIndex = -1;
       var level = this.level;

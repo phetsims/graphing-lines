@@ -30,8 +30,8 @@ define( function( require ) {
       onLine: null // line that the tool is on, null if it's not on a line
     } );
 
-    thisTool.orientation = orientation;
-    thisTool.dragBounds = dragBounds;
+    thisTool.orientation = orientation; // @public
+    thisTool.dragBounds = dragBounds; // @public
 
     // Update when the point tool moves or the lines change.
     Property.multilink( [ thisTool.locationProperty, lines.lengthProperty ],
@@ -56,6 +56,7 @@ define( function( require ) {
      * Determines if the point tool is on the specified line.
      * @param {Line} line
      * @returns {boolean}
+     * @public
      */
     isOnLine: function( line ) {
       return ( line.run === 0 && this.location.x === line.x1 ) || // slope is undefined, tool is on the line

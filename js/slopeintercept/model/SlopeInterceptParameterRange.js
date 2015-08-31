@@ -19,7 +19,7 @@ define( function( require ) {
   }
 
   return inherit( PointSlopeParameterRange, SlopeInterceptParameterRange, {
-    // @override Ranges are identical to point-slope, except that x1 is fixed at 0 for slope-intercept.
+    // @override @pubic Ranges are identical to point-slope, except that x1 is fixed at 0 for slope-intercept.
     x1: function() {
       return new Range( 0, 0 );
     }

@@ -41,13 +41,13 @@ define( function( require ) {
     thisNode.viewProperties = viewProperties; // @private
     this.equationType = equationType; // @private
 
-    // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
+    // @private Nodes for each category of line (interactive, standard, saved) to maintain rendering order
     thisNode.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform,
       { equationType: equationType } ); // @private
     thisNode.standardLinesParentNode = new Node(); // @private
     thisNode.savedLinesParentNode = new Node(); // @private
 
-    // Slope tool
+    // @private Slope tool
     thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
 
     // Rendering order

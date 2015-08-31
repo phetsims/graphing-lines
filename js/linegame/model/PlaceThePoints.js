@@ -34,7 +34,7 @@ define( function( require ) {
     var thisChallenge = this;
     GraphTheLine.call( thisChallenge, description, answer, equationForm, ManipulationMode.THREE_POINTS, xRange, yRange );
 
-    // initial points do not form a line
+    // @public initial points do not form a line
     this.addProperty( 'p1', new Vector2( -3, 2 ) );
     this.addProperty( 'p2', new Vector2( 0, 0 ) );
     this.addProperty( 'p3', new Vector2( 3, 2 ) );
@@ -58,10 +58,11 @@ define( function( require ) {
 
     /**
      * Creates the view for this challenge.
-     * @override
      * @param {LineGameModel} model the game model
      * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
      * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
+     * @override
+     * @public
      */
     createView: function( model, challengeSize, audioPlayer ) {
       return new PlaceThePointsNode( this, model, challengeSize, audioPlayer );

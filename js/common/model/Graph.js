@@ -18,6 +18,8 @@ define( function( require ) {
    * @constructor
    */
   function Graph( xRange, yRange ) {
+
+    // @public
     this.xRange = xRange;
     this.yRange = yRange;
     this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
@@ -25,14 +27,17 @@ define( function( require ) {
 
   return inherit( Object, Graph, {
 
+    // @public
     getWidth: function() { return this.xRange.getLength(); },
 
+    // @public
     getHeight: function() { return this.yRange.getLength(); },
 
     /**
      * Does the graph contain the specified point?
      * @param {Vector2} point
      * @returns {boolean}
+     * @public
      */
     contains: function( point ) {
       return this.xRange.contains( point.x ) && this.yRange.contains( point.y );

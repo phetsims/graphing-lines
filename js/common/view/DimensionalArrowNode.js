@@ -67,6 +67,7 @@ define( function( require ) {
      * @param {number} tailY
      * @param {number} tipX
      * @param {number} tipY
+     * @public
      */
     setTailAndTip: function( tailX, tailY, tipX, tipY ) {
 

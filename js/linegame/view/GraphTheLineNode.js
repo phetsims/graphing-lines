@@ -60,14 +60,14 @@ define( function( require ) {
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
     thisNode.equationNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
 
-    // 'Not A Line', for situations where 3-points do not define a line
+    // @private 'Not A Line', for situations where 3-points do not define a line
     thisNode.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
     // Guess
     thisNode.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
       new Node( { children: [ thisNode.equationNode, thisNode.notALineNode ] } ) );
 
-    // Graph
+    // @private Graph
     thisNode.graphNode = this.createGraphNode( challenge );
     thisNode.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
@@ -152,6 +152,7 @@ define( function( require ) {
      * Creates the graph portion of the view.
      * @param {Challenge} challenge
      * @returns {ChallengeGraphNode}
+     * @public
      */
     createGraphNode: function( challenge ) {
       if ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {

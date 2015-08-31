@@ -34,6 +34,8 @@ define( function( require ) {
      * @param {Range} xRange range of the graph's x axis
      * @param {Range} yRange range of the graph's y axis
      * @return {Challenge[]} array of challenges
+     * @overide
+     * @public
      */
     createChallenges: function( xRange, yRange ) {
 

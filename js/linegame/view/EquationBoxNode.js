@@ -33,7 +33,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    // icons for 'correct' and 'incorrect'
+    // @private icons for 'correct' and 'incorrect'
     var iconFont = new GLFont( 72 );
     thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
     thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
@@ -81,12 +81,12 @@ define( function( require ) {
 
   return inherit( Node, EquationBoxNode, {
 
-    // Sets the visibility of the correct icon (green check mark).
+    // @public Sets the visibility of the correct icon (green check mark).
     setCorrectIconVisible: function( visible ) {
       this.correctIconNode.visible = visible;
     },
 
-    // Sets the visibility of the incorrect icon (red X).
+    // @public Sets the visibility of the incorrect icon (red X).
     setIncorrectIconVisible: function( visible ) {
       this.incorrectIconNode.visible = visible;
     }

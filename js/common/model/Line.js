@@ -25,6 +25,8 @@ define( function( require ) {
    */
   function Line( x1, y1, x2, y2, color ) {
     assert && assert( x1 !== x2 || y1 !== y2 ); // 2 different points are required
+
+    // @public
     this.x1 = x1;
     this.y1 = y1;
     this.x2 = x2;
@@ -36,27 +38,28 @@ define( function( require ) {
 
   inherit( Object, Line, {
 
-    // Convenience method for creating a line with a different color.
+    // @public Convenience method for creating a line with a different color.
     withColor: function( color ) {
       return new Line( this.x1, this.y1, this.x2, this.y2, color );
     },
 
+    // @public
     toString: function() {
       return 'Line[x1=' + this.x1 + ' y1=' + this.y1 + ' x2=' + this.x2 + ' y2=' + this.y2 +
              ' rise=' + this.rise + ' run=' + this.run + ' color=' + this.color.toString() + ']';
     },
 
-    // Returns true if 2 points on the specified line are also on this line.
+    // @public Returns true if 2 points on the specified line are also on this line.
     same: function( line ) {
       return ( line !== null ) && this.onLineXY( line.x1, line.y1 ) && this.onLineXY( line.x2, line.y2 );
     },
 
-    // Returns true if the slope is undefined.
+    // @public Returns true if the slope is undefined.
     undefinedSlope: function() {
       return this.run === 0;
     },
 
-    // Gets the slope. Returns NaN if slope is undefined.
+    // @public Gets the slope. Returns NaN if slope is undefined.
     getSlope: function() {
       if ( this.undefinedSlope() ) {
         return Number.NaN;
@@ -70,6 +73,9 @@ define( function( require ) {
      * Given x, solve y = m(x - x1) + y1
      * Returns NaN if the solution is not unique, or there is no solution (x can't possibly be on the line.)
      * This occurs when we have a vertical line, with no run.
+     * @param {number} x
+     * @returns {number}
+     * @public
      */
     solveY: function( x ) {
       if ( this.undefinedSlope() ) {
@@ -83,6 +89,9 @@ define( function( require ) {
     /*
      * Given y, solve x = ((y - y1)/m) + x1
      * Returns NaN if the solution is not unique (horizontal line) or the slope is undefined (vertical line).
+     * @param {number} y
+     * @returns {number}
+     * @public
      */
     solveX: function( y ) {
       if ( this.rise === 0 || this.run === 0 ) {
@@ -93,7 +102,7 @@ define( function( require ) {
       }
     },
 
-    // Gets the simplified rise.
+    // @public Gets the simplified rise.
     getSimplifiedRise: function() {
       if ( this.slopeIsSimplifiable() ) {
         return ( this.rise / Util.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
@@ -103,7 +112,7 @@ define( function( require ) {
       }
     },
 
-    // Gets the simplified run.
+    // @public Gets the simplified run.
     getSimplifiedRun: function() {
       if ( this.slopeIsSimplifiable() ) {
         return ( this.run / Util.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
@@ -116,6 +125,7 @@ define( function( require ) {
     /*
      * Simplification uses Euclid's algorithm for computing the greatest common divisor (GCD) of non-zero integers,
      * so slope can be simplified only if the rise and run meet that criteria.
+     * @public
      */
     slopeIsSimplifiable: function() {
       return ( this.rise !== 0 ) && ( this.run !== 0 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run );
@@ -124,11 +134,13 @@ define( function( require ) {
     /**
      * Returns true if point is on this line.
      * @param {Vector2} p
+     * @public
      */
     onLinePoint: function( p ) {
       return this.onLineXY( p.x, p.y );
     },
 
+    // @public
     onLineXY: function( x, y ) {
       if ( this.rise === 0 ) {
         return ( y === this.y1 );
@@ -145,6 +157,7 @@ define( function( require ) {
      * Gets the the y-intercept as a simplified fraction.
      * This is valid only if (x1,y1) and (x2,y2) are at integer locations on the grid.
      * @returns {Fraction}
+     * @public
      */
     getYIntercept: function() {
       assert && assert( Util.isInteger( this.x1 ) && Util.isInteger( this.y1 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run ) );
@@ -162,6 +175,7 @@ define( function( require ) {
      * Creates a line by describing it in point-slope form: (y - y1) = m(x - x1)
      * Need to use a factory method because params are identical to primary constructor.
      * @static
+     * @public
      */
     createPointSlope: function( x1, y1, rise, run, color ) {
       return new Line( x1, y1, x1 + run, y1 + rise, color );
@@ -171,16 +185,17 @@ define( function( require ) {
      * Creates a line by describing it in slope-intercept form: y = mx + b
      * Using a factory method instead of a constructor to be consistent with createPointSlope.
      * @static
+     * @public
      */
     createSlopeIntercept: function( rise, run, yIntercept, color ) {
       return Line.createPointSlope( 0, yIntercept, rise, run, color );
     }
   } );
 
-  // @static y = x (a standard line)
+  // @static @public y = x (a standard line)
   Line.Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.Y_EQUALS_X );
 
-  // @static y = -x (a standard line)
+  // @static @public y = -x (a standard line)
   Line.Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.Y_EQUALS_NEGATIVE_X );
 
   return Line;

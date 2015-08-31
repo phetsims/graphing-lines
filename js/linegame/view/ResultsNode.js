@@ -29,7 +29,7 @@ define( function( require ) {
     var thisNode = this;
     Node.call( thisNode );
 
-    thisNode.rewardNode = null;
+    thisNode.rewardNode = null; // @private
 
     // show results when we enter this phase
     model.gamePhaseProperty.link( function( gamePhase ) {
@@ -74,6 +74,8 @@ define( function( require ) {
   }
 
   return inherit( Node, ResultsNode, {
+
+    // @public
     step: function( elapsedTime ) {
       if ( this.rewardNode ) {
         this.rewardNode.step( elapsedTime );

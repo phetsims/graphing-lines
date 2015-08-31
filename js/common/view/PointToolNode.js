@@ -118,7 +118,7 @@ define( function( require ) {
       thisNode.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), thisNode.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
       { pickable: false } );
 
-    // displayed value
+    // @private displayed value
     thisNode.valueNode = new Text( '?', {
       font: new GLFont( { size: 15, weight: 'bold' } ),
       pickable: false,

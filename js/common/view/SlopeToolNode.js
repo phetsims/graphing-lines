@@ -46,8 +46,8 @@ define( function( require ) {
       yMargin: 6,
       cornerRadius: 5
     };
-    thisNode.riseProperty = new Property( lineProperty.get().rise );
-    thisNode.runProperty = new Property( lineProperty.get().run );
+    thisNode.riseProperty = new Property( lineProperty.get().rise ); // @private
+    thisNode.runProperty = new Property( lineProperty.get().run ); // @private
     thisNode.riseValueNode = new NumberBackgroundNode( thisNode.riseProperty, numberOptions ); // @private
     thisNode.runValueNode = new NumberBackgroundNode( thisNode.runProperty, numberOptions ); // @private
 
@@ -84,6 +84,7 @@ define( function( require ) {
      * Slope tool is not updated while invisible.
      * If it becomes visible, update it.
      * @override
+     * @public
      */
     setVisible: function( visible ) {
       var doUpdate = ( visible && !this.visible );

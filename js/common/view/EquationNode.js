@@ -27,9 +27,10 @@ define( function( require ) {
 
     assert && assert( typeof pointSize === 'number' );
 
-    this.DECIMAL_PLACES = 0;
+    this.DECIMAL_PLACES = 0; // @private
 
     /*
+     * @protected (read-only)
      * Controls the vertical offset of the slope's sign.
      * Zero is vertically centered on the equals sign, positive values move it down, negative move it up.
      * This was created because there was a great deal of discussion and disagreement about where the sign should be placed.
@@ -37,6 +38,7 @@ define( function( require ) {
     this.slopeSignYOffset = 0;
 
     /*
+     * @protected (read-only)
      * Fudge factors for horizontal lines, to vertically center them with equals sign (set by visual inspection).
      * Note that these are currently all zero, and that looks good in JavaScript.
      * In Java, they were a function of pointSize.
@@ -48,16 +50,16 @@ define( function( require ) {
     this.undefinedSlopeYFudgeFactor = 0;
     this.equalsSignFudgeFactor = 0;
 
-    // thickness of the fraction divisor line
+    // @protected (read-only) thickness of the fraction divisor line
     this.fractionLineThickness = 0.06 * pointSize;
 
-    // size of the lines used to create + and - operators
+    // @protected (read-only) size of the lines used to create + and - operators
     this.operatorLineSize = new Dimension2( 0.54 * pointSize, 0.07 * pointSize );
 
-    // size of the lines used to create + and - signs
+    // @protected (read-only) size of the lines used to create + and - signs
     this.signLineSize = new Dimension2( 0.54 * pointSize, 0.11 * pointSize );
 
-    // spacing between components of an equation (set by visual inspection)
+    // @protected (read-only) spacing between components of an equation (set by visual inspection)
     this.integerSignXSpacing = 0.18 * pointSize; // spacing between a sign and the integer to the right of it
     this.fractionSignXSpacing = 0.36 * pointSize; // spacing between a sign and the fraction to the right of it
     this.integerSlopeXSpacing = 0.04 * pointSize; // spacing between a fractional slope and what's to the right of it
@@ -83,6 +85,7 @@ define( function( require ) {
      * @param {GLFont} font
      * @param {number} decimalPlaces
      * @static
+     * @public
      */
     computeMaxSlopePickerWidth: function( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {
 

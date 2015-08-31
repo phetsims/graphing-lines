@@ -40,21 +40,21 @@ define( function( require ) {
 
     var thisNode = this;
 
-    thisNode.lineProperty = lineProperty;
+    thisNode.lineProperty = lineProperty; // @public
     thisNode.graph = graph; // @private
     thisNode.modelViewTransform = modelViewTransform; // @private
     thisNode.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
     thisNode.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
 
-    // parent of all children
+    // @private parent of all children
     thisNode.parentNode = new Node();
 
-    // double-headed arrow
+    // @private double-headed arrow
     thisNode.arrowNode = new ArrowNode( 0, 0, 0, 1,
       { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
     thisNode.parentNode.addChild( thisNode.arrowNode );
 
-    // optional equation
+    // @private optional equation
     if ( options.equationType ) {
       thisNode.equationNode = options.equationType.createDynamicLabel( lineProperty, EQUATION_FONT_SIZE );
       // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
@@ -71,6 +71,7 @@ define( function( require ) {
 
   return inherit( Node, LineNode, {
 
+    // @public
     setEquationVisible: function( visible ) {
       this.equationParentNode.visible = visible;
     },

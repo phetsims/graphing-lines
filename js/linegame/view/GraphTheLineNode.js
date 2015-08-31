@@ -111,7 +111,7 @@ define( function( require ) {
       if ( line instanceof Line ) {
         guessLineProperty.set( line ); // updates equationNode
       }
-      thisNode.equationNode.visible = !!line; // cast to boolean
+      thisNode.equationNode.visible = ( line instanceof Line ); // cast to boolean
       thisNode.notALineNode.visible = !thisNode.equationNode.visible;
 
       // visibility of correct/incorrect icons

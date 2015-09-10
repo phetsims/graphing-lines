@@ -17,7 +17,7 @@ define( function( require ) {
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptView' );
 
   // strings
-  var title = require( 'string!GRAPHING_LINES/tab.slopeIntercept' );
+  var title = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
 
   function SlopeInterceptScreen() {
     Screen.call( this, title,

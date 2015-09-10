@@ -65,16 +65,16 @@
   "symbol.intercept": {
     "value": "b"
   },
-  "tab.slope": {
+  "screen.slope": {
     "value": "Slope"
   },
-  "tab.slopeIntercept": {
+  "screen.slopeIntercept": {
     "value": "Slope-Intercept"
   },
-  "tab.pointSlope": {
+  "screen.pointSlope": {
     "value": "Point-Slope"
   },
-  "tab.lineGame": {
+  "screen.lineGame": {
     "value": "Line Game"
   },
   "point.xy": {

@@ -17,7 +17,7 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var title = require( 'string!GRAPHING_LINES/tab.pointSlope' );
+  var title = require( 'string!GRAPHING_LINES/screen.pointSlope' );
 
   function PointSlopeScreen() {
     Screen.call( this, title,

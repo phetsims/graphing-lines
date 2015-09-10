@@ -17,7 +17,7 @@ define( function( require ) {
   var SlopeView = require( 'GRAPHING_LINES/slope/view/SlopeView' );
 
   // strings
-  var title = require( 'string!GRAPHING_LINES/tab.slope' );
+  var title = require( 'string!GRAPHING_LINES/screen.slope' );
 
   function SlopeScreen() {
     Screen.call( this, title,

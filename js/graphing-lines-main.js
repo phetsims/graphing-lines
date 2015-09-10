@@ -17,7 +17,7 @@ define( function( require ) {
   var SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
 
   // strings
-  var simTitle = require( 'string!GRAPHING_LINES/graphing-lines.name' );
+  var simTitle = require( 'string!GRAPHING_LINES/graphing-lines.title' );
 
   var screens = [ new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ];
 

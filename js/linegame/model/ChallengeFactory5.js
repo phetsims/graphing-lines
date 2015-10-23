@@ -36,7 +36,10 @@ define( function( require ) {
    */
   ChallengeFactory5.addPlaceThePointsChallenges = function( challenges, xRange, yRange ) {
 
-    var x1, y1, rise, run;
+    var x1;
+    var y1;
+    var rise;
+    var run;
 
     // all ranges limited to [-5,5]
     var range = new Range( -5, 5 );
@@ -86,9 +89,25 @@ define( function( require ) {
 
       // all variables, manually hoisted
       var challenges = [];
-      var yIntercepts, riseList, runList, excluded;
-      var equationForm, slope, excludedSlopes, yIntercept, point, line;
-      var x1, y1, x2, y2, xList, yList, rise, run, i;
+      var yIntercepts;
+      var riseList;
+      var runList;
+      var excluded;
+      var equationForm;
+      var slope;
+      var excludedSlopes;
+      var yIntercept;
+      var point;
+      var line;
+      var x1;
+      var y1;
+      var x2;
+      var y2;
+      var xList;
+      var yList;
+      var rise;
+      var run;
+      var i;
 
       // for y-intercept manipulation challenges
       yIntercepts = RandomChooser.rangeToArray( yRange );

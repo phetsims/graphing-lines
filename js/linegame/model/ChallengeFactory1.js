@@ -41,12 +41,25 @@ define( function( require ) {
 
       // all variables, manually hoisted
       var challenges = [];
-      var x, y, x1Range, y1Range, yInterceptRange;
-      var pointArrays, pointArrayIndices, quadrant1Points, quadrant3Points;
-      var slopeArrays, slopeArrayIndices;
-      var yInterceptArrays, yInterceptArrayIndices;
+      var x;
+      var y;
+      var x1Range;
+      var y1Range;
+      var yInterceptRange;
+      var pointArrays;
+      var pointArrayIndices;
+      var quadrant1Points;
+      var quadrant3Points;
+      var slopeArrays;
+      var slopeArrayIndices;
+      var yInterceptArrays;
+      var yInterceptArrayIndices;
       var pointSlopeManipulationModes;
-      var slope, yIntercept, point, description, manipulationMode;
+      var slope;
+      var yIntercept;
+      var point;
+      var description;
+      var manipulationMode;
 
       // for point manipulation challenges, (x1,y1) must be in Quadrant 1 (both coordinates positive) or Quadrant 3 (both coordinates negative)
       {

@@ -104,7 +104,8 @@ define( function( require ) {
     var y1MinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) ); // for y=-y1 case
     var equalsNode = new Text( '=', staticOptions );
     var slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
-    var riseNode, runNode;
+    var riseNode;
+    var runNode;
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );

@@ -148,7 +148,9 @@ define( function( require ) {
    * @param {Color|String} staticColor
    */
   var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
-    var interactivePoint, interactiveSlope, interactiveIntercept;
+    var interactivePoint;
+    var interactiveSlope;
+    var interactiveIntercept;
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       interactiveIntercept = ( manipulationMode === ManipulationMode.INTERCEPT ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );

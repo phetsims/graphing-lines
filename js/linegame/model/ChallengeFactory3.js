@@ -39,8 +39,14 @@ define( function( require ) {
 
       // all variables, manually hoisted
       var challenges = [];
-      var slopeArrays, slopeArrayIndices, yInterceptArrays, yInterceptArrayIndices;
-      var equationForms, slope, yIntercept, point;
+      var slopeArrays;
+      var slopeArrayIndices;
+      var yInterceptArrays;
+      var yInterceptArrayIndices;
+      var equationForms;
+      var slope;
+      var yIntercept;
+      var point;
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = ChallengeFactory2.createSlopeArrays(); // same slopes as level 1

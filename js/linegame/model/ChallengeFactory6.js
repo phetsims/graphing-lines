@@ -40,8 +40,19 @@ define( function( require ) {
 
       // all variables, manually hoisted
       var challenges = [];
-      var yIntercepts, equationForms, equationForm, slope, yIntercept, line;
-      var x1, y1, x2, y2, xList, yList, i;
+      var yIntercepts;
+      var equationForms;
+      var equationForm;
+      var slope;
+      var yIntercept;
+      var line;
+      var x1;
+      var y1;
+      var x2;
+      var y2;
+      var xList;
+      var yList;
+      var i;
 
       yIntercepts = RandomChooser.rangeToArray( yRange );
 

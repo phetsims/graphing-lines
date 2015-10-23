@@ -87,7 +87,10 @@ define( function( require ) {
       // compute the new tip and tail for the line
       var xRange = this.graph.xRange;
       var yRange = this.graph.yRange;
-      var tailX, tailY, tipX, tipY;
+      var tailX;
+      var tailY;
+      var tipX;
+      var tipY;
 
       if ( line.run === 0 ) {
         // x = 0

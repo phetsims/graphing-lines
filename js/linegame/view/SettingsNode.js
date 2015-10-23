@@ -89,7 +89,8 @@ define( function( require ) {
     // Level-selection buttons, arranged in 2 rows
     assert && assert( Util.isInteger( model.numberOfLevels / 2 ) ); // assumes an even number of buttons
     var buttonsParent = new Node();
-    var button, previousButton;
+    var button;
+    var previousButton;
     for ( var level = 0; level < model.numberOfLevels; level++ ) {
 
       button = createLevelSelectionButton( level, model );

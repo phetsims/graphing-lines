@@ -17,10 +17,10 @@ define( function( require ) {
   var Screen = require( 'JOIST/Screen' );
 
   // strings
-  var title = require( 'string!GRAPHING_LINES/screen.pointSlope' );
+  var screenPointSlopeString = require( 'string!GRAPHING_LINES/screen.pointSlope' );
 
   function PointSlopeScreen() {
-    Screen.call( this, title,
+    Screen.call( this, screenPointSlopeString,
       GLIconFactory.createPointSlopeScreenIcon(),
       function() { return new PointSlopeModel(); },
       function( model ) { return new PointSlopeView( model ); },

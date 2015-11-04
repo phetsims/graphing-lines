@@ -17,7 +17,7 @@ define( function( require ) {
   var SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
 
   // strings
-  var simTitle = require( 'string!GRAPHING_LINES/graphing-lines.title' );
+  var graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
 
   var screens = [ new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ];
 
@@ -32,7 +32,7 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
-    var sim = new Sim( simTitle, screens, options );
+    var sim = new Sim( graphingLinesTitleString, screens, options );
     sim.start();
   } );
 } );

@@ -17,10 +17,10 @@ define( function( require ) {
   var SlopeInterceptView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptView' );
 
   // strings
-  var title = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
+  var screenSlopeInterceptString = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
 
   function SlopeInterceptScreen() {
-    Screen.call( this, title,
+    Screen.call( this, screenSlopeInterceptString,
       GLIconFactory.createSlopeInterceptScreenIcon(),
       function() { return new SlopeInterceptModel(); },
       function( model ) { return new SlopeInterceptView( model ); },

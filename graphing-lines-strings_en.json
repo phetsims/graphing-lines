@@ -77,7 +77,7 @@
   "screen.lineGame": {
     "value": "Line Game"
   },
-  "point.xy": {
+  "point.XY": {
     "value": "({0}, {1})"
   },
   "point.unknown": {

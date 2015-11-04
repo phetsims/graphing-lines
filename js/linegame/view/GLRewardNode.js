@@ -40,7 +40,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var patternPointXY = require( 'string!GRAPHING_LINES/point.xy' );
+  var pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
 
   // images
   var pointToolBodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
@@ -124,7 +124,7 @@ define( function( require ) {
     var body = new Image( pointToolBodyImage );
     var tip = new Image( pointToolTipImage, { top: body.bottom, centerX: 0.25 * body.width } );
     var background = new Rectangle( 0, 0, 0.95 * body.width, 0.95 * body.height, { fill: color, center: body.center } );
-    var value = new Text( StringUtils.format( patternPointXY, getRandomX(), getRandomY() ),
+    var value = new Text( StringUtils.format( pointXYString, getRandomX(), getRandomY() ),
       { font: POINT_TOOL_FONT, centerX: POINT_TOOL_WINDOW_CENTER_X, centerY: body.centerY } );
     return new Node( { children: [ background, body, tip, value ] } );
   };

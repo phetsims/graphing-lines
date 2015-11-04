@@ -24,7 +24,7 @@ define( function( require ) {
 
   // strings
   var pointUnknownString = require( 'string!GRAPHING_LINES/point.unknown' );
-  var pointXYString = require( 'string!GRAPHING_LINES/point.xy' );
+  var pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
 
   // images
   var bodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );

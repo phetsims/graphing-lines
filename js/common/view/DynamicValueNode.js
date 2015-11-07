@@ -1,4 +1,4 @@
-// Copyright 2013-2014, University of Colorado Boulder
+// Copyright 2013-2015, University of Colorado Boulder
 
 /**
  * Text node that stays synchronized with a dynamic value. This is used in interactive equations,

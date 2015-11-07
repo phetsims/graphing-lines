@@ -1,4 +1,4 @@
-// Copyright 2013-2014, University of Colorado Boulder
+// Copyright 2013-2015, University of Colorado Boulder
 
 /**
  * Base type view for the various screens that deal with line forms (Slope, Slope-Intercept, Point-Slope).

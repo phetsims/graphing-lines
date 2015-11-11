@@ -11,10 +11,11 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var ThreePointsGraphNode = require( 'GRAPHING_LINES/linegame/view/ThreePointsGraphNode' );
+  var GraphThreePointsNode = require( 'GRAPHING_LINES/linegame/view/GraphThreePointsNode' );
 
   /**
    * @param {GraphTheLine} challenge
@@ -42,6 +43,8 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
+
   return inherit( GraphTheLineNode, PlaceThePointsNode, {
 
     /**
@@ -52,7 +55,7 @@ define( function( require ) {
      * @public
      */
     createGraphNode: function( challenge ) {
-      return new ThreePointsGraphNode( challenge );
+      return new GraphThreePointsNode( challenge );
     }
   } );
 } );

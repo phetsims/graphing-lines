@@ -14,6 +14,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -95,6 +96,8 @@ define( function( require ) {
     thisNode.setGuessPointVisible( options.guessPointVisible );
     thisNode.setSlopeToolVisible( options.slopeToolVisible );
   }
+
+  graphingLines.register( 'ChallengeGraphNode', ChallengeGraphNode );
 
   return inherit( GraphNode, ChallengeGraphNode, {
 

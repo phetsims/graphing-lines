@@ -12,9 +12,12 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
 
   function NotALine() {}
+
+  graphingLines.register( 'NotALine', NotALine );
 
   return inherit( Object, NotALine );
 } );

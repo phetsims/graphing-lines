@@ -13,6 +13,7 @@ define( function( require ) {
 
   // modules
   var Dimension2 = require( 'DOT/Dimension2' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Property = require( 'AXON/Property' );
@@ -73,6 +74,8 @@ define( function( require ) {
 
     Node.call( this, options );
   }
+
+  graphingLines.register( 'EquationNode', EquationNode );
 
   return inherit( Node, EquationNode, {
     // prototype functions go here

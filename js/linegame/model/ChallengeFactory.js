@@ -9,10 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
   function ChallengeFactory() {}
+
+  graphingLines.register( 'ChallengeFactory', ChallengeFactory );
 
   return inherit( Object, ChallengeFactory, {
 

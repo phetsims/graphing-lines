@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
   var PropertySet = require( 'AXON/PropertySet' );
@@ -49,6 +50,8 @@ define( function( require ) {
       }
     );
   }
+
+  graphingLines.register( 'PointTool', PointTool );
 
   return inherit( PropertySet, PointTool, {
 

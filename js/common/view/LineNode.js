@@ -14,6 +14,7 @@ define( function( require ) {
   // modules
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -68,6 +69,8 @@ define( function( require ) {
       thisNode.update( line );
     } );
   }
+
+  graphingLines.register( 'LineNode', LineNode );
 
   return inherit( Node, LineNode, {
 

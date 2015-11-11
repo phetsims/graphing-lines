@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
@@ -88,6 +89,8 @@ define( function( require ) {
     controlsParent.centerX = graphNode.right + xMargin + ( availableControlPanelWidth / 2 );
     controlsParent.top = yMargin;
   }
+
+  graphingLines.register( 'LineFormsView', LineFormsView );
 
   return inherit( ScreenView, LineFormsView );
 } );

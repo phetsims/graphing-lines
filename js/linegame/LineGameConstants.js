@@ -11,9 +11,10 @@ define( function( require ) {
   // modules
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var Vector2 = require( 'DOT/Vector2' );
 
-  return {
+  var LineGameConstants = {
     ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates
 
     // fonts
@@ -37,4 +38,8 @@ define( function( require ) {
     POINT_RADIUS: 0.25, // radius of plotted points, in model units
     POINT_TOOL_SCALE: 0.95
   };
+
+  graphingLines.register( 'LineGameConstants', LineGameConstants );
+
+  return LineGameConstants;
 } );

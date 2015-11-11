@@ -13,6 +13,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -152,6 +153,8 @@ define( function( require ) {
       }
     } );
   }
+
+  graphingLines.register( 'GraphControls', GraphControls );
 
   return inherit( Panel, GraphControls );
 } );

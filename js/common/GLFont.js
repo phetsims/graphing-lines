@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
@@ -30,6 +31,8 @@ define( function( require ) {
 
     PhetFont.call( this, options );
   }
+
+  graphingLines.register( 'GLFont', GLFont );
 
   return inherit( PhetFont, GLFont );
 } );

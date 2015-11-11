@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -34,6 +35,8 @@ define( function( require ) {
     // initialize
     this.setSize( width, height );
   }
+
+  graphingLines.register( 'UndefinedSlopeIndicator', UndefinedSlopeIndicator );
 
   return inherit( Node, UndefinedSlopeIndicator, {
 

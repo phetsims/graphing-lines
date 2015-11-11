@@ -10,12 +10,36 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} x2RangeProperty
+   * @param {Property.<Range>} y2RangeProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @constructor
+   */
+  function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
+
+    var thisNode = this;
+    Manipulator.call( thisNode, radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
+
+    // move the manipulator to match the line's (x2,y2) point
+    lineProperty.link( function( line ) {
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+    } );
+
+    thisNode.addInputListener( new X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) );
+  }
+
+  graphingLines.register( 'X2Y2Manipulator', X2Y2Manipulator );
 
   /**
    * Drag handler for (x2,y2) manipulator.
@@ -59,28 +83,9 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'X2Y2Manipulator.X2Y2DragHandler', X2Y2DragHandler );
+
   inherit( SimpleDragHandler, X2Y2DragHandler );
-
-  /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} x2RangeProperty
-   * @param {Property.<Range>} y2RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @constructor
-   */
-  function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
-
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
-
-    // move the manipulator to match the line's (x2,y2) point
-    lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
-    } );
-
-    thisNode.addInputListener( new X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) );
-  }
 
   return inherit( Manipulator, X2Y2Manipulator );
 } );

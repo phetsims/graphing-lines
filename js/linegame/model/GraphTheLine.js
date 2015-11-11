@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -38,6 +39,8 @@ define( function( require ) {
       yRange
     );
   }
+
+  graphingLines.register( 'GraphTheLine', GraphTheLine );
 
   return inherit( Challenge, GraphTheLine, {
 

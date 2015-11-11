@@ -19,6 +19,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -136,6 +137,7 @@ define( function( require ) {
       slopeMinusSignNode, riseNode, runNode, fractionLineNode, xLeftParenNode, xNode, xPlusNode, xMinusNode, x1Node, xRightParenNode,
       slopeUndefinedNode
     ];
+
     /*
      * Updates the layout to match the desired form of the equation.
      * This is based on which parts of the equation are interactive, and what the
@@ -381,6 +383,8 @@ define( function( require ) {
 
     thisNode.mutate( options );
   }
+
+  graphingLines.register( 'PointSlopeEquationNode', PointSlopeEquationNode );
 
   // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
   PointSlopeEquationNode.createGeneralFormNode = function( options ) {

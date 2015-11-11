@@ -13,6 +13,7 @@ define( function( require ) {
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -25,6 +26,8 @@ define( function( require ) {
   function ChallengeFactory5() {
     ChallengeFactory.call( this );
   }
+
+  graphingLines.register( 'ChallengeFactory5', ChallengeFactory5 );
 
   /**
    * Adds 2 'Place the Point' challenges, 1 slope-intercept form, 1 point-slope form.

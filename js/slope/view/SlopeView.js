@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
   var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsView = require( 'GRAPHING_LINES/common/view/LineFormsView' );
   var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
@@ -54,6 +55,8 @@ define( function( require ) {
       )
     );
   }
+
+  graphingLines.register( 'SlopeView', SlopeView );
 
   return inherit( LineFormsView, SlopeView );
 } );

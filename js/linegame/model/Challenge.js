@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -67,6 +68,8 @@ define( function( require ) {
     // {Line|NotALine} When the guess changes, update the lines that are 'seen' by the point tools.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );
   }
+
+  graphingLines.register( 'Challenge', Challenge );
 
   /*
    * Creates an initial guess, based on the answer and what the user can manipulate.

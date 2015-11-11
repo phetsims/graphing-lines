@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ObservableArray = require( 'AXON/ObservableArray' );
 
@@ -24,6 +25,8 @@ define( function( require ) {
     this.yRange = yRange;
     this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
   }
+
+  graphingLines.register( 'Graph', Graph );
 
   return inherit( Object, Graph, {
 

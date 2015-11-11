@@ -14,17 +14,18 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var PointSlopeGraphNode = require( 'GRAPHING_LINES/linegame/view/PointSlopeGraphNode' );
+  var GraphPointSlopeNode = require( 'GRAPHING_LINES/linegame/view/GraphPointSlopeNode' );
   var Property = require( 'AXON/Property' );
-  var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/linegame/view/SlopeInterceptGraphNode' );
+  var GraphSlopeInterceptNode = require( 'GRAPHING_LINES/linegame/view/GraphSlopeInterceptNode' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var TwoPointsGraphNode = require( 'GRAPHING_LINES/linegame/view/TwoPointsGraphNode' );
+  var GraphTwoPointsNode = require( 'GRAPHING_LINES/linegame/view/GraphTwoPointsNode' );
 
   // strings
   var lineToGraphString = require( 'string!GRAPHING_LINES/lineToGraph' );
@@ -146,6 +147,8 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'GraphTheLineNode', GraphTheLineNode );
+
   return inherit( ChallengeNode, GraphTheLineNode, {
 
     /**
@@ -156,14 +159,14 @@ define( function( require ) {
      */
     createGraphNode: function( challenge ) {
       if ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {
-        return new PointSlopeGraphNode( challenge );
+        return new GraphPointSlopeNode( challenge );
       }
       else if ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {
         assert && assert( challenge.answer.getYIntercept().isInteger() );
-        return new SlopeInterceptGraphNode( challenge );
+        return new GraphSlopeInterceptNode( challenge );
       }
       else if ( challenge.manipulationMode === ManipulationMode.TWO_POINTS ) {
-        return new TwoPointsGraphNode( challenge );
+        return new GraphTwoPointsNode( challenge );
       }
       else {
         throw new Error( 'unsupported manipulationMode: ' + challenge.manipulationMode );

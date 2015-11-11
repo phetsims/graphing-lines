@@ -19,6 +19,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
@@ -78,6 +79,8 @@ define( function( require ) {
       }
     } );
   }
+
+  graphingLines.register( 'LineFormsGraphNode', LineFormsGraphNode );
 
   return inherit( GraphNode, LineFormsGraphNode, {
 

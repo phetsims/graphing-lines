@@ -13,6 +13,7 @@ define( function( require ) {
   var Dimension2 = require( 'DOT/Dimension2' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -63,6 +64,8 @@ define( function( require ) {
       challengeParent.addChild( challenge.createView( model, challengeSize, audioPlayer ) );
     } );
   }
+
+  graphingLines.register( 'PlayNode', PlayNode );
 
   return inherit( Node, PlayNode );
 } );

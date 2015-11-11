@@ -13,6 +13,7 @@ define( function( require ) {
   var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -24,6 +25,8 @@ define( function( require ) {
   function ChallengeFactory6() {
     ChallengeFactory.call( this );
   }
+
+  graphingLines.register( 'ChallengeFactory6', ChallengeFactory6 );
 
   return inherit( ChallengeFactory, ChallengeFactory6, {
 

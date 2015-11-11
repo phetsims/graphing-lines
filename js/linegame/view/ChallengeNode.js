@@ -21,6 +21,7 @@ define( function( require ) {
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -182,6 +183,8 @@ define( function( require ) {
       } );
     }
   }
+
+  graphingLines.register( 'ChallengeNode', ChallengeNode );
 
   /**
    * Creates a non-interactive equation, used to label the specified line.

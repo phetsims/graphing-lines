@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Util = require( 'DOT/Util' );
 
@@ -35,6 +36,8 @@ define( function( require ) {
     this.run = x2 - x1;
     this.color = color || 'black';
   }
+
+  graphingLines.register( 'Line', Line );
 
   inherit( Object, Line, {
 

@@ -15,6 +15,7 @@ define( function( require ) {
   var DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
@@ -77,6 +78,8 @@ define( function( require ) {
       thisNode.update( line, modelViewTransform );
     } );
   }
+
+  graphingLines.register( 'SlopeToolNode', SlopeToolNode );
 
   return inherit( Node, SlopeToolNode, {
 

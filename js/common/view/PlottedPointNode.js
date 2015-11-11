@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var Color = require( 'SCENERY/util/Color' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
@@ -32,6 +33,8 @@ define( function( require ) {
 
     ShadedSphereNode.call( this, 2 * radius, options );
   }
+
+  graphingLines.register( 'PlottedPointNode', PlottedPointNode );
 
   return inherit( ShadedSphereNode, PlottedPointNode );
 } );

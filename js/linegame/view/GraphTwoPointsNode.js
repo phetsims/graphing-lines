@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Property = require( 'AXON/Property' );
@@ -21,7 +22,7 @@ define( function( require ) {
    * @param {PlaceThePoints} challenge
    * @constructor
    */
-  function TwoPointsGraphNode( challenge ) {
+  function GraphTwoPointsNode( challenge ) {
 
     var thisNode = this;
     ChallengeGraphNode.call( thisNode, challenge );
@@ -48,6 +49,8 @@ define( function( require ) {
     } );
   }
 
-  return inherit( ChallengeGraphNode, TwoPointsGraphNode );
+  graphingLines.register( 'GraphTwoPointsNode', GraphTwoPointsNode );
+
+  return inherit( ChallengeGraphNode, GraphTwoPointsNode );
 } );
 

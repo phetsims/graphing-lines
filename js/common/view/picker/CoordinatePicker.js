@@ -13,6 +13,7 @@ define( function( require ) {
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
@@ -58,6 +59,8 @@ define( function( require ) {
 
     NumberPicker.call( this, a1, range, options );
   }
+
+  graphingLines.register( 'CoordinatePicker', CoordinatePicker );
 
   return inherit( NumberPicker, CoordinatePicker );
 } );

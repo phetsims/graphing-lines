@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -57,6 +58,8 @@ define( function( require ) {
       textNode.centerY = backgroundNode.centerY;
     } );
   }
+
+  graphingLines.register( 'NumberBackgroundNode', NumberBackgroundNode );
 
   return inherit( Node, NumberBackgroundNode );
 } );

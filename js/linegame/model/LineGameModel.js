@@ -26,6 +26,7 @@ define( function( require ) {
   var GameTimer = require( 'VEGAS/GameTimer' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -47,28 +48,6 @@ define( function( require ) {
     new ChallengeFactory5(),
     new ChallengeFactory6()
   ];
-
-  /**
-   * Property used for the game phase.
-   * It has a 'hook' function that is called before the value is changed.
-   * This is useful for setting the various state parameters of the game before
-   * notifying observes that the game phase has changed.
-   * @param {GamePhase} value
-   * @param {function} hook function with one parameter of type {GamePhase}
-   * @constructor
-   */
-  function GamePhaseProperty( value, hook ) {
-    this.hook = hook; // @private
-    Property.call( this, value );
-  }
-
-  inherit( Property, GamePhaseProperty, {
-    /** @override */
-    set: function( value ) {
-      this.hook( value );
-      Property.prototype.set.call( this, value );
-    }
-  } );
 
   function LineGameModel() {
 
@@ -150,6 +129,32 @@ define( function( require ) {
       }
     } );
   }
+
+  graphingLines.register( 'LineGameModel', LineGameModel );
+
+  /**
+   * Property used for the game phase.
+   * It has a 'hook' function that is called before the value is changed.
+   * This is useful for setting the various state parameters of the game before
+   * notifying observes that the game phase has changed.
+   * @param {GamePhase} value
+   * @param {function} hook function with one parameter of type {GamePhase}
+   * @constructor
+   */
+  function GamePhaseProperty( value, hook ) {
+    this.hook = hook; // @private
+    Property.call( this, value );
+  }
+
+  graphingLines.register( 'LineGameModel.GamePhaseProperty', GamePhaseProperty );
+
+  inherit( Property, GamePhaseProperty, {
+    /** @override */
+    set: function( value ) {
+      this.hook( value );
+      Property.prototype.set.call( this, value );
+    }
+  } );
 
   return inherit( PropertySet, LineGameModel, {
 

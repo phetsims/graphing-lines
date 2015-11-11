@@ -10,12 +10,37 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} x1RangeProperty
+   * @param {Property.<Range>} y1RangeProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
+   * @constructor
+   */
+  function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
+
+    var thisNode = this;
+    Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
+
+    // move the manipulator to match the line's (x1,y1) point
+    lineProperty.link( function( line ) {
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+    } );
+
+    thisNode.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
+  }
+
+  graphingLines.register( 'X1Y1Manipulator', X1Y1Manipulator );
 
   /**
    * Drag handler for (x1,y1) manipulator.
@@ -64,29 +89,9 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'X1Y1Manipulator.X1Y1DragHandler', X1Y1DragHandler );
+
   inherit( SimpleDragHandler, X1Y1DragHandler );
-
-  /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} x1RangeProperty
-   * @param {Property.<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
-   * @constructor
-   */
-  function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
-
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
-
-    // move the manipulator to match the line's (x1,y1) point
-    lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-    } );
-
-    thisNode.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
-  }
 
   return inherit( Manipulator, X1Y1Manipulator );
 } );

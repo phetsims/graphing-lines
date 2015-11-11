@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
   var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
@@ -45,6 +46,8 @@ define( function( require ) {
       x1y1Manipulator.visible = x2y2Manipulator.visible = linesVisible;
     } );
   }
+
+  graphingLines.register( 'SlopeGraphNode', SlopeGraphNode );
 
   return inherit( LineFormsGraphNode, SlopeGraphNode );
 } );

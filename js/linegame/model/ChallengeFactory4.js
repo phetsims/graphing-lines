@@ -13,6 +13,7 @@ define( function( require ) {
   var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -24,6 +25,8 @@ define( function( require ) {
   function ChallengeFactory4() {
     ChallengeFactory.call( this );
   }
+
+  graphingLines.register( 'ChallengeFactory4', ChallengeFactory4 );
 
   return inherit( ChallengeFactory, ChallengeFactory4, {
 

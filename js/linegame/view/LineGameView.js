@@ -12,6 +12,7 @@ define( function( require ) {
   var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PlayNode = require( 'GRAPHING_LINES/linegame/view/PlayNode' );
   var ResultsNode = require( 'GRAPHING_LINES/linegame/view/ResultsNode' );
@@ -47,6 +48,8 @@ define( function( require ) {
       thisView.resultsNode.visible = ( gamePhase === GamePhase.RESULTS );
     } );
   }
+
+  graphingLines.register( 'LineGameView', LineGameView );
 
   return inherit( ScreenView, LineGameView, {
 

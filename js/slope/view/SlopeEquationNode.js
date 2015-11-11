@@ -16,6 +16,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -378,6 +379,8 @@ define( function( require ) {
 
     return equationNode;
   };
+
+  graphingLines.register( 'SlopeEquationNode', SlopeEquationNode );
 
   return inherit( EquationNode, SlopeEquationNode );
 } );

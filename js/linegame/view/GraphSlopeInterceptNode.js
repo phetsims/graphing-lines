@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
@@ -23,7 +24,7 @@ define( function( require ) {
    * @param {Challenge} challenge
    * @constructor
    */
-  function SlopeInterceptGraphNode( challenge ) {
+  function GraphSlopeInterceptNode( challenge ) {
 
     var thisNode = this;
     ChallengeGraphNode.call( thisNode, challenge );
@@ -67,5 +68,7 @@ define( function( require ) {
     } );
   }
 
-  return inherit( ChallengeGraphNode, SlopeInterceptGraphNode );
+  graphingLines.register( 'GraphSlopeInterceptNode', GraphSlopeInterceptNode );
+
+  return inherit( ChallengeGraphNode, GraphSlopeInterceptNode );
 } );

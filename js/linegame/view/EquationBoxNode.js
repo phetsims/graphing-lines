@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -78,6 +79,8 @@ define( function( require ) {
     thisNode.correctIconNode.visible = false;
     thisNode.incorrectIconNode.visible = false;
   }
+
+  graphingLines.register( 'EquationBoxNode', EquationBoxNode );
 
   return inherit( Node, EquationBoxNode, {
 

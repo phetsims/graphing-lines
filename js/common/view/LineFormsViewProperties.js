@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PropertySet = require( 'AXON/PropertySet' );
 
@@ -22,6 +23,8 @@ define( function( require ) {
       slopeToolVisible: true // determines whether the slope tool is visible on the graph
     } );
   }
+
+  graphingLines.register( 'LineFormsViewProperties', LineFormsViewProperties );
 
   return inherit( PropertySet, LineFormsViewProperties );
 } );

@@ -11,12 +11,35 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} y1RangeProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @constructor
+   */
+  function YInterceptManipulator( radius, lineProperty, y1RangeProperty, modelViewTransform ) {
+
+    var thisNode = this;
+    Manipulator.call( thisNode, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
+
+    // move the manipulator to match the line's (x1,y1) point
+    lineProperty.link( function( line ) {
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+    } );
+
+    thisNode.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
+  }
+
+  graphingLines.register( 'YInterceptManipulator', YInterceptManipulator );
 
   /**
    * Drag handler for y-intercept manipulator.
@@ -55,27 +78,9 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'YInterceptManipulator.YInterceptDragHandler', YInterceptDragHandler );
+
   inherit( SimpleDragHandler, YInterceptDragHandler );
-
-  /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @constructor
-   */
-  function YInterceptManipulator( radius, lineProperty, y1RangeProperty, modelViewTransform ) {
-
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
-
-    // move the manipulator to match the line's (x1,y1) point
-    lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-    } );
-
-    thisNode.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
-  }
 
   return inherit( Manipulator, YInterceptManipulator );
 } );

@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -33,54 +34,6 @@ define( function( require ) {
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;
   var VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
-
-  /**
-   * Drag handler for the pointer tool.
-   * @param {PointTool} pointTool
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Graph} graph
-   * @constructor
-   */
-  function PointToolDragHandler( pointTool, modelViewTransform, graph ) {
-
-    var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
-
-    var constrainBounds = function( point, bounds ) {
-      if ( !bounds || bounds.containsPoint( point ) ) {
-        return point;
-      }
-      else {
-        return new Vector2( Util.clamp( point.x, bounds.minX, bounds.maxX ), Util.clamp( point.y, bounds.minY, bounds.maxY ) );
-      }
-    };
-
-    SimpleDragHandler.call( this, {
-
-      allowTouchSnag: true,
-
-      // note where the drag started
-      start: function( event ) {
-        // Note the mouse-click offset when dragging starts.
-        var location = modelViewTransform.modelToViewPosition( pointTool.location );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
-        // Move the tool that we're dragging to the foreground.
-        event.currentTarget.moveToFront();
-      },
-
-      drag: function( event ) {
-        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = modelViewTransform.viewToModelPosition( parentPoint );
-        location = constrainBounds( location, pointTool.dragBounds );
-        if ( graph.contains( location ) ) {
-          // snap to the graph's grid
-          location = new Vector2( Util.toFixedNumber( location.x, 0 ), Util.toFixedNumber( location.y, 0 ) );
-        }
-        pointTool.location = location;
-      }
-    } );
-  }
-
-  inherit( SimpleDragHandler, PointToolDragHandler );
 
   /**
    * @param {PointTool} pointTool
@@ -192,6 +145,58 @@ define( function( require ) {
     // interactivity
     thisNode.addInputListener( new PointToolDragHandler( pointTool, modelViewTransform, graph ) );
   }
+
+  graphingLines.register( 'PointToolNode', PointToolNode );
+
+  /**
+   * Drag handler for the pointer tool.
+   * @param {PointTool} pointTool
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Graph} graph
+   * @constructor
+   */
+  function PointToolDragHandler( pointTool, modelViewTransform, graph ) {
+
+    var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
+
+    var constrainBounds = function( point, bounds ) {
+      if ( !bounds || bounds.containsPoint( point ) ) {
+        return point;
+      }
+      else {
+        return new Vector2( Util.clamp( point.x, bounds.minX, bounds.maxX ), Util.clamp( point.y, bounds.minY, bounds.maxY ) );
+      }
+    };
+
+    SimpleDragHandler.call( this, {
+
+      allowTouchSnag: true,
+
+      // note where the drag started
+      start: function( event ) {
+        // Note the mouse-click offset when dragging starts.
+        var location = modelViewTransform.modelToViewPosition( pointTool.location );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
+        // Move the tool that we're dragging to the foreground.
+        event.currentTarget.moveToFront();
+      },
+
+      drag: function( event ) {
+        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        var location = modelViewTransform.viewToModelPosition( parentPoint );
+        location = constrainBounds( location, pointTool.dragBounds );
+        if ( graph.contains( location ) ) {
+          // snap to the graph's grid
+          location = new Vector2( Util.toFixedNumber( location.x, 0 ), Util.toFixedNumber( location.y, 0 ) );
+        }
+        pointTool.location = location;
+      }
+    } );
+  }
+
+  inherit( SimpleDragHandler, PointToolDragHandler );
+
+  graphingLines.register( 'PointToolNode.PointToolDragHandler', PointToolDragHandler );
 
   return inherit( Node, PointToolNode, {
 

@@ -13,6 +13,7 @@ define( function( require ) {
   var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -57,6 +58,29 @@ define( function( require ) {
   var TICK_LABEL_SPACING = 2;
   var MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
 
+  /**
+   * @param {Graph} graph
+   * @param {ModelViewTransform2} modelViewTransform
+   * @constructor
+   */
+  function GraphNode( graph, modelViewTransform ) {
+
+    assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
+
+    this.gridNode = new GridNode( graph, modelViewTransform ); // @private
+
+    Node.call( this, {
+        children: [
+          this.gridNode,
+          new XAxisNode( graph, modelViewTransform ),
+          new YAxisNode( graph, modelViewTransform )
+        ]
+      }
+    );
+  }
+
+  graphingLines.register( 'GraphNode', GraphNode );
+
   //----------------------------------------------------------------------------------------
   // A major or minor line in the grid
   //----------------------------------------------------------------------------------------
@@ -68,6 +92,8 @@ define( function( require ) {
       stroke: isMajor ? MAJOR_GRID_LINE_COLOR : MINOR_GRID_LINE_COLOR
     } );
   }
+
+  graphingLines.register( 'GraphNode.GridLineNode', GridLineNode );
 
   inherit( Line, GridLineNode );
 
@@ -107,6 +133,8 @@ define( function( require ) {
     }
   }
 
+  graphingLines.register( 'GraphNode.MajorTickNode', MajorTickNode );
+
   inherit( Node, MajorTickNode );
 
   //----------------------------------------------------------------------------------------
@@ -122,6 +150,8 @@ define( function( require ) {
       stroke: MINOR_TICK_COLOR
     } );
   }
+
+  graphingLines.register( 'GraphNode.MinorTickNode', MinorTickNode );
 
   inherit( Path, MinorTickNode );
 
@@ -176,6 +206,8 @@ define( function( require ) {
     }
   }
 
+  graphingLines.register( 'GraphNode.XAxisNode', XAxisNode );
+
   inherit( Node, XAxisNode );
 
   //----------------------------------------------------------------------------------------
@@ -228,6 +260,8 @@ define( function( require ) {
       }
     }
   }
+
+  graphingLines.register( 'GraphNode.YAxisNode', YAxisNode );
 
   inherit( Node, YAxisNode );
 
@@ -283,6 +317,8 @@ define( function( require ) {
     }
   }
 
+  graphingLines.register( 'GraphNode.GridNode', GridNode );
+
   inherit( Node, GridNode, {
 
     // Sets visibility of grid lines
@@ -292,27 +328,6 @@ define( function( require ) {
   } );
 
   //----------------------------------------------------------------------------------------
-
-  /**
-   * @param {Graph} graph
-   * @param {ModelViewTransform2} modelViewTransform
-   * @constructor
-   */
-  function GraphNode( graph, modelViewTransform ) {
-
-    assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) ); // (0,0) and quadrant 1 is visible
-
-    this.gridNode = new GridNode( graph, modelViewTransform ); // @private
-
-    Node.call( this, {
-        children: [
-          this.gridNode,
-          new XAxisNode( graph, modelViewTransform ),
-          new YAxisNode( graph, modelViewTransform )
-        ]
-      }
-    );
-  }
 
   return inherit( Node, GraphNode, {
 

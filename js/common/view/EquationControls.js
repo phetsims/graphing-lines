@@ -12,6 +12,7 @@ define( function( require ) {
   var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var HStrut = require( 'SCENERY/nodes/HStrut' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -117,6 +118,8 @@ define( function( require ) {
 
     Panel.call( this, content, options );
   }
+
+  graphingLines.register( 'EquationControls', EquationControls );
 
   return inherit( Panel, EquationControls );
 } );

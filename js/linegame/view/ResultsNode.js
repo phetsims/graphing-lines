@@ -13,6 +13,7 @@ define( function( require ) {
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -72,6 +73,8 @@ define( function( require ) {
       }
     } );
   }
+
+  graphingLines.register( 'ResultsNode', ResultsNode );
 
   return inherit( Node, ResultsNode, {
 

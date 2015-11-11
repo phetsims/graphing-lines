@@ -12,6 +12,7 @@ define( function( require ) {
   var Bounds2 = require( 'DOT/Bounds2' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var ObservableArray = require( 'AXON/ObservableArray' );
@@ -70,6 +71,8 @@ define( function( require ) {
     thisModel.pointTool2 = new PointTool( new Vector2( 3, -13 ), 'down', thisModel.graph.lines,
       new Bounds2( thisModel.graph.xRange.min - 1, thisModel.graph.yRange.min - 3, thisModel.graph.xRange.max + 3, thisModel.graph.yRange.max + 1 ) );
   }
+
+  graphingLines.register( 'LineFormsModel', LineFormsModel );
 
   return inherit( PropertySet, LineFormsModel, {
 

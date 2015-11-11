@@ -8,7 +8,10 @@
 define( function( require ) {
   'use strict';
 
-  return {
+  // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+
+  var GLColors = {
 
     // various backgrounds
     SCREEN_BACKGROUND: 'rgb( 255, 255, 214 )',
@@ -38,4 +41,8 @@ define( function( require ) {
       point: 0.15
     }
   };
+
+  graphingLines.register( 'GLColors', GLColors );
+
+  return GLColors;
 } );

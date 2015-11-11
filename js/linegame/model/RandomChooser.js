@@ -6,8 +6,10 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function() {
+define( function( require ) {
   'use strict';
+
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
   var RandomChooser = {
 
@@ -64,6 +66,8 @@ define( function() {
       return array;
     }
   };
+
+  graphingLines.register( 'RandomChooser', RandomChooser );
 
   return RandomChooser;
 } );

@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Text = require( 'SCENERY/nodes/Text' );
   var Util = require( 'DOT/Util' );
@@ -36,6 +37,8 @@ define( function( require ) {
       thisNode.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
     } );
   }
+
+  graphingLines.register( 'DynamicValueNode', DynamicValueNode );
 
   return inherit( Text, DynamicValueNode );
 } );

@@ -17,6 +17,7 @@ define( function( require ) {
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
@@ -137,6 +138,8 @@ define( function( require ) {
       updateIcons();
     } );
   }
+
+  graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );
 
   /**
    * Creates an interactive equation.

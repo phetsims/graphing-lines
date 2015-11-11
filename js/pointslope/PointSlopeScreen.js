@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointslope/view/PointSlopeView' );
@@ -27,6 +28,8 @@ define( function( require ) {
       { backgroundColor: GLColors.SCREEN_BACKGROUND }
     );
   }
+
+  graphingLines.register( 'PointSlopeScreen', PointSlopeScreen );
 
   return inherit( Screen, PointSlopeScreen );
 } );

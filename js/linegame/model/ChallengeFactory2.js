@@ -14,6 +14,7 @@ define( function( require ) {
   var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -25,6 +26,8 @@ define( function( require ) {
   function ChallengeFactory2() {
     ChallengeFactory.call( this );
   }
+
+  graphingLines.register( 'ChallengeFactory2', ChallengeFactory2 );
 
   // Creates the set of positive fractional slopes that are identified in the design document.
   ChallengeFactory2.createPositiveFractionalSlopes = function() {

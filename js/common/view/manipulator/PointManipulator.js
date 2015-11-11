@@ -11,11 +11,36 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * @param {number} radius
+   * @param {Property.<Vector2>} pointProperty
+   * @param {Property.<Vector2>[]} otherPointProperties
+   * @param {Range} xRange
+   * @param {Range} yRange
+   * @param {ModelViewTransform2} modelViewTransform
+   * @constructor
+   */
+  function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
+
+    var thisNode = this;
+    Manipulator.call( thisNode, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
+
+    // move the manipulator to match the point
+    pointProperty.link( function( point ) {
+      thisNode.translation = modelViewTransform.modelToViewPosition( point );
+    } );
+
+    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
+  }
+
+  graphingLines.register( 'PointManipulator', PointManipulator );
 
   /**
    * Drag handler for arbitrary point.
@@ -67,29 +92,9 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'PointManipulator.PointDragHandler', PointDragHandler );
+
   inherit( SimpleDragHandler, PointDragHandler );
-
-  /**
-   * @param {number} radius
-   * @param {Property.<Vector2>} pointProperty
-   * @param {Property.<Vector2>[]} otherPointProperties
-   * @param {Range} xRange
-   * @param {Range} yRange
-   * @param {ModelViewTransform2} modelViewTransform
-   * @constructor
-   */
-  function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
-
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
-
-    // move the manipulator to match the point
-    pointProperty.link( function( point ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( point );
-    } );
-
-    thisNode.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
-  }
 
   return inherit( Manipulator, PointManipulator );
 } );

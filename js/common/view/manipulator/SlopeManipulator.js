@@ -10,12 +10,36 @@ define( function( require ) {
 
   // modules
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   var Util = require( 'DOT/Util' );
   var Vector2 = require( 'DOT/Vector2' );
+
+  /**
+   * @param {number} radius
+   * @param {Property.<Line>} lineProperty
+   * @param {Property.<Range>} riseRangeProperty
+   * @param {Property.<Range>} runRangeProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   * @constructor
+   */
+  function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
+
+    var thisNode = this;
+    Manipulator.call( thisNode, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
+
+    // move the manipulator to match the line's slope
+    lineProperty.link( function( line ) {
+      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+    } );
+
+    thisNode.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
+  }
+
+  graphingLines.register( 'SlopeManipulator', SlopeManipulator );
 
   /**
    * Drag handler for slope manipulator.
@@ -55,28 +79,9 @@ define( function( require ) {
     } );
   }
 
+  graphingLines.register( 'SlopeManipulator.SlopeDragHandler', SlopeDragHandler );
+
   inherit( SimpleDragHandler, SlopeDragHandler );
-
-  /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} riseRangeProperty
-   * @param {Property.<Range>} runRangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @constructor
-   */
-  function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
-
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
-
-    // move the manipulator to match the line's slope
-    lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
-    } );
-
-    thisNode.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
-  }
 
   return inherit( Manipulator, SlopeManipulator );
 } );

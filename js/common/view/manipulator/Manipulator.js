@@ -13,6 +13,7 @@ define( function( require ) {
   var ButtonListener = require( 'SCENERY/input/ButtonListener' );
   var Circle = require( 'SCENERY/nodes/Circle' );
   var Color = require( 'SCENERY/util/Color' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
@@ -54,6 +55,8 @@ define( function( require ) {
     // expand pointer areas
     this.mouseArea = this.touchArea = Shape.circle( 0, 0, 1.5 * radius );
   }
+
+  graphingLines.register( 'Manipulator', Manipulator );
 
   return inherit( Node, Manipulator );
 } );

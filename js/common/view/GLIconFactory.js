@@ -16,6 +16,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
@@ -43,7 +44,7 @@ define( function( require ) {
   };
   var MANIPULATOR_RADIUS = 40;
 
-  return {
+  var GLIconFactory = {
 
     // Creates the icon for the 'Slope' screen. Positions and sizes are 'eye balled'.
     createSlopeScreenIcon: function() {
@@ -148,4 +149,8 @@ define( function( require ) {
       return graphNode;
     }
   };
+
+  graphingLines.register( 'GLIconFactory', GLIconFactory );
+
+  return GLIconFactory;
 } );

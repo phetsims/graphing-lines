@@ -13,6 +13,7 @@ define( function( require ) {
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -43,32 +44,6 @@ define( function( require ) {
   var CHALLENGES_PER_GAME = 6;
   var BUTTONS_X_SPACING = 50;
   var BUTTONS_Y_SPACING = 40;
-
-  // Creates a level selection button
-  var createLevelSelectionButton = function( level, model ) {
-
-    // 'Level N' centered above icon
-    var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), { font: new GLFont( 60 ) } );
-    var image = new Image( levelImages[ level ], { centerX: label.centerX, top: label.bottom + 20 } );
-    var icon = new Node( { children: [ label, image ] } );
-
-    return new LevelSelectionButton(
-      icon,
-      CHALLENGES_PER_GAME,
-      function() {
-        model.levelProperty.set( level );
-        model.gamePhaseProperty.set( GamePhase.PLAY );
-      },
-      model.bestScoreProperties[ level ],
-      model.getPerfectScore(),
-      {
-        baseColor: 'rgb( 180, 205, 255 )',
-        buttonWidth: 175,
-        buttonHeight: 210,
-        bestTimeProperty: model.bestTimeProperties[ level ],
-        bestTimeVisibleProperty: model.timerEnabledProperty
-      } );
-  };
 
   /**
    * @param {LineGameModel} model
@@ -118,7 +93,7 @@ define( function( require ) {
     var resetAllButton = new ResetAllButton( {
       listener: function() { model.reset(); },
       scale: GLConstants.RESET_ALL_BUTTON_SCALE,
-      right:  layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
+      right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
 
@@ -144,6 +119,34 @@ define( function( require ) {
     ];
     Node.call( this, options );
   }
+
+  graphingLines.register( 'SettingsNode', SettingsNode );
+
+  // Creates a level selection button
+  var createLevelSelectionButton = function( level, model ) {
+
+    // 'Level N' centered above icon
+    var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), { font: new GLFont( 60 ) } );
+    var image = new Image( levelImages[ level ], { centerX: label.centerX, top: label.bottom + 20 } );
+    var icon = new Node( { children: [ label, image ] } );
+
+    return new LevelSelectionButton(
+      icon,
+      CHALLENGES_PER_GAME,
+      function() {
+        model.levelProperty.set( level );
+        model.gamePhaseProperty.set( GamePhase.PLAY );
+      },
+      model.bestScoreProperties[ level ],
+      model.getPerfectScore(),
+      {
+        baseColor: 'rgb( 180, 205, 255 )',
+        buttonWidth: 175,
+        buttonHeight: 210,
+        bestTimeProperty: model.bestTimeProperties[ level ],
+        bestTimeVisibleProperty: model.timerEnabledProperty
+      } );
+  };
 
   return inherit( Node, SettingsNode );
 } );

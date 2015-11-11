@@ -25,6 +25,7 @@ define( function( require ) {
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -64,6 +65,8 @@ define( function( require ) {
     var nodes = nodeFactoryFunctions[ level ]();
     RewardNode.call( this, { nodes: nodes } );
   }
+
+  graphingLines.register( 'GLRewardNode', GLRewardNode );
 
   //-----------------------------------------------------------------------------------------------
   // Misc. utility functions

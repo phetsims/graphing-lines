@@ -11,6 +11,7 @@ define( function( require ) {
   // modules
   var inherit = require( 'PHET_CORE/inherit' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
   var PointSlopeParameterRange = require( 'GRAPHING_LINES/pointslope/model/PointSlopeParameterRange' );
@@ -44,6 +45,8 @@ define( function( require ) {
       thisModel.runRangeProperty.set( parameterRange.run( line, thisModel.graph ) );
     } );
   }
+
+  graphingLines.register( 'PointSlopeModel', PointSlopeModel );
 
   return inherit( LineFormsModel, PointSlopeModel );
 } );

@@ -12,6 +12,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -53,6 +54,8 @@ define( function( require ) {
         }
       } );
   }
+
+  graphingLines.register( 'PlaceThePoints', PlaceThePoints );
 
   return inherit( GraphTheLine, PlaceThePoints, {
 

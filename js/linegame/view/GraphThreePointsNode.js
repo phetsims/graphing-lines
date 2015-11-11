@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var PointManipulator = require( 'GRAPHING_LINES/common/view/manipulator/PointManipulator' );
@@ -19,7 +20,7 @@ define( function( require ) {
    * @param {PlaceThePoints} challenge
    * @constructor
    */
-  function ThreePointsGraphNode( challenge ) {
+  function GraphThreePointsNode( challenge ) {
 
     var thisNode = this;
     ChallengeGraphNode.call( thisNode, challenge, { slopeToolEnabled: false } );
@@ -47,6 +48,8 @@ define( function( require ) {
       } );
   }
 
-  return inherit( ChallengeGraphNode, ThreePointsGraphNode );
+  graphingLines.register( 'GraphThreePointsNode', GraphThreePointsNode );
+
+  return inherit( ChallengeGraphNode, GraphThreePointsNode );
 } );
 

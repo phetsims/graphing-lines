@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
@@ -19,7 +20,7 @@ define( function( require ) {
   // constants
   var DESCRIPTION = 'dev-hardcoded';
 
-  return {
+  var ChallengeFactoryHardCoded = {
     /**
      * Creates hard-coded challenges, for development testing.
      * @param {number} level the game level
@@ -78,4 +79,8 @@ define( function( require ) {
       return challenges;
     }
   };
+
+  graphingLines.register( 'ChallengeFactoryHardCoded', ChallengeFactoryHardCoded );
+
+  return ChallengeFactoryHardCoded;
 } );

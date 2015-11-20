@@ -110,6 +110,10 @@ define( function( require ) {
       linesVisibleProperty.set( !visible );
     } );
 
+    gridVisibleProperty.link( function( visible ) {
+      notGridVisibleProperty.set( !visible );
+    } );
+
     notGridVisibleProperty.link( function( visible ) {
       gridVisibleProperty.set( !visible );
     } );

@@ -240,7 +240,7 @@ define( function( require ) {
 
     var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
-    // m =
+    // Slope m =
     var leftSideNode = new Text( StringUtils.format( '{0}    {1} =', slopeString, symbolSlopeString ), {
       font: font,
       fill: options.fill,

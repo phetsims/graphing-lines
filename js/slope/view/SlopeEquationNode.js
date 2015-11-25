@@ -240,8 +240,12 @@ define( function( require ) {
 
     var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
-    // m =
-    var leftSideNode = new Text( StringUtils.format( '{0}    {1} =', slopeString, symbolSlopeString ), { font: font, fill: options.fill } );
+    // Slope m =
+    var leftSideNode = new Text( StringUtils.format( '{0}    {1} =', slopeString, symbolSlopeString ), {
+      font: font,
+      fill: options.fill,
+      maxWidth: 125 // i18n, determined empirically
+    } );
 
     // pattern for numerator and denominator
     var pattern = '{0}<sub>2</sub> - {1}<sub>1</sub>';

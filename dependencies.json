@@ -1,71 +1,71 @@
 {
-  "comment": "# graphing-lines 1.1.0-rc.1 Mon Nov 16 2015 13:17:51 GMT-0700 (MST)",
+  "comment": "# graphing-lines 1.1.0-dev.5 Sat Nov 28 2015 19:41:25 GMT-0700 (MST)",
   "assert": {
     "sha": "3921bc3784dc67e9cbfa31cdec52b582fcfc68e7",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "axon": {
     "sha": "fffc6c30fe12ce50630ddf3946ed486ca3288133",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "brand": {
     "sha": "3b236d6fc040318086b7d360782871f1dcf45a87",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "6735d2658be491a8cdd413633df35dfe56c14797",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "5c39b7d803db50ef802291f79fb43396f1cf9bb8",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "6e531507708761a0c4f13ad608baba15edd709c7",
+    "sha": "e10ad3dedfae83235260a6cdeff6ad699d4d685d",
     "branch": "1.1"
   },
   "joist": {
     "sha": "2a5b44c4a42e334b6ebb73a3cc7144e6e9e297d8",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "kite": {
     "sha": "84e84bcaef87ea4be58ad08d4b61fb6fa591088d",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phet-core": {
     "sha": "73a034c676ee7b14b99aeeb1e7aad79f579b91b1",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "phetcommon": {
     "sha": "61a7c5fa36772acb6f7208b4c4c04d864f7b7c27",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "c0c08ec5a6e97f467025d60a97274ffec57e2098",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "scenery-phet": {
     "sha": "61d8e7ed602ecaae7caae126551167c1336641de",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "be8c4fc917f1644586ba4459351eade68e3bc0d2",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "sun": {
     "sha": "8d2903208596c74c91c2abe0df795d03a1689a56",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "tandem": {
     "sha": "e98bd8c3370af1d1b7b207ad054bd408de5ad190",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "vegas": {
     "sha": "03114c7c96aade76c84da36f1a72ac57649e38ff",
-    "branch": "master"
+    "branch": "HEAD"
   },
   "vibe": {
     "sha": "40a281829dd0273ab17c882b97910e4c0490be69",
-    "branch": "master"
+    "branch": "HEAD"
   }
 }

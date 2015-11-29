@@ -176,7 +176,6 @@ define( function( require ) {
 
     /*
      * Creates a line by describing it in point-slope form: (y - y1) = m(x - x1)
-     * Need to use a factory method because params are identical to primary constructor.
      * @static
      * @public
      */
@@ -186,7 +185,6 @@ define( function( require ) {
 
     /*
      * Creates a line by describing it in slope-intercept form: y = mx + b
-     * Using a factory method instead of a constructor to be consistent with createPointSlope.
      * @static
      * @public
      */

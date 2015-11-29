@@ -121,13 +121,15 @@ define( function( require ) {
 
     // @private Removes the node that corresponds to the specified line.
     removeLineNode: function( line, parentNode ) {
-      for ( var i = 0; i < parentNode.getChildrenCount(); i++ ) {
+      var removed = false;
+      for ( var i = 0; i < parentNode.getChildrenCount() && !removed; i++ ) {
         var node = parentNode.getChildAt( i );
-        if ( line.same( node.lineProperty.get() ) ) {
+        if ( line === node.lineProperty.get() ) {
           parentNode.removeChild( node );
-          break;
+          removed = true;
         }
       }
+      assert && assert( removed, 'no Node found for line ' + line.toString() );
     }
   } );
 } );

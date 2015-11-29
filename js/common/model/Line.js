@@ -143,7 +143,7 @@ define( function( require ) {
       return this.onLineXY( p.x, p.y );
     },
 
-    // @public
+    // @private
     onLineXY: function( x, y ) {
       if ( this.rise === 0 ) {
         return ( y === this.y1 );

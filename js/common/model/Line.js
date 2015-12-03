@@ -152,7 +152,7 @@ define( function( require ) {
         return ( x === this.x1 );
       }
       else {
-        return ( x === this.solveX( y ) );
+        return ( Math.abs( x - this.solveX( y ) ) < 1E-10 ); // account for floating point errors, see #56
       }
     },
 

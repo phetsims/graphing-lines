@@ -152,7 +152,8 @@ define( function( require ) {
         return ( x === this.x1 );
       }
       else {
-        return ( Math.abs( x - this.solveX( y ) ) < 1E-10 ); // account for floating point errors, see #56
+        // account for floating point errors, see https://github.com/phetsims/graphing-lines/issues/56
+        return ( Math.abs( x - this.solveX( y ) ) < 1E-10 );
       }
     },
 

@@ -62,8 +62,7 @@ define( function( require ) {
      * @public
      */
     isOnLine: function( line ) {
-      return ( line.run === 0 && this.location.x === line.x1 ) || // slope is undefined, tool is on the line
-             ( this.location.y === line.solveY( this.location.x ) ); // tool is on the line
+      return line.onLinePoint( this.location );
     }
   } );
 } );

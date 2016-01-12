@@ -96,7 +96,7 @@ define( function( require ) {
     var y1Node;
     if ( options.interactivePoint ) {
       y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
-        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: 30 } );
+        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaXDilation: 30 } );
     }
     else {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -123,7 +123,7 @@ define( function( require ) {
     var x1Node;
     if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
-        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X } );
+        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION } );
     }
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );

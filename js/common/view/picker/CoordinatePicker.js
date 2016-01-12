@@ -30,7 +30,7 @@ define( function( require ) {
 
     options = _.extend( {
       color: GLColors.POINT_X1_Y1,
-      touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X
+      touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
     }, options );
 
     // computes value when 'up' button is pressed

@@ -27,7 +27,7 @@ define( function( require ) {
 
     options = _.extend( {
       color: GLColors.SLOPE,
-      touchAreaExpandX: GLConstants.PICKER_TOUCH_AREA_EXPAND_X
+      touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
     }, options );
 
     // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients

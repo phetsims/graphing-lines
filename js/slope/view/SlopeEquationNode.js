@@ -174,7 +174,7 @@ define( function( require ) {
 
       // fraction line length
       var unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );
-      unsimplifiedFractionLineNode.setLine( 0, 0, unsimplifiedFractionLineLength, 1 );
+      unsimplifiedFractionLineNode.setLine( 0, 0, unsimplifiedFractionLineLength, 0 );
 
       // undefined-slope indicator
       undefinedSlopeIndicator.visible = line.undefinedSlope();
@@ -198,7 +198,7 @@ define( function( require ) {
     y1Node.y = y2Node.y;
     // fix fraction line length
     var fractionLineLength = y1Node.right - y2Node.left;
-    interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 1 );
+    interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 0 );
     // x2 - x1
     x2Node.left = y2Node.left;
     x2Node.top = interactiveFractionLineNode.bottom + thisNode.pickersYSpacing;
@@ -258,7 +258,10 @@ define( function( require ) {
 
     // fraction line
     var length = Math.max( numeratorNode.width, denominatorNode.width );
-    var fractionLineNode = new scenery.Line( 0, 0, length, equationNode.fractionLineThickness, { stroke: options.fill } );
+    var fractionLineNode = new scenery.Line( 0, 0, length, 0, {
+      stroke: options.fill,
+      lineWidth: equationNode.fractionLineThickness
+    } );
 
     // rendering order
     equationNode.addChild( leftSideNode );

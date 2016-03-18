@@ -20,12 +20,18 @@ define( function( require ) {
   // strings
   var screenSlopeInterceptString = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
 
-  function SlopeInterceptScreen() {
+  /**
+   * @param {Tandem} tandem
+   * @constructor
+   */
+  function SlopeInterceptScreen( tandem ) {
     Screen.call( this, screenSlopeInterceptString,
       GLIconFactory.createSlopeInterceptScreenIcon(),
       function() { return new SlopeInterceptModel(); },
-      function( model ) { return new SlopeInterceptView( model ); },
-      { backgroundColor: GLColors.SCREEN_BACKGROUND }
+      function( model ) { return new SlopeInterceptView( model ); }, {
+        backgroundColor: GLColors.SCREEN_BACKGROUND,
+        tandem: tandem
+      }
     );
   }
 

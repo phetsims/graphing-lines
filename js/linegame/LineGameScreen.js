@@ -20,11 +20,17 @@ define( function( require ) {
   // strings
   var screenLineGameString = require( 'string!GRAPHING_LINES/screen.lineGame' );
 
-  function LineGameScreen() {
+  /**
+   * @param {Tandem} tandem
+   * @constructor
+   */
+  function LineGameScreen( tandem ) {
     Screen.call( this, screenLineGameString, GLIconFactory.createGameScreenIcon(),
       function() { return new LineGameModel(); },
-      function( model ) { return new LineGameView( model ); },
-      { backgroundColor: GLColors.SCREEN_BACKGROUND }
+      function( model ) { return new LineGameView( model ); }, {
+        backgroundColor: GLColors.SCREEN_BACKGROUND,
+        tandem: tandem
+      }
     );
   }
 

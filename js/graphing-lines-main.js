@@ -15,11 +15,20 @@ define( function( require ) {
   var SimLauncher = require( 'JOIST/SimLauncher' );
   var SlopeInterceptScreen = require( 'GRAPHING_LINES/slopeintercept/SlopeInterceptScreen' );
   var SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
+  var Tandem = require( 'TANDEM/Tandem' );
 
   // strings
   var graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
 
-  var screens = [ new SlopeScreen(), new SlopeInterceptScreen(), new PointSlopeScreen(), new LineGameScreen() ];
+  // constants
+  var tandem = Tandem.createRootTandem();
+
+  var screens = [
+    new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
+    new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
+    new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
+    new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
+  ];
 
   var options = {
     credits: {
@@ -28,7 +37,8 @@ define( function( require ) {
       team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein,\nAmanda McGarry, Kathy Perkins',
       graphicArts: 'Sharon Siman-Tov',
       qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan,\nOliver Orejola, Benjamin Roberts, Bryan Yoelin'
-    }
+    },
+    tandem: tandem
   };
 
   SimLauncher.launch( function() {

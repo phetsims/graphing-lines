@@ -20,12 +20,18 @@ define( function( require ) {
   // strings
   var screenSlopeString = require( 'string!GRAPHING_LINES/screen.slope' );
 
-  function SlopeScreen() {
+  /**
+   * @param {Tandem} tandem
+   * @constructor
+   */
+  function SlopeScreen( tandem ) {
     Screen.call( this, screenSlopeString,
       GLIconFactory.createSlopeScreenIcon(),
       function() { return new SlopeModel(); },
-      function( model ) { return new SlopeView( model ); },
-      { backgroundColor: GLColors.SCREEN_BACKGROUND }
+      function( model ) { return new SlopeView( model ); }, {
+        backgroundColor: GLColors.SCREEN_BACKGROUND,
+        tandem: tandem
+      }
     );
   }
 

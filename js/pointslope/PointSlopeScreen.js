@@ -20,12 +20,18 @@ define( function( require ) {
   // strings
   var screenPointSlopeString = require( 'string!GRAPHING_LINES/screen.pointSlope' );
 
-  function PointSlopeScreen() {
+  /**
+   * @param {Tandem} tandem
+   * @constructor
+   */
+  function PointSlopeScreen( tandem ) {
     Screen.call( this, screenPointSlopeString,
       GLIconFactory.createPointSlopeScreenIcon(),
       function() { return new PointSlopeModel(); },
-      function( model ) { return new PointSlopeView( model ); },
-      { backgroundColor: GLColors.SCREEN_BACKGROUND }
+      function( model ) { return new PointSlopeView( model ); }, {
+        backgroundColor: GLColors.SCREEN_BACKGROUND,
+        tandem: tandem
+      }
     );
   }
 

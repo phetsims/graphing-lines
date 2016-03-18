@@ -23,13 +23,6 @@ define( function( require ) {
   // constants
   var tandem = Tandem.createRootTandem();
 
-  var screens = [
-    new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
-    new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
-    new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
-    new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
-  ];
-
   var options = {
     credits: {
       leadDesign: 'Ariel Paul',
@@ -42,6 +35,12 @@ define( function( require ) {
   };
 
   SimLauncher.launch( function() {
+    var screens = [
+      new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
+      new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
+      new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
+      new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
+    ];
     var sim = new Sim( graphingLinesTitleString, screens, options );
     sim.start();
   } );

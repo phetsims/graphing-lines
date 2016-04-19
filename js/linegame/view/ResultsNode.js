@@ -69,6 +69,9 @@ define( function( require ) {
       }
       else {
         thisNode.removeAllChildren();
+        if ( thisNode.rewardNode !== null ) {
+          thisNode.rewardNode.dispose();
+        }
         thisNode.rewardNode = null;
       }
     } );

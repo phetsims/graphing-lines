@@ -14,7 +14,7 @@ define( function( require ) {
   var PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
   /**
-   * @param {Number|*} options font size or font options
+   * @param {number|*} options font size or font options
    * @constructor
    */
   function GLFont( options ) {

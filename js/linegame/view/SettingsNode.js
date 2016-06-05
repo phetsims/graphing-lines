@@ -25,6 +25,7 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
   var Util = require( 'DOT/Util' );
+  var VBox = require( 'SCENERY/nodes/VBox' );
 
   // images, ordered by level
   var levelImages = [
@@ -126,9 +127,12 @@ define( function( require ) {
   var createLevelSelectionButton = function( level, model ) {
 
     // 'Level N' centered above icon
-    var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), { font: new GLFont( 60 ) } );
-    var image = new Image( levelImages[ level ], { centerX: label.centerX, top: label.bottom + 20 } );
-    var icon = new Node( { children: [ label, image ] } );
+    var image = new Image( levelImages[ level ] );
+    var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
+      font: new GLFont( 60 ),
+      maxWidth: image.width
+    } );
+    var icon = new VBox( { children: [ label, image ], spacing: 20 } );
 
     return new LevelSelectionButton(
       icon,

@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.1.4 Tue Apr 05 2016 13:49:39 GMT-0600 (MDT)",
+  "comment": "# graphing-lines 1.1.4 Wed Jun 15 2016 11:53:43 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "3921bc3784dc67e9cbfa31cdec52b582fcfc68e7",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "de82994eed7361b56e9ba07bb769dbe05f896d2a",
+    "sha": "916f177300fcd1618835aacfeeadc74e8988faaf",
     "branch": "1.1"
   },
   "joist": {
@@ -37,8 +37,8 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "f33c191b503f690c87d9266d3ec226e880febf2d",
-    "branch": "HEAD"
+    "sha": "161272d283ed3bdaeefe5b657c93292c83758f50",
+    "branch": "graphing-lines-1.1"
   },
   "scenery": {
     "sha": "6c03fb9870209e686dd6c01728d3163c1398384e",

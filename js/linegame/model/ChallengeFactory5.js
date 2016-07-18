@@ -21,7 +21,7 @@ define( function( require ) {
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   function ChallengeFactory5() {
     ChallengeFactory.call( this );
@@ -45,7 +45,7 @@ define( function( require ) {
     var run;
 
     // all ranges limited to [-5,5]
-    var range = new Range( -5, 5 );
+    var range = new RangeWithValue( -5, 5 );
     assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
     var xList = RandomChooser.rangeToArray( range );
     var yList = RandomChooser.rangeToArray( range );
@@ -133,7 +133,7 @@ define( function( require ) {
         equationForm = RandomChooser.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
 
         // random points
-        var range = new Range( -5, 5 );
+        var range = new RangeWithValue( -5, 5 );
         assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
         xList = RandomChooser.rangeToArray( range );
         yList = RandomChooser.rangeToArray( range );

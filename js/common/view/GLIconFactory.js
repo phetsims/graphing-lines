@@ -24,7 +24,7 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var Path = require( 'SCENERY/nodes/Path' );
   var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var ScreenIcon = require( 'JOIST/ScreenIcon' );
   var Shape = require( 'KITE/Shape' );
@@ -136,7 +136,7 @@ define( function( require ) {
 
     // Creates an icon that shows a line on a graph.
     createGraphIcon: function( width, color, x1, y1, x2, y2 ) {
-      var axisRange = new Range( -3, 3 );
+      var axisRange = new RangeWithValue( -3, 3 );
       var graph = new Graph( axisRange, axisRange );
       var modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
       var graphNode = new GraphNode( graph, modelViewTransform );

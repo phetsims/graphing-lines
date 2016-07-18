@@ -21,7 +21,7 @@ define( function( require ) {
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
-  var Range = require( 'DOT/Range' );
+  var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   function ChallengeFactory2() {
     ChallengeFactory.call( this );
@@ -116,14 +116,14 @@ define( function( require ) {
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = ChallengeFactory2.createSlopeArrays();
-      slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
+      slopeArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, slopeArrays.length - 1 ) );
 
       // for y-intercept manipulation challenges, one must be positive, one negative
       yInterceptArrays = [
-        RandomChooser.rangeToArray( new Range( yRange.min, -1 ) ),
-        RandomChooser.rangeToArray( new Range( 1, yRange.max ) )
+        RandomChooser.rangeToArray( new RangeWithValue( yRange.min, -1 ) ),
+        RandomChooser.rangeToArray( new RangeWithValue( 1, yRange.max ) )
       ];
-      yInterceptArrayIndices = RandomChooser.rangeToArray( new Range( 0, yInterceptArrays.length - 1 ) );
+      yInterceptArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, yInterceptArrays.length - 1 ) );
 
       // for point-slope form, one of each manipulation mode
       pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];

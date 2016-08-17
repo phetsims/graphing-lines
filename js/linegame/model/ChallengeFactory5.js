@@ -224,7 +224,7 @@ define( function( require ) {
       ChallengeFactory5.addPlaceThePointsChallenges( challenges, xRange, yRange );
 
       // shuffle and return
-      return _.shuffle( challenges );
+      return phet.joist.random.shuffle( challenges );
     }
   } );
 } );

@@ -49,12 +49,12 @@ define( function( require ) {
       // x
       var minX = ( run >= 0 ) ? graphXRange.min : graphXRange.min - run;
       var maxX = (run >= 0) ? graphXRange.max - run : graphXRange.max;
-      var x = Math.floor( minX + ( Math.random() * ( maxX - minX ) ) );
+      var x = Math.floor( minX + ( phet.joist.random.nextDouble() * ( maxX - minX ) ) );
 
       // y
       var minY = ( rise >= 0) ? graphYRange.min : graphYRange.min - rise;
       var maxY = (rise >= 0) ? graphYRange.max - rise : graphYRange.max;
-      var y = Math.floor( minY + ( Math.random() * ( maxY - minY ) ) );
+      var y = Math.floor( minY + ( phet.joist.random.nextDouble() * ( maxY - minY ) ) );
 
       return new Vector2( x, y );
     },
@@ -77,12 +77,12 @@ define( function( require ) {
       // x1 coordinates
       var minX1 = ( run >= 0 ) ? graphXRange.max - run + 1 : graphXRange.min;
       var maxX1 = ( run >= 0 ) ? graphXRange.max : graphXRange.min - run - 1;
-      var x1 = Math.floor( minX1 + ( Math.random() * ( maxX1 - minX1 ) ) );
+      var x1 = Math.floor( minX1 + ( phet.joist.random.nextDouble() * ( maxX1 - minX1 ) ) );
 
       // y1 coordinates
       var minY1 = ( rise >= 0 ) ? graphYRange.max - rise + 1 : graphYRange.min;
       var maxY1 = ( rise >= 0 ) ? graphYRange.max : graphYRange.min - rise - 1;
-      var y1 = Math.floor( minY1 + ( Math.random() * ( maxY1 - minY1 ) ) );
+      var y1 = Math.floor( minY1 + ( phet.joist.random.nextDouble() * ( maxY1 - minY1 ) ) );
 
       // compute (x2,y2) for validation
       var x2 = x1 + run;

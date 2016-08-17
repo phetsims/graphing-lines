@@ -81,7 +81,7 @@ define( function( require ) {
   };
 
   var getRandomNonZeroInteger = function( min, max ) {
-    var i = Math.floor( min + ( Math.random() * ( max - min ) ) );
+    var i = Math.floor( min + ( phet.joist.random.nextDouble() * ( max - min ) ) );
     if ( i === 0 ) { i = 1; }
     return i;
   };
@@ -94,7 +94,7 @@ define( function( require ) {
   // Creates a random equation with the specified color.
   var createEquationNode = function( color ) {
     var node;
-    if ( Math.random() < 0.5 ) {
+    if ( phet.joist.random.nextDouble() < 0.5 ) {
       node = SlopeInterceptEquationNode.createDynamicLabel(
         new Property( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ),
         EQUATION_FONT_SIZE );
@@ -110,7 +110,7 @@ define( function( require ) {
   // Creates a random graph with the specified color.
   var createGraphNode = function( color ) {
     var node;
-    if ( Math.random() < 0.5 ) {
+    if ( phet.joist.random.nextDouble() < 0.5 ) {
       node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
     }
     else {

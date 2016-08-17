@@ -46,7 +46,7 @@ define( function( require ) {
 
     // Gets a random index for a specified array.
     randomIndex: function( array ) {
-      return Math.floor( Math.random() * array.length );
+      return Math.floor( phet.joist.random.nextDouble() * array.length );
     },
 
     /**

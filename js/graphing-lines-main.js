@@ -30,8 +30,7 @@ define( function( require ) {
       team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein,\nAmanda McGarry, Kathy Perkins',
       graphicArts: 'Sharon Siman-Tov',
       qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan,\nOliver Orejola, Benjamin Roberts, Bryan Yoelin'
-    },
-    tandem: tandem
+    }
   };
 
   SimLauncher.launch( function() {

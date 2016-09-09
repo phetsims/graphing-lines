@@ -25,13 +25,18 @@ define( function( require ) {
    * @constructor
    */
   function LineGameScreen( tandem ) {
-    Screen.call( this, screenLineGameString, GLIconFactory.createGameScreenIcon(),
+
+    var options = {
+      name: screenLineGameString,
+      backgroundColor: GLColors.SCREEN_BACKGROUND,
+      homeScreenIcon: GLIconFactory.createGameScreenIcon(),
+      tandem: tandem
+    };
+
+    Screen.call( this,
       function() { return new LineGameModel(); },
-      function( model ) { return new LineGameView( model ); }, {
-        backgroundColor: GLColors.SCREEN_BACKGROUND,
-        tandem: tandem
-      }
-    );
+      function( model ) { return new LineGameView( model ); },
+      options );
   }
 
   graphingLines.register( 'LineGameScreen', LineGameScreen );

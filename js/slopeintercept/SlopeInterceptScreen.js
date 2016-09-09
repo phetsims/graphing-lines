@@ -25,14 +25,18 @@ define( function( require ) {
    * @constructor
    */
   function SlopeInterceptScreen( tandem ) {
-    Screen.call( this, screenSlopeInterceptString,
-      GLIconFactory.createSlopeInterceptScreenIcon(),
+
+    var options = {
+      name: screenSlopeInterceptString,
+      backgroundColor: GLColors.SCREEN_BACKGROUND,
+      homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon(),
+      tandem: tandem
+    };
+
+    Screen.call( this,
       function() { return new SlopeInterceptModel(); },
-      function( model ) { return new SlopeInterceptView( model ); }, {
-        backgroundColor: GLColors.SCREEN_BACKGROUND,
-        tandem: tandem
-      }
-    );
+      function( model ) { return new SlopeInterceptView( model ); },
+      options );
   }
 
   graphingLines.register( 'SlopeInterceptScreen', SlopeInterceptScreen );

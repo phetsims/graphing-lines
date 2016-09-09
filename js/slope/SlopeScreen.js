@@ -25,14 +25,18 @@ define( function( require ) {
    * @constructor
    */
   function SlopeScreen( tandem ) {
-    Screen.call( this, screenSlopeString,
-      GLIconFactory.createSlopeScreenIcon(),
+
+    var options = {
+      name: screenSlopeString,
+      backgroundColor: GLColors.SCREEN_BACKGROUND,
+      homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
+      tandem: tandem
+    };
+
+    Screen.call( this,
       function() { return new SlopeModel(); },
-      function( model ) { return new SlopeView( model ); }, {
-        backgroundColor: GLColors.SCREEN_BACKGROUND,
-        tandem: tandem
-      }
-    );
+      function( model ) { return new SlopeView( model ); },
+      options );
   }
 
   graphingLines.register( 'SlopeScreen', SlopeScreen );

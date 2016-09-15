@@ -22,8 +22,7 @@ define( function( require ) {
    */
   function GraphThreePointsNode( challenge ) {
 
-    var thisNode = this;
-    ChallengeGraphNode.call( thisNode, challenge, { slopeToolEnabled: false } );
+    ChallengeGraphNode.call( this, challenge, { slopeToolEnabled: false } );
 
     // manipulators
     var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
@@ -35,9 +34,9 @@ define( function( require ) {
       challenge.p3Property, [ challenge.p1Property, challenge.p2Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.modelViewTransform );
 
     // rendering order
-    thisNode.addChild( p1Manipulator );
-    thisNode.addChild( p2Manipulator );
-    thisNode.addChild( p3Manipulator );
+    this.addChild( p1Manipulator );
+    this.addChild( p2Manipulator );
+    this.addChild( p3Manipulator );
 
     // Move the manipulators to match points
     challenge.multilink( [ 'p1', 'p2', 'p3' ],

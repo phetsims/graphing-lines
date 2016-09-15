@@ -31,18 +31,17 @@ define( function( require ) {
    */
   function EquationBoxNode( title, titleColor, boxSize, equationNode ) {
 
-    var thisNode = this;
-    Node.call( thisNode );
+    Node.call( this );
 
     // @private icons for 'correct' and 'incorrect'
     var iconFont = new GLFont( 72 );
-    thisNode.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
-    thisNode.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
+    this.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
+    this.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
 
     var titleNode = new Text( title, {
       fill: titleColor,
       font: new GLFont( { size: 24, weight: 'bold' } ),
-      maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( thisNode.correctIconNode.width, thisNode.incorrectIconNode.width )
+      maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( this.correctIconNode.width, this.incorrectIconNode.width )
     } );
 
     var boxNode = new Rectangle( 0, 0, boxSize.width, boxSize.height, 20, 20, {
@@ -54,11 +53,11 @@ define( function( require ) {
     equationNode.maxWidth = boxSize.width - ( 2 * X_MARGIN ); // constrain with for i18n
 
     // rendering order
-    thisNode.addChild( boxNode );
-    thisNode.addChild( titleNode );
-    thisNode.addChild( equationNode );
-    thisNode.addChild( thisNode.correctIconNode );
-    thisNode.addChild( thisNode.incorrectIconNode );
+    this.addChild( boxNode );
+    this.addChild( titleNode );
+    this.addChild( equationNode );
+    this.addChild( this.correctIconNode );
+    this.addChild( this.incorrectIconNode );
 
     // layout
     // title in upper left
@@ -70,14 +69,14 @@ define( function( require ) {
     // icons in upper-right corner
     var iconXMargin = 5;
     var iconYMargin = 1;
-    thisNode.correctIconNode.right = boxNode.right - iconXMargin;
-    thisNode.correctIconNode.top = boxNode.top + iconYMargin;
-    thisNode.incorrectIconNode.right = boxNode.right - iconXMargin;
-    thisNode.incorrectIconNode.top = boxNode.top + iconYMargin;
+    this.correctIconNode.right = boxNode.right - iconXMargin;
+    this.correctIconNode.top = boxNode.top + iconYMargin;
+    this.incorrectIconNode.right = boxNode.right - iconXMargin;
+    this.incorrectIconNode.top = boxNode.top + iconYMargin;
 
     // icons are initially hidden
-    thisNode.correctIconNode.visible = false;
-    thisNode.incorrectIconNode.visible = false;
+    this.correctIconNode.visible = false;
+    this.incorrectIconNode.visible = false;
   }
 
   graphingLines.register( 'EquationBoxNode', EquationBoxNode );

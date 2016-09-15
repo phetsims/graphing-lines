@@ -28,15 +28,15 @@ define( function( require ) {
    */
   function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
 
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
+    Manipulator.call( this, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
+    var self = this;
     lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
+      self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     } );
 
-    thisNode.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
+    this.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
   }
 
   graphingLines.register( 'SlopeManipulator', SlopeManipulator );

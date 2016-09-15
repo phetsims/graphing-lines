@@ -41,8 +41,9 @@ define( function( require ) {
    */
   function GraphTheLineNode( challenge, model, challengeSize, audioPlayer ) {
 
-    var thisNode = this;
-    ChallengeNode.call( thisNode, challenge, model, challengeSize, audioPlayer );
+    var self = this;
+    
+    ChallengeNode.call( this, challenge, model, challengeSize, audioPlayer );
 
     var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
 
@@ -59,24 +60,24 @@ define( function( require ) {
 
     // Guess equation
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    thisNode.equationNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
+    this.equationNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
 
     // @private 'Not A Line', for situations where 3-points do not define a line
-    thisNode.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
+    this.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
     // Guess
-    thisNode.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
-      new Node( { children: [ thisNode.equationNode, thisNode.notALineNode ] } ) );
+    this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
+      new Node( { children: [ this.equationNode, this.notALineNode ] } ) );
 
     // @private Graph
-    thisNode.graphNode = this.createGraphNode( challenge );
-    thisNode.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
+    this.graphNode = this.createGraphNode( challenge );
+    this.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
     // rendering order
-    thisNode.subtypeParent.addChild( titleNode );
-    thisNode.subtypeParent.addChild( thisNode.graphNode );
-    thisNode.subtypeParent.addChild( answerBoxNode );
-    thisNode.subtypeParent.addChild( thisNode.guessBoxNode );
+    this.subtypeParent.addChild( titleNode );
+    this.subtypeParent.addChild( this.graphNode );
+    this.subtypeParent.addChild( answerBoxNode );
+    this.subtypeParent.addChild( this.guessBoxNode );
 
     // layout
     {
@@ -84,25 +85,25 @@ define( function( require ) {
 
       // left align the title and boxes
       answerBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
-      thisNode.guessBoxNode.left = answerBoxNode.left;
+      this.guessBoxNode.left = answerBoxNode.left;
       titleNode.left = answerBoxNode.left;
 
       // stack title and boxes vertically, title top-aligned with graph's grid
       var ySpacing = 30;
       titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
       answerBoxNode.top = titleNode.bottom + ySpacing;
-      thisNode.guessBoxNode.top = answerBoxNode.bottom + ySpacing;
+      this.guessBoxNode.top = answerBoxNode.bottom + ySpacing;
 
       // face centered below boxes, bottom-aligned with buttons
-      thisNode.faceNode.centerX = answerBoxNode.centerX;
-      thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
+      this.faceNode.centerX = answerBoxNode.centerX;
+      this.faceNode.bottom = this.buttonsParent.bottom;
     }
 
     // Update visibility of the correct/incorrect icons.
     var updateIcons = function() {
       answerBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT );
-      thisNode.guessBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT && challenge.isCorrect() );
-      thisNode.guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
+      self.guessBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT && challenge.isCorrect() );
+      self.guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess
@@ -112,8 +113,8 @@ define( function( require ) {
       if ( line instanceof Line ) {
         guessLineProperty.set( line ); // updates equationNode
       }
-      thisNode.equationNode.visible = ( line instanceof Line ); // cast to boolean
-      thisNode.notALineNode.visible = !thisNode.equationNode.visible;
+      self.equationNode.visible = ( line instanceof Line ); // cast to boolean
+      self.notALineNode.visible = !self.equationNode.visible;
 
       // visibility of correct/incorrect icons
       updateIcons();
@@ -123,7 +124,7 @@ define( function( require ) {
     model.playStateProperty.link( function( playState ) {
 
       // states in which the graph is interactive
-      thisNode.graphNode.pickable = (
+      self.graphNode.pickable = (
         playState === PlayState.FIRST_CHECK ||
         playState === PlayState.SECOND_CHECK ||
         playState === PlayState.TRY_AGAIN ||
@@ -131,15 +132,15 @@ define( function( require ) {
       );
 
       // Graph the answer line at the end of the challenge.
-      thisNode.graphNode.setAnswerVisible( playState === PlayState.NEXT );
+      self.graphNode.setAnswerVisible( playState === PlayState.NEXT );
 
-      thisNode.guessBoxNode.visible = ( model.playState === PlayState.NEXT );
+      self.guessBoxNode.visible = ( model.playState === PlayState.NEXT );
 
       // show stuff when the user got the challenge wrong
       if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-        thisNode.graphNode.setAnswerPointVisible( true );
-        thisNode.graphNode.setGuessPointVisible( true );
-        thisNode.graphNode.setSlopeToolVisible( true );
+        self.graphNode.setAnswerPointVisible( true );
+        self.graphNode.setGuessPointVisible( true );
+        self.graphNode.setSlopeToolVisible( true );
       }
 
       // visibility of correct/incorrect icons

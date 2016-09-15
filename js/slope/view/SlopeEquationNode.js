@@ -55,13 +55,12 @@ define( function( require ) {
       staticColor: 'black'
     }, options );
 
-    var thisNode = this;
     EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
     // internal properties that are connected to pickers
     var x1Property = new Property( lineProperty.get().x1 );
@@ -90,7 +89,7 @@ define( function( require ) {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    var numeratorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var numeratorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
     var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.yRangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
@@ -102,7 +101,7 @@ define( function( require ) {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    var denominatorOperatorNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
+    var denominatorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
     var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.xRangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
@@ -124,8 +123,8 @@ define( function( require ) {
 
     // rendering order
     var parentNode = new Node();
-    thisNode.addChild( parentNode );
-    thisNode.addChild( undefinedSlopeIndicator );
+    this.addChild( parentNode );
+    this.addChild( undefinedSlopeIndicator );
 
     // m =
     parentNode.addChild( mNode );
@@ -184,45 +183,45 @@ define( function( require ) {
     // m =
     mNode.x = 0;
     mNode.y = 0;
-    interactiveEqualsNode.left = mNode.right + thisNode.relationalOperatorXSpacing;
+    interactiveEqualsNode.left = mNode.right + this.relationalOperatorXSpacing;
     interactiveEqualsNode.y = mNode.y;
     // fraction line
-    interactiveFractionLineNode.left = interactiveEqualsNode.right + thisNode.relationalOperatorXSpacing;
-    interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + thisNode.fractionLineYFudgeFactor;
+    interactiveFractionLineNode.left = interactiveEqualsNode.right + this.relationalOperatorXSpacing;
+    interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + this.fractionLineYFudgeFactor;
     // y2 - y1
     y2Node.left = interactiveFractionLineNode.left;
-    y2Node.bottom = interactiveFractionLineNode.top - thisNode.pickersYSpacing;
-    numeratorOperatorNode.left = y2Node.right + thisNode.operatorXSpacing;
+    y2Node.bottom = interactiveFractionLineNode.top - this.pickersYSpacing;
+    numeratorOperatorNode.left = y2Node.right + this.operatorXSpacing;
     numeratorOperatorNode.centerY = y2Node.centerY;
-    y1Node.left = numeratorOperatorNode.right + thisNode.operatorXSpacing;
+    y1Node.left = numeratorOperatorNode.right + this.operatorXSpacing;
     y1Node.y = y2Node.y;
     // fix fraction line length
     var fractionLineLength = y1Node.right - y2Node.left;
     interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 0 );
     // x2 - x1
     x2Node.left = y2Node.left;
-    x2Node.top = interactiveFractionLineNode.bottom + thisNode.pickersYSpacing;
-    denominatorOperatorNode.left = x2Node.right + thisNode.operatorXSpacing;
+    x2Node.top = interactiveFractionLineNode.bottom + this.pickersYSpacing;
+    denominatorOperatorNode.left = x2Node.right + this.operatorXSpacing;
     denominatorOperatorNode.centerY = x2Node.centerY;
-    x1Node.left = denominatorOperatorNode.right + thisNode.operatorXSpacing;
+    x1Node.left = denominatorOperatorNode.right + this.operatorXSpacing;
     x1Node.y = x2Node.y;
     // = rise/run
-    unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + thisNode.relationalOperatorXSpacing;
+    unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + this.relationalOperatorXSpacing;
     unsimplifiedEqualsNode.y = interactiveEqualsNode.y;
-    unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + thisNode.relationalOperatorXSpacing;
+    unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + this.relationalOperatorXSpacing;
     unsimplifiedFractionLineNode.y = interactiveFractionLineNode.y;
     // horizontally center rise and run above fraction line
     unsimplifiedRiseNode.centerX = unsimplifiedFractionLineNode.centerX;
-    unsimplifiedRiseNode.bottom = unsimplifiedFractionLineNode.top - thisNode.slopeYSpacing;
+    unsimplifiedRiseNode.bottom = unsimplifiedFractionLineNode.top - this.slopeYSpacing;
     unsimplifiedRunNode.centerX = unsimplifiedFractionLineNode.centerX;
-    unsimplifiedRunNode.top = unsimplifiedFractionLineNode.bottom + thisNode.slopeYSpacing;
+    unsimplifiedRunNode.top = unsimplifiedFractionLineNode.bottom + this.slopeYSpacing;
 
     // set up undefined-slope indicator last
     undefinedSlopeIndicator.setSize( parentNode.getWidth(), parentNode.getHeight() );
     undefinedSlopeIndicator.centerX = parentNode.centerX;
-    undefinedSlopeIndicator.centerY = parentNode.centerY + thisNode.undefinedSlopeYFudgeFactor;
+    undefinedSlopeIndicator.centerY = parentNode.centerY + this.undefinedSlopeYFudgeFactor;
 
-    thisNode.mutate( options );
+    this.mutate( options );
   }
 
   /**

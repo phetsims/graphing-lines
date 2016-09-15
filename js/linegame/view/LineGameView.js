@@ -25,27 +25,27 @@ define( function( require ) {
    */
   function LineGameView( model ) {
 
-    var thisView = this;
-    ScreenView.call( thisView, GLConstants.SCREEN_VIEW_OPTIONS );
+    ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
     // audio
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
     // @private one parent node for each 'phase' of the game
-    thisView.settingsNode = new SettingsNode( model, thisView.layoutBounds );
-    thisView.playNode = new PlayNode( model, thisView.layoutBounds, audioPlayer );
-    thisView.resultsNode = new ResultsNode( model, thisView.layoutBounds, audioPlayer );
+    this.settingsNode = new SettingsNode( model, this.layoutBounds );
+    this.playNode = new PlayNode( model, this.layoutBounds, audioPlayer );
+    this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer );
 
     // rendering order
-    thisView.addChild( thisView.resultsNode );
-    thisView.addChild( thisView.playNode );
-    thisView.addChild( thisView.settingsNode );
+    this.addChild( this.resultsNode );
+    this.addChild( this.playNode );
+    this.addChild( this.settingsNode );
 
     // game 'phase' changes
+    var self = this;
     model.gamePhaseProperty.link( function( gamePhase ) {
-      thisView.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
-      thisView.playNode.visible = ( gamePhase === GamePhase.PLAY );
-      thisView.resultsNode.visible = ( gamePhase === GamePhase.RESULTS );
+      self.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
+      self.playNode.visible = ( gamePhase === GamePhase.PLAY );
+      self.resultsNode.visible = ( gamePhase === GamePhase.RESULTS );
     } );
   }
 

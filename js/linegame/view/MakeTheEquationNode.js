@@ -40,8 +40,7 @@ define( function( require ) {
    */
   function MakeTheEquationNode( challenge, model, challengeSize, audioPlayer ) {
 
-    var thisNode = this;
-    ChallengeNode.call( thisNode, challenge, model, challengeSize, audioPlayer );
+    ChallengeNode.call( this, challenge, model, challengeSize, audioPlayer );
 
     var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
@@ -68,10 +67,10 @@ define( function( require ) {
     var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );
 
     // rendering order
-    thisNode.subtypeParent.addChild( titleNode );
-    thisNode.subtypeParent.addChild( graphNode );
-    thisNode.subtypeParent.addChild( answerBoxNode );
-    thisNode.subtypeParent.addChild( guessBoxNode );
+    this.subtypeParent.addChild( titleNode );
+    this.subtypeParent.addChild( graphNode );
+    this.subtypeParent.addChild( answerBoxNode );
+    this.subtypeParent.addChild( guessBoxNode );
 
     // layout
     {
@@ -89,8 +88,8 @@ define( function( require ) {
       answerBoxNode.top = guessBoxNode.bottom + ySpacing;
 
       // face centered below boxes, bottom-aligned with buttons
-      thisNode.faceNode.centerX = guessBoxNode.centerX;
-      thisNode.faceNode.bottom = thisNode.buttonsParent.bottom;
+      this.faceNode.centerX = guessBoxNode.centerX;
+      this.faceNode.bottom = this.buttonsParent.bottom;
     }
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
@@ -98,7 +97,7 @@ define( function( require ) {
       var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), 14 /* fontSize */ );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;
-      thisNode.addChild( devAnswerNode );
+      this.addChild( devAnswerNode );
       devAnswerNode.moveToBack();
     }
 
@@ -110,7 +109,7 @@ define( function( require ) {
     };
 
     // sync with guess
-    challenge.guessProperty.link( updateIcons.bind( thisNode ) );
+    challenge.guessProperty.link( updateIcons.bind( this ) );
 
     // sync with game state
     model.playStateProperty.link( function( playState ) {

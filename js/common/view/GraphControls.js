@@ -52,8 +52,6 @@ define( function( require ) {
       includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
     }, options );
 
-    var thisNode = this;
-
     // private properties for standard-line check boxes
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
@@ -96,7 +94,7 @@ define( function( require ) {
       align: 'left'
     } );
 
-    Panel.call( thisNode, contentNode, options );
+    Panel.call( this, contentNode, options );
 
     // when lines are not visible, hide related controls
     linesVisibleProperty.link( function( visible ) {

@@ -26,10 +26,9 @@ define( function( require ) {
    */
   function GraphPointSlopeNode( challenge ) {
 
-    var thisNode = this;
-    ChallengeGraphNode.call( thisNode, challenge );
+    ChallengeGraphNode.call( this, challenge );
 
-    thisNode.setGuessVisible( true );
+    this.setGuessVisible( true );
 
     // dynamic ranges
     var pointSlopeParameterRange = new PointSlopeParameterRange();
@@ -44,7 +43,7 @@ define( function( require ) {
     var pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
     var pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
-      thisNode.addChild( pointManipulator );
+      this.addChild( pointManipulator );
     }
 
     // slope manipulator

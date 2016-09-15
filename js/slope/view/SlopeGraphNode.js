@@ -24,8 +24,7 @@ define( function( require ) {
    */
   function SlopeGraphNode( model, viewProperties ) {
 
-    var thisNode = this;
-    LineFormsGraphNode.call( thisNode, model, viewProperties, SlopeEquationNode );
+    LineFormsGraphNode.call( this, model, viewProperties, SlopeEquationNode );
 
     var manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 
@@ -38,8 +37,8 @@ define( function( require ) {
       manipulatorRadius, model.interactiveLineProperty, model.x2RangeProperty, model.y2RangeProperty, model.modelViewTransform );
 
     // rendering order
-    thisNode.addChild( x1y1Manipulator );
-    thisNode.addChild( x2y2Manipulator );
+    this.addChild( x1y1Manipulator );
+    this.addChild( x2y2Manipulator );
 
     // visibility of manipulators
     viewProperties.linesVisibleProperty.link( function( linesVisible ) {

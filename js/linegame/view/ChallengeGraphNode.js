@@ -41,60 +41,60 @@ define( function( require ) {
       slopeToolEnabled: true
     }, options );
 
-    var thisNode = this;
-    GraphNode.call( thisNode, challenge.graph, challenge.modelViewTransform );
+    GraphNode.call( this, challenge.graph, challenge.modelViewTransform );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( GLQueryParameters.DEV ) {
-      thisNode.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
+      this.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
     }
 
     var pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
     // @private answer
-    thisNode.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
+    this.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
     var answerNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
-    thisNode.answerParentNode.addChild( answerNode );
+    this.answerParentNode.addChild( answerNode );
 
     // @private point (x1,y1) for answer
-    thisNode.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
-    thisNode.answerParentNode.addChild( thisNode.answerPointNode );
-    thisNode.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
+    this.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
+    this.answerParentNode.addChild( this.answerPointNode );
+    this.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 
     // @private guess
-    thisNode.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
-    thisNode.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform ) );
-    thisNode.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
-    thisNode.guessParentNode.addChild( thisNode.guessPointNode );
-    thisNode.guessPointVisible = true;
+    this.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
+    this.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform ) );
+    this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
+    this.guessParentNode.addChild( this.guessPointNode );
+    this.guessPointVisible = true;
 
     // @private slope tool
     if ( options.slopeToolEnabled ) {
-      thisNode.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform );
+      this.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform );
     }
 
     // rendering order
-    thisNode.addChild( thisNode.guessParentNode );
-    thisNode.addChild( thisNode.answerParentNode );
-    if ( thisNode.slopeToolNode ) {
-      thisNode.addChild( thisNode.slopeToolNode );
+    this.addChild( this.guessParentNode );
+    this.addChild( this.answerParentNode );
+    if ( this.slopeToolNode ) {
+      this.addChild( this.slopeToolNode );
     }
 
     // Sync with the guess
+    var self = this;
     challenge.guessProperty.link( function( line ) {
       if ( line instanceof Line ) {
         // plot (x1,y1)
-        thisNode.guessPointNode.visible = thisNode.guessPointVisible;
-        thisNode.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+        self.guessPointNode.visible = self.guessPointVisible;
+        self.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       }
     } );
 
     // initial state
-    thisNode.setAnswerVisible( options.answerVisible );
-    thisNode.setAnswerPointVisible( options.answerPointVisible );
-    thisNode.setGuessVisible( options.guessVisible );
-    thisNode.setGuessPointVisible( options.guessPointVisible );
-    thisNode.setSlopeToolVisible( options.slopeToolVisible );
+    this.setAnswerVisible( options.answerVisible );
+    this.setAnswerPointVisible( options.answerPointVisible );
+    this.setGuessVisible( options.guessVisible );
+    this.setGuessPointVisible( options.guessPointVisible );
+    this.setSlopeToolVisible( options.slopeToolVisible );
   }
 
   graphingLines.register( 'ChallengeGraphNode', ChallengeGraphNode );

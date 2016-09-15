@@ -32,10 +32,8 @@ define( function( require ) {
    */
   function SlopeToolNode( lineProperty, modelViewTransform ) {
 
-    var thisNode = this;
-
-    thisNode.lineProperty = lineProperty; // @private
-    thisNode.modelViewTransform = modelViewTransform; // @private
+    this.lineProperty = lineProperty; // @private
+    this.modelViewTransform = modelViewTransform; // @private
 
     // Values
     var numberOptions = {
@@ -47,10 +45,10 @@ define( function( require ) {
       yMargin: 6,
       cornerRadius: 5
     };
-    thisNode.riseProperty = new Property( lineProperty.get().rise ); // @private
-    thisNode.runProperty = new Property( lineProperty.get().run ); // @private
-    thisNode.riseValueNode = new NumberBackgroundNode( thisNode.riseProperty, numberOptions ); // @private
-    thisNode.runValueNode = new NumberBackgroundNode( thisNode.runProperty, numberOptions ); // @private
+    this.riseProperty = new Property( lineProperty.get().rise ); // @private
+    this.runProperty = new Property( lineProperty.get().run ); // @private
+    this.riseValueNode = new NumberBackgroundNode( this.riseProperty, numberOptions ); // @private
+    this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
 
     // Arrows
     var arrowOptions = {
@@ -59,23 +57,24 @@ define( function( require ) {
       arrowTipSize: new Dimension2( 10, 10 ),
       delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
     };
-    thisNode.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
-    thisNode.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
+    this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
+    this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
 
     // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
-    thisNode.parentNode = new Node( {
+    this.parentNode = new Node( {
       children: [
-        thisNode.riseArrowNode,
-        thisNode.riseValueNode,
-        thisNode.runArrowNode,
-        thisNode.runValueNode
+        this.riseArrowNode,
+        this.riseValueNode,
+        this.runArrowNode,
+        this.runValueNode
       ]
     } );
 
-    Node.call( thisNode, { children: [ thisNode.parentNode ] } );
+    Node.call( this, { children: [ this.parentNode ] } );
 
+    var self = this;
     lineProperty.link( function( line ) {
-      thisNode.update( line, modelViewTransform );
+      self.update( line, modelViewTransform );
     } );
   }
 

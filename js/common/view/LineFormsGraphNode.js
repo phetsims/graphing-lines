@@ -35,47 +35,48 @@ define( function( require ) {
    */
   function LineFormsGraphNode( model, viewProperties, equationType ) {
 
-    var thisNode = this;
-    GraphNode.call( thisNode, model.graph, model.modelViewTransform );
+    var self = this;
+    
+    GraphNode.call( this, model.graph, model.modelViewTransform );
 
-    thisNode.model = model; // @private
-    thisNode.viewProperties = viewProperties; // @private
+    this.model = model; // @private
+    this.viewProperties = viewProperties; // @private
     this.equationType = equationType; // @private
 
     // @private Nodes for each category of line (interactive, standard, saved) to maintain rendering order
-    thisNode.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform,
+    this.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform,
       { equationType: equationType } ); // @private
-    thisNode.standardLinesParentNode = new Node(); // @private
-    thisNode.savedLinesParentNode = new Node(); // @private
+    this.standardLinesParentNode = new Node(); // @private
+    this.savedLinesParentNode = new Node(); // @private
 
     // @private Slope tool
-    thisNode.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
+    this.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
 
     // Rendering order
-    thisNode.addChild( this.savedLinesParentNode );
-    thisNode.addChild( this.standardLinesParentNode );
-    thisNode.addChild( this.interactiveLineNode );
-    thisNode.addChild( this.slopeToolNode );
+    this.addChild( this.savedLinesParentNode );
+    this.addChild( this.standardLinesParentNode );
+    this.addChild( this.interactiveLineNode );
+    this.addChild( this.slopeToolNode );
 
     // Add/remove standard lines
-    model.standardLines.addListeners( thisNode.standardLineAdded.bind( thisNode ), thisNode.standardLineRemoved.bind( thisNode ) );
+    model.standardLines.addListeners( this.standardLineAdded.bind( this ), this.standardLineRemoved.bind( this ) );
 
     // Add/remove saved lines
-    model.savedLines.addListeners( thisNode.savedLineAdded.bind( thisNode ), thisNode.savedLineRemoved.bind( thisNode ) );
+    model.savedLines.addListeners( this.savedLineAdded.bind( this ), this.savedLineRemoved.bind( this ) );
 
     // Visibility of lines
     viewProperties.multilink( [ 'linesVisible', 'slopeToolVisible' ],
-      thisNode.updateLinesVisibility.bind( thisNode ) );
+      this.updateLinesVisibility.bind( this ) );
 
     // Visibility of the grid
     viewProperties.gridVisibleProperty.link( function( visible ) {
-      thisNode.setGridVisible( visible );
+      self.setGridVisible( visible );
     } );
 
     // Visibility of the equation on the interactive line
-    thisNode.viewProperties.interactiveEquationVisibleProperty.link( function( visible ) {
-      if ( thisNode.interactiveLineNode ) {
-        thisNode.interactiveLineNode.setEquationVisible( visible );
+    this.viewProperties.interactiveEquationVisibleProperty.link( function( visible ) {
+      if ( self.interactiveLineNode ) {
+        self.interactiveLineNode.setEquationVisible( visible );
       }
     } );
   }

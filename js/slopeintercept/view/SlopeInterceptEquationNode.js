@@ -64,14 +64,15 @@ define( function( require ) {
       staticColor: 'black'
     }, options );
 
-    var thisNode = this;
+    var self = this;
+    
     EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
     var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: thisNode.fractionLineThickness };
+    var fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
 
     // internal properties that are connected to pickers
     var riseProperty = new Property( lineProperty.get().rise );
@@ -90,12 +91,12 @@ define( function( require ) {
     var updatingControls = false;
 
     // Determine the max width of the rise and run pickers.
-    var maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, thisNode.DECIMAL_PLACES );
+    var maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, self.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     var yNode = new Text( symbolYString, staticOptions );
     var equalsNode = new Text( '=', staticOptions );
-    var slopeMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize }, staticOptions ) );
+    var slopeMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) );
     var riseNode;
     var runNode;
     if ( options.interactiveSlope ) {
@@ -108,9 +109,9 @@ define( function( require ) {
     }
     var slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     var xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
-    var plusNode = new PlusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
-    var minusNode = new MinusNode( _.extend( { size: thisNode.operatorLineSize }, staticOptions ) );
-    var yInterceptMinusSignNode = new MinusNode( _.extend( { size: thisNode.signLineSize, absoluteValue: true }, staticOptions ) );
+    var plusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
+    var minusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
+    var yInterceptMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize, absoluteValue: true }, staticOptions ) );
     var yInterceptNumeratorNode; // also used for integer values
     if ( options.interactiveIntercept ) {
       yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
@@ -124,7 +125,7 @@ define( function( require ) {
     var slopeUndefinedNode = new Text( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
-    thisNode.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
+    self.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
       yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedNode ];
 
     /*
@@ -138,9 +139,9 @@ define( function( require ) {
       var lineColor = line.color;
 
       // start with all children invisible
-      var len = thisNode.children.length;
+      var len = self.children.length;
       for ( var i = 0; i < len; i++ ) {
-        thisNode.children[ i ].visible = false;
+        self.children[ i ].visible = false;
       }
 
       if ( line.undefinedSlope() && !interactive ) {
@@ -164,7 +165,7 @@ define( function( require ) {
       // y =
       yNode.visible = equalsNode.visible = true;
       yNode.fill = equalsNode.fill = lineColor;
-      equalsNode.left = yNode.right + thisNode.relationalOperatorXSpacing;
+      equalsNode.left = yNode.right + self.relationalOperatorXSpacing;
       equalsNode.y = yNode.y;
 
       // Layout the 'mx' part of the equation.
@@ -175,13 +176,13 @@ define( function( require ) {
         // (rise/run)x
         riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
         riseNode.fill = runNode.fill = slopeFractionLineNode.stroke = xNode.fill = lineColor;
-        slopeFractionLineNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
-        slopeFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;
+        slopeFractionLineNode.left = equalsNode.right + self.relationalOperatorXSpacing;
+        slopeFractionLineNode.centerY = equalsNode.centerY + self.fractionLineYFudgeFactor;
         riseNode.centerX = slopeFractionLineNode.centerX;
-        riseNode.bottom = slopeFractionLineNode.top - thisNode.pickersYSpacing;
+        riseNode.bottom = slopeFractionLineNode.top - self.pickersYSpacing;
         runNode.centerX = slopeFractionLineNode.centerX;
-        runNode.top = slopeFractionLineNode.bottom + thisNode.pickersYSpacing;
-        xNode.left = slopeFractionLineNode.right + thisNode.fractionalSlopeXSpacing;
+        runNode.top = slopeFractionLineNode.bottom + self.pickersYSpacing;
+        xNode.left = slopeFractionLineNode.right + self.fractionalSlopeXSpacing;
         xNode.y = yNode.y;
       }
       else {
@@ -193,16 +194,16 @@ define( function( require ) {
         if ( positiveSlope || zeroSlope ) {
           // no sign
           previousNode = equalsNode;
-          previousXOffset = thisNode.relationalOperatorXSpacing;
+          previousXOffset = self.relationalOperatorXSpacing;
         }
         else {
           // -
           slopeMinusSignNode.visible = true;
           slopeMinusSignNode.fill = lineColor;
-          slopeMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
-          slopeMinusSignNode.centerY = equalsNode.centerY + thisNode.slopeSignYFudgeFactor + thisNode.slopeSignYOffset;
+          slopeMinusSignNode.left = equalsNode.right + self.relationalOperatorXSpacing;
+          slopeMinusSignNode.centerY = equalsNode.centerY + self.slopeSignYFudgeFactor + self.slopeSignYOffset;
           previousNode = slopeMinusSignNode;
-          previousXOffset = ( fractionalSlope ? thisNode.fractionSignXSpacing : thisNode.integerSignXSpacing );
+          previousXOffset = ( fractionalSlope ? self.fractionSignXSpacing : self.integerSignXSpacing );
         }
 
         if ( line.undefinedSlope() || fractionalSlope ) {
@@ -214,12 +215,12 @@ define( function( require ) {
           slopeFractionLineNode.setLine( 0, 0, lineWidth, 0 );
           // layout
           slopeFractionLineNode.left = previousNode.right + previousXOffset;
-          slopeFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;
+          slopeFractionLineNode.centerY = equalsNode.centerY + self.fractionLineYFudgeFactor;
           riseNode.centerX = slopeFractionLineNode.centerX;
-          riseNode.bottom = slopeFractionLineNode.top - thisNode.ySpacing;
+          riseNode.bottom = slopeFractionLineNode.top - self.ySpacing;
           runNode.centerX = slopeFractionLineNode.centerX;
-          runNode.top = slopeFractionLineNode.bottom + thisNode.ySpacing;
-          xNode.left = slopeFractionLineNode.right + thisNode.fractionalSlopeXSpacing;
+          runNode.top = slopeFractionLineNode.bottom + self.ySpacing;
+          xNode.left = slopeFractionLineNode.right + self.fractionalSlopeXSpacing;
           xNode.y = yNode.y;
         }
         else if ( zeroSlope ) {
@@ -238,7 +239,7 @@ define( function( require ) {
           riseNode.fill = xNode.fill = lineColor;
           riseNode.left = previousNode.right + previousXOffset;
           riseNode.y = yNode.y;
-          xNode.left = riseNode.right + thisNode.integerSlopeXSpacing;
+          xNode.left = riseNode.right + self.integerSlopeXSpacing;
           xNode.y = yNode.y;
         }
         else {
@@ -253,7 +254,7 @@ define( function( require ) {
           // y = b
           yInterceptNumeratorNode.visible = true;
           yInterceptNumeratorNode.fill = lineColor;
-          yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
+          yInterceptNumeratorNode.left = equalsNode.right + self.relationalOperatorXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
         else {
@@ -261,9 +262,9 @@ define( function( require ) {
           plusNode.visible = yInterceptNumeratorNode.visible = true;
           minusNode.visible = false;
           plusNode.fill = yInterceptNumeratorNode.fill = lineColor;
-          plusNode.left = xNode.right + thisNode.operatorXSpacing;
-          plusNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
-          yInterceptNumeratorNode.left = plusNode.right + thisNode.operatorXSpacing;
+          plusNode.left = xNode.right + self.operatorXSpacing;
+          plusNode.centerY = equalsNode.centerY + self.operatorYFudgeFactor;
+          yInterceptNumeratorNode.left = plusNode.right + self.operatorXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
       }
@@ -281,7 +282,7 @@ define( function( require ) {
             // y = 0
             yInterceptNumeratorNode.visible = true;
             yInterceptNumeratorNode.fill = lineColor;
-            yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
+            yInterceptNumeratorNode.left = equalsNode.right + self.relationalOperatorXSpacing;
             yInterceptNumeratorNode.centerY = yNode.centerY;
           }
           else {
@@ -292,16 +293,16 @@ define( function( require ) {
           // y = b
           yInterceptNumeratorNode.visible = true;
           yInterceptNumeratorNode.fill = lineColor;
-          yInterceptNumeratorNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
+          yInterceptNumeratorNode.left = equalsNode.right + self.relationalOperatorXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
         else if ( !positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = -b
           yInterceptMinusSignNode.visible = yInterceptNumeratorNode.visible = true;
           yInterceptMinusSignNode.fill = yInterceptNumeratorNode.fill = lineColor;
-          yInterceptMinusSignNode.left = equalsNode.right + thisNode.relationalOperatorXSpacing;
-          yInterceptMinusSignNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
-          yInterceptNumeratorNode.left = yInterceptMinusSignNode.right + thisNode.integerSignXSpacing;
+          yInterceptMinusSignNode.left = equalsNode.right + self.relationalOperatorXSpacing;
+          yInterceptMinusSignNode.centerY = equalsNode.centerY + self.operatorYFudgeFactor;
+          yInterceptNumeratorNode.left = yInterceptMinusSignNode.right + self.integerSignXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
         else {
@@ -309,14 +310,14 @@ define( function( require ) {
           var operatorNode = ( positiveIntercept ) ? plusNode : minusNode;
           operatorNode.visible = true;
           operatorNode.fill = lineColor;
-          operatorNode.left = xNode.right + thisNode.operatorXSpacing;
-          operatorNode.centerY = equalsNode.centerY + thisNode.operatorYFudgeFactor;
+          operatorNode.left = xNode.right + self.operatorXSpacing;
+          operatorNode.centerY = equalsNode.centerY + self.operatorYFudgeFactor;
 
           if ( integerIntercept ) {
             // b is an integer
             yInterceptNumeratorNode.visible = true;
             yInterceptNumeratorNode.fill = lineColor;
-            yInterceptNumeratorNode.left = operatorNode.right + thisNode.operatorXSpacing;
+            yInterceptNumeratorNode.left = operatorNode.right + self.operatorXSpacing;
             yInterceptNumeratorNode.centerY = yNode.centerY;
           }
           else {
@@ -327,12 +328,12 @@ define( function( require ) {
             lineWidth = Math.max( yInterceptNumeratorNode.width, yInterceptDenominatorNode.width );
             yInterceptFractionLineNode.setLine( 0, 0, lineWidth, 0 );
             // layout
-            yInterceptFractionLineNode.left = operatorNode.right + thisNode.operatorXSpacing;
-            yInterceptFractionLineNode.centerY = equalsNode.centerY + thisNode.fractionLineYFudgeFactor;
+            yInterceptFractionLineNode.left = operatorNode.right + self.operatorXSpacing;
+            yInterceptFractionLineNode.centerY = equalsNode.centerY + self.fractionLineYFudgeFactor;
             yInterceptNumeratorNode.centerY = yInterceptFractionLineNode.centerY;
-            yInterceptNumeratorNode.bottom = yInterceptFractionLineNode.top - thisNode.ySpacing;
+            yInterceptNumeratorNode.bottom = yInterceptFractionLineNode.top - self.ySpacing;
             yInterceptDenominatorNode.centerX = yInterceptFractionLineNode.centerX;
-            yInterceptDenominatorNode.top = yInterceptFractionLineNode.bottom + thisNode.ySpacing;
+            yInterceptDenominatorNode.top = yInterceptFractionLineNode.bottom + self.ySpacing;
           }
         }
       }
@@ -389,16 +390,16 @@ define( function( require ) {
       updateLayout( lineProperty.get() );
 
       // add undefinedSlopeIndicator
-      var undefinedSlopeIndicator = new UndefinedSlopeIndicator( thisNode.width, thisNode.height, staticOptions );
-      thisNode.addChild( undefinedSlopeIndicator );
-      undefinedSlopeIndicator.centerX = thisNode.centerX;
-      undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - thisNode.undefinedSlopeYFudgeFactor;
+      var undefinedSlopeIndicator = new UndefinedSlopeIndicator( self.width, self.height, staticOptions );
+      self.addChild( undefinedSlopeIndicator );
+      undefinedSlopeIndicator.centerX = self.centerX;
+      undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - self.undefinedSlopeYFudgeFactor;
       lineProperty.link( function( line ) {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
       } );
     }
 
-    thisNode.mutate( options );
+    self.mutate( options );
   }
 
   graphingLines.register( 'SlopeInterceptEquationNode', SlopeInterceptEquationNode );

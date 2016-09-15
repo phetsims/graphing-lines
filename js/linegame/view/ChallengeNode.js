@@ -48,13 +48,14 @@ define( function( require ) {
    */
   function ChallengeNode( challenge, model, challengeSize, audioPlayer ) {
 
-    var thisNode = this;
-    Node.call( thisNode );
+    var self = this;
+    
+    Node.call( this );
 
-    thisNode.subtypeParent = new Node(); // @protected subtypes should add children to this node, to preserve rendering order
+    this.subtypeParent = new Node(); // @protected subtypes should add children to this node, to preserve rendering order
 
     // @protected smiley/frowning face
-    thisNode.faceNode = new FaceWithPointsNode( {
+    this.faceNode = new FaceWithPointsNode( {
       faceDiameter: LineGameConstants.FACE_DIAMETER,
       faceOpacity: 1,
       pointsAlignment: 'rightCenter'
@@ -72,8 +73,9 @@ define( function( require ) {
     var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
     var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
     var nextButton = new TextPushButton( nextString, buttonOptions );
+    
     // @protected
-    thisNode.buttonsParent = new Node( {
+    this.buttonsParent = new Node( {
       children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ],
       maxWidth: 400 // determined empirically
     } );
@@ -89,28 +91,28 @@ define( function( require ) {
     pointToolParent.addChild( pointToolNode2 );
 
     // rendering order
-    thisNode.addChild( thisNode.subtypeParent );
-    thisNode.addChild( thisNode.buttonsParent );
-    thisNode.addChild( pointToolParent );
-    thisNode.addChild( thisNode.faceNode );
+    this.addChild( this.subtypeParent );
+    this.addChild( this.buttonsParent );
+    this.addChild( pointToolParent );
+    this.addChild( this.faceNode );
 
     // buttons at center-bottom
-    thisNode.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
-    thisNode.buttonsParent.bottom = challengeSize.height - 20;
+    this.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
+    this.buttonsParent.bottom = challengeSize.height - 20;
 
     // 'Check' button
     checkButton.addListener( function() {
       if ( challenge.isCorrect() ) {
-        thisNode.faceNode.smile();
+        self.faceNode.smile();
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playState === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
         model.score = model.score + points;
-        thisNode.faceNode.setPoints( points );
+        self.faceNode.setPoints( points );
         model.playState = PlayState.NEXT;
       }
       else {
-        thisNode.faceNode.frown();
-        thisNode.faceNode.setPoints( 0 );
+        self.faceNode.frown();
+        self.faceNode.setPoints( 0 );
         audioPlayer.wrongAnswer();
         if ( model.playState === PlayState.FIRST_CHECK ) {
           model.playState = PlayState.TRY_AGAIN;
@@ -140,9 +142,9 @@ define( function( require ) {
     model.playStateProperty.link( function( state ) {
 
       // visibility of face
-      thisNode.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
-                                    state === PlayState.SHOW_ANSWER ||
-                                    ( state === PlayState.NEXT && challenge.isCorrect() ) );
+      self.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
+                                state === PlayState.SHOW_ANSWER ||
+                                ( state === PlayState.NEXT && challenge.isCorrect() ) );
 
       // visibility of buttons
       checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
@@ -165,7 +167,7 @@ define( function( require ) {
       var descriptionNode = new Text( this.constructor.name + ': ' + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
       descriptionNode.left = 10;
       descriptionNode.top = 10;
-      thisNode.addChild( descriptionNode );
+      this.addChild( descriptionNode );
 
       // developer buttons (no i18n) to right of main buttons
       var devButtonOptions = { font: new GLFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
@@ -174,9 +176,9 @@ define( function( require ) {
       var replayButton = new TextPushButton( 'dev: Replay',
         _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
       var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
-      devButtonsParent.left = thisNode.buttonsParent.right + 15;
-      devButtonsParent.centerY = thisNode.buttonsParent.centerY;
-      thisNode.addChild( devButtonsParent );
+      devButtonsParent.left = this.buttonsParent.right + 15;
+      devButtonsParent.centerY = this.buttonsParent.centerY;
+      this.addChild( devButtonsParent );
       model.playStateProperty.link( function( state ) {
         replayButton.visible = ( state === PlayState.NEXT );
         skipButton.visible = !replayButton.visible;
@@ -190,7 +192,7 @@ define( function( require ) {
    * Creates a non-interactive equation, used to label the specified line.
    * @param {EquationForm} equationForm
    * @param {Property.<Line>} lineProperty
-   * @param {Font} font
+   * @param {number} fontSize
    */
   ChallengeNode.createEquationNode = function( equationForm, lineProperty, fontSize ) {
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {

@@ -27,10 +27,9 @@ define( function( require ) {
    */
   function LineFormsView( model, viewProperties, graphNode, graphControls, equationControls ) {
 
-    var thisView = this;
-    ScreenView.call( thisView, GLConstants.SCREEN_VIEW_OPTIONS );
+    ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
-    thisView.viewProperties = viewProperties; // @private
+    this.viewProperties = viewProperties; // @private
 
     // Create point tool nodes
     var pointTool1 = new PointToolNode( model.pointTool1, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
@@ -47,8 +46,8 @@ define( function( require ) {
       },
       scale: GLConstants.RESET_ALL_BUTTON_SCALE
     } );
-    resetAllButton.right = thisView.layoutBounds.width - GLConstants.SCREEN_X_MARGIN;
-    resetAllButton.bottom = thisView.layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
+    resetAllButton.right = this.layoutBounds.width - GLConstants.SCREEN_X_MARGIN;
+    resetAllButton.bottom = this.layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
 
     // Parent for all controls, to simplify layout
     var controlsParent = new Node();
@@ -56,10 +55,10 @@ define( function( require ) {
     controlsParent.addChild( graphControls );
 
     // rendering order
-    thisView.addChild( controlsParent );
-    thisView.addChild( graphNode );
-    thisView.addChild( pointToolParent );
-    thisView.addChild( resetAllButton );
+    this.addChild( controlsParent );
+    this.addChild( graphNode );
+    this.addChild( pointToolParent );
+    this.addChild( resetAllButton );
 
     // layout - position of graphNode is determined by model
 
@@ -69,7 +68,7 @@ define( function( require ) {
     var ySpacing = 15;
 
     // get the amount of canvas width that's available for the control panels
-    var availableControlPanelWidth = thisView.layoutBounds.width - graphNode.right - ( 2 * xMargin );
+    var availableControlPanelWidth = this.layoutBounds.width - graphNode.right - ( 2 * xMargin );
 
     // if either control panel is too wide, scale it
     if ( equationControls.width > availableControlPanelWidth ) {

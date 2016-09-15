@@ -27,12 +27,12 @@ define( function( require ) {
    */
   function ResultsNode( model, layoutBounds, audioPlayer ) {
 
-    var thisNode = this;
-    Node.call( thisNode );
+    Node.call( this );
 
-    thisNode.rewardNode = null; // @private
+    this.rewardNode = null; // @private
 
     // show results when we enter this phase
+    var self = this;
     model.gamePhaseProperty.link( function( gamePhase ) {
       if ( gamePhase === GamePhase.RESULTS ) {
 
@@ -41,15 +41,15 @@ define( function( require ) {
 
           audioPlayer.gameOverPerfectScore();
 
-          thisNode.rewardNode = new GLRewardNode( model.level );
-          thisNode.addChild( thisNode.rewardNode );
+          self.rewardNode = new GLRewardNode( model.level );
+          self.addChild( self.rewardNode );
         }
         else {
           audioPlayer.gameOverImperfectScore();
         }
 
         // game results
-        thisNode.addChild( new LevelCompletedNode(
+        self.addChild( new LevelCompletedNode(
           model.level,
           model.score,
           model.getPerfectScore(),
@@ -68,11 +68,11 @@ define( function( require ) {
           } ) );
       }
       else {
-        thisNode.removeAllChildren();
-        if ( thisNode.rewardNode !== null ) {
-          thisNode.rewardNode.dispose();
+        self.removeAllChildren();
+        if ( self.rewardNode !== null ) {
+          self.rewardNode.dispose();
         }
-        thisNode.rewardNode = null;
+        self.rewardNode = null;
       }
     } );
   }

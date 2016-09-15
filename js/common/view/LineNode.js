@@ -39,34 +39,34 @@ define( function( require ) {
       equationType: null
     }, options );
 
-    var thisNode = this;
+    var self = this;
 
-    thisNode.lineProperty = lineProperty; // @public
-    thisNode.graph = graph; // @private
-    thisNode.modelViewTransform = modelViewTransform; // @private
-    thisNode.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
-    thisNode.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
+    this.lineProperty = lineProperty; // @public
+    this.graph = graph; // @private
+    this.modelViewTransform = modelViewTransform; // @private
+    this.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
+    this.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
 
     // @private parent of all children
-    thisNode.parentNode = new Node();
+    this.parentNode = new Node();
 
     // @private double-headed arrow
-    thisNode.arrowNode = new ArrowNode( 0, 0, 0, 1,
+    this.arrowNode = new ArrowNode( 0, 0, 0, 1,
       { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
-    thisNode.parentNode.addChild( thisNode.arrowNode );
+    this.parentNode.addChild( this.arrowNode );
 
     // @private optional equation
     if ( options.equationType ) {
-      thisNode.equationNode = options.equationType.createDynamicLabel( lineProperty, EQUATION_FONT_SIZE );
+      this.equationNode = options.equationType.createDynamicLabel( lineProperty, EQUATION_FONT_SIZE );
       // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
-      thisNode.equationParentNode = new Node( { children: [ this.equationNode ] } );
-      thisNode.parentNode.addChild( thisNode.equationParentNode );
+      this.equationParentNode = new Node( { children: [ this.equationNode ] } );
+      this.parentNode.addChild( this.equationParentNode );
     }
 
-    Node.call( thisNode, { children: [ thisNode.parentNode ] } );
+    Node.call( this, { children: [ this.parentNode ] } );
 
     lineProperty.link( function( line ) {
-      thisNode.update( line );
+      self.update( line );
     } );
   }
 

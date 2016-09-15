@@ -28,15 +28,15 @@ define( function( require ) {
    */
   function YInterceptManipulator( radius, lineProperty, y1RangeProperty, modelViewTransform ) {
 
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
+    Manipulator.call( this, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
 
     // move the manipulator to match the line's (x1,y1) point
+    var self = this;
     lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+      self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    thisNode.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
+    this.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
   }
 
   graphingLines.register( 'YInterceptManipulator', YInterceptManipulator );

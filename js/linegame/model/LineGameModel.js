@@ -51,9 +51,9 @@ define( function( require ) {
 
   function LineGameModel() {
 
-    var thisModel = this;
+    var self = this;
 
-    PropertySet.call( thisModel, {
+    PropertySet.call( this, {
 
       // @public
       level: 0,
@@ -67,65 +67,65 @@ define( function( require ) {
     } );
 
     // @public
-    thisModel.challenges = []; // {Challenge[]}
-    thisModel.timer = new GameTimer();
-    thisModel.numberOfLevels = factories.length;
-    thisModel.maxPointsPerChallenge = 2;
-    thisModel.bestScoreProperties = []; // best scores for each level, array of Property.<number>
-    thisModel.bestTimeProperties = []; // best times for each level, in ms, array of Property.<number>
-    thisModel.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
-    for ( var level = 0; level < thisModel.numberOfLevels; level++ ) {
-      thisModel.bestScoreProperties.push( new Property( 0 ) );
-      thisModel.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
+    this.challenges = []; // {Challenge[]}
+    this.timer = new GameTimer();
+    this.numberOfLevels = factories.length;
+    this.maxPointsPerChallenge = 2;
+    this.bestScoreProperties = []; // best scores for each level, array of Property.<number>
+    this.bestTimeProperties = []; // best times for each level, in ms, array of Property.<number>
+    this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
+    for ( var level = 0; level < this.numberOfLevels; level++ ) {
+      this.bestScoreProperties.push( new Property( 0 ) );
+      this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 
     // @public
-    thisModel.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
+    this.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
       /*
        * This function will be called prior to setting the property value.
        * Updates fields so that they are accurate before property listeners are notified.
        */
       function( gamePhase ) {
         if ( gamePhase === GamePhase.SETTINGS ) {
-          thisModel.playState = PlayState.NONE;
-          thisModel.timer.stop();
+          self.playState = PlayState.NONE;
+          self.timer.stop();
         }
         else if ( gamePhase === GamePhase.PLAY ) {
-          thisModel.initChallenges();
-          thisModel.playState = PlayState.FIRST_CHECK;
-          thisModel.score = 0;
-          thisModel.timer.start();
+          self.initChallenges();
+          self.playState = PlayState.FIRST_CHECK;
+          self.score = 0;
+          self.timer.start();
         }
         else if ( gamePhase === GamePhase.RESULTS ) {
-          thisModel.playState = PlayState.NONE;
-          thisModel.timer.stop();
-          thisModel.updateBestTime();
+          self.playState = PlayState.NONE;
+          self.timer.stop();
+          self.updateBestTime();
         }
         else {
           throw new Error( 'unsupported game phase: ' + gamePhase );
         }
       } );
 
-    thisModel.initChallenges();
+    this.initChallenges();
 
     // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
-    thisModel.playStateProperty.link( function( playState ) {
+    this.playStateProperty.link( function( playState ) {
       if ( playState === PlayState.FIRST_CHECK ) {
-        if ( thisModel.challengeIndex === thisModel.challenges.length - 1 ) {
+        if ( self.challengeIndex === self.challenges.length - 1 ) {
           // game has been completed
-          thisModel.gamePhaseProperty.set( GamePhase.RESULTS );
-          if ( thisModel.score > thisModel.bestScoreProperties[ thisModel.level ].get() ) {
-            thisModel.bestScoreProperties[ thisModel.level ].set( thisModel.score );
+          self.gamePhaseProperty.set( GamePhase.RESULTS );
+          if ( self.score > self.bestScoreProperties[ self.level ].get() ) {
+            self.bestScoreProperties[ self.level ].set( self.score );
           }
         }
         else {
           // next challenge
-          thisModel.challengeIndex = thisModel.challengeIndex + 1;
-          thisModel.challenge = thisModel.challenges[ thisModel.challengeIndex ];
+          self.challengeIndex = self.challengeIndex + 1;
+          self.challenge = self.challenges[ self.challengeIndex ];
         }
       }
       else if ( playState === PlayState.NEXT ) {
-        thisModel.challenge.setAnswerVisible( true );
+        self.challenge.setAnswerVisible( true );
       }
     } );
   }

@@ -26,20 +26,20 @@ define( function( require ) {
    */
   function PlaceThePointsNode( challenge, model, challengeSize, audioPlayer ) {
 
-    var thisNode = this;
-    GraphTheLineNode.call( thisNode, challenge, model, challengeSize, audioPlayer );
+    GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
 
+    var self = this;
     model.playStateProperty.link( function( state ) {
 
       // show user's line only in states where there guess is wrong.
-      thisNode.graphNode.setGuessVisible( !challenge.isCorrect() && ( state === PlayState.TRY_AGAIN || state === PlayState.NEXT ) );
+      self.graphNode.setGuessVisible( !challenge.isCorrect() && ( state === PlayState.TRY_AGAIN || state === PlayState.NEXT ) );
 
       /*
        * Plot (x1,y1) for answer when user got the challenge wrong.
        * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
        */
-      thisNode.graphNode.setAnswerPointVisible( state === PlayState.NEXT && !challenge.isCorrect() );
-      thisNode.graphNode.setGuessPointVisible( false );
+      self.graphNode.setAnswerPointVisible( state === PlayState.NEXT && !challenge.isCorrect() );
+      self.graphNode.setGuessPointVisible( false );
     } );
   }
 

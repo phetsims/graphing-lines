@@ -26,10 +26,9 @@ define( function( require ) {
    */
   function GraphSlopeInterceptNode( challenge ) {
 
-    var thisNode = this;
-    ChallengeGraphNode.call( thisNode, challenge );
+    ChallengeGraphNode.call( this, challenge );
 
-    thisNode.setGuessVisible( true );
+    this.setGuessVisible( true );
 
     // dynamic ranges
     var parameterRange = new SlopeInterceptParameterRange();
@@ -43,14 +42,14 @@ define( function( require ) {
     var yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
     var interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
-      thisNode.addChild( yInterceptManipulator );
+      this.addChild( yInterceptManipulator );
     }
 
     // slope manipulator
     var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {
-      thisNode.addChild( slopeManipulator );
+      this.addChild( slopeManipulator );
     }
 
     // Sync with the guess

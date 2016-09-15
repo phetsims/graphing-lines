@@ -24,10 +24,9 @@ define( function( require ) {
    */
   function GraphTwoPointsNode( challenge ) {
 
-    var thisNode = this;
-    ChallengeGraphNode.call( thisNode, challenge );
+    ChallengeGraphNode.call( this, challenge );
 
-    thisNode.setGuessVisible( true );
+    this.setGuessVisible( true );
 
     var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
@@ -38,8 +37,8 @@ define( function( require ) {
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform );
 
     // Rendering order
-    thisNode.addChild( x1y1Manipulator );
-    thisNode.addChild( x2y2Manipulator );
+    this.addChild( x1y1Manipulator );
+    this.addChild( x2y2Manipulator );
 
     // Sync with the guess
     challenge.guessProperty.link( function( line ) {

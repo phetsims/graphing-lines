@@ -25,28 +25,29 @@ define( function( require ) {
 
     assert && assert( orientation === 'up' || orientation === 'down' );
 
-    var thisTool = this;
-    PropertySet.call( thisTool, {
+    var self = this;
+    
+    PropertySet.call( this, {
       location: location,
       onLine: null // line that the tool is on, null if it's not on a line
     } );
 
-    thisTool.orientation = orientation; // @public
-    thisTool.dragBounds = dragBounds; // @public
+    this.orientation = orientation; // @public
+    this.dragBounds = dragBounds; // @public
 
     // Update when the point tool moves or the lines change.
-    Property.multilink( [ thisTool.locationProperty, lines.lengthProperty ],
+    Property.multilink( [ this.locationProperty, lines.lengthProperty ],
       function() {
         var line;
         // Lines are in rendering order, reverse iterate so we get the one that's on top.
         for ( var i = lines.length - 1; i >= 0; i-- ) {
           line = lines.get( i );
-          if ( thisTool.isOnLine( line ) ) {
-            thisTool.onLine = line;
+          if ( self.isOnLine( line ) ) {
+            self.onLine = line;
             return;
           }
         }
-        thisTool.onLine = null;
+        self.onLine = null;
       }
     );
   }

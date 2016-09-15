@@ -29,15 +29,15 @@ define( function( require ) {
    */
   function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
 
-    var thisNode = this;
-    Manipulator.call( thisNode, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
+    Manipulator.call( this, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
 
     // move the manipulator to match the line's (x1,y1) point
+    var self = this;
     lineProperty.link( function( line ) {
-      thisNode.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
+      self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     } );
 
-    thisNode.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
+    this.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
   }
 
   graphingLines.register( 'X1Y1Manipulator', X1Y1Manipulator );

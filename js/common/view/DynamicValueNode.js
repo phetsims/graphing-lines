@@ -30,11 +30,11 @@ define( function( require ) {
       absoluteValue: false
     }, options );
 
-    var thisNode = this;
     Text.call( this, '', options );
 
+    var self = this;
     valueProperty.link( function( value ) {
-      thisNode.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
+      self.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
     } );
   }
 

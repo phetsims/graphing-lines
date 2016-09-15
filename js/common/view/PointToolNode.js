@@ -52,9 +52,9 @@ define( function( require ) {
       foregroundHighlightColor: 'white'
     }, options );
 
-    var thisNode = this;
+    var self = this;
 
-    thisNode.bodyNode = new Image( bodyImage ); // @private body of the tool
+    this.bodyNode = new Image( bodyImage ); // @private body of the tool
 
     /*
      * @private
@@ -63,16 +63,16 @@ define( function( require ) {
      * to pick a line manipulator when the tip and manipulator were on the same grid point.
      * Making the tip non-pickable was determined to be an acceptable and 'natural feeling' solution.
      */
-    thisNode.tipNode = new Image( tipImage, { pickable: false } );
+    this.tipNode = new Image( tipImage, { pickable: false } );
 
     // @private background behind the displayed value, shows through a transparent hole in the display area portion of the body image
     var BACKGROUND_MARGIN = 5;
-    thisNode.backgroundNode = new Rectangle( 0, 0,
-      thisNode.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), thisNode.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
+    this.backgroundNode = new Rectangle( 0, 0,
+      this.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), this.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
       { pickable: false } );
 
     // @private displayed value
-    thisNode.valueNode = new Text( '?', {
+    this.valueNode = new Text( '?', {
       font: new GLFont( { size: 15, weight: 'bold' } ),
       pickable: false,
       maxWidth: 60 // constrain width, determined empirically, dependent on bodyImage
@@ -80,23 +80,23 @@ define( function( require ) {
 
     // orientation
     if ( pointTool.orientation === 'down' ) {
-      thisNode.tipNode.centerX = 0;
-      thisNode.tipNode.bottom = 0;
-      thisNode.bodyNode.left = thisNode.tipNode.left - ( 0.1 * thisNode.bodyNode.width );
-      thisNode.bodyNode.bottom = thisNode.tipNode.top;
-      thisNode.backgroundNode.centerX = thisNode.bodyNode.centerX;
-      thisNode.backgroundNode.top = thisNode.bodyNode.top + BACKGROUND_MARGIN;
-      thisNode.valueNode.centerY = thisNode.backgroundNode.centerY;
+      this.tipNode.centerX = 0;
+      this.tipNode.bottom = 0;
+      this.bodyNode.left = this.tipNode.left - ( 0.1 * this.bodyNode.width );
+      this.bodyNode.bottom = this.tipNode.top;
+      this.backgroundNode.centerX = this.bodyNode.centerX;
+      this.backgroundNode.top = this.bodyNode.top + BACKGROUND_MARGIN;
+      this.valueNode.centerY = this.backgroundNode.centerY;
     }
     else if ( pointTool.orientation === 'up' ) {
-      thisNode.tipNode.setScaleMagnitude( 1, -1 ); // reflect around x-axis, so that lighting will be correct
-      thisNode.tipNode.centerX = 0;
-      thisNode.tipNode.top = 0;
-      thisNode.bodyNode.left = thisNode.tipNode.left - ( 0.1 * thisNode.bodyNode.width );
-      thisNode.bodyNode.top = thisNode.tipNode.bottom;
-      thisNode.backgroundNode.centerX = thisNode.bodyNode.centerX;
-      thisNode.backgroundNode.top = thisNode.bodyNode.top + BACKGROUND_MARGIN;
-      thisNode.valueNode.centerY = thisNode.backgroundNode.centerY;
+      this.tipNode.setScaleMagnitude( 1, -1 ); // reflect around x-axis, so that lighting will be correct
+      this.tipNode.centerX = 0;
+      this.tipNode.top = 0;
+      this.bodyNode.left = this.tipNode.left - ( 0.1 * this.bodyNode.width );
+      this.bodyNode.top = this.tipNode.bottom;
+      this.backgroundNode.centerX = this.bodyNode.centerX;
+      this.backgroundNode.top = this.bodyNode.top + BACKGROUND_MARGIN;
+      this.valueNode.centerY = this.backgroundNode.centerY;
     }
     else {
       throw new Error( 'unsupported point tool orientation: ' + pointTool.orientation );
@@ -108,7 +108,7 @@ define( function( require ) {
       this.tipNode,
       this.valueNode
     ];
-    Node.call( thisNode, options );
+    Node.call( this, options );
 
     // initial state
     this.setCoordinatesVector2( pointTool.location );
@@ -120,30 +120,30 @@ define( function( require ) {
 
         // move to location
         var location = pointTool.location;
-        thisNode.translation = modelViewTransform.modelToViewPosition( location );
+        self.translation = modelViewTransform.modelToViewPosition( location );
 
         // display value and highlighting
         if ( graph.contains( location ) ) {
-          thisNode.setCoordinatesVector2( location );
+          self.setCoordinatesVector2( location );
           if ( linesVisibleProperty.get() ) {
             // use the line's color to highlight
-            thisNode.setForeground( !pointTool.onLine ? options.foregroundNormalColor : options.foregroundHighlightColor );
-            thisNode.setBackground( !pointTool.onLine ? options.backgroundNormalColor : pointTool.onLine.color );
+            self.setForeground( !pointTool.onLine ? options.foregroundNormalColor : options.foregroundHighlightColor );
+            self.setBackground( !pointTool.onLine ? options.backgroundNormalColor : pointTool.onLine.color );
           }
           else {
-            thisNode.setForeground( options.foregroundNormalColor );
-            thisNode.setBackground( options.backgroundNormalColor );
+            self.setForeground( options.foregroundNormalColor );
+            self.setBackground( options.backgroundNormalColor );
           }
         }
         else {
-          thisNode.setCoordinatesString( pointUnknownString );
-          thisNode.setForeground( options.foregroundNormalColor );
-          thisNode.setBackground( options.backgroundNormalColor );
+          self.setCoordinatesString( pointUnknownString );
+          self.setForeground( options.foregroundNormalColor );
+          self.setBackground( options.backgroundNormalColor );
         }
       } );
 
     // interactivity
-    thisNode.addInputListener( new PointToolDragHandler( pointTool, modelViewTransform, graph ) );
+    this.addInputListener( new PointToolDragHandler( pointTool, modelViewTransform, graph ) );
   }
 
   graphingLines.register( 'PointToolNode', PointToolNode );

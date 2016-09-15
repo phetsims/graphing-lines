@@ -27,8 +27,7 @@ define( function( require ) {
    */
   function PlayNode( model, layoutBounds, audioPlayer ) {
 
-    var thisNode = this;
-    Node.call( thisNode );
+    Node.call( this );
 
     var scoreboardNode = new ScoreboardBar(
       layoutBounds.width,
@@ -48,7 +47,7 @@ define( function( require ) {
       } );
     scoreboardNode.centerX = layoutBounds.centerX;
     scoreboardNode.top = 0;
-    thisNode.addChild( scoreboardNode );
+    this.addChild( scoreboardNode );
 
     // compute the size of the area available for the challenges
     var challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - scoreboardNode.bottom );
@@ -56,7 +55,7 @@ define( function( require ) {
     // challenge parent, to keep challenge below scoreboard
     var challengeParent = new Rectangle( 0, 0, 0, 1 );
     challengeParent.top = scoreboardNode.bottom;
-    thisNode.addChild( challengeParent );
+    this.addChild( challengeParent );
 
     // Set up a new challenge
     model.challengeProperty.link( function( challenge ) {

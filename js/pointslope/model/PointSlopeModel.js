@@ -27,22 +27,21 @@ define( function( require ) {
     interactiveLine = interactiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
     parameterRange = parameterRange || new PointSlopeParameterRange();
 
-    var thisModel = this;
-
-    LineFormsModel.call( thisModel, interactiveLine );
+    LineFormsModel.call( this, interactiveLine );
 
     // @public ranges
-    thisModel.x1RangeProperty = new Property( thisModel.graph.xRange );
-    thisModel.y1RangeProperty = new Property( thisModel.graph.yRange );
-    thisModel.riseRangeProperty = new Property( thisModel.graph.yRange );
-    thisModel.runRangeProperty = new Property( thisModel.graph.xRange );
+    this.x1RangeProperty = new Property( this.graph.xRange );
+    this.y1RangeProperty = new Property( this.graph.yRange );
+    this.riseRangeProperty = new Property( this.graph.yRange );
+    this.runRangeProperty = new Property( this.graph.xRange );
 
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
-    thisModel.interactiveLineProperty.link( function( line ) {
-      thisModel.x1RangeProperty.set( parameterRange.x1( line, thisModel.graph ) );
-      thisModel.y1RangeProperty.set( parameterRange.y1( line, thisModel.graph ) );
-      thisModel.riseRangeProperty.set( parameterRange.rise( line, thisModel.graph ) );
-      thisModel.runRangeProperty.set( parameterRange.run( line, thisModel.graph ) );
+    var self = this;
+    this.interactiveLineProperty.link( function( line ) {
+      self.x1RangeProperty.set( parameterRange.x1( line, self.graph ) );
+      self.y1RangeProperty.set( parameterRange.y1( line, self.graph ) );
+      self.riseRangeProperty.set( parameterRange.rise( line, self.graph ) );
+      self.runRangeProperty.set( parameterRange.run( line, self.graph ) );
     } );
   }
 

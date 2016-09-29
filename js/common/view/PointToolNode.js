@@ -111,7 +111,7 @@ define( function( require ) {
     Node.call( this, options );
 
     // initial state
-    this.setCoordinatesVector2( pointTool.location );
+    this.setCoordinatesVector2( pointTool.locationProperty.get() );
     this.setBackground( options.backgroundNormalColor );
 
     // location and display
@@ -119,7 +119,7 @@ define( function( require ) {
       function() {
 
         // move to location
-        var location = pointTool.location;
+        var location = pointTool.locationProperty.get();
         self.translation = modelViewTransform.modelToViewPosition( location );
 
         // display value and highlighting
@@ -127,8 +127,8 @@ define( function( require ) {
           self.setCoordinatesVector2( location );
           if ( linesVisibleProperty.get() ) {
             // use the line's color to highlight
-            self.setForeground( !pointTool.onLine ? options.foregroundNormalColor : options.foregroundHighlightColor );
-            self.setBackground( !pointTool.onLine ? options.backgroundNormalColor : pointTool.onLine.color );
+            self.setForeground( !pointTool.onLineProperty.get() ? options.foregroundNormalColor : options.foregroundHighlightColor );
+            self.setBackground( !pointTool.onLineProperty.get() ? options.backgroundNormalColor : pointTool.onLineProperty.get().color );
           }
           else {
             self.setForeground( options.foregroundNormalColor );
@@ -175,7 +175,7 @@ define( function( require ) {
       // note where the drag started
       start: function( event ) {
         // Note the mouse-click offset when dragging starts.
-        var location = modelViewTransform.modelToViewPosition( pointTool.location );
+        var location = modelViewTransform.modelToViewPosition( pointTool.locationProperty.get() );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
         // Move the tool that we're dragging to the foreground.
         event.currentTarget.moveToFront();
@@ -189,7 +189,7 @@ define( function( require ) {
           // snap to the graph's grid
           location = new Vector2( Util.toFixedNumber( location.x, 0 ), Util.toFixedNumber( location.y, 0 ) );
         }
-        pointTool.location = location;
+        pointTool.locationProperty.set( location );
       }
     } );
   }

@@ -18,7 +18,6 @@ define( function( require ) {
   var ObservableArray = require( 'AXON/ObservableArray' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
   var Property = require( 'AXON/Property' );
-  var PropertySet = require( 'AXON/PropertySet' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // constants
@@ -32,11 +31,10 @@ define( function( require ) {
   function LineFormsModel( interactiveLine ) {
 
     var self = this;
-    
-    PropertySet.call( this, {
-      interactiveLine: interactiveLine // @public
-    } );
 
+    // @public the line that the user interacts with
+    this.interactiveLineProperty = new Property( interactiveLine );
+    
     // @public (read-only) radius of the manipulators
     this.manipulatorRadius = GLConstants.MANIPULATOR_RADIUS;
 
@@ -56,7 +54,7 @@ define( function( require ) {
       function() {
         self.graph.lines.clear();
         // add lines in the order that they would be rendered
-        self.graph.lines.add( self.interactiveLine );
+        self.graph.lines.add( self.interactiveLineProperty.get() );
         self.savedLines.forEach( function( line ) {
           self.graph.lines.add( line );
         } );
@@ -75,11 +73,11 @@ define( function( require ) {
 
   graphingLines.register( 'LineFormsModel', LineFormsModel );
 
-  return inherit( PropertySet, LineFormsModel, {
+  return inherit( Object, LineFormsModel, {
 
     // @override @public
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+      this.interactiveLineProperty.reset();
       this.savedLines.clear();
       this.standardLines.clear();
       this.pointTool1.reset();

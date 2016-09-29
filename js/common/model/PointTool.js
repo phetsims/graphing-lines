@@ -12,7 +12,6 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
-  var PropertySet = require( 'AXON/PropertySet' );
 
   /**
    * @param {Vector2} location initial location of the tool
@@ -26,12 +25,13 @@ define( function( require ) {
     assert && assert( orientation === 'up' || orientation === 'down' );
 
     var self = this;
-    
-    PropertySet.call( this, {
-      location: location,
-      onLine: null // line that the tool is on, null if it's not on a line
-    } );
 
+    // @public {Vector2} location of the point tool
+    this.locationProperty = new Property( location );
+
+    // @public line that the tool is on, null if it's not on a line
+    this.onLineProperty = new Property( null );
+    
     this.orientation = orientation; // @public
     this.dragBounds = dragBounds; // @public
 
@@ -43,18 +43,24 @@ define( function( require ) {
         for ( var i = lines.length - 1; i >= 0; i-- ) {
           line = lines.get( i );
           if ( self.isOnLine( line ) ) {
-            self.onLine = line;
+            self.onLineProperty.set( line );
             return;
           }
         }
-        self.onLine = null;
+        self.onLineProperty.set( null );
       }
     );
   }
 
   graphingLines.register( 'PointTool', PointTool );
 
-  return inherit( PropertySet, PointTool, {
+  return inherit( Object, PointTool, {
+
+    // @public
+    reset: function() {
+      this.locationProperty.reset();
+      this.onLineProperty.reset();
+    },
 
     /**
      * Determines if the point tool is on the specified line.
@@ -63,7 +69,7 @@ define( function( require ) {
      * @public
      */
     isOnLine: function( line ) {
-      return line.onLinePoint( this.location );
+      return line.onLinePoint( this.locationProperty.get() );
     }
   } );
 } );

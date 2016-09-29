@@ -65,7 +65,7 @@ define( function( require ) {
     model.savedLines.addListeners( this.savedLineAdded.bind( this ), this.savedLineRemoved.bind( this ) );
 
     // Visibility of lines
-    viewProperties.multilink( [ 'linesVisible', 'slopeToolVisible' ],
+    Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.slopeToolVisibleProperty ],
       this.updateLinesVisibility.bind( this ) );
 
     // Visibility of the grid
@@ -87,15 +87,18 @@ define( function( require ) {
 
     // @private Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
+
+      var linesVisible = this.viewProperties.linesVisibleProperty.get();
+
       // interactive line
-      this.interactiveLineNode.visible = this.viewProperties.linesVisible;
+      this.interactiveLineNode.visible = linesVisible;
 
       // saved & standard lines
-      this.savedLinesParentNode.visible = this.viewProperties.linesVisible;
-      this.standardLinesParentNode.visible = this.viewProperties.linesVisible;
+      this.savedLinesParentNode.visible = linesVisible;
+      this.standardLinesParentNode.visible = linesVisible;
 
       // slope tool
-      this.slopeToolNode.visible = ( this.viewProperties.slopeToolVisible && this.viewProperties.linesVisible );
+      this.slopeToolNode.visible = ( this.viewProperties.slopeToolVisibleProperty.get() && linesVisible );
     },
 
     // @private Called when a standard line is added to the model.

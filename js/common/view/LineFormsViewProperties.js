@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2016, University of Colorado Boulder
 
 /**
  * Properties that are specific to subtypes of LineFormsView.
@@ -11,20 +11,36 @@ define( function( require ) {
   // modules
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
 
+  /**
+   * @constructor
+   */
   function LineFormsViewProperties() {
-    PropertySet.call( this, {
 
-      // @public
-      linesVisible: true, // determines whether all lines are visible on the graph
-      gridVisible: true, // determines whether the grid is visible on the graph
-      interactiveEquationVisible: true, // determines whether the interactive line is visible in the control panel
-      slopeToolVisible: true // determines whether the slope tool is visible on the graph
-    } );
+    // @public determines whether all lines are visible on the graph
+    this.linesVisibleProperty = new Property( true );
+
+    // @public determines whether the grid is visible on the graph
+    this.gridVisibleProperty = new Property( true );
+
+    // @public determines whether the interactive line is visible in the control panel
+    this.interactiveEquationVisibleProperty = new Property( true );
+
+    // @public determines whether the slope tool is visible on the graph
+    this.slopeToolVisibleProperty = new Property( true );
   }
 
   graphingLines.register( 'LineFormsViewProperties', LineFormsViewProperties );
 
-  return inherit( PropertySet, LineFormsViewProperties );
+  return inherit( Object, LineFormsViewProperties, {
+
+    // @public
+    reset: function() {
+      this.linesVisibleProperty.reset();
+      this.gridVisibleProperty.reset();
+      this.interactiveEquationVisibleProperty.reset();
+      this.slopeToolVisibleProperty.reset();
+    }
+  } );
 } );

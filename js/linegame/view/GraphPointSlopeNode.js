@@ -34,8 +34,8 @@ define( function( require ) {
     var pointSlopeParameterRange = new PointSlopeParameterRange();
     var x1RangeProperty = new Property( challenge.graph.xRange );
     var y1RangeProperty = new Property( challenge.graph.yRange );
-    var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guess, challenge.graph ) );
-    var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guess, challenge.graph ) );
+    var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
+    var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
 
     var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 

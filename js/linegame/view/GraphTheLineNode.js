@@ -101,9 +101,10 @@ define( function( require ) {
 
     // Update visibility of the correct/incorrect icons.
     var updateIcons = function() {
-      answerBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT );
-      self.guessBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT && challenge.isCorrect() );
-      self.guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
+      var playState = model.playStateProperty.get();
+      answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
+      self.guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
+      self.guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess
@@ -134,7 +135,7 @@ define( function( require ) {
       // Graph the answer line at the end of the challenge.
       self.graphNode.setAnswerVisible( playState === PlayState.NEXT );
 
-      self.guessBoxNode.visible = ( model.playState === PlayState.NEXT );
+      self.guessBoxNode.visible = ( playState === PlayState.NEXT );
 
       // show stuff when the user got the challenge wrong
       if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {

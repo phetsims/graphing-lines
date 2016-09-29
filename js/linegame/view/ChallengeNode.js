@@ -105,37 +105,37 @@ define( function( require ) {
       if ( challenge.isCorrect() ) {
         self.faceNode.smile();
         audioPlayer.correctAnswer();
-        var points = model.computePoints( model.playState === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
-        model.score = model.score + points;
+        var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+        model.scoreProperty.set( model.scoreProperty.get() + points );
         self.faceNode.setPoints( points );
-        model.playState = PlayState.NEXT;
+        model.playStateProperty.set( PlayState.NEXT );
       }
       else {
         self.faceNode.frown();
         self.faceNode.setPoints( 0 );
         audioPlayer.wrongAnswer();
-        if ( model.playState === PlayState.FIRST_CHECK ) {
-          model.playState = PlayState.TRY_AGAIN;
+        if ( model.playStateProperty.get() === PlayState.FIRST_CHECK ) {
+          model.playStateProperty.set( PlayState.TRY_AGAIN );
         }
         else {
-          model.playState = PlayState.SHOW_ANSWER;
+          model.playStateProperty.set( PlayState.SHOW_ANSWER );
         }
       }
     } );
 
     // 'Try Again' button
     tryAgainButton.addListener( function() {
-      model.playState = PlayState.SECOND_CHECK;
+      model.playStateProperty.set( PlayState.SECOND_CHECK );
     } );
 
     // 'Show Answer' button
     showAnswerButton.addListener( function() {
-      model.playState = PlayState.NEXT;
+      model.playStateProperty.set( PlayState.NEXT );
     } );
 
     // 'Next' button
     nextButton.addListener( function() {
-      model.playState = PlayState.FIRST_CHECK;
+      model.playStateProperty.set( PlayState.FIRST_CHECK );
     } );
 
     // play-state changes
@@ -154,7 +154,7 @@ define( function( require ) {
     } );
 
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
-    model.challenge.guessProperty.link( function( guess ) {
+    model.challengeProperty.get().guessProperty.link( function( guess ) {
       if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
         model.playStateProperty.set( PlayState.SECOND_CHECK );
       }

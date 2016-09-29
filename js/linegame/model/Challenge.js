@@ -19,7 +19,7 @@ define( function( require ) {
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-  var PropertySet = require( 'AXON/PropertySet' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -42,9 +42,8 @@ define( function( require ) {
 
     assert && assert( !answer.undefinedSlope() ); // our answer should be defined
 
-    PropertySet.call( this, {
-      guess: createInitialGuess( answer, manipulationMode, xRange, yRange ) // @public {Line} the user's current guess
-    } );
+    // @public {Line} the user's current guess
+    this.guessProperty = new Property( createInitialGuess( answer, manipulationMode, xRange, yRange ) );
 
     // @public (read-only)
     this.title = title;
@@ -101,7 +100,7 @@ define( function( require ) {
     }
   };
 
-  return inherit( PropertySet, Challenge, {
+  return inherit( Object, Challenge, {
 
     /**
      * Creates the view component for the challenge.
@@ -127,7 +126,7 @@ define( function( require ) {
 
     // @public Resets the challenge
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+      this.guessProperty.reset();
       this.pointTool1.reset();
       this.pointTool2.reset();
       this.setAnswerVisible( false );
@@ -141,7 +140,7 @@ define( function( require ) {
 
     // @public True if the guess and answer are descriptions of the same line.
     isCorrect: function() {
-      return this.answer.same( this.guess );
+      return this.answer.same( this.guessProperty.get() );
     },
 
     // @public

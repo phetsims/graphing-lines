@@ -33,7 +33,6 @@ define( function( require ) {
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var Property = require( 'AXON/Property' );
-  var PropertySet = require( 'AXON/PropertySet' );
 
   // constants
   var DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
@@ -49,22 +48,22 @@ define( function( require ) {
     new ChallengeFactory6()
   ];
 
+  /**
+   * @constructor
+   */
   function LineGameModel() {
 
     var self = this;
 
-    PropertySet.call( this, {
-
-      // @public
-      level: 0,
-      soundEnabled: true,
-      timerEnabled: false,
-      score: 0, // how many points the user has earned for the current game
-      challenge: DUMMY_CHALLENGE,
-      challengeIndex: 0,
-      challengesPerGame: 0,
-      playState: PlayState.NONE
-    } );
+    // @public Properties
+    this.levelProperty = new Property( 0 );
+    this.soundEnabledProperty = new Property( true );
+    this.timerEnabledProperty = new Property( false );
+    this.scoreProperty = new Property( 0 ); // {number} how many points the user has earned for the current game
+    this.challengeProperty = new Property( DUMMY_CHALLENGE );
+    this.challengeIndexProperty = new Property( 0 );
+    this.challengesPerGameProperty = new Property( 0 );
+    this.playStateProperty = new Property( PlayState.NONE );
 
     // @public
     this.challenges = []; // {Challenge[]}
@@ -87,17 +86,17 @@ define( function( require ) {
        */
       function( gamePhase ) {
         if ( gamePhase === GamePhase.SETTINGS ) {
-          self.playState = PlayState.NONE;
+          self.playStateProperty.set( PlayState.NONE );
           self.timer.stop();
         }
         else if ( gamePhase === GamePhase.PLAY ) {
           self.initChallenges();
-          self.playState = PlayState.FIRST_CHECK;
-          self.score = 0;
+          self.playStateProperty.set( PlayState.FIRST_CHECK );
+          self.scoreProperty.set( 0 );
           self.timer.start();
         }
         else if ( gamePhase === GamePhase.RESULTS ) {
-          self.playState = PlayState.NONE;
+          self.playStateProperty.set( PlayState.NONE );
           self.timer.stop();
           self.updateBestTime();
         }
@@ -111,21 +110,27 @@ define( function( require ) {
     // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
     this.playStateProperty.link( function( playState ) {
       if ( playState === PlayState.FIRST_CHECK ) {
-        if ( self.challengeIndex === self.challenges.length - 1 ) {
+
+        var challengeIndex = self.challengeIndexProperty.get();
+        var level = self.levelProperty.get();
+        var score = self.scoreProperty.get();
+
+        if ( challengeIndex === self.challenges.length - 1 ) {
           // game has been completed
           self.gamePhaseProperty.set( GamePhase.RESULTS );
-          if ( self.score > self.bestScoreProperties[ self.level ].get() ) {
-            self.bestScoreProperties[ self.level ].set( self.score );
+          if ( score > self.bestScoreProperties[ level ].get() ) {
+            self.bestScoreProperties[ level ].set( score );
           }
         }
         else {
           // next challenge
-          self.challengeIndex = self.challengeIndex + 1;
-          self.challenge = self.challenges[ self.challengeIndex ];
+          var nextChallengeIndex = challengeIndex + 1;
+          self.challengeIndexProperty.set( nextChallengeIndex );
+          self.challengeProperty.set( self.challenges[ nextChallengeIndex ] );
         }
       }
       else if ( playState === PlayState.NEXT ) {
-        self.challenge.setAnswerVisible( true );
+        self.challengeProperty.get().setAnswerVisible( true );
       }
     } );
   }
@@ -156,11 +161,20 @@ define( function( require ) {
     }
   } );
 
-  return inherit( PropertySet, LineGameModel, {
+  return inherit( Object, LineGameModel, {
 
     // @override @public
     reset: function() {
-      PropertySet.prototype.reset.call( this );
+
+      this.levelProperty.reset();
+      this.soundEnabledProperty.reset();
+      this.timerEnabledProperty.reset();
+      this.scoreProperty.reset();
+      this.challengeProperty.reset();
+      this.challengeIndexProperty.reset();
+      this.challengesPerGameProperty.reset();
+      this.playStateProperty.reset();
+
       this.gamePhaseProperty.reset();
       this.resetBestScores();
       this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
@@ -175,7 +189,7 @@ define( function( require ) {
 
     // @public
     isPerfectScore: function() {
-      return this.score === this.getPerfectScore();
+      return this.scoreProperty.get() === this.getPerfectScore();
     },
 
     // @public Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
@@ -195,8 +209,8 @@ define( function( require ) {
      * @public
      */
     skipCurrentChallenge: function() {
-      this.playState = PlayState.NEXT;
-      this.playState = PlayState.FIRST_CHECK;
+      this.playStateProperty.set( PlayState.NEXT );
+      this.playStateProperty.set( PlayState.FIRST_CHECK );
     },
 
     /**
@@ -206,17 +220,17 @@ define( function( require ) {
      * @public
      */
     replayCurrentChallenge: function() {
-      this.challenge.reset();
-      this.challengeIndex = this.challengeIndex - 1;
-      this.challenge = DUMMY_CHALLENGE; // force an update
-      this.playState = PlayState.FIRST_CHECK;
+      this.challengeProperty.get().reset();
+      this.challengeIndexProperty.set( this.challengeIndexProperty.get() - 1 );
+      this.challengeProperty.set( DUMMY_CHALLENGE ); // force an update
+      this.playStateProperty.set( PlayState.FIRST_CHECK );
     },
 
     // @private Updates the best time for the current level, at the end of a timed game with a perfect score.
     updateBestTime: function() {
       assert && assert( !this.timer.isRunning );
-      if ( this.timerEnabled && this.isPerfectScore() ) {
-        var level = this.level;
+      if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
+        var level = this.levelProperty.get();
         var time = this.timer.elapsedTime;
         this.isNewBestTime = false;
         if ( !this.bestTimeProperties[ level ].get() ) {
@@ -233,8 +247,8 @@ define( function( require ) {
 
     // @private initializes a new set of challenges for the current level
     initChallenges: function() {
-      this.challengeIndex = -1;
-      var level = this.level;
+      this.challengeIndexProperty.set( -1 );
+      var level = this.levelProperty.get();
       if ( GLQueryParameters.HARD_CODED ) {
         console.log( 'using hard-coded challenges for debugging' );
         this.challenges = ChallengeFactoryHardCoded.createChallenges( level, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );

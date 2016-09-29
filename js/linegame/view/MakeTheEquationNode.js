@@ -59,9 +59,9 @@ define( function( require ) {
 
     // Guess
     var guessBoxNode =
-      new EquationBoxNode( yourEquationString, challenge.guess.color, boxSize,
+      new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-          GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guess.color ) );
+          GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
 
     // Graph
     var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );
@@ -103,9 +103,10 @@ define( function( require ) {
 
     // Update visibility of the correct/incorrect icons.
     var updateIcons = function() {
-      answerBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT );
-      guessBoxNode.setCorrectIconVisible( model.playState === PlayState.NEXT && challenge.isCorrect() );
-      guessBoxNode.setIncorrectIconVisible( model.playState === PlayState.NEXT && !challenge.isCorrect() );
+      var playState = model.playStateProperty.get();
+      answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
+      guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
+      guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess

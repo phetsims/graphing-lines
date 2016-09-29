@@ -20,6 +20,7 @@ define( function( require ) {
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var NotALine = require( 'GRAPHING_LINES/linegame/model/NotALine' );
   var PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
+  var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -35,22 +36,22 @@ define( function( require ) {
     GraphTheLine.call( this, description, answer, equationForm, ManipulationMode.THREE_POINTS, xRange, yRange );
 
     // @public initial points do not form a line
-    this.addProperty( 'p1', new Vector2( -3, 2 ) );
-    this.addProperty( 'p2', new Vector2( 0, 0 ) );
-    this.addProperty( 'p3', new Vector2( 3, 2 ) );
+    this.p1Property = new Property( new Vector2( -3, 2 ) );
+    this.p2Property = new Property( new Vector2( 0, 0 ) );
+    this.p3Property = new Property( new Vector2( 3, 2 ) );
 
     // update the guess when the points change
     var self = this;
-    this.multilink( [ 'p1', 'p2', 'p3' ],
+    Property.multilink( [ this.p1Property, this.p2Property, this.p3Property ],
       function( p1, p2, p3 ) {
         var line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
         if ( line.onLinePoint( p3 ) ) {
           // all 3 points are on a line
-          self.guess = line;
+          self.guessProperty.set( line );
         }
         else {
           // the 3 points don't form a line
-          self.guess = new NotALine();
+          self.guessProperty.set( new NotALine() );
         }
       } );
   }
@@ -58,6 +59,14 @@ define( function( require ) {
   graphingLines.register( 'PlaceThePoints', PlaceThePoints );
 
   return inherit( GraphTheLine, PlaceThePoints, {
+
+    // @public
+    reset: function() {
+       GraphTheLine.prototype.reset.call( this );
+      this.p1Property.reset();
+      this.p2Property.reset();
+      this.p3Property.reset();
+    },
 
     /**
      * Creates the view for this challenge.

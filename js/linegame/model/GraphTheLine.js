@@ -67,8 +67,8 @@ define( function( require ) {
 
       // Add lines in the order that they would be rendered.
       // Account for guesses that might be NotALine (not a valid line).
-      if ( this.guess instanceof Line ) {
-        this.graph.lines.push( this.guess );
+      if ( this.guessProperty.get() instanceof Line ) {
+        this.graph.lines.push( this.guessProperty.get() );
       }
 
       if ( this.answerVisible ) {

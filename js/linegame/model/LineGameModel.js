@@ -249,7 +249,7 @@ define( function( require ) {
     initChallenges: function() {
       this.challengeIndexProperty.set( -1 );
       var level = this.levelProperty.get();
-      if ( GLQueryParameters.HARD_CODED ) {
+      if ( GLQueryParameters.hardCoded ) {
         console.log( 'using hard-coded challenges for debugging' );
         this.challenges = ChallengeFactoryHardCoded.createChallenges( level, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }

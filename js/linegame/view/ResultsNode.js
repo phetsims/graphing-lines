@@ -37,7 +37,7 @@ define( function( require ) {
       if ( gamePhase === GamePhase.RESULTS ) {
 
         // game reward, shown for perfect score (or with 'reward' query parameter)
-        if ( model.isPerfectScore() || GLQueryParameters.REWARD ) {
+        if ( model.isPerfectScore() || GLQueryParameters.showReward ) {
 
           audioPlayer.gameOverPerfectScore();
 

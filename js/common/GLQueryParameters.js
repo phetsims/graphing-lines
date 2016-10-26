@@ -11,19 +11,17 @@ define( function( require ) {
   // modules
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
-  var getQueryParameter = phet.chipper.getQueryParameter;
-
-  var GLQueryParameters = {
+  var GLQueryParameters = QueryStringMachine.getAll( {
 
     // enables developer-only features
-    DEV: getQueryParameter( 'dev' ) || false,
+    dev: { type: 'flag' },
 
     // shows the game reward regardless of score
-    REWARD: getQueryParameter( 'reward' ) || false,
+    showReward: { type: 'flag' },
 
     // use hard-coded challenges in the game, for debugging
-    HARD_CODED: getQueryParameter( 'hardCoded' ) || false
-  };
+    hardCoded: { type: 'flag' }
+  } );
 
   graphingLines.register( 'GLQueryParameters', GLQueryParameters );
 

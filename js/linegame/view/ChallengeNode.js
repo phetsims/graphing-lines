@@ -161,7 +161,7 @@ define( function( require ) {
     } );
 
     // dev-mode options
-    if ( GLQueryParameters.DEV ) {
+    if ( GLQueryParameters.dev ) {
 
       // description at leftTop
       var descriptionNode = new Text( this.constructor.name + ': ' + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );

@@ -13,8 +13,11 @@ define( function( require ) {
 
   var GLQueryParameters = QueryStringMachine.getAll( {
 
-    // enables developer-only features
-    dev: { type: 'flag' },
+    // adds debugging components to the Game screen
+    gameDebug: { type: 'flag' },
+
+    // shows the answers
+    showAnswers: { type: 'flag' },
 
     // shows the game reward regardless of score
     showReward: { type: 'flag' },

@@ -44,7 +44,7 @@ define( function( require ) {
     GraphNode.call( this, challenge.graph, challenge.modelViewTransform );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
-    if ( GLQueryParameters.dev ) {
+    if ( GLQueryParameters.showAnswers ) {
       this.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
     }
 

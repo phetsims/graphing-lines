@@ -93,7 +93,7 @@ define( function( require ) {
     }
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
-    if ( GLQueryParameters.dev ) {
+    if ( GLQueryParameters.showAnswers ) {
       var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), 14 /* fontSize */ );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;

@@ -55,7 +55,7 @@ define( function( require ) {
   var POINT_TOOL_FONT = new GLFont( 15 );
   var POINT_TOOL_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
   var FACE_DIAMETER = 60;
-  var AIRPLANE_SIZE = new Dimension2( 60, 54 );
+  var AIRPLANE_SCALE = 1.76;
 
   /**
    * @param level game level, starting at zero
@@ -139,7 +139,7 @@ define( function( require ) {
 
   // Creates a paper airplane with the specified color.
   var createAirplaneNode = function( color ) {
-    return new PaperAirplaneNode( { fill: color, size: AIRPLANE_SIZE } );
+    return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
   };
 
   //-----------------------------------------------------------------------------------------------

@@ -257,7 +257,7 @@ define( function( require ) {
         assert && assert( level >= 0 && level < factories.length );
         this.challenges = factories[ level ].createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
       }
-      this.challengesPerGame = this.challenges.length;
+      this.challengesPerGameProperty.set( this.challenges.length );
     }
   } );
 } );

@@ -16,6 +16,8 @@ define( function( require ) {
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
   var Screen = require( 'JOIST/Screen' );
+  var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenLineGameString = require( 'string!GRAPHING_LINES/screen.lineGame' );
@@ -28,7 +30,7 @@ define( function( require ) {
 
     var options = {
       name: screenLineGameString,
-      backgroundColor: GLColors.SCREEN_BACKGROUND,
+      backgroundColorProperty: new Property( Color.toColor( GLColors.SCREEN_BACKGROUND ) ),
       homeScreenIcon: GLIconFactory.createGameScreenIcon(),
       tandem: tandem
     };

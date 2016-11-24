@@ -16,6 +16,8 @@ define( function( require ) {
   var PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
   var PointSlopeView = require( 'GRAPHING_LINES/pointslope/view/PointSlopeView' );
   var Screen = require( 'JOIST/Screen' );
+  var Property = require( 'AXON/Property' );
+  var Color = require( 'SCENERY/util/Color' );
 
   // strings
   var screenPointSlopeString = require( 'string!GRAPHING_LINES/screen.pointSlope' );
@@ -28,7 +30,7 @@ define( function( require ) {
 
     var options = {
       name: screenPointSlopeString,
-      backgroundColor: GLColors.SCREEN_BACKGROUND,
+      backgroundColorProperty: new Property( Color.toColor( GLColors.SCREEN_BACKGROUND ) ),
       homeScreenIcon: GLIconFactory.createPointSlopeScreenIcon(),
       tandem: tandem
     };

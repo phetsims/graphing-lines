@@ -390,7 +390,7 @@ define( function( require ) {
   // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
   PointSlopeEquationNode.createGeneralFormNode = function( options ) {
     options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
-    var pattern = '({0} - {1}<sub>1</sub>) = {2}({3} - {4}<sub>1</sub>)';
+    var pattern = '({0} \u2212 {1}<sub>1</sub>) = {2}({3} \u2212 {4}<sub>1</sub>)';
     var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
     return new SubSupText( html, { font: options.font } );
   };

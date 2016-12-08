@@ -247,7 +247,7 @@ define( function( require ) {
     } );
 
     // pattern for numerator and denominator
-    var pattern = '{0}<sub>2</sub> - {1}<sub>1</sub>';
+    var pattern = '{0}<sub>2</sub> \u2212 {1}<sub>1</sub>';
 
     // y2 - y1
     var numeratorNode = new SubSupText( StringUtils.format( pattern, symbolYString, symbolYString ), { font: font, fill: options.fill } );

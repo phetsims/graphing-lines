@@ -36,7 +36,7 @@ define( function( require ) {
   function LineFormsGraphNode( model, viewProperties, equationType ) {
 
     var self = this;
-    
+
     GraphNode.call( this, model.graph, model.modelViewTransform );
 
     this.model = model; // @private
@@ -59,10 +59,12 @@ define( function( require ) {
     this.addChild( this.slopeToolNode );
 
     // Add/remove standard lines
-    model.standardLines.addListeners( this.standardLineAdded.bind( this ), this.standardLineRemoved.bind( this ) );
+    model.standardLines.addItemAddedListener( this.standardLineAdded.bind( this ) );
+    model.standardLines.addItemRemovedListener( this.standardLineRemoved.bind( this ) );
 
     // Add/remove saved lines
-    model.savedLines.addListeners( this.savedLineAdded.bind( this ), this.savedLineRemoved.bind( this ) );
+    model.savedLines.addItemAddedListener( this.savedLineAdded.bind( this ) );
+    model.savedLines.addItemRemovedListener( this.savedLineRemoved.bind( this ) );
 
     // Visibility of lines
     Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.slopeToolVisibleProperty ],

@@ -15,9 +15,8 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
   var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
-  var Screen = require( 'JOIST/Screen' );
   var Property = require( 'AXON/Property' );
-  var Color = require( 'SCENERY/util/Color' );
+  var Screen = require( 'JOIST/Screen' );
 
   // strings
   var screenLineGameString = require( 'string!GRAPHING_LINES/screen.lineGame' );
@@ -30,7 +29,7 @@ define( function( require ) {
 
     var options = {
       name: screenLineGameString,
-      backgroundColorProperty: new Property( Color.toColor( GLColors.SCREEN_BACKGROUND ) ),
+      backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createGameScreenIcon(),
       tandem: tandem
     };

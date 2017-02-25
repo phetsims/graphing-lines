@@ -34,24 +34,24 @@ define( function( require ) {
     }, options );
 
     // computes value when 'up' button is pressed
-    options.upFunction = function() {
-      var x1New = a1.get() + 1;
+    options.upFunction = function( a1 ) {
+      var x1New = a1 + 1;
       if ( x1New === a2.get() && b1.get() === b2.get() ) { // will points be the same?
         x1New++;
         if ( x1New > range.get().max ) { // did we skip too far?
-          x1New = a1.get();
+          x1New = a1;
         }
       }
       return x1New;
     };
 
     // computes value when 'down' button is pressed
-    options.downFunction = function() {
-      var x1New = a1.get() - 1;
+    options.downFunction = function( a1 ) {
+      var x1New = a1 - 1;
       if ( x1New === a2.get() && b1.get() === b2.get() ) { // will points be the same?
         x1New--;
         if ( x1New < range.get().min ) { // did we skip too far?
-          x1New = a1.get();
+          x1New = a1;
         }
       }
       return x1New;

@@ -89,7 +89,6 @@ define( function( require ) {
         pointArrays = [ quadrant1Points, quadrant3Points ];
         pointArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, pointArrays.length - 1 ) );
       }
-      debugger;
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = [

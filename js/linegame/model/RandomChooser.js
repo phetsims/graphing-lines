@@ -32,7 +32,7 @@ define( function( require ) {
      * By removing an index from arrayIndices, one of the arrays is excluded from further consideration.
      *
      * @param {*[[]]} arrays arrays from which the value may be chosen
-     * @param {Array<number>} indices indices of the arrays that will be considered when choosing a value, optional
+     * @param {Array<number>} [indices] indices of the arrays that will be considered when choosing a value, optional
      * @return a value from one of the arrays
      */
     chooseFromArrays: function( arrays, indices ) {

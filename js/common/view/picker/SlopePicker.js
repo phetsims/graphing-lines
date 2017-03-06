@@ -31,13 +31,13 @@ define( function( require ) {
     }, options );
 
     // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients
-    options.upFunction = function() {
-      return ( variableComponent.get() === -1 && fixedComponent.get() === 0 ) ? 1 : variableComponent.get() + 1;
+    options.upFunction = function( variable ) {
+      return ( variable === -1 && fixedComponent.get() === 0 ) ? 1 : variable + 1;
     };
 
     // 'down' function, skips over undefined line condition (slope=0/0) - not changeable by clients
-    options.downFunction = function() {
-      return ( variableComponent.get() === 1 && fixedComponent.get() === 0 ) ? -1 : variableComponent.get() - 1;
+    options.downFunction = function( variable ) {
+      return ( variable === 1 && fixedComponent.get() === 0 ) ? -1 : variable - 1;
     };
 
     NumberPicker.call( this, variableComponent, variableRange, options );

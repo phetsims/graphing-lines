@@ -19,6 +19,7 @@ define( function( require ) {
      *  @return {*} a value
      */
     choose: function( array ) {
+      assert && assert( array && array.length > 0, 'array is empty' );
       var index = RandomChooser.randomIndex( array );
       assert && assert( index !== -1 );
       var value = array[ index ];
@@ -36,6 +37,7 @@ define( function( require ) {
      * @return a value from one of the arrays
      */
     chooseFromArrays: function( arrays, indices ) {
+      assert && assert( arrays && arrays.length > 0, 'arrays is empty' );
       indices = indices || RandomChooser.rangeToArray( { min: 0, max: arrays.length - 1 } );
       var index = RandomChooser.randomIndex( indices );
       assert && assert( index !== -1 );

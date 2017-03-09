@@ -34,7 +34,7 @@ define( function( require ) {
   // constants
   var CHALLENGES_PER_GAME = 6;
   var BUTTONS_X_SPACING = 50;
-  var BUTTONS_Y_SPACING = 40;
+  var BUTTONS_Y_SPACING = 25;
 
   /**
    * @param {LineGameModel} model
@@ -95,7 +95,7 @@ define( function( require ) {
         children: [ title, buttonsParent ],
         orientation: 'vertical',
         align: 'center',
-        spacing: 40,
+        spacing: 50,
         center: layoutBounds.center
       } ),
       // timer and sound buttons at leftBottom

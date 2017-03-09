@@ -27,16 +27,6 @@ define( function( require ) {
   var Util = require( 'DOT/Util' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
-  // images, ordered by level
-  var levelImages = [
-    require( 'image!GRAPHING_LINES/Level_1.png' ),
-    require( 'image!GRAPHING_LINES/Level_2.png' ),
-    require( 'image!GRAPHING_LINES/Level_3.png' ),
-    require( 'image!GRAPHING_LINES/Level_4.png' ),
-    require( 'image!GRAPHING_LINES/Level_5.png' ),
-    require( 'image!GRAPHING_LINES/Level_6.png' )
-  ];
-
   // strings
   var chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
   var patternLevel0String = require( 'string!GRAPHING_LINES/pattern_Level_0' );
@@ -49,10 +39,11 @@ define( function( require ) {
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
+   * @param{HTMLImageElement[]} levelImages
    * @param {Object} [options]
    * @constructor
    */
-  function SettingsNode( model, layoutBounds, options ) {
+  function SettingsNode( model, layoutBounds, levelImages, options ) {
 
     options = options || {};
 
@@ -69,7 +60,7 @@ define( function( require ) {
     var previousButton;
     for ( var level = 0; level < model.numberOfLevels; level++ ) {
 
-      button = createLevelSelectionButton( level, model );
+      button = createLevelSelectionButton( level, model, levelImages );
       buttonsParent.addChild( button );
 
       if ( previousButton ) {
@@ -123,8 +114,16 @@ define( function( require ) {
 
   graphingLines.register( 'SettingsNode', SettingsNode );
 
-  // Creates a level selection button
-  var createLevelSelectionButton = function( level, model ) {
+  /**
+   * Creates a level selection button
+   * @param {number} level
+   * @param {LineGameModel} model
+   * @param {HTMLImageElement[]} levelImages
+   * @returns {LevelSelectionButton}
+   */
+  var createLevelSelectionButton = function( level, model, levelImages ) {
+
+    assert && assert( level <= levelImages.length, 'no image for level ' + level );
 
     // 'Level N' centered above icon
     var image = new Image( levelImages[ level ] );

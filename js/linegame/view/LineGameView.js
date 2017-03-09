@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2017, University of Colorado Boulder
 
 /**
  * View for the 'Line Game' screen.
@@ -9,55 +9,27 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var BaseGameView = require( 'GRAPHING_LINES/linegame/view/BaseGameView' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var PlayNode = require( 'GRAPHING_LINES/linegame/view/PlayNode' );
-  var ResultsNode = require( 'GRAPHING_LINES/linegame/view/ResultsNode' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var SettingsNode = require( 'GRAPHING_LINES/linegame/view/SettingsNode' );
+
+  // images
+  var level1Image = require( 'image!GRAPHING_LINES/Level_1.png' );
+  var level2Image = require( 'image!GRAPHING_LINES/Level_2.png' );
+  var level3Image = require( 'image!GRAPHING_LINES/Level_3.png' );
+  var level4Image = require( 'image!GRAPHING_LINES/Level_4.png' );
+  var level5Image = require( 'image!GRAPHING_LINES/Level_5.png' );
+  var level6Image = require( 'image!GRAPHING_LINES/Level_6.png' );
 
   /**
    * @param {LineGameModel} model
    * @constructor
    */
   function LineGameView( model ) {
-
-    ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
-
-    // audio
-    var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
-
-    // @private one parent node for each 'phase' of the game
-    this.settingsNode = new SettingsNode( model, this.layoutBounds );
-    this.playNode = new PlayNode( model, this.layoutBounds, audioPlayer );
-    this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer );
-
-    // rendering order
-    this.addChild( this.resultsNode );
-    this.addChild( this.playNode );
-    this.addChild( this.settingsNode );
-
-    // game 'phase' changes
-    var self = this;
-    model.gamePhaseProperty.link( function( gamePhase ) {
-      self.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
-      self.playNode.visible = ( gamePhase === GamePhase.PLAY );
-      self.resultsNode.visible = ( gamePhase === GamePhase.RESULTS );
-    } );
+    BaseGameView.call( this, model, [ level1Image, level2Image, level3Image, level4Image, level5Image, level6Image ] );
   }
 
   graphingLines.register( 'LineGameView', LineGameView );
 
-  return inherit( ScreenView, LineGameView, {
-
-    // @public
-    step: function( elapsedTime ) {
-      if ( this.resultsNode.visible ) {
-        this.resultsNode.step( elapsedTime );
-      }
-    }
-  } );
+  return inherit( BaseGameView, LineGameView );
 } );

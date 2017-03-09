@@ -20,10 +20,7 @@ define( function( require ) {
     showAnswers: { type: 'flag' },
 
     // shows the game reward regardless of score
-    showReward: { type: 'flag' },
-
-    // use hard-coded challenges in the game, for debugging
-    hardCoded: { type: 'flag' }
+    showReward: { type: 'flag' }
   } );
 
   graphingLines.register( 'GLQueryParameters', GLQueryParameters );

@@ -20,7 +20,14 @@ define( function( require ) {
     showAnswers: { type: 'flag' },
 
     // shows the game reward regardless of score
-    showReward: { type: 'flag' }
+    showReward: { type: 'flag' },
+
+    // whether to shuffle challenges in the game,
+    // set to false if you want to compare challenges to the design doc
+    shuffleChallenges: {
+      type: 'boolean',
+      defaultValue: true
+    }
   } );
 
   graphingLines.register( 'GLQueryParameters', GLQueryParameters );

@@ -21,7 +21,7 @@ define( function( require ) {
    * @param y1
    * @param x2
    * @param y2
-   * @param {Color|String} color
+   * @param {Color|String} [color] - default to 'black'
    * @constructor
    */
   function Line( x1, y1, x2, y2, color ) {

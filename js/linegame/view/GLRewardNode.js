@@ -58,10 +58,27 @@ define( function( require ) {
 
   /**
    * @param level game level, starting at zero
+   * @param {Object} [options]
    * @constructor
    */
-  function GLRewardNode( level ) {
-    var nodes = nodeFactoryFunctions[ level ]();
+  function GLRewardNode( level, options ) {
+
+    options = _.extend( {
+
+      // functions that create nodes used by the reward, ordered by game level
+      nodeFactoryFunctions: [
+        GLRewardNode.createEquationNodes,
+        GLRewardNode.createGraphNodes,
+        GLRewardNode.createPointToolNodes,
+        GLRewardNode.createSmileyFaceNodes,
+        GLRewardNode.createAirplaneNodes,
+        GLRewardNode.createAssortedNodes
+      ]
+    }, options );
+
+    assert && assert( level < options.nodeFactoryFunctions.length, 'no function for level ' + level );
+
+    var nodes = options.nodeFactoryFunctions[ level ]();
     RewardNode.call( this, { nodes: nodes } );
   }
 
@@ -141,10 +158,6 @@ define( function( require ) {
     return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
   };
 
-  //-----------------------------------------------------------------------------------------------
-  // Functions that create nodes for each level
-  //-----------------------------------------------------------------------------------------------
-
   /**
    * Creates an array of nodes for a specified array of colors.
    * The functions above serve as the creationFunction argument.
@@ -161,54 +174,71 @@ define( function( require ) {
     return nodes;
   };
 
-  // Level 1 = equations
-  var createNodesLevel1 = function() {
-    return RewardNode.createRandomNodes( createNodes( createEquationNode, NODE_COLORS ), NUMBER_OF_NODES );
-  };
+  return inherit( RewardNode, GLRewardNode, {}, {
 
-  // Level 2 = graphs
-  var createNodesLevel2 = function() {
-    return RewardNode.createRandomNodes( createNodes( createGraphNode, NODE_COLORS ), NUMBER_OF_NODES );
-  };
+    /**
+     * Creates a set of equations nodes.
+     * @returns {Node[]}
+     * @public
+     * @static
+     */
+    createEquationNodes: function() {
+      return RewardNode.createRandomNodes( createNodes( createEquationNode, NODE_COLORS ), NUMBER_OF_NODES );
+    },
 
-  // Level 3 = point tools
-  var createNodesLevel3 = function() {
-    return RewardNode.createRandomNodes( createNodes( createPointToolNode, NODE_COLORS ), NUMBER_OF_NODES );
-  };
+    /**
+     * Creates a set of equations graph.
+     * @returns {Node[]}
+     * @public
+     * @static
+     */
+    createGraphNodes: function() {
+      return RewardNode.createRandomNodes( createNodes( createGraphNode, NODE_COLORS ), NUMBER_OF_NODES );
+    },
 
-  // Level 4 = smiley faces
-  var createNodesLevel4 = function() {
-    return RewardNode.createRandomNodes( createNodes( createFaceNode, NODE_COLORS ), NUMBER_OF_NODES );
-  };
+    /**
+     * Creates a set of 'point tool' nodes.
+     * @returns {Node[]}
+     * @public
+     * @static
+     */
+    createPointToolNodes: function() {
+      return RewardNode.createRandomNodes( createNodes( createPointToolNode, NODE_COLORS ), NUMBER_OF_NODES );
+    },
 
-  // Level 5 = paper airplanes, as in the PhET logos
-  var createNodesLevel5 = function() {
-    return RewardNode.createRandomNodes( createNodes( createAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
-  };
+    /**
+     * Creates a set of 'smiley face' nodes.
+     * @returns {Node[]}
+     * @public
+     * @static
+     */
+    createSmileyFaceNodes: function() {
+      return RewardNode.createRandomNodes( createNodes( createFaceNode, NODE_COLORS ), NUMBER_OF_NODES );
+    },
 
-  // Level 6 = all of the above
-  var createNodesLevel6 = function() {
-    var nodes = createNodes( createEquationNode, NODE_COLORS )
-      .concat( createNodes( createGraphNode, NODE_COLORS ) )
-      .concat( createNodes( createPointToolNode, NODE_COLORS ) )
-      .concat( createNodes( createFaceNode, NODE_COLORS ) )
-      .concat( createNodes( createAirplaneNode, NODE_COLORS ) );
-    return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
-  };
+    /**
+     * Creates a set of paper airplane nodes, similar to the PhET logo.
+     * @returns {Node[]}
+     * @public
+     * @static
+     */
+    createAirplaneNodes: function() {
+      return RewardNode.createRandomNodes( createNodes( createAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
+    },
 
-  /*
-   * Functions for creating nodes, indexed by level.
-   * In the model, level starts at zero. In the view, it's presented as starting from 1.
-   * The function names correspond to the view presentation.
-   */
-  var nodeFactoryFunctions = [
-    createNodesLevel1,
-    createNodesLevel2,
-    createNodesLevel3,
-    createNodesLevel4,
-    createNodesLevel5,
-    createNodesLevel6
-  ];
-
-  return inherit( RewardNode, GLRewardNode );
+    /**
+     * Creates an assortment of nodes, using all of the above types.
+     * @returns {Node[]}
+     * @public
+     * @static
+     */
+    createAssortedNodes: function() {
+      var nodes = createNodes( createEquationNode, NODE_COLORS )
+        .concat( createNodes( createGraphNode, NODE_COLORS ) )
+        .concat( createNodes( createPointToolNode, NODE_COLORS ) )
+        .concat( createNodes( createFaceNode, NODE_COLORS ) )
+        .concat( createNodes( createAirplaneNode, NODE_COLORS ) );
+      return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
+    }
+  } );
 } );

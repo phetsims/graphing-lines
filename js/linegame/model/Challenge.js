@@ -40,8 +40,6 @@ define( function( require ) {
    */
   function Challenge( title, description, answer, equationForm, manipulationMode, xRange, yRange ) {
 
-    assert && assert( !answer.undefinedSlope() ); // our answer should be defined
-
     // @public {Line} the user's current guess
     this.guessProperty = new Property( createInitialGuess( answer, manipulationMode, xRange, yRange ) );
 

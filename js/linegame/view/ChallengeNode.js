@@ -106,7 +106,11 @@ define( function( require ) {
         self.faceNode.smile();
         audioPlayer.correctAnswer();
         var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
-        model.scoreProperty.set( model.scoreProperty.get() + points );
+
+        // Prevent score from exceeding perfect score, in case we replay challenges with ?gameDebug query parameter.
+        // See https://github.com/phetsims/graphing-lines/issues/70
+        var newScore = Math.min( model.scoreProperty.get() + points, model.getPerfectScore() );
+        model.scoreProperty.set( newScore );
         self.faceNode.setPoints( points );
         model.playStateProperty.set( PlayState.NEXT );
       }

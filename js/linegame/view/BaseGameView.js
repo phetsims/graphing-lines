@@ -21,10 +21,11 @@ define( function( require ) {
 
   /**
    * @param {BaseGameModel} model
-   * @param {HTMLImageElement[]} levelImages
+   * @param {HTMLImageElement[]} levelImages - images for the level-selection buttons, ordered by level
+   * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
    * @constructor
    */
-  function BaseGameView( model, levelImages ) {
+  function BaseGameView( model, levelImages, rewardFactoryFunctions ) {
 
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
@@ -36,7 +37,7 @@ define( function( require ) {
     // @private one parent node for each 'phase' of the game
     this.settingsNode = new SettingsNode( model, this.layoutBounds, levelImages );
     this.playNode = new PlayNode( model, this.layoutBounds, audioPlayer );
-    this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer );
+    this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer, rewardFactoryFunctions );
 
     // rendering order
     this.addChild( this.resultsNode );

@@ -57,29 +57,11 @@ define( function( require ) {
   var AIRPLANE_SCALE = 1.76;
 
   /**
-   * @param level game level, starting at zero
-   * @param {Object} [options]
+   * @params {Node[]} nodes to use in the reward
    * @constructor
    */
-  function GLRewardNode( level, options ) {
-
-    options = _.extend( {
-
-      // functions that create nodes used by the reward, ordered by game level
-      nodeFactoryFunctions: [
-        GLRewardNode.createEquationNodes,
-        GLRewardNode.createGraphNodes,
-        GLRewardNode.createPointToolNodes,
-        GLRewardNode.createSmileyFaceNodes,
-        GLRewardNode.createAirplaneNodes,
-        GLRewardNode.createAssortedNodes
-      ]
-    }, options );
-
-    assert && assert( level < options.nodeFactoryFunctions.length, 'no function for level ' + level );
-
-    var nodes = options.nodeFactoryFunctions[ level ]();
-    RewardNode.call( this, { nodes: nodes } );
+  function GLRewardNode( rewardNodes ) {
+    RewardNode.call( this, { nodes: rewardNodes } );
   }
 
   graphingLines.register( 'GLRewardNode', GLRewardNode );
@@ -154,7 +136,7 @@ define( function( require ) {
   };
 
   // Creates a paper airplane with the specified color.
-  var createAirplaneNode = function( color ) {
+  var createPaperAirplaneNode = function( color ) {
     return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
   };
 
@@ -222,8 +204,8 @@ define( function( require ) {
      * @public
      * @static
      */
-    createAirplaneNodes: function() {
-      return RewardNode.createRandomNodes( createNodes( createAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
+    createPaperAirplaneNodes: function() {
+      return RewardNode.createRandomNodes( createNodes( createPaperAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
     },
 
     /**
@@ -237,7 +219,7 @@ define( function( require ) {
         .concat( createNodes( createGraphNode, NODE_COLORS ) )
         .concat( createNodes( createPointToolNode, NODE_COLORS ) )
         .concat( createNodes( createFaceNode, NODE_COLORS ) )
-        .concat( createNodes( createAirplaneNode, NODE_COLORS ) );
+        .concat( createNodes( createPaperAirplaneNode, NODE_COLORS ) );
       return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
     }
   } );

@@ -23,9 +23,10 @@ define( function( require ) {
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
    * @param {GameAudioPlayer} audioPlayer
+   * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
    * @constructor
    */
-  function ResultsNode( model, layoutBounds, audioPlayer ) {
+  function ResultsNode( model, layoutBounds, audioPlayer, rewardFactoryFunctions ) {
 
     Node.call( this );
 
@@ -41,7 +42,9 @@ define( function( require ) {
 
           audioPlayer.gameOverPerfectScore();
 
-          self.rewardNode = new GLRewardNode( model.levelProperty.get() );
+          var level = model.levelProperty.get();
+          var rewardNodes = rewardFactoryFunctions[ level ]();
+          self.rewardNode = new GLRewardNode( rewardNodes );
           self.addChild( self.rewardNode );
         }
         else {

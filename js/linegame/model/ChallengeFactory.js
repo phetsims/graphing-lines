@@ -13,6 +13,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * @constructor
+   */
   function ChallengeFactory() {}
 
   graphingLines.register( 'ChallengeFactory', ChallengeFactory );
@@ -22,8 +25,8 @@ define( function( require ) {
     /**
      * Creates challenges for the factory's game level.
      *
-     * @param {Range} xRange range of the graph's x axis
-     * @param {Range} yRange range of the graph's y axis
+     * @param {Range} xRange - range of the graph's x axis
+     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
      * @public
      */

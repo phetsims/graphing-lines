@@ -24,81 +24,24 @@ define( function( require ) {
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 
+  /**
+   * @constructor
+   */
   function ChallengeFactory2() {
     ChallengeFactory.call( this );
   }
 
   graphingLines.register( 'ChallengeFactory2', ChallengeFactory2 );
 
-  // Creates the set of positive fractional slopes that are identified in the design document.
-  ChallengeFactory2.createPositiveFractionalSlopes = function() {
-    return [
-      // positive fractions
-      new Fraction( 1, 4 ),
-      new Fraction( 1, 5 ),
-      new Fraction( 1, 6 ),
-      new Fraction( 1, 7 ),
-      new Fraction( 2, 5 ),
-      new Fraction( 3, 5 ),
-      new Fraction( 2, 7 ),
-      new Fraction( 3, 7 ),
-      new Fraction( 4, 7 ),
-      new Fraction( 5, 2 ),
-      new Fraction( 3, 2 ),
-      new Fraction( 7, 2 ),
-      new Fraction( 7, 3 ),
-      new Fraction( 7, 4 )
-    ];
-  };
-
-  // Creates the 3 sets of slopes that are identified in the design document.
-  ChallengeFactory2.createSlopeArrays = function() {
-    return [
-      // positive and negative integers
-      [
-        new Fraction( 1, 1 ),
-        new Fraction( 2, 1 ),
-        new Fraction( 3, 1 ),
-        new Fraction( 4, 1 ),
-        new Fraction( 5, 1 ),
-        new Fraction( -1, 1 ),
-        new Fraction( -2, 1 ),
-        new Fraction( -3, 1 ),
-        new Fraction( -4, 1 ),
-        new Fraction( -5, 1 )
-      ],
-      // positive fractions
-      ChallengeFactory2.createPositiveFractionalSlopes(),
-      // negative fractions
-      [
-        new Fraction( -1, 2 ),
-        new Fraction( -1, 3 ),
-        new Fraction( -1, 4 ),
-        new Fraction( -1, 5 ),
-        new Fraction( -2, 3 ),
-        new Fraction( -3, 4 ),
-        new Fraction( -2, 5 ),
-        new Fraction( -3, 5 ),
-        new Fraction( -4, 5 ),
-        new Fraction( -3, 2 ),
-        new Fraction( -4, 3 ),
-        new Fraction( -5, 2 ),
-        new Fraction( -5, 3 ),
-        new Fraction( -5, 4 )
-      ]
-    ];
-  };
-
   return inherit( ChallengeFactory, ChallengeFactory2, {
 
     /**
      * Creates challenges for this game level.
-     * @override
-     * @param {Range} xRange range of the graph's x axis
-     * @param {Range} yRange range of the graph's y axis
+     * @param {Range} xRange - range of the graph's x axis
+     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
-     * @override
      * @public
+     * @override
      */
     createChallenges: function( xRange, yRange ) {
 
@@ -129,35 +72,35 @@ define( function( require ) {
       // for point-slope form, one of each manipulation mode
       pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
-      // Graph-the-Line, slope-intercept form, slope variable
+      // CHALLENGE 1: Graph-the-Line, slope-intercept form, slope variable
       slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope, unique
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
       challenges.push( new GraphTheLine( '1 of 3 required slopes',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
 
-      // Graph-the-Line, slope-intercept form, intercept variable
+      // CHALLENGE 2: Graph-the-Line, slope-intercept form, intercept variable
       slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // first required y-intercept, unique
       challenges.push( new GraphTheLine( '1 of 2 required y-intercepts',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
 
-      // Make-the-Equation, slope-intercept form, slope variable
+      // CHALLENGE 3: Make-the-Equation, slope-intercept form, slope variable
       slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices );  // second required slope, unique
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
       challenges.push( new MakeTheEquation( '2 of 3 requires slopes',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
 
-      // Make-the-Equation, slope-intercept form, intercept variable
+      // CHALLENGE 4: Make-the-Equation, slope-intercept form, intercept variable
       slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // second required y-intercept, unique
       challenges.push( new MakeTheEquation( '2 of 2 required y-intercepts',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
 
-      // Graph-the-Line, point-slope form, point or slope variable (random choice)
+      // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {
         // manipulation mode
         manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
@@ -178,7 +121,7 @@ define( function( require ) {
           EquationForm.POINT_SLOPE, manipulationMode, xRange, yRange ) );
       }
 
-      // Make-the-Equation, point-slope form, point or slope variable (whichever was not variable above)
+      // CHALLENGE 6: Make-the-Equation, point-slope form, point or slope variable (whichever was not variable above)
       {
         // manipulation mode
         manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
@@ -201,6 +144,75 @@ define( function( require ) {
 
       // shuffle and return
       return ( GLQueryParameters.shuffleChallenges ? phet.joist.random.shuffle( challenges ) : challenges );
+    }
+  }, {
+
+    /**
+     * Creates the 3 sets of slopes that are identified in the design document.
+     * @returns {Fraction[][]}
+     */
+    createSlopeArrays: function() {
+      return [
+
+        // positive and negative integers
+        [
+          new Fraction( 1, 1 ),
+          new Fraction( 2, 1 ),
+          new Fraction( 3, 1 ),
+          new Fraction( 4, 1 ),
+          new Fraction( 5, 1 ),
+          new Fraction( -1, 1 ),
+          new Fraction( -2, 1 ),
+          new Fraction( -3, 1 ),
+          new Fraction( -4, 1 ),
+          new Fraction( -5, 1 )
+        ],
+
+        // {Fraction[]} positive fractions
+        ChallengeFactory2.createPositiveFractionalSlopes(),
+
+        // negative fractions
+        [
+          new Fraction( -1, 2 ),
+          new Fraction( -1, 3 ),
+          new Fraction( -1, 4 ),
+          new Fraction( -1, 5 ),
+          new Fraction( -2, 3 ),
+          new Fraction( -3, 4 ),
+          new Fraction( -2, 5 ),
+          new Fraction( -3, 5 ),
+          new Fraction( -4, 5 ),
+          new Fraction( -3, 2 ),
+          new Fraction( -4, 3 ),
+          new Fraction( -5, 2 ),
+          new Fraction( -5, 3 ),
+          new Fraction( -5, 4 )
+        ]
+      ];
+    },
+
+    /**
+     * Creates the set of positive fractional slopes that are identified in the design document.
+     * @returns {Fraction[]}
+     */
+    createPositiveFractionalSlopes: function() {
+      return [
+        // positive fractions
+        new Fraction( 1, 4 ),
+        new Fraction( 1, 5 ),
+        new Fraction( 1, 6 ),
+        new Fraction( 1, 7 ),
+        new Fraction( 2, 5 ),
+        new Fraction( 3, 5 ),
+        new Fraction( 2, 7 ),
+        new Fraction( 3, 7 ),
+        new Fraction( 4, 7 ),
+        new Fraction( 5, 2 ),
+        new Fraction( 3, 2 ),
+        new Fraction( 7, 2 ),
+        new Fraction( 7, 3 ),
+        new Fraction( 7, 4 )
+      ];
     }
   } );
 } );

@@ -23,6 +23,9 @@ define( function( require ) {
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 
+  /**
+   * @constructor
+   */
   function ChallengeFactory6() {
     ChallengeFactory.call( this );
   }
@@ -33,12 +36,11 @@ define( function( require ) {
 
     /**
      * Creates challenges for this game level.
-     * @override
-     * @param {Range} xRange range of the graph's x axis
-     * @param {Range} yRange range of the graph's y axis
+     * @param {Range} xRange - range of the graph's x axis
+     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
-     * @override
      * @public
+     * @override
      */
     createChallenges: function( xRange, yRange ) {
 
@@ -60,16 +62,18 @@ define( function( require ) {
 
       yIntercepts = RandomChooser.rangeToArray( yRange );
 
-      // Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
+      // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
       yIntercept = RandomChooser.choose( yIntercepts );
       challenges.push( new PlaceThePoints( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
 
-      // 2 Place-the-Point challenges (same as level 5)
+      // CHALLENGES 2 & 3: 2 Place-the-Point challenges (same as level 5)
       ChallengeFactory5.addPlaceThePointsChallenges( challenges, xRange, yRange );
 
-      // 3 Graph-the-Line challenges with mismatched representations (eg, point-slope equation with slope-intercept manipulators)
+      // CHALLENGES 4, 5 & 6:
+      // 3 Graph-the-Line challenges with mismatched representations
+      // (eg, point-slope equation with slope-intercept manipulators)
       {
         // we'll pick 3 from here
         equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE, EquationForm.POINT_SLOPE ];

@@ -24,6 +24,9 @@ define( function( require ) {
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Vector2 = require( 'DOT/Vector2' );
 
+  /**
+   * @constructor
+   */
   function ChallengeFactory1() {
     ChallengeFactory.call( this );
   }
@@ -34,12 +37,11 @@ define( function( require ) {
 
     /**
      * Creates challenges for this game level.
-     * @override
-     * @param {Range} xRange range of the graph's x axis
-     * @param {Range} yRange range of the graph's y axis
+     * @param {Range} xRange - range of the graph's x axis
+     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
-     * @overide
      * @public
+     * @override
      */
     createChallenges: function( xRange, yRange ) {
 
@@ -111,35 +113,35 @@ define( function( require ) {
       // for point-slope form, one of each manipulation mode
       pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
-      // Graph-the-Line, slope-intercept form, slope variable
+      // CHALLENGE 1: Graph-the-Line, slope-intercept form, slope variable
       slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
       challenges.push( new GraphTheLine( '1 of 3 required slopes',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
 
-      // Graph-the-Line, slope-intercept form, intercept variable
+      // CHALLENGE 2: Graph-the-Line, slope-intercept form, intercept variable
       slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // first required y-intercept, unique
       challenges.push( new GraphTheLine( '1 of 2 required y-intercepts',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
 
-      // Make-the-Equation, slope-intercept form, slope variable
+      // CHALLENGE 3: Make-the-Equation, slope-intercept form, slope variable
       slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // second required slope, unique
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
       challenges.push( new MakeTheEquation( '2 of 3 required slopes',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
 
-      // Make-the-Equation, slope-intercept form, intercept variable
+      // CHALLENGE 4: Make-the-Equation, slope-intercept form, intercept variable
       slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
       yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // second required y-intercept, unique
       challenges.push( new MakeTheEquation( '2 of 2 required y-intercepts',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
         EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
 
-      // Graph-the-Line, point-slope form, point or slope variable (random choice)
+      // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {
         // manipulation mode
         manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
@@ -161,7 +163,7 @@ define( function( require ) {
           EquationForm.POINT_SLOPE, manipulationMode, xRange, yRange ) );
       }
 
-      // Make-the-Equation, point-slope form, point or slope variable (whichever was not chosen above)
+      // CHALLENGE 6: Make-the-Equation, point-slope form, point or slope variable (whichever was not chosen above)
       {
         // manipulation mode
         manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );

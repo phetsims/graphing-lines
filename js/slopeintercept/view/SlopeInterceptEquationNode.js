@@ -330,7 +330,7 @@ define( function( require ) {
             // layout
             yInterceptFractionLineNode.left = operatorNode.right + self.operatorXSpacing;
             yInterceptFractionLineNode.centerY = equalsNode.centerY + self.fractionLineYFudgeFactor;
-            yInterceptNumeratorNode.centerY = yInterceptFractionLineNode.centerY;
+            yInterceptNumeratorNode.centerX = yInterceptFractionLineNode.centerX;
             yInterceptNumeratorNode.bottom = yInterceptFractionLineNode.top - self.ySpacing;
             yInterceptDenominatorNode.centerX = yInterceptFractionLineNode.centerX;
             yInterceptDenominatorNode.top = yInterceptFractionLineNode.bottom + self.ySpacing;

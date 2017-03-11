@@ -10,13 +10,15 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var FontAwesomeNode = require( 'SUN/FontAwesomeNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var Node = require( 'SCENERY/nodes/Node' );
+  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var Text = require( 'SCENERY/nodes/Text' );
-  var ShadowText = require( 'SCENERY_PHET/ShadowText' );
 
   // constants
   var X_MARGIN = 20;
@@ -34,9 +36,14 @@ define( function( require ) {
     Node.call( this );
 
     // @private icons for 'correct' and 'incorrect'
-    var iconFont = new GLFont( 72 );
-    this.correctIconNode = new ShadowText( '\u2713', { fill: 'rgb(137,244,0)', font: iconFont } ); // @private check mark
-    this.incorrectIconNode = new ShadowText( '\u2718', { fill: 'rgb(252,104,0)', font: iconFont } ); // @private heavy ballot X
+    this.correctIconNode = new FontAwesomeNode( 'check_without_box', {
+      scale: 1.5,
+      fill: LineGameConstants.ANSWER_COLOR
+    } );
+    this.incorrectIconNode = new FontAwesomeNode( 'times', {
+      scale: 1.5,
+      fill: PhetColorScheme.RED_COLORBLIND
+    } );
 
     var titleNode = new Text( title, {
       fill: titleColor,
@@ -67,12 +74,10 @@ define( function( require ) {
     equationNode.left = X_MARGIN;
     equationNode.centerY = titleNode.bottom + ( ( boxNode.bottom - titleNode.bottom ) / 2 );
     // icons in upper-right corner
-    var iconXMargin = 5;
-    var iconYMargin = 1;
-    this.correctIconNode.right = boxNode.right - iconXMargin;
-    this.correctIconNode.top = boxNode.top + iconYMargin;
-    this.incorrectIconNode.right = boxNode.right - iconXMargin;
-    this.incorrectIconNode.top = boxNode.top + iconYMargin;
+    this.correctIconNode.right = boxNode.right - X_MARGIN;
+    this.correctIconNode.top = boxNode.top + Y_MARGIN;
+    this.incorrectIconNode.right = boxNode.right - X_MARGIN;
+    this.incorrectIconNode.top = boxNode.top + Y_MARGIN;
 
     // icons are initially hidden
     this.correctIconNode.visible = false;

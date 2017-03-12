@@ -1,4 +1,4 @@
-********************************** Graphing Lines simulation ***************************************
+# Graphing Lines - model description
 
 1. General
 
@@ -61,4 +61,3 @@
    Challenges are quasi-randomly generated, following the specification in the design document.
    See the ChallengeFactory class hierarchy for more details on challenge generation.
 
-****************************************************************************************************

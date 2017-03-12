@@ -20,7 +20,7 @@ Terminology:
 - _challenges_ are the individual problems that the user tries to solve
 - a _game_ is a collection of challenges
 
-Property<T> is used throughout the model and view for storage of properties and notification of changes.
+`Property<T>` is used throughout the model and view for storage of properties and notification of changes.
 The sim has both model-specific properties (found throughout the model) and view-specific properties
 (encapsulated in LineFormsViewProperties).
 

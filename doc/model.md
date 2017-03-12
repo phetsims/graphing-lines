@@ -41,7 +41,7 @@ The "Line Game" screen presents the student with a set of challenges to be solve
 There are 3 types of challenges:
 
 - Make the Equation: given a graphed line, derive an equation for that line
-- Graph the Line: given an equation, graph the line
+- Graph the Line: given an equation, graph the corresponding line
 - Place the Points: given an equation, graph 3 points on the corresponding line
 
 Challenges use slope-intercept and point-slope forms, sometimes combining them in the same challenge.

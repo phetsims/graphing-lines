@@ -5,7 +5,7 @@ is software developers who need to review, enhance or maintain the simulation.
 
 Before reading this document, it's recommended that you read the model description in model.txt.
 
-Directory structure under graphing-lines/js/:
+Directory structure under `graphing-lines/js/`:
 - `common/` directory contains code used by >1 screen
 - other directories are organized by screen. For example, `slope/` is the "Slope" screen.
 - directories are further divided into model and view subdirectories, per MVC design pattern

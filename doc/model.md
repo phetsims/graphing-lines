@@ -1,6 +1,6 @@
 # Graphing Lines - model description
 
-1. General
+## General
 
    The model describes a line using 2 points, (x1,y1) and (x2,y2).
    All tabs use this internal representation, but present the line in different forms.
@@ -19,7 +19,7 @@
    The first three tabs provide 2 representations of a line: equation and graph.
    These representations are kept synchronized throughout all user interactions.
 
-2. Slope screen
+## Slope screen
 
    The "Slope" screen presents a line using the standard equation for slope:
 
@@ -27,7 +27,7 @@
 
    x1, y1, x2 and y2 are variable.
 
-3. Slope-Intercept screen
+## Slope-Intercept screen
 
    The "Slope-Intercept" screen presents a line in slope-intercept form:
 
@@ -35,7 +35,7 @@
 
    Rise, run and b (y-intercept) are variable.
 
-4. Point-Slope screen
+## Point-Slope screen
 
    The "Point-Slope" screen presents a line in point-slope form:
 
@@ -43,7 +43,7 @@
 
    Rise, run, x1 and y1 are variable.
 
-5. Line Game screen
+## Line Game screen
 
    The "Line Game" screen presents the student with a set of challenges to be solved.
    All of these challenges involve deriving a line or equation for a given line or equation.

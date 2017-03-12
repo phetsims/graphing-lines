@@ -52,16 +52,24 @@ define( function( require ) {
   function SlopeInterceptEquationNode( lineProperty, options ) {
 
     options = _.extend( {
+
+      // Don't show 'slope undefined' after non-interactive equations with undefined slope
+      // See https://github.com/phetsims/graphing-slope-intercept/issues/7
+      slopeUndefinedVisible: true,
+
       // components that can be interactive
       interactiveSlope: true,
       interactiveIntercept: true,
+
       // dynamic range of components
       riseRangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       runRangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
       yInterceptRangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
+
       // style
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
+
     }, options );
 
     var self = this;
@@ -148,7 +156,9 @@ define( function( require ) {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
+        slopeUndefinedNode.text = ( options.slopeUndefinedVisible ) ?
+                                  StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ) :
+                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, symbolXString, line.x1 );
         return;
       }
 
@@ -416,15 +426,18 @@ define( function( require ) {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property.<Line>} lineProperty
-   * @param {number} fontSize
+   * @param {Object} [options]
    * @returns {Node}
    */
-  SlopeInterceptEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
-    return new SlopeInterceptEquationNode( lineProperty, {
+  SlopeInterceptEquationNode.createDynamicLabel = function( lineProperty, options ) {
+
+    options = _.extend( {
       interactiveSlope: false,
       interactiveIntercept: false,
-      fontSize: fontSize
-    } );
+      fontSize: 18
+    }, options );
+
+    return new SlopeInterceptEquationNode( lineProperty, options );
   };
 
   return inherit( EquationNode, SlopeInterceptEquationNode );

@@ -94,13 +94,15 @@ define( function( require ) {
     var node;
     if ( phet.joist.random.nextDouble() < 0.5 ) {
       node = SlopeInterceptEquationNode.createDynamicLabel(
-        new Property( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ),
-        EQUATION_FONT_SIZE );
+        new Property( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ), {
+          fontSize: EQUATION_FONT_SIZE
+        } );
     }
     else {
       node = PointSlopeEquationNode.createDynamicLabel(
-        new Property( Line.createPointSlope( getRandomX(), getRandomY(), getRandomX(), getRandomY(), color ) ),
-        EQUATION_FONT_SIZE );
+        new Property( Line.createPointSlope( getRandomX(), getRandomY(), getRandomX(), getRandomY(), color ) ), {
+          fontSize: EQUATION_FONT_SIZE
+        } );
     }
     return node;
   };

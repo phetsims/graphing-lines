@@ -52,14 +52,15 @@ define( function( require ) {
     } );
 
     // Answer
-    var answerBoxNode =
-      new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
-        ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
+    var answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
+      ChallengeNode.createEquationNode( new Property( challenge.answer ), {
+        equationForm: challenge.equationForm,
+        fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
+      } ) );
     answerBoxNode.visible = false;
 
     // Guess
-    var guessBoxNode =
-      new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
+    var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
         createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
           GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
 
@@ -94,7 +95,10 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( GLQueryParameters.showAnswers ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), 14 /* fontSize */ );
+      var devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), {
+        equationForm: challenge.equationForm,
+        fontSize: 14
+      } );
       devAnswerNode.left = answerBoxNode.left + 30;
       devAnswerNode.centerY = answerBoxNode.centerY;
       this.addChild( devAnswerNode );

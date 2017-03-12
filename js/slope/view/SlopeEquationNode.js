@@ -288,14 +288,20 @@ define( function( require ) {
    * composed of multiple scenery.Text nodes.
    *
    * @param {Property.<Line>} lineProperty
-   * @param {number} fontSize
+   * @param {Object} [options]
    * @returns {Node}
    */
-  SlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
+  SlopeEquationNode.createDynamicLabel = function( lineProperty, options ) {
 
-    var equationNode = new EquationNode( fontSize );
+    options = _.extend( {
+      fontSize: 18
+    }, options );
 
-    var textOptions = { font: new GLFont( { size: fontSize, weight: 'bold' } ), maxWidth: 130 };
+    var equationNode = new EquationNode( options.fontSize );
+
+    var textOptions = {
+      font: new GLFont( { size: options.fontSize, weight: 'bold' } ),
+      maxWidth: 130 };
 
     // allocate nodes needed to represent all simplified forms
     var slopeIsNode = new Text( slopeIsString, textOptions );

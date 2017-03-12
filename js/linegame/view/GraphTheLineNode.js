@@ -56,11 +56,18 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( challenge.equationForm, new Property( challenge.answer ), LineGameConstants.STATIC_EQUATION_FONT_SIZE ) );
+      ChallengeNode.createEquationNode( new Property( challenge.answer ), {
+        equationForm: challenge.equationForm,
+        fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
+        slopeUndefinedVisible: false
+      } ) );
 
     // Guess equation
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    this.equationNode = ChallengeNode.createEquationNode( challenge.equationForm, guessLineProperty, LineGameConstants.STATIC_EQUATION_FONT_SIZE );
+    this.equationNode = ChallengeNode.createEquationNode( guessLineProperty, {
+      equationForm: challenge.equationForm,
+      fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
+    } );
 
     // @private 'Not A Line', for situations where 3-points do not define a line
     this.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );

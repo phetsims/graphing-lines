@@ -49,21 +49,29 @@ define( function( require ) {
   function PointSlopeEquationNode( lineProperty, options ) {
 
     options = _.extend( {
+
+      // Don't show 'slope undefined' after non-interactive equations with undefined slope
+      // See https://github.com/phetsims/graphing-slope-intercept/issues/7
+      slopeUndefinedVisible: true,
+
       // components that can be interactive
       interactivePoint: true,
       interactiveSlope: true,
+
       // dynamic range of components
       x1RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
       y1RangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       riseRangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       runRangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
+
       // style
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
+
     }, options );
 
     var self = this;
-    
+
     EquationNode.call( self, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var fullyInteractive = ( options.interactivePoint && options.interactiveSlope );
@@ -124,7 +132,11 @@ define( function( require ) {
     var x1Node;
     if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
-        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION } );
+        {
+          color: GLColors.POINT_X1_Y1,
+          font: interactiveFont,
+          touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
+        } );
     }
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -159,7 +171,9 @@ define( function( require ) {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        slopeUndefinedNode.text = StringUtils.format( slopeUndefinedString, symbolXString, line.x1 );
+        slopeUndefinedNode.text = ( options.slopeUndefinedVisible ) ?
+                                  StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ) :
+                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, symbolXString, line.x1 );
         return;
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
@@ -398,15 +412,18 @@ define( function( require ) {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property.<Line>} lineProperty
-   * @param {number} fontSize
+   * @param {Object} [options]
    * @returns {Node}
    */
-  PointSlopeEquationNode.createDynamicLabel = function( lineProperty, fontSize ) {
-    return new PointSlopeEquationNode( lineProperty, {
+  PointSlopeEquationNode.createDynamicLabel = function( lineProperty, options ) {
+
+    options = _.extend( {
       interactivePoint: false,
       interactiveSlope: false,
-      fontSize: fontSize
-    } );
+      fontSize: 18
+    }, options );
+
+    return new PointSlopeEquationNode( lineProperty, options );
   };
 
   return inherit( EquationNode, PointSlopeEquationNode );

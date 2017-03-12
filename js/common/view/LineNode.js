@@ -35,7 +35,9 @@ define( function( require ) {
   function LineNode( lineProperty, graph, modelViewTransform, options ) {
 
     options = _.extend( {
-      // type for creating an equation node, must have static function createDynamicLabel( {Property.<Line>} lineProperty, {number} fontSize )
+
+      // type for creating an equation node,
+      // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
       equationType: null
     }, options );
 
@@ -57,7 +59,9 @@ define( function( require ) {
 
     // @private optional equation
     if ( options.equationType ) {
-      this.equationNode = options.equationType.createDynamicLabel( lineProperty, EQUATION_FONT_SIZE );
+      this.equationNode = options.equationType.createDynamicLabel( lineProperty, {
+        fontSize: EQUATION_FONT_SIZE
+      } );
       // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
       this.equationParentNode = new Node( { children: [ this.equationNode ] } );
       this.parentNode.addChild( this.equationParentNode );

@@ -194,19 +194,31 @@ define( function( require ) {
 
   /**
    * Creates a non-interactive equation, used to label the specified line.
-   * @param {EquationForm} equationForm
    * @param {Property.<Line>} lineProperty
-   * @param {number} fontSize
+   * @param {Object} [options]
    */
-  ChallengeNode.createEquationNode = function( equationForm, lineProperty, fontSize ) {
-    if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, fontSize );
+  ChallengeNode.createEquationNode = function( lineProperty, options ) {
+
+    options = _.extend( {
+      equationForm: EquationForm.SLOPE_INTERCEPT, // {EquationForm}
+      fontSize: 18, // {number},
+      slopeUndefinedVisible: true
+    }, options );
+
+    if ( options.equationForm === EquationForm.SLOPE_INTERCEPT ) {
+      return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, {
+        fontSize: options.fontSize,
+        slopeUndefinedVisible: options.slopeUndefinedVisible
+      } );
     }
-    else if ( equationForm === EquationForm.POINT_SLOPE ) {
-      return PointSlopeEquationNode.createDynamicLabel( lineProperty, fontSize );
+    else if ( options.equationForm === EquationForm.POINT_SLOPE ) {
+      return PointSlopeEquationNode.createDynamicLabel( lineProperty, {
+        fontSize: options.fontSize,
+        slopeUndefinedVisible: options.slopeUndefinedVisible
+      } );
     }
     else {
-      throw new Error( 'unsupported equation form: ' + equationForm );
+      throw new Error( 'unsupported equation form: ' + options.equationForm );
     }
   };
 

@@ -23,25 +23,25 @@
 
    The "Slope" screen presents a line using the standard equation for slope:
 
-   m = (y2 - y1)/(x2 - x1)
+   `m = (y2 - y1)/(x2 - x1)`
 
-   x1, y1, x2 and y2 are variable.
+   `x1`, `y1`, `x2` and `y2` are variable.
 
 ## Slope-Intercept screen
 
    The "Slope-Intercept" screen presents a line in slope-intercept form:
 
-   y = (rise/run)x + b
+   `y = (rise/run)x + b`
 
-   Rise, run and b (y-intercept) are variable.
+   `rise`, `run` and `b` (y-intercept) are variable.
 
 ## Point-Slope screen
 
    The "Point-Slope" screen presents a line in point-slope form:
 
-   (y - y1) = (rise/run)(x - x1)
+   `(y - y1) = (rise/run)(x - x1)`
 
-   Rise, run, x1 and y1 are variable.
+  `rise`, `run`, `x1` and `y1` are variable.
 
 ## Line Game screen
 

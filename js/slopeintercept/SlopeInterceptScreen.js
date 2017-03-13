@@ -16,7 +16,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
   var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
-  var SlopeInterceptView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptView' );
+  var SlopeInterceptScreenView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptScreenView' );
 
   // strings
   var screenSlopeInterceptString = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
@@ -36,7 +36,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new SlopeInterceptModel(); },
-      function( model ) { return new SlopeInterceptView( model ); },
+      function( model ) { return new SlopeInterceptScreenView( model ); },
       options );
   }
 

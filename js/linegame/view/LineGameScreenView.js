@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var BaseGameView = require( 'GRAPHING_LINES/linegame/view/BaseGameView' );
+  var BaseGameScreenView = require( 'GRAPHING_LINES/linegame/view/BaseGameScreenView' );
   var GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -26,7 +26,7 @@ define( function( require ) {
    * @param {LineGameModel} model
    * @constructor
    */
-  function LineGameView( model ) {
+  function LineGameScreenView( model ) {
 
     // images for the level-selection buttons, ordered by level
     var levelImages = [
@@ -48,10 +48,10 @@ define( function( require ) {
       GLRewardNode.createAssortedNodes
     ];
 
-    BaseGameView.call( this, model, levelImages, rewardFactoryFunctions );
+    BaseGameScreenView.call( this, model, levelImages, rewardFactoryFunctions );
   }
 
-  graphingLines.register( 'LineGameView', LineGameView );
+  graphingLines.register( 'LineGameScreenView', LineGameScreenView );
 
-  return inherit( BaseGameView, LineGameView );
+  return inherit( BaseGameScreenView, LineGameScreenView );
 } );

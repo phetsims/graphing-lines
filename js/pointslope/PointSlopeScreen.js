@@ -14,7 +14,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
-  var PointSlopeView = require( 'GRAPHING_LINES/pointslope/view/PointSlopeView' );
+  var PointSlopeScreenView = require( 'GRAPHING_LINES/pointslope/view/PointSlopeScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
 
@@ -36,7 +36,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new PointSlopeModel(); },
-      function( model ) { return new PointSlopeView( model ); },
+      function( model ) { return new PointSlopeScreenView( model ); },
       options );
   }
 

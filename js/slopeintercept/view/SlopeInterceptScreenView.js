@@ -22,7 +22,7 @@ define( function( require ) {
    * @param {SlopeInterceptModel} model
    * @constructor
    */
-  function SlopeInterceptView( model ) {
+  function SlopeInterceptScreenView( model ) {
 
     var viewProperties = new LineFormsViewProperties();
 
@@ -56,7 +56,7 @@ define( function( require ) {
     );
   }
 
-  graphingLines.register( 'SlopeInterceptView', SlopeInterceptView );
+  graphingLines.register( 'SlopeInterceptScreenView', SlopeInterceptScreenView );
 
-  return inherit( LineFormsView, SlopeInterceptView );
+  return inherit( LineFormsView, SlopeInterceptScreenView );
 } );

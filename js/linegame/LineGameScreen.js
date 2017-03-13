@@ -14,7 +14,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameModel = require( 'GRAPHING_LINES/linegame/model/LineGameModel' );
-  var LineGameView = require( 'GRAPHING_LINES/linegame/view/LineGameView' );
+  var LineGameScreenView = require( 'GRAPHING_LINES/linegame/view/LineGameScreenView' );
   var Property = require( 'AXON/Property' );
   var Screen = require( 'JOIST/Screen' );
 
@@ -36,7 +36,7 @@ define( function( require ) {
 
     Screen.call( this,
       function() { return new LineGameModel(); },
-      function( model ) { return new LineGameView( model ); },
+      function( model ) { return new LineGameScreenView( model ); },
       options );
   }
 

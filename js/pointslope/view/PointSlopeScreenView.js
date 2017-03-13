@@ -1,7 +1,7 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
 /**
- * View for the 'Slope' screen.
+ * View for the 'Point-Slope' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -15,21 +15,21 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsView = require( 'GRAPHING_LINES/common/view/LineFormsView' );
   var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
-  var SlopeEquationNode = require( 'GRAPHING_LINES/slope/view/SlopeEquationNode' );
-  var SlopeGraphNode = require( 'GRAPHING_LINES/slope/view/SlopeGraphNode' );
+  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  var PointSlopeGraphNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeGraphNode' );
 
   /**
-   * @param {SlopeModel} model
+   * @param {PointSlopeModel} model
    * @constructor
    */
-  function SlopeView( model ) {
+  function PointSlopeScreenView( model ) {
 
     var viewProperties = new LineFormsViewProperties();
 
     LineFormsView.call( this, model, viewProperties,
 
       // graph
-      new SlopeGraphNode( model, viewProperties ),
+      new PointSlopeGraphNode( model, viewProperties ),
 
       // graph controls
       new GraphControls(
@@ -37,26 +37,27 @@ define( function( require ) {
         viewProperties.gridVisibleProperty,
         viewProperties.slopeToolVisibleProperty,
         model.standardLines, {
-          includeStandardLines: false,
           maxWidth: 400
         } ),
 
       // equation controls
       new EquationControls(
-        SlopeEquationNode.createGeneralFormNode(),
+        PointSlopeEquationNode.createGeneralFormNode(),
         model.interactiveLineProperty,
         model.savedLines,
         viewProperties.interactiveEquationVisibleProperty,
         viewProperties.linesVisibleProperty,
-        new SlopeEquationNode( model.interactiveLineProperty, {
+        new PointSlopeEquationNode( model.interactiveLineProperty, {
           x1RangeProperty: model.x1RangeProperty,
-          y1RangeProperty: model.y1RangeProperty
+          y1RangeProperty: model.y1RangeProperty,
+          riseRangeProperty: model.riseRangeProperty,
+          runRangeProperty: model.runRangeProperty
         } )
       )
     );
   }
 
-  graphingLines.register( 'SlopeView', SlopeView );
+  graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );
 
-  return inherit( LineFormsView, SlopeView );
+  return inherit( LineFormsView, PointSlopeScreenView );
 } );

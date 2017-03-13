@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
    * @constructor
    */
-  function BaseGameView( model, levelImages, rewardFactoryFunctions ) {
+  function BaseGameScreenView( model, levelImages, rewardFactoryFunctions ) {
 
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
@@ -53,9 +53,9 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'BaseGameView', BaseGameView );
+  graphingLines.register( 'BaseGameScreenView', BaseGameScreenView );
 
-  return inherit( ScreenView, BaseGameView, {
+  return inherit( ScreenView, BaseGameScreenView, {
 
     // @public
     step: function( elapsedTime ) {

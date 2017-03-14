@@ -1,7 +1,7 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
 /**
- * Base type for challenge factories. These factories handle quasi-random creation of challenges.
+ * Base type for challenge factories in the 'Graphing Lines' sim.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -9,40 +9,30 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
+   * @param {Object} [options]
    * @constructor
    */
-  function ChallengeFactory() {}
+  function ChallengeFactory( options ) {
+    BaseChallengeFactory.call( this, options );
+  }
 
   graphingLines.register( 'ChallengeFactory', ChallengeFactory );
 
-  return inherit( Object, ChallengeFactory, {
-
-    /**
-     * Creates challenges for the factory's game level.
-     *
-     * @param {Range} xRange - range of the graph's x axis
-     * @param {Range} yRange - range of the graph's y axis
-     * @return {Challenge[]} array of challenges
-     * @public
-     */
-    createChallenges: function( xRange, yRange ) {
-      throw new Error( 'must be implemented by subtypes' );
-    }
-  }, {
+  return inherit( BaseChallengeFactory, ChallengeFactory, {}, {
 
     /**
      * Picks a point that keeps the slope indicator on the graph.
-     *
-     * @static
      * @param {Fraction} slope
      * @param {Range} graphXRange
      * @param {Range} graphYRange
      * @returns {Vector2}
+     * @static
      */
     choosePointForSlope: function( slope, graphXRange, graphYRange ) {
 

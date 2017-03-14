@@ -31,7 +31,7 @@ define( function( require ) {
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
   /**
-   * @param {ChallengeFactory[]} challengeFactories
+   * @param {BaseChallengeFactory[]} challengeFactories
    * @constructor
    */
   function BaseGameModel( challengeFactories ) {
@@ -236,7 +236,7 @@ define( function( require ) {
       this.challengeIndexProperty.set( -1 );
       var level = this.levelProperty.get();
       assert && assert( level >= 0 && level < this.challengeFactories.length );
-      this.challenges = this.challengeFactories[ level ].createChallenges( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
+      this.challenges = this.challengeFactories[ level ].createChallenges();
       this.challengesPerGameProperty.set( this.challenges.length );
     }
   } );

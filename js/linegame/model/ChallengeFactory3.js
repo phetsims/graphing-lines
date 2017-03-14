@@ -41,7 +41,7 @@ define( function( require ) {
      * @public
      * @override
      */
-    createChallenges: function( xRange, yRange ) {
+    createChallenges: function() {
 
       // all variables, manually hoisted
       var challenges = [];
@@ -53,6 +53,9 @@ define( function( require ) {
       var slope;
       var yIntercept;
       var point;
+
+      var xRange = this.xRange;
+      var yRange = this.yRange;
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = ChallengeFactory2.createSlopeArrays(); // same slopes as level 1

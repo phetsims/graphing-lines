@@ -25,10 +25,11 @@ define( function( require ) {
   var Vector2 = require( 'DOT/Vector2' );
 
   /**
+   * @param {Object} options
    * @constructor
    */
-  function ChallengeFactory1() {
-    ChallengeFactory.call( this );
+  function ChallengeFactory1( options ) {
+    ChallengeFactory.call( this, options );
   }
 
   graphingLines.register( 'ChallengeFactory1', ChallengeFactory1 );
@@ -37,13 +38,11 @@ define( function( require ) {
 
     /**
      * Creates challenges for this game level.
-     * @param {Range} xRange - range of the graph's x axis
-     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
      * @public
      * @override
      */
-    createChallenges: function( xRange, yRange ) {
+    createChallenges: function() {
 
       // all variables, manually hoisted
       var challenges = [];
@@ -66,6 +65,9 @@ define( function( require ) {
       var point;
       var description;
       var manipulationMode;
+
+      var xRange = this.xRange;
+      var yRange = this.yRange;
 
       // for point manipulation challenges, (x1,y1) must be in Quadrant 1 (both coordinates positive) or Quadrant 3 (both coordinates negative)
       {

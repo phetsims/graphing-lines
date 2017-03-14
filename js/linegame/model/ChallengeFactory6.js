@@ -36,13 +36,11 @@ define( function( require ) {
 
     /**
      * Creates challenges for this game level.
-     * @param {Range} xRange - range of the graph's x axis
-     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
      * @public
      * @override
      */
-    createChallenges: function( xRange, yRange ) {
+    createChallenges: function( ) {
 
       // all variables, manually hoisted
       var challenges = [];
@@ -59,6 +57,9 @@ define( function( require ) {
       var xList;
       var yList;
       var i;
+
+      var xRange = this.xRange;
+      var yRange = this.yRange;
 
       yIntercepts = RandomChooser.rangeToArray( yRange );
 

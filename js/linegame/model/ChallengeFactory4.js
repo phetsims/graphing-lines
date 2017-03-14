@@ -36,13 +36,11 @@ define( function( require ) {
 
     /**
      * Creates challenges for this game level.
-     * @param {Range} xRange - range of the graph's x axis
-     * @param {Range} yRange - range of the graph's y axis
      * @return {Challenge[]} array of challenges
      * @public
      * @override
      */
-    createChallenges: function( xRange, yRange ) {
+    createChallenges: function() {
 
       // all variables, manually hoisted
       var challenges = [];
@@ -55,6 +53,9 @@ define( function( require ) {
       var yIntercept;
       var point;
       var positiveSlopes;
+
+      var xRange = this.xRange;
+      var yRange = this.yRange;
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = ChallengeFactory2.createSlopeArrays();

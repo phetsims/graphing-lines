@@ -68,7 +68,7 @@ define( function( require ) {
   }, {
 
     /**
-     * Randomly chooses an item from an array, removes the item from the array.
+     * Randomly chooses an item from an array, and removes the item from the array.
      * @param {*[]} array
      * @return {*}
      * @public

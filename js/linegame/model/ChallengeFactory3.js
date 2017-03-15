@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
@@ -59,7 +59,7 @@ define( function( require ) {
 
       // CHALLENGE 2: Graph-the-Line, point-slope form
       slope = slopePool.chooseRequired();
-      point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+      point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
       challenges.push( new GraphTheLine( 'required slope, point and slope variable',
         this.createPointSlopeLine( point, slope ),
         EquationForm.POINT_SLOPE,
@@ -98,7 +98,7 @@ define( function( require ) {
 
       // CHALLENGE 5: Make-the-Equation, point-slope form
       slope = slopePool.chooseRequired();
-      point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+      point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
       challenges.push( new MakeTheEquation( 'required slope, point and slope variable',
         this.createPointSlopeLine( point, slope ),
         EquationForm.POINT_SLOPE,
@@ -119,7 +119,7 @@ define( function( require ) {
 
         // Make-the-Equation, point-slope form
         slope = slopePool.chooseOptional();
-        point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange ); // random point, not necessarily unique
+        point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
         challenges.push( new MakeTheEquation( 'point and slope variable',
           this.createPointSlopeLine( point, slope ),
           EquationForm.POINT_SLOPE,

@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
@@ -27,12 +27,12 @@ define( function( require ) {
    * @constructor
    */
   function ChallengeFactory1( options ) {
-    ChallengeFactory.call( this, options );
+    BaseChallengeFactory.call( this, options );
   }
 
   graphingLines.register( 'ChallengeFactory1', ChallengeFactory1 );
 
-  return inherit( ChallengeFactory, ChallengeFactory1, {
+  return inherit( BaseChallengeFactory, ChallengeFactory1, {
 
     /**
      * Creates challenges for this game level.

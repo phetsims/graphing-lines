@@ -10,7 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
@@ -64,7 +64,7 @@ define( function( require ) {
 
       // CHALLENGE 2: Make-the-Equation, point-slope form
       slope = slopePool.chooseRequired();
-      point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+      point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
       challenges.push( new MakeTheEquation( 'required slope, point and slope variable',
         this.createPointSlopeLine( point, slope ),
         EquationForm.POINT_SLOPE,
@@ -85,7 +85,7 @@ define( function( require ) {
 
         // Make-the-Equation, point-slope form
         slope = slopePool.chooseRequired();
-        point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+        point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
         challenges.push( new MakeTheEquation( 'required slopes, point and slope variable',
           this.createPointSlopeLine( point, slope ),
           EquationForm.POINT_SLOPE,
@@ -102,7 +102,7 @@ define( function( require ) {
 
       // CHALLENGE 5: Graph-the-Line, point-slope form
       slope = slopePool.chooseRequired();
-      point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+      point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
       challenges.push( new GraphTheLine( 'required slope, point and slope variable',
         this.createPointSlopeLine( point, slope ),
         EquationForm.POINT_SLOPE,
@@ -120,7 +120,7 @@ define( function( require ) {
         positiveSlopes.push( new Fraction( 5, 1 ) );
         slope = ValuePool.choose( positiveSlopes );
 
-        point = ChallengeFactory.choosePointForSlopeInversion( slope, this.xRange, this.yRange );
+        point = BaseChallengeFactory.choosePointForSlopeInversion( slope, this.xRange, this.yRange );
 
         if ( ValuePool.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
 

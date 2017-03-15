@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
@@ -27,12 +27,12 @@ define( function( require ) {
    * @constructor
    */
   function ChallengeFactory6( options ) {
-    ChallengeFactory.call( this, options );
+    BaseChallengeFactory.call( this, options );
   }
 
   graphingLines.register( 'ChallengeFactory6', ChallengeFactory6 );
 
-  return inherit( ChallengeFactory, ChallengeFactory6, {
+  return inherit( BaseChallengeFactory, ChallengeFactory6, {
 
     /**
      * Creates challenges for this game level.

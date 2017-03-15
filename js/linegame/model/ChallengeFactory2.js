@@ -11,7 +11,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
@@ -27,12 +27,12 @@ define( function( require ) {
    * @constructor
    */
   function ChallengeFactory2( options ) {
-    ChallengeFactory.call( this, options );
+    BaseChallengeFactory.call( this, options );
   }
 
   graphingLines.register( 'ChallengeFactory2', ChallengeFactory2 );
 
-  return inherit( ChallengeFactory, ChallengeFactory2, {
+  return inherit( BaseChallengeFactory, ChallengeFactory2, {
 
     /**
      * Creates challenges for this game level.
@@ -98,7 +98,7 @@ define( function( require ) {
           slope = slopePool.chooseOptional();
           description = 'point variable';
         }
-        point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+        point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
 
         // challenge
         challenges.push( new GraphTheLine( description,
@@ -121,7 +121,7 @@ define( function( require ) {
           slope = slopePool.chooseOptional();
           description = 'point variable';
         }
-        point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
+        point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
 
         // challenge
         challenges.push( new MakeTheEquation( description,

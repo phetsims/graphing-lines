@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeFactory = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory' );
+  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
@@ -28,12 +28,12 @@ define( function( require ) {
    * @constructor
    */
   function ChallengeFactory5( options ) {
-    ChallengeFactory.call( this, options );
+    BaseChallengeFactory.call( this, options );
   }
 
   graphingLines.register( 'ChallengeFactory5', ChallengeFactory5 );
 
-  return inherit( ChallengeFactory, ChallengeFactory5, {
+  return inherit( BaseChallengeFactory, ChallengeFactory5, {
 
     /**
      * Creates challenges for this game level.
@@ -157,7 +157,7 @@ define( function( require ) {
         assert && assert( run !== 0 );
 
         // points
-        point = ChallengeFactory.choosePointForSlope( new Fraction( rise, run ), this.xRange, this.yRange );
+        point = BaseChallengeFactory.choosePointForSlope( new Fraction( rise, run ), this.xRange, this.yRange );
         x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : point.x;
         y1 = point.y;
         x2 = x1 + run;

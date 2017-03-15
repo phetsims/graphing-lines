@@ -65,23 +65,24 @@ define( function( require ) {
       var run;
       var i;
 
-      var xRange = this.xRange;
-      var yRange = this.yRange;
-
       // for y-intercept manipulation challenges
-      yIntercepts = RandomChooser.rangeToArray( yRange );
+      yIntercepts = RandomChooser.rangeToArray( this.yRange );
 
       // CHALLENGE 1: Make-the-Equation, slope-intercept form, slope=0
       yIntercept = RandomChooser.choose( yIntercepts );
       challenges.push( new MakeTheEquation( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.SLOPE_INTERCEPT,
+        this.xRange, this.yRange ) );
 
       // CHALLENGE 2: Graph-the-Line, slope-intercept form, slope=0
       yIntercept = RandomChooser.choose( yIntercepts );
       challenges.push( new GraphTheLine( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.SLOPE_INTERCEPT,
+        this.xRange, this.yRange ) );
 
       // CHALLENGE 3: Graph-the-Line, slope-intercept or point-slope form (random choice), 2 variables
       {
@@ -90,7 +91,7 @@ define( function( require ) {
 
         // random points
         var range = new Range( -5, 5 );
-        assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
+        assert && assert( this.xRange.containsRange( range ) && this.yRange.containsRange( range ) );
         xList = RandomChooser.rangeToArray( range );
         yList = RandomChooser.rangeToArray( range );
         x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : RandomChooser.choose( xList );
@@ -111,11 +112,15 @@ define( function( require ) {
         line = new Line( x1, y1, x2, y2, Color.BLACK );
         if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
           challenges.push( new GraphTheLine( 'random choice of slope-intercept, points in [-5,5]',
-            line, EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
+            line, EquationForm.SLOPE_INTERCEPT,
+            ManipulationMode.SLOPE_INTERCEPT,
+            this.xRange, this.yRange ) );
         }
         else {
           challenges.push( new GraphTheLine( 'random choice of point-slope, points in [-5,5]',
-            line, EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
+            line, EquationForm.POINT_SLOPE,
+            ManipulationMode.POINT_SLOPE,
+            this.xRange, this.yRange ) );
         }
       }
 
@@ -136,8 +141,8 @@ define( function( require ) {
         ];
 
         // choose rise and run such that they don't make an undefined or excluded slope
-        riseList = RandomChooser.rangeToArray( yRange );
-        runList = RandomChooser.rangeToArray( xRange );
+        riseList = RandomChooser.rangeToArray( this.yRange );
+        runList = RandomChooser.rangeToArray( this.xRange );
         rise = RandomChooser.choose( riseList );
         run = RandomChooser.choose( runList );
         excluded = true;
@@ -159,7 +164,7 @@ define( function( require ) {
         assert && assert( run !== 0 );
 
         // points
-        point = ChallengeFactory.choosePointForSlope( new Fraction( rise, run ), xRange, yRange );
+        point = ChallengeFactory.choosePointForSlope( new Fraction( rise, run ), this.xRange, this.yRange );
         x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : point.x;
         y1 = point.y;
         x2 = x1 + run;
@@ -169,16 +174,22 @@ define( function( require ) {
         line = new Line( x1, y1, x2, y2, Color.BLACK );
         if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
           challenges.push( new GraphTheLine( 'random choice of slope-intercept, some excluded slopes',
-            line, EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
+            line,
+            EquationForm.SLOPE_INTERCEPT,
+            ManipulationMode.SLOPE_INTERCEPT,
+            this.xRange, this.yRange ) );
         }
         else {
           challenges.push( new GraphTheLine( 'random choice of point-slope, some excluded slopes',
-            line, EquationForm.POINT_SLOPE, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
+            line,
+            EquationForm.POINT_SLOPE,
+            ManipulationMode.POINT_SLOPE,
+            this.xRange, this.yRange ) );
         }
       }
 
       // CHALLENGES 5 & 6: 2 Place-the-Point challenges
-      ChallengeFactory5.addPlaceThePointsChallenges( challenges, xRange, yRange );
+      ChallengeFactory5.addPlaceThePointsChallenges( challenges, this.xRange, this.yRange );
 
       return challenges;
     }

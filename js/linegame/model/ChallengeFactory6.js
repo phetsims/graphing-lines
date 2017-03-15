@@ -58,19 +58,17 @@ define( function( require ) {
       var yList;
       var i;
 
-      var xRange = this.xRange;
-      var yRange = this.yRange;
-
-      yIntercepts = RandomChooser.rangeToArray( yRange );
+      yIntercepts = RandomChooser.rangeToArray( this.yRange );
 
       // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
       yIntercept = RandomChooser.choose( yIntercepts );
       challenges.push( new PlaceThePoints( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
+        EquationForm.SLOPE_INTERCEPT,
+        this.xRange, this.yRange ) );
 
       // CHALLENGES 2 & 3: 2 Place-the-Point challenges (same as level 5)
-      ChallengeFactory5.addPlaceThePointsChallenges( challenges, xRange, yRange );
+      ChallengeFactory5.addPlaceThePointsChallenges( challenges, this.xRange, this.yRange );
 
       // CHALLENGES 4, 5 & 6:
       // 3 Graph-the-Line challenges with mismatched representations
@@ -86,7 +84,7 @@ define( function( require ) {
 
           // random points
           var range = new Range( -7, 7 );
-          assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
+          assert && assert( this.xRange.containsRange( range ) && this.yRange.containsRange( range ) );
           xList = RandomChooser.rangeToArray( range );
           yList = RandomChooser.rangeToArray( range );
           x1 = 0; // y-intercept must be an integer since we're mismatching representations
@@ -106,10 +104,18 @@ define( function( require ) {
           // challenge, with mismatched representations
           line = new Line( x1, y1, x2, y2, Color.BLACK );
           if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-            challenges.push( new GraphTheLine( 'slope-intercept, Graph-the-Line ' + i, line, equationForm, ManipulationMode.POINT_SLOPE, xRange, yRange ) );
+            challenges.push( new GraphTheLine( 'slope-intercept, Graph-the-Line ' + i,
+              line,
+              equationForm,
+              ManipulationMode.POINT_SLOPE,
+              this.xRange, this.yRange ) );
           }
           else {
-            challenges.push( new GraphTheLine( 'point-slope, Graph-the-Line ' + i, line, equationForm, ManipulationMode.SLOPE_INTERCEPT, xRange, yRange ) );
+            challenges.push( new GraphTheLine( 'point-slope, Graph-the-Line ' + i,
+              line,
+              equationForm,
+              ManipulationMode.SLOPE_INTERCEPT,
+              this.xRange, this.yRange ) );
           }
         }
       }

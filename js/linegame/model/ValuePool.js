@@ -85,7 +85,7 @@ define( function( require ) {
 
     /**
      * Converts an integer range to an ordered array of integer values that are in that range.
-     * @param {{min:Number, max:Number}} range
+     * @param {Range} range
      * @param {Object} [options]
      * @returns {number[]}
      * @public

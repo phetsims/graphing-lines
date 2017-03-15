@@ -22,10 +22,11 @@ define( function( require ) {
   var RangeWithValue = require( 'DOT/RangeWithValue' );
 
   /**
+   * @param {Object} [options]
    * @constructor
    */
-  function ChallengeFactory3() {
-    ChallengeFactory.call( this );
+  function ChallengeFactory3( options ) {
+    ChallengeFactory.call( this, options );
   }
 
   graphingLines.register( 'ChallengeFactory3', ChallengeFactory3 );

@@ -14,6 +14,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Object} [options]
@@ -57,6 +58,19 @@ define( function( require ) {
       assert && assert( slope instanceof Fraction );
       assert && assert( typeof intercept === 'number' );
       return Line.createSlopeIntercept( slope.numerator, slope.denominator, intercept );
+    },
+
+    /**
+     * Convenience function for creating a line, give a point and slope.
+     * @param {Vector2} point
+     * @param {Fraction} slope
+     * @returns {Line}
+     * @protected
+     */
+    createPointSlopeLine: function( point, slope ) {
+      assert && assert( point instanceof Vector2 );
+      assert && assert( slope instanceof Fraction );
+      return Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator );
     }
   } );
 } );

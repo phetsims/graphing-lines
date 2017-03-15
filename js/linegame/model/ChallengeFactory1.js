@@ -16,7 +16,6 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var Range = require( 'DOT/Range' );
@@ -48,7 +47,6 @@ define( function( require ) {
 
       // hoist vars
       var slope;
-      var yIntercept;
       var point;
       var description;
       var manipulationMode;
@@ -59,37 +57,29 @@ define( function( require ) {
       var pointPool = new ValuePool( this.createPointArrays() );
 
       // CHALLENGE 1: Graph-the-Line, slope-intercept form, slope variable
-      slope = slopePool.chooseRequired();
-      yIntercept = yInterceptPool.chooseOptional();
       challenges.push( new GraphTheLine( 'required slopes, slope variable',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        this.createSlopeInterceptLine( slopePool.chooseRequired(), yInterceptPool.chooseOptional() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 2: Graph-the-Line, slope-intercept form, intercept variable
-      slope = slopePool.chooseOptional();
-      yIntercept = yInterceptPool.chooseRequired();
       challenges.push( new GraphTheLine( 'required y-intercept, y-intercept variable',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.INTERCEPT,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 3: Make-the-Equation, slope-intercept form, slope variable
-      slope = slopePool.chooseRequired();
-      yIntercept = yInterceptPool.chooseOptional();
       challenges.push( new MakeTheEquation( 'required slope, slope variable',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        this.createSlopeInterceptLine( slopePool.chooseRequired(), yInterceptPool.chooseOptional() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 4: Make-the-Equation, slope-intercept form, intercept variable
-      slope = slopePool.chooseOptional();
-      yIntercept = yInterceptPool.chooseRequired();
       challenges.push( new MakeTheEquation( 'required y-intercept, y-intercept variable',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.INTERCEPT,
         this.xRange, this.yRange ) );
@@ -115,7 +105,7 @@ define( function( require ) {
 
         // challenge
         challenges.push( new GraphTheLine( description,
-          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
+          this.createPointSlopeLine( point, slope ),
           EquationForm.POINT_SLOPE,
           manipulationMode,
           this.xRange, this.yRange ) );
@@ -139,7 +129,7 @@ define( function( require ) {
 
         // challenge
         challenges.push( new MakeTheEquation( description,
-          Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
+          this.createPointSlopeLine( point, slope ),
           EquationForm.POINT_SLOPE,
           manipulationMode,
           this.xRange, this.yRange ) );

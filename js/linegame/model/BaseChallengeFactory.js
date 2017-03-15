@@ -11,7 +11,6 @@ define( function( require ) {
   // modules
   var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -58,21 +57,6 @@ define( function( require ) {
       assert && assert( slope instanceof Fraction );
       assert && assert( typeof intercept === 'number' );
       return Line.createSlopeIntercept( slope.numerator, slope.denominator, intercept );
-    },
-
-    /**
-     * Randomly shuffles an array, unless turned off via 'shuffle' query parameter.
-     * @param {*[]} array
-     * @returns {*[]}
-     * @protected
-     */
-    shuffle: function( array ) {
-      if ( GLQueryParameters.shuffle ) {
-        return phet.joist.random.shuffle( array );
-      }
-      else {
-        return array;
-      }
     }
   } );
 } );

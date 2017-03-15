@@ -18,6 +18,7 @@ define( function( require ) {
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GameTimer = require( 'VEGAS/GameTimer' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -237,6 +238,9 @@ define( function( require ) {
       var level = this.levelProperty.get();
       assert && assert( level >= 0 && level < this.challengeFactories.length );
       this.challenges = this.challengeFactories[ level ].createChallenges();
+      if ( GLQueryParameters.shuffle ) {
+        this.challenges = phet.joist.random.shuffle( this.challenges );
+      }
       this.challengesPerGameProperty.set( this.challenges.length );
     }
   } );

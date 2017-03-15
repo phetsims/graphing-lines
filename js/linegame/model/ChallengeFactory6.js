@@ -13,7 +13,6 @@ define( function( require ) {
   var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
   var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -113,9 +112,8 @@ define( function( require ) {
           }
         }
       }
-
-      // shuffle and return
-      return ( GLQueryParameters.shuffleChallenges ? phet.joist.random.shuffle( challenges ) : challenges );
+       
+      return challenges;
     }
   } );
 } );

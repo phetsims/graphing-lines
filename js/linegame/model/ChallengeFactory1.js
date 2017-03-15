@@ -106,7 +106,7 @@ define( function( require ) {
         else {
           point = pointPool.chooseRequired();
           slope = slopePool.chooseOptional();
-          description = 'require point, point variable';
+          description = 'required point, point variable';
         }
 
         // challenge

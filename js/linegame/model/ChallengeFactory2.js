@@ -22,6 +22,7 @@ define( function( require ) {
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Range = require( 'DOT/Range' );
+  var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
   /**
    * @param {Object} [options]
@@ -43,63 +44,57 @@ define( function( require ) {
      */
     createChallenges: function() {
 
-      // all variables, manually hoisted
       var challenges = [];
-      var slopeArrays;
-      var slopeArrayIndices;
-      var yInterceptArrays;
-      var yInterceptArrayIndices;
-      var pointSlopeManipulationModes;
+
+      // hoist vars
       var slope;
       var yIntercept;
       var point;
       var description;
       var manipulationMode;
 
-      var xRange = this.xRange;
-      var yRange = this.yRange;
+      // pools of values for slope, y-intercept and point
+      var slopePool = new ValuePool( this.createSlopeArrays() );
+      var yInterceptPool = new ValuePool( this.createYInterceptArrays() );
 
-      // for slope manipulation challenges, 1 slope must come from each list
-      slopeArrays = ChallengeFactory2.createSlopeArrays();
-      slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
+      // CHALLENGE 1: Graph-the-Line, slope-intercept form
+      slope = slopePool.chooseRequired();
+      yIntercept = yInterceptPool.chooseOptional();
+      challenges.push( new GraphTheLine( 'required slope, slope variable',
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.SLOPE,
+        this.xRange, this.yRange ) );
 
-      // for y-intercept manipulation challenges, one must be positive, one negative
-      yInterceptArrays = [
-        RandomChooser.rangeToArray( new Range( yRange.min, -1 ) ),
-        RandomChooser.rangeToArray( new Range( 1, yRange.max ) )
-      ];
-      yInterceptArrayIndices = RandomChooser.rangeToArray( new Range( 0, yInterceptArrays.length - 1 ) );
+      // CHALLENGE 2: Graph-the-Line, slope-intercept form
+      slope = slopePool.chooseOptional();
+      yIntercept = yInterceptPool.chooseRequired();
+      challenges.push( new GraphTheLine( 'required y-intercept, y-intercept variable',
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.INTERCEPT,
+        this.xRange, this.yRange ) );
+
+      // CHALLENGE 3: Make-the-Equation, slope-intercept form
+      slope = slopePool.chooseRequired();
+      yIntercept = yInterceptPool.chooseOptional();
+      challenges.push( new MakeTheEquation( 'required slope, slope variable',
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.SLOPE,
+        this.xRange, this.yRange ) );
+
+      // CHALLENGE 4: Make-the-Equation, slope-intercept form
+      slope = slopePool.chooseOptional();
+      yIntercept = yInterceptPool.chooseRequired();
+      challenges.push( new MakeTheEquation( 'required y-intercept, y-intercept variable',
+        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.INTERCEPT,
+        this.xRange, this.yRange ) );
 
       // for point-slope form, one of each manipulation mode
-      pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
-
-      // CHALLENGE 1: Graph-the-Line, slope-intercept form, slope variable
-      slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // first required slope, unique
-      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
-      challenges.push( new GraphTheLine( '1 of 3 required slopes',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
-
-      // CHALLENGE 2: Graph-the-Line, slope-intercept form, intercept variable
-      slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
-      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // first required y-intercept, unique
-      challenges.push( new GraphTheLine( '1 of 2 required y-intercepts',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
-
-      // CHALLENGE 3: Make-the-Equation, slope-intercept form, slope variable
-      slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices );  // second required slope, unique
-      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays ); // unique y-intercept
-      challenges.push( new MakeTheEquation( '2 of 3 requires slopes',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, xRange, yRange ) );
-
-      // CHALLENGE 4: Make-the-Equation, slope-intercept form, intercept variable
-      slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
-      yIntercept = RandomChooser.chooseFromArrays( yInterceptArrays, yInterceptArrayIndices ); // second required y-intercept, unique
-      challenges.push( new MakeTheEquation( '2 of 2 required y-intercepts',
-        Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT, xRange, yRange ) );
+      var pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
       // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {
@@ -107,19 +102,22 @@ define( function( require ) {
         manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
-          slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // third required slope, unique
-          description = 'random choice of slope manipulation, 3 of 3 required slopes';
+          slope = slopePool.chooseRequired();
+          description = 'required slope, slope variable';
         }
         else {
-          slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
-          description = 'random choice of point manipulation';
+          slope = slopePool.chooseOptional();
+          description = 'point variable';
         }
-        point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
+        // random point, not necessarily unique
+        point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
 
         // challenge
         challenges.push( new GraphTheLine( description,
           Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
-          EquationForm.POINT_SLOPE, manipulationMode, xRange, yRange ) );
+          EquationForm.POINT_SLOPE,
+          manipulationMode,
+          this.xRange, this.yRange ) );
       }
 
       // CHALLENGE 6: Make-the-Equation, point-slope form, point or slope variable (whichever was not variable above)
@@ -128,24 +126,26 @@ define( function( require ) {
         manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
-          slope = RandomChooser.chooseFromArrays( slopeArrays, slopeArrayIndices ); // third required slope, unique
-          description = 'slope manipulation because Graph-the-Line uses point, 3 of 3 required slopes';
+          slope = slopePool.chooseRequired();
+          description = 'required slope, slope variable';
         }
         else {
-          slope = RandomChooser.chooseFromArrays( slopeArrays ); // unique slope
-          description = 'point manipulation because Graph-the-Line uses slope';
+          slope = slopePool.chooseOptional();
+          description = 'point variable';
         }
-        point = ChallengeFactory.choosePointForSlope( slope, xRange, yRange ); // random point, not necessarily unique
+        // random point, not necessarily unique
+        point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
 
         // challenge
         challenges.push( new MakeTheEquation( description,
           Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
-          EquationForm.POINT_SLOPE, manipulationMode, xRange, yRange ) );
+          EquationForm.POINT_SLOPE,
+          manipulationMode,
+          this.xRange, this.yRange ) );
       }
 
       return challenges;
-    }
-  }, {
+    },
 
     /**
      * Creates the 3 sets of slopes that are identified in the design document.
@@ -190,6 +190,20 @@ define( function( require ) {
         ]
       ];
     },
+
+    /**
+     * Creates the sets of y-intercepts used for generating challenges.
+     * @returns {number[][]}
+     * @protected
+     * @override
+     */
+    createYInterceptArrays: function() {
+      return [
+        ValuePool.rangeToArray( new Range( this.yRange.min, -1 ) ), // negative intercepts
+        ValuePool.rangeToArray( new Range( 1, this.yRange.max ) )   // positive intercepts
+      ];
+    }
+  }, {
 
     /**
      * Creates the set of positive fractional slopes that are identified in the design document.

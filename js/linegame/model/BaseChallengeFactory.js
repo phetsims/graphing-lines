@@ -1,7 +1,7 @@
 // Copyright 2017, University of Colorado Boulder
 
 /**
- * Base type for challenge factories.
+ * Base type for challenge factories in both the 'Graphing Lines' and 'Graphing Slope-Intercept' sims.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

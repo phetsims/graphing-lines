@@ -3,7 +3,7 @@
 /**
  * ValuePool takes sets of values, separates them into "required" and "optional" sets,
  * and provides an API for randomly selecting values from either set.
- * Used in the game to create sets of slopes and y-intercepts for challenges.
+ * Used in the game to create sets of slopes, y-intercepts and points for challenges.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

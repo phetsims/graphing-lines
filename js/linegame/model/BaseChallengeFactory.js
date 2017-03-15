@@ -9,9 +9,12 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var Fraction = require( 'PHETCOMMON/model/Fraction' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
+  var Line = require( 'GRAPHING_LINES/common/model/Line' );
 
   /**
    * @param {Object} [options]
@@ -38,9 +41,38 @@ define( function( require ) {
      *
      * @return {Challenge[]} array of challenges
      * @public
+     * @abstract
      */
     createChallenges: function() {
       throw new Error( 'must be implemented by subtypes' );
+    },
+
+    /**
+     * Convenience function for creating a line, give a slope and intercept.
+     * @param {Fraction} slope
+     * @param {number} intercept
+     * @returns {Line}
+     * @protected
+     */
+    createSlopeInterceptLine: function( slope, intercept ) {
+      assert && assert( slope instanceof Fraction );
+      assert && assert( typeof intercept === 'number' );
+      return Line.createSlopeIntercept( slope.numerator, slope.denominator, intercept );
+    },
+
+    /**
+     * Randomly shuffles an array, unless turned off via query parameter.
+     * @param {*[]} array
+     * @returns {*[]}
+     * @protected
+     */
+    shuffle: function( array ) {
+      if ( GLQueryParameters.shuffleChallenges ) {
+        return phet.joist.random.shuffle( array );
+      }
+      else {
+        return array;
+      }
     }
   } );
 } );

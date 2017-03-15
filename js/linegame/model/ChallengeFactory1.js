@@ -63,7 +63,8 @@ define( function( require ) {
       yIntercept = yInterceptPool.chooseOptional();
       challenges.push( new GraphTheLine( 'required slopes, slope variable',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE,
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 2: Graph-the-Line, slope-intercept form, intercept variable
@@ -71,7 +72,8 @@ define( function( require ) {
       yIntercept = yInterceptPool.chooseRequired();
       challenges.push( new GraphTheLine( 'required y-intercept, y-intercept variable',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT,
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.INTERCEPT,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 3: Make-the-Equation, slope-intercept form, slope variable
@@ -79,7 +81,8 @@ define( function( require ) {
       yIntercept = yInterceptPool.chooseOptional();
       challenges.push( new MakeTheEquation( 'required slope, slope variable',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE,
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 4: Make-the-Equation, slope-intercept form, intercept variable
@@ -87,7 +90,8 @@ define( function( require ) {
       yIntercept = yInterceptPool.chooseRequired();
       challenges.push( new MakeTheEquation( 'required y-intercept, y-intercept variable',
         Line.createSlopeIntercept( slope.numerator, slope.denominator, yIntercept ),
-        EquationForm.SLOPE_INTERCEPT, ManipulationMode.INTERCEPT,
+        EquationForm.SLOPE_INTERCEPT,
+        ManipulationMode.INTERCEPT,
         this.xRange, this.yRange ) );
 
       // for point-slope form, one of each manipulation mode
@@ -112,7 +116,8 @@ define( function( require ) {
         // challenge
         challenges.push( new GraphTheLine( description,
           Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
-          EquationForm.POINT_SLOPE, manipulationMode,
+          EquationForm.POINT_SLOPE,
+          manipulationMode,
           this.xRange, this.yRange ) );
       }
 
@@ -135,7 +140,8 @@ define( function( require ) {
         // challenge
         challenges.push( new MakeTheEquation( description,
           Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator ),
-          EquationForm.POINT_SLOPE, manipulationMode,
+          EquationForm.POINT_SLOPE,
+          manipulationMode,
           this.xRange, this.yRange ) );
       }
 

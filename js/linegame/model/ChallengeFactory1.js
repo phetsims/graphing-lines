@@ -56,28 +56,28 @@ define( function( require ) {
       var yInterceptPool = new ValuePool( this.createYInterceptArrays() );
       var pointPool = new ValuePool( this.createPointArrays() );
 
-      // CHALLENGE 1: Graph-the-Line, slope-intercept form, slope variable
+      // CHALLENGE 1: Graph-the-Line, slope-intercept form
       challenges.push( new GraphTheLine( 'required slopes, slope variable',
         this.createSlopeInterceptLine( slopePool.chooseRequired(), yInterceptPool.chooseOptional() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
-      // CHALLENGE 2: Graph-the-Line, slope-intercept form, intercept variable
+      // CHALLENGE 2: Graph-the-Line, slope-intercept form
       challenges.push( new GraphTheLine( 'required y-intercept, y-intercept variable',
         this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.INTERCEPT,
         this.xRange, this.yRange ) );
 
-      // CHALLENGE 3: Make-the-Equation, slope-intercept form, slope variable
+      // CHALLENGE 3: Make-the-Equation, slope-intercept form
       challenges.push( new MakeTheEquation( 'required slope, slope variable',
         this.createSlopeInterceptLine( slopePool.chooseRequired(), yInterceptPool.chooseOptional() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
-      // CHALLENGE 4: Make-the-Equation, slope-intercept form, intercept variable
+      // CHALLENGE 4: Make-the-Equation, slope-intercept form
       challenges.push( new MakeTheEquation( 'required y-intercept, y-intercept variable',
         this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
@@ -94,7 +94,7 @@ define( function( require ) {
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           point = pointPool.chooseOptional();
-          slope = slopePool.chooseRequired(); // third required slope, unique
+          slope = slopePool.chooseRequired();
           description = 'required slope, slope variable';
         }
         else {

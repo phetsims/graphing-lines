@@ -99,7 +99,6 @@ define( function( require ) {
           slope = slopePool.chooseOptional();
           description = 'point variable';
         }
-        // random point, not necessarily unique
         point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
 
         // challenge
@@ -123,7 +122,6 @@ define( function( require ) {
           slope = slopePool.chooseOptional();
           description = 'point variable';
         }
-        // random point, not necessarily unique
         point = ChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
 
         // challenge

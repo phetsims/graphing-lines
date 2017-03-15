@@ -44,8 +44,10 @@ define( function( require ) {
 
       var challenges = [];
 
-      // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
+      // for y-intercept manipulation challenges
       var yIntercepts = ValuePool.rangeToArray( this.yRange );
+
+      // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
       var yIntercept = ValuePool.choose( yIntercepts );
       challenges.push( new PlaceThePoints( 'slope=0, slope and intercept variable',
         Line.createSlopeIntercept( 0, 1, yIntercept ),

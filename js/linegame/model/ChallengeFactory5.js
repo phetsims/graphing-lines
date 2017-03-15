@@ -57,7 +57,6 @@ define( function( require ) {
       var y2;
       var rise;
       var run;
-      var i;
 
       // for y-intercept manipulation challenges
       var yIntercepts = ValuePool.rangeToArray( this.yRange );
@@ -144,7 +143,7 @@ define( function( require ) {
           slope = new Fraction( rise, run ).getValue();
           excluded = false;
           // is this an excluded or undefined slope?
-          for ( i = 0; i < excludedSlopes.length; i++ ) {
+          for ( var i = 0; i < excludedSlopes.length; i++ ) {
             if ( run === 0 || slope === excludedSlopes[ i ].getValue() ) {
               excluded = true;
               run = ValuePool.choose( runList ); // choose a new run, and remove it from runList

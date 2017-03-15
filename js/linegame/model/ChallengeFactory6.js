@@ -42,27 +42,12 @@ define( function( require ) {
      */
     createChallenges: function( ) {
 
-      // all variables, manually hoisted
       var challenges = [];
-      var yIntercepts;
-      var equationForms;
-      var equationForm;
-      var slope;
-      var yIntercept;
-      var line;
-      var x1;
-      var y1;
-      var x2;
-      var y2;
-      var xList;
-      var yList;
-      var i;
-
-      yIntercepts = ValuePool.rangeToArray( this.yRange );
 
       // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
-      yIntercept = ValuePool.choose( yIntercepts );
-      challenges.push( new PlaceThePoints( 'slope=0',
+      var yIntercepts = ValuePool.rangeToArray( this.yRange );
+      var yIntercept = ValuePool.choose( yIntercepts );
+      challenges.push( new PlaceThePoints( 'slope=0, slope and intercept variable',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
         this.xRange, this.yRange ) );
@@ -75,43 +60,43 @@ define( function( require ) {
       // (eg, point-slope equation with slope-intercept manipulators)
       {
         // we'll pick 3 from here
-        equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE, EquationForm.POINT_SLOPE ];
+        var equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE, EquationForm.POINT_SLOPE ];
         assert && assert( equationForms.length === 4 );
 
-        for ( i = 0; i < 3; i++ ) {
+        for ( var i = 0; i < 3; i++ ) {
 
-          equationForm = ValuePool.choose( equationForms );
+          var equationForm = ValuePool.choose( equationForms );
 
           // random points
           var range = new Range( -7, 7 );
           assert && assert( this.xRange.containsRange( range ) && this.yRange.containsRange( range ) );
-          xList = ValuePool.rangeToArray( range );
-          yList = ValuePool.rangeToArray( range );
-          x1 = 0; // y-intercept must be an integer since we're mismatching representations
-          y1 = ValuePool.choose( yList );
-          x2 = ValuePool.choose( xList );
+          var xList = ValuePool.rangeToArray( range );
+          var yList = ValuePool.rangeToArray( range );
+          var x1 = 0; // y-intercept must be an integer since we're mismatching representations
+          var y1 = ValuePool.choose( yList );
+          var x2 = ValuePool.choose( xList );
           if ( x2 === x1 ) {
             x2 = ValuePool.choose( xList ); // prevent undefined slope
           }
-          y2 = ValuePool.choose( yList );
+          var y2 = ValuePool.choose( yList );
 
           // exclude slopes of +1 and -1
-          slope = ( y2 - y1 ) / ( x2 - x1 );
+          var slope = ( y2 - y1 ) / ( x2 - x1 );
           if ( slope === 1 || slope === -1 ) {
             y2 = ValuePool.choose( yList );
           }
 
           // challenge, with mismatched representations
-          line = new Line( x1, y1, x2, y2, Color.BLACK );
+          var line = new Line( x1, y1, x2, y2, Color.BLACK );
           if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-            challenges.push( new GraphTheLine( 'slope-intercept, Graph-the-Line ' + i,
+            challenges.push( new GraphTheLine( 'slope-intercept form, point and slope variable',
               line,
               equationForm,
               ManipulationMode.POINT_SLOPE,
               this.xRange, this.yRange ) );
           }
           else {
-            challenges.push( new GraphTheLine( 'point-slope, Graph-the-Line ' + i,
+            challenges.push( new GraphTheLine( 'point-slope form, slope and intercept variable',
               line,
               equationForm,
               ManipulationMode.SLOPE_INTERCEPT,

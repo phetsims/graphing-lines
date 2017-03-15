@@ -19,7 +19,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
   /**
@@ -73,7 +72,7 @@ define( function( require ) {
         this.xRange, this.yRange ) );
 
       // CHALLENGE 3: Make-the-Equation, slope-intercept or point-slope form (random choice)
-      if ( RandomChooser.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
+      if ( ValuePool.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
 
         // Make-the-Equation, slope-intercept form
         challenges.push( new MakeTheEquation( 'slope and intercept variable',
@@ -119,11 +118,11 @@ define( function( require ) {
         positiveSlopes.push( new Fraction( 3, 1 ) );
         positiveSlopes.push( new Fraction( 4, 1 ) );
         positiveSlopes.push( new Fraction( 5, 1 ) );
-        slope = RandomChooser.choose( positiveSlopes );
+        slope = ValuePool.choose( positiveSlopes );
 
         point = ChallengeFactory.choosePointForSlopeInversion( slope, this.xRange, this.yRange );
 
-        if ( RandomChooser.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
+        if ( ValuePool.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
 
           // Graph-the-Line, slope-intercept, 2 points variable
           challenges.push( new GraphTheLine( 'force slope inversion, 2 points variable',

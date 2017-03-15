@@ -19,7 +19,6 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Range = require( 'DOT/Range' );
   var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
@@ -89,7 +88,7 @@ define( function( require ) {
       // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {
         // manipulation mode
-        manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
+        manipulationMode = ValuePool.choose( pointSlopeManipulationModes );
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           slope = slopePool.chooseRequired();
@@ -112,7 +111,7 @@ define( function( require ) {
       // CHALLENGE 6: Make-the-Equation, point-slope form, point or slope variable (whichever was not variable above)
       {
         // manipulation mode
-        manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
+        manipulationMode = ValuePool.choose( pointSlopeManipulationModes );
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           slope = slopePool.chooseRequired();

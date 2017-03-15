@@ -19,7 +19,6 @@ define( function( require ) {
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var Range = require( 'DOT/Range' );
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -90,7 +89,7 @@ define( function( require ) {
       // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {
         // manipulation mode
-        manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
+        manipulationMode = ValuePool.choose( pointSlopeManipulationModes );
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           point = pointPool.chooseOptional();
@@ -114,7 +113,7 @@ define( function( require ) {
       // CHALLENGE 6: Make-the-Equation, point-slope form, point or slope variable (whichever was not chosen above)
       {
         // manipulation mode
-        manipulationMode = RandomChooser.choose( pointSlopeManipulationModes );
+        manipulationMode = ValuePool.choose( pointSlopeManipulationModes );
 
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           point = pointPool.chooseOptional();

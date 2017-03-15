@@ -24,7 +24,7 @@ define( function( require ) {
 
     // whether to shuffle challenges in the game,
     // set to false if you want to compare challenges to the design doc
-    shuffleChallenges: {
+    shuffle: {
       type: 'boolean',
       defaultValue: true
     }

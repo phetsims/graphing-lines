@@ -61,13 +61,13 @@ define( function( require ) {
     },
 
     /**
-     * Randomly shuffles an array, unless turned off via query parameter.
+     * Randomly shuffles an array, unless turned off via 'shuffle' query parameter.
      * @param {*[]} array
      * @returns {*[]}
      * @protected
      */
     shuffle: function( array ) {
-      if ( GLQueryParameters.shuffleChallenges ) {
+      if ( GLQueryParameters.shuffle ) {
         return phet.joist.random.shuffle( array );
       }
       else {

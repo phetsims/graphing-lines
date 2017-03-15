@@ -19,7 +19,7 @@ define( function( require ) {
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
 
   /**
    * @param {Object} [options]
@@ -59,14 +59,14 @@ define( function( require ) {
 
       // for slope manipulation challenges, 1 slope must come from each list
       slopeArrays = ChallengeFactory2.createSlopeArrays(); // same slopes as level 1
-      slopeArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, slopeArrays.length - 1 ) );
+      slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
 
       // for y-intercept manipulation challenges, one must be positive, one negative
       yInterceptArrays = [
-        RandomChooser.rangeToArray( new RangeWithValue( yRange.min, -1 ) ),
-        RandomChooser.rangeToArray( new RangeWithValue( 1, yRange.max ) )
+        RandomChooser.rangeToArray( new Range( yRange.min, -1 ) ),
+        RandomChooser.rangeToArray( new Range( 1, yRange.max ) )
       ];
-      yInterceptArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, yInterceptArrays.length - 1 ) );
+      yInterceptArrayIndices = RandomChooser.rangeToArray( new Range( 0, yInterceptArrays.length - 1 ) );
 
       // equation form for 3rd challenge of each type
       equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ];

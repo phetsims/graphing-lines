@@ -19,7 +19,7 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
   var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Vector2 = require( 'DOT/Vector2' );
 
@@ -70,8 +70,8 @@ define( function( require ) {
 
       // for point manipulation challenges, (x1,y1) must be in Quadrant 1 (both coordinates positive) or Quadrant 3 (both coordinates negative)
       {
-        x1Range = new RangeWithValue( -9, 4 );
-        y1Range = new RangeWithValue( -9, 4 );
+        x1Range = new Range( -9, 4 );
+        y1Range = new Range( -9, 4 );
         assert && assert( xRange.containsRange( x1Range ) && yRange.containsRange( y1Range ) );
 
         // all points in Quadrant 1
@@ -91,7 +91,7 @@ define( function( require ) {
         }
 
         pointArrays = [ quadrant1Points, quadrant3Points ];
-        pointArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, pointArrays.length - 1 ) );
+        pointArrayIndices = RandomChooser.rangeToArray( new Range( 0, pointArrays.length - 1 ) );
       }
 
       // for slope manipulation challenges, 1 slope must come from each list
@@ -100,16 +100,16 @@ define( function( require ) {
         [ new Fraction( 1, 2 ), new Fraction( 1, 3 ), new Fraction( 1, 4 ), new Fraction( 1, 5 ) ],
         [ new Fraction( 2, 3 ), new Fraction( 3, 4 ), new Fraction( 3, 5 ), new Fraction( 2, 5 ) ]
       ];
-      slopeArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, slopeArrays.length - 1 ) );
+      slopeArrayIndices = RandomChooser.rangeToArray( new Range( 0, slopeArrays.length - 1 ) );
 
       // for y-intercept manipulation challenges, one must be positive, one negative
-      yInterceptRange = new RangeWithValue( -6, 4 );
+      yInterceptRange = new Range( -6, 4 );
       assert && assert( yRange.containsRange( yInterceptRange ) );
       yInterceptArrays = [
-        RandomChooser.rangeToArray( new RangeWithValue( yInterceptRange.min, -1 ) ),
-        RandomChooser.rangeToArray( new RangeWithValue( 1, yInterceptRange.max ) )
+        RandomChooser.rangeToArray( new Range( yInterceptRange.min, -1 ) ),
+        RandomChooser.rangeToArray( new Range( 1, yInterceptRange.max ) )
       ];
-      yInterceptArrayIndices = RandomChooser.rangeToArray( new RangeWithValue( 0, yInterceptArrays.length - 1 ) );
+      yInterceptArrayIndices = RandomChooser.rangeToArray( new Range( 0, yInterceptArrays.length - 1 ) );
 
       // for point-slope form, one of each manipulation mode
       pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];

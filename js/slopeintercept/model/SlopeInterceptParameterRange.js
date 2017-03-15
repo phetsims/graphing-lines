@@ -13,7 +13,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PointSlopeParameterRange = require( 'GRAPHING_LINES/pointslope/model/PointSlopeParameterRange' );
-  var RangeWithValue = require( 'DOT/RangeWithValue' );
+  var Range = require( 'DOT/Range' );
 
   function SlopeInterceptParameterRange() {
     PointSlopeParameterRange.call( this );
@@ -25,7 +25,7 @@ define( function( require ) {
 
     // @override @pubic Ranges are identical to point-slope, except that x1 is fixed at 0 for slope-intercept.
     x1: function() {
-      return new RangeWithValue( 0, 0 );
+      return new Range( 0, 0 );
     }
   } );
 } );

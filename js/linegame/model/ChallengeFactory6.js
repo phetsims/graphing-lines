@@ -19,8 +19,8 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Range = require( 'DOT/Range' );
+  var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
   /**
    * @param {Object} [options]
@@ -58,10 +58,10 @@ define( function( require ) {
       var yList;
       var i;
 
-      yIntercepts = RandomChooser.rangeToArray( this.yRange );
+      yIntercepts = ValuePool.rangeToArray( this.yRange );
 
       // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
-      yIntercept = RandomChooser.choose( yIntercepts );
+      yIntercept = ValuePool.choose( yIntercepts );
       challenges.push( new PlaceThePoints( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
@@ -80,25 +80,25 @@ define( function( require ) {
 
         for ( i = 0; i < 3; i++ ) {
 
-          equationForm = RandomChooser.choose( equationForms );
+          equationForm = ValuePool.choose( equationForms );
 
           // random points
           var range = new Range( -7, 7 );
           assert && assert( this.xRange.containsRange( range ) && this.yRange.containsRange( range ) );
-          xList = RandomChooser.rangeToArray( range );
-          yList = RandomChooser.rangeToArray( range );
+          xList = ValuePool.rangeToArray( range );
+          yList = ValuePool.rangeToArray( range );
           x1 = 0; // y-intercept must be an integer since we're mismatching representations
-          y1 = RandomChooser.choose( yList );
-          x2 = RandomChooser.choose( xList );
+          y1 = ValuePool.choose( yList );
+          x2 = ValuePool.choose( xList );
           if ( x2 === x1 ) {
-            x2 = RandomChooser.choose( xList ); // prevent undefined slope
+            x2 = ValuePool.choose( xList ); // prevent undefined slope
           }
-          y2 = RandomChooser.choose( yList );
+          y2 = ValuePool.choose( yList );
 
           // exclude slopes of +1 and -1
           slope = ( y2 - y1 ) / ( x2 - x1 );
           if ( slope === 1 || slope === -1 ) {
-            y2 = RandomChooser.choose( yList );
+            y2 = ValuePool.choose( yList );
           }
 
           // challenge, with mismatched representations

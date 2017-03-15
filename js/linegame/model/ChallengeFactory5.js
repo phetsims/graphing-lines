@@ -20,8 +20,8 @@ define( function( require ) {
   var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
   var PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
-  var RandomChooser = require( 'GRAPHING_LINES/linegame/model/RandomChooser' );
   var Range = require( 'DOT/Range' );
+  var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
   /**
    * @param {Object} [options]
@@ -66,10 +66,10 @@ define( function( require ) {
       var i;
 
       // for y-intercept manipulation challenges
-      yIntercepts = RandomChooser.rangeToArray( this.yRange );
+      yIntercepts = ValuePool.rangeToArray( this.yRange );
 
       // CHALLENGE 1: Make-the-Equation, slope-intercept form, slope=0
-      yIntercept = RandomChooser.choose( yIntercepts );
+      yIntercept = ValuePool.choose( yIntercepts );
       challenges.push( new MakeTheEquation( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
@@ -77,7 +77,7 @@ define( function( require ) {
         this.xRange, this.yRange ) );
 
       // CHALLENGE 2: Graph-the-Line, slope-intercept form, slope=0
-      yIntercept = RandomChooser.choose( yIntercepts );
+      yIntercept = ValuePool.choose( yIntercepts );
       challenges.push( new GraphTheLine( 'slope=0',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
@@ -87,25 +87,25 @@ define( function( require ) {
       // CHALLENGE 3: Graph-the-Line, slope-intercept or point-slope form (random choice), 2 variables
       {
         // randomly choose equation form
-        equationForm = RandomChooser.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
+        equationForm = ValuePool.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
 
         // random points
         var range = new Range( -5, 5 );
         assert && assert( this.xRange.containsRange( range ) && this.yRange.containsRange( range ) );
-        xList = RandomChooser.rangeToArray( range );
-        yList = RandomChooser.rangeToArray( range );
-        x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : RandomChooser.choose( xList );
-        y1 = RandomChooser.choose( yList );
-        x2 = RandomChooser.choose( xList );
+        xList = ValuePool.rangeToArray( range );
+        yList = ValuePool.rangeToArray( range );
+        x1 = ( equationForm === EquationForm.SLOPE_INTERCEPT ) ? 0 : ValuePool.choose( xList );
+        y1 = ValuePool.choose( yList );
+        x2 = ValuePool.choose( xList );
         if ( x2 === x1 ) {
-          x2 = RandomChooser.choose( xList ); // prevent undefined slope
+          x2 = ValuePool.choose( xList ); // prevent undefined slope
         }
-        y2 = RandomChooser.choose( yList );
+        y2 = ValuePool.choose( yList );
 
         // exclude slopes of +1 and -1
         slope = ( y2 - y1 ) / ( x2 - x1 );
         if ( slope === 1 || slope === -1 ) {
-          y2 = RandomChooser.choose( yList );
+          y2 = ValuePool.choose( yList );
         }
 
         // challenge
@@ -128,7 +128,7 @@ define( function( require ) {
       // random slope with exclusions
       {
         // randomly choose equation form
-        equationForm = RandomChooser.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
+        equationForm = ValuePool.choose( [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ] );
 
         // exclude slopes whose simplified absolute value matches these
         excludedSlopes = [
@@ -141,10 +141,10 @@ define( function( require ) {
         ];
 
         // choose rise and run such that they don't make an undefined or excluded slope
-        riseList = RandomChooser.rangeToArray( this.yRange );
-        runList = RandomChooser.rangeToArray( this.xRange );
-        rise = RandomChooser.choose( riseList );
-        run = RandomChooser.choose( runList );
+        riseList = ValuePool.rangeToArray( this.yRange );
+        runList = ValuePool.rangeToArray( this.xRange );
+        rise = ValuePool.choose( riseList );
+        run = ValuePool.choose( runList );
         excluded = true;
         while ( excluded && runList.length > 0 ) {
           slope = new Fraction( rise, run ).getValue();
@@ -153,7 +153,7 @@ define( function( require ) {
           for ( i = 0; i < excludedSlopes.length; i++ ) {
             if ( run === 0 || slope === excludedSlopes[ i ].getValue() ) {
               excluded = true;
-              run = RandomChooser.choose( runList ); // choose a new run, and remove it from runList
+              run = ValuePool.choose( runList ); // choose a new run, and remove it from runList
               break;
             }
           }
@@ -215,30 +215,30 @@ define( function( require ) {
       // all ranges limited to [-5,5]
       var range = new Range( -5, 5 );
       assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
-      var xList = RandomChooser.rangeToArray( range );
-      var yList = RandomChooser.rangeToArray( range );
-      var riseList = RandomChooser.rangeToArray( range, { excludeZero: true } ); // prevent zero slope
-      var runList = RandomChooser.rangeToArray( range, { excludeZero: true } );  // prevent undefined slope
+      var xList = ValuePool.rangeToArray( range );
+      var yList = ValuePool.rangeToArray( range );
+      var riseList = ValuePool.rangeToArray( range, { excludeZero: true } ); // prevent zero slope
+      var runList = ValuePool.rangeToArray( range, { excludeZero: true } );  // prevent undefined slope
 
       // CHALLENGE 5: slope-intercept form, slope and intercept variable
       x1 = 0; // y-intercept must be an integer
-      y1 = RandomChooser.choose( yList );
-      rise = RandomChooser.choose( riseList );
-      run = RandomChooser.choose( runList );
+      y1 = ValuePool.choose( yList );
+      rise = ValuePool.choose( riseList );
+      run = ValuePool.choose( runList );
       if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
-        run = RandomChooser.choose( runList );
+        run = ValuePool.choose( runList );
       }
       challenges.push( new PlaceThePoints( 'slope-intercept, random points',
         new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
         EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
 
       // CHALLENGE 6: point-slope form, point and slope variable
-      x1 = RandomChooser.choose( xList );
-      y1 = RandomChooser.choose( yList );
-      rise = RandomChooser.choose( riseList );
-      run = RandomChooser.choose( runList );
+      x1 = ValuePool.choose( xList );
+      y1 = ValuePool.choose( yList );
+      rise = ValuePool.choose( riseList );
+      run = ValuePool.choose( runList );
       if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
-        run = RandomChooser.choose( runList );
+        run = ValuePool.choose( runList );
       }
       challenges.push( new PlaceThePoints( 'point-slope, random points',
         new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),

@@ -34,8 +34,6 @@ define( function( require ) {
 
   // constants
   var CHALLENGES_PER_GAME = 6;
-  var BUTTONS_X_SPACING = 50;
-  var BUTTONS_Y_SPACING = 25;
 
   /**
    * @param {LineGameModel} model
@@ -49,7 +47,10 @@ define( function( require ) {
     assert && assert( _.flatten( levelImages ).length === model.numberOfLevels,
       'one image is required for each game level' );
 
-    options = options || {};
+    options = _.extend( {
+      buttonsXSpace: 50,
+      buttonsYSpace: 25
+    }, options );
 
     // Title
     var title = new Text( chooseYourLevelString, {
@@ -72,13 +73,13 @@ define( function( require ) {
       // layout the row horizontally
       gridChildren.push( new HBox( {
         children: rowChildren,
-        spacing: BUTTONS_X_SPACING,
+        spacing: options.buttonsXSpace,
         align: 'center'
       } ) );
     } );
     var buttonGrid = new VBox( {
       children: gridChildren,
-      spacing: BUTTONS_Y_SPACING,
+      spacing: options.buttonsYSpace,
       align: 'center'
     } );
     

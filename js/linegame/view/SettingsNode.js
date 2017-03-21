@@ -14,6 +14,7 @@ define( function( require ) {
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -39,11 +40,14 @@ define( function( require ) {
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
-   * @param{HTMLImageElement[]} levelImages
+   * @param {HTMLImageElement[][]} levelImages - grid of images for the level-selection buttons, ordered by level
    * @param {Object} [options]
    * @constructor
    */
   function SettingsNode( model, layoutBounds, levelImages, options ) {
+
+    assert && assert( _.flatten( levelImages ).length === model.numberOfLevels,
+      'one image is required for each game level' );
 
     options = options || {};
 
@@ -53,29 +57,31 @@ define( function( require ) {
       maxWidth: 0.85 * layoutBounds.width
     } );
 
-    // Level-selection buttons, arranged in 2 rows
-    assert && assert( Util.isInteger( model.numberOfLevels / 2 ) ); // assumes an even number of buttons
-    var buttonsParent = new Node();
-    var button;
-    var previousButton;
-    for ( var level = 0; level < model.numberOfLevels; level++ ) {
+    // Grid of level-selection buttons. levelImages describes the grid.
+    var level = 0;
+    var gridChildren = [];
+    levelImages.forEach( function( row ) {
 
-      button = createLevelSelectionButton( level, model, levelImages );
-      buttonsParent.addChild( button );
+      // create the buttons for the current row
+      var rowChildren = [];
+      row.forEach( function( levelImage ) {
+        rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
+        level++;
+      } );
 
-      if ( previousButton ) {
-        if ( level === model.numberOfLevels / 2 ) {
-          button.left = 0;
-          button.top = previousButton.bottom + BUTTONS_Y_SPACING;
-        }
-        else {
-          button.left = previousButton.right + BUTTONS_X_SPACING;
-          button.top = previousButton.top;
-        }
-      }
-      previousButton = button;
-    }
-
+      // layout the row horizontally
+      gridChildren.push( new HBox( {
+        children: rowChildren,
+        spacing: BUTTONS_X_SPACING,
+        align: 'center'
+      } ) );
+    } );
+    var buttonGrid = new VBox( {
+      children: gridChildren,
+      spacing: BUTTONS_Y_SPACING,
+      align: 'center'
+    } );
+    
     // Timer and Sound controls
     var toggleOptions = { stroke: 'gray', scale: 1.3 };
     var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, toggleOptions );
@@ -92,7 +98,7 @@ define( function( require ) {
     options.children = [
       // title and level-selection buttons centered
       new LayoutBox( {
-        children: [ title, buttonsParent ],
+        children: [ title, buttonGrid ],
         orientation: 'vertical',
         align: 'center',
         spacing: 50,
@@ -118,23 +124,22 @@ define( function( require ) {
    * Creates a level selection button
    * @param {number} level
    * @param {LineGameModel} model
-   * @param {HTMLImageElement[]} levelImages
+   * @param {HTMLImageElement} levelImage
    * @returns {LevelSelectionButton}
    */
-  var createLevelSelectionButton = function( level, model, levelImages ) {
+  var createLevelSelectionButton = function( level, model, levelImage ) {
 
-    assert && assert( level <= levelImages.length, 'no image for level ' + level );
-
-    // 'Level N' centered above icon
-    var image = new Image( levelImages[ level ] );
+    var image = new Image( levelImage );
     var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
       font: new GLFont( 60 ),
       maxWidth: image.width
     } );
-    var icon = new VBox( { children: [ label, image ], spacing: 20 } );
+
+    // 'Level N' centered above image
+    var buttonContent = new VBox( { children: [ label, image ], spacing: 20 } );
 
     return new LevelSelectionButton(
-      icon,
+      buttonContent,
       CHALLENGES_PER_GAME,
       function() {
         model.levelProperty.set( level );

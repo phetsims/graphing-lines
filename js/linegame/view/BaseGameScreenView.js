@@ -21,13 +21,11 @@ define( function( require ) {
 
   /**
    * @param {BaseGameModel} model
-   * @param {HTMLImageElement[]} levelImages - images for the level-selection buttons, ordered by level
+   * @param {HTMLImageElement[][]} levelImages - grid of images for the level-selection buttons, ordered by level
    * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
    * @constructor
    */
   function BaseGameScreenView( model, levelImages, rewardFactoryFunctions ) {
-
-    assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
     ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 

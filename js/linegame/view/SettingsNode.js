@@ -32,9 +32,6 @@ define( function( require ) {
   var chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
   var patternLevel0String = require( 'string!GRAPHING_LINES/pattern_Level_0' );
 
-  // constants
-  var CHALLENGES_PER_GAME = 6;
-
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
@@ -141,7 +138,7 @@ define( function( require ) {
 
     return new LevelSelectionButton(
       buttonContent,
-      CHALLENGES_PER_GAME,
+      model.challengesPerGameProperty.get(),
       function() {
         model.levelProperty.set( level );
         model.gamePhaseProperty.set( GamePhase.PLAY );

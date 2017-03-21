@@ -28,6 +28,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
 
   // constants
+  var CHALLENGES_PER_GAME = 6;
   var DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
@@ -49,7 +50,7 @@ define( function( require ) {
     this.scoreProperty = new Property( 0 ); // {number} how many points the user has earned for the current game
     this.challengeProperty = new Property( DUMMY_CHALLENGE );
     this.challengeIndexProperty = new Property( 0 );
-    this.challengesPerGameProperty = new Property( 0 );
+    this.challengesPerGameProperty = new Property( CHALLENGES_PER_GAME );
     this.playStateProperty = new Property( PlayState.NONE );
 
     // @public
@@ -234,14 +235,23 @@ define( function( require ) {
 
     // @private initializes a new set of challenges for the current level
     initChallenges: function() {
+      
+      // force update
       this.challengeIndexProperty.set( -1 );
+      
+      // level
       var level = this.levelProperty.get();
       assert && assert( level >= 0 && level < this.challengeFactories.length );
+      
+      // generate challenges
       this.challenges = this.challengeFactories[ level ].createChallenges();
       if ( GLQueryParameters.shuffle ) {
         this.challenges = phet.joist.random.shuffle( this.challenges );
       }
+      
+      // set the number of challenges
       this.challengesPerGameProperty.set( this.challenges.length );
+      assert && assert( this.challengesPerGameProperty.get() === CHALLENGES_PER_GAME );
     }
   } );
 } );

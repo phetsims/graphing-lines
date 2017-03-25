@@ -1,12 +1,12 @@
-// Copyright 2014-2015, University of Colorado Boulder
+// Copyright 2014-2017, University of Colorado Boulder
 
 /**
  * A dimensional arrow is used in engineering drawings or technical drawings to denote the dimensions
  * of something in the drawing. It includes an arrow drawn between two perpendicular lines which mark
  * the end points of the thing in the drawing that's being measured.
- * <p>
+ *
  * We're using a dimensional arrow in this sim to indicate the dimensions of slope: rise and run.
- * <p>
+ *
  * The arrow has a head at the tip, and there are delimiters (perpendicular lines) at the tip and tail.
  * The arrow head is different than scenery-phet.ArrowNode.
  * Currently supports only horizontal and vertical arrows.

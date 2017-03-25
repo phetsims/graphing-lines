@@ -1,9 +1,9 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Renderer for point-slope equations, with optional interactivity of point and slope.
  * General point-slope form is: (y - y1) = m(x - x1)
- * <p>
+ *
  * Point and/or slope may be interactive.
  * Pickers are used to increment/decrement parts of the equation that are specified as being interactive.
  * Non-interactive parts of the equation are expressed in a form that is typical of how the equation

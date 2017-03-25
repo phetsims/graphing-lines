@@ -1,9 +1,9 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Renderer for slope equations.
  * General form is m = (y2 - y1) / (x2 - x1) = rise/run
- * <p>
+ *
  * x1, y1, x2, and y2 are all interactive.
  *
  * @author Chris Malley (PixelZoom, Inc.)

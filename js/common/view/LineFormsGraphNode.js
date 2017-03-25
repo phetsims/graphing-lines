@@ -1,16 +1,14 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Base type for the 'Slope', 'Slope-Intercept' and 'Point-Slope' graphs.
- * <p>
+ *
  * Displays the following:
- * <ul>
- * <li>one interactive line</li>
- * <li>slope tool for interactive line</li>
- * <li>zero or more 'saved' lines</li>
- * <li>zero or more 'standard' lines</li>
- * </ul>
- * <p>
+ * - one interactive line
+ * - slope tool for interactive line
+ * - zero or more 'saved' lines
+ * - zero or more 'standard' lines
+ *
  * Note: All properties of this type should be considered private.
  *
  * @author Chris Malley (PixelZoom, Inc.)

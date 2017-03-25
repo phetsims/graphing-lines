@@ -1,14 +1,12 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Base type view for all challenges.
  * Provides the view components that are common to all challenges.
- * <p/>
+ *
  * Subtypes are responsible for:
- * <li>
- * <ul>providing the nodes for graph and equations</ul>
- * <ul>positioning faceNode</ul>
- * </li>
+ * - providing the nodes for graph and equations
+ * - positioning faceNode
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

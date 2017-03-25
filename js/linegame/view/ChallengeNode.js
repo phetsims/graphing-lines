@@ -165,7 +165,7 @@ define( function( require ) {
     if ( GLQueryParameters.showAnswers ) {
 
       // description at leftTop
-      var descriptionNode = new Text( this.constructor.name + ': ' + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      var descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
       descriptionNode.left = 10;
       descriptionNode.top = 10;
       this.addChild( descriptionNode );

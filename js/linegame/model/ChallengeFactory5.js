@@ -63,7 +63,8 @@ define( function( require ) {
 
       // CHALLENGE 1: Make-the-Equation, slope-intercept form, slope=0
       yIntercept = ValuePool.choose( yIntercepts );
-      challenges.push( new MakeTheEquation( 'slope=0, slope and intercept variable',
+      challenges.push( new MakeTheEquation(
+        '1. MakeTheEquation, slope=0, slope and intercept variable',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE_INTERCEPT,
@@ -71,7 +72,8 @@ define( function( require ) {
 
       // CHALLENGE 2: Graph-the-Line, slope-intercept form, slope=0
       yIntercept = ValuePool.choose( yIntercepts );
-      challenges.push( new GraphTheLine( 'slope=0, slope and intercept variable',
+      challenges.push( new GraphTheLine(
+        '2. GraphTheLine, slope=0, slope and intercept variable',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE_INTERCEPT,
@@ -104,13 +106,15 @@ define( function( require ) {
         // challenge
         line = new Line( x1, y1, x2, y2, Color.BLACK );
         if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-          challenges.push( new GraphTheLine( 'random choice of slope-intercept, points in [-5,5]',
+          challenges.push( new GraphTheLine(
+            '3. GraphTheLine, random choice of slope-intercept, points in [-5,5]',
             line, EquationForm.SLOPE_INTERCEPT,
             ManipulationMode.SLOPE_INTERCEPT,
             this.xRange, this.yRange ) );
         }
         else {
-          challenges.push( new GraphTheLine( 'random choice of point-slope, points in [-5,5]',
+          challenges.push( new GraphTheLine(
+            '3: GraphTheLine, random choice of point-slope, points in [-5,5]',
             line, EquationForm.POINT_SLOPE,
             ManipulationMode.POINT_SLOPE,
             this.xRange, this.yRange ) );
@@ -166,14 +170,16 @@ define( function( require ) {
         // challenge
         line = new Line( x1, y1, x2, y2, Color.BLACK );
         if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-          challenges.push( new GraphTheLine( 'random choice of slope-intercept, some excluded slopes',
+          challenges.push( new GraphTheLine(
+            '4: GraphTheLine, random choice of slope-intercept, some excluded slopes',
             line,
             EquationForm.SLOPE_INTERCEPT,
             ManipulationMode.SLOPE_INTERCEPT,
             this.xRange, this.yRange ) );
         }
         else {
-          challenges.push( new GraphTheLine( 'random choice of point-slope, some excluded slopes',
+          challenges.push( new GraphTheLine(
+            '4: GraphTheLine, random choice of point-slope, some excluded slopes',
             line,
             EquationForm.POINT_SLOPE,
             ManipulationMode.POINT_SLOPE,
@@ -216,7 +222,8 @@ define( function( require ) {
       if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
         run = ValuePool.choose( runList );
       }
-      challenges.push( new PlaceThePoints( 'slope-intercept, random points',
+      challenges.push( new PlaceThePoints(
+        '5: PlaceThePoints, slope-intercept, random points',
         new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
         EquationForm.SLOPE_INTERCEPT, xRange, yRange ) );
 
@@ -228,7 +235,8 @@ define( function( require ) {
       if ( Math.abs( rise / run ) === 1 ) { // prevent unit slope
         run = ValuePool.choose( runList );
       }
-      challenges.push( new PlaceThePoints( 'point-slope, random points',
+      challenges.push( new PlaceThePoints(
+        '6: PlaceThePoints, point-slope, random points',
         new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
         EquationForm.POINT_SLOPE, xRange, yRange ) );
     }

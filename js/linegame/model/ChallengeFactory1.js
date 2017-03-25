@@ -56,28 +56,32 @@ define( function( require ) {
       var pointPool = new ValuePool( this.createPointArrays() );
 
       // CHALLENGE 1: Graph-the-Line, slope-intercept form
-      challenges.push( new GraphTheLine( 'required slopes, slope variable',
+      challenges.push( new GraphTheLine(
+        '1: GraphTheLine, required slopes, slope variable',
         this.createSlopeInterceptLine( slopePool.chooseRequired(), yInterceptPool.chooseOptional() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 2: Graph-the-Line, slope-intercept form
-      challenges.push( new GraphTheLine( 'required y-intercept, y-intercept variable',
+      challenges.push( new GraphTheLine(
+        '2: GraphTheLine, required y-intercept, y-intercept variable',
         this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.INTERCEPT,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 3: Make-the-Equation, slope-intercept form
-      challenges.push( new MakeTheEquation( 'required slope, slope variable',
+      challenges.push( new MakeTheEquation(
+        '3: MakeTheEquation, required slope, slope variable',
         this.createSlopeInterceptLine( slopePool.chooseRequired(), yInterceptPool.chooseOptional() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE,
         this.xRange, this.yRange ) );
 
       // CHALLENGE 4: Make-the-Equation, slope-intercept form
-      challenges.push( new MakeTheEquation( 'required y-intercept, y-intercept variable',
+      challenges.push( new MakeTheEquation(
+        '4: MakeTheEquation, required y-intercept, y-intercept variable',
         this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.INTERCEPT,
@@ -94,12 +98,12 @@ define( function( require ) {
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           point = pointPool.chooseOptional();
           slope = slopePool.chooseRequired();
-          description = 'required slope, slope variable';
+          description = '5: GraphTheLine, required slope, slope variable';
         }
         else {
           point = pointPool.chooseRequired();
           slope = slopePool.chooseOptional();
-          description = 'required point, point variable';
+          description = '5: GraphTheLine, required point, point variable';
         }
 
         // challenge
@@ -118,12 +122,12 @@ define( function( require ) {
         if ( manipulationMode === ManipulationMode.SLOPE ) {
           point = pointPool.chooseOptional();
           slope = slopePool.chooseRequired();
-          description = 'required slope, slope variable';
+          description = '6: MakeTheEquation, required slope, slope variable';
         }
         else {
           point = pointPool.chooseRequired();
           slope = slopePool.chooseOptional();
-          description = 'required point, point variable';
+          description = '6: MakeTheEquation, required point, point variable';
         }
 
         // challenge

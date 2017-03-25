@@ -56,7 +56,8 @@ define( function( require ) {
       var equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ];
 
       // CHALLENGE 1: Make-the-Equation, slope-intercept form
-      challenges.push( new MakeTheEquation( 'required y-intercepts, slope and intercept variable',
+      challenges.push( new MakeTheEquation(
+        '1: MakeTheEquation, required y-intercepts, slope and intercept variable',
         this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE_INTERCEPT,
@@ -65,7 +66,8 @@ define( function( require ) {
       // CHALLENGE 2: Make-the-Equation, point-slope form
       slope = slopePool.chooseRequired();
       point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
-      challenges.push( new MakeTheEquation( 'required slope, point and slope variable',
+      challenges.push( new MakeTheEquation(
+        '2: MakeTheEquation, required slope, point and slope variable',
         this.createPointSlopeLine( point, slope ),
         EquationForm.POINT_SLOPE,
         ManipulationMode.POINT_SLOPE,
@@ -75,7 +77,8 @@ define( function( require ) {
       if ( ValuePool.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
 
         // Make-the-Equation, slope-intercept form
-        challenges.push( new MakeTheEquation( 'slope and intercept variable',
+        challenges.push( new MakeTheEquation(
+          '3: MakeTheEquation, slope and intercept variable',
           this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseOptional() ),
           EquationForm.SLOPE_INTERCEPT,
           ManipulationMode.SLOPE_INTERCEPT,
@@ -86,7 +89,8 @@ define( function( require ) {
         // Make-the-Equation, point-slope form
         slope = slopePool.chooseRequired();
         point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
-        challenges.push( new MakeTheEquation( 'required slopes, point and slope variable',
+        challenges.push( new MakeTheEquation(
+          '3: MakeTheEquation , required slopes, point and slope variable',
           this.createPointSlopeLine( point, slope ),
           EquationForm.POINT_SLOPE,
           ManipulationMode.POINT_SLOPE,
@@ -94,7 +98,8 @@ define( function( require ) {
       }
 
       // CHALLENGE 4: Graph-the-Line, slope-intercept form, slope and intercept variable
-      challenges.push( new GraphTheLine( 'required y-intercept, slope and intercept variable',
+      challenges.push( new GraphTheLine(
+        '4: GraphTheLine, required y-intercept, slope and intercept variable',
         this.createSlopeInterceptLine( slopePool.chooseOptional(), yInterceptPool.chooseRequired() ),
         EquationForm.SLOPE_INTERCEPT,
         ManipulationMode.SLOPE_INTERCEPT,
@@ -103,7 +108,8 @@ define( function( require ) {
       // CHALLENGE 5: Graph-the-Line, point-slope form
       slope = slopePool.chooseRequired();
       point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
-      challenges.push( new GraphTheLine( 'required slope, point and slope variable',
+      challenges.push( new GraphTheLine(
+        '5: GraphTheLine, required slope, point and slope variable',
         this.createPointSlopeLine( point, slope ),
         EquationForm.POINT_SLOPE,
         ManipulationMode.POINT_SLOPE,
@@ -125,7 +131,8 @@ define( function( require ) {
         if ( ValuePool.choose( equationForms ) === EquationForm.SLOPE_INTERCEPT ) {
 
           // Graph-the-Line, slope-intercept, 2 points variable
-          challenges.push( new GraphTheLine( 'force slope inversion, 2 points variable',
+          challenges.push( new GraphTheLine(
+            '6: GraphTheLine, force slope inversion, 2 points variable',
             this.createSlopeInterceptLine( slope, point.y ),
             EquationForm.SLOPE_INTERCEPT,
             ManipulationMode.TWO_POINTS,
@@ -134,7 +141,8 @@ define( function( require ) {
         else {
 
           // Graph-the-Line, point-slope, 2 points variable
-          challenges.push( new GraphTheLine( 'force slope inversion, 2 points variable',
+          challenges.push( new GraphTheLine(
+            '6: GraphTheLine, force slope inversion, 2 points variable',
             this.createPointSlopeLine( point, slope ),
             EquationForm.POINT_SLOPE,
             ManipulationMode.TWO_POINTS,

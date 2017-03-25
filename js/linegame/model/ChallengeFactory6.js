@@ -43,21 +43,20 @@ define( function( require ) {
     createChallenges: function( ) {
 
       var challenges = [];
+      var challengeNumber = 1;
 
       // for y-intercept manipulation challenges
       var yIntercepts = ValuePool.rangeToArray( this.yRange );
 
       // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
       var yIntercept = ValuePool.choose( yIntercepts );
-      challenges.push( new PlaceThePoints( 'slope=0, slope and intercept variable',
+      challenges.push( new PlaceThePoints(
+        (challengeNumber++) + ': PlaceThePoints, slope=0, slope and intercept variable',
         Line.createSlopeIntercept( 0, 1, yIntercept ),
         EquationForm.SLOPE_INTERCEPT,
         this.xRange, this.yRange ) );
 
-      // CHALLENGES 2 & 3: 2 Place-the-Point challenges (same as level 5)
-      ChallengeFactory5.addPlaceThePointsChallenges( challenges, this.xRange, this.yRange );
-
-      // CHALLENGES 4, 5 & 6:
+      // CHALLENGES 2-4:
       // 3 Graph-the-Line challenges with mismatched representations
       // (eg, point-slope equation with slope-intercept manipulators)
       {
@@ -91,14 +90,16 @@ define( function( require ) {
           // challenge, with mismatched representations
           var line = new Line( x1, y1, x2, y2, Color.BLACK );
           if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
-            challenges.push( new GraphTheLine( 'slope-intercept form, point and slope variable',
+            challenges.push( new GraphTheLine(
+              (challengeNumber++) + ': GraphTheLine, slope-intercept form, point and slope variable',
               line,
               equationForm,
               ManipulationMode.POINT_SLOPE,
               this.xRange, this.yRange ) );
           }
           else {
-            challenges.push( new GraphTheLine( 'point-slope form, slope and intercept variable',
+            challenges.push( new GraphTheLine(
+              (challengeNumber++) + ': GraphTheLine, point-slope form, slope and intercept variable',
               line,
               equationForm,
               ManipulationMode.SLOPE_INTERCEPT,
@@ -106,6 +107,9 @@ define( function( require ) {
           }
         }
       }
+
+      // CHALLENGES 5 & 6: 2 Place-the-Point challenges (same as level 5)
+      ChallengeFactory5.addPlaceThePointsChallenges( challenges, this.xRange, this.yRange );
        
       return challenges;
     }

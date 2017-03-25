@@ -165,7 +165,7 @@ define( function( require ) {
     } );
 
     // debugging options
-    if ( GLQueryParameters.gameDebug ) {
+    if ( GLQueryParameters.showAnswers ) {
 
       // description at leftTop
       var descriptionNode = new Text( this.constructor.name + ': ' + challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
@@ -174,10 +174,14 @@ define( function( require ) {
       this.addChild( descriptionNode );
 
       // developer buttons (no i18n) to right of main buttons
-      var devButtonOptions = { font: new GLFont( 12 ), baseColor: Color.WHITE, centerX: 0 };
-      var skipButton = new TextPushButton( 'dev: Skip',
+      var devButtonOptions = {
+        font: new GLFont( 20 ),
+        baseColor: 'red',
+        textFill: 'white'
+      };
+      var skipButton = new TextPushButton( 'Skip',
         _.extend( { listener: model.skipCurrentChallenge.bind( model ) }, devButtonOptions ) ); // skips the current challenge.
-      var replayButton = new TextPushButton( 'dev: Replay',
+      var replayButton = new TextPushButton( 'Replay',
         _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
       var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
       devButtonsParent.left = this.buttonsParent.right + 15;

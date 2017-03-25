@@ -16,7 +16,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );

@@ -85,7 +85,6 @@ define( function( require ) {
         }
         else if ( gamePhase === GamePhase.RESULTS ) {
           self.playStateProperty.set( PlayState.NONE );
-          self.timer.stop();
           self.updateBestTime();
         }
         else {
@@ -97,13 +96,21 @@ define( function( require ) {
 
     // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
     this.playStateProperty.link( function( playState ) {
+
+      var challengeIndex = self.challengeIndexProperty.get();
+      var isLastChallenge = ( challengeIndex === self.challenges.length - 1 );
+
+      if ( isLastChallenge && ( playState === PlayState.NEXT || playState === PlayState.SHOW_ANSWER ) ) {
+        // game over, stop the timer
+        self.timer.stop();
+      }
+
       if ( playState === PlayState.FIRST_CHECK ) {
 
-        var challengeIndex = self.challengeIndexProperty.get();
         var level = self.levelProperty.get();
         var score = self.scoreProperty.get();
 
-        if ( challengeIndex === self.challenges.length - 1 ) {
+        if ( isLastChallenge ) {
           // game has been completed
           self.gamePhaseProperty.set( GamePhase.RESULTS );
           if ( score > self.bestScoreProperties[ level ].get() ) {

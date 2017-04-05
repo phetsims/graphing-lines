@@ -172,6 +172,8 @@ define( function( require ) {
 
       this.gamePhaseProperty.reset();
       this.resetBestScores();
+      this.resetBestTimes();
+
       this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
     },
 
@@ -179,6 +181,13 @@ define( function( require ) {
     resetBestScores: function() {
       this.bestScoreProperties.forEach( function( property ) {
         property.set( 0 );
+      } );
+    },
+
+    // @private resets the best times to null (no time) for every level
+    resetBestTimes: function() {
+      this.bestTimeProperties.forEach( function( property ) {
+        property.set( null );
       } );
     },
 

@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.1.9-rc.1 Thu Apr 06 2017 11:37:55 GMT-0600 (MDT)",
+  "comment": "# graphing-lines 1.1.9-rc.2 Thu Apr 06 2017 11:40:16 GMT-0600 (MDT)",
   "assert": {
     "sha": "3921bc3784dc67e9cbfa31cdec52b582fcfc68e7",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "d802b7049675cfe63c8d1c92884f82d5ff8244c2",
+    "sha": "11268ab4fd16dfd9444cd6c498fa5f768562d63d",
     "branch": "1.1"
   },
   "joist": {
@@ -38,7 +38,7 @@
   },
   "phetcommon": {
     "sha": "a86f7e8fcf88805254fbecf82ea128e00adf246f",
-    "branch": "graphing-lines-1.1"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "98428866174e137c6c15b526be96dd6fcecd9921",
@@ -46,7 +46,7 @@
   },
   "scenery-phet": {
     "sha": "988f2e768fdab397abdaf1c627268030d4e906d8",
-    "branch": "graphing-lines-1.1"
+    "branch": "HEAD"
   },
   "sherpa": {
     "sha": "fb02f54017e3d5aea97279d7d5de45baf418ce06",

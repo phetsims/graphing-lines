@@ -39,7 +39,7 @@ define( function( require ) {
     /**
      * Creates challenges for the factory's game level.
      *
-     * @return {Challenge[]} array of challenges
+     * @returns {Challenge[]} array of challenges
      * @public
      * @abstract
      */

@@ -37,7 +37,7 @@ define( function( require ) {
 
     /**
      * Creates challenges for this game level.
-     * @return {Array<Challenge>} array of challenges
+     * @returns {Array<Challenge>} array of challenges
      * @public
      * @override
      */

@@ -24,7 +24,10 @@ define( function( require ) {
     shuffle: {
       type: 'boolean',
       defaultValue: true
-    }
+    },
+
+    // verifies the creation of challenges via stress testing, use this with assertions enabled (?ea)
+    verifyChallenges: { type: 'flag' }
   } );
 
   graphingLines.register( 'GLQueryParameters', GLQueryParameters );

@@ -128,6 +128,10 @@ define( function( require ) {
         self.challengeProperty.get().setAnswerVisible( true );
       }
     } );
+
+    if ( GLQueryParameters.verifyChallenges ) {
+      this.verifyChallenges();
+    }
   }
 
   graphingLines.register( 'BaseGameModel', BaseGameModel );
@@ -251,7 +255,7 @@ define( function( require ) {
 
     // @private initializes a new set of challenges for the current level
     initChallenges: function() {
-      
+
       // force update
       this.challengeIndexProperty.set( -1 );
       
@@ -268,6 +272,18 @@ define( function( require ) {
       // set the number of challenges
       this.challengesPerGameProperty.set( this.challenges.length );
       assert && assert( this.challengesPerGameProperty.get() === CHALLENGES_PER_GAME );
+    },
+
+    // @private verify challenge creation by
+    verifyChallenges: function() {
+      console.log( 'begin: verify creation of challenges' );
+      for ( var level = 0; level < this.challengeFactories.length; level++ ) {
+        console.log( 'verifying level ' + level + '...' );
+        for ( var i = 0; i < 2000; i++ ) {
+          this.challengeFactories[ level ].createChallenges();
+        }
+      }
+      console.log( 'end: verify creation of challenges' );
     }
   } );
 } );

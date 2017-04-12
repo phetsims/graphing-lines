@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.2.0-dev.1 Tue Apr 11 2017 14:15:02 GMT-0600 (MDT)",
+  "comment": "# graphing-lines 1.2.0-dev.1 Wed Apr 12 2017 11:22:25 GMT-0600 (MDT)",
   "assert": {
     "sha": "a707328cc11048787a807714496af23e0bd25be1",
     "branch": "HEAD"
@@ -13,15 +13,15 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "6218b3c79524e69dd0564b6f03c885812b77505c",
-    "branch": "master"
+    "sha": "36dc0e55352136601a098eac9b354a8b3c1bc1cb",
+    "branch": "HEAD"
   },
   "dot": {
     "sha": "a0c5770eb418e53a0a6cd8183f9cca48a4cb7f69",
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "971a39de61220bdf62099f79c0eeed23828e37fa",
+    "sha": "8542b103d16fee7d1a4d32fdb7bc0de0c19f61a8",
     "branch": "master"
   },
   "joist": {

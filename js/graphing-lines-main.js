@@ -35,9 +35,7 @@ define( function( require ) {
 
   SimLauncher.launch( function() {
     var screens = [
-      new SlopeScreen( tandem.createTandem( 'slopeScreen' ), {
-
-      } ),
+      new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
       new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
       new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
       new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )

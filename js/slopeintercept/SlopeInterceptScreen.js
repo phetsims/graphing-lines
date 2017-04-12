@@ -23,7 +23,7 @@ define( function( require ) {
 
   /**
    * @param {Tandem} tandem
-   * @param {Object} options
+   * @param {Object} [options]
    * @constructor
    */
   function SlopeInterceptScreen( tandem, options ) {

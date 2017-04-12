@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * The 'Slope-Intercept' screen. Conforms to the contract specified in joist/Screen.
@@ -23,16 +23,19 @@ define( function( require ) {
 
   /**
    * @param {Tandem} tandem
+   * @param {Object} options
    * @constructor
    */
-  function SlopeInterceptScreen( tandem ) {
+  function SlopeInterceptScreen( tandem, options ) {
 
-    var options = {
+    options = _.extend( {
       name: screenSlopeInterceptString,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon(),
-      tandem: tandem
-    };
+      homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
+    }, options );
+
+    assert && assert( !options.tandem, 'tandem is a constructor parameter' );
+    options.tandem = tandem;
 
     Screen.call( this,
       function() { return new SlopeInterceptModel(); },

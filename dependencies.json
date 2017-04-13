@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.1.9 Thu Apr 13 2017 15:58:21 GMT-0600 (MDT)",
+  "comment": "# graphing-lines 1.1.9 Thu Apr 13 2017 16:30:06 GMT-0600 (MDT)",
   "assert": {
     "sha": "3921bc3784dc67e9cbfa31cdec52b582fcfc68e7",
     "branch": "HEAD"
@@ -10,7 +10,7 @@
   },
   "brand": {
     "sha": "537072a989922edc78f741c22c3ca92d590b5aa2",
-    "branch": "graphing-lines-1.1"
+    "branch": "HEAD"
   },
   "chipper": {
     "sha": "8524220228d665e5aedc1fda5dedbc934297156d",
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "04eff1f3fdbb78335c845f1e92e2e7ffc0b19cda",
+    "sha": "68bd66cebe8cffd71396cee774dda70453ea7446",
     "branch": "1.1"
   },
   "joist": {
@@ -38,7 +38,7 @@
   },
   "phetcommon": {
     "sha": "af02d263debba524ca8255a64e8173240a99bc32",
-    "branch": "graphing-lines-1.1"
+    "branch": "HEAD"
   },
   "scenery": {
     "sha": "98428866174e137c6c15b526be96dd6fcecd9921",
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "vibe": {
-    "sha": "40a281829dd0273ab17c882b97910e4c0490be69",
-    "branch": "HEAD"
+    "sha": "8a6284991f0fc29095f472bd79d724d683f1b61c",
+    "branch": "graphing-lines-1.1"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.1.9 Thu Apr 13 2017 16:30:06 GMT-0600 (MDT)",
+  "comment": "# graphing-lines 1.1.9 Thu Apr 13 2017 19:17:37 GMT-0600 (MDT)",
   "assert": {
     "sha": "3921bc3784dc67e9cbfa31cdec52b582fcfc68e7",
     "branch": "HEAD"
@@ -21,12 +21,12 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "68bd66cebe8cffd71396cee774dda70453ea7446",
+    "sha": "e88efe7df06a2fb57a57de0aac2ce4294f22e24d",
     "branch": "1.1"
   },
   "joist": {
-    "sha": "ac9fe6b16087bd499f58240152424c70497408d0",
-    "branch": "HEAD"
+    "sha": "e18c399aca1f5c415a2675e7f1a886448d05ecd0",
+    "branch": "graphing-lines-1.1"
   },
   "kite": {
     "sha": "84e84bcaef87ea4be58ad08d4b61fb6fa591088d",
@@ -66,6 +66,6 @@
   },
   "vibe": {
     "sha": "8a6284991f0fc29095f472bd79d724d683f1b61c",
-    "branch": "graphing-lines-1.1"
+    "branch": "HEAD"
   }
 }

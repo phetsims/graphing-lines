@@ -26,7 +26,7 @@ define( function( require ) {
   var Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
@@ -250,10 +250,10 @@ define( function( require ) {
     var pattern = '{0}<sub>2</sub> \u2212 {1}<sub>1</sub>';
 
     // y2 - y1
-    var numeratorNode = new SubSupText( StringUtils.format( pattern, symbolYString, symbolYString ), { font: font, fill: options.fill } );
+    var numeratorNode = new RichText( StringUtils.format( pattern, symbolYString, symbolYString ), { font: font, fill: options.fill } );
 
     // x2 - x1
-    var denominatorNode = new SubSupText( StringUtils.format( pattern, symbolXString, symbolXString ), { font: font, fill: options.fill } );
+    var denominatorNode = new RichText( StringUtils.format( pattern, symbolXString, symbolXString ), { font: font, fill: options.fill } );
 
     // fraction line
     var length = Math.max( numeratorNode.width, denominatorNode.width );

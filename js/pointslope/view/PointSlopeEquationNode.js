@@ -30,7 +30,7 @@ define( function( require ) {
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var SubSupText = require( 'SCENERY_PHET/SubSupText' );
+  var RichText = require( 'SCENERY_PHET/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
@@ -406,7 +406,7 @@ define( function( require ) {
     options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
     var pattern = '({0} \u2212 {1}<sub>1</sub>) = {2}({3} \u2212 {4}<sub>1</sub>)';
     var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
-    return new SubSupText( html, { font: options.font } );
+    return new RichText( html, { font: options.font } );
   };
 
   /**

@@ -25,7 +25,9 @@ define( function( require ) {
    * @constructor
    */
   function Line( x1, y1, x2, y2, color ) {
-    assert && assert( x1 !== x2 || y1 !== y2 ); // 2 different points are required
+
+    // 2 different points are required
+    assert && assert( x1 !== x2 || y1 !== y2, 'points are the same: (' + x1 + ',' + y1 + ')' );
 
     // @public
     this.x1 = x1;

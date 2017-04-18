@@ -27,7 +27,21 @@ define( function( require ) {
 
     options = _.extend( {
       color: GLColors.SLOPE,
-      touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
+      touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION,
+
+      // Prevent overlapping points when fixedComponent is at the maximum.
+      // See https://github.com/phetsims/graphing-lines/issues/75
+      upEnabledFunction: function( value, range ) {
+        var max = ( fixedComponent.value === range.max ) ? ( range.max - 1 ) : range.max;
+        return ( value < max );
+      },
+
+      // Prevent overlapping points when fixedComponent is at the minimum.
+      // See https://github.com/phetsims/graphing-lines/issues/75
+      downEnabledFunction: function( value, range ) {
+        var min = ( fixedComponent.value === range.min ) ? ( range.min + 1 ) : range.min;
+        return ( value > min );
+      }
     }, options );
 
     // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients

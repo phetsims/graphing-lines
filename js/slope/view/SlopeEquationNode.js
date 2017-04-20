@@ -84,7 +84,7 @@ define( function( require ) {
     // m =
     var mNode = new Text( symbolSlopeString, staticOptions );
     var interactiveEqualsNode = new Text( '=', staticOptions );
-    // y2 - y2
+    // y2 - y1
     var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.yRangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2

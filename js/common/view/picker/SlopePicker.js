@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Picker for changing a component of slope.
@@ -17,44 +17,44 @@ define( function( require ) {
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
-   * @param {Property.<number>} variableComponent the part of the slope we're manipulating
-   * @param {Property.<number>} fixedComponent the part of the slope we're not manipulating
-   * @param {Property.<Range>} variableRange the range of variableComponent
+   * @param {Property.<number>} variableComponentProperty - the part of the slope we're manipulating
+   * @param {Property.<number>} fixedComponentProperty - the part of the slope we're not manipulating
+   * @param {Property.<Range>} variableRangeProperty - the range of variableComponentProperty
    * @param {Object} [options]
    * @constructor
    */
-  function SlopePicker( variableComponent, fixedComponent, variableRange, options ) {
+  function SlopePicker( variableComponentProperty, fixedComponentProperty, variableRangeProperty, options ) {
 
     options = _.extend( {
       color: GLColors.SLOPE,
       touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION,
 
-      // Prevent overlapping points when fixedComponent is at the maximum.
+      // Prevent overlapping points when fixedComponentProperty is at the maximum.
       // See https://github.com/phetsims/graphing-lines/issues/75
       upEnabledFunction: function( value, range ) {
-        var max = ( fixedComponent.value === range.max ) ? ( range.max - 1 ) : range.max;
+        var max = ( fixedComponentProperty.value === range.max ) ? ( range.max - 1 ) : range.max;
         return ( value < max );
       },
 
-      // Prevent overlapping points when fixedComponent is at the minimum.
+      // Prevent overlapping points when fixedComponentProperty is at the minimum.
       // See https://github.com/phetsims/graphing-lines/issues/75
       downEnabledFunction: function( value, range ) {
-        var min = ( fixedComponent.value === range.min ) ? ( range.min + 1 ) : range.min;
+        var min = ( fixedComponentProperty.value === range.min ) ? ( range.min + 1 ) : range.min;
         return ( value > min );
       }
     }, options );
 
     // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients
     options.upFunction = function( variable ) {
-      return ( variable === -1 && fixedComponent.get() === 0 ) ? 1 : variable + 1;
+      return ( variable === -1 && fixedComponentProperty.get() === 0 ) ? 1 : variable + 1;
     };
 
     // 'down' function, skips over undefined line condition (slope=0/0) - not changeable by clients
     options.downFunction = function( variable ) {
-      return ( variable === 1 && fixedComponent.get() === 0 ) ? -1 : variable - 1;
+      return ( variable === 1 && fixedComponentProperty.get() === 0 ) ? -1 : variable - 1;
     };
 
-    NumberPicker.call( this, variableComponent, variableRange, options );
+    NumberPicker.call( this, variableComponentProperty, variableRangeProperty, options );
   }
 
   graphingLines.register( 'SlopePicker', SlopePicker );

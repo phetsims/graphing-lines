@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Picker for one coordinate of a 2D point.
@@ -18,15 +18,15 @@ define( function( require ) {
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
-   * @param {Property.<number>} a1 the coordinate that this picker changes
-   * @param {Property.<number>} b1 the other coordinate of the point that has coordinate a1
-   * @param {Property.<number>} a2 the coordinate in the second point that is on the same axis as a1
-   * @param {Property.<number>} b2 the coordinate in the second point that is on the same axis as b1
-   * @param {Property.<Range>} range
+   * @param {Property.<number>} a1Property - the coordinate that this picker changes
+   * @param {Property.<number>} b1Property - the other coordinate of the point that has coordinate a1Property
+   * @param {Property.<number>} a2Property - the coordinate in the second point that is on the same axis as a1Property
+   * @param {Property.<number>} b2Property - the coordinate in the second point that is on the same axis as b1Property
+   * @param {Property.<Range>} rangeProperty - the range of a1Property
    * @param {Object} [options]
    * @constructor
    */
-  function CoordinatePicker( a1, b1, a2, b2, range, options ) {
+  function CoordinatePicker( a1Property, b1Property, a2Property, b2Property, rangeProperty, options ) {
 
     options = _.extend( {
       color: GLColors.POINT_X1_Y1,
@@ -34,30 +34,30 @@ define( function( require ) {
     }, options );
 
     // computes value when 'up' button is pressed
-    options.upFunction = function( a1 ) {
-      var x1New = a1 + 1;
-      if ( x1New === a2.get() && b1.get() === b2.get() ) { // will points be the same?
+    options.upFunction = function( a1Property ) {
+      var x1New = a1Property.get() + 1;
+      if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
         x1New++;
-        if ( x1New > range.get().max ) { // did we skip too far?
-          x1New = a1;
+        if ( x1New > rangeProperty.get().max ) { // did we skip too far?
+          x1New = a1Property.get();
         }
       }
       return x1New;
     };
 
     // computes value when 'down' button is pressed
-    options.downFunction = function( a1 ) {
-      var x1New = a1 - 1;
-      if ( x1New === a2.get() && b1.get() === b2.get() ) { // will points be the same?
+    options.downFunction = function( a1Property ) {
+      var x1New = a1Property.get() - 1;
+      if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
         x1New--;
-        if ( x1New < range.get().min ) { // did we skip too far?
-          x1New = a1;
+        if ( x1New < rangeProperty.get().min ) { // did we skip too far?
+          x1New = a1Property.get();
         }
       }
       return x1New;
     };
 
-    NumberPicker.call( this, a1, range, options );
+    NumberPicker.call( this, a1Property, rangeProperty, options );
   }
 
   graphingLines.register( 'CoordinatePicker', CoordinatePicker );

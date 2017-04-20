@@ -14,6 +14,9 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Range = require( 'DOT/Range' );
 
+  /**
+   * @constructor
+   */
   function PointSlopeParameterRange() {}
 
   graphingLines.register( 'PointSlopeParameterRange', PointSlopeParameterRange );

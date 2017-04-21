@@ -43,16 +43,16 @@ define( function( require ) {
     // @public Range for the vertical component of the slope
     // Prevents overlapping points at extremes, see https://github.com/phetsims/graphing-lines/issues/75
     rise: function( line, graph ) {
-      var min = ( line.y1 === graph.yRange.min ) ? 1 : ( graph.yRange.min - line.y1 );
-      var max = ( line.y1 === graph.yRange.max ) ? -1 : ( graph.yRange.max - line.y1 );
+      var min = ( line.run === 0 && line.y1 === graph.yRange.min ) ? 1 : ( graph.yRange.min - line.y1 );
+      var max = ( line.run === 0 && line.y1 === graph.yRange.max ) ? -1 : ( graph.yRange.max - line.y1 );
       return new Range( min, max );
     },
 
     // @public Range for the horizontal component of the slope
     // Prevents overlapping points at extremes, see https://github.com/phetsims/graphing-lines/issues/75
     run: function( line, graph ) {
-      var min = ( line.x1 === graph.xRange.min ) ? 1 : ( graph.xRange.min - line.x1 );
-      var max = ( line.x1 === graph.xRange.max ) ? -1 : ( graph.xRange.max - line.x1 );
+      var min = ( line.rise === 0 && line.x1 === graph.xRange.min ) ? 1 : ( graph.xRange.min - line.x1 );
+      var max = ( line.rise === 0 && line.x1 === graph.xRange.max ) ? -1 : ( graph.xRange.max - line.x1 );
       return new Range( min, max );
     }
   } );

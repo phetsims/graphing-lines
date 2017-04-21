@@ -177,10 +177,10 @@ define( function( require ) {
         baseColor: 'red',
         textFill: 'white'
       };
-      //TODO #78 TextPushButton.dispose required
+      //TODO #78 TextPushButton.removeListener required?
       var skipButton = new TextPushButton( 'Skip',
         _.extend( { listener: model.skipCurrentChallenge.bind( model ) }, devButtonOptions ) ); // skips the current challenge.
-      //TODO #78 TextPushButton.dispose required
+      //TODO #78 TextPushButton.removeListener required?
       var replayButton = new TextPushButton( 'Replay',
         _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
       var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );

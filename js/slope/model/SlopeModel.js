@@ -15,8 +15,14 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
   var Property = require( 'AXON/Property' );
+  var SlopeParameterRange = require( 'GRAPHING_LINES/slope/model/SlopeParameterRange' );
 
+  /**
+   * @constructor
+   */
   function SlopeModel() {
+
+    var self = this;
 
     LineFormsModel.call( this, new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
 
@@ -26,7 +32,14 @@ define( function( require ) {
     this.x2RangeProperty = new Property( this.graph.xRange );
     this.y2RangeProperty = new Property( this.graph.yRange );
 
-    //NOTE: Unlike slope-intercept and point-slope, ranges do not need to be dynamically adjusted, because the points are free ranging.
+    // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
+    var parameterRange = new SlopeParameterRange();
+    this.interactiveLineProperty.link( function( line ) {
+      self.x1RangeProperty.set( parameterRange.x1( line, self.graph ) );
+      self.y1RangeProperty.set( parameterRange.y1( line, self.graph ) );
+      self.x2RangeProperty.set( parameterRange.x2( line, self.graph ) );
+      self.y2RangeProperty.set( parameterRange.y2( line, self.graph ) );
+    } );
   }
 
   graphingLines.register( 'SlopeModel', SlopeModel );

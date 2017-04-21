@@ -49,8 +49,10 @@ define( function( require ) {
   function SlopeEquationNode( lineProperty, options ) {
 
     options = _.extend( {
-      xRangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
-      yRangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
+      x1RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
+      x2RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
+      y1RangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
+      y2RangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
     }, options );
@@ -85,24 +87,24 @@ define( function( require ) {
     var mNode = new Text( symbolSlopeString, staticOptions );
     var interactiveEqualsNode = new Text( '=', staticOptions );
     // y2 - y1
-    var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.yRangeProperty, {
+    var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
     var numeratorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
-    var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.yRangeProperty, {
+    var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
     } );
     // fraction line, correct length will be set later
     var interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
-    var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.xRangeProperty, {
+    var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
     var denominatorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
-    var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.xRangeProperty, {
+    var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
     } );

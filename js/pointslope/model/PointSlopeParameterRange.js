@@ -1,8 +1,11 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Methods for computing ranges of line parameters for point-slope form,
- * so that point and slope are within the visible range of the graph.
+ * so that point and slope are within the visible range of the graph,
+ * and to prevent the 2 points that define the line from being identical.
+ *
+ * Point-slope form is: (y - y1) = (rise/run)(x - x1)
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -38,16 +41,18 @@ define( function( require ) {
     },
 
     // @public Range for the vertical component of the slope
+    // Prevents overlapping points at extremes, see https://github.com/phetsims/graphing-lines/issues/75
     rise: function( line, graph ) {
-      var min = graph.yRange.min - line.y1;
-      var max = graph.yRange.max - line.y1;
+      var min = ( line.y1 === graph.yRange.min ) ? 1 : ( graph.yRange.min - line.y1 );
+      var max = ( line.y1 === graph.yRange.max ) ? -1 : ( graph.yRange.max - line.y1 );
       return new Range( min, max );
     },
 
     // @public Range for the horizontal component of the slope
+    // Prevents overlapping points at extremes, see https://github.com/phetsims/graphing-lines/issues/75
     run: function( line, graph ) {
-      var min = graph.xRange.min - line.x1;
-      var max = graph.xRange.max - line.x1;
+      var min = ( line.x1 === graph.xRange.min ) ? 1 : ( graph.xRange.min - line.x1 );
+      var max = ( line.x1 === graph.xRange.max ) ? -1 : ( graph.xRange.max - line.x1 );
       return new Range( min, max );
     }
   } );

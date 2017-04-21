@@ -50,7 +50,9 @@ define( function( require ) {
         viewProperties.linesVisibleProperty,
         new SlopeEquationNode( model.interactiveLineProperty, {
           x1RangeProperty: model.x1RangeProperty,
-          y1RangeProperty: model.y1RangeProperty
+          y1RangeProperty: model.y1RangeProperty,
+          x2RangeProperty: model.x2RangeProperty,
+          y2RangeProperty: model.y2RangeProperty
         } )
       )
     );

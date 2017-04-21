@@ -29,6 +29,7 @@ define( function( require ) {
     GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
 
     var self = this;
+    //TODO #78 unlink in dispose
     model.playStateProperty.link( function( playState ) {
 
       // show user's line only in states where there guess is wrong.

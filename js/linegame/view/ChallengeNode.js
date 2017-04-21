@@ -139,6 +139,7 @@ define( function( require ) {
       model.playStateProperty.set( PlayState.FIRST_CHECK );
     } );
 
+    //TODO #78 unlink in dispose
     // play-state changes
     model.playStateProperty.link( function( state ) {
 
@@ -176,14 +177,17 @@ define( function( require ) {
         baseColor: 'red',
         textFill: 'white'
       };
+      //TODO #78 TextPushButton.dispose required
       var skipButton = new TextPushButton( 'Skip',
         _.extend( { listener: model.skipCurrentChallenge.bind( model ) }, devButtonOptions ) ); // skips the current challenge.
+      //TODO #78 TextPushButton.dispose required
       var replayButton = new TextPushButton( 'Replay',
         _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
       var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
       devButtonsParent.left = this.buttonsParent.right + 15;
       devButtonsParent.centerY = this.buttonsParent.centerY;
       this.addChild( devButtonsParent );
+      //TODO #78 unlink in dispose
       model.playStateProperty.link( function( state ) {
         replayButton.visible = ( state === PlayState.NEXT );
         skipButton.visible = !replayButton.visible;

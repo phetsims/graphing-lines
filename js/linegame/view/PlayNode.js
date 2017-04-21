@@ -59,6 +59,7 @@ define( function( require ) {
 
     // Set up a new challenge
     model.challengeProperty.link( function( challenge ) {
+      //TODO #78 call dispose on ChallengeNode subtypes
       challengeParent.removeAllChildren();
       challengeParent.addChild( challenge.createView( model, challengeSize, audioPlayer ) );
     } );

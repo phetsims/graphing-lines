@@ -128,6 +128,7 @@ define( function( require ) {
       updateIcons();
     } );
 
+    //TODO #78 unlink in dispose
     // sync with game state
     model.playStateProperty.link( function( playState ) {
 

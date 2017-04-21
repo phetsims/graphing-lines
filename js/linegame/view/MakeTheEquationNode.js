@@ -116,6 +116,7 @@ define( function( require ) {
     // sync with guess
     challenge.guessProperty.link( updateIcons.bind( this ) );
 
+    //TODO #78 unlink in dispose
     // sync with game state
     model.playStateProperty.link( function( playState ) {
 

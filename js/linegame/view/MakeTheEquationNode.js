@@ -59,6 +59,7 @@ define( function( require ) {
       } ) );
     answerBoxNode.visible = false;
 
+    //TODO #78 dispose of the EquationNode returned by createInteractiveEquationNode
     // Guess
     var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
       createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
@@ -148,6 +149,7 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeMakeTheEquationNode = function() {
+      //TODO #78 graphNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
     };

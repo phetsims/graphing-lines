@@ -1,5 +1,6 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
+//TODO implement dispose for this node and its subtypes
 /**
  * Base type for graph nodes in game challenges.
  * Renders the answer line, guess line, and slope tool.

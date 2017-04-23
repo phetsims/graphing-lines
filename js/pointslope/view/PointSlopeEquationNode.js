@@ -1,5 +1,6 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
+//TODO #78 implement dispose
 /**
  * Renderer for point-slope equations, with optional interactivity of point and slope.
  * General point-slope form is: (y - y1) = m(x - x1)

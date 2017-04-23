@@ -62,7 +62,6 @@ define( function( require ) {
         slopeUndefinedVisible: false
       } ) );
 
-    // Guess equation
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
     this.equationNode = ChallengeNode.createEquationNode( guessLineProperty, {
       equationForm: challenge.equationForm,
@@ -159,6 +158,8 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeGraphTheLineNode = function() {
+      //TODO #78 this.equationNode.dispose();
+      //TODO #78 this.graphNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
     };

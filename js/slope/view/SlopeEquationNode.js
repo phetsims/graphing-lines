@@ -1,5 +1,6 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
+//TODO #78 implement dispose
 /**
  * Renderer for slope equations.
  * General form is m = (y2 - y1) / (x2 - x1) = rise/run

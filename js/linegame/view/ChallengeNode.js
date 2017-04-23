@@ -77,6 +77,7 @@ define( function( require ) {
       maxWidth: 400 // determined empirically
     } );
 
+    //TODO #78 dispose of PointToolNode
     // point tools
     var linesVisibleProperty = new Property( true );
     var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );

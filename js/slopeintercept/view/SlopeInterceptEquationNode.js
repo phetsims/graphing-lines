@@ -1,5 +1,6 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
+//TODO #78 implement dispose
 /**
  * Renderer for slope-intercept equations, with optional interactivity of slope and intercept.
  * General slope-intercept form is: y = mx + b

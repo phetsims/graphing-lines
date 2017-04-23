@@ -1,5 +1,6 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
+//TOOD #78 implement dispose
 /**
  * Tool that displays the (x,y) coordinates of a grid-point on the graph.
  * Origin is at the tip of the tool (bottom center.)

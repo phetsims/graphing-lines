@@ -28,7 +28,7 @@ define( function( require ) {
   /**
    * @param {LineFormsModel } model
    * @param {LineFormsViewProperties} viewProperties
-   * @param {Type} equationType a subtype of EquationNode
+   * @param {constructor} equationType a subtype of EquationNode
    * @constructor
    */
   function LineFormsGraphNode( model, viewProperties, equationType ) {

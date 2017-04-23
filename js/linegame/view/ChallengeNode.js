@@ -173,9 +173,8 @@ define( function( require ) {
       model.playStateProperty.set( PlayState.FIRST_CHECK );
     } );
 
-    //TODO #78 unlink in dispose
     // play-state changes
-    model.playStateProperty.link( function( state ) {
+    var playStateObserver = function( state ) {
 
       // visibility of face
       self.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
@@ -193,14 +192,22 @@ define( function( require ) {
         replayButton.visible = ( state === PlayState.NEXT );
         skipButton.visible = !replayButton.visible;
       }
-    } );
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
-    model.challengeProperty.get().guessProperty.link( function( guess ) {
+    var guessObserver = function( guess ) {
       if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
         model.playStateProperty.set( PlayState.SECOND_CHECK );
       }
-    } );
+    };
+    model.challengeProperty.get().guessProperty.link( guessObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeChallengeNode = function() {
+      model.playStateProperty.unlink( playStateObserver );
+      model.challengeProperty.get().guessProperty.unlink( guessObserver );
+    }
   }
 
   graphingLines.register( 'ChallengeNode', ChallengeNode );
@@ -235,5 +242,12 @@ define( function( require ) {
     }
   };
 
-  return inherit( Node, ChallengeNode );
+  return inherit( Node, ChallengeNode, {
+
+    // @public
+    dispose: function() {
+      this.disposeChallengeNode();
+      Node.prototype.dispose.call( this );
+    }
+  } );
 } );

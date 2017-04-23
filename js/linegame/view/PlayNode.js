@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Portion of the scenegraph that corresponds to the 'play' game phase. (See GamePhase.PLAY)
@@ -10,6 +10,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
@@ -59,8 +60,17 @@ define( function( require ) {
 
     // Set up a new challenge
     model.challengeProperty.link( function( challenge ) {
-      //TODO #78 call dispose on ChallengeNode subtypes
-      challengeParent.removeAllChildren();
+
+      // dispose of view for previous challenge
+      var challengeNodes = challengeParent.getChildren();
+      for ( var i = 0; i < challengeNodes.length; i++ ) {
+        var challengeNode = challengeNodes[ i ];
+        assert && assert( challengeNode instanceof ChallengeNode );
+        challengeNode.dispose();
+        challengeParent.removeChild( challengeNode );
+      }
+
+      // add view for current challenge
       challengeParent.addChild( challenge.createView( model, challengeSize, audioPlayer ) );
     } );
   }

@@ -207,7 +207,7 @@ define( function( require ) {
     this.disposeChallengeNode = function() {
       model.playStateProperty.unlink( playStateObserver );
       model.challengeProperty.get().guessProperty.unlink( guessObserver );
-    }
+    };
   }
 
   graphingLines.register( 'ChallengeNode', ChallengeNode );

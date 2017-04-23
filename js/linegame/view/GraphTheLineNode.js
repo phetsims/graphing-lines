@@ -161,7 +161,7 @@ define( function( require ) {
     this.disposeGraphTheLineNode = function() {
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
-    }
+    };
   }
 
   graphingLines.register( 'GraphTheLineNode', GraphTheLineNode );

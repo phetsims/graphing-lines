@@ -87,7 +87,7 @@ define( function( require ) {
     setGridVisible: function( visible ) {
       this.gridNode.setLinesVisible( visible );
     }
-  } )
+  } );
 
   //----------------------------------------------------------------------------------------
   // A major or minor line in the grid

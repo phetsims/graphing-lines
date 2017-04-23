@@ -244,7 +244,10 @@ define( function( require ) {
 
   return inherit( Node, ChallengeNode, {
 
-    // @public
+    /**
+     * @public
+     * @override
+     */
     dispose: function() {
       this.disposeChallengeNode();
       Node.prototype.dispose.call( this );

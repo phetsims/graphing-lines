@@ -202,7 +202,10 @@ define( function( require ) {
 
   return inherit( ChallengeNode, MakeTheEquationNode, {
 
-    // @public
+    /**
+     * @public
+     * @override
+     */
     dispose: function() {
       this.disposeMakeTheEquationNode();
       ChallengeNode.prototype.dispose.call( this );

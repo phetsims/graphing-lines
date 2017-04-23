@@ -168,7 +168,10 @@ define( function( require ) {
 
   return inherit( ChallengeNode, GraphTheLineNode, {
 
-    // @public
+    /**
+     * @public
+     * @override
+     */
     dispose: function() {
       this.disposeGraphTheLineNode();
       ChallengeNode.prototype.dispose.call( this );

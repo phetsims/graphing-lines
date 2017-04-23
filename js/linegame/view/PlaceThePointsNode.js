@@ -55,7 +55,10 @@ define( function( require ) {
 
   return inherit( GraphTheLineNode, PlaceThePointsNode, {
 
-    // @public
+    /**
+     * @public
+     * @override
+     */
     dispose: function() {
       this.disposePlaceThePointsNode();
       GraphTheLineNode.prototype.dispose.call( this );

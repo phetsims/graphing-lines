@@ -61,8 +61,8 @@ define( function( require ) {
 
     // Guess
     var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
-        createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-          GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
+      createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
+        GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
 
     // Graph
     var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );
@@ -114,11 +114,13 @@ define( function( require ) {
     };
 
     // sync with guess
-    challenge.guessProperty.link( updateIcons.bind( this ) );
+    var guessObserver = function() {
+      updateIcons();
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
-    //TODO #78 unlink in dispose
     // sync with game state
-    model.playStateProperty.link( function( playState ) {
+    var playStateObserver = function( playState ) {
 
       // states in which the equation is interactive
       guessBoxNode.pickable = (
@@ -141,7 +143,14 @@ define( function( require ) {
 
       // visibility of correct/incorrect icons
       updateIcons();
-    } );
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeMakeTheEquationNode = function() {
+      challenge.guessProperty.unlink( guessObserver );
+      model.playStateProperty.unlink( playStateObserver );
+    };
   }
 
   graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );
@@ -191,5 +200,12 @@ define( function( require ) {
     }
   };
 
-  return inherit( ChallengeNode, MakeTheEquationNode );
+  return inherit( ChallengeNode, MakeTheEquationNode, {
+
+    // @public
+    dispose: function() {
+      this.disposeMakeTheEquationNode();
+      ChallengeNode.prototype.dispose.call( this );
+    }
+  } );
 } );

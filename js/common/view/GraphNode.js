@@ -81,6 +81,14 @@ define( function( require ) {
 
   graphingLines.register( 'GraphNode', GraphNode );
 
+  inherit( Node, GraphNode, {
+
+    // @public Sets the visibility of the grid
+    setGridVisible: function( visible ) {
+      this.gridNode.setLinesVisible( visible );
+    }
+  } )
+
   //----------------------------------------------------------------------------------------
   // A major or minor line in the grid
   //----------------------------------------------------------------------------------------
@@ -182,7 +190,7 @@ define( function( require ) {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    var labelNode = new Text( symbolXString, { font: AXIS_LABEL_FONT, maxWidth: 30  } );
+    var labelNode = new Text( symbolXString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
     labelNode.centerY = lineNode.centerY;
@@ -329,11 +337,5 @@ define( function( require ) {
 
   //----------------------------------------------------------------------------------------
 
-  return inherit( Node, GraphNode, {
-
-    // @public Sets the visibility of the grid
-    setGridVisible: function( visible ) {
-      this.gridNode.setLinesVisible( visible );
-    }
-  } );
+  return GraphNode;
 } );

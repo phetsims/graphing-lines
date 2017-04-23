@@ -1,4 +1,4 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
  * Base type for graphs, displays a 2D grid and axes.
@@ -90,10 +90,16 @@ define( function( require ) {
   } );
 
   //----------------------------------------------------------------------------------------
-  // A major or minor line in the grid
-  //----------------------------------------------------------------------------------------
 
-  // Line goes from (x1,y1) to (x2,y2), and is either a major or minor grid line.
+  /**
+   * A major or minor line in the grid, drawn from (x1,y1) to (x2,y2).
+   * @param {number} x1
+   * @param {number} y1
+   * @param {number} x2
+   * @param {number} y2
+   * @param {boolean} isMajor
+   * @constructor
+   */
   function GridLineNode( x1, y1, x2, y2, isMajor ) {
     Line.call( this, x1, y1, x2, y2, {
       lineWidth: isMajor ? MAJOR_GRID_LINE_WIDTH : MINOR_GRID_LINE_WIDTH,
@@ -106,10 +112,15 @@ define( function( require ) {
   inherit( Line, GridLineNode );
 
   //----------------------------------------------------------------------------------------
-  // major tick with label, orientation is vertical or horizontal
-  //----------------------------------------------------------------------------------------
 
-  // Tick is placed at (x,y) and is either vertical or horizontal.
+  /**
+   * Major tick with label, orientation is vertical or horizontal
+   * @param {number} x
+   * @param {number} y
+   * @param {number} value
+   * @param {boolean} isVertical
+   * @constructor
+   */
   function MajorTickNode( x, y, value, isVertical ) {
 
     Node.call( this );
@@ -146,10 +157,14 @@ define( function( require ) {
   inherit( Node, MajorTickNode );
 
   //----------------------------------------------------------------------------------------
-  // minor tick mark, no label, orientation is vertical or horizontal
-  //----------------------------------------------------------------------------------------
 
-  // Tick is placed at (x,y) and is either vertical or horizontal
+  /**
+   * Minor tick mark, no label, orientation is vertical or horizontall
+   * @param {number} x
+   * @param {number} y
+   * @param {boolean} isVertical
+   * @constructor
+   */
   function MinorTickNode( x, y, isVertical ) {
     Path.call( this, isVertical ?
                      Shape.lineSegment( x, y - MINOR_TICK_LENGTH, x, y + MINOR_TICK_LENGTH ) :
@@ -164,10 +179,9 @@ define( function( require ) {
   inherit( Path, MinorTickNode );
 
   //----------------------------------------------------------------------------------------
-  // x-axis (horizontal)
-  //----------------------------------------------------------------------------------------
 
   /**
+   * x-axis (horizontal)
    * @param {Graph} graph
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
@@ -219,10 +233,9 @@ define( function( require ) {
   inherit( Node, XAxisNode );
 
   //----------------------------------------------------------------------------------------
-  // y-axis (vertical)
-  //----------------------------------------------------------------------------------------
 
   /**
+   * y-axis (vertical)
    * @param {Graph} graph
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor
@@ -274,10 +287,9 @@ define( function( require ) {
   inherit( Node, YAxisNode );
 
   //----------------------------------------------------------------------------------------
-  // 2D grid
-  //----------------------------------------------------------------------------------------
 
   /**
+   * 2D grid
    * @param {Graph} graph
    * @param {ModelViewTransform2} modelViewTransform
    * @constructor

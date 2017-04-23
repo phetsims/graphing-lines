@@ -97,6 +97,40 @@ define( function( require ) {
     this.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
     this.buttonsParent.bottom = challengeSize.height - 20;
 
+    // debugging controls
+    if ( GLQueryParameters.showAnswers ) {
+
+      // description at leftTop
+      var descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      descriptionNode.left = 10;
+      descriptionNode.top = 10;
+      this.addChild( descriptionNode );
+
+      // developer buttons (no i18n) to right of main buttons
+      var devButtonOptions = {
+        font: new GLFont( 20 ),
+        baseColor: 'red',
+        textFill: 'white'
+      };
+
+      // skips the current challenge.
+      var skipButton = new TextPushButton( 'Skip', devButtonOptions );
+      skipButton.addListener( function() {
+        model.skipCurrentChallenge();
+      } );
+
+      // replays the current challenge.
+      var replayButton = new TextPushButton( 'Replay', devButtonOptions );
+      replayButton.addListener( function() {
+        model.replayCurrentChallenge();
+      } );
+
+      var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
+      devButtonsParent.left = this.buttonsParent.right + 15;
+      devButtonsParent.centerY = this.buttonsParent.centerY;
+      this.addChild( devButtonsParent );
+    }
+
     // 'Check' button
     checkButton.addListener( function() {
       if ( challenge.isCorrect() ) {
@@ -153,6 +187,12 @@ define( function( require ) {
       tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
       showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
       nextButton.visible = ( state === PlayState.NEXT );
+
+      // dev buttons
+      if ( GLQueryParameters.showAnswers ) {
+        replayButton.visible = ( state === PlayState.NEXT );
+        skipButton.visible = !replayButton.visible;
+      }
     } );
 
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
@@ -161,38 +201,6 @@ define( function( require ) {
         model.playStateProperty.set( PlayState.SECOND_CHECK );
       }
     } );
-
-    // debugging options
-    if ( GLQueryParameters.showAnswers ) {
-
-      // description at leftTop
-      var descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
-      descriptionNode.left = 10;
-      descriptionNode.top = 10;
-      this.addChild( descriptionNode );
-
-      // developer buttons (no i18n) to right of main buttons
-      var devButtonOptions = {
-        font: new GLFont( 20 ),
-        baseColor: 'red',
-        textFill: 'white'
-      };
-      //TODO #78 TextPushButton.removeListener required?
-      var skipButton = new TextPushButton( 'Skip',
-        _.extend( { listener: model.skipCurrentChallenge.bind( model ) }, devButtonOptions ) ); // skips the current challenge.
-      //TODO #78 TextPushButton.removeListener required?
-      var replayButton = new TextPushButton( 'Replay',
-        _.extend( { listener: model.replayCurrentChallenge.bind( model ) }, devButtonOptions ) ); // replays the current challenge.
-      var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
-      devButtonsParent.left = this.buttonsParent.right + 15;
-      devButtonsParent.centerY = this.buttonsParent.centerY;
-      this.addChild( devButtonsParent );
-      //TODO #78 unlink in dispose
-      model.playStateProperty.link( function( state ) {
-        replayButton.visible = ( state === PlayState.NEXT );
-        skipButton.visible = !replayButton.visible;
-      } );
-    }
   }
 
   graphingLines.register( 'ChallengeNode', ChallengeNode );

@@ -42,7 +42,7 @@ define( function( require ) {
   function GraphTheLineNode( challenge, model, challengeSize, audioPlayer ) {
 
     var self = this;
-    
+
     ChallengeNode.call( this, challenge, model, challengeSize, audioPlayer );
 
     var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
@@ -115,7 +115,7 @@ define( function( require ) {
     };
 
     // sync with guess
-    challenge.guessProperty.link( function( line ) {
+    var guessObserver = function( line ) {
 
       // line is NotAline if ManipulationMode.THREE_POINTS and points don't make a line
       if ( line instanceof Line ) {
@@ -126,11 +126,11 @@ define( function( require ) {
 
       // visibility of correct/incorrect icons
       updateIcons();
-    } );
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
-    //TODO #78 unlink in dispose
     // sync with game state
-    model.playStateProperty.link( function( playState ) {
+    var playStateObserver = function( playState ) {
 
       // states in which the graph is interactive
       self.graphNode.pickable = (
@@ -154,12 +154,25 @@ define( function( require ) {
 
       // visibility of correct/incorrect icons
       updateIcons();
-    } );
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeGraphTheLineNode = function() {
+      challenge.guessProperty.unlink( guessObserver );
+      model.playStateProperty.unlink( playStateObserver );
+    }
   }
 
   graphingLines.register( 'GraphTheLineNode', GraphTheLineNode );
 
   return inherit( ChallengeNode, GraphTheLineNode, {
+
+    // @public
+    dispose: function() {
+      this.disposeGraphTheLineNode();
+      ChallengeNode.prototype.dispose.call( this );
+    },
 
     /**
      * Creates the graph portion of the view.

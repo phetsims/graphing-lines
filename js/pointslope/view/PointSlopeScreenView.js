@@ -13,7 +13,7 @@ define( function( require ) {
   var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var LineFormsView = require( 'GRAPHING_LINES/common/view/LineFormsView' );
+  var LineFormsScreenView = require( 'GRAPHING_LINES/common/view/LineFormsScreenView' );
   var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointSlopeGraphNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeGraphNode' );
@@ -26,7 +26,7 @@ define( function( require ) {
 
     var viewProperties = new LineFormsViewProperties();
 
-    LineFormsView.call( this, model, viewProperties,
+    LineFormsScreenView.call( this, model, viewProperties,
 
       // graph
       new PointSlopeGraphNode( model, viewProperties ),
@@ -59,5 +59,5 @@ define( function( require ) {
 
   graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );
 
-  return inherit( LineFormsView, PointSlopeScreenView );
+  return inherit( LineFormsScreenView, PointSlopeScreenView );
 } );

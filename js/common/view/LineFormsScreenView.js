@@ -1,7 +1,7 @@
-// Copyright 2013-2015, University of Colorado Boulder
+// Copyright 2013-2017, University of Colorado Boulder
 
 /**
- * Base type view for the various screens that deal with line forms (Slope, Slope-Intercept, Point-Slope).
+ * Base ScreenView for the various screens that deal with line forms (Slope, Slope-Intercept, Point-Slope).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -25,7 +25,7 @@ define( function( require ) {
    * @param {Node} equationControls
    * @constructor
    */
-  function LineFormsView( model, viewProperties, graphNode, graphControls, equationControls ) {
+  function LineFormsScreenView( model, viewProperties, graphNode, graphControls, equationControls ) {
 
     ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
@@ -89,7 +89,7 @@ define( function( require ) {
     controlsParent.top = yMargin;
   }
 
-  graphingLines.register( 'LineFormsView', LineFormsView );
+  graphingLines.register( 'LineFormsScreenView', LineFormsScreenView );
 
-  return inherit( ScreenView, LineFormsView );
+  return inherit( ScreenView, LineFormsScreenView );
 } );

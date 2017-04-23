@@ -49,7 +49,7 @@ define( function( require ) {
     this.savedLines = new ObservableArray();
     this.standardLines = new ObservableArray();
 
-    // Update the lines seen by the graph.
+    // Update the lines seen by the graph. unmultilink unnecessary because we own these Properties.
     Property.multilink( [ this.interactiveLineProperty, this.savedLines.lengthProperty, this.standardLines.lengthProperty ],
       function() {
         self.graph.lines.clear();

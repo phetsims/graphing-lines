@@ -153,7 +153,12 @@ define( function( require ) {
   graphingLines.register( 'BaseGameModel.GamePhaseProperty', GamePhaseProperty );
 
   inherit( Property, GamePhaseProperty, {
-    /** @override */
+
+    /**
+     * @param value
+     * @public
+     * @override
+     */
     set: function( value ) {
       this.hook( value );
       Property.prototype.set.call( this, value );

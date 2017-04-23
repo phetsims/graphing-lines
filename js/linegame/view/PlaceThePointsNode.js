@@ -29,8 +29,8 @@ define( function( require ) {
     GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
 
     var self = this;
-    //TODO #78 unlink in dispose
-    model.playStateProperty.link( function( playState ) {
+
+    var playStateObserver = function( playState ) {
 
       // show user's line only in states where there guess is wrong.
       self.graphNode.setGuessVisible(
@@ -42,12 +42,24 @@ define( function( require ) {
        */
       self.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
       self.graphNode.setGuessPointVisible( false );
-    } );
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposePlaceThePointsNode = function() {
+      model.playStateProperty.unlink( playStateObserver );
+    };
   }
 
   graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
 
   return inherit( GraphTheLineNode, PlaceThePointsNode, {
+
+    // @public
+    dispose: function() {
+      this.disposePlaceThePointsNode();
+      GraphTheLineNode.prototype.dispose.call( this );
+    },
 
     /**
      * Creates the graph portion of the view.

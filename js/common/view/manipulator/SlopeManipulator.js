@@ -41,6 +41,8 @@ define( function( require ) {
 
   graphingLines.register( 'SlopeManipulator', SlopeManipulator );
 
+  inherit( Manipulator, SlopeManipulator );
+
   /**
    * Drag handler for slope manipulator.
    * @param {Property.<Line>} lineProperty
@@ -83,5 +85,5 @@ define( function( require ) {
 
   inherit( SimpleDragHandler, SlopeDragHandler );
 
-  return inherit( Manipulator, SlopeManipulator );
+  return SlopeManipulator;
 } );

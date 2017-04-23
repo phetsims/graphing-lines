@@ -41,6 +41,8 @@ define( function( require ) {
 
   graphingLines.register( 'YInterceptManipulator', YInterceptManipulator );
 
+  inherit( Manipulator, YInterceptManipulator );
+
   /**
    * Drag handler for y-intercept manipulator.
    * @param {Property.<Line>} lineProperty
@@ -82,5 +84,5 @@ define( function( require ) {
 
   inherit( SimpleDragHandler, YInterceptDragHandler );
 
-  return inherit( Manipulator, YInterceptManipulator );
+  return YInterceptManipulator;
 } );

@@ -42,6 +42,8 @@ define( function( require ) {
 
   graphingLines.register( 'PointManipulator', PointManipulator );
 
+  inherit( Manipulator, PointManipulator );
+
   /**
    * Drag handler for arbitrary point.
    * @param {Property.<Vector2>} pointProperty
@@ -96,5 +98,5 @@ define( function( require ) {
 
   inherit( SimpleDragHandler, PointDragHandler );
 
-  return inherit( Manipulator, PointManipulator );
+  return PointManipulator;
 } );

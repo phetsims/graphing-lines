@@ -42,6 +42,8 @@ define( function( require ) {
 
   graphingLines.register( 'X1Y1Manipulator', X1Y1Manipulator );
 
+  inherit( Manipulator, X1Y1Manipulator );
+
   /**
    * Drag handler for (x1,y1) manipulator.
    * @param {Property.<Line>} lineProperty
@@ -93,5 +95,5 @@ define( function( require ) {
 
   inherit( SimpleDragHandler, X1Y1DragHandler );
 
-  return inherit( Manipulator, X1Y1Manipulator );
+  return X1Y1Manipulator;
 } );

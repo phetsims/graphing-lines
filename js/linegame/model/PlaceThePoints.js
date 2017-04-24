@@ -41,6 +41,7 @@ define( function( require ) {
     this.p3Property = new Property( new Vector2( 3, 2 ) );
 
     // update the guess when the points change
+    // unmultilink unnecessary because PlaceThePoints owns these Properties.
     var self = this;
     Property.multilink( [ this.p1Property, this.p2Property, this.p3Property ],
       function( p1, p2, p3 ) {

@@ -59,6 +59,7 @@ define( function( require ) {
     this.addChild( challengeParent );
 
     // Set up a new challenge
+    // unlink unnecessary because PlayNode exists for the lifetime of the sim.
     model.challengeProperty.link( function( challenge ) {
 
       // dispose of view for previous challenge

@@ -358,6 +358,7 @@ define( function( require ) {
 
     //***************************************************************
 
+    //TODO #78 unmultilink
     // sync the model with the controls
     Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
       function() {
@@ -373,6 +374,7 @@ define( function( require ) {
       }
     );
 
+    //TODO #78 unlink
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {
 
@@ -411,6 +413,8 @@ define( function( require ) {
       self.addChild( undefinedSlopeIndicator );
       undefinedSlopeIndicator.centerX = self.centerX;
       undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - self.undefinedSlopeYFudgeFactor;
+
+      //TODO #78 unlink
       lineProperty.link( function( line ) {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
       } );

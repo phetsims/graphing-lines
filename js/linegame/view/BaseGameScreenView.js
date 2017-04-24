@@ -43,6 +43,7 @@ define( function( require ) {
     this.addChild( this.settingsNode );
 
     // game 'phase' changes
+    // unlink unnecessary because BaseGameScreenView exists for the lifetime of the sim.
     var self = this;
     model.gamePhaseProperty.link( function( gamePhase ) {
       self.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );

@@ -147,6 +147,7 @@ define( function( require ) {
     parentNode.addChild( unsimplifiedFractionLineNode );
     parentNode.addChild( unsimplifiedRunNode );
 
+    //TODO #78 unmultilink
     // sync the model with the controls
     Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
       function() {
@@ -156,6 +157,7 @@ define( function( require ) {
       }
     );
 
+    //TODO #78 unlink
     // sync the controls and layout with the model
     lineProperty.link( function( line ) {
 
@@ -420,6 +422,7 @@ define( function( require ) {
         }
       };
 
+      //TODO #78 unlink
       lineProperty.link( update.bind( this ) );
 
       return equationNode;

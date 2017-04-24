@@ -41,6 +41,7 @@ define( function( require ) {
     this.addChild( slopeManipulator );
 
     // visibility of manipulators
+    // unlink unnecessary because PointSlopeGraphNode exists for the lifetime of the sim.
     viewProperties.linesVisibleProperty.link( function( linesVisible ) {
       x1y1Manipulator.visible = slopeManipulator.visible = linesVisible;
     } );

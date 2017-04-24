@@ -28,12 +28,14 @@ define( function( require ) {
    */
   function ResultsNode( model, layoutBounds, audioPlayer, rewardFactoryFunctions ) {
 
+    var self = this;
+
     Node.call( this );
 
     this.rewardNode = null; // @private
 
     // show results when we enter this phase
-    var self = this;
+    // unlink unnecessary because ResultsNode exists for the lifetime of the sim.
     model.gamePhaseProperty.link( function( gamePhase ) {
       if ( gamePhase === GamePhase.RESULTS ) {
 

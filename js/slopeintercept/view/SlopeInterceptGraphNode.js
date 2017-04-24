@@ -41,6 +41,7 @@ define( function( require ) {
     this.addChild( yInterceptManipulator );
 
     // visibility of manipulators
+    // unlink unnecessary because SlopeInterceptGraphNode exists for the lifetime of the sim.
     viewProperties.linesVisibleProperty.link( function( linesVisible ) {
       slopeManipulator.visible = yInterceptManipulator.visible = linesVisible;
     } );

@@ -77,6 +77,7 @@ define( function( require ) {
     } );
 
     // Sets the enabled states of the Save and Erase buttons
+    // unmultilink is unnecessary since EquationControls exists for the lifetime of the sim.
     Property.multilink( [ savedLines.lengthProperty, linesVisibleProperty ],
       function() {
         saveLineButton.enabled = linesVisibleProperty.get();

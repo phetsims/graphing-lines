@@ -95,6 +95,7 @@ define( function( require ) {
     this.initChallenges();
 
     // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
+    // unlink is unnecessary since BaseGameModel exists for the lifetime of the sim.
     this.playStateProperty.link( function( playState ) {
 
       var challengeIndex = self.challengeIndexProperty.get();

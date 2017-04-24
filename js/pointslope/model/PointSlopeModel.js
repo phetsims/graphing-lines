@@ -24,6 +24,8 @@ define( function( require ) {
    */
   function PointSlopeModel( interactiveLine, parameterRange ) {
 
+    var self = this;
+
     interactiveLine = interactiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
     parameterRange = parameterRange || new PointSlopeParameterRange();
 
@@ -36,7 +38,7 @@ define( function( require ) {
     this.runRangeProperty = new Property( this.graph.xRange );
 
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
-    var self = this;
+    // unlink unnecessary because PointSlopeModel exists for the lifetime of the sim.
     this.interactiveLineProperty.link( function( line ) {
       self.x1RangeProperty.set( parameterRange.x1( line, self.graph ) );
       self.y1RangeProperty.set( parameterRange.y1( line, self.graph ) );

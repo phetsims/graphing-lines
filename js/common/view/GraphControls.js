@@ -97,6 +97,7 @@ define( function( require ) {
     Panel.call( this, contentNode, options );
 
     // when lines are not visible, hide related controls
+    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     linesVisibleProperty.link( function( visible ) {
       notLinesVisibleProperty.set( !visible );
       yEqualsXCheckBox.enabled = visible;
@@ -104,14 +105,17 @@ define( function( require ) {
       slopeCheckBox.enabled = visible;
     } );
 
+    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     notLinesVisibleProperty.link( function( visible ) {
       linesVisibleProperty.set( !visible );
     } );
 
+    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     gridVisibleProperty.link( function( visible ) {
       notGridVisibleProperty.set( !visible );
     } );
 
+    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     notGridVisibleProperty.link( function( visible ) {
       gridVisibleProperty.set( !visible );
     } );
@@ -126,16 +130,19 @@ define( function( require ) {
     };
 
     // Add/remove standard line 'y = x'
+    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     yEqualsXVisibleProperty.link( function( visible ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_X_LINE );
     } );
 
     // Add/remove standard line 'y = -x'
+    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     yEqualsNegativeXVisibleProperty.link( function( visible ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_NEGATIVE_X_LINE );
     } );
 
     // Select appropriate check boxes when standard lines are added.
+    // removeItemAddedListener is unnecessary since GraphControls exists for the lifetime of the sim.
     standardLines.addItemAddedListener( function( line ) {
       if ( line === Line.Y_EQUALS_X_LINE ) {
         yEqualsXVisibleProperty.set( true );
@@ -146,6 +153,7 @@ define( function( require ) {
     } );
 
     // Deselect appropriate check boxes when standard lines are removed.
+    // removeItemRemovedListener is unnecessary since GraphControls exists for the lifetime of the sim.
     standardLines.addItemRemovedListener( function( line ) {
       if ( line === Line.Y_EQUALS_X_LINE ) {
         yEqualsXVisibleProperty.set( false );

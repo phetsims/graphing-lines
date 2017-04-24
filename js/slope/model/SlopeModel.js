@@ -33,6 +33,7 @@ define( function( require ) {
     this.y2RangeProperty = new Property( this.graph.yRange );
 
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
+    // unlink unnecessary because SlopeModel exists for the lifetime of the sim.
     var parameterRange = new SlopeParameterRange();
     this.interactiveLineProperty.link( function( line ) {
       self.x1RangeProperty.set( parameterRange.x1( line, self.graph ) );

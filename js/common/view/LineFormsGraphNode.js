@@ -57,23 +57,28 @@ define( function( require ) {
     this.addChild( this.slopeToolNode );
 
     // Add/remove standard lines
+    // remove*Listener not needed because LineFormsGraphNode exists for the lifetime of the sim.
     model.standardLines.addItemAddedListener( this.standardLineAdded.bind( this ) );
     model.standardLines.addItemRemovedListener( this.standardLineRemoved.bind( this ) );
 
     // Add/remove saved lines
+    // remove*Listener not needed because LineFormsGraphNode exists for the lifetime of the sim.
     model.savedLines.addItemAddedListener( this.savedLineAdded.bind( this ) );
     model.savedLines.addItemRemovedListener( this.savedLineRemoved.bind( this ) );
 
     // Visibility of lines
+    // unmultilink is unnecessary since LineFormsGraphNode exists for the lifetime of the sim.
     Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.slopeToolVisibleProperty ],
       this.updateLinesVisibility.bind( this ) );
 
     // Visibility of the grid
+    // unlink is unnecessary since LineFormsGraphNode exists for the lifetime of the sim.
     viewProperties.gridVisibleProperty.link( function( visible ) {
       self.setGridVisible( visible );
     } );
 
     // Visibility of the equation on the interactive line
+    // unlink is unnecessary since LineFormsGraphNode exists for the lifetime of the sim.
     this.viewProperties.interactiveEquationVisibleProperty.link( function( visible ) {
       if ( self.interactiveLineNode ) {
         self.interactiveLineNode.setEquationVisible( visible );

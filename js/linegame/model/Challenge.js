@@ -63,6 +63,7 @@ define( function( require ) {
     this.pointTool2 = new PointTool( new Vector2( 7, -13 ), 'down', this.graph.lines, new Bounds2( -15, -14, 11, 11 ) );
 
     // {Line|NotALine} When the guess changes, update the lines that are 'seen' by the point tools.
+    // unlink unnecessary because Challenge owns this Property.
     this.guessProperty.link( this.updateGraphLines.bind( this ) );
   }
 

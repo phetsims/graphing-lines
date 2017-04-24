@@ -41,15 +41,33 @@ define( function( require ) {
     this.addChild( x2y2Manipulator );
 
     // Sync with the guess
-    challenge.guessProperty.link( function( line ) {
+    var guessObserver = function( line ) {
       // move the manipulators
       x1y1Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
       x2y2Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
-    } );
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeGraphTwoPointsNode = function() {
+      x1y1Manipulator.dispose();
+      x2y2Manipulator.dispose();
+      challenge.guessProperty.unlink( guessObserver );
+    };
   }
 
   graphingLines.register( 'GraphTwoPointsNode', GraphTwoPointsNode );
 
-  return inherit( ChallengeGraphNode, GraphTwoPointsNode );
+  return inherit( ChallengeGraphNode, GraphTwoPointsNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeGraphTwoPointsNode();
+      ChallengeGraphNode.prototype.dispose.call( this );
+    }
+  } );
 } );
 

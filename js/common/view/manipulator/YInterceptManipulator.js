@@ -28,20 +28,37 @@ define( function( require ) {
    */
   function YInterceptManipulator( radius, lineProperty, y1RangeProperty, modelViewTransform ) {
 
+    var self = this;
+
     Manipulator.call( this, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
 
     // move the manipulator to match the line's (x1,y1) point
-    var self = this;
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
+
+    // @private called by dispose
+    this.disposeYInterceptManipulator = function() {
+      lineProperty.unlink( lineObserver );
+    };
   }
 
   graphingLines.register( 'YInterceptManipulator', YInterceptManipulator );
 
-  inherit( Manipulator, YInterceptManipulator );
+  inherit( Manipulator, YInterceptManipulator, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeYInterceptManipulator();
+      Manipulator.prototype.dispose.call( this );
+    }
+  } );
 
   /**
    * Drag handler for y-intercept manipulator.

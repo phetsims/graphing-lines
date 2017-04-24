@@ -59,11 +59,10 @@ define( function( require ) {
       } ) );
     answerBoxNode.visible = false;
 
-    //TODO #78 dispose of the EquationNode returned by createInteractiveEquationNode
     // Guess
-    var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize,
-      createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-        GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color ) );
+    var guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
+      GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color );
+    var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
 
     // Graph
     var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );
@@ -149,7 +148,8 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeMakeTheEquationNode = function() {
-      //TODO #78 graphNode.dispose();
+      guessEquationNode.dispose();
+      graphNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
     };

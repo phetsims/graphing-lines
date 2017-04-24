@@ -29,20 +29,38 @@ define( function( require ) {
    */
   function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
+    var self = this;
+
     Manipulator.call( this, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
     // move the manipulator to match the point
-    var self = this;
-    pointProperty.link( function( point ) {
+    var lineObserver = function( point ) {
       self.translation = modelViewTransform.modelToViewPosition( point );
-    } );
+    };
+    pointProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
+
+    // @private called by dispose
+    this.disposePointManipulator = function() {
+      pointProperty.unlink( lineObserver );
+    };
   }
 
   graphingLines.register( 'PointManipulator', PointManipulator );
 
-  inherit( Manipulator, PointManipulator );
+  inherit( Manipulator, PointManipulator, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposePointManipulator();
+      Manipulator.prototype.dispose.call( this );
+    }
+
+  } );
 
   /**
    * Drag handler for arbitrary point.

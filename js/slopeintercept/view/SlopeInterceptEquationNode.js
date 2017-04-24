@@ -1,6 +1,5 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
-//TODO #78 implement dispose
 /**
  * Renderer for slope-intercept equations, with optional interactivity of slope and intercept.
  * General slope-intercept form is: y = mx + b
@@ -74,7 +73,7 @@ define( function( require ) {
     }, options );
 
     var self = this;
-    
+
     EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
@@ -120,11 +119,18 @@ define( function( require ) {
     var xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
     var plusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var minusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    var yInterceptMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize, absoluteValue: true }, staticOptions ) );
+    var yInterceptMinusSignNode = new MinusNode( _.extend( {
+      size: self.signLineSize,
+      absoluteValue: true
+    }, staticOptions ) );
     var yInterceptNumeratorNode; // also used for integer values
     if ( options.interactiveIntercept ) {
       yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
-        { color: GLColors.INTERCEPT, font: interactiveFont, touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION } );
+        {
+          color: GLColors.INTERCEPT,
+          font: interactiveFont,
+          touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
+        } );
     }
     else {
       yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -411,35 +417,58 @@ define( function( require ) {
     }
 
     self.mutate( options );
+
+    // @private called by dispose
+    this.disposeSlopeInterceptEquationNode = function() {
+      //TODO #78 implement dispose
+    };
   }
 
   graphingLines.register( 'SlopeInterceptEquationNode', SlopeInterceptEquationNode );
 
-  // Creates a node that displays the general form of this equation: y = mx + b
-  SlopeInterceptEquationNode.createGeneralFormNode = function( options ) {
-    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
-    var text = StringUtils.format( '{0} = {1}{2} + {3}',
-      symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
-    return new Text( text, { font: options.font, pickable: false } );
+  return inherit( EquationNode, SlopeInterceptEquationNode, {
 
-  };
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeSlopeInterceptEquationNode();
+      EquationNode.prototype.dispose.call( this );
+    }
+  }, {
 
-  /**
-   * Creates a non-interactive equation, used to label a dynamic line.
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   * @returns {Node}
-   */
-  SlopeInterceptEquationNode.createDynamicLabel = function( lineProperty, options ) {
+    /**
+     * Creates a node that displays the general form of this equation: y = mx + b
+     * @param {Object} [options]
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createGeneralFormNode: function( options ) {
+      options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
+      var text = StringUtils.format( '{0} = {1}{2} + {3}',
+        symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
+      return new Text( text, { font: options.font, pickable: false } );
+    },
 
-    options = _.extend( {
-      interactiveSlope: false,
-      interactiveIntercept: false,
-      fontSize: 18
-    }, options );
+    /**
+     * Creates a non-interactive equation, used to label a dynamic line.
+     * @param {Property.<Line>} lineProperty
+     * @param {Object} [options]
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createDynamicLabel: function( lineProperty, options ) {
 
-    return new SlopeInterceptEquationNode( lineProperty, options );
-  };
+      options = _.extend( {
+        interactiveSlope: false,
+        interactiveIntercept: false,
+        fontSize: 18
+      }, options );
 
-  return inherit( EquationNode, SlopeInterceptEquationNode );
+      return new SlopeInterceptEquationNode( lineProperty, options );
+    }
+  } );
 } );

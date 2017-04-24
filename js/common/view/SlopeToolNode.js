@@ -32,6 +32,8 @@ define( function( require ) {
    */
   function SlopeToolNode( lineProperty, modelViewTransform ) {
 
+    var self = this;
+
     this.lineProperty = lineProperty; // @private
     this.modelViewTransform = modelViewTransform; // @private
 
@@ -72,15 +74,31 @@ define( function( require ) {
 
     Node.call( this, { children: [ this.parentNode ] } );
 
-    var self = this;
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
       self.update( line, modelViewTransform );
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeSlopeToolNode = function() {
+      self.riseValueNode.dispose();
+      self.runValueNode.dispose();
+      lineProperty.unlink( lineObserver );
+    };
   }
 
   graphingLines.register( 'SlopeToolNode', SlopeToolNode );
 
   return inherit( Node, SlopeToolNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeSlopeToolNode();
+      Node.prototype.dispose.call( this );
+    },
 
     /*
      * Slope tool is not updated while invisible.

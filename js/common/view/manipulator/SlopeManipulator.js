@@ -28,20 +28,37 @@ define( function( require ) {
    */
   function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
 
+    var self = this;
+
     Manipulator.call( this, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
-    var self = this;
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
+
+    // @private called by dispose
+    this.disposeSlopeManipulator = function() {
+      lineProperty.unlink( lineObserver );
+    };
   }
 
   graphingLines.register( 'SlopeManipulator', SlopeManipulator );
 
-  inherit( Manipulator, SlopeManipulator );
+  inherit( Manipulator, SlopeManipulator, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeSlopeManipulator();
+      Manipulator.prototype.dispose.call( this );
+    }
+  } );
 
   /**
    * Drag handler for slope manipulator.

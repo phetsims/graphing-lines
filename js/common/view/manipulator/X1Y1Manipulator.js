@@ -29,20 +29,37 @@ define( function( require ) {
    */
   function X1Y1Manipulator( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
 
+    var self = this;
+
     Manipulator.call( this, radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
 
     // move the manipulator to match the line's (x1,y1) point
-    var self = this;
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new X1Y1DragHandler( lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
+
+    // @private called by dispose
+    this.disposeX1Y1Manipulator = function() {
+      lineProperty.unlink( lineObserver );
+    };
   }
 
   graphingLines.register( 'X1Y1Manipulator', X1Y1Manipulator );
 
-  inherit( Manipulator, X1Y1Manipulator );
+  inherit( Manipulator, X1Y1Manipulator, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeX1Y1Manipulator();
+      Manipulator.prototype.dispose.call( this );
+    }
+  } );
 
   /**
    * Drag handler for (x1,y1) manipulator.

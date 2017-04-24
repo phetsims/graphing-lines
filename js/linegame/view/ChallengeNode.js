@@ -46,7 +46,7 @@ define( function( require ) {
   function ChallengeNode( challenge, model, challengeSize, audioPlayer ) {
 
     var self = this;
-    
+
     Node.call( this );
 
     this.subtypeParent = new Node(); // @protected subtypes should add children to this node, to preserve rendering order
@@ -70,14 +70,13 @@ define( function( require ) {
     var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
     var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
     var nextButton = new TextPushButton( nextString, buttonOptions );
-    
+
     // @protected
     this.buttonsParent = new Node( {
       children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ],
       maxWidth: 400 // determined empirically
     } );
 
-    //TODO #78 dispose of PointToolNode
     // point tools
     var linesVisibleProperty = new Property( true );
     var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
@@ -206,42 +205,14 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeChallengeNode = function() {
+      pointToolNode1.dispose();
+      pointToolNode2.dispose();
       model.playStateProperty.unlink( playStateObserver );
       model.challengeProperty.get().guessProperty.unlink( guessObserver );
     };
   }
 
   graphingLines.register( 'ChallengeNode', ChallengeNode );
-
-  /**
-   * Creates a non-interactive equation, used to label the specified line.
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   */
-  ChallengeNode.createEquationNode = function( lineProperty, options ) {
-
-    options = _.extend( {
-      equationForm: EquationForm.SLOPE_INTERCEPT, // {EquationForm}
-      fontSize: 18, // {number},
-      slopeUndefinedVisible: true
-    }, options );
-
-    if ( options.equationForm === EquationForm.SLOPE_INTERCEPT ) {
-      return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, {
-        fontSize: options.fontSize,
-        slopeUndefinedVisible: options.slopeUndefinedVisible
-      } );
-    }
-    else if ( options.equationForm === EquationForm.POINT_SLOPE ) {
-      return PointSlopeEquationNode.createDynamicLabel( lineProperty, {
-        fontSize: options.fontSize,
-        slopeUndefinedVisible: options.slopeUndefinedVisible
-      } );
-    }
-    else {
-      throw new Error( 'unsupported equation form: ' + options.equationForm );
-    }
-  };
 
   return inherit( Node, ChallengeNode, {
 
@@ -252,6 +223,39 @@ define( function( require ) {
     dispose: function() {
       this.disposeChallengeNode();
       Node.prototype.dispose.call( this );
+    }
+  }, {
+
+    /**
+     * Creates a non-interactive equation, used to label the specified line.
+     * @param {Property.<Line>} lineProperty
+     * @param {Object} [options]
+     * @public
+     * @static
+     */
+    createEquationNode: function( lineProperty, options ) {
+
+      options = _.extend( {
+        equationForm: EquationForm.SLOPE_INTERCEPT, // {EquationForm}
+        fontSize: 18, // {number},
+        slopeUndefinedVisible: true
+      }, options );
+
+      if ( options.equationForm === EquationForm.SLOPE_INTERCEPT ) {
+        return SlopeInterceptEquationNode.createDynamicLabel( lineProperty, {
+          fontSize: options.fontSize,
+          slopeUndefinedVisible: options.slopeUndefinedVisible
+        } );
+      }
+      else if ( options.equationForm === EquationForm.POINT_SLOPE ) {
+        return PointSlopeEquationNode.createDynamicLabel( lineProperty, {
+          fontSize: options.fontSize,
+          slopeUndefinedVisible: options.slopeUndefinedVisible
+        } );
+      }
+      else {
+        throw new Error( 'unsupported equation form: ' + options.equationForm );
+      }
     }
   } );
 } );

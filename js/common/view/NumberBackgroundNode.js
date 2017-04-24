@@ -48,7 +48,7 @@ define( function( require ) {
     options.children = [ backgroundNode, textNode ];
     Node.call( this, options );
 
-    valueProperty.link( function( value ) {
+    var valueObserver = function( value ) {
 
       // format the value
       textNode.text = Util.toFixed( value, options.decimalPlaces );
@@ -61,10 +61,26 @@ define( function( require ) {
       // center the value in the background
       textNode.centerX = backgroundNode.centerX;
       textNode.centerY = backgroundNode.centerY;
-    } );
+    };
+    valueProperty.link( valueObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeNumberBackgroundNode = function() {
+      valueProperty.unlink( valueObserver );
+    };
   }
 
   graphingLines.register( 'NumberBackgroundNode', NumberBackgroundNode );
 
-  return inherit( Node, NumberBackgroundNode );
+  return inherit( Node, NumberBackgroundNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeNumberBackgroundNode();
+      Node.prototype.dispose.call( this );
+    }
+  } );
 } );

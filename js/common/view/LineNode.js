@@ -69,14 +69,29 @@ define( function( require ) {
 
     Node.call( this, { children: [ this.parentNode ] } );
 
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
       self.update( line );
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeLineNode = function() {
+      lineProperty.unlink( lineObserver );
+    };
   }
 
   graphingLines.register( 'LineNode', LineNode );
 
   return inherit( Node, LineNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeLineNode();
+      Node.prototype.dispose.call( this );
+    },
 
     // @public
     setEquationVisible: function( visible ) {

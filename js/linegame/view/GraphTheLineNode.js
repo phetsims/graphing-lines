@@ -158,8 +158,8 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeGraphTheLineNode = function() {
-      //TODO #78 this.equationNode.dispose();
-      //TODO #78 this.graphNode.dispose();
+      self.equationNode.dispose();
+      self.graphNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
     };

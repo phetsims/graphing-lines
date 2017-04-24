@@ -1,6 +1,5 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
-//TODO #78 implement dispose
 /**
  * Renderer for point-slope equations, with optional interactivity of point and slope.
  * General point-slope form is: (y - y1) = m(x - x1)
@@ -398,34 +397,55 @@ define( function( require ) {
     }
 
     self.mutate( options );
+
+    // @private called by dispose
+    this.disposePointSlopeEquationNode = function() {
+      //TODO #78 implement dispose
+    };
   }
 
   graphingLines.register( 'PointSlopeEquationNode', PointSlopeEquationNode );
 
-  // Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
-  PointSlopeEquationNode.createGeneralFormNode = function( options ) {
-    options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
-    var pattern = '({0} \u2212 {1}<sub>1</sub>) = {2}({3} \u2212 {4}<sub>1</sub>)';
-    var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
-    return new RichText( html, { font: options.font } );
-  };
 
-  /**
-   * Creates a non-interactive equation, used to label a dynamic line.
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   * @returns {Node}
-   */
-  PointSlopeEquationNode.createDynamicLabel = function( lineProperty, options ) {
+  return inherit( EquationNode, PointSlopeEquationNode, {
 
-    options = _.extend( {
-      interactivePoint: false,
-      interactiveSlope: false,
-      fontSize: 18
-    }, options );
+    dispose: function() {
+      this.disposePointSlopeEquationNode();
+      EquationNode.prototype.dispose.call( this );
+    }
+  }, {
 
-    return new PointSlopeEquationNode( lineProperty, options );
-  };
+    /**
+     * Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
+     * @param {Object} [options]
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createGeneralFormNode: function( options ) {
+      options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
+      var pattern = '({0} \u2212 {1}<sub>1</sub>) = {2}({3} \u2212 {4}<sub>1</sub>)';
+      var html = StringUtils.format( pattern, symbolYString, symbolYString, symbolSlopeString, symbolXString, symbolXString );
+      return new RichText( html, { font: options.font } );
+    },
 
-  return inherit( EquationNode, PointSlopeEquationNode );
+    /**
+     * Creates a non-interactive equation, used to label a dynamic line.
+     * @param {Property.<Line>} lineProperty
+     * @param {Object} [options]
+     * @returns {Node}
+     * @public
+     * @static
+     */
+    createDynamicLabel: function( lineProperty, options ) {
+
+      options = _.extend( {
+        interactivePoint: false,
+        interactiveSlope: false,
+        fontSize: 18
+      }, options );
+
+      return new PointSlopeEquationNode( lineProperty, options );
+    }
+  } );
 } );

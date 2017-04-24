@@ -54,7 +54,7 @@ define( function( require ) {
     }
 
     // Sync with the guess
-    challenge.guessProperty.link( function( line ) {
+    var guessObserver = function( line ) {
 
       // move the manipulators
       pointManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
@@ -67,10 +67,28 @@ define( function( require ) {
         riseRangeProperty.set( pointSlopeParameterRange.rise( line, challenge.graph ) );
         runRangeProperty.set( pointSlopeParameterRange.run( line, challenge.graph ) );
       }
-    } );
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeGraphPointSlopeNode = function() {
+      pointManipulator.dispose();
+      slopeManipulator.dispose();
+      challenge.guessProperty.unlink( guessObserver );
+    };
   }
 
   graphingLines.register( 'GraphPointSlopeNode', GraphPointSlopeNode );
 
-  return inherit( ChallengeGraphNode, GraphPointSlopeNode );
+  return inherit( ChallengeGraphNode, GraphPointSlopeNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeGraphPointSlopeNode();
+      ChallengeGraphNode.prototype.dispose.call( this );
+    }
+  } );
 } );

@@ -115,8 +115,8 @@ define( function( require ) {
     this.setCoordinatesVector2( pointTool.locationProperty.get() );
     this.setBackground( options.backgroundNormalColor );
 
-    // location and display
-    Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
+    // location and display, unmultilink in dispose
+    var updateMultilink = Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
       function() {
 
         // move to location
@@ -145,9 +145,47 @@ define( function( require ) {
 
     // interactivity
     this.addInputListener( new PointToolDragHandler( pointTool, modelViewTransform, graph ) );
+
+    // @private called by dispose
+    this.disposePointToolNode = function() {
+      Property.unmultilink( updateMultilink );
+    };
   }
 
   graphingLines.register( 'PointToolNode', PointToolNode );
+
+  inherit( Node, PointToolNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposePointToolNode();
+      Node.prototype.dispose.call( this );
+    },
+
+    // @private Sets the displayed value to a point
+    setCoordinatesVector2: function( p ) {
+      this.setCoordinatesString( StringUtils.format( pointXYString, Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
+    },
+
+    // @private Sets the displayed value to an arbitrary string
+    setCoordinatesString: function( s ) {
+      this.valueNode.text = s;
+      this.valueNode.centerX = this.bodyNode.left + VALUE_WINDOW_CENTER_X;  // centered
+    },
+
+    // @private Sets the foreground, the color of the displayed value
+    setForeground: function( color ) {
+      this.valueNode.fill = color;
+    },
+
+    // @private Sets the background, the color of the display area behind the value
+    setBackground: function( color ) {
+      this.backgroundNode.fill = color;
+    }
+  } );
 
   /**
    * Drag handler for the pointer tool.
@@ -199,27 +237,5 @@ define( function( require ) {
 
   graphingLines.register( 'PointToolNode.PointToolDragHandler', PointToolDragHandler );
 
-  return inherit( Node, PointToolNode, {
-
-    // @private Sets the displayed value to a point
-    setCoordinatesVector2: function( p ) {
-      this.setCoordinatesString( StringUtils.format( pointXYString, Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
-    },
-
-    // @private Sets the displayed value to an arbitrary string
-    setCoordinatesString: function( s ) {
-      this.valueNode.text = s;
-      this.valueNode.centerX = this.bodyNode.left + VALUE_WINDOW_CENTER_X;  // centered
-    },
-
-    // @private Sets the foreground, the color of the displayed value
-    setForeground: function( color ) {
-      this.valueNode.fill = color;
-    },
-
-    // @private Sets the background, the color of the display area behind the value
-    setBackground: function( color ) {
-      this.backgroundNode.fill = color;
-    }
-  } );
+  return PointToolNode;
 } );

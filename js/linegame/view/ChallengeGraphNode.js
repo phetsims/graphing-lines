@@ -1,6 +1,5 @@
 // Copyright 2013-2015, University of Colorado Boulder
 
-//TODO implement dispose for this node and its subtypes
 /**
  * Base type for graph nodes in game challenges.
  * Renders the answer line, guess line, and slope tool.
@@ -42,6 +41,8 @@ define( function( require ) {
       slopeToolEnabled: true
     }, options );
 
+    var self = this;
+
     GraphNode.call( this, challenge.graph, challenge.modelViewTransform );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
@@ -63,7 +64,8 @@ define( function( require ) {
 
     // @private guess
     this.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
-    this.guessParentNode.addChild( new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform ) );
+    var lineNode = new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform );
+    this.guessParentNode.addChild( lineNode );
     this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
     this.guessParentNode.addChild( this.guessPointNode );
     this.guessPointVisible = true;
@@ -81,14 +83,14 @@ define( function( require ) {
     }
 
     // Sync with the guess
-    var self = this;
-    challenge.guessProperty.link( function( line ) {
+    var guessObserver = function( line ) {
       if ( line instanceof Line ) {
         // plot (x1,y1)
         self.guessPointNode.visible = self.guessPointVisible;
         self.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
       }
-    } );
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     // initial state
     this.setAnswerVisible( options.answerVisible );
@@ -96,11 +98,27 @@ define( function( require ) {
     this.setGuessVisible( options.guessVisible );
     this.setGuessPointVisible( options.guessPointVisible );
     this.setSlopeToolVisible( options.slopeToolVisible );
+
+    // @private called by dispose
+    this.disposeChallengeGraphNode = function() {
+      lineNode.dispose();
+      self.slopeToolNode && self.slopeToolNode.dispose();
+      challenge.guessProperty.unlink( guessObserver );
+    };
   }
 
   graphingLines.register( 'ChallengeGraphNode', ChallengeGraphNode );
 
   return inherit( GraphNode, ChallengeGraphNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeChallengeGraphNode();
+      GraphNode.prototype.dispose.call( this );
+    },
 
     // @public Sets the visibility of the answer.
     setAnswerVisible: function( visible ) { this.answerParentNode.visible = visible; },

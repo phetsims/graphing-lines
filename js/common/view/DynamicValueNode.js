@@ -30,15 +30,32 @@ define( function( require ) {
       absoluteValue: false
     }, options );
 
+    var self = this;
+
     Text.call( this, '', options );
 
-    var self = this;
-    valueProperty.link( function( value ) {
+    var valueObserver = function( value ) {
       self.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
-    } );
+    };
+    valueProperty.link( valueObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeDynamicValueNode = function() {
+      valueProperty.unlink( valueObserver );
+    };
   }
 
   graphingLines.register( 'DynamicValueNode', DynamicValueNode );
 
-  return inherit( Text, DynamicValueNode );
+  return inherit( Text, DynamicValueNode, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeDynamicValueNode();
+      Text.prototype.dispose.call( this );
+    }
+  } );
 } );

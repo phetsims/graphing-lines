@@ -28,18 +28,35 @@ define( function( require ) {
    */
   function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
 
+    var self = this;
+
     Manipulator.call( this, radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
 
     // move the manipulator to match the line's (x2,y2) point
-    var self = this;
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) );
+
+    // @private called by dispose
+    this.disposeX2Y2Manipulator = function() {
+      lineProperty.unlink( lineObserver );
+    };
   }
 
-  graphingLines.register( 'X2Y2Manipulator', X2Y2Manipulator );
+  graphingLines.register( 'X2Y2Manipulator', X2Y2Manipulator, {
+
+    /**
+     * @public
+     * @override
+     */
+    dispose: function() {
+      this.disposeX2Y2Manipulator();
+      Manipulator.prototype.dispose.call( this );
+    }
+  } );
 
   inherit( Manipulator, X2Y2Manipulator );
 

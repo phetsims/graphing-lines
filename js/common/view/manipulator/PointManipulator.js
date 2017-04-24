@@ -59,7 +59,6 @@ define( function( require ) {
       this.disposePointManipulator();
       Manipulator.prototype.dispose.call( this );
     }
-
   } );
 
   /**

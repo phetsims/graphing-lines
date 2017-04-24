@@ -241,7 +241,7 @@ define( function( require ) {
 
   graphingLines.register( 'SlopeEquationNode', SlopeEquationNode );
 
-  return inherit( EquationNode, SlopeEquationNode, {
+  inherit( EquationNode, SlopeEquationNode, {
 
     /**
      * @public
@@ -321,10 +321,6 @@ define( function( require ) {
 
     /**
      * Creates a non-interactive equation, used to label a dynamic line.
-     * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
-     * Note that while this is a sentence, it's order is not localized, due to the fact that it is
-     * composed of multiple scenery.Text nodes.
-     *
      * @param {Property.<Line>} lineProperty
      * @param {Object} [options]
      * @returns {Node}
@@ -332,106 +328,140 @@ define( function( require ) {
      * @static
      */
     createDynamicLabel: function( lineProperty, options ) {
+       return new DynamicLabelNode( lineProperty, options );
+    }
+  } );
 
-      options = _.extend( {
-        fontSize: 18
-      }, options );
+  /**
+   * A non-interactive equation, used to label a dynamic line.
+   * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
+   * Note that while this is a sentence, it's order is not localized, due to the fact that it is
+   * composed of multiple scenery.Text nodes.
+   * @param {Property.<Line>} lineProperty
+   * @param {Object} [options]
+   * @constructor
+   */
+  function DynamicLabelNode( lineProperty, options ) {
 
-      var equationNode = new EquationNode( options.fontSize );
+    options = _.extend( {
+      fontSize: 18
+    }, options );
 
-      var textOptions = {
-        font: new GLFont( { size: options.fontSize, weight: 'bold' } ),
-        maxWidth: 130
-      };
+    var self = this;
 
-      // allocate nodes needed to represent all simplified forms
-      var slopeIsNode = new Text( slopeIsString, textOptions );
-      var undefinedNode = new Text( undefinedString, textOptions );
-      var minusSignNode = new MinusNode( { size: equationNode.signLineSize } );
-      var riseNode = new Text( '?', textOptions );
-      var runNode = new Text( '?', textOptions );
-      var fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: equationNode.fractionLineThickness } );
+    EquationNode.call( this, options.fontSize );
 
-      // add all nodes, we'll set which ones are visible bases on desired simplification
-      equationNode.children = [ slopeIsNode, undefinedNode, minusSignNode, riseNode, runNode, fractionLineNode ];
+    var textOptions = {
+      font: new GLFont( { size: options.fontSize, weight: 'bold' } ),
+      maxWidth: 130
+    };
 
-      // update visibility, layout and properties of nodes to match the current line
-      var update = function( line ) {
+    // allocate nodes needed to represent all simplified forms
+    var slopeIsNode = new Text( slopeIsString, textOptions );
+    var undefinedNode = new Text( undefinedString, textOptions );
+    var minusSignNode = new MinusNode( { size: this.signLineSize } );
+    var riseNode = new Text( '?', textOptions );
+    var runNode = new Text( '?', textOptions );
+    var fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
 
-        var lineColor = line.color;
+    // add all nodes, we'll set which ones are visible bases on desired simplification
+    assert && assert( this.getChildrenCount() === 0, 'supertype has unexpected children' );
+    this.children = [ slopeIsNode, undefinedNode, minusSignNode, riseNode, runNode, fractionLineNode ];
 
-        // start with all children invisible
-        var len = equationNode.children.length;
-        for ( var i = 0; i < len; i++ ) {
-          equationNode.children[ i ].visible = false;
+    // update visibility, layout and properties of nodes to match the current line
+    var update = function( line ) {
+
+      var lineColor = line.color;
+
+      // start with all children invisible
+      var len = self.children.length;
+      for ( var i = 0; i < len; i++ ) {
+        self.children[ i ].visible = false;
+      }
+
+      // 'Slope is'
+      slopeIsNode.visible = true;
+      slopeIsNode.fill = lineColor;
+
+      if ( line.undefinedSlope() ) {
+        // 'undefined'
+        undefinedNode.visible = true;
+        undefinedNode.fill = lineColor;
+        undefinedNode.left = slopeIsNode.right + self.relationalOperatorXSpacing;
+        undefinedNode.y = slopeIsNode.y;
+      }
+      else if ( line.getSlope() === 0 ) {
+        // 0
+        riseNode.visible = true;
+        riseNode.text = '0';
+        riseNode.fill = lineColor;
+        riseNode.left = slopeIsNode.right + self.relationalOperatorXSpacing;
+        riseNode.y = slopeIsNode.y;
+      }
+      else {
+        var nextXOffset;
+        if ( line.getSlope() < 0 ) {
+          // minus sign
+          minusSignNode.visible = true;
+          minusSignNode.fill = lineColor;
+          minusSignNode.left = slopeIsNode.right + self.relationalOperatorXSpacing;
+          minusSignNode.centerY = slopeIsNode.centerY + self.slopeSignYFudgeFactor + self.slopeSignYOffset;
+          nextXOffset = minusSignNode.right + self.operatorXSpacing;
+        }
+        else {
+          // no sign
+          nextXOffset = slopeIsNode.right + self.relationalOperatorXSpacing;
         }
 
-        // 'Slope is'
-        slopeIsNode.visible = true;
-        slopeIsNode.fill = lineColor;
-
-        if ( line.undefinedSlope() ) {
-          // 'undefined'
-          undefinedNode.visible = true;
-          undefinedNode.fill = lineColor;
-          undefinedNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
-          undefinedNode.y = slopeIsNode.y;
-        }
-        else if ( line.getSlope() === 0 ) {
-          // 0
+        if ( Util.isInteger( line.getSlope() ) ) {
+          // integer slope (rise/1)
           riseNode.visible = true;
-          riseNode.text = '0';
+          riseNode.text = Util.toFixed( Math.abs( line.getSlope() ), 0 );
           riseNode.fill = lineColor;
-          riseNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
+          riseNode.left = nextXOffset;
           riseNode.y = slopeIsNode.y;
         }
         else {
-          var nextXOffset;
-          if ( line.getSlope() < 0 ) {
-            // minus sign
-            minusSignNode.visible = true;
-            minusSignNode.fill = lineColor;
-            minusSignNode.left = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
-            minusSignNode.centerY = slopeIsNode.centerY + equationNode.slopeSignYFudgeFactor + equationNode.slopeSignYOffset;
-            nextXOffset = minusSignNode.right + equationNode.operatorXSpacing;
-          }
-          else {
-            // no sign
-            nextXOffset = slopeIsNode.right + equationNode.relationalOperatorXSpacing;
-          }
+          // fractional slope
+          riseNode.visible = runNode.visible = fractionLineNode.visible = true;
 
-          if ( Util.isInteger( line.getSlope() ) ) {
-            // integer slope (rise/1)
-            riseNode.visible = true;
-            riseNode.text = Util.toFixed( Math.abs( line.getSlope() ), 0 );
-            riseNode.fill = lineColor;
-            riseNode.left = nextXOffset;
-            riseNode.y = slopeIsNode.y;
-          }
-          else {
-            // fractional slope
-            riseNode.visible = runNode.visible = fractionLineNode.visible = true;
+          riseNode.text = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+          runNode.text = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+          fractionLineNode.setLine( 0, 0, Math.max( riseNode.width, runNode.width ), 0 );
+          riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
 
-            riseNode.text = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
-            runNode.text = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
-            fractionLineNode.setLine( 0, 0, Math.max( riseNode.width, runNode.width ), 0 );
-            riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
-
-            // layout, values horizontally centered
-            fractionLineNode.left = nextXOffset;
-            fractionLineNode.centerY = slopeIsNode.centerY + equationNode.fractionLineYFudgeFactor;
-            riseNode.centerX = fractionLineNode.centerX;
-            riseNode.bottom = fractionLineNode.top - equationNode.ySpacing;
-            runNode.centerX = fractionLineNode.centerX;
-            runNode.top = fractionLineNode.bottom + equationNode.ySpacing;
-          }
+          // layout, values horizontally centered
+          fractionLineNode.left = nextXOffset;
+          fractionLineNode.centerY = slopeIsNode.centerY + self.fractionLineYFudgeFactor;
+          riseNode.centerX = fractionLineNode.centerX;
+          riseNode.bottom = fractionLineNode.top - self.ySpacing;
+          runNode.centerX = fractionLineNode.centerX;
+          runNode.top = fractionLineNode.bottom + self.ySpacing;
         }
-      };
+      }
+    };
 
-      //TODO #78 unlink
-      lineProperty.link( update.bind( this ) );
+    var lineObserver = function( line ) {
+      update( line );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
-      return equationNode;
+    // @private called by dispose
+    this.disposeDynamicLabelNode = function() {
+      lineProperty.unlink( lineObserver );
+    };
+  }
+
+  graphingLines.register( 'SlopeEquationNode.DynamicLabelNode', DynamicLabelNode );
+
+  inherit( EquationNode, DynamicLabelNode, {
+
+    // @public @override
+    dispose: function() {
+      this.disposeDynamicLabelNode();
+      EquationNode.prototype.dispose.call( this );
     }
   } );
+
+  return SlopeEquationNode;
 } );

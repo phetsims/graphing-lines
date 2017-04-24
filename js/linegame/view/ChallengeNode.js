@@ -201,14 +201,14 @@ define( function( require ) {
         model.playStateProperty.set( PlayState.SECOND_CHECK );
       }
     };
-    model.challengeProperty.get().guessProperty.link( guessObserver ); // unlink in dispose
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     // @private called by dispose
     this.disposeChallengeNode = function() {
       pointToolNode1.dispose();
       pointToolNode2.dispose();
       model.playStateProperty.unlink( playStateObserver );
-      model.challengeProperty.get().guessProperty.unlink( guessObserver );
+      challenge.guessProperty.unlink( guessObserver );
     };
   }
 

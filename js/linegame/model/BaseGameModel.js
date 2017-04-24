@@ -1,8 +1,8 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
 /**
- * Base type for the 'Line Game' model. 
- * 
+ * Base type for the 'Line Game' model.
+ *
  * Responsibilities include:
  * - creation of challenges (delegated to factory)
  * - management of game state
@@ -136,36 +136,7 @@ define( function( require ) {
 
   graphingLines.register( 'BaseGameModel', BaseGameModel );
 
-  /**
-   * Property used for the game phase.
-   * It has a 'hook' function that is called before the value is changed.
-   * This is useful for setting the various state parameters of the game before
-   * notifying observes that the game phase has changed.
-   * @param {GamePhase} value
-   * @param {function} hook function with one parameter of type {GamePhase}
-   * @constructor
-   */
-  function GamePhaseProperty( value, hook ) {
-    this.hook = hook; // @private
-    Property.call( this, value );
-  }
-
-  graphingLines.register( 'BaseGameModel.GamePhaseProperty', GamePhaseProperty );
-
-  inherit( Property, GamePhaseProperty, {
-
-    /**
-     * @param value
-     * @public
-     * @override
-     */
-    set: function( value ) {
-      this.hook( value );
-      Property.prototype.set.call( this, value );
-    }
-  } );
-
-  return inherit( Object, BaseGameModel, {
+  inherit( Object, BaseGameModel, {
 
     // @override @public
     reset: function() {
@@ -263,17 +234,17 @@ define( function( require ) {
 
       // force update
       this.challengeIndexProperty.set( -1 );
-      
+
       // level
       var level = this.levelProperty.get();
       assert && assert( level >= 0 && level < this.challengeFactories.length );
-      
+
       // generate challenges
       this.challenges = this.challengeFactories[ level ].createChallenges();
       if ( GLQueryParameters.shuffle ) {
         this.challenges = phet.joist.random.shuffle( this.challenges );
       }
-      
+
       // set the number of challenges
       this.challengesPerGameProperty.set( this.challenges.length );
       assert && assert( this.challengesPerGameProperty.get() === CHALLENGES_PER_GAME );
@@ -291,4 +262,35 @@ define( function( require ) {
       console.log( 'end: verify creation of challenges' );
     }
   } );
+
+  /**
+   * Property used for the game phase.
+   * It has a 'hook' function that is called before the value is changed.
+   * This is useful for setting the various state parameters of the game before
+   * notifying observes that the game phase has changed.
+   * @param {GamePhase} value
+   * @param {function} hook function with one parameter of type {GamePhase}
+   * @constructor
+   */
+  function GamePhaseProperty( value, hook ) {
+    this.hook = hook; // @private
+    Property.call( this, value );
+  }
+
+  graphingLines.register( 'BaseGameModel.GamePhaseProperty', GamePhaseProperty );
+
+  inherit( Property, GamePhaseProperty, {
+
+    /**
+     * @param value
+     * @public
+     * @override
+     */
+    set: function( value ) {
+      this.hook( value );
+      Property.prototype.set.call( this, value );
+    }
+  } );
+
+  return BaseGameModel;
 } );

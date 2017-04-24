@@ -80,6 +80,7 @@ define( function( require ) {
      * @param {Range} graphXRange
      * @param {Range} graphYRange
      * @returns {Vector2}
+     * @public
      * @static
      */
     choosePointForSlope: function( slope, graphXRange, graphYRange ) {
@@ -104,11 +105,12 @@ define( function( require ) {
      * Picks a point (x1,x2) on the graph that results in the slope indicator (x2,y2) being off the graph.
      * This forces the user to invert the slope.
      *
-     * @static
      * @param {Fraction} slope
      * @param {Range} graphXRange
      * @param {Range} graphYRange
      * @returns {Vector2}
+     * @public
+     * @static
      */
     choosePointForSlopeInversion: function( slope, graphXRange, graphYRange ) {
 

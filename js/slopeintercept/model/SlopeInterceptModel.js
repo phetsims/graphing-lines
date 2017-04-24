@@ -18,6 +18,9 @@ define( function( require ) {
   var PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
   var SlopeInterceptParameterRange = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptParameterRange' );
 
+  /**
+   * @constructor
+   */
   function SlopeInterceptModel() {
     PointSlopeModel.call( this, Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
   }

@@ -15,6 +15,9 @@ define( function( require ) {
   var PointSlopeParameterRange = require( 'GRAPHING_LINES/pointslope/model/PointSlopeParameterRange' );
   var Range = require( 'DOT/Range' );
 
+  /**
+   * @constructor
+   */
   function SlopeInterceptParameterRange() {
     PointSlopeParameterRange.call( this );
   }

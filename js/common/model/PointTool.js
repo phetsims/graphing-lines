@@ -36,6 +36,8 @@ define( function( require ) {
     this.dragBounds = dragBounds; // @public
 
     // Update when the point tool moves or the lines change.
+    // unmultilink unneeded because PointTool either exists for sim lifetime, or is owned by a Challenge that
+    // doesn't require dispose.
     Property.multilink( [ this.locationProperty, lines.lengthProperty ],
       function() {
         var line;

@@ -429,7 +429,7 @@ define( function( require ) {
       yInterceptDenominatorNode.dispose();
       Property.unmultilink( controlsMultilink );
       lineProperty.unlink( lineObserver );
-      undefinedSlopeUpdater && lineProperty.link( undefinedSlopeUpdater );
+      undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };
   }
 

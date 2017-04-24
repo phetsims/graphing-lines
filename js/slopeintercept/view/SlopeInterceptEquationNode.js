@@ -358,9 +358,8 @@ define( function( require ) {
 
     //***************************************************************
 
-    //TODO #78 unmultilink
-    // sync the model with the controls
-    Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
+    // sync the model with the controls, unmultilink in dispose
+    var controlsMultilink = Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
       function() {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {
@@ -374,9 +373,8 @@ define( function( require ) {
       }
     );
 
-    //TODO #78 unlink
     // sync the controls and layout with the model
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
 
       // If intercept is interactive, then (x1,y1) must be on a grid line on the y intercept.
       assert && assert( !options.interactiveIntercept || ( line.x1 === 0 && Util.isInteger( line.y1 ) ) );
@@ -400,7 +398,8 @@ define( function( require ) {
 
       // Fully-interactive equations have a constant form, no need to update layout when line changes.
       if ( !fullyInteractive ) { updateLayout( line ); }
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     // For fully-interactive equations ...
     if ( fullyInteractive ) {
@@ -414,17 +413,23 @@ define( function( require ) {
       undefinedSlopeIndicator.centerX = self.centerX;
       undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - self.undefinedSlopeYFudgeFactor;
 
-      //TODO #78 unlink
-      lineProperty.link( function( line ) {
+      var undefinedSlopeUpdater = function( line ) {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
-      } );
+      };
+      lineProperty.link( undefinedSlopeUpdater ); // unlink in dispose
     }
 
     self.mutate( options );
 
     // @private called by dispose
     this.disposeSlopeInterceptEquationNode = function() {
-      //TODO #78 implement dispose
+      riseNode.dispose();
+      runNode.dispose();
+      yInterceptNumeratorNode.dispose();
+      yInterceptDenominatorNode.dispose();
+      Property.unmultilink( controlsMultilink );
+      lineProperty.unlink( lineObserver );
+      undefinedSlopeUpdater && lineProperty.link( undefinedSlopeUpdater );
     };
   }
 

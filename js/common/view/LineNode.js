@@ -76,6 +76,7 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeLineNode = function() {
+      this.equationNode && this.equationNode.dispose();
       lineProperty.unlink( lineObserver );
     };
   }

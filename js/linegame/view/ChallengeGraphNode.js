@@ -64,8 +64,8 @@ define( function( require ) {
 
     // @private guess
     this.guessParentNode = new Node(); // to maintain rendering order of stuff related to guess
-    var lineNode = new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform );
-    this.guessParentNode.addChild( lineNode );
+    var guessLineNode = new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform );
+    this.guessParentNode.addChild( guessLineNode );
     this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
     this.guessParentNode.addChild( this.guessPointNode );
     this.guessPointVisible = true;
@@ -101,7 +101,7 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeChallengeGraphNode = function() {
-      lineNode.dispose();
+      guessLineNode.dispose();
       self.slopeToolNode && self.slopeToolNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
     };

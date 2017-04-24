@@ -354,9 +354,8 @@ define( function( require ) {
       }
     };
 
-    //TODO #78 unmultilink
-    // sync the model with the controls
-    Property.lazyMultilink( [ x1Property, y1Property, riseProperty, runProperty ],
+    // sync the model with the controls, unmultilink in dispose
+    var controlsMultilink = Property.lazyMultilink( [ x1Property, y1Property, riseProperty, runProperty ],
       function() {
         if ( !updatingControls ) {
           lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
@@ -364,9 +363,8 @@ define( function( require ) {
       }
     );
 
-    //TODO #78 unlink
     // sync the controls and layout with the model
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;
@@ -380,7 +378,8 @@ define( function( require ) {
 
       // Fully-interactive equations have a constant form, no need to update layout when line changes.
       if ( !fullyInteractive ) { updateLayout( line ); }
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     // For fully-interactive equations ...
     if ( fullyInteractive ) {
@@ -394,17 +393,23 @@ define( function( require ) {
       undefinedSlopeIndicator.centerX = self.centerX;
       undefinedSlopeIndicator.centerY = fractionLineNode.centerY - self.undefinedSlopeYFudgeFactor;
 
-      //TODO #78 unlink
-      lineProperty.link( function( line ) {
+      var undefinedSlopeUpdater = function( line ) {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
-      } );
+      };
+      lineProperty.link( undefinedSlopeUpdater ); // unlink in dispose
     }
 
     self.mutate( options );
 
     // @private called by dispose
     this.disposePointSlopeEquationNode = function() {
-      //TODO #78 implement dispose
+      x1Node.dispose();
+      y1Node.dispose();
+      riseNode.dispose();
+      runNode.dispose();
+      Property.unmultilink( controlsMultilink );
+      lineProperty.unlink( lineObserver );
+      undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };
   }
 

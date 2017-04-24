@@ -147,9 +147,8 @@ define( function( require ) {
     parentNode.addChild( unsimplifiedFractionLineNode );
     parentNode.addChild( unsimplifiedRunNode );
 
-    //TODO #78 unmultilink
-    // sync the model with the controls
-    Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
+    // sync the model with the controls, unmultilink in dispose
+    var controlsMultilink = Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
       function() {
         if ( !updatingControls ) {
           lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
@@ -157,9 +156,8 @@ define( function( require ) {
       }
     );
 
-    //TODO #78 unlink
     // sync the controls and layout with the model
-    lineProperty.link( function( line ) {
+    var lineObserver = function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;
@@ -181,7 +179,8 @@ define( function( require ) {
 
       // undefined-slope indicator
       undefinedSlopeIndicator.visible = line.undefinedSlope();
-    } );
+    };
+    lineProperty.link( lineObserver ); // unlink in dispose
 
     // layout, after registering observers
     // m =
@@ -229,7 +228,14 @@ define( function( require ) {
 
     // @private called by dispose
     this.disposeSlopeEquationNode = function() {
-      //TODO #78 implement dispose
+      x1Node.dispose();
+      x2Node.dispose();
+      y1Node.dispose();
+      y2Node.dispose();
+      unsimplifiedRiseNode.dispose();
+      unsimplifiedRunNode.dispose();
+      lineProperty.unlink( lineObserver );
+      Property.unmultilink( controlsMultilink );
     };
   }
 

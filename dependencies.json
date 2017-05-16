@@ -1,11 +1,11 @@
 {
-  "comment": "# graphing-lines 1.2.0-dev.3 Mon May 01 2017 12:49:35 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# graphing-lines 1.2.0-dev.2 Tue Apr 25 2017 14:12:43 GMT-0600 (MDT)",
   "assert": {
     "sha": "5c3f92048a9c2ffd6df8ede54fd64f1f7a7e4ef2",
     "branch": "master"
   },
   "axon": {
-    "sha": "5db49894e7dc1018e63f61c751accee25eb05bdd",
+    "sha": "f475e68ce3e6340da58610a1524d131b44bf6c51",
     "branch": "master"
   },
   "brand": {
@@ -13,20 +13,20 @@
     "branch": "master"
   },
   "chipper": {
-    "sha": "bed4dd83c05087221a3d06312b3f4bc0215b065a",
+    "sha": "3061f107c8678475135e3d0809cf17a164776348",
     "branch": "master"
   },
   "dot": {
-    "sha": "ef145e365ef9dd517e6178a0b2ea65e4c533d73d",
+    "sha": "57936fff9a213e6ff0c17fc2d3c1b2972f2095dd",
     "branch": "master"
   },
   "graphing-lines": {
-    "sha": "c611bac52fb46ea37563ef295e31c1613d8d4f70",
+    "sha": "1ca271dd8a04f761c3ba11c135e1d16c5b9ed10e",
     "branch": "master"
   },
   "joist": {
-    "sha": "70f24bdac2f371562d8fc7587ada9dfe93e81f4b",
-    "branch": "heartbeat-under-sim"
+    "sha": "06775098c51402473bd3b3871b9e7362f52d94f5",
+    "branch": "master"
   },
   "kite": {
     "sha": "0cc5b62077af04ac7765ed26ee1a410de8612ae1",
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phetcommon": {
-    "sha": "3ad92ec57b50aa2f2e49d52bd880ae63e24fb92c",
+    "sha": "d0ffe176ab56f58ca5f49d61d2be48c33d7698d4",
     "branch": "master"
   },
   "query-string-machine": {
@@ -45,11 +45,11 @@
     "branch": "master"
   },
   "scenery": {
-    "sha": "7bcac8e0f887d73a6215ff684f272d94fde7f7f9",
+    "sha": "d1d2ca2da5b54aefde7704318d5c4ceaf6d27612",
     "branch": "master"
   },
   "scenery-phet": {
-    "sha": "ff102f186fc132aa3627ce5c5118cdae322c651d",
+    "sha": "6dc1a0644474a144e5486453de16350959c7137d",
     "branch": "master"
   },
   "sherpa": {
@@ -57,7 +57,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "86c9a9bf4c5e938fe42fbb1806551f433ddaeda2",
+    "sha": "3967c777f10cfdab2feff2626efe9ca6e6b2cc41",
     "branch": "master"
   },
   "tandem": {

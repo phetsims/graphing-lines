@@ -67,8 +67,8 @@ define( function( require ) {
       for ( var i = 0; i < challengeNodes.length; i++ ) {
         var challengeNode = challengeNodes[ i ];
         assert && assert( challengeNode instanceof ChallengeNode );
-        challengeNode.dispose();
         challengeParent.removeChild( challengeNode );
+        challengeNode.dispose();
       }
 
       // add view for current challenge

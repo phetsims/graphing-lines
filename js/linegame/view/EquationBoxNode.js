@@ -36,7 +36,7 @@ define( function( require ) {
     Node.call( this );
 
     // @private icons for 'correct' and 'incorrect'
-    this.correctIconNode = new FontAwesomeNode( 'check_without_box', {
+    this.correctIconNode = new FontAwesomeNode( 'check', {
       scale: 1.5,
       fill: LineGameConstants.ANSWER_COLOR
     } );

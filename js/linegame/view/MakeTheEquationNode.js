@@ -122,36 +122,40 @@ define( function( require ) {
     // sync with game state
     var playStateObserver = function( playState ) {
 
-      // states in which the equation is interactive
-      guessBoxNode.pickable = (
-        playState === PlayState.FIRST_CHECK ||
-        playState === PlayState.SECOND_CHECK ||
-        playState === PlayState.TRY_AGAIN ||
-        ( playState === PlayState.NEXT && !challenge.isCorrect() )
-      );
+      // dispose may have been called after playStateObserver was queued to be called, see #83
+      if ( !self.disposed ) {
 
-      // Graph the guess line at the end of the challenge.
-      graphNode.setGuessVisible( playState === PlayState.NEXT );
+        // states in which the equation is interactive
+        guessBoxNode.pickable = (
+          playState === PlayState.FIRST_CHECK ||
+          playState === PlayState.SECOND_CHECK ||
+          playState === PlayState.TRY_AGAIN ||
+          ( playState === PlayState.NEXT && !challenge.isCorrect() )
+        );
 
-      // show stuff when the user got the challenge wrong
-      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-        answerBoxNode.setVisible( true );
-        graphNode.setAnswerPointVisible( true );
-        graphNode.setGuessPointVisible( true );
-        graphNode.setSlopeToolVisible( true );
+        // Graph the guess line at the end of the challenge.
+        graphNode.setGuessVisible( playState === PlayState.NEXT );
+
+        // show stuff when the user got the challenge wrong
+        if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+          answerBoxNode.setVisible( true );
+          graphNode.setAnswerPointVisible( true );
+          graphNode.setGuessPointVisible( true );
+          graphNode.setSlopeToolVisible( true );
+        }
+
+        // visibility of correct/incorrect icons
+        updateIcons();
       }
-
-      // visibility of correct/incorrect icons
-      updateIcons();
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
     // @private called by dispose
     this.disposeMakeTheEquationNode = function() {
-      guessEquationNode.dispose();
-      graphNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
+      guessEquationNode.dispose();
+      graphNode.dispose();
     };
   }
 

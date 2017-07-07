@@ -135,8 +135,8 @@ define( function( require ) {
         var node = parentNode.getChildAt( i );
         if ( line === node.lineProperty.get() ) {
           assert && assert( node instanceof LineNode );
-          node.dispose();
           parentNode.removeChild( node );
+          node.dispose();
           removed = true;
         }
       }

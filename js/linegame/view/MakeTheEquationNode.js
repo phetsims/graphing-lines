@@ -122,31 +122,27 @@ define( function( require ) {
     // sync with game state
     var playStateObserver = function( playState ) {
 
-      // dispose may have been called after playStateObserver was queued to be called, see #83
-      if ( !self.disposed ) {
+      // states in which the equation is interactive
+      guessBoxNode.pickable = (
+        playState === PlayState.FIRST_CHECK ||
+        playState === PlayState.SECOND_CHECK ||
+        playState === PlayState.TRY_AGAIN ||
+        ( playState === PlayState.NEXT && !challenge.isCorrect() )
+      );
 
-        // states in which the equation is interactive
-        guessBoxNode.pickable = (
-          playState === PlayState.FIRST_CHECK ||
-          playState === PlayState.SECOND_CHECK ||
-          playState === PlayState.TRY_AGAIN ||
-          ( playState === PlayState.NEXT && !challenge.isCorrect() )
-        );
+      // Graph the guess line at the end of the challenge.
+      graphNode.setGuessVisible( playState === PlayState.NEXT );
 
-        // Graph the guess line at the end of the challenge.
-        graphNode.setGuessVisible( playState === PlayState.NEXT );
-
-        // show stuff when the user got the challenge wrong
-        if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-          answerBoxNode.setVisible( true );
-          graphNode.setAnswerPointVisible( true );
-          graphNode.setGuessPointVisible( true );
-          graphNode.setSlopeToolVisible( true );
-        }
-
-        // visibility of correct/incorrect icons
-        updateIcons();
+      // show stuff when the user got the challenge wrong
+      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+        answerBoxNode.setVisible( true );
+        graphNode.setAnswerPointVisible( true );
+        graphNode.setGuessPointVisible( true );
+        graphNode.setSlopeToolVisible( true );
       }
+
+      // visibility of correct/incorrect icons
+      updateIcons();
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 

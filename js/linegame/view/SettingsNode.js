@@ -18,7 +18,7 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
+  var LevelSelectionItemNode = require( 'VEGAS/LevelSelectionItemNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
@@ -62,7 +62,7 @@ define( function( require ) {
       // create the buttons for the current row
       var rowChildren = [];
       row.forEach( function( levelImage ) {
-        rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
+        rowChildren.push( createLevelSelectionItemNode( level, model, levelImage ) );
         level++;
       } );
 
@@ -122,9 +122,9 @@ define( function( require ) {
    * @param {number} level
    * @param {LineGameModel} model
    * @param {HTMLImageElement} levelImage
-   * @returns {LevelSelectionButton}
+   * @returns {LevelSelectionItemNode}
    */
-  var createLevelSelectionButton = function( level, model, levelImage ) {
+  var createLevelSelectionItemNode = function( level, model, levelImage ) {
 
     var image = new Image( levelImage );
     var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
@@ -135,7 +135,7 @@ define( function( require ) {
     // 'Level N' centered above image
     var buttonContent = new VBox( { children: [ label, image ], spacing: 20 } );
 
-    return new LevelSelectionButton(
+    return new LevelSelectionItemNode(
       buttonContent,
       model.challengesPerGameProperty.get(),
       function() {

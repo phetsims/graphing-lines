@@ -12,10 +12,10 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var inherit = require( 'PHET_CORE/inherit' );
   var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
+  var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );

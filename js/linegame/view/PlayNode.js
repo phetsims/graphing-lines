@@ -15,10 +15,10 @@ define( function( require ) {
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
 
   /**
    * @param {LineGameModel} model

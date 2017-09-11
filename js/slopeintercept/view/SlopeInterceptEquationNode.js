@@ -19,12 +19,12 @@ define( function( require ) {
 
   // modules
   var DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
+  var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );

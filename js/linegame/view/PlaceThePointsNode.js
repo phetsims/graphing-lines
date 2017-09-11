@@ -13,9 +13,9 @@ define( function( require ) {
   // modules
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
+  var GraphThreePointsNode = require( 'GRAPHING_LINES/linegame/view/GraphThreePointsNode' );
   var inherit = require( 'PHET_CORE/inherit' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var GraphThreePointsNode = require( 'GRAPHING_LINES/linegame/view/GraphThreePointsNode' );
 
   /**
    * @param {GraphTheLine} challenge

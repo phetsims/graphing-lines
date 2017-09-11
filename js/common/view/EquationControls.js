@@ -24,8 +24,8 @@ define( function( require ) {
   var VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
   var eraseLinesString = require( 'string!GRAPHING_LINES/eraseLines' );
+  var saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
 
   // constants
   var BUTTON_FONT = new GLFont( 18 );

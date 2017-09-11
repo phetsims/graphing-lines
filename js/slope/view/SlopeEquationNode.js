@@ -13,27 +13,27 @@ define( function( require ) {
 
   // modules
   var CoordinatePicker = require( 'GRAPHING_LINES/common/view/picker/CoordinatePicker' );
+  var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   var Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var RichText = require( 'SCENERY/nodes/RichText' );
+  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
 
   // strings
-  var slopeString = require( 'string!GRAPHING_LINES/slope' );
   var slopeIsString = require( 'string!GRAPHING_LINES/slopeIs' );
+  var slopeString = require( 'string!GRAPHING_LINES/slope' );
   var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
   var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );

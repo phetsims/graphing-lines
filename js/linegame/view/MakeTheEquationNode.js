@@ -10,8 +10,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
   var ChallengeGraphNode = require( 'GRAPHING_LINES/linegame/view/ChallengeGraphNode' );
+  var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );

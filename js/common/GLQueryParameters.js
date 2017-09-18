@@ -33,13 +33,7 @@ define( function( require ) {
   graphingLines.register( 'GLQueryParameters', GLQueryParameters );
 
   // log the values of all sim-specific query parameters
-  if ( phet.log ) {
-    for ( var property in GLQueryParameters ) {
-      if ( GLQueryParameters.hasOwnProperty( property ) ) {
-        phet.log( property + '=' + GLQueryParameters[ property ] );
-      }
-    }
-  }
+  phet.log && phet.log( 'query parameters: ' + JSON.stringify( GLQueryParameters, null, 2 ) );
 
   return GLQueryParameters;
 } );

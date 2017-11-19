@@ -21,7 +21,7 @@ define( function( require ) {
   var graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
 
   // constants
-  var tandem = Tandem.createRootTandem();
+  var tandem = Tandem.rootTandem;
 
   var options = {
     credits: {

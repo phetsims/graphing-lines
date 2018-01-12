@@ -37,7 +37,7 @@ define( function( require ) {
    * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
    * @param {Property.<boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
    * @param {ObservableArray.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
-   * @param {Object} [options] should check boxes for standard lines be accessible?
+   * @param {Object} [options] should checkboxes for standard lines be accessible?
    * @constructor
    */
   function GraphControls( linesVisibleProperty, gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
@@ -52,35 +52,35 @@ define( function( require ) {
       includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
     }, options );
 
-    // private properties for standard-line check boxes
+    // private properties for standard-line checkboxes
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
-    // private properties for 'Hide' check boxes, where 'visible' needs to be inverted
+    // private properties for 'Hide' checkboxes, where 'visible' needs to be inverted
     var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
     var notGridVisibleProperty = new Property( !gridVisibleProperty.get() );
 
-    // check boxes
+    // checkboxes
     var TEXT_OPTIONS = { font: new GLFont( 18 ) };
     var ICON_SIZE = 60;
 
-    // 'Slope' check box
+    // 'Slope' checkbox
     var slopeCheckbox = Checkbox.createTextCheckbox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
       { icon: GLIconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
-    // 'y = x' check box
+    // 'y = x' checkbox
     var yEqualsXCheckbox = Checkbox.createTextCheckbox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
       { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
 
-    // 'y = -x' check box
+    // 'y = -x' checkbox
     var yEqualsNegativeXCheckbox = Checkbox.createTextCheckbox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
       { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
 
-    // 'Hide lines' check box
+    // 'Hide lines' checkbox
     var hideLinesCheckbox = Checkbox.createTextCheckbox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
     hideLinesCheckbox.touchArea = hideLinesCheckbox.localBounds.dilatedXY( 15, 10 );
 
-    // 'Hide grid' check box
+    // 'Hide grid' checkbox
     var hideGridCheckbox = Checkbox.createTextCheckbox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
     hideGridCheckbox.touchArea = hideGridCheckbox.localBounds.dilatedXY( 15, 10 );
 
@@ -141,7 +141,7 @@ define( function( require ) {
       setStandardLineVisible( visible, Line.Y_EQUALS_NEGATIVE_X_LINE );
     } );
 
-    // Select appropriate check boxes when standard lines are added.
+    // Select appropriate checkboxes when standard lines are added.
     // removeItemAddedListener is unnecessary since GraphControls exists for the lifetime of the sim.
     standardLines.addItemAddedListener( function( line ) {
       if ( line === Line.Y_EQUALS_X_LINE ) {
@@ -152,7 +152,7 @@ define( function( require ) {
       }
     } );
 
-    // Deselect appropriate check boxes when standard lines are removed.
+    // Deselect appropriate checkboxes when standard lines are removed.
     // removeItemRemovedListener is unnecessary since GraphControls exists for the lifetime of the sim.
     standardLines.addItemRemovedListener( function( line ) {
       if ( line === Line.Y_EQUALS_X_LINE ) {

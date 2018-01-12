@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var CheckBox = require( 'SUN/CheckBox' );
+  var Checkbox = require( 'SUN/Checkbox' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
@@ -65,30 +65,30 @@ define( function( require ) {
     var ICON_SIZE = 60;
 
     // 'Slope' check box
-    var slopeCheckBox = CheckBox.createTextCheckBox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
+    var slopeCheckbox = Checkbox.createTextCheckbox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
       { icon: GLIconFactory.createSlopeToolIcon( ICON_SIZE ) } );
 
     // 'y = x' check box
-    var yEqualsXCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
+    var yEqualsXCheckbox = Checkbox.createTextCheckbox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
       { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
 
     // 'y = -x' check box
-    var yEqualsNegativeXCheckBox = CheckBox.createTextCheckBox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
+    var yEqualsNegativeXCheckbox = Checkbox.createTextCheckbox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
       { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
 
     // 'Hide lines' check box
-    var hideLinesCheckBox = CheckBox.createTextCheckBox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
-    hideLinesCheckBox.touchArea = hideLinesCheckBox.localBounds.dilatedXY( 15, 10 );
+    var hideLinesCheckbox = Checkbox.createTextCheckbox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
+    hideLinesCheckbox.touchArea = hideLinesCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // 'Hide grid' check box
-    var hideGridCheckBox = CheckBox.createTextCheckBox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
-    hideGridCheckBox.touchArea = hideGridCheckBox.localBounds.dilatedXY( 15, 10 );
+    var hideGridCheckbox = Checkbox.createTextCheckbox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
+    hideGridCheckbox.touchArea = hideGridCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // vertical layout
     var contentNode = new LayoutBox( {
       children: ( options.includeStandardLines ) ?
-        [ slopeCheckBox, yEqualsXCheckBox, yEqualsNegativeXCheckBox, hideLinesCheckBox, hideGridCheckBox ] :
-        [ slopeCheckBox, hideLinesCheckBox, hideGridCheckBox ],
+        [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, hideLinesCheckbox, hideGridCheckbox ] :
+        [ slopeCheckbox, hideLinesCheckbox, hideGridCheckbox ],
       orientation: 'vertical',
       spacing: 20,
       align: 'left'
@@ -100,9 +100,9 @@ define( function( require ) {
     // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     linesVisibleProperty.link( function( visible ) {
       notLinesVisibleProperty.set( !visible );
-      yEqualsXCheckBox.enabled = visible;
-      yEqualsNegativeXCheckBox.enabled = visible;
-      slopeCheckBox.enabled = visible;
+      yEqualsXCheckbox.enabled = visible;
+      yEqualsNegativeXCheckbox.enabled = visible;
+      slopeCheckbox.enabled = visible;
     } );
 
     // unlink is unnecessary since GraphControls exists for the lifetime of the sim.

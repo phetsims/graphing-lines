@@ -20,6 +20,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
@@ -272,23 +273,26 @@ define( function( require ) {
       var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
       // Slope m =
-      var leftSideNode = new Text( StringUtils.format( '{0}    {1} =', slopeString, symbolSlopeString ), {
+      var leftSideText = StringUtils.format( '{0}    {1} {2}', slopeString, symbolSlopeString, MathSymbols.EQUAL_TO );
+      var leftSideNode = new Text( leftSideText, {
         font: font,
         fill: options.fill,
         maxWidth: 125 // i18n, determined empirically
       } );
 
       // pattern for numerator and denominator
-      var pattern = '{0}<sub>2</sub> \u2212 {1}<sub>1</sub>';
+      var pattern = '{0}<sub>2</sub> {1} {2}<sub>1</sub>';
 
       // y2 - y1
-      var numeratorNode = new RichText( StringUtils.format( pattern, symbolYString, symbolYString ), {
+      var numeratorText = StringUtils.format( pattern, symbolYString, MathSymbols.MINUS, symbolYString );
+      var numeratorNode = new RichText( numeratorText, {
         font: font,
         fill: options.fill
       } );
 
       // x2 - x1
-      var denominatorNode = new RichText( StringUtils.format( pattern, symbolXString, symbolXString ), {
+      var denominatorText = StringUtils.format( pattern, symbolXString, MathSymbols.MINUS, symbolXString );
+      var denominatorNode = new RichText( denominatorText, {
         font: font,
         fill: options.fill
       } );

@@ -26,6 +26,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
@@ -456,8 +457,8 @@ define( function( require ) {
      */
     createGeneralFormNode: function( options ) {
       options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
-      var text = StringUtils.format( '{0} = {1}{2} + {3}',
-        symbolYString, symbolSlopeString, symbolXString, symbolInterceptString );
+      var text = StringUtils.format( '{0} {1} {2}{3} {4} {5}',
+        symbolYString, MathSymbols.EQUAL_TO, symbolSlopeString, symbolXString, MathSymbols.PLUS, symbolInterceptString );
       return new Text( text, { font: options.font, pickable: false } );
     },
 

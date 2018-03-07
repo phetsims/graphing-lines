@@ -17,6 +17,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
@@ -29,8 +30,10 @@ define( function( require ) {
   var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   // constants
-  var Y_EQUALS_X = StringUtils.format( '{0} = {1}', symbolYString, symbolXString );  // y = x
-  var Y_EQUALS_NEGATIVE_X = StringUtils.format( '{0} = -{1}', symbolYString, symbolXString ); // y = -x
+  // y = x
+  var Y_EQUALS_X = StringUtils.format( '{0} {1} {2}', symbolYString, MathSymbols.EQUAL_TO, symbolXString );
+  // y = -x
+  var Y_EQUALS_NEGATIVE_X = StringUtils.format( '{0} {1} {2}{3}', symbolYString, MathSymbols.EQUAL_TO, MathSymbols.UNARY_MINUS, symbolXString );
 
   /**
    * @param {Property.<boolean>} linesVisibleProperty are lines visible on the graph?

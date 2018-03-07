@@ -12,6 +12,7 @@ define( function( require ) {
   // modules
   var Bounds2 = require( 'DOT/Bounds2' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var Range = require( 'DOT/Range' );
 
   var GLConstants = {
@@ -24,7 +25,7 @@ define( function( require ) {
     SCREEN_X_MARGIN: 40,
     SCREEN_Y_MARGIN: 20,
     RESET_ALL_BUTTON_SCALE: 1.32,
-    PATTERN_0VALUE_EQUALS_1VALUE: '{0} = {1}' // i18n not required, used for e.g. x = 5
+    PATTERN_0VALUE_EQUALS_1VALUE: '{0} ' + MathSymbols.EQUAL_TO + ' {1}' // i18n not required, used for e.g. x = 5
   };
 
   graphingLines.register( 'GLConstants', GLConstants );

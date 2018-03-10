@@ -26,7 +26,7 @@ define( function( require ) {
     // @private 1 value from each array is "required"
     this.requiredValues = [];
     arrays.forEach( function( array ) {
-      assert && assert( array instanceof Array );
+      assert && assert( Array.isArray(array) );
       self.requiredValues.push( ValuePool.choose( array ) );
     } );
 

@@ -110,7 +110,7 @@ define( function( require ) {
     // @public Gets the simplified rise.
     getSimplifiedRise: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return ( this.rise / Util.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
+        return ( this.rise / Line.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
       }
       else {
         return this.rise;
@@ -120,7 +120,7 @@ define( function( require ) {
     // @public Gets the simplified run.
     getSimplifiedRun: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return ( this.run / Util.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
+        return ( this.run / Line.gcd( Math.floor( this.rise ), Math.floor( this.run ) ) );
       }
       else {
         return this.run;
@@ -172,7 +172,7 @@ define( function( require ) {
       }
       var numerator = Math.floor( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
       var denominator = Math.floor( this.run );
-      var gcd = Util.gcd( numerator, denominator );
+      var gcd = Line.gcd( numerator, denominator );
       return new Fraction( numerator / gcd, denominator / gcd );
     }
   }, {
@@ -193,6 +193,20 @@ define( function( require ) {
      */
     createSlopeIntercept: function( rise, run, yIntercept, color ) {
       return Line.createPointSlope( 0, yIntercept, rise, run, color );
+    },
+
+    /**
+     * Greatest Common Denominator, using https://en.wikipedia.org/wiki/Euclidean_algorithm
+     * @public
+     *
+     * NOTE: This is a copy of the old implementation from DOT/Util, which has a specific sign convention that is now
+     * no longer used.
+     *
+     * @param {number} a
+     * @param {number} b
+     */
+    gcd: function( a, b ) {
+      return b === 0 ? a : this.gcd( b, a % b );
     }
   } );
 

@@ -110,7 +110,7 @@ define( function( require ) {
     // @public Gets the simplified rise.
     getSimplifiedRise: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return Util.roundSymmetric( this.rise / Line.gcd( this.rise, this.run ) );
+        return Util.roundSymmetric( this.rise / Util.gcd( this.rise, this.run ) );
       }
       else {
         return this.rise;
@@ -120,7 +120,7 @@ define( function( require ) {
     // @public Gets the simplified run.
     getSimplifiedRun: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return Util.roundSymmetric( this.run / Line.gcd( this.rise, this.run ) );
+        return Util.roundSymmetric( this.run / Util.gcd( this.rise, this.run ) );
       }
       else {
         return this.run;

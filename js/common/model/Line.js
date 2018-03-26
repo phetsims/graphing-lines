@@ -193,20 +193,6 @@ define( function( require ) {
      */
     createSlopeIntercept: function( rise, run, yIntercept, color ) {
       return Line.createPointSlope( 0, yIntercept, rise, run, color );
-    },
-
-    /**
-     * Greatest Common Denominator, using https://en.wikipedia.org/wiki/Euclidean_algorithm
-     * @public
-     *
-     * NOTE: This is a copy of the old implementation from DOT/Util, which has a specific sign convention that is now
-     * no longer used.
-     *
-     * @param {number} a
-     * @param {number} b
-     */
-    gcd: function( a, b ) {
-      return b === 0 ? a : this.gcd( b, a % b );
     }
   } );
 

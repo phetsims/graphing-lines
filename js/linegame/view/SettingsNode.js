@@ -18,9 +18,10 @@ define( function( require ) {
   var Image = require( 'SCENERY/nodes/Image' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var LevelSelectionItemNode = require( 'VEGAS/LevelSelectionItemNode' );
+  var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  var ScoreDisplayStars = require( 'VEGAS/ScoreDisplayStars' );
   var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
@@ -62,7 +63,7 @@ define( function( require ) {
       // create the buttons for the current row
       var rowChildren = [];
       row.forEach( function( levelImage ) {
-        rowChildren.push( createLevelSelectionItemNode( level, model, levelImage ) );
+        rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
         level++;
       } );
 
@@ -78,7 +79,7 @@ define( function( require ) {
       spacing: options.buttonsYSpace,
       align: 'center'
     } );
-    
+
     // Timer and Sound controls
     var toggleOptions = { stroke: 'gray', scale: 1.3 };
     var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, toggleOptions );
@@ -122,9 +123,9 @@ define( function( require ) {
    * @param {number} level
    * @param {LineGameModel} model
    * @param {HTMLImageElement} levelImage
-   * @returns {LevelSelectionItemNode}
+   * @returns {LevelSelectionButton}
    */
-  var createLevelSelectionItemNode = function( level, model, levelImage ) {
+  var createLevelSelectionButton = function( level, model, levelImage ) {
 
     var image = new Image( levelImage );
     var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
@@ -133,24 +134,25 @@ define( function( require ) {
     } );
 
     // 'Level N' centered above image
-    var buttonContent = new VBox( { children: [ label, image ], spacing: 20 } );
+    var icon = new VBox( { children: [ label, image ], spacing: 20 } );
 
-    return new LevelSelectionItemNode(
-      buttonContent,
-      model.challengesPerGameProperty.get(),
-      function() {
+    // score display
+    var scoreDisplay = new ScoreDisplayStars( model.bestScoreProperties[ level ], {
+      numberOfStars: model.challengesPerGameProperty.get(),
+      perfectScore: model.getPerfectScore( level )
+    } );
+
+    return new LevelSelectionButton( icon, scoreDisplay, {
+      baseColor: 'rgb( 180, 205, 255 )',
+      buttonWidth: 175,
+      buttonHeight: 210,
+      bestTimeProperty: model.bestTimeProperties[ level ],
+      bestTimeVisibleProperty: model.timerEnabledProperty,
+      listener: function() {
         model.levelProperty.set( level );
         model.gamePhaseProperty.set( GamePhase.PLAY );
-      },
-      model.bestScoreProperties[ level ],
-      model.getPerfectScore(),
-      {
-        baseColor: 'rgb( 180, 205, 255 )',
-        buttonWidth: 175,
-        buttonHeight: 210,
-        bestTimeProperty: model.bestTimeProperties[ level ],
-        bestTimeVisibleProperty: model.timerEnabledProperty
-      } );
+      }
+    } );
   };
 
   return inherit( Node, SettingsNode );

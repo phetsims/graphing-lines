@@ -21,10 +21,6 @@ define( function( require ) {
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
   var ScoreDisplayLabeledNumber = require( 'VEGAS/ScoreDisplayLabeledNumber' );
 
-  // constants
-  var STATUS_BAR_FONT = new GLFont( 20 );
-  var STATUS_BAR_TEXT_FILL = 'white';
-
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
@@ -36,19 +32,15 @@ define( function( require ) {
 
     Node.call( this );
 
-    var scoreDisplay = new ScoreDisplayLabeledNumber( model.scoreProperty, {
-      font: STATUS_BAR_FONT,
-      fill: STATUS_BAR_TEXT_FILL
-    } );
-
-    var scoreboardNode = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, scoreDisplay, {
+    var scoreboardNode = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
+      scoreDisplayConstructor: ScoreDisplayLabeledNumber,
       levelProperty: model.levelProperty,
       challengeIndexProperty: model.challengeIndexProperty,
       numberOfChallengesProperty: model.challengesPerGameProperty,
       elapsedTimeProperty: model.timer.elapsedTimeProperty,
       timerEnabledProperty: model.timerEnabledProperty,
-      font: STATUS_BAR_FONT,
-      textFill: STATUS_BAR_TEXT_FILL,
+      font: new GLFont( 20 ),
+      textFill: 'white',
       barFill: 'rgb( 49, 117, 202 )',
       xMargin: 40,
       startOverButtonOptions: {

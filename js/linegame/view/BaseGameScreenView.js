@@ -34,7 +34,7 @@ define( function( require ) {
 
     // @private one parent node for each 'phase' of the game
     this.settingsNode = new SettingsNode( model, this.layoutBounds, levelImages );
-    this.playNode = new PlayNode( model, this.layoutBounds, audioPlayer );
+    this.playNode = new PlayNode( model, this.layoutBounds, this.visibleBoundsProperty, audioPlayer );
     this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer, rewardFactoryFunctions );
 
     // rendering order

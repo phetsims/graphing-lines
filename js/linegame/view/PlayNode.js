@@ -12,42 +12,51 @@ define( function( require ) {
   // modules
   var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
   var Dimension2 = require( 'DOT/Dimension2' );
+  var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var ScoreboardBar = require( 'VEGAS/ScoreboardBar' );
+  var ScoreDisplayLabeledNumber = require( 'VEGAS/ScoreDisplayLabeledNumber' );
 
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
+   * @param {Property.<Bounds2>} visibleBoundsProperty
    * @param {GameAudioPlayer} audioPlayer
    * @constructor
    */
-  function PlayNode( model, layoutBounds, audioPlayer ) {
+  function PlayNode( model, layoutBounds, visibleBoundsProperty, audioPlayer ) {
 
     Node.call( this );
 
-    var scoreboardNode = new ScoreboardBar(
-      layoutBounds.width,
-      model.challengeIndexProperty,
-      model.challengesPerGameProperty,
-      model.levelProperty,
-      model.scoreProperty,
-      model.timer.elapsedTimeProperty,
-      model.timerEnabledProperty,
-      function() {
-        model.gamePhaseProperty.set( GamePhase.SETTINGS );
-      },
-      {
-        font: new GLFont( 20 ),
-        leftMargin: 40, // visually aligned with left edge of challenge boxes
-        rightMargin: 50 // visually aligned with right edge of challenge graph
-      } );
-    scoreboardNode.centerX = layoutBounds.centerX;
-    scoreboardNode.top = 0;
+    var scoreDisplay = new ScoreDisplayLabeledNumber( model.scoreProperty, {
+      font: new GLFont( 20 ),
+      fill: 'white'
+    } );
+
+    var scoreboardNode = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, scoreDisplay, {
+      levelProperty: model.levelProperty,
+      challengeIndexProperty: model.challengeIndexProperty,
+      numberOfChallengesProperty: model.challengesPerGameProperty,
+      elapsedTimeProperty: model.timer.elapsedTimeProperty,
+      timerEnabledProperty: model.timerEnabledProperty,
+      font: new GLFont( 20 ),
+      textFill: 'white',
+      barFill: 'rgb( 49, 117, 202 )',
+      xMargin: 40,
+      startOverButtonOptions: {
+        baseColor: 'rgb( 229, 243, 255 )',
+        textFill: 'black',
+        xMargin: 10,
+        yMargin: 5,
+        listener: function() {
+          model.gamePhaseProperty.set( GamePhase.SETTINGS );
+        }
+      }
+    } );
     this.addChild( scoreboardNode );
 
     // compute the size of the area available for the challenges

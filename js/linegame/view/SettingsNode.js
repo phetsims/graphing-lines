@@ -136,18 +136,17 @@ define( function( require ) {
     // 'Level N' centered above image
     var icon = new VBox( { children: [ label, image ], spacing: 20 } );
 
-    // score display
-    var scoreDisplay = new ScoreDisplayStars( model.bestScoreProperties[ level ], {
-      numberOfStars: model.challengesPerGameProperty.get(),
-      perfectScore: model.getPerfectScore( level )
-    } );
-
-    return new LevelSelectionButton( icon, scoreDisplay, {
+    return new LevelSelectionButton( icon, model.bestScoreProperties[ level ], {
       baseColor: 'rgb( 180, 205, 255 )',
       buttonWidth: 175,
       buttonHeight: 210,
       bestTimeProperty: model.bestTimeProperties[ level ],
       bestTimeVisibleProperty: model.timerEnabledProperty,
+      scoreDisplayConstructor: ScoreDisplayStars,
+      scoreDisplayOptions: {
+        numberOfStars: model.challengesPerGameProperty.get(),
+        perfectScore: model.getPerfectScore( level )
+      },
       listener: function() {
         model.levelProperty.set( level );
         model.gamePhaseProperty.set( GamePhase.PLAY );

@@ -55,7 +55,7 @@ define( function( require ) {
 
         // game results
         self.addChild( new LevelCompletedNode(
-          model.levelProperty.get(),
+          model.levelProperty.get() + 1,
           model.scoreProperty.get(),
           model.getPerfectScore(),
           model.getPerfectScore() / model.maxPointsPerChallenge, // number of stars in the progress indicator

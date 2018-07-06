@@ -11,6 +11,7 @@ define( function( require ) {
 
   // modules
   var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
+  var DerivedProperty = require( 'AXON/DerivedProperty' );
   var Dimension2 = require( 'DOT/Dimension2' );
   var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
@@ -34,7 +35,9 @@ define( function( require ) {
 
     var scoreboardNode = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
       scoreDisplayConstructor: ScoreDisplayLabeledNumber,
-      levelProperty: model.levelProperty,
+
+      // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #88.
+      levelProperty: new DerivedProperty( [ model.levelProperty ], function( level ) { return level + 1; } ),
       challengeIndexProperty: model.challengeIndexProperty,
       numberOfChallengesProperty: model.challengesPerGameProperty,
       elapsedTimeProperty: model.timer.elapsedTimeProperty,

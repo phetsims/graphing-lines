@@ -41,8 +41,7 @@ define( function( require ) {
     Property.multilink( [ this.locationProperty, lines.lengthProperty ],
       function() {
         var line;
-        // Lines are in rendering order, reverse iterate so we get the one that's on top.
-        for ( var i = lines.length - 1; i >= 0; i-- ) {
+        for ( var i = 0; i < lines.length; i++ ) {
           line = lines.get( i );
           if ( self.isOnLine( line ) ) {
             self.onLineProperty.set( line );

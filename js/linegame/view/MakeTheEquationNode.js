@@ -16,7 +16,6 @@ define( function( require ) {
   var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -94,7 +93,7 @@ define( function( require ) {
     }
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
-    if ( GLQueryParameters.showAnswers ) {
+    if ( phet.chipper.queryParameters.showAnswers ) {
       var devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), {
         equationForm: challenge.equationForm,
         fontSize: 14

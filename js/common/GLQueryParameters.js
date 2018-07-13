@@ -13,9 +13,6 @@ define( function( require ) {
 
   var GLQueryParameters = QueryStringMachine.getAll( {
 
-    // shows the game answers and additional debugging controls
-    showAnswers: { type: 'flag' },
-
     // shows the game reward regardless of score
     showReward: { type: 'flag' },
 

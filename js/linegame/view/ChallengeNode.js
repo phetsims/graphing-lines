@@ -17,7 +17,6 @@ define( function( require ) {
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
@@ -98,7 +97,7 @@ define( function( require ) {
     this.buttonsParent.bottom = challengeSize.height - 20;
 
     // debugging controls
-    if ( GLQueryParameters.showAnswers ) {
+    if ( phet.chipper.queryParameters.showAnswers ) {
 
       // description at leftTop
       var descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
@@ -188,7 +187,7 @@ define( function( require ) {
       nextButton.visible = ( state === PlayState.NEXT );
 
       // dev buttons
-      if ( GLQueryParameters.showAnswers ) {
+      if ( phet.chipper.queryParameters.showAnswers ) {
         replayButton.visible = ( state === PlayState.NEXT );
         skipButton.visible = !replayButton.visible;
       }

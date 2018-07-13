@@ -12,7 +12,6 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -46,7 +45,7 @@ define( function( require ) {
     GraphNode.call( this, challenge.graph, challenge.modelViewTransform );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
-    if ( GLQueryParameters.showAnswers ) {
+    if ( phet.chipper.queryParameters.showAnswers ) {
       this.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
     }
 

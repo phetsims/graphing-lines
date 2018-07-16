@@ -17,6 +17,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
+  var SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line require-statement-match
   var Node = require( 'SCENERY/nodes/Node' );
 
   // constants
@@ -38,7 +39,9 @@ define( function( require ) {
 
       // type for creating an equation node,
       // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
-      equationType: null
+      equationType: null,
+      lineNotArrow: false, // graphing-quadratics uses a line not a double-headed arrow
+      lineOptions: null // filled in below
     }, options );
 
     var self = this;
@@ -56,6 +59,18 @@ define( function( require ) {
     this.arrowNode = new ArrowNode( 0, 0, 0, 1,
       { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
     this.parentNode.addChild( this.arrowNode );
+
+    // @private
+    this.lineNotArrow = options.lineNotArrow;
+
+    if ( this.lineNotArrow ) {
+      options.lineOptions = _.extend( { lineWidth: 3 }, options.lineOptions );
+
+      // @private line
+      this.lineNode = new SceneryLine( 0, 0, 0, 0, options.lineOptions );
+      this.parentNode.addChild( this.lineNode );
+      this.arrowNode.visible = false;
+    }
 
     // @private optional equation
     if ( options.equationType ) {
@@ -160,6 +175,10 @@ define( function( require ) {
       var tipLocation = this.modelViewTransform.modelToViewXY( tipX, tipY );
       this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
       this.arrowNode.fill = line.color;
+
+      if ( this.lineNotArrow ) {
+        this.lineNode.setLine( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
+      }
 
       /*
        * If this line has an equation, update its orientation and position.

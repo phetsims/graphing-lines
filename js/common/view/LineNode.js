@@ -32,10 +32,9 @@ define( function( require ) {
     headHeight: HEAD_SIZE.height,
     stroke: null
   };
-  var LINE_DEFAULT_OPTIONS = {
-    lineWidth: 3
+  var SCENERY_LINE_DEFAULT_OPTIONS = {
+    lineWidth: TAIL_WIDTH
   };
-
 
   /**
    * @param {Property.<Line|NotALine>} lineProperty
@@ -52,7 +51,7 @@ define( function( require ) {
       // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
       equationType: null,
 
-      // true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
+      // whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
       hasArrows: true,
 
       // filled in below
@@ -64,7 +63,7 @@ define( function( require ) {
       options.lineOptions = _.extend( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
     }
     else {
-      options.lineOptions = _.extend( {}, LINE_DEFAULT_OPTIONS, options.lineOptions );
+      options.lineOptions = _.extend( {}, SCENERY_LINE_DEFAULT_OPTIONS, options.lineOptions );
     }
 
     var self = this;

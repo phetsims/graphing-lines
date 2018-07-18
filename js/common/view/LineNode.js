@@ -25,6 +25,17 @@ define( function( require ) {
   var TAIL_WIDTH = 3;
   var LINE_EXTENT = 25; // how far the line extends past the grid
   var EQUATION_FONT_SIZE = 18;
+  var ARROW_NODE_DEFAULT_OPTIONS = {
+    doubleHead: true,
+    tailWidth: TAIL_WIDTH,
+    headWidth: HEAD_SIZE.width,
+    headHeight: HEAD_SIZE.height,
+    stroke: null
+  };
+  var LINE_DEFAULT_OPTIONS = {
+    lineWidth: 3
+  };
+
 
   /**
    * @param {Property.<Line|NotALine>} lineProperty
@@ -40,9 +51,21 @@ define( function( require ) {
       // type for creating an equation node,
       // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
       equationType: null,
-      lineNotArrow: false, // graphing-quadratics uses a line not a double-headed arrow
-      lineOptions: null // filled in below
+
+      // true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
+      hasArrows: true,
+
+      // filled in below
+      lineOptions: null
     }, options );
+
+    // fill in appropriate options based on whether the line has arrows
+    if ( options.hasArrows ) {
+      options.lineOptions = _.extend( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
+    }
+    else {
+      options.lineOptions = _.extend( {}, LINE_DEFAULT_OPTIONS, options.lineOptions );
+    }
 
     var self = this;
 
@@ -55,22 +78,15 @@ define( function( require ) {
     // @private parent of all children
     this.parentNode = new Node();
 
-    // @private double-headed arrow
-    this.arrowNode = new ArrowNode( 0, 0, 0, 1,
-      { doubleHead: true, tailWidth: TAIL_WIDTH, headWidth: HEAD_SIZE.width, headHeight: HEAD_SIZE.height, stroke: null } );
-    this.parentNode.addChild( this.arrowNode );
-
-    // @private
-    this.lineNotArrow = options.lineNotArrow;
-
-    if ( this.lineNotArrow ) {
-      options.lineOptions = _.extend( { lineWidth: 3 }, options.lineOptions );
-
-      // @private line
-      this.lineNode = new SceneryLine( 0, 0, 0, 0, options.lineOptions );
-      this.parentNode.addChild( this.lineNode );
-      this.arrowNode.visible = false;
+    // @private the line
+    this.lineNode = null;
+    if ( options.hasArrows ) {
+      this.lineNode = new ArrowNode( 0, 0, 0, 1, options.lineOptions );
     }
+    else {
+      this.lineNode = new SceneryLine( 0, 0, 0, 0, options.lineOptions );
+    }
+    this.parentNode.addChild( this.lineNode );
 
     // @private optional equation
     if ( options.equationType ) {
@@ -170,14 +186,16 @@ define( function( require ) {
         }
       }
 
-      // line (arrow)
+      // line
       var tailLocation = this.modelViewTransform.modelToViewXY( tailX, tailY );
       var tipLocation = this.modelViewTransform.modelToViewXY( tipX, tipY );
-      this.arrowNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
-      this.arrowNode.fill = line.color;
-
-      if ( this.lineNotArrow ) {
+      if ( this.lineNode instanceof ArrowNode ) {
+        this.lineNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
+        this.lineNode.fill = line.color;
+      }
+      else {
         this.lineNode.setLine( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
+        this.lineNode.stroke = line.color;
       }
 
       /*

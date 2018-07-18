@@ -25,6 +25,8 @@ define( function( require ) {
   var TAIL_WIDTH = 3;
   var LINE_EXTENT = 25; // how far the line extends past the grid
   var EQUATION_FONT_SIZE = 18;
+
+  // default options passed to SCENERY_PHET/ArrowNode
   var ARROW_NODE_DEFAULT_OPTIONS = {
     doubleHead: true,
     tailWidth: TAIL_WIDTH,
@@ -32,6 +34,8 @@ define( function( require ) {
     headHeight: HEAD_SIZE.height,
     stroke: null
   };
+
+  // default options pass to SCENERY/Line
   var SCENERY_LINE_DEFAULT_OPTIONS = {
     lineWidth: TAIL_WIDTH
   };

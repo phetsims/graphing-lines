@@ -22,7 +22,7 @@ define( function( require ) {
    */
   function PointTool( location, orientation, lines, dragBounds ) {
 
-    assert && assert( orientation === 'up' || orientation === 'down' );
+    assert && assert( [ 'up', 'down', 'right', 'left' ].includes( orientation ) );
 
     var self = this;
 

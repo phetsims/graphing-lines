@@ -23,6 +23,7 @@ define( function( require ) {
   function PlottedPointNode( radius, color, options ) {
 
     var mainColor = Color.toColor( color );
+
     options = _.extend( {
       highlightColor: Color.WHITE,
       mainColor: mainColor,

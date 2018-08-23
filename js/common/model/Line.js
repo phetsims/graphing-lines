@@ -160,7 +160,7 @@ define( function( require ) {
     },
 
     /**
-     * Gets the the y-intercept as a simplified fraction.
+     * Gets the y-intercept as a simplified fraction.
      * This is valid only if (x1,y1) and (x2,y2) are at integer locations on the grid.
      * @returns {Fraction}
      * @public

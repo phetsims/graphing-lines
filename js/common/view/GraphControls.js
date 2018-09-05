@@ -14,6 +14,7 @@ define( function( require ) {
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -21,6 +22,7 @@ define( function( require ) {
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var hideGridString = require( 'string!GRAPHING_LINES/hideGrid' );
@@ -66,25 +68,41 @@ define( function( require ) {
     // checkboxes
     var TEXT_OPTIONS = { font: new GLFont( 18 ) };
     var ICON_SIZE = 60;
+    var ICON_SPACING = 15;
 
     // 'Slope' checkbox
-    var slopeCheckbox = Checkbox.createTextCheckbox( slopeString, TEXT_OPTIONS, slopeToolVisibleProperty,
-      { icon: GLIconFactory.createSlopeToolIcon( ICON_SIZE ) } );
+    var slopeCheckbox = new Checkbox( new HBox( {
+      spacing: ICON_SPACING,
+      children: [
+        new Text( slopeString, TEXT_OPTIONS ),
+        GLIconFactory.createSlopeToolIcon( ICON_SIZE )
+      ]
+    } ), slopeToolVisibleProperty );
 
     // 'y = x' checkbox
-    var yEqualsXCheckbox = Checkbox.createTextCheckbox( Y_EQUALS_X, TEXT_OPTIONS, yEqualsXVisibleProperty,
-      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 ) } );
+    var yEqualsXCheckbox = new Checkbox( new HBox( {
+      spacing: ICON_SPACING,
+      children: [
+        new Text( Y_EQUALS_X, TEXT_OPTIONS ),
+        GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 )
+      ]
+    } ), yEqualsXVisibleProperty );
 
     // 'y = -x' checkbox
-    var yEqualsNegativeXCheckbox = Checkbox.createTextCheckbox( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS, yEqualsNegativeXVisibleProperty,
-      { icon: GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 ) } );
+    var yEqualsNegativeXCheckbox = new Checkbox( new HBox( {
+      spacing: ICON_SPACING,
+      children: [
+        new Text( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
+        GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 )
+      ]
+    } ), yEqualsNegativeXVisibleProperty );
 
     // 'Hide lines' checkbox
-    var hideLinesCheckbox = Checkbox.createTextCheckbox( hideLinesString, TEXT_OPTIONS, notLinesVisibleProperty );
+    var hideLinesCheckbox = new Checkbox( new Text( hideLinesString, TEXT_OPTIONS ), notLinesVisibleProperty );
     hideLinesCheckbox.touchArea = hideLinesCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // 'Hide grid' checkbox
-    var hideGridCheckbox = Checkbox.createTextCheckbox( hideGridString, TEXT_OPTIONS, notGridVisibleProperty );
+    var hideGridCheckbox = new Checkbox( new Text( hideGridString, TEXT_OPTIONS ), notGridVisibleProperty );
     hideGridCheckbox.touchArea = hideGridCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // vertical layout

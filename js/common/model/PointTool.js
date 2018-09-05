@@ -1,4 +1,4 @@
-// Copyright 2013-2017, University of Colorado Boulder
+// Copyright 2013-2018, University of Colorado Boulder
 
 /**
  * Model of the point tool. Highlights when it is placed on one of the lines.
@@ -15,14 +15,14 @@ define( function( require ) {
 
   /**
    * @param {Vector2} location initial location of the tool
-   * @param {string} orientation direction that the tip points, either 'up', 'down', 'right', or 'left'
+   * @param {string} orientation direction that the tip points, either 'up', 'down'
    * @param {ObservableArray.<Line>} lines Lines that the tool might intersect, provided in the order that they would be rendered
    * @param {Bounds2} dragBounds tool can be dragged within these bounds
    * @constructor
    */
   function PointTool( location, orientation, lines, dragBounds ) {
 
-    assert && assert( [ 'up', 'down', 'right', 'left' ].includes( orientation ) );
+    assert && assert( [ 'up', 'down' ].includes( orientation ) );
 
     var self = this;
 

@@ -29,7 +29,7 @@ define( function( require ) {
 
     ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
-    // audio
+    // sounds
     var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
     // @private one parent node for each 'phase' of the game

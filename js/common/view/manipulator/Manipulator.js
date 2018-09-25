@@ -38,19 +38,26 @@ define( function( require ) {
       stroke: mainColor.darkerColor()
     }, options );
 
-    var haloNode = new Circle( 1.75 * radius,
-      { fill: mainColor.withAlpha( options.haloAlpha ), pickable: false, visible: false } );
-    var sphereNode = new ShadedSphereNode( 2 * radius, options );
+    Node.call( this );
 
-    Node.call( this, { children: [ haloNode, sphereNode ] } );
+    var haloNode = new Circle( 1.75 * radius, {
+      fill: mainColor.withAlpha( options.haloAlpha ),
+      pickable: false,
+      visible: false
+    } );
+    if ( options.haloAlpha !== 0 ) {
+      this.addChild( haloNode );
+    }
+
+    var sphereNode = new ShadedSphereNode( 2 * radius, options );
+    this.addChild( sphereNode );
 
     // halo visibility
     sphereNode.addInputListener( new ButtonListener( {
-        up: function( event ) { haloNode.visible = false; },
-        down: function( event ) { haloNode.visible = true; },
-        over: function( event ) { haloNode.visible = true; }
-      } )
-    );
+      up: function( event ) { haloNode.visible = false; },
+      down: function( event ) { haloNode.visible = true; },
+      over: function( event ) { haloNode.visible = true; }
+    } ) );
 
     // expand pointer areas
     this.mouseArea = this.touchArea = Shape.circle( 0, 0, 1.5 * radius );

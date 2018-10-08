@@ -12,6 +12,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var ObservableArray = require( 'AXON/ObservableArray' );
+  var Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Range} xRange
@@ -44,6 +45,22 @@ define( function( require ) {
      */
     contains: function( point ) {
       return this.xRange.contains( point.x ) && this.yRange.contains( point.y );
+    },
+
+    /**
+     * Constrains a point to the x,y range of the graph.
+     * @param {Vector2} point
+     * @returns {Vector2}
+     */
+    constrain: function( point ) {
+      var x = this.xRange.constrainValue( point.x );
+      var y = this.yRange.constrainValue( point.y );
+      if ( point.x === x && point.y === y ) {
+        return point;
+      }
+      else {
+        return new Vector2( x, y );
+      }
     }
   } );
 } );

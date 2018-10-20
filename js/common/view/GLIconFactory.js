@@ -68,7 +68,7 @@ define( function( require ) {
       } );
       var riseNode = new DimensionalArrowNode( 0, 0.5 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
       var runNode = new DimensionalArrowNode( 0, 0, 0.45 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
-      var interceptNode = new Manipulator( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
+      var interceptNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
       var iconNode = new Node( { children: [ axisNode, lineNode, riseNode, runNode, interceptNode ] } );
       axisNode.centerX = 0.35 * SCREEN_ICON_BASE_SIZE.width;
       riseNode.centerX = axisNode.left - 60;
@@ -85,8 +85,8 @@ define( function( require ) {
       var lineNode = new ArrowNode( 0, 0.75 * SCREEN_ICON_BASE_SIZE.height, SCREEN_ICON_BASE_SIZE.width, 0.25 * SCREEN_ICON_BASE_SIZE.height, ARROW_OPTIONS );
       var riseNode = new DimensionalArrowNode( 0, 0.37 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
       var runNode = new DimensionalArrowNode( 0, 0, 0.54 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
-      var pointNode = new Manipulator( MANIPULATOR_RADIUS, GLColors.INTERCEPT, { pickable: false } );
-      var slopeNode = new Manipulator( MANIPULATOR_RADIUS, GLColors.SLOPE, { pickable: false } );
+      var pointNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
+      var slopeNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.SLOPE );
       var iconNode = new Node( { children: [ lineNode, riseNode, runNode, pointNode, slopeNode ] } );
       riseNode.centerX = 0.2 * SCREEN_ICON_BASE_SIZE.width;
       riseNode.bottom = lineNode.bottom - ( 0.4 * lineNode.height );

@@ -84,6 +84,8 @@ define( function( require ) {
      * @param {Color|String} color base color used to shade the sphere
      * @param {Object} options - see constructor
      * @returns {Manipulator}
+     * @public
+     * @static
      */
     createIcon: function( radius, color, options ) {
 

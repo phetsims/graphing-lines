@@ -30,11 +30,13 @@ define( function( require ) {
     var mainColor = Color.toColor( color );
     options = _.extend( {
 
+      // Alpha channel of the halo, 0.0 - 1.0. Setting this to 0 results in no halo.
+      haloAlpha: 0.5,
+
       // ShadedSphereNode options
       mainColor: mainColor,
       highlightColor: Color.WHITE,
       shadowColor: mainColor.darkerColor(),
-      haloAlpha: 0.5, // alpha channel of the halo, 0.0 - 1.0
       lineWidth: 1,
       stroke: mainColor.darkerColor(),
 
@@ -65,7 +67,13 @@ define( function( require ) {
       } ) );
     }
 
-    var sphereNode = new ShadedSphereNode( 2 * radius, options );
+    var sphereNode = new ShadedSphereNode( 2 * radius, {
+      mainColor: options.mainColor,
+      highlightColor: options.highlightColor,
+      shadowColor: options.shadowColor,
+      lineWidth: options.lineWidth,
+      stroke: options.stroke
+    } );
     this.addChild( sphereNode );
 
     this.mutate( options );

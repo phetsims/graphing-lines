@@ -69,9 +69,6 @@ define( function( require ) {
     this.addChild( sphereNode );
 
     this.mutate( options );
-
-    // @protected the actual radius of this Node, including optional halo, used by graphing-quadratics
-    this.actualRadius = this.width / 2;
   }
 
   graphingLines.register( 'Manipulator', Manipulator );

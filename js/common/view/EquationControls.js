@@ -19,7 +19,6 @@ define( function( require ) {
   var Line = require( 'SCENERY/nodes/Line' );
   var Node = require( 'SCENERY/nodes/Node' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -76,14 +75,11 @@ define( function( require ) {
       children: [ saveLineButton, eraseLinesButton ]
     } );
 
-    // Sets the enabled states of the Save and Erase buttons
+    // Sets the enabled states of the Erase button.
     // unmultilink is unnecessary since EquationControls exists for the lifetime of the sim.
-    Property.multilink( [ savedLines.lengthProperty, linesVisibleProperty ],
-      function() {
-        saveLineButton.enabled = linesVisibleProperty.get();
-        eraseLinesButton.enabled = ( linesVisibleProperty.get() && ( savedLines.length > 0 ) );
-      }
-    );
+    savedLines.lengthProperty.link( function( length ) {
+      eraseLinesButton.enabled = ( length > 0 );
+    } );
 
     var contentWidth = Math.max( buttons.width, interactiveEquationNode.width, ( expandCollapseButton.width + titleNode.width + TITLE_X_SPACING ) );
 

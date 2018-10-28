@@ -36,14 +36,13 @@ define( function( require ) {
   var Y_EQUALS_NEGATIVE_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + MathSymbols.UNARY_MINUS + GLSymbols.x;
 
   /**
-   * @param {Property.<boolean>} linesVisibleProperty are lines visible on the graph?
    * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
    * @param {Property.<boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
    * @param {ObservableArray.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
    * @param {Object} [options] should checkboxes for standard lines be accessible?
    * @constructor
    */
-  function GraphControls( linesVisibleProperty, gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
+  function GraphControls( gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
 
     options = _.extend( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
@@ -106,14 +105,6 @@ define( function( require ) {
     } );
 
     Panel.call( this, contentNode, options );
-
-    // when lines are not visible, hide related controls
-    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
-    linesVisibleProperty.link( function( visible ) {
-      yEqualsXCheckbox.enabled = visible;
-      yEqualsNegativeXCheckbox.enabled = visible;
-      slopeCheckbox.enabled = visible;
-    } );
 
     var setStandardLineVisible = function( visible, line ) {
       if ( visible && !standardLines.contains( line ) ) {

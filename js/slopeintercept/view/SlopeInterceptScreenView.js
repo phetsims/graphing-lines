@@ -33,7 +33,6 @@ define( function( require ) {
 
       // graph controls
       new GraphControls(
-        viewProperties.linesVisibleProperty,
         viewProperties.gridVisibleProperty,
         viewProperties.slopeToolVisibleProperty,
         model.standardLines, {

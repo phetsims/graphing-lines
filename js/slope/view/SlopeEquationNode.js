@@ -115,7 +115,7 @@ define( function( require ) {
       minWidth: y2Node.width,
       minHeight: y2Node.height - 20
     };
-    var unsimplifiedEqualsNode = new Text( '=', staticOptions );
+    var unsimplifiedEqualsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     var unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
     var unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
     var unsimplifiedFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later

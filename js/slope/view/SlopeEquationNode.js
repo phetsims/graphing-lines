@@ -17,6 +17,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -35,9 +36,6 @@ define( function( require ) {
   // strings
   var slopeIsString = require( 'string!GRAPHING_LINES/slopeIs' );
   var slopeString = require( 'string!GRAPHING_LINES/slope' );
-  var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
-  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
-  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
   var undefinedString = require( 'string!GRAPHING_LINES/undefined' );
 
   /**
@@ -85,8 +83,8 @@ define( function( require ) {
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    var mNode = new Text( symbolSlopeString, staticOptions );
-    var interactiveEqualsNode = new Text( '=', staticOptions );
+    var mNode = new RichText( GLSymbols.m, staticOptions );
+    var interactiveEqualsNode = new Text( MathSymbols.EQUAL_TO, staticOptions );
     // y2 - y1
     var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
       font: interactiveFont,
@@ -273,8 +271,8 @@ define( function( require ) {
       var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
       // Slope m =
-      var leftSideText = StringUtils.format( '{0}    {1} {2}', slopeString, symbolSlopeString, MathSymbols.EQUAL_TO );
-      var leftSideNode = new Text( leftSideText, {
+      var leftSideText = StringUtils.format( '{0}    {1} {2}', slopeString, GLSymbols.m, MathSymbols.EQUAL_TO );
+      var leftSideNode = new RichText( leftSideText, {
         font: font,
         fill: options.fill,
         maxWidth: 125 // i18n, determined empirically
@@ -284,14 +282,14 @@ define( function( require ) {
       var pattern = '{0}<sub>2</sub> {1} {2}<sub>1</sub>';
 
       // y2 - y1
-      var numeratorText = StringUtils.format( pattern, symbolYString, MathSymbols.MINUS, symbolYString );
+      var numeratorText = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y );
       var numeratorNode = new RichText( numeratorText, {
         font: font,
         fill: options.fill
       } );
 
       // x2 - x1
-      var denominatorText = StringUtils.format( pattern, symbolXString, MathSymbols.MINUS, symbolXString );
+      var denominatorText = StringUtils.format( pattern, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
       var denominatorNode = new RichText( denominatorText, {
         font: font,
         fill: options.fill

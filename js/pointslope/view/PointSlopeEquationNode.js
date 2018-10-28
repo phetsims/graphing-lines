@@ -20,6 +20,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -38,9 +39,6 @@ define( function( require ) {
 
   // strings
   var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
-  var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
-  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
-  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
    * @param {Property.<Line>} lineProperty
@@ -100,7 +98,7 @@ define( function( require ) {
 
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     var yLeftParenNode = new Text( '(', staticOptions );
-    var yNode = new Text( symbolYString, staticOptions );
+    var yNode = new RichText( GLSymbols.y, staticOptions );
     var yPlusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var yMinusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var y1Node;
@@ -127,7 +125,7 @@ define( function( require ) {
     }
     var fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     var xLeftParenNode = new Text( '(', staticOptions );
-    var xNode = new Text( symbolXString, staticOptions );
+    var xNode = new RichText( GLSymbols.x, staticOptions );
     var xPlusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var xMinusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var x1Node;
@@ -143,7 +141,7 @@ define( function( require ) {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     var xRightParenNode = new Text( ')', staticOptions );
-    var slopeUndefinedNode = new Text( '?', staticOptions );
+    var slopeUndefinedNode = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     self.children = [
@@ -173,8 +171,8 @@ define( function( require ) {
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.text = ( options.slopeUndefinedVisible ) ?
-                                  StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ) :
-                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, symbolXString, line.x1 );
+                                  StringUtils.format( slopeUndefinedString, GLSymbols.x, line.x1 ) :
+                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
         return;
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
@@ -434,9 +432,10 @@ define( function( require ) {
      */
     createGeneralFormNode: function( options ) {
       options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
+      // (y - y1) = m(x - x1)
       var pattern = '({0} {1} {2}<sub>1</sub>) {3} {4}({5} {6} {7}<sub>1</sub>)';
-      var html = StringUtils.format( pattern, symbolYString, MathSymbols.MINUS, symbolYString, MathSymbols.EQUAL_TO,
-        symbolSlopeString, symbolXString, MathSymbols.MINUS, symbolXString );
+      var html = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y, MathSymbols.EQUAL_TO,
+        GLSymbols.m, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
       return new RichText( html, { font: options.font } );
     },
 

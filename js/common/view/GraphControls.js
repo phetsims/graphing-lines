@@ -15,6 +15,7 @@ define( function( require ) {
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  var GridCheckbox = require( 'GRAPHING_LINES/common/view/GridCheckbox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
@@ -26,7 +27,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var hideGridString = require( 'string!GRAPHING_LINES/hideGrid' );
   var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
   var slopeString = require( 'string!GRAPHING_LINES/slope' );
 
@@ -60,9 +60,8 @@ define( function( require ) {
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
-    // private properties for 'Hide' checkboxes, where 'visible' needs to be inverted
+    // private Property for 'Hide' checkboxes, which needs to be inverted
     var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
-    var notGridVisibleProperty = new Property( !gridVisibleProperty.get() );
 
     // checkboxes
     var TEXT_OPTIONS = { font: new GLFont( 18 ) };
@@ -100,15 +99,15 @@ define( function( require ) {
     var hideLinesCheckbox = new Checkbox( new Text( hideLinesString, TEXT_OPTIONS ), notLinesVisibleProperty );
     hideLinesCheckbox.touchArea = hideLinesCheckbox.localBounds.dilatedXY( 15, 10 );
 
-    // 'Hide grid' checkbox
-    var hideGridCheckbox = new Checkbox( new Text( hideGridString, TEXT_OPTIONS ), notGridVisibleProperty );
-    hideGridCheckbox.touchArea = hideGridCheckbox.localBounds.dilatedXY( 15, 10 );
+    // Grid checkbox
+    var gridCheckbox = new GridCheckbox( gridVisibleProperty );
+    gridCheckbox.touchArea = gridCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // vertical layout
     var contentNode = new LayoutBox( {
       children: ( options.includeStandardLines ) ?
-        [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, hideLinesCheckbox, hideGridCheckbox ] :
-        [ slopeCheckbox, hideLinesCheckbox, hideGridCheckbox ],
+        [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, hideLinesCheckbox, gridCheckbox ] :
+        [ slopeCheckbox, hideLinesCheckbox, gridCheckbox ],
       orientation: 'vertical',
       spacing: 20,
       align: 'left'
@@ -128,16 +127,6 @@ define( function( require ) {
     // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     notLinesVisibleProperty.link( function( visible ) {
       linesVisibleProperty.set( !visible );
-    } );
-
-    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
-    gridVisibleProperty.link( function( visible ) {
-      notGridVisibleProperty.set( !visible );
-    } );
-
-    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
-    notGridVisibleProperty.link( function( visible ) {
-      gridVisibleProperty.set( !visible );
     } );
 
     var setStandardLineVisible = function( visible, line ) {

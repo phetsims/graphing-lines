@@ -23,6 +23,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
@@ -31,19 +32,15 @@ define( function( require ) {
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
   var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
   var Util = require( 'DOT/Util' );
 
   // strings
   var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
-  var symbolInterceptString = require( 'string!GRAPHING_LINES/symbol.intercept' );
-  var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
-  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
-  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   /**
    * @param {Property.<Line>} lineProperty
@@ -103,8 +100,8 @@ define( function( require ) {
     var maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, self.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
-    var yNode = new Text( symbolYString, staticOptions );
-    var equalsNode = new Text( '=', staticOptions );
+    var yNode = new RichText( GLSymbols.y, staticOptions );
+    var equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     var slopeMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) );
     var riseNode;
     var runNode;
@@ -117,7 +114,7 @@ define( function( require ) {
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     var slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    var xNode = new Text( symbolXString, _.extend( { absoluteValue: true }, staticOptions ) );
+    var xNode = new RichText( GLSymbols.x, _.extend( { absoluteValue: true }, staticOptions ) );
     var plusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var minusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var yInterceptMinusSignNode = new MinusNode( _.extend( {
@@ -138,7 +135,7 @@ define( function( require ) {
     }
     var yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     var yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    var slopeUndefinedNode = new Text( '?', staticOptions );
+    var slopeUndefinedNode = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     self.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
@@ -165,8 +162,8 @@ define( function( require ) {
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.text = ( options.slopeUndefinedVisible ) ?
-                                  StringUtils.format( slopeUndefinedString, symbolXString, line.x1 ) :
-                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, symbolXString, line.x1 );
+                                  StringUtils.format( slopeUndefinedString, GLSymbols.x, line.x1 ) :
+                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
         return;
       }
 
@@ -457,9 +454,10 @@ define( function( require ) {
      */
     createGeneralFormNode: function( options ) {
       options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
+      // y = mx + b
       var text = StringUtils.format( '{0} {1} {2}{3} {4} {5}',
-        symbolYString, MathSymbols.EQUAL_TO, symbolSlopeString, symbolXString, MathSymbols.PLUS, symbolInterceptString );
-      return new Text( text, { font: options.font, pickable: false } );
+        GLSymbols.y, MathSymbols.EQUAL_TO, GLSymbols.m, GLSymbols.x, MathSymbols.PLUS, GLSymbols.b );
+      return new RichText( text, { font: options.font, pickable: false } );
     },
 
     /**

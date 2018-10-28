@@ -58,8 +58,8 @@ define( function( require ) {
 
     EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
-    var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
-    var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
+    var interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    var staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
@@ -262,7 +262,7 @@ define( function( require ) {
 
       options = _.extend( {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: GLConstants.EQUATION_FONT_WEIGHT,
         fill: 'black'
       }, options );
 
@@ -354,7 +354,7 @@ define( function( require ) {
     EquationNode.call( this, options.fontSize );
 
     var textOptions = {
-      font: new GLFont( { size: options.fontSize, weight: 'bold' } ),
+      font: new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 130
     };
 

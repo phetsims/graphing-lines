@@ -74,8 +74,8 @@ define( function( require ) {
     EquationNode.call( self, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     var fullyInteractive = ( options.interactivePoint && options.interactiveSlope );
-    var interactiveFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
-    var staticFont = new GLFont( { size: options.fontSize, weight: 'bold' } );
+    var interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    var staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
 
@@ -431,7 +431,7 @@ define( function( require ) {
      * @static
      */
     createGeneralFormNode: function( options ) {
-      options = _.extend( { font: new GLFont( { size: 20, weight: 'bold' } ) }, options );
+      options = _.extend( { font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ) }, options );
       // (y - y1) = m(x - x1)
       var pattern = '({0} {1} {2}<sub>1</sub>) {3} {4}({5} {6} {7}<sub>1</sub>)';
       var html = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y, MathSymbols.EQUAL_TO,

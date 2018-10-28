@@ -13,6 +13,7 @@ define( function( require ) {
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -21,21 +22,19 @@ define( function( require ) {
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var Panel = require( 'SUN/Panel' );
   var Property = require( 'AXON/Property' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  var RichText = require( 'SCENERY/nodes/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
   var hideGridString = require( 'string!GRAPHING_LINES/hideGrid' );
   var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
   var slopeString = require( 'string!GRAPHING_LINES/slope' );
-  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
-  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   // constants
   // y = x
-  var Y_EQUALS_X = StringUtils.format( '{0} {1} {2}', symbolYString, MathSymbols.EQUAL_TO, symbolXString );
+  var Y_EQUALS_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + GLSymbols.x;
   // y = -x
-  var Y_EQUALS_NEGATIVE_X = StringUtils.format( '{0} {1} {2}{3}', symbolYString, MathSymbols.EQUAL_TO, MathSymbols.UNARY_MINUS, symbolXString );
+  var Y_EQUALS_NEGATIVE_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + MathSymbols.UNARY_MINUS + GLSymbols.x;
 
   /**
    * @param {Property.<boolean>} linesVisibleProperty are lines visible on the graph?
@@ -83,7 +82,7 @@ define( function( require ) {
     var yEqualsXCheckbox = new Checkbox( new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new Text( Y_EQUALS_X, TEXT_OPTIONS ),
+        new RichText( Y_EQUALS_X, TEXT_OPTIONS ),
         GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 )
       ]
     } ), yEqualsXVisibleProperty );
@@ -92,7 +91,7 @@ define( function( require ) {
     var yEqualsNegativeXCheckbox = new Checkbox( new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new Text( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
+        new RichText( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
         GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 )
       ]
     } ), yEqualsNegativeXVisibleProperty );

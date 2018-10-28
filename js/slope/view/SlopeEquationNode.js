@@ -408,7 +408,7 @@ define( function( require ) {
           minusSignNode.fill = lineColor;
           minusSignNode.left = slopeIsNode.right + self.relationalOperatorXSpacing;
           minusSignNode.centerY = slopeIsNode.centerY + self.slopeSignYFudgeFactor + self.slopeSignYOffset;
-          nextXOffset = minusSignNode.right + self.operatorXSpacing;
+          nextXOffset = minusSignNode.right + self.fractionalSlopeXSpacing;
         }
         else {
           // no sign

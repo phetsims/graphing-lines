@@ -10,6 +10,7 @@ define( function( require ) {
 
   // modules
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GraphContentsToggleButton = require( 'GRAPHING_LINES/common/view/GraphContentsToggleButton' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
@@ -38,6 +39,11 @@ define( function( require ) {
     pointToolParent.addChild( pointTool1 );
     pointToolParent.addChild( pointTool2 );
 
+    // Toggle button for showing/hiding contents of graph
+    const graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty, {
+      scale: 0.75
+    } );
+
     // Reset All button, at bottom-right
     var resetAllButton = new ResetAllButton( {
       listener: function() {
@@ -57,6 +63,7 @@ define( function( require ) {
     // rendering order
     this.addChild( controlsParent );
     this.addChild( graphNode );
+    this.addChild( graphContentsToggleButton );
     this.addChild( pointToolParent );
     this.addChild( resetAllButton );
 
@@ -87,6 +94,10 @@ define( function( require ) {
     // center controls in the space to the right of the graph
     controlsParent.centerX = graphNode.right + xMargin + ( availableControlPanelWidth / 2 );
     controlsParent.top = yMargin;
+
+    // graphContentsToggleButton at lower right of graph
+    graphContentsToggleButton.left = model.modelViewTransform.modelToViewX( model.graph.xRange.max ) + 10;
+    graphContentsToggleButton.bottom = model.modelViewTransform.modelToViewY( model.graph.yRange.min );
   }
 
   graphingLines.register( 'LineFormsScreenView', LineFormsScreenView );

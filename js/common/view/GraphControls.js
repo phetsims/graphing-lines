@@ -27,7 +27,6 @@ define( function( require ) {
   var Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var hideLinesString = require( 'string!GRAPHING_LINES/hideLines' );
   var slopeString = require( 'string!GRAPHING_LINES/slope' );
 
   // constants
@@ -59,9 +58,6 @@ define( function( require ) {
     // private properties for standard-line checkboxes
     var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
     var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
-
-    // private Property for 'Hide' checkboxes, which needs to be inverted
-    var notLinesVisibleProperty = new Property( !linesVisibleProperty.get() );
 
     // checkboxes
     var TEXT_OPTIONS = { font: new GLFont( 18 ) };
@@ -95,10 +91,6 @@ define( function( require ) {
       ]
     } ), yEqualsNegativeXVisibleProperty );
 
-    // 'Hide lines' checkbox
-    var hideLinesCheckbox = new Checkbox( new Text( hideLinesString, TEXT_OPTIONS ), notLinesVisibleProperty );
-    hideLinesCheckbox.touchArea = hideLinesCheckbox.localBounds.dilatedXY( 15, 10 );
-
     // Grid checkbox
     var gridCheckbox = new GridCheckbox( gridVisibleProperty );
     gridCheckbox.touchArea = gridCheckbox.localBounds.dilatedXY( 15, 10 );
@@ -106,8 +98,8 @@ define( function( require ) {
     // vertical layout
     var contentNode = new LayoutBox( {
       children: ( options.includeStandardLines ) ?
-        [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, hideLinesCheckbox, gridCheckbox ] :
-        [ slopeCheckbox, hideLinesCheckbox, gridCheckbox ],
+        [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, gridCheckbox ] :
+        [ slopeCheckbox, gridCheckbox ],
       orientation: 'vertical',
       spacing: 20,
       align: 'left'
@@ -118,15 +110,9 @@ define( function( require ) {
     // when lines are not visible, hide related controls
     // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
     linesVisibleProperty.link( function( visible ) {
-      notLinesVisibleProperty.set( !visible );
       yEqualsXCheckbox.enabled = visible;
       yEqualsNegativeXCheckbox.enabled = visible;
       slopeCheckbox.enabled = visible;
-    } );
-
-    // unlink is unnecessary since GraphControls exists for the lifetime of the sim.
-    notLinesVisibleProperty.link( function( visible ) {
-      linesVisibleProperty.set( !visible );
     } );
 
     var setStandardLineVisible = function( visible, line ) {

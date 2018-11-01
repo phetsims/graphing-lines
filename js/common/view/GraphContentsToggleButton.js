@@ -21,11 +21,16 @@ define( require => {
      */
     constructor( property, options ) {
 
+      options = _.extend( {
+        trueColor: 'white', // {Color|string} button color when property.value === true
+        falseColor: PhetColorScheme.BUTTON_YELLOW  // {Color|string} button color when property.value === false
+      }, options );
+
       super( property, options );
 
       // change the button color to emphasize when the graph contents are hidden
       property.link( visible => {
-        this.setBaseColor( visible ? 'white' : PhetColorScheme.BUTTON_YELLOW );
+        this.setBaseColor( visible ? options.trueColor : options.falseColor );
       } );
     }
   }

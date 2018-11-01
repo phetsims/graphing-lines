@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   const GraphContentsToggleButton = require( 'GRAPHING_LINES/common/view/GraphContentsToggleButton' );
+  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );

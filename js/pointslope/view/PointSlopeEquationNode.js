@@ -27,6 +27,7 @@ define( function( require ) {
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
@@ -79,11 +80,15 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
 
+    var numberPropertyOptions = {
+      numberType: 'Integer'
+    };
+
     // internal properties that are connected to pickers
-    var x1Property = new Property( lineProperty.get().x1 );
-    var y1Property = new Property( lineProperty.get().y1 );
-    var riseProperty = new Property( lineProperty.get().rise );
-    var runProperty = new Property( lineProperty.get().run );
+    var x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
+    var y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
+    var riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
+    var runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.

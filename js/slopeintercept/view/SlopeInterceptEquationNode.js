@@ -30,6 +30,7 @@ define( function( require ) {
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var RichText = require( 'SCENERY/nodes/RichText' );
@@ -80,13 +81,17 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
 
+    var numberPropertyOptions = {
+      numberType: 'Integer'
+    };
+
     // internal properties that are connected to pickers
-    var riseProperty = new Property( lineProperty.get().rise );
-    var runProperty = new Property( lineProperty.get().run );
-    var yInterceptProperty = new Property( lineProperty.get().y1 );
+    var riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
+    var runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
+    var yInterceptProperty = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
     var fractionalIntercept = lineProperty.get().getYIntercept();
-    var yInterceptNumeratorProperty = new Property( fractionalIntercept.numerator );
-    var yInterceptDenominatorProperty = new Property( fractionalIntercept.denominator );
+    var yInterceptNumeratorProperty = new NumberProperty( fractionalIntercept.numerator, numberPropertyOptions );
+    var yInterceptDenominatorProperty = new NumberProperty( fractionalIntercept.denominator, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.

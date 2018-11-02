@@ -19,7 +19,7 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
-  var Property = require( 'AXON/Property' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
 
   // constants
   var VALUE_X_SPACING = 6;
@@ -47,8 +47,8 @@ define( function( require ) {
       yMargin: 6,
       cornerRadius: 5
     };
-    this.riseProperty = new Property( lineProperty.get().rise ); // @private
-    this.runProperty = new Property( lineProperty.get().run ); // @private
+    this.riseProperty = new NumberProperty( lineProperty.get().rise ); // @private
+    this.runProperty = new NumberProperty( lineProperty.get().run ); // @private
     this.riseValueNode = new NumberBackgroundNode( this.riseProperty, numberOptions ); // @private
     this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
 

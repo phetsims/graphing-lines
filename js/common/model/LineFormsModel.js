@@ -32,7 +32,7 @@ define( function( require ) {
 
     var self = this;
 
-    // @public the line that the user interacts with
+    // @public {Property.<Line>} the line that the user interacts with
     this.interactiveLineProperty = new Property( interactiveLine );
     
     // @public (read-only) radius of the manipulators

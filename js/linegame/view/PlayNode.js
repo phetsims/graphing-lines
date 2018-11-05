@@ -33,7 +33,7 @@ define( function( require ) {
 
     Node.call( this );
 
-    var scoreboardNode = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
+    var statusBar = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
       scoreDisplayConstructor: ScoreDisplayLabeledNumber,
 
       // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #88.
@@ -56,14 +56,14 @@ define( function( require ) {
         }
       }
     } );
-    this.addChild( scoreboardNode );
+    this.addChild( statusBar );
 
     // compute the size of the area available for the challenges
-    var challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - scoreboardNode.bottom );
+    var challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - statusBar.bottom );
 
     // challenge parent, to keep challenge below scoreboard
     var challengeParent = new Rectangle( 0, 0, 0, 1 );
-    challengeParent.top = scoreboardNode.bottom;
+    challengeParent.top = statusBar.bottom;
     this.addChild( challengeParent );
 
     // Set up a new challenge

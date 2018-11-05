@@ -334,7 +334,7 @@ define( function( require ) {
         }
 
         // x term
-        if ( options.interactivePoint || options.interactiveSlope || line.rise !== 0 ) {
+        if ( options.interactivePoint || options.interactiveSlope || ( line.rise !== 0 && line.x1 !== 0 ) ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
           xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
@@ -348,6 +348,12 @@ define( function( require ) {
           x1Node.centerY = yNode.centerY;
           xRightParenNode.left = x1Node.right + self.parenXSpacing;
           xRightParenNode.y = yNode.y;
+        }
+        else if ( line.x1 === 0  ) {
+          // x
+          xNode.visible = true;
+          xNode.left = previousNode.right + previousXOffset;
+          xNode.centerY = yNode.centerY;
         }
         else if ( line.rise === 0 ) {
           // no x term

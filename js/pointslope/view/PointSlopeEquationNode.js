@@ -227,24 +227,33 @@ define( function( require ) {
 
         var previousNode;
 
-        // (y - y1)
-        yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
-        yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
-        yLeftParenNode.x = 0;
-        yLeftParenNode.y = 0;
-        yNode.left = yLeftParenNode.right + self.parenXSpacing;
-        yNode.y = yLeftParenNode.y;
-        yOperatorNode.left = yNode.right + self.operatorXSpacing;
-        yOperatorNode.centerY = yNode.centerY + self.operatorYFudgeFactor;
-        y1Node.left = yOperatorNode.right + self.operatorXSpacing;
-        y1Node.centerY = yNode.centerY;
-        yRightParenNode.left = y1Node.right + self.parenXSpacing;
-        yRightParenNode.y = yNode.y;
+        if ( !options.interactivePoint && line.y1 === 0 ) {
+          // y
+          yNode.fill = lineColor;
+          yNode.visible = true;
+          previousNode = yNode;
+        }
+        else {
+          // (y - y1)
+          yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
+          yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
+          yLeftParenNode.x = 0;
+          yLeftParenNode.y = 0;
+          yNode.left = yLeftParenNode.right + self.parenXSpacing;
+          yNode.y = yLeftParenNode.y;
+          yOperatorNode.left = yNode.right + self.operatorXSpacing;
+          yOperatorNode.centerY = yNode.centerY + self.operatorYFudgeFactor;
+          y1Node.left = yOperatorNode.right + self.operatorXSpacing;
+          y1Node.centerY = yNode.centerY;
+          yRightParenNode.left = y1Node.right + self.parenXSpacing;
+          yRightParenNode.y = yNode.y;
+          previousNode = yRightParenNode;
+        }
 
         // =
         equalsNode.visible = true;
         equalsNode.fill = lineColor;
-        equalsNode.left = yRightParenNode.right + self.relationalOperatorXSpacing;
+        equalsNode.left = previousNode.right + self.relationalOperatorXSpacing;
         equalsNode.y = yNode.y + self.equalsSignFudgeFactor;
 
         // slope
@@ -354,9 +363,6 @@ define( function( require ) {
           xNode.visible = true;
           xNode.left = previousNode.right + previousXOffset;
           xNode.centerY = yNode.centerY;
-        }
-        else if ( line.rise === 0 ) {
-          // no x term
         }
         else {
           throw new Error( 'programming error, forgot to handle some x-term case' );

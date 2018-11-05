@@ -62,7 +62,9 @@ define( function( require ) {
     this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
       numberType: 'Integer'
     } );
-    this.playStateProperty = new StringProperty( PlayState.NONE );
+    this.playStateProperty = new StringProperty( PlayState.NONE, {
+      reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
+    } );
 
     // @public
     this.challenges = []; // {Challenge[]}

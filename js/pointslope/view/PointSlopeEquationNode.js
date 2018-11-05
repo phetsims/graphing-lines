@@ -229,9 +229,23 @@ define( function( require ) {
 
         if ( !options.interactivePoint && line.y1 === 0 ) {
           // y
+          yNode.x = 0;
+          yNode.y = 0;
           yNode.fill = lineColor;
           yNode.visible = true;
           previousNode = yNode;
+        }
+        else if ( !options.interactivePoint && !options.interactivePoint ) {
+          // y - y1
+          yNode.visible = yOperatorNode.visible = y1Node.visible = true;
+          yNode.fill = yOperatorNode.fill = y1Node.fill = lineColor;
+          yNode.x = 0;
+          yNode.y = 0;
+          yOperatorNode.left = yNode.right + self.operatorXSpacing;
+          yOperatorNode.centerY = yNode.centerY + self.operatorYFudgeFactor;
+          y1Node.left = yOperatorNode.right + self.operatorXSpacing;
+          y1Node.centerY = yNode.centerY;
+          previousNode = y1Node;
         }
         else {
           // (y - y1)

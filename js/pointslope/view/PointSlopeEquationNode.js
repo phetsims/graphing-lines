@@ -357,7 +357,7 @@ define( function( require ) {
         }
 
         // x term
-        if ( options.interactivePoint || options.interactiveSlope || ( line.rise !== 0 && line.x1 !== 0 ) ) {
+        if ( interactive || ( line.x1 !== 0 && line.getSlope() !== 0 && line.getSlope() !== 1 ) ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
           xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
@@ -372,9 +372,21 @@ define( function( require ) {
           xRightParenNode.left = x1Node.right + self.parenXSpacing;
           xRightParenNode.y = yNode.y;
         }
+        else if ( line.getSlope() === 1 && line.x1 !== 0 ) {
+          // x - x1
+          xNode.visible = xOperatorNode.visible = x1Node.visible = true;
+          xNode.fill = xOperatorNode.fill = x1Node.fill = lineColor;
+          xNode.left = previousNode.right + previousXOffset;
+          xNode.y = yNode.y;
+          xOperatorNode.left = xNode.right + self.operatorXSpacing;
+          xOperatorNode.centerY = xNode.centerY + self.operatorYFudgeFactor;
+          x1Node.left = xOperatorNode.right + self.operatorXSpacing;
+          x1Node.centerY = yNode.centerY;
+        }
         else if ( line.x1 === 0  ) {
           // x
           xNode.visible = true;
+          xNode.fill = lineColor;
           xNode.left = previousNode.right + previousXOffset;
           xNode.centerY = yNode.centerY;
         }

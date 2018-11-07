@@ -235,7 +235,7 @@ define( function( require ) {
           yNode.visible = true;
           previousNode = yNode;
         }
-        else if ( !options.interactivePoint && !options.interactivePoint ) {
+        else if ( !interactive ) {
           // y - y1
           yNode.visible = yOperatorNode.visible = y1Node.visible = true;
           yNode.fill = yOperatorNode.fill = y1Node.fill = lineColor;

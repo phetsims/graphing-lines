@@ -1,11 +1,11 @@
 {
-  "comment": "# graphing-lines 1.3.0-dev.6 Mon Nov 05 2018 16:14:27 GMT-0700 (MST)",
+  "comment": "# graphing-lines 1.3.0-dev.7 Tue Nov 06 2018 21:13:18 GMT-0700 (MST)",
   "assert": {
     "sha": "928741cfc8fe804334d5b35292140314511f8678",
     "branch": "master"
   },
   "axon": {
-    "sha": "cca8e36ef05a9ff0584bae8c68182888929ab67c",
+    "sha": "ff00a0bb08819a1803c8593038e14db7169934cc",
     "branch": "master"
   },
   "brand": {
@@ -21,7 +21,7 @@
     "branch": "master"
   },
   "graphing-lines": {
-    "sha": "2184d33772df9419829a92e31f872d134eef28cc",
+    "sha": "40a95e05155a96996c9edabc7fb43f57b38dc8d5",
     "branch": "master"
   },
   "joist": {
@@ -37,7 +37,7 @@
     "branch": "master"
   },
   "phet-io": {
-    "sha": "3694f827f21553f820da004b8154f1aa8453fa42",
+    "sha": "38d7b161c80b5aab54bef294f0b9290606df1bed",
     "branch": "master"
   },
   "phet-io-wrapper-classroom-activity": {
@@ -53,7 +53,7 @@
     "branch": "master"
   },
   "phet-io-wrappers": {
-    "sha": "37b35e112ecc8bf4a2fdf1f71471bdf4526e3e53",
+    "sha": "a6bc62ca0704bcc525f2beb2a95d46bc1eed495c",
     "branch": "master"
   },
   "phetcommon": {
@@ -77,7 +77,7 @@
     "branch": "master"
   },
   "sun": {
-    "sha": "a423abfbb72bdd39fe06c29f1b81b58f12e77c23",
+    "sha": "b891734089dc2c3052ccf7f6605e84fd5e32f54e",
     "branch": "master"
   },
   "tambo": {
@@ -85,7 +85,7 @@
     "branch": "master"
   },
   "tandem": {
-    "sha": "1b93c58b6de5068171726eb1dc12e4d9111a29f8",
+    "sha": "688d0abed6a951c40483aac472af45d2fa0a57cd",
     "branch": "master"
   },
   "vegas": {

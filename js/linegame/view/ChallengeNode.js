@@ -128,6 +128,7 @@ define( function( require ) {
       devButtonsParent.left = this.buttonsParent.right + 15;
       devButtonsParent.centerY = this.buttonsParent.centerY;
       this.addChild( devButtonsParent );
+      devButtonsParent.moveToBack();
     }
 
     // 'Check' button

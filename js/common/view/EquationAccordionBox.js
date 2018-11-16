@@ -1,7 +1,7 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
 /**
- * Accordion box that contains the interactive-equation and related controls
+ * Accordion box that contains the interactive equation and related controls
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

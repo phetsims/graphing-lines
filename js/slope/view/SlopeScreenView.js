@@ -50,7 +50,8 @@ define( function( require ) {
           x1RangeProperty: model.x1RangeProperty,
           y1RangeProperty: model.y1RangeProperty,
           x2RangeProperty: model.x2RangeProperty,
-          y2RangeProperty: model.y2RangeProperty
+          y2RangeProperty: model.y2RangeProperty,
+          maxWidth: 400
         } )
       )
     );

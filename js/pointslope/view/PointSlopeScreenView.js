@@ -49,7 +49,8 @@ define( function( require ) {
           x1RangeProperty: model.x1RangeProperty,
           y1RangeProperty: model.y1RangeProperty,
           riseRangeProperty: model.riseRangeProperty,
-          runRangeProperty: model.runRangeProperty
+          runRangeProperty: model.runRangeProperty,
+          maxWidth: 400
         } )
       )
     );

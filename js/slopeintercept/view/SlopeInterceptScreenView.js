@@ -48,7 +48,8 @@ define( function( require ) {
         new SlopeInterceptEquationNode( model.interactiveLineProperty, {
           riseRangeProperty: model.riseRangeProperty,
           runRangeProperty: model.runRangeProperty,
-          yInterceptRangeProperty: model.y1RangeProperty
+          yInterceptRangeProperty: model.y1RangeProperty,
+          maxWidth: 400
         } )
       )
     );

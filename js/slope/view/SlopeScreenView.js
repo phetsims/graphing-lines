@@ -36,8 +36,7 @@ define( function( require ) {
         viewProperties.gridVisibleProperty,
         viewProperties.slopeToolVisibleProperty,
         model.standardLines, {
-          includeStandardLines: false,
-          maxWidth: 400
+          includeStandardLines: false
         } ),
 
       // equation controls

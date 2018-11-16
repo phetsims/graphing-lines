@@ -51,6 +51,7 @@ define( function( require ) {
       xMargin: 20,
       yMargin: 15,
       cornerRadius: 10,
+      maxWidth: 400, // determined empirically
       includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
     }, options );
 
@@ -59,7 +60,10 @@ define( function( require ) {
     var yEqualsNegativeXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // checkboxes
-    var TEXT_OPTIONS = { font: new GLFont( 18 ) };
+    var TEXT_OPTIONS = {
+      font: new GLFont( 18 ),
+      maxWidth: 150 // determined empirically
+    };
     var ICON_SIZE = 60;
     var ICON_SPACING = 15;
 

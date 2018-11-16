@@ -499,9 +499,11 @@ define( function( require ) {
     createDynamicLabel: function( lineProperty, options ) {
 
       options = _.extend( {
+        pickable: false,
         interactivePoint: false,
         interactiveSlope: false,
-        fontSize: 18
+        fontSize: 18,
+        maxWidth: 200
       }, options );
 
       return new PointSlopeEquationNode( lineProperty, options );

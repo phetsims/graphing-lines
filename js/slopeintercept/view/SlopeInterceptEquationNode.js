@@ -484,7 +484,8 @@ define( function( require ) {
       options = _.extend( {
         interactiveSlope: false,
         interactiveIntercept: false,
-        fontSize: 18
+        fontSize: 18,
+        maxWidth: 200
       }, options );
 
       return new SlopeInterceptEquationNode( lineProperty, options );

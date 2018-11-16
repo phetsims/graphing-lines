@@ -274,7 +274,7 @@ define( function( require ) {
         maxWidth: 300
       }, options );
 
-      var equationNode = new EquationNode( options.fontSize );
+      var equationNode = new EquationNode( options.fontSize, options );
 
       var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
@@ -326,9 +326,7 @@ define( function( require ) {
       denominatorNode.centerX = fractionLineNode.centerX;
       denominatorNode.top = fractionLineNode.bottom + 1;
 
-      return new Node( _.extend( {
-        children: [ equationNode ]
-      }, options ) );
+      return equationNode;
     },
 
     /**
@@ -340,6 +338,12 @@ define( function( require ) {
      * @static
      */
     createDynamicLabel: function( lineProperty, options ) {
+
+      options = _.extend( {
+        pickable: false,
+        maxWidth: 200
+      }, options );
+
        return new DynamicLabelNode( lineProperty, options );
     }
   } );
@@ -364,8 +368,7 @@ define( function( require ) {
     EquationNode.call( this, options.fontSize );
 
     var textOptions = {
-      font: new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
-      maxWidth: 130
+      font: new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } )
     };
 
     // allocate nodes needed to represent all simplified forms
@@ -462,6 +465,8 @@ define( function( require ) {
     this.disposeDynamicLabelNode = function() {
       lineProperty.unlink( lineObserver );
     };
+
+    this.mutate( options );
   }
 
   graphingLines.register( 'SlopeEquationNode.DynamicLabelNode', DynamicLabelNode );

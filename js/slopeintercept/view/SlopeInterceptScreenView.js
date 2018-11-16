@@ -9,8 +9,8 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var EquationControls = require( 'GRAPHING_LINES/common/view/EquationControls' );
-  var GraphControls = require( 'GRAPHING_LINES/common/view/GraphControls' );
+  var EquationAccordionBox = require( 'GRAPHING_LINES/common/view/EquationAccordionBox' );
+  var GraphControlPanel = require( 'GRAPHING_LINES/common/view/GraphControlPanel' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LineFormsScreenView = require( 'GRAPHING_LINES/common/view/LineFormsScreenView' );
@@ -31,15 +31,15 @@ define( function( require ) {
       // graph
       new SlopeInterceptGraphNode( model, viewProperties ),
 
-      // graph controls
-      new GraphControls(
+      // graph control panel
+      new GraphControlPanel(
         viewProperties.gridVisibleProperty,
         viewProperties.slopeToolVisibleProperty,
         model.standardLines
       ),
 
-      // equation controls
-      new EquationControls(
+      // equation accordion box
+      new EquationAccordionBox(
         SlopeInterceptEquationNode.createGeneralFormNode(),
         model.interactiveLineProperty,
         model.savedLines,

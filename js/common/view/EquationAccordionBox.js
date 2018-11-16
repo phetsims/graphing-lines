@@ -1,7 +1,7 @@
 // Copyright 2013-2017, University of Colorado Boulder
 
 /**
- * Control panel for interactive-equation.
+ * Accordion box that contains the interactive-equation and related controls
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -41,7 +41,7 @@ define( function( require ) {
    * @param {Object} [options]
    * @constructor
    */
-  function EquationControls( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
+  function EquationAccordionBox( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
 
     options = _.extend( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
@@ -76,7 +76,7 @@ define( function( require ) {
     } );
 
     // Sets the enabled states of the Erase button.
-    // unmultilink is unnecessary since EquationControls exists for the lifetime of the sim.
+    // unmultilink is unnecessary since EquationAccordionBox exists for the lifetime of the sim.
     savedLines.lengthProperty.link( function( length ) {
       eraseLinesButton.enabled = ( length > 0 );
     } );
@@ -116,7 +116,7 @@ define( function( require ) {
     Panel.call( this, content, options );
   }
 
-  graphingLines.register( 'EquationControls', EquationControls );
+  graphingLines.register( 'EquationAccordionBox', EquationAccordionBox );
 
-  return inherit( Panel, EquationControls );
+  return inherit( Panel, EquationAccordionBox );
 } );

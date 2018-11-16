@@ -22,11 +22,11 @@ define( function( require ) {
    * @param {LineFormsModel} model
    * @param {LineFormsViewProperties} viewProperties
    * @param {Node} graphNode
-   * @param {Node} graphControls
-   * @param {Node} equationControls
+   * @param {GraphControlPanel} graphControlPanel
+   * @param {AccordionBox} equationAccordionBox
    * @constructor
    */
-  function LineFormsScreenView( model, viewProperties, graphNode, graphControls, equationControls ) {
+  function LineFormsScreenView( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox ) {
 
     ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
@@ -57,8 +57,8 @@ define( function( require ) {
 
     // Parent for all controls, to simplify layout
     var controlsParent = new Node();
-    controlsParent.addChild( equationControls );
-    controlsParent.addChild( graphControls );
+    controlsParent.addChild( equationAccordionBox );
+    controlsParent.addChild( graphControlPanel );
 
     // rendering order
     this.addChild( controlsParent );
@@ -78,18 +78,18 @@ define( function( require ) {
     var availableControlPanelWidth = this.layoutBounds.width - graphNode.right - ( 2 * xMargin );
 
     // if either control panel is too wide, scale it
-    if ( equationControls.width > availableControlPanelWidth ) {
-      equationControls.scale = availableControlPanelWidth / equationControls.width;
+    if ( equationAccordionBox.width > availableControlPanelWidth ) {
+      equationAccordionBox.scale = availableControlPanelWidth / equationAccordionBox.width;
     }
-    if ( graphControls.width > availableControlPanelWidth ) {
-      graphControls.scale = availableControlPanelWidth / graphControls.width;
+    if ( graphControlPanel.width > availableControlPanelWidth ) {
+      graphControlPanel.scale = availableControlPanelWidth / graphControlPanel.width;
     }
 
     // vertically stack controls, horizontally align centers
-    equationControls.centerX = availableControlPanelWidth / 2;
-    equationControls.y = 0;
-    graphControls.centerX = equationControls.centerX;
-    graphControls.top = equationControls.bottom + ySpacing;
+    equationAccordionBox.centerX = availableControlPanelWidth / 2;
+    equationAccordionBox.y = 0;
+    graphControlPanel.centerX = equationAccordionBox.centerX;
+    graphControlPanel.top = equationAccordionBox.bottom + ySpacing;
 
     // center controls in the space to the right of the graph
     controlsParent.centerX = graphNode.right + xMargin + ( availableControlPanelWidth / 2 );

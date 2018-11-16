@@ -33,15 +33,16 @@ define( function( require ) {
 
   /**
    * @param {Node} titleNode
+   * @param {Node} interactiveEquationNode
    * @param {Property.<Line>} interactiveLineProperty
    * @param {ObservableArray.<Line>} savedLines
    * @param {Property.<boolean>} maximizedProperty
    * @param {Property.<boolean>} linesVisibleProperty
-   * @param {Node} interactiveEquationNode
    * @param {Object} [options]
    * @constructor
    */
-  function EquationAccordionBox( titleNode, interactiveLineProperty, savedLines, maximizedProperty, linesVisibleProperty, interactiveEquationNode, options ) {
+  function EquationAccordionBox( titleNode, interactiveEquationNode, interactiveLineProperty, savedLines,
+                                 maximizedProperty, linesVisibleProperty, options ) {
 
     options = _.extend( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,

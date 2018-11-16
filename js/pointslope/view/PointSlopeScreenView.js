@@ -40,18 +40,24 @@ define( function( require ) {
 
       // equation accordion box
       new EquationAccordionBox(
+
+        // title
         PointSlopeEquationNode.createGeneralFormNode(),
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty,
+
+        // interactive equation
         new PointSlopeEquationNode( model.interactiveLineProperty, {
           x1RangeProperty: model.x1RangeProperty,
           y1RangeProperty: model.y1RangeProperty,
           riseRangeProperty: model.riseRangeProperty,
           runRangeProperty: model.runRangeProperty,
           maxWidth: 400
-        } )
+        } ),
+
+        // Properties
+        model.interactiveLineProperty,
+        model.savedLines,
+        viewProperties.interactiveEquationVisibleProperty,
+        viewProperties.linesVisibleProperty,
       )
     );
   }

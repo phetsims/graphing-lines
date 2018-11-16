@@ -40,17 +40,23 @@ define( function( require ) {
 
       // equation accordion box
       new EquationAccordionBox(
+
+        // title
         SlopeInterceptEquationNode.createGeneralFormNode(),
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty,
+
+        // interactive equation
         new SlopeInterceptEquationNode( model.interactiveLineProperty, {
           riseRangeProperty: model.riseRangeProperty,
           runRangeProperty: model.runRangeProperty,
           yInterceptRangeProperty: model.y1RangeProperty,
           maxWidth: 400
-        } )
+        } ),
+
+        // Properties
+        model.interactiveLineProperty,
+        model.savedLines,
+        viewProperties.interactiveEquationVisibleProperty,
+        viewProperties.linesVisibleProperty
       )
     );
   }

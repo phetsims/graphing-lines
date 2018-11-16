@@ -41,18 +41,23 @@ define( function( require ) {
 
       // equation accordion box
       new EquationAccordionBox(
+        // title
         SlopeEquationNode.createGeneralFormNode(),
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty,
+
+        // interactive equation
         new SlopeEquationNode( model.interactiveLineProperty, {
           x1RangeProperty: model.x1RangeProperty,
           y1RangeProperty: model.y1RangeProperty,
           x2RangeProperty: model.x2RangeProperty,
           y2RangeProperty: model.y2RangeProperty,
           maxWidth: 400
-        } )
+        } ),
+
+        // Properties
+        model.interactiveLineProperty,
+        model.savedLines,
+        viewProperties.interactiveEquationVisibleProperty,
+        viewProperties.linesVisibleProperty
       )
     );
   }

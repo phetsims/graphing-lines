@@ -1,4 +1,4 @@
-// Copyright 2013-2017, University of Colorado Boulder
+// Copyright 2013-2018, University of Colorado Boulder
 
 /**
  * Accordion box that contains the interactive equation and related controls
@@ -9,16 +9,13 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var ExpandCollapseButton = require( 'SUN/ExpandCollapseButton' );
+  var AccordionBox = require( 'SUN/AccordionBox' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var HBox = require( 'SCENERY/nodes/HBox' );
-  var HStrut = require( 'SCENERY/nodes/HStrut' );
+  var HSeparator = require( 'SUN/HSeparator' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Panel = require( 'SUN/Panel' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
   var VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -28,30 +25,36 @@ define( function( require ) {
 
   // constants
   var BUTTON_FONT = new GLFont( 18 );
-  var TITLE_X_SPACING = 5;
-  var Y_SPACING = 10;
 
   /**
    * @param {Node} titleNode
    * @param {Node} interactiveEquationNode
    * @param {Property.<Line>} interactiveLineProperty
    * @param {ObservableArray.<Line>} savedLines
-   * @param {Property.<boolean>} maximizedProperty
-   * @param {Property.<boolean>} linesVisibleProperty
+   * @param {Property.<boolean>} expandedProperty
    * @param {Object} [options]
    * @constructor
    */
   function EquationAccordionBox( titleNode, interactiveEquationNode, interactiveLineProperty, savedLines,
-                                 maximizedProperty, linesVisibleProperty, options ) {
+                                 expandedProperty, options ) {
 
     options = _.extend( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
-      xMargin: 10,
-      yMargin: 10
+      titleXSpacing: 5,
+      titleYMargin: 10,
+      contentXMargin: 10,
+      contentYMargin: 10,
+      contentYSpacing: 0,
+      buttonLength: 30,
+      buttonXMargin: 10,
+      buttonYMargin: 10
     }, options );
 
-    // Expand/collapse button
-    var expandCollapseButton = new ExpandCollapseButton( maximizedProperty, { sideLength: 30 } );
+    assert && assert( !options.titleNode, 'EquationAccordionBox sets titleNode' );
+    options.titleNode = titleNode;
+    
+    assert && assert( !options.expandedProperty, 'EquationAccordionBox sets expandedProperty' );
+    options.expandedProperty = expandedProperty;
 
     // Save Line button
     var saveLineButton = new TextPushButton( saveLineString, {
@@ -70,54 +73,35 @@ define( function( require ) {
     } );
 
     // horizontal layout of buttons
-    var buttons = new HBox( {
+    var buttonGroup = new HBox( {
       spacing: 20,
       maxWidth: 320,
       children: [ saveLineButton, eraseLinesButton ]
     } );
 
-    // Sets the enabled states of the Erase button.
-    // unmultilink is unnecessary since EquationAccordionBox exists for the lifetime of the sim.
+    // Disable eraseLinesButton when there are no saved lines. unlink not needed.
     savedLines.lengthProperty.link( function( length ) {
       eraseLinesButton.enabled = ( length > 0 );
     } );
 
-    var contentWidth = Math.max( buttons.width, interactiveEquationNode.width, ( expandCollapseButton.width + titleNode.width + TITLE_X_SPACING ) );
+    const separatorWidth = Math.max( interactiveEquationNode.width, buttonGroup.width );
+    const separatorOptions = { stroke: 'rgb( 212, 212, 212 )' };
 
-        // Stuff that is hidden when minimized must be attached to this node.
-    var separatorColor = 'rgb( 212, 212, 212 )';
-    var subContent = new VBox( {
-      spacing: Y_SPACING,
+    var contentNode = new VBox( {
       align: 'center',
+      spacing: 10,
       children: [
-        new Line( 0, 0, contentWidth, 0, { stroke: separatorColor } ),
+        new HSeparator( separatorWidth, separatorOptions ),
         interactiveEquationNode,
-        new Line( 0, 0, contentWidth, 0, { stroke: separatorColor } ),
-        buttons
+        new HSeparator( separatorWidth, separatorOptions ),
+        buttonGroup
       ]
     } );
 
-    // Top-level content, with strut to prevent panel from resizing
-    var content = new Node( {
-      children: [ new HStrut( contentWidth ), expandCollapseButton, titleNode, subContent  ]
-    } );
-    titleNode.centerX = contentWidth / 2;
-    titleNode.centerY = expandCollapseButton.centerY;
-    subContent.top = Math.max( expandCollapseButton.bottom, titleNode.bottom ) + Y_SPACING;
-
-    maximizedProperty.link( function( maximized ) {
-      if ( maximized && content.indexOfChild( subContent ) === -1 ) {
-        content.addChild( subContent );
-      }
-      else if ( !maximized && content.indexOfChild( subContent ) !== -1 ) {
-        content.removeChild( subContent );
-      }
-    } );
-
-    Panel.call( this, content, options );
+    AccordionBox.call( this, contentNode, options );
   }
 
   graphingLines.register( 'EquationAccordionBox', EquationAccordionBox );
 
-  return inherit( Panel, EquationAccordionBox );
+  return inherit( AccordionBox, EquationAccordionBox );
 } );

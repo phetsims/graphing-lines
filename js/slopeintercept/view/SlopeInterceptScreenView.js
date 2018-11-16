@@ -55,8 +55,7 @@ define( function( require ) {
         // Properties
         model.interactiveLineProperty,
         model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        viewProperties.linesVisibleProperty
+        viewProperties.interactiveEquationVisibleProperty
       )
     );
   }

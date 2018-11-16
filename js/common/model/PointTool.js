@@ -26,10 +26,10 @@ define( function( require ) {
 
     var self = this;
 
-    // @public {Vector2} location of the point tool
+    // @public {Property.<Vector2>} location of the point tool
     this.locationProperty = new Property( location );
 
-    // @public line that the tool is on, null if it's not on a line
+    // @public {Property.<Line|null> line that the tool is on, null if it's not on a line
     this.onLineProperty = new Property( null );
     
     this.orientation = orientation; // @public

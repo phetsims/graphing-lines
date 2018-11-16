@@ -9,6 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var Checkbox = require( 'SUN/Checkbox' );
   var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
@@ -22,7 +23,6 @@ define( function( require ) {
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var Panel = require( 'SUN/Panel' );
-  var Property = require( 'AXON/Property' );
   var RichText = require( 'SCENERY/nodes/RichText' );
   var Text = require( 'SCENERY/nodes/Text' );
 
@@ -55,8 +55,8 @@ define( function( require ) {
     }, options );
 
     // private properties for standard-line checkboxes
-    var yEqualsXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
-    var yEqualsNegativeXVisibleProperty = new Property( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
+    var yEqualsXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
+    var yEqualsNegativeXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // checkboxes
     var TEXT_OPTIONS = { font: new GLFont( 18 ) };

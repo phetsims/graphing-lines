@@ -25,6 +25,7 @@ define( function( require ) {
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var Node = require( 'SCENERY/nodes/Node' );
   var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   var RichText = require( 'SCENERY/nodes/RichText' );
@@ -63,15 +64,19 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
+    var numberPropertyOptions = {
+      numberType: 'Integer'
+    };
+
     // internal properties that are connected to pickers
-    var x1Property = new Property( lineProperty.get().x1 );
-    var y1Property = new Property( lineProperty.get().y1 );
-    var x2Property = new Property( lineProperty.get().x2 );
-    var y2Property = new Property( lineProperty.get().y2 );
+    var x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
+    var y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
+    var x2Property = new NumberProperty( lineProperty.get().x2, numberPropertyOptions );
+    var y2Property = new NumberProperty( lineProperty.get().y2, numberPropertyOptions );
 
     // internal properties that are connected to number displays
-    var riseProperty = new Property( lineProperty.get().rise );
-    var runProperty = new Property( lineProperty.get().run );
+    var riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
+    var runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.

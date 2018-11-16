@@ -27,6 +27,7 @@ define( function( require ) {
   var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   var MinusNode = require( 'SCENERY_PHET/MinusNode' );
   var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PlusNode = require( 'SCENERY_PHET/PlusNode' );
   var Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
@@ -79,11 +80,15 @@ define( function( require ) {
     var staticOptions = { font: staticFont, fill: options.staticColor };
     var fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
 
+    var numberPropertyOptions = {
+      numberType: 'Integer'
+    };
+
     // internal properties that are connected to pickers
-    var x1Property = new Property( lineProperty.get().x1 );
-    var y1Property = new Property( lineProperty.get().y1 );
-    var riseProperty = new Property( lineProperty.get().rise );
-    var runProperty = new Property( lineProperty.get().run );
+    var x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
+    var y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
+    var riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
+    var runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.
@@ -222,24 +227,47 @@ define( function( require ) {
 
         var previousNode;
 
-        // (y - y1)
-        yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
-        yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
-        yLeftParenNode.x = 0;
-        yLeftParenNode.y = 0;
-        yNode.left = yLeftParenNode.right + self.parenXSpacing;
-        yNode.y = yLeftParenNode.y;
-        yOperatorNode.left = yNode.right + self.operatorXSpacing;
-        yOperatorNode.centerY = yNode.centerY + self.operatorYFudgeFactor;
-        y1Node.left = yOperatorNode.right + self.operatorXSpacing;
-        y1Node.centerY = yNode.centerY;
-        yRightParenNode.left = y1Node.right + self.parenXSpacing;
-        yRightParenNode.y = yNode.y;
+        if ( !options.interactivePoint && line.y1 === 0 ) {
+          // y
+          yNode.x = 0;
+          yNode.y = 0;
+          yNode.fill = lineColor;
+          yNode.visible = true;
+          previousNode = yNode;
+        }
+        else if ( !interactive ) {
+          // y - y1
+          yNode.visible = yOperatorNode.visible = y1Node.visible = true;
+          yNode.fill = yOperatorNode.fill = y1Node.fill = lineColor;
+          yNode.x = 0;
+          yNode.y = 0;
+          yOperatorNode.left = yNode.right + self.operatorXSpacing;
+          yOperatorNode.centerY = yNode.centerY + self.operatorYFudgeFactor;
+          y1Node.left = yOperatorNode.right + self.operatorXSpacing;
+          y1Node.centerY = yNode.centerY;
+          previousNode = y1Node;
+        }
+        else {
+          // (y - y1)
+          yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
+          yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
+          yLeftParenNode.x = 0;
+          yLeftParenNode.y = 0;
+          yNode.left = yLeftParenNode.right + self.parenXSpacing;
+          yNode.y = yLeftParenNode.y;
+          yOperatorNode.left = yNode.right + self.operatorXSpacing;
+          yOperatorNode.centerY = yNode.centerY + self.operatorYFudgeFactor;
+          y1Node.left = yOperatorNode.right + self.operatorXSpacing;
+          y1Node.centerY = yNode.centerY;
+          yRightParenNode.left = y1Node.right + self.parenXSpacing;
+          yRightParenNode.y = yNode.y;
+          previousNode = yRightParenNode;
+        }
 
         // =
         equalsNode.visible = true;
         equalsNode.fill = lineColor;
-        equalsNode.left = yRightParenNode.right + self.relationalOperatorXSpacing;
+        equalsNode.left = previousNode.right + self.relationalOperatorXSpacing;
         equalsNode.y = yNode.y + self.equalsSignFudgeFactor;
 
         // slope
@@ -329,7 +357,7 @@ define( function( require ) {
         }
 
         // x term
-        if ( options.interactivePoint || options.interactiveSlope || line.rise !== 0 ) {
+        if ( interactive || ( line.x1 !== 0 && line.getSlope() !== 0 && line.getSlope() !== 1 ) ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
           xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
@@ -344,8 +372,23 @@ define( function( require ) {
           xRightParenNode.left = x1Node.right + self.parenXSpacing;
           xRightParenNode.y = yNode.y;
         }
-        else if ( line.rise === 0 ) {
-          // no x term
+        else if ( line.getSlope() === 1 && line.x1 !== 0 ) {
+          // x - x1
+          xNode.visible = xOperatorNode.visible = x1Node.visible = true;
+          xNode.fill = xOperatorNode.fill = x1Node.fill = lineColor;
+          xNode.left = previousNode.right + previousXOffset;
+          xNode.y = yNode.y;
+          xOperatorNode.left = xNode.right + self.operatorXSpacing;
+          xOperatorNode.centerY = xNode.centerY + self.operatorYFudgeFactor;
+          x1Node.left = xOperatorNode.right + self.operatorXSpacing;
+          x1Node.centerY = yNode.centerY;
+        }
+        else if ( line.x1 === 0  ) {
+          // x
+          xNode.visible = true;
+          xNode.fill = lineColor;
+          xNode.left = previousNode.right + previousXOffset;
+          xNode.centerY = yNode.centerY;
         }
         else {
           throw new Error( 'programming error, forgot to handle some x-term case' );

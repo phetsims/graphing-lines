@@ -14,6 +14,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
   var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
@@ -24,7 +25,6 @@ define( function( require ) {
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
   var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
-  var Property = require( 'AXON/Property' );
   var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TextPushButton = require( 'SUN/buttons/TextPushButton' );
@@ -77,7 +77,7 @@ define( function( require ) {
     } );
 
     // point tools
-    var linesVisibleProperty = new Property( true );
+    var linesVisibleProperty = new BooleanProperty( true );
     var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
     var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
 

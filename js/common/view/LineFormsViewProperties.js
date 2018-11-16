@@ -9,9 +9,9 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
 
   /**
    * @constructor
@@ -19,16 +19,16 @@ define( function( require ) {
   function LineFormsViewProperties() {
 
     // @public determines whether all lines are visible on the graph
-    this.linesVisibleProperty = new Property( true );
+    this.linesVisibleProperty = new BooleanProperty( true );
 
     // @public determines whether the grid is visible on the graph
-    this.gridVisibleProperty = new Property( true );
+    this.gridVisibleProperty = new BooleanProperty( true );
 
     // @public determines whether the interactive line is visible in the control panel
-    this.interactiveEquationVisibleProperty = new Property( true );
+    this.interactiveEquationVisibleProperty = new BooleanProperty( true );
 
     // @public determines whether the slope tool is visible on the graph
-    this.slopeToolVisibleProperty = new Property( true );
+    this.slopeToolVisibleProperty = new BooleanProperty( true );
   }
 
   graphingLines.register( 'LineFormsViewProperties', LineFormsViewProperties );

@@ -14,6 +14,7 @@ define( function( require ) {
   'use strict';
 
   // modules
+  var BooleanProperty = require( 'AXON/BooleanProperty' );
   var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GameTimer = require( 'VEGAS/GameTimer' );
@@ -24,8 +25,10 @@ define( function( require ) {
   var inherit = require( 'PHET_CORE/inherit' );
   var Line = require( 'GRAPHING_LINES/common/model/Line' );
   var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  var NumberProperty = require( 'AXON/NumberProperty' );
   var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   var Property = require( 'AXON/Property' );
+  var StringProperty = require( 'AXON/StringProperty' );
 
   // constants
   var CHALLENGES_PER_GAME = 6;
@@ -44,14 +47,24 @@ define( function( require ) {
     this.challengeFactories = challengeFactories;
 
     // @public Properties
-    this.levelProperty = new Property( 0 );
-    this.soundEnabledProperty = new Property( true );
-    this.timerEnabledProperty = new Property( false );
-    this.scoreProperty = new Property( 0 ); // {number} how many points the user has earned for the current game
+    this.levelProperty = new NumberProperty( 0, {
+      numberType: 'Integer'
+    } );
+    this.soundEnabledProperty = new BooleanProperty( true );
+    this.timerEnabledProperty = new BooleanProperty( false );
+    this.scoreProperty = new NumberProperty( 0, {
+      numberType: 'Integer'
+    } ); // {number} how many points the user has earned for the current game
     this.challengeProperty = new Property( DUMMY_CHALLENGE );
-    this.challengeIndexProperty = new Property( 0 );
-    this.challengesPerGameProperty = new Property( CHALLENGES_PER_GAME );
-    this.playStateProperty = new Property( PlayState.NONE );
+    this.challengeIndexProperty = new NumberProperty( 0, {
+      numberType: 'Integer'
+    } );
+    this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
+      numberType: 'Integer'
+    } );
+    this.playStateProperty = new StringProperty( PlayState.NONE, {
+      reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
+    } );
 
     // @public
     this.challenges = []; // {Challenge[]}
@@ -62,7 +75,9 @@ define( function( require ) {
     this.bestTimeProperties = []; // best times for each level, in ms, array of Property.<number>
     this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
     for ( var level = 0; level < this.numberOfLevels; level++ ) {
-      this.bestScoreProperties.push( new Property( 0 ) );
+      this.bestScoreProperties.push( new NumberProperty( 0, {
+        numberType: 'Integer'
+      } ) );
       this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 

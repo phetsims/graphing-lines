@@ -260,15 +260,18 @@ define( function( require ) {
     /**
      * Creates a node that displays the general form of the slope equation: m = (y2-y1)/(x2-x1)
      * @param {Object} [options]
+     * @returns {Node}
      * @public
      * @static
      */
     createGeneralFormNode: function( options ) {
 
       options = _.extend( {
+        pickable: false,
         fontSize: 20,
         fontWeight: GLConstants.EQUATION_FONT_WEIGHT,
-        fill: 'black'
+        fill: 'black',
+        maxWidth: 300
       }, options );
 
       var equationNode = new EquationNode( options.fontSize );
@@ -323,7 +326,9 @@ define( function( require ) {
       denominatorNode.centerX = fractionLineNode.centerX;
       denominatorNode.top = fractionLineNode.bottom + 1;
 
-      return equationNode;
+      return new Node( _.extend( {
+        children: [ equationNode ]
+      }, options ) );
     },
 
     /**

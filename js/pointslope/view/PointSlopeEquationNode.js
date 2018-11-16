@@ -474,12 +474,18 @@ define( function( require ) {
      * @static
      */
     createGeneralFormNode: function( options ) {
-      options = _.extend( { font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ) }, options );
+
+      options = _.extend( {
+        pickable: false,
+        font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
+        maxWidth: 300
+      }, options );
+
       // (y - y1) = m(x - x1)
       var pattern = '({0} {1} {2}<sub>1</sub>) {3} {4}({5} {6} {7}<sub>1</sub>)';
       var html = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y, MathSymbols.EQUAL_TO,
         GLSymbols.m, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
-      return new RichText( html, { font: options.font } );
+      return new RichText( html, options );
     },
 
     /**

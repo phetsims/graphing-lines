@@ -458,11 +458,17 @@ define( function( require ) {
      * @static
      */
     createGeneralFormNode: function( options ) {
-      options = _.extend( { font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ) }, options );
+
+      options = _.extend( {
+        pickable: false,
+        font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
+        maxWidth: 300
+      }, options );
+
       // y = mx + b
       var text = StringUtils.format( '{0} {1} {2}{3} {4} {5}',
         GLSymbols.y, MathSymbols.EQUAL_TO, GLSymbols.m, GLSymbols.x, MathSymbols.PLUS, GLSymbols.b );
-      return new RichText( text, { font: options.font, pickable: false } );
+      return new RichText( text, options );
     },
 
     /**

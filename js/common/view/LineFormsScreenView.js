@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  const GraphContentsToggleButton = require( 'GRAPHING_LINES/common/view/GraphContentsToggleButton' );
+  var GraphContentsToggleButton = require( 'GRAPHING_LINES/common/view/GraphContentsToggleButton' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
@@ -40,7 +40,7 @@ define( function( require ) {
     pointToolParent.addChild( pointTool2 );
 
     // Toggle button for showing/hiding contents of graph
-    const graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty, {
+    var graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty, {
       scale: 0.75
     } );
 

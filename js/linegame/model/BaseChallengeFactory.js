@@ -1,4 +1,4 @@
-// Copyright 2017, University of Colorado Boulder
+// Copyright 2017-2018, University of Colorado Boulder
 
 /**
  * Base type for challenge factories in both the 'Graphing Lines' and 'Graphing Slope-Intercept' sims.

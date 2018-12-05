@@ -62,8 +62,8 @@ define( function( require ) {
 
     // rendering order
     this.addChild( controlsParent );
-    this.addChild( graphNode );
     this.addChild( graphContentsToggleButton );
+    this.addChild( graphNode );
     this.addChild( pointToolParent );
     this.addChild( resetAllButton );
 
@@ -96,7 +96,7 @@ define( function( require ) {
     controlsParent.top = yMargin;
 
     // graphContentsToggleButton at lower right of graph
-    graphContentsToggleButton.left = model.modelViewTransform.modelToViewX( model.graph.xRange.max ) + 10;
+    graphContentsToggleButton.left = model.modelViewTransform.modelToViewX( model.graph.xRange.max ) + 21;
     graphContentsToggleButton.bottom = model.modelViewTransform.modelToViewY( model.graph.yRange.min );
   }
 

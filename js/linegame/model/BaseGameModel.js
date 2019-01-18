@@ -284,29 +284,29 @@ define( function( require ) {
    * It has a 'hook' function that is called before the value is changed.
    * This is useful for setting the various state parameters of the game before
    * notifying observes that the game phase has changed.
+   * TODO: Shouldn't this be accomplished by adding the first listener to a Property?
    * @param {GamePhase} value
    * @param {function} hook function with one parameter of type {GamePhase}
    * @constructor
    */
-  function GamePhaseProperty( value, hook ) {
-    this.hook = hook; // @private
-    Property.call( this, value );
-  }
-
-  graphingLines.register( 'BaseGameModel.GamePhaseProperty', GamePhaseProperty );
-
-  inherit( Property, GamePhaseProperty, {
+  class GamePhaseProperty extends Property {
+    constructor( value, hook ) {
+      super( value );
+      this.hook = hook; // @private
+    }
 
     /**
      * @param value
      * @public
      * @override
      */
-    set: function( value ) {
+    set( value ) {
       this.hook( value );
-      Property.prototype.set.call( this, value );
+      super.set( value );
     }
-  } );
+  }
+
+  graphingLines.register( 'BaseGameModel.GamePhaseProperty', GamePhaseProperty );
 
   return BaseGameModel;
 } );

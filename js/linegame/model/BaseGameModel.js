@@ -84,8 +84,8 @@ define( function( require ) {
     // @public
     this.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
       /*
-       * This function will be called prior to setting the property value.
-       * Updates fields so that they are accurate before property listeners are notified.
+       * This function will be called prior to setting the Property value.
+       * Updates fields so that they are accurate before Property listeners are notified.
        */
       function( gamePhase ) {
         if ( gamePhase === GamePhase.SETTINGS ) {

@@ -296,12 +296,13 @@ define( function( require ) {
 
     /**
      * @param value
+     * @returns {Property}
      * @public
      * @override
      */
     set( value ) {
       this.hook( value );
-      super.set( value );
+      return super.set( value );
     }
   }
 

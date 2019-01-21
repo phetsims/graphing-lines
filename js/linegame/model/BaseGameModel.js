@@ -31,6 +31,7 @@ define( function( require ) {
   var StringProperty = require( 'AXON/StringProperty' );
 
   // constants
+  var INITIAL_GAME_PHASE = GamePhase.SETTINGS;
   var CHALLENGES_PER_GAME = 6;
   var DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
@@ -81,31 +82,8 @@ define( function( require ) {
       this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 
-    // @public
-    this.gamePhaseProperty = new GamePhaseProperty( GamePhase.SETTINGS,
-      /*
-       * This function will be called prior to setting the Property value.
-       * Updates fields so that they are accurate before Property listeners are notified.
-       */
-      function( gamePhase ) {
-        if ( gamePhase === GamePhase.SETTINGS ) {
-          self.playStateProperty.set( PlayState.NONE );
-          self.timer.stop();
-        }
-        else if ( gamePhase === GamePhase.PLAY ) {
-          self.initChallenges();
-          self.playStateProperty.set( PlayState.FIRST_CHECK );
-          self.scoreProperty.set( 0 );
-          self.timer.start();
-        }
-        else if ( gamePhase === GamePhase.RESULTS ) {
-          self.playStateProperty.set( PlayState.NONE );
-          self.updateBestTime();
-        }
-        else {
-          throw new Error( 'unsupported game phase: ' + gamePhase );
-        }
-      } );
+    // @public (read-only) {GamePhase} set this using setGamePhase
+    this.gamePhaseProperty = new Property( INITIAL_GAME_PHASE );
 
     this.initChallenges();
 
@@ -128,7 +106,7 @@ define( function( require ) {
 
         if ( isLastChallenge ) {
           // game has been completed
-          self.gamePhaseProperty.set( GamePhase.RESULTS );
+          self.setGamePhase( GamePhase.RESULTS );
           if ( score > self.bestScoreProperties[ level ].get() ) {
             self.bestScoreProperties[ level ].set( score );
           }
@@ -152,7 +130,40 @@ define( function( require ) {
 
   graphingLines.register( 'BaseGameModel', BaseGameModel );
 
-  inherit( Object, BaseGameModel, {
+  return inherit( Object, BaseGameModel, {
+
+    /**
+     * Sets the game phase. Call this instead of setting gamePhaseProperty directly,
+     * because there are tasks that needs to be done before listeners are notified.
+     * @param {GamePhase} gamePhase
+     * @public
+     */
+    setGamePhase: function( gamePhase ) {
+      if ( gamePhase !== this.gamePhaseProperty.get() ) {
+
+        // Do tasks that need to be done before notifying listeners.
+        if ( gamePhase === GamePhase.SETTINGS ) {
+          this.playStateProperty.set( PlayState.NONE );
+          this.timer.stop();
+        }
+        else if ( gamePhase === GamePhase.PLAY ) {
+          this.initChallenges();
+          this.playStateProperty.set( PlayState.FIRST_CHECK );
+          this.scoreProperty.set( 0 );
+          this.timer.start();
+        }
+        else if ( gamePhase === GamePhase.RESULTS ) {
+          this.playStateProperty.set( PlayState.NONE );
+          this.updateBestTime();
+        }
+        else {
+          throw new Error( 'unsupported game phase: ' + gamePhase );
+        }
+
+        // Change the Property, which notifies listeners
+        this.gamePhaseProperty.set( gamePhase );
+      }
+    },
 
     // @override @public
     reset: function() {
@@ -166,7 +177,7 @@ define( function( require ) {
       this.challengesPerGameProperty.reset();
       this.playStateProperty.reset();
 
-      this.gamePhaseProperty.reset();
+      this.setGamePhase( INITIAL_GAME_PHASE );
       this.resetBestScores();
       this.resetBestTimes();
 
@@ -278,35 +289,4 @@ define( function( require ) {
       console.log( 'end: verify creation of challenges' );
     }
   } );
-
-  /**
-   * Property used for the game phase.
-   * It has a 'hook' function that is called before the value is changed.
-   * This is useful for setting the various state parameters of the game before
-   * notifying observes that the game phase has changed.
-   * @param {GamePhase} value
-   * @param {function} hook function with one parameter of type {GamePhase}
-   * @constructor
-   */
-  class GamePhaseProperty extends Property {
-    constructor( value, hook ) {
-      super( value );
-      this.hook = hook; // @private
-    }
-
-    /**
-     * @param value
-     * @returns {Property}
-     * @public
-     * @override
-     */
-    set( value ) {
-      this.hook( value );
-      return super.set( value );
-    }
-  }
-
-  graphingLines.register( 'BaseGameModel.GamePhaseProperty', GamePhaseProperty );
-
-  return BaseGameModel;
 } );

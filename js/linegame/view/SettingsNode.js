@@ -149,7 +149,7 @@ define( function( require ) {
       },
       listener: function() {
         model.levelProperty.set( level );
-        model.gamePhaseProperty.set( GamePhase.PLAY );
+        model.setGamePhase( GamePhase.PLAY );
       }
     } );
   };

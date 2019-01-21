@@ -64,7 +64,7 @@ define( function( require ) {
           model.bestTimeProperties[ model.levelProperty.get() ].get(),
           model.isNewBestTime,
           function() {
-            model.gamePhaseProperty.set( GamePhase.SETTINGS );
+            model.setGamePhase( GamePhase.SETTINGS );
           }, {
             starDiameter: 45,
             buttonFill: LineGameConstants.BUTTON_COLOR,

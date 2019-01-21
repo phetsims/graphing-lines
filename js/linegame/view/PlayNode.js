@@ -52,7 +52,7 @@ define( function( require ) {
         xMargin: 10,
         yMargin: 5,
         listener: function() {
-          model.gamePhaseProperty.set( GamePhase.SETTINGS );
+          model.setGamePhase( GamePhase.SETTINGS );
         }
       }
     } );

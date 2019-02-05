@@ -373,7 +373,6 @@ define( function( require ) {
 
     // allocate nodes needed to represent all simplified forms
     var slopeIsNode = new Text( slopeIsString, textOptions );
-    var undefinedNode = new Text( undefinedString, textOptions );
     var minusSignNode = new MinusNode( { size: this.signLineSize } );
     var riseNode = new Text( '?', textOptions );
     var runNode = new Text( '?', textOptions );
@@ -381,7 +380,7 @@ define( function( require ) {
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     assert && assert( this.getChildrenCount() === 0, 'supertype has unexpected children' );
-    this.children = [ slopeIsNode, undefinedNode, minusSignNode, riseNode, runNode, fractionLineNode ];
+    this.children = [ slopeIsNode, minusSignNode, riseNode, runNode, fractionLineNode ];
 
     // update visibility, layout and properties of nodes to match the current line
     var update = function( line ) {
@@ -400,10 +399,11 @@ define( function( require ) {
 
       if ( line.undefinedSlope() ) {
         // 'undefined'
-        undefinedNode.visible = true;
-        undefinedNode.fill = lineColor;
-        undefinedNode.left = slopeIsNode.right + self.relationalOperatorXSpacing;
-        undefinedNode.y = slopeIsNode.y;
+        riseNode.visible = true;
+        riseNode.text = undefinedString;
+        riseNode.fill = lineColor;
+        riseNode.left = slopeIsNode.right + self.relationalOperatorXSpacing;
+        riseNode.y = slopeIsNode.y;
       }
       else if ( line.getSlope() === 0 ) {
         // 0

@@ -53,8 +53,8 @@ define( function( require ) {
 
     // @private answer
     this.answerParentNode = new Node(); // to maintain rendering order of stuff related to answer
-    var answerNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
-    this.answerParentNode.addChild( answerNode );
+    var answerLineNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
+    this.answerParentNode.addChild( answerLineNode );
 
     // @private point (x1,y1) for answer
     this.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );

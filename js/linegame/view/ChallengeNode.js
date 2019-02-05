@@ -229,7 +229,7 @@ define( function( require ) {
     /**
      * Creates a non-interactive equation, used to label the specified line.
      * @param {Property.<Line>} lineProperty
-     * @param  {EquationForm} equationForm
+     * @param {EquationForm} equationForm
      * @param {Object} [options] - see EquationNode
      * @public
      * @static

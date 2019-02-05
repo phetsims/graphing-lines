@@ -69,9 +69,14 @@ define( function( require ) {
     // @private 'Not A Line', for situations where 3-points do not define a line
     this.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
+    // See https://github.com/phetsims/graphing-lines/issues/117
+    // Either the equation or 'not a line' is displayed. So clear guessEquationNode's default maxWidth,
+    // which is appropriate for an equation on the graph, but not for an equation in EquationBoxNode.
+    var equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
+    guessEquationNode.maxWidth = null;
+
     // Guess
-    this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
-      new Node( { children: [ guessEquationNode, this.notALineNode ] } ) );
+    this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
     // @private Graph
     this.graphNode = this.createGraphNode( challenge );

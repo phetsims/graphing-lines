@@ -58,16 +58,16 @@ define( function( require ) {
 
     /**
      * Updates the collection of lines that are 'seen' by the point tools.
+     * Order is important here! See https://github.com/phetsims/graphing-lines/issues/89
      * @override
      * @protected
      */
     updateGraphLines: function() {
       this.graph.lines.clear();
-      // add lines in the order that they would be rendered
+      this.graph.lines.push( this.answer );
       if ( this.answerVisible ) {
         this.graph.lines.push( this.guessProperty.get() );
       }
-      this.graph.lines.push( this.answer );
     }
   } );
 } );

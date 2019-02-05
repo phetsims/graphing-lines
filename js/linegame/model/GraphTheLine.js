@@ -59,6 +59,7 @@ define( function( require ) {
 
     /**
      * Updates the collection of lines that are 'seen' by the point tools.
+     * Order is important here! See https://github.com/phetsims/graphing-lines/issues/89
      * @override
      * @protected
      */
@@ -66,14 +67,13 @@ define( function( require ) {
 
       this.graph.lines.clear();
 
-      // Add lines in the order that they would be rendered.
+      if ( this.answerVisible ) {
+        this.graph.lines.push( this.answer );
+      }
+
       // Account for guesses that might be NotALine (not a valid line).
       if ( this.guessProperty.get() instanceof Line ) {
         this.graph.lines.push( this.guessProperty.get() );
-      }
-
-      if ( this.answerVisible ) {
-        this.graph.lines.push( this.answer );
       }
     }
   } );

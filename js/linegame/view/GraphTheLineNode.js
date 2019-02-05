@@ -56,24 +56,27 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property( challenge.answer ), {
-        equationForm: challenge.equationForm,
+      ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
       } ) );
 
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    this.equationNode = ChallengeNode.createEquationNode( guessLineProperty, {
-      equationForm: challenge.equationForm,
+    var guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, challenge.equationForm, {
       fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
     } );
 
     // @private 'Not A Line', for situations where 3-points do not define a line
     this.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
+    // See https://github.com/phetsims/graphing-lines/issues/117
+    // Either the equation or 'not a line' is displayed. So clear guessEquationNode's default maxWidth,
+    // which is appropriate for an equation on the graph, but not for an equation in EquationBoxNode.
+    var equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
+    guessEquationNode.maxWidth = null;
+
     // Guess
-    this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
-      new Node( { children: [ this.equationNode, this.notALineNode ] } ) );
+    this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
     // @private Graph
     this.graphNode = this.createGraphNode( challenge );
@@ -116,12 +119,14 @@ define( function( require ) {
     // sync with guess
     var guessObserver = function( line ) {
 
+      var isaLine = ( line instanceof Line );
+
       // line is NotAline if ManipulationMode.THREE_POINTS and points don't make a line
-      if ( line instanceof Line ) {
-        guessLineProperty.set( line ); // updates equationNode
+      if ( isaLine ) {
+        guessLineProperty.set( line ); // updates guessEquationNode
       }
-      self.equationNode.visible = ( line instanceof Line ); // cast to boolean
-      self.notALineNode.visible = !self.equationNode.visible;
+      guessEquationNode.visible = isaLine;
+      self.notALineNode.visible = !isaLine;
 
       // visibility of correct/incorrect icons
       updateIcons();
@@ -144,11 +149,14 @@ define( function( require ) {
 
       self.guessBoxNode.visible = ( playState === PlayState.NEXT );
 
-      // show stuff when the user got the challenge wrong
-      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+      if ( playState === PlayState.NEXT ) {
         self.graphNode.setAnswerPointVisible( true );
-        self.graphNode.setGuessPointVisible( true );
-        self.graphNode.setSlopeToolVisible( true );
+
+        // show stuff when the user got the challenge wrong
+        if ( !challenge.isCorrect() ) {
+          self.graphNode.setGuessPointVisible( true );
+          self.graphNode.setSlopeToolVisible( true );
+        }
       }
 
       // visibility of correct/incorrect icons
@@ -160,7 +168,7 @@ define( function( require ) {
     this.disposeGraphTheLineNode = function() {
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
-      self.equationNode.dispose();
+      guessEquationNode.dispose();
       self.graphNode.dispose();
     };
   }

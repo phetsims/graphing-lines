@@ -144,11 +144,14 @@ define( function( require ) {
 
       self.guessBoxNode.visible = ( playState === PlayState.NEXT );
 
-      // show stuff when the user got the challenge wrong
-      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+      if ( playState === PlayState.NEXT ) {
         self.graphNode.setAnswerPointVisible( true );
-        self.graphNode.setGuessPointVisible( true );
-        self.graphNode.setSlopeToolVisible( true );
+
+        // show stuff when the user got the challenge wrong
+        if ( !challenge.isCorrect() ) {
+          self.graphNode.setGuessPointVisible( true );
+          self.graphNode.setSlopeToolVisible( true );
+        }
       }
 
       // visibility of correct/incorrect icons

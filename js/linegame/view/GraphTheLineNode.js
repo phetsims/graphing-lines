@@ -63,7 +63,7 @@ define( function( require ) {
       } ) );
 
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    this.equationNode = ChallengeNode.createEquationNode( guessLineProperty, {
+    var guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, {
       equationForm: challenge.equationForm,
       fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
     } );
@@ -73,7 +73,7 @@ define( function( require ) {
 
     // Guess
     this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize,
-      new Node( { children: [ this.equationNode, this.notALineNode ] } ) );
+      new Node( { children: [ guessEquationNode, this.notALineNode ] } ) );
 
     // @private Graph
     this.graphNode = this.createGraphNode( challenge );
@@ -116,12 +116,14 @@ define( function( require ) {
     // sync with guess
     var guessObserver = function( line ) {
 
+      var isaLine = ( line instanceof Line );
+
       // line is NotAline if ManipulationMode.THREE_POINTS and points don't make a line
-      if ( line instanceof Line ) {
-        guessLineProperty.set( line ); // updates equationNode
+      if ( isaLine ) {
+        guessLineProperty.set( line ); // updates guessEquationNode
       }
-      self.equationNode.visible = ( line instanceof Line ); // cast to boolean
-      self.notALineNode.visible = !self.equationNode.visible;
+      guessEquationNode.visible = isaLine;
+      self.notALineNode.visible = !isaLine;
 
       // visibility of correct/incorrect icons
       updateIcons();
@@ -163,7 +165,7 @@ define( function( require ) {
     this.disposeGraphTheLineNode = function() {
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
-      self.equationNode.dispose();
+      guessEquationNode.dispose();
       self.graphNode.dispose();
     };
   }

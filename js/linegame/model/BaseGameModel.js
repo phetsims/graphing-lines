@@ -72,8 +72,8 @@ define( function( require ) {
     this.timer = new GameTimer();
     this.numberOfLevels = challengeFactories.length;
     this.maxPointsPerChallenge = 2;
-    this.bestScoreProperties = []; // best scores for each level, array of Property.<number>
-    this.bestTimeProperties = []; // best times for each level, in ms, array of Property.<number>
+    this.bestScoreProperties = []; // {NumberProperty[]} best scores for each level
+    this.bestTimeProperties = []; // {Property.<number|null>[]} best times for each level, in ms
     this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
     for ( var level = 0; level < this.numberOfLevels; level++ ) {
       this.bestScoreProperties.push( new NumberProperty( 0, {
@@ -240,10 +240,10 @@ define( function( require ) {
     // @private Updates the best time for the current level, at the end of a timed game with a perfect score.
     updateBestTime: function() {
       assert && assert( !this.timer.isRunningProperty.value );
+      this.isNewBestTime = false;
       if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
         var level = this.levelProperty.get();
         var time = this.timer.elapsedTimeProperty.value;
-        this.isNewBestTime = false;
         if ( !this.bestTimeProperties[ level ].get() ) {
           // there was no previous time for this level
           this.bestTimeProperties[ level ].set( time );

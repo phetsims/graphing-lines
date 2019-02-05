@@ -52,8 +52,7 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property( challenge.answer ), {
-        equationForm: challenge.equationForm,
+      ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
       } ) );
     answerBoxNode.visible = false;
@@ -94,11 +93,11 @@ define( function( require ) {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( phet.chipper.queryParameters.showAnswers ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), {
-        equationForm: challenge.equationForm,
-        fontSize: 14
+      var devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+        fontSize: 14,
+        maxWidth: boxSize.width
       } );
-      devAnswerNode.left = answerBoxNode.left + 30;
+      devAnswerNode.left = answerBoxNode.left;
       devAnswerNode.centerY = answerBoxNode.centerY;
       this.addChild( devAnswerNode );
       devAnswerNode.moveToBack();

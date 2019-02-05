@@ -56,15 +56,13 @@ define( function( require ) {
 
     // Answer
     var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property( challenge.answer ), {
-        equationForm: challenge.equationForm,
+      ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
       } ) );
 
     var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    var guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, {
-      equationForm: challenge.equationForm,
+    var guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, challenge.equationForm, {
       fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
     } );
 

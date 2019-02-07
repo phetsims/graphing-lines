@@ -158,10 +158,12 @@ define( function( require ) {
       var interactive = ( options.interactiveSlope || options.interactiveIntercept );
       var lineColor = line.color;
 
-      // start with all children invisible
+      // Start with all children invisible and at x=0.
+      // See https://github.com/phetsims/graphing-lines/issues/120
       var len = self.children.length;
       for ( var i = 0; i < len; i++ ) {
         self.children[ i ].visible = false;
+        self.children[ i ].x = 0;
       }
 
       if ( line.undefinedSlope() && !interactive ) {

@@ -63,7 +63,7 @@ define( function( require ) {
     var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
 
     // Graph
-    var graphNode = new ChallengeGraphNode( challenge, { answerVisible: true } );
+    var graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
 
     // rendering order
     this.subtypeParent.addChild( titleNode );
@@ -129,7 +129,7 @@ define( function( require ) {
       );
 
       // Graph the guess line at the end of the challenge.
-      graphNode.setGuessVisible( playState === PlayState.NEXT );
+      graphNode.setGuessLineVisible( playState === PlayState.NEXT );
 
       // show stuff when the user got the challenge wrong
       if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {

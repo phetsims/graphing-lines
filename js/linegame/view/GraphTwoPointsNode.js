@@ -26,7 +26,7 @@ define( function( require ) {
 
     ChallengeGraphNode.call( this, challenge );
 
-    this.setGuessVisible( true );
+    this.setGuessLineVisible( true );
 
     var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 

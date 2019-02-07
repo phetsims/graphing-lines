@@ -33,7 +33,7 @@ define( function( require ) {
     var playStateObserver = function( playState ) {
 
       // show user's line only in states where there guess is wrong.
-      self.graphNode.setGuessVisible(
+      self.graphNode.setGuessLineVisible(
         !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
 
       /*

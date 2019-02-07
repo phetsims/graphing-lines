@@ -145,18 +145,15 @@ define( function( require ) {
       );
 
       // Graph the answer line at the end of the challenge.
-      self.graphNode.setAnswerVisible( playState === PlayState.NEXT );
+      self.graphNode.setAnswerLineVisible( playState === PlayState.NEXT );
+      self.graphNode.setAnswerPointVisible( playState === PlayState.NEXT );
 
       self.guessBoxNode.visible = ( playState === PlayState.NEXT );
 
-      if ( playState === PlayState.NEXT ) {
-        self.graphNode.setAnswerPointVisible( true );
-
-        // show stuff when the user got the challenge wrong
-        if ( !challenge.isCorrect() ) {
-          self.graphNode.setGuessPointVisible( true );
-          self.graphNode.setSlopeToolVisible( true );
-        }
+      // show stuff when the user got the challenge wrong
+      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+        self.graphNode.setGuessPointVisible( true );
+        self.graphNode.setSlopeToolVisible( true );
       }
 
       // visibility of correct/incorrect icons

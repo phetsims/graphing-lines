@@ -28,7 +28,7 @@ define( function( require ) {
 
     ChallengeGraphNode.call( this, challenge );
 
-    this.setGuessVisible( true );
+    this.setGuessLineVisible( true );
 
     // dynamic ranges
     var pointSlopeParameterRange = new PointSlopeParameterRange();

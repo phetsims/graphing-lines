@@ -54,12 +54,14 @@ define( function( require ) {
     Property.multilink( [ this.interactiveLineProperty, this.savedLines.lengthProperty, this.standardLines.lengthProperty ],
       function() {
         self.graph.lines.clear();
-        // add lines in the order that they would be rendered
+
+        // Add lines in the order that PointTool will see them: interactiveLine, standardLines, savedLines
+        // This should match the order of rendering in LineFormsGraphNode.
         self.graph.lines.add( self.interactiveLineProperty.get() );
-        self.savedLines.forEach( function( line ) {
+        self.standardLines.forEach( function( line ) {
           self.graph.lines.add( line );
         } );
-        self.standardLines.forEach( function( line ) {
+        self.savedLines.forEach( function( line ) {
           self.graph.lines.add( line );
         } );
       }

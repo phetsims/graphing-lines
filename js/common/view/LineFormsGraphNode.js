@@ -50,7 +50,7 @@ define( function( require ) {
     // @private Slope tool
     this.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
 
-    // Rendering order
+    // Rendering order. The order of lines should match the order of LineFormsModel.graph.lines.
     this.addChild( this.savedLinesParentNode );
     this.addChild( this.standardLinesParentNode );
     this.addChild( this.interactiveLineNode );

@@ -29,7 +29,8 @@ define( function( require ) {
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
       graphicArts: 'Sharon Siman-Tov',
-      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Oliver Orejola, Benjamin Roberts, Bryan Yoelin'
+      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
+                        'Benjamin Roberts, Jacob Romero, Katie Woessner, Bryan Yoelin'
     }
   };
 

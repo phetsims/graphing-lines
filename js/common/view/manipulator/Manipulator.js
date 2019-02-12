@@ -55,7 +55,8 @@ define( function( require ) {
       var haloNode = new Circle( 1.75 * radius, {
         fill: mainColor.withAlpha( options.haloAlpha ),
         pickable: false,
-        visible: false
+        visible: false,
+        renderer: 'canvas' // Workaround for Firefox graphics artifacts, see phetsims/graphing-lines/issues/119
       } );
       this.addChild( haloNode );
 

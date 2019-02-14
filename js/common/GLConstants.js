@@ -20,13 +20,20 @@ define( function( require ) {
     X_AXIS_RANGE: new Range( -10, 10 ),
     Y_AXIS_RANGE: new Range( -10, 10 ),
     INTERACTIVE_EQUATION_FONT_SIZE: 34,
-    PICKER_TOUCH_AREA_X_DILATION: 30,
     MANIPULATOR_RADIUS: 0.425,
     SCREEN_X_MARGIN: 40,
     SCREEN_Y_MARGIN: 20,
     RESET_ALL_BUTTON_SCALE: 1.32,
     PATTERN_0VALUE_EQUALS_1VALUE: '{0} ' + MathSymbols.EQUAL_TO + ' {1}', // i18n not required, used for e.g. x = 5
-    EQUATION_FONT_WEIGHT: 'bold'
+    EQUATION_FONT_WEIGHT: 'bold',
+
+    // see https://github.com/phetsims/graphing-lines/issues/124
+    PICKER_OPTIONS: {
+      touchAreaXDilation: 26,
+      touchAreaYDilation: 4,
+      mouseAreaXDilation: 0,
+      mouseAreaYDilation: 4
+    }
   };
 
   graphingLines.register( 'GLConstants', GLConstants );

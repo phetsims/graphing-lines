@@ -128,11 +128,11 @@ define( function( require ) {
     }, staticOptions ) );
     var yInterceptNumeratorNode; // also used for integer values
     if ( options.interactiveIntercept ) {
-      yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty, {
-        color: GLColors.INTERCEPT,
-        font: interactiveFont,
-        touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
-      } );
+      yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
+        _.extend( {}, GLConstants.PICKER_OPTIONS, {
+          color: GLColors.INTERCEPT,
+          font: interactiveFont
+        } ) );
     }
     else {
       yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );

@@ -28,9 +28,8 @@ define( function( require ) {
    */
   function CoordinatePicker( a1Property, b1Property, a2Property, b2Property, rangeProperty, options ) {
 
-    options = _.extend( {
-      color: GLColors.POINT_X1_Y1,
-      touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
+    options = _.extend( {}, GLConstants.PICKER_OPTIONS, {
+      color: GLColors.POINT_X1_Y1
     }, options );
 
     // computes value when 'up' button is pressed

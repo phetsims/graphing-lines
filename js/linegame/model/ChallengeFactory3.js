@@ -85,9 +85,11 @@ define( function( require ) {
       else {
 
         // Graph-the-Line, point-slope form
+        slope = slopePool.chooseOptional();
+        point = BaseChallengeFactory.choosePointForSlope( slope, this.xRange, this.yRange );
         challenges.push( new GraphTheLine(
           '3: GraphTheLine, point and slope variable',
-          this.createPointSlopeLine( point, slopePool.chooseOptional() ),
+          this.createPointSlopeLine( point, slope ),
           EquationForm.POINT_SLOPE,
           ManipulationMode.POINT_SLOPE,
           this.xRange, this.yRange ) );

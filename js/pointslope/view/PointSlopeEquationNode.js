@@ -108,8 +108,10 @@ define( function( require ) {
     var yMinusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var y1Node;
     if ( options.interactivePoint ) {
-      y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
-        { color: GLColors.POINT_X1_Y1, font: interactiveFont, touchAreaXDilation: 30 } );
+      y1Node = new NumberPicker( y1Property, options.y1RangeProperty, _.extend( {}, GLConstants.PICKER_OPTIONS, {
+        color: GLColors.POINT_X1_Y1,
+        font: interactiveFont
+      } ) );
     }
     else {
       y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
@@ -135,12 +137,10 @@ define( function( require ) {
     var xMinusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
     var x1Node;
     if ( options.interactivePoint ) {
-      x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
-        {
-          color: GLColors.POINT_X1_Y1,
-          font: interactiveFont,
-          touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
-        } );
+      x1Node = new NumberPicker( x1Property, options.x1RangeProperty, _.extend( {}, GLConstants.PICKER_OPTIONS, {
+        color: GLColors.POINT_X1_Y1,
+        font: interactiveFont
+      } ) );
     }
     else {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );

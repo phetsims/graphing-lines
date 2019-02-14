@@ -25,9 +25,8 @@ define( function( require ) {
    */
   function SlopePicker( variableComponentProperty, fixedComponentProperty, variableRangeProperty, options ) {
 
-    options = _.extend( {
-      color: GLColors.SLOPE,
-      touchAreaXDilation: GLConstants.PICKER_TOUCH_AREA_X_DILATION
+    options = _.extend( {}, GLConstants.PICKER_OPTIONS, {
+      color: GLColors.SLOPE
     }, options );
 
     // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients

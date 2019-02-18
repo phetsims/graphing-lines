@@ -139,9 +139,7 @@ define( function( require ) {
     }
     var yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     var yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    var slopeUndefinedNode = new RichText( '?', _.extend( {}, staticOptions, {
-      maxWidth: options.maxWidth // see #114
-    } ) );
+    var slopeUndefinedNode = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     self.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
@@ -164,7 +162,7 @@ define( function( require ) {
         self.children[ i ].visible = false;
         self.children[ i ].x = 0;
       }
-      slopeUndefinedNode.text = ''; // workaround for #117
+      slopeUndefinedNode.text = ''; // workaround for #114 and #117
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive

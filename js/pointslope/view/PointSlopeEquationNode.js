@@ -146,9 +146,7 @@ define( function( require ) {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     var xRightParenNode = new Text( ')', staticOptions );
-    var slopeUndefinedNode = new RichText( '?', _.extend( {}, staticOptions, {
-      maxWidth: options.maxWidth // see #114
-    } ) );
+    var slopeUndefinedNode = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     self.children = [
@@ -174,7 +172,7 @@ define( function( require ) {
         self.children[ i ].visible = false;
         self.children[ i ].x = 0;
       }
-      slopeUndefinedNode.text = ''; // workaround for #117
+      slopeUndefinedNode.text = ''; // workaround for #114 and #117
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive

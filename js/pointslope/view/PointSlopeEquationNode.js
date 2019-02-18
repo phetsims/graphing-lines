@@ -1,4 +1,4 @@
-// Copyright 2013-2018, University of Colorado Boulder
+// Copyright 2013-2019, University of Colorado Boulder
 
 /**
  * Renderer for point-slope equations, with optional interactivity of point and slope.
@@ -146,7 +146,9 @@ define( function( require ) {
       x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
     }
     var xRightParenNode = new Text( ')', staticOptions );
-    var slopeUndefinedNode = new RichText( '?', staticOptions );
+    var slopeUndefinedNode = new RichText( '?', _.extend( {}, staticOptions, {
+      maxWidth: options.maxWidth // see #114
+    } ) );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     self.children = [

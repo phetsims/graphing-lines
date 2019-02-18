@@ -174,6 +174,7 @@ define( function( require ) {
         self.children[ i ].visible = false;
         self.children[ i ].x = 0;
       }
+      slopeUndefinedNode.text = ''; // workaround for #117
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive

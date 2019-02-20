@@ -11,9 +11,6 @@
   "slope": {
     "value": "Slope"
   },
-  "hideLines": {
-    "value": "Hide lines"
-  },
   "slopeUndefined": {
     "value": "{0} = {1} (slope undefined)"
   },

@@ -45,9 +45,11 @@ define( function( require ) {
       contentXMargin: 10,
       contentYMargin: 10,
       contentYSpacing: 0,
-      buttonLength: 30,
       buttonXMargin: 10,
-      buttonYMargin: 10
+      buttonYMargin: 10,
+      expandCollapseButtonOptions: {
+        sideLength: 30
+      }
     }, options );
 
     assert && assert( !options.titleNode, 'EquationAccordionBox sets titleNode' );

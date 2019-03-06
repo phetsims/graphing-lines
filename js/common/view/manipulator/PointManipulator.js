@@ -20,8 +20,8 @@ define( function( require ) {
 
   /**
    * @param {number} radius
-   * @param {Property.<Vector2>} pointProperty
-   * @param {Property.<Vector2>[]} otherPointProperties
+   * @param {Vector2Property} pointProperty
+   * @param {Vector2Property} otherPointProperties
    * @param {Range} xRange
    * @param {Range} yRange
    * @param {ModelViewTransform2} modelViewTransform
@@ -63,8 +63,8 @@ define( function( require ) {
 
   /**
    * Drag handler for arbitrary point.
-   * @param {Property.<Vector2>} pointProperty
-   * @param {Property.<Vector2>[]} otherPointProperties points that the point can't be on
+   * @param {Vector2Property} pointProperty
+   * @param {Vector2Property[]} otherPointProperties points that the point can't be on
    * @param {Range} xRange
    * @param {Range} yRange
    * @param {ModelViewTransform2} modelViewTransform

@@ -12,6 +12,7 @@ define( function( require ) {
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   var inherit = require( 'PHET_CORE/inherit' );
   var Property = require( 'AXON/Property' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Vector2} location initial location of the tool
@@ -26,8 +27,8 @@ define( function( require ) {
 
     var self = this;
 
-    // @public {Property.<Vector2>} location of the point tool
-    this.locationProperty = new Property( location );
+    // @public location of the point tool
+    this.locationProperty = new Vector2Property( location );
 
     // @public {Property.<Line|null> line that the tool is on, null if it's not on a line
     this.onLineProperty = new Property( null );

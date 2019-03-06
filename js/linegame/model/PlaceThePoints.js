@@ -22,6 +22,7 @@ define( function( require ) {
   var PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
   var Property = require( 'AXON/Property' );
   var Vector2 = require( 'DOT/Vector2' );
+  var Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {string} description brief description of the challenge, visible in dev versions
@@ -36,9 +37,9 @@ define( function( require ) {
     GraphTheLine.call( this, description, answer, equationForm, ManipulationMode.THREE_POINTS, xRange, yRange );
 
     // @public initial points do not form a line
-    this.p1Property = new Property( new Vector2( -3, 2 ) );
-    this.p2Property = new Property( new Vector2( 0, 0 ) );
-    this.p3Property = new Property( new Vector2( 3, 2 ) );
+    this.p1Property = new Vector2Property( new Vector2( -3, 2 ) );
+    this.p2Property = new Vector2Property( new Vector2( 0, 0 ) );
+    this.p3Property = new Vector2Property( new Vector2( 3, 2 ) );
 
     // update the guess when the points change
     // unmultilink unnecessary because PlaceThePoints owns these Properties.

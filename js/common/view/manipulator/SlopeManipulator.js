@@ -98,8 +98,6 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'SlopeManipulator.SlopeDragHandler', SlopeDragHandler );
-
   inherit( SimpleDragHandler, SlopeDragHandler );
 
   return SlopeManipulator;

@@ -105,8 +105,6 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'GraphNode.GridLineNode', GridLineNode );
-
   inherit( Line, GridLineNode );
 
   //----------------------------------------------------------------------------------------
@@ -150,8 +148,6 @@ define( function( require ) {
     }
   }
 
-  graphingLines.register( 'GraphNode.MajorTickNode', MajorTickNode );
-
   inherit( Node, MajorTickNode );
 
   //----------------------------------------------------------------------------------------
@@ -171,8 +167,6 @@ define( function( require ) {
       stroke: MINOR_TICK_COLOR
     } );
   }
-
-  graphingLines.register( 'GraphNode.MinorTickNode', MinorTickNode );
 
   inherit( Path, MinorTickNode );
 
@@ -226,8 +220,6 @@ define( function( require ) {
     }
   }
 
-  graphingLines.register( 'GraphNode.XAxisNode', XAxisNode );
-
   inherit( Node, XAxisNode );
 
   //----------------------------------------------------------------------------------------
@@ -279,8 +271,6 @@ define( function( require ) {
       }
     }
   }
-
-  graphingLines.register( 'GraphNode.YAxisNode', YAxisNode );
 
   inherit( Node, YAxisNode );
 
@@ -334,8 +324,6 @@ define( function( require ) {
       }
     }
   }
-
-  graphingLines.register( 'GraphNode.GridNode', GridNode );
 
   inherit( Node, GridNode, {
 

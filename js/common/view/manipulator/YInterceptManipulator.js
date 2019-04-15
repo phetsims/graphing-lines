@@ -97,8 +97,6 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'YInterceptManipulator.YInterceptDragHandler', YInterceptDragHandler );
-
   inherit( SimpleDragHandler, YInterceptDragHandler );
 
   return YInterceptManipulator;

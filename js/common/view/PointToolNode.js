@@ -234,7 +234,5 @@ define( function( require ) {
 
   inherit( SimpleDragHandler, PointToolDragHandler );
 
-  graphingLines.register( 'PointToolNode.PointToolDragHandler', PointToolDragHandler );
-
   return PointToolNode;
 } );

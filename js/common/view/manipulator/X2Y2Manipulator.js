@@ -102,8 +102,6 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'X2Y2Manipulator.X2Y2DragHandler', X2Y2DragHandler );
-
   inherit( SimpleDragHandler, X2Y2DragHandler );
 
   return X2Y2Manipulator;

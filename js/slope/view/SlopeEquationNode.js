@@ -469,8 +469,6 @@ define( function( require ) {
     this.mutate( options );
   }
 
-  graphingLines.register( 'SlopeEquationNode.DynamicLabelNode', DynamicLabelNode );
-
   inherit( EquationNode, DynamicLabelNode, {
 
     // @public @override

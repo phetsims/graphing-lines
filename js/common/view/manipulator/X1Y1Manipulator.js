@@ -108,8 +108,6 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'X1Y1Manipulator.X1Y1DragHandler', X1Y1DragHandler );
-
   inherit( SimpleDragHandler, X1Y1DragHandler );
 
   return X1Y1Manipulator;

@@ -111,8 +111,6 @@ define( function( require ) {
     } );
   }
 
-  graphingLines.register( 'PointManipulator.PointDragHandler', PointDragHandler );
-
   inherit( SimpleDragHandler, PointDragHandler );
 
   return PointManipulator;

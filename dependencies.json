@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.3.2 Wed Apr 24 2019 15:58:22 GMT-0800 (Alaskan Daylight Time)",
+  "comment": "# graphing-lines 1.3.2 Fri May 24 2019 14:49:50 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "HEAD"
@@ -13,15 +13,15 @@
     "branch": "HEAD"
   },
   "chipper": {
-    "sha": "1025886f8bff8fc2516b8697a2f9d53bd61c05ba",
-    "branch": "HEAD"
+    "sha": "dd8f1e62f0f73bfb790695fd4841671652546111",
+    "branch": "graphing-lines-1.3"
   },
   "dot": {
     "sha": "782f9d54fb356c7f1d29ee4449f2e866de3d1717",
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "c0cea4d6a7b2da36f152859cd0c6705bc002a31d",
+    "sha": "00aff9375108cd338e7e68e8246edab7dce7318c",
     "branch": "1.3"
   },
   "joist": {
@@ -38,18 +38,6 @@
   },
   "phet-io": {
     "sha": "4566046207d6a4712b1b081ec2a0786bae6c44b9",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-classroom-activity": {
-    "sha": "64aff78db6605aa5317724d50fdb28bd9cf495e2",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-hookes-law-energy": {
-    "sha": "edb231a365b0b81c976f6e502874a234a0284915",
-    "branch": "HEAD"
-  },
-  "phet-io-wrapper-lab-book": {
-    "sha": "fb5c98c155259e2bdd37eb64e30081017a6e1d09",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {

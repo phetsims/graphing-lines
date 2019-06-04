@@ -9,7 +9,7 @@ define( function( require ) {
   'use strict';
 
   // modules
-  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
+  var GameAudioPlayerOld = require( 'VEGAS/GameAudioPlayerOld' );
   var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
   var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
@@ -30,7 +30,7 @@ define( function( require ) {
     ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
     // sounds
-    var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
+    var audioPlayer = new GameAudioPlayerOld( model.soundEnabledProperty );
 
     // @private one parent node for each 'phase' of the game
     this.settingsNode = new SettingsNode( model, this.layoutBounds, levelImages );

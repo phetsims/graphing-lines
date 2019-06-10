@@ -22,7 +22,6 @@ define( function( require ) {
   var Node = require( 'SCENERY/nodes/Node' );
   var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   var ScoreDisplayStars = require( 'VEGAS/ScoreDisplayStars' );
-  var SoundToggleButton = require( 'SCENERY_PHET/buttons/SoundToggleButton' );
   var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   var Text = require( 'SCENERY/nodes/Text' );
   var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
@@ -81,9 +80,12 @@ define( function( require ) {
     } );
 
     // Timer and Sound controls
-    var toggleOptions = { stroke: 'gray', scale: 1.3 };
-    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, toggleOptions );
-    var soundToggleButton = new SoundToggleButton( model.soundEnabledProperty, toggleOptions );
+    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
+      stroke: 'gray',
+      scale: 1.3,
+      left: GLConstants.SCREEN_X_MARGIN,
+      bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
+    } );
 
     // Reset All button, at rightBottom
     var resetAllButton = new ResetAllButton( {
@@ -102,15 +104,7 @@ define( function( require ) {
         spacing: 50,
         center: layoutBounds.center
       } ),
-      // timer and sound buttons at leftBottom
-      new LayoutBox( {
-        children: [ timerToggleButton, soundToggleButton ],
-        orientation: 'vertical',
-        align: 'center',
-        spacing: 15,
-        left: GLConstants.SCREEN_X_MARGIN,
-        bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
-      } ),
+      timerToggleButton,
       resetAllButton
     ];
     Node.call( this, options );

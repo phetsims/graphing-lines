@@ -12,8 +12,7 @@
   "phet": {
     "requirejsNamespace": "GRAPHING_LINES",
     "phetLibs": [
-      "vegas",
-      "vibe"
+      "vegas"
     ],
     "runnable": true,
     "supportedBrands": [

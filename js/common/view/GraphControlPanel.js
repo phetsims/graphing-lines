@@ -16,7 +16,7 @@ define( function( require ) {
   var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
   var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GridCheckbox = require( 'GRAPHING_LINES/common/view/GridCheckbox' );
+  var GridCheckbox = require( 'SCENERY_PHET/GridCheckbox' );
   var HBox = require( 'SCENERY/nodes/HBox' );
   var inherit = require( 'PHET_CORE/inherit' );
   var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );

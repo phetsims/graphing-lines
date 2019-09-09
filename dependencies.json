@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.3.6 Fri Aug 23 2019 13:42:44 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# graphing-lines 1.3.6 Mon Sep 09 2019 12:15:06 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "HEAD"
@@ -21,12 +21,12 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "ed0b30651b1b3915262e0b08b357edc693acde31",
+    "sha": "5deff47181382bf4a6923a452b14392c325f0c5c",
     "branch": "1.3"
   },
   "joist": {
-    "sha": "75b3e5c53787524253942a8f42b4ea2f5fc1d7fd",
-    "branch": "HEAD"
+    "sha": "a9e8f2017b1d95ca17c3e7e9f6675e5b0b053b68",
+    "branch": "graphing-lines-1.3"
   },
   "kite": {
     "sha": "20a875b740cbb9c441c72911e60617cd05a5d4e1",

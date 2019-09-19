@@ -5,14 +5,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Color = require( 'SCENERY/util/Color' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  const Color = require( 'SCENERY/util/Color' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   /**
    * @param {number} radius

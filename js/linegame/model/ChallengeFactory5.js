@@ -5,23 +5,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
-  var Color = require( 'SCENERY/util/Color' );
-  var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var Fraction = require( 'PHETCOMMON/model/Fraction' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
-  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
-  var Range = require( 'DOT/Range' );
-  var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
+  const BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
+  const Color = require( 'SCENERY/util/Color' );
+  const EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  const Fraction = require( 'PHETCOMMON/model/Fraction' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
+  const ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  const PlaceThePoints = require( 'GRAPHING_LINES/linegame/model/PlaceThePoints' );
+  const Range = require( 'DOT/Range' );
+  const ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
   /**
    * @param {Object} [options]

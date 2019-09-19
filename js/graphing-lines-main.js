@@ -5,20 +5,20 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
-  var PointSlopeScreen = require( 'GRAPHING_LINES/pointslope/PointSlopeScreen' );
-  var Sim = require( 'JOIST/Sim' );
-  var SimLauncher = require( 'JOIST/SimLauncher' );
-  var SlopeInterceptScreen = require( 'GRAPHING_LINES/slopeintercept/SlopeInterceptScreen' );
-  var SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
-  var Tandem = require( 'TANDEM/Tandem' );
+  const LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
+  const PointSlopeScreen = require( 'GRAPHING_LINES/pointslope/PointSlopeScreen' );
+  const Sim = require( 'JOIST/Sim' );
+  const SimLauncher = require( 'JOIST/SimLauncher' );
+  const SlopeInterceptScreen = require( 'GRAPHING_LINES/slopeintercept/SlopeInterceptScreen' );
+  const SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
+  const Tandem = require( 'TANDEM/Tandem' );
 
   // strings
-  var graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
+  const graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
 
   // constants
   var tandem = Tandem.rootTandem;

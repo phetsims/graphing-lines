@@ -6,30 +6,30 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScoreDisplayStars = require( 'VEGAS/ScoreDisplayStars' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
+  const LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScoreDisplayStars = require( 'VEGAS/ScoreDisplayStars' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const TimerToggleButton = require( 'SCENERY_PHET/buttons/TimerToggleButton' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
-  var patternLevel0String = require( 'string!GRAPHING_LINES/pattern_Level_0' );
+  const chooseYourLevelString = require( 'string!GRAPHING_LINES/chooseYourLevel' );
+  const patternLevel0String = require( 'string!GRAPHING_LINES/pattern_Level_0' );
 
   /**
    * @param {LineGameModel} model

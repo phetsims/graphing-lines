@@ -8,20 +8,20 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
-  var PlottedPointNode = require( 'GRAPHING_LINES/common/view/PlottedPointNode' );
-  var Property = require( 'AXON/Property' );
-  var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
+  const PlottedPointNode = require( 'GRAPHING_LINES/common/view/PlottedPointNode' );
+  const Property = require( 'AXON/Property' );
+  const SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   /**
    * @param {Challenge} challenge

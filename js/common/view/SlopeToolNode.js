@@ -7,19 +7,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
 
   // constants
   var VALUE_X_SPACING = 6;

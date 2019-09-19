@@ -5,14 +5,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Vector2Property = require( 'DOT/Vector2Property' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Property = require( 'AXON/Property' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {Vector2} location initial location of the tool

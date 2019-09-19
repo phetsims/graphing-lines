@@ -6,16 +6,16 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
-  var SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
-  var X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LineFormsGraphNode = require( 'GRAPHING_LINES/common/view/LineFormsGraphNode' );
+  const PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  const SlopeManipulator = require( 'GRAPHING_LINES/common/view/manipulator/SlopeManipulator' );
+  const X1Y1Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/X1Y1Manipulator' );
 
   /**
    * @param {PointSlopeModel} model

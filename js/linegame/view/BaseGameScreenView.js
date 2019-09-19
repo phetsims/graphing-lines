@@ -5,19 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var PlayNode = require( 'GRAPHING_LINES/linegame/view/PlayNode' );
-  var ResultsNode = require( 'GRAPHING_LINES/linegame/view/ResultsNode' );
-  var ScreenView = require( 'JOIST/ScreenView' );
-  var SettingsNode = require( 'GRAPHING_LINES/linegame/view/SettingsNode' );
+  const GameAudioPlayer = require( 'VEGAS/GameAudioPlayer' );
+  const GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const PlayNode = require( 'GRAPHING_LINES/linegame/view/PlayNode' );
+  const ResultsNode = require( 'GRAPHING_LINES/linegame/view/ResultsNode' );
+  const ScreenView = require( 'JOIST/ScreenView' );
+  const SettingsNode = require( 'GRAPHING_LINES/linegame/view/SettingsNode' );
 
   /**
    * @param {BaseGameModel} model

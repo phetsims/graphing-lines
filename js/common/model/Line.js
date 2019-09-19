@@ -6,15 +6,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Fraction = require( 'PHETCOMMON/model/Fraction' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Util = require( 'DOT/Util' );
+  const Fraction = require( 'PHETCOMMON/model/Fraction' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Util = require( 'DOT/Util' );
 
   /**
    * @param x1

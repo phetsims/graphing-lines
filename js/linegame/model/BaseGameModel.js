@@ -10,25 +10,25 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GameTimer = require( 'VEGAS/GameTimer' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var Property = require( 'AXON/Property' );
-  var StringProperty = require( 'AXON/StringProperty' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  const GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  const GameTimer = require( 'VEGAS/GameTimer' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
+  const Property = require( 'AXON/Property' );
+  const StringProperty = require( 'AXON/StringProperty' );
 
   // constants
   var INITIAL_GAME_PHASE = GamePhase.SETTINGS;

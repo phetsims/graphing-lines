@@ -5,17 +5,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
-  var Property = require( 'AXON/Property' );
-  var SlopeParameterRange = require( 'GRAPHING_LINES/slope/model/SlopeParameterRange' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const LineFormsModel = require( 'GRAPHING_LINES/common/model/LineFormsModel' );
+  const Property = require( 'AXON/Property' );
+  const SlopeParameterRange = require( 'GRAPHING_LINES/slope/model/SlopeParameterRange' );
 
   /**
    * @constructor

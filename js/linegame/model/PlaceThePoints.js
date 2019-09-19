@@ -8,21 +8,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var NotALine = require( 'GRAPHING_LINES/linegame/model/NotALine' );
-  var PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
-  var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
-  var Vector2Property = require( 'DOT/Vector2Property' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  const NotALine = require( 'GRAPHING_LINES/linegame/model/NotALine' );
+  const PlaceThePointsNode = require( 'GRAPHING_LINES/linegame/view/PlaceThePointsNode' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
+  const Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
    * @param {string} description brief description of the challenge, visible in dev versions

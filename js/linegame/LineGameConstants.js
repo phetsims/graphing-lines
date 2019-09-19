@@ -5,14 +5,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   var LineGameConstants = {
     ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates

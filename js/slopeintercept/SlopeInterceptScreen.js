@@ -5,21 +5,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
-  var SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
-  var SlopeInterceptScreenView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptScreenView' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
+  const SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
+  const SlopeInterceptScreenView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptScreenView' );
 
   // strings
-  var screenSlopeInterceptString = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
+  const screenSlopeInterceptString = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
 
   /**
    * @param {Tandem} tandem

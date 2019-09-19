@@ -5,18 +5,18 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var EquationAccordionBox = require( 'GRAPHING_LINES/common/view/EquationAccordionBox' );
-  var GraphControlPanel = require( 'GRAPHING_LINES/common/view/GraphControlPanel' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LineFormsScreenView = require( 'GRAPHING_LINES/common/view/LineFormsScreenView' );
-  var LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var SlopeInterceptGraphNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptGraphNode' );
+  const EquationAccordionBox = require( 'GRAPHING_LINES/common/view/EquationAccordionBox' );
+  const GraphControlPanel = require( 'GRAPHING_LINES/common/view/GraphControlPanel' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LineFormsScreenView = require( 'GRAPHING_LINES/common/view/LineFormsScreenView' );
+  const LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
+  const SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
+  const SlopeInterceptGraphNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptGraphNode' );
 
   /**
    * @param {SlopeInterceptModel} model

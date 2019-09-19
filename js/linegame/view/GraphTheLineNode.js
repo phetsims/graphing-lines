@@ -6,31 +6,31 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphPointSlopeNode = require( 'GRAPHING_LINES/linegame/view/GraphPointSlopeNode' );
-  var GraphSlopeInterceptNode = require( 'GRAPHING_LINES/linegame/view/GraphSlopeInterceptNode' );
-  var GraphTwoPointsNode = require( 'GRAPHING_LINES/linegame/view/GraphTwoPointsNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var Property = require( 'AXON/Property' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const EquationBoxNode = require( 'GRAPHING_LINES/linegame/view/EquationBoxNode' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphPointSlopeNode = require( 'GRAPHING_LINES/linegame/view/GraphPointSlopeNode' );
+  const GraphSlopeInterceptNode = require( 'GRAPHING_LINES/linegame/view/GraphSlopeInterceptNode' );
+  const GraphTwoPointsNode = require( 'GRAPHING_LINES/linegame/view/GraphTwoPointsNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
+  const Property = require( 'AXON/Property' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var lineToGraphString = require( 'string!GRAPHING_LINES/lineToGraph' );
-  var notALineString = require( 'string!GRAPHING_LINES/notALine' );
-  var yourLineString = require( 'string!GRAPHING_LINES/yourLine' );
+  const lineToGraphString = require( 'string!GRAPHING_LINES/lineToGraph' );
+  const notALineString = require( 'string!GRAPHING_LINES/notALine' );
+  const yourLineString = require( 'string!GRAPHING_LINES/yourLine' );
 
   /**
    * @param {GraphTheLine} challenge

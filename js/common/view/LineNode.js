@@ -8,17 +8,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line require-statement-match
+  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line require-statement-match
 
   // constants
   var HEAD_SIZE = new Dimension2( 10, 10 );

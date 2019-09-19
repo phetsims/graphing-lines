@@ -10,30 +10,30 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
-  var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  const FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
+  const PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  const PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
+  const SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const TextPushButton = require( 'SUN/buttons/TextPushButton' );
 
   // strings
-  var checkString = require( 'string!VEGAS/check' );
-  var nextString = require( 'string!VEGAS/next' );
-  var showAnswerString = require( 'string!VEGAS/showAnswer' );
-  var tryAgainString = require( 'string!VEGAS/tryAgain' );
+  const checkString = require( 'string!VEGAS/check' );
+  const nextString = require( 'string!VEGAS/next' );
+  const showAnswerString = require( 'string!VEGAS/showAnswer' );
+  const tryAgainString = require( 'string!VEGAS/tryAgain' );
 
   /**
    * @param {Challenge} challenge the challenge

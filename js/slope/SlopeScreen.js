@@ -5,21 +5,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Property = require( 'AXON/Property' );
-  var Screen = require( 'JOIST/Screen' );
-  var SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
-  var SlopeScreenView = require( 'GRAPHING_LINES/slope/view/SlopeScreenView' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
+  const SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
+  const SlopeScreenView = require( 'GRAPHING_LINES/slope/view/SlopeScreenView' );
 
   // strings
-  var screenSlopeString = require( 'string!GRAPHING_LINES/screen.slope' );
+  const screenSlopeString = require( 'string!GRAPHING_LINES/screen.slope' );
 
   /**
    * @param {Tandem} tandem

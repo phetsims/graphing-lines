@@ -5,31 +5,31 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
-  var FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Property = require( 'AXON/Property' );
-  var Range = require( 'DOT/Range' );
+  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const DimensionalArrowNode = require( 'GRAPHING_LINES/common/view/DimensionalArrowNode' );
+  const FaceWithPointsNode = require( 'SCENERY_PHET/FaceWithPointsNode' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
-  var ScreenIcon = require( 'JOIST/ScreenIcon' );
-  var Shape = require( 'KITE/Shape' );
-  var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const ScreenIcon = require( 'JOIST/ScreenIcon' );
+  const Shape = require( 'KITE/Shape' );
+  const SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var SCREEN_ICON_BASE_SIZE = new Dimension2( 548, 373 );

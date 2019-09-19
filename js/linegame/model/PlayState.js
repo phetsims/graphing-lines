@@ -8,11 +8,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
   var PlayState = Object.freeze( {

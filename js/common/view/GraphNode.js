@@ -6,24 +6,24 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'SCENERY/nodes/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Path = require( 'SCENERY/nodes/Path' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var Shape = require( 'KITE/Shape' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'SCENERY/nodes/Line' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const Shape = require( 'KITE/Shape' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   //----------------------------------------------------------------------------------------
   // constants

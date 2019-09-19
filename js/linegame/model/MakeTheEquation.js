@@ -6,17 +6,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MakeTheEquationNode = require( 'GRAPHING_LINES/linegame/view/MakeTheEquationNode' );
+  const Challenge = require( 'GRAPHING_LINES/linegame/model/Challenge' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MakeTheEquationNode = require( 'GRAPHING_LINES/linegame/view/MakeTheEquationNode' );
 
   // strings
-  var makeTheEquationString = require( 'string!GRAPHING_LINES/makeTheEquation' );
+  const makeTheEquationString = require( 'string!GRAPHING_LINES/makeTheEquation' );
 
   /**
    * @param {string} description brief description of the challenge, visible in dev versions

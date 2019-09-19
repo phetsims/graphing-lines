@@ -5,23 +5,23 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var AccordionBox = require( 'SUN/AccordionBox' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var HSeparator = require( 'SUN/HSeparator' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var TextPushButton = require( 'SUN/buttons/TextPushButton' );
-  var VBox = require( 'SCENERY/nodes/VBox' );
+  const AccordionBox = require( 'SUN/AccordionBox' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HSeparator = require( 'SUN/HSeparator' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const TextPushButton = require( 'SUN/buttons/TextPushButton' );
+  const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-  var eraseLinesString = require( 'string!GRAPHING_LINES/eraseLines' );
-  var saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
+  const eraseLinesString = require( 'string!GRAPHING_LINES/eraseLines' );
+  const saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
 
   // constants
   var BUTTON_FONT = new GLFont( 18 );

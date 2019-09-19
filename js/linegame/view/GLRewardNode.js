@@ -16,36 +16,36 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var FaceNode = require( 'SCENERY_PHET/FaceNode' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PaperAirplaneNode = require( 'SCENERY_PHET/PaperAirplaneNode' );
-  var PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
-  var PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
-  var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var RewardNode = require( 'VEGAS/RewardNode' );
-  var SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
+  const FaceNode = require( 'SCENERY_PHET/FaceNode' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PaperAirplaneNode = require( 'SCENERY_PHET/PaperAirplaneNode' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+  const PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
+  const Property = require( 'AXON/Property' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const RewardNode = require( 'VEGAS/RewardNode' );
+  const SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
 
   // strings
-  var pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
+  const pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
 
   // images
-  var pointToolBodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
-  var pointToolTipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
+  const pointToolBodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
+  const pointToolTipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
 
   // constants
   var NUMBER_OF_NODES = 150;

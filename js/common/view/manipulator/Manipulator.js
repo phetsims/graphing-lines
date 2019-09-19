@@ -6,18 +6,18 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ButtonListener = require( 'SCENERY/input/ButtonListener' );
-  var Circle = require( 'SCENERY/nodes/Circle' );
-  var Color = require( 'SCENERY/util/Color' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
-  var Shape = require( 'KITE/Shape' );
+  const ButtonListener = require( 'SCENERY/input/ButtonListener' );
+  const Circle = require( 'SCENERY/nodes/Circle' );
+  const Color = require( 'SCENERY/util/Color' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
+  const Shape = require( 'KITE/Shape' );
 
   /**
    * @param {number} radius radius of the sphere

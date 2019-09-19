@@ -6,18 +6,18 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
-  var GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var Node = require( 'SCENERY/nodes/Node' );
+  const GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  const GLQueryParameters = require( 'GRAPHING_LINES/common/GLQueryParameters' );
+  const GLRewardNode = require( 'GRAPHING_LINES/linegame/view/GLRewardNode' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LevelCompletedNode = require( 'VEGAS/LevelCompletedNode' );
+  const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const Node = require( 'SCENERY/nodes/Node' );
 
   /**
    * @param {LineGameModel} model

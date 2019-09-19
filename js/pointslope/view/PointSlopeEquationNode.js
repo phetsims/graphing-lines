@@ -11,35 +11,35 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
-  var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
-  var MinusNode = require( 'SCENERY_PHET/MinusNode' );
-  var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var PlusNode = require( 'SCENERY_PHET/PlusNode' );
-  var Property = require( 'AXON/Property' );
+  const DynamicValueNode = require( 'GRAPHING_LINES/common/view/DynamicValueNode' );
+  const EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const MinusNode = require( 'SCENERY_PHET/MinusNode' );
+  const NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const PlusNode = require( 'SCENERY_PHET/PlusNode' );
+  const Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
-  var Util = require( 'DOT/Util' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
+  const Util = require( 'DOT/Util' );
 
   // strings
-  var slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
+  const slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
 
   /**
    * @param {Property.<Line>} lineProperty

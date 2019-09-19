@@ -5,18 +5,18 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GraphContentsToggleButton = require( 'GRAPHING_LINES/common/view/GraphContentsToggleButton' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
-  var ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
-  var ScreenView = require( 'JOIST/ScreenView' );
+  const GraphContentsToggleButton = require( 'GRAPHING_LINES/common/view/GraphContentsToggleButton' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const PointToolNode = require( 'GRAPHING_LINES/common/view/PointToolNode' );
+  const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
+  const ScreenView = require( 'JOIST/ScreenView' );
 
   /**
    * @param {LineFormsModel} model

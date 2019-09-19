@@ -5,19 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BaseGameModel = require( 'GRAPHING_LINES/linegame/model/BaseGameModel' );
-  var ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
-  var ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
-  var ChallengeFactory3 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory3' );
-  var ChallengeFactory4 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory4' );
-  var ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
-  var ChallengeFactory6 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory6' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
+  const BaseGameModel = require( 'GRAPHING_LINES/linegame/model/BaseGameModel' );
+  const ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
+  const ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
+  const ChallengeFactory3 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory3' );
+  const ChallengeFactory4 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory4' );
+  const ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
+  const ChallengeFactory6 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory6' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
 
   /**
    * @constructor

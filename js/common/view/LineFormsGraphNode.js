@@ -13,17 +13,17 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphNode = require( 'GRAPHING_LINES/common/view/GraphNode' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Property = require( 'AXON/Property' );
+  const SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
 
   /**
    * @param {LineFormsModel } model

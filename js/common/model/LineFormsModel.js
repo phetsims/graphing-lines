@@ -5,20 +5,20 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var ObservableArray = require( 'AXON/ObservableArray' );
-  var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-  var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const ObservableArray = require( 'AXON/ObservableArray' );
+  const PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // constants
   var GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates

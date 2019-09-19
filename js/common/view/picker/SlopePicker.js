@@ -6,15 +6,15 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
    * @param {Property.<number>} variableComponentProperty - the part of the slope we're manipulating

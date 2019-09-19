@@ -8,16 +8,16 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Property = require( 'AXON/Property' );
+  const SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
 
   /**
    * @param {number} pointSize point size of the font used to render the equation

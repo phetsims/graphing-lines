@@ -6,30 +6,30 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var Image = require( 'SCENERY/nodes/Image' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Property = require( 'AXON/Property' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var Util = require( 'DOT/Util' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const Image = require( 'SCENERY/nodes/Image' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Property = require( 'AXON/Property' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const Util = require( 'DOT/Util' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var pointUnknownString = require( 'string!GRAPHING_LINES/point.unknown' );
-  var pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
+  const pointUnknownString = require( 'string!GRAPHING_LINES/point.unknown' );
+  const pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
 
   // images
-  var bodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
-  var tipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
+  const bodyImage = require( 'image!GRAPHING_LINES/point_tool_body.png' );
+  const tipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
 
   // constants
   var NUMBER_OF_DECIMAL_PLACES = 0;

@@ -6,14 +6,14 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
-  var Range = require( 'DOT/Range' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const Range = require( 'DOT/Range' );
 
   var GLConstants = {
     SCREEN_VIEW_OPTIONS: { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) },

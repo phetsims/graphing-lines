@@ -7,20 +7,20 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
-  var EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
-  var Fraction = require( 'PHETCOMMON/model/Fraction' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
-  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var Range = require( 'DOT/Range' );
-  var ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
+  const BaseChallengeFactory = require( 'GRAPHING_LINES/linegame/model/BaseChallengeFactory' );
+  const EquationForm = require( 'GRAPHING_LINES/linegame/model/EquationForm' );
+  const Fraction = require( 'PHETCOMMON/model/Fraction' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GraphTheLine = require( 'GRAPHING_LINES/linegame/model/GraphTheLine' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const MakeTheEquation = require( 'GRAPHING_LINES/linegame/model/MakeTheEquation' );
+  const ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  const Range = require( 'DOT/Range' );
+  const ValuePool = require( 'GRAPHING_LINES/linegame/model/ValuePool' );
 
   /**
    * @param {Object} [options]

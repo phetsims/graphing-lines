@@ -5,29 +5,29 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var BooleanProperty = require( 'AXON/BooleanProperty' );
-  var Checkbox = require( 'SUN/Checkbox' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
-  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var GridCheckbox = require( 'SCENERY_PHET/GridCheckbox' );
-  var HBox = require( 'SCENERY/nodes/HBox' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
-  var Panel = require( 'SUN/Panel' );
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var Text = require( 'SCENERY/nodes/Text' );
+  const BooleanProperty = require( 'AXON/BooleanProperty' );
+  const Checkbox = require( 'SUN/Checkbox' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
+  const GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const GridCheckbox = require( 'SCENERY_PHET/GridCheckbox' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const Panel = require( 'SUN/Panel' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const Text = require( 'SCENERY/nodes/Text' );
 
   // strings
-  var slopeString = require( 'string!GRAPHING_LINES/slope' );
+  const slopeString = require( 'string!GRAPHING_LINES/slope' );
 
   // constants
   // y = x

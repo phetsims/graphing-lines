@@ -6,27 +6,27 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var Bounds2 = require( 'DOT/Bounds2' );
-  var Graph = require( 'GRAPHING_LINES/common/model/Graph' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
-  var ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
-  var ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
-  var PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
-  var Property = require( 'AXON/Property' );
-  var Vector2 = require( 'DOT/Vector2' );
+  const Bounds2 = require( 'DOT/Bounds2' );
+  const Graph = require( 'GRAPHING_LINES/common/model/Graph' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const ManipulationMode = require( 'GRAPHING_LINES/linegame/model/ManipulationMode' );
+  const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
+  const PointTool = require( 'GRAPHING_LINES/common/model/PointTool' );
+  const Property = require( 'AXON/Property' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // strings
-  var putPointsOnLineString = require( 'string!GRAPHING_LINES/putPointsOnLine' );
-  var setThePointString = require( 'string!GRAPHING_LINES/setThePoint' );
-  var setTheSlopeString = require( 'string!GRAPHING_LINES/setTheSlope' );
-  var setTheYInterceptString = require( 'string!GRAPHING_LINES/setTheYIntercept' );
+  const putPointsOnLineString = require( 'string!GRAPHING_LINES/putPointsOnLine' );
+  const setThePointString = require( 'string!GRAPHING_LINES/setThePoint' );
+  const setTheSlopeString = require( 'string!GRAPHING_LINES/setTheSlope' );
+  const setTheYInterceptString = require( 'string!GRAPHING_LINES/setTheYIntercept' );
 
   /**
    * @param {string} title title that is visible to the user

@@ -6,21 +6,21 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
-  var DerivedProperty = require( 'AXON/DerivedProperty' );
-  var Dimension2 = require( 'DOT/Dimension2' );
-  var FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
-  var GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  var ScoreDisplayLabeledNumber = require( 'VEGAS/ScoreDisplayLabeledNumber' );
+  const ChallengeNode = require( 'GRAPHING_LINES/linegame/view/ChallengeNode' );
+  const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const Dimension2 = require( 'DOT/Dimension2' );
+  const FiniteStatusBar = require( 'VEGAS/FiniteStatusBar' );
+  const GamePhase = require( 'GRAPHING_LINES/linegame/model/GamePhase' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const ScoreDisplayLabeledNumber = require( 'VEGAS/ScoreDisplayLabeledNumber' );
 
   /**
    * @param {LineGameModel} model

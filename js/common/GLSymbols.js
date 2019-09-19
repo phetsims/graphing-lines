@@ -5,19 +5,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var MathSymbolFont = require( 'SCENERY_PHET/MathSymbolFont' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const MathSymbolFont = require( 'SCENERY_PHET/MathSymbolFont' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
 
   // strings
-  var symbolInterceptString = require( 'string!GRAPHING_LINES/symbol.intercept' );
-  var symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
-  var symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
-  var symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
+  const symbolInterceptString = require( 'string!GRAPHING_LINES/symbol.intercept' );
+  const symbolSlopeString = require( 'string!GRAPHING_LINES/symbol.slope' );
+  const symbolXString = require( 'string!GRAPHING_LINES/symbol.x' );
+  const symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   // constants
   var SYMBOL_PATTERN = '<i style=\'font-family: ' + new MathSymbolFont( 10 ).family + '\'>{{symbol}}</i>';

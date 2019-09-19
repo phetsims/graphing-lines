@@ -8,36 +8,36 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( function( require ) {
+define( require => {
   'use strict';
 
   // modules
-  var CoordinatePicker = require( 'GRAPHING_LINES/common/view/picker/CoordinatePicker' );
-  var EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
-  var GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  var GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
-  var GLFont = require( 'GRAPHING_LINES/common/GLFont' );
-  var GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
-  var graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  var inherit = require( 'PHET_CORE/inherit' );
-  var Line = require( 'GRAPHING_LINES/common/model/Line' );
-  var MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
-  var MinusNode = require( 'SCENERY_PHET/MinusNode' );
-  var Node = require( 'SCENERY/nodes/Node' );
-  var NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
-  var NumberProperty = require( 'AXON/NumberProperty' );
-  var Property = require( 'AXON/Property' );
+  const CoordinatePicker = require( 'GRAPHING_LINES/common/view/picker/CoordinatePicker' );
+  const EquationNode = require( 'GRAPHING_LINES/common/view/EquationNode' );
+  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
+  const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
+  const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
+  const GLSymbols = require( 'GRAPHING_LINES/common/GLSymbols' );
+  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const inherit = require( 'PHET_CORE/inherit' );
+  const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const MinusNode = require( 'SCENERY_PHET/MinusNode' );
+  const Node = require( 'SCENERY/nodes/Node' );
+  const NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
+  const NumberProperty = require( 'AXON/NumberProperty' );
+  const Property = require( 'AXON/Property' );
   var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
-  var RichText = require( 'SCENERY/nodes/RichText' );
-  var StringUtils = require( 'PHETCOMMON/util/StringUtils' );
-  var Text = require( 'SCENERY/nodes/Text' );
-  var UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
-  var Util = require( 'DOT/Util' );
+  const RichText = require( 'SCENERY/nodes/RichText' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
+  const Text = require( 'SCENERY/nodes/Text' );
+  const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
+  const Util = require( 'DOT/Util' );
 
   // strings
-  var slopeIsString = require( 'string!GRAPHING_LINES/slopeIs' );
-  var slopeString = require( 'string!GRAPHING_LINES/slope' );
-  var undefinedString = require( 'string!GRAPHING_LINES/undefined' );
+  const slopeIsString = require( 'string!GRAPHING_LINES/slopeIs' );
+  const slopeString = require( 'string!GRAPHING_LINES/slope' );
+  const undefinedString = require( 'string!GRAPHING_LINES/undefined' );
 
   /**
    * Creates an interactive equation. x1, y1, x2 and y2 are interactive.

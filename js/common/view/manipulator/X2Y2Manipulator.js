@@ -28,12 +28,12 @@ define( require => {
    */
   function X2Y2Manipulator( radius, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
 
-    var self = this;
+    const self = this;
 
     Manipulator.call( this, radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
 
     // move the manipulator to match the line's (x2,y2) point
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
@@ -70,7 +70,7 @@ define( require => {
    */
   function X2Y2DragHandler( lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
 
-    var startOffset; // where the drag started, relative to (x2,y2), in parent view coordinates
+    let startOffset; // where the drag started, relative to (x2,y2), in parent view coordinates
 
     SimpleDragHandler.call( this, {
 
@@ -78,20 +78,20 @@ define( require => {
 
       // note where the drag started
       start: function( event ) {
-        var line = lineProperty.get();
-        var location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
+        const line = lineProperty.get();
+        const location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
 
-        var line = lineProperty.get();
-        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = modelViewTransform.viewToModelPosition( parentPoint );
+        const line = lineProperty.get();
+        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var x2 = Util.roundSymmetric( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
-        var y2 = Util.roundSymmetric( Util.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
+        const x2 = Util.roundSymmetric( Util.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
+        const y2 = Util.roundSymmetric( Util.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
 
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)

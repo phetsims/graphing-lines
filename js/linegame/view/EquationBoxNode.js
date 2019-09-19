@@ -21,8 +21,8 @@ define( require => {
   const Text = require( 'SCENERY/nodes/Text' );
 
   // constants
-  var X_MARGIN = 20;
-  var Y_MARGIN = 10;
+  const X_MARGIN = 20;
+  const Y_MARGIN = 10;
 
   /**
    * @param {string} title
@@ -45,13 +45,13 @@ define( require => {
       fill: PhetColorScheme.RED_COLORBLIND
     } );
 
-    var titleNode = new Text( title, {
+    const titleNode = new Text( title, {
       fill: titleColor,
       font: new GLFont( { size: 24, weight: 'bold' } ),
       maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( this.correctIconNode.width, this.incorrectIconNode.width )
     } );
 
-    var boxNode = new Rectangle( 0, 0, boxSize.width, boxSize.height, 20, 20, {
+    const boxNode = new Rectangle( 0, 0, boxSize.width, boxSize.height, 20, 20, {
       fill: 'rgb( 238, 238, 238 )',
       stroke: 'black',
       lineWidth: 1

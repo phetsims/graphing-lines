@@ -25,7 +25,7 @@ define( require => {
   function LineGameModel() {
 
     // a challenge factory for each level
-    var challengeFactories = [
+    const challengeFactories = [
       new ChallengeFactory1(),
       new ChallengeFactory2(),
       new ChallengeFactory3(),

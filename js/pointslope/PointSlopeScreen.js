@@ -27,7 +27,7 @@ define( require => {
    */
   function PointSlopeScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenPointSlopeString,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createPointSlopeScreenIcon(),

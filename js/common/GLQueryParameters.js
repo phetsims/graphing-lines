@@ -11,7 +11,7 @@ define( require => {
   // modules
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
-  var GLQueryParameters = QueryStringMachine.getAll( {
+  const GLQueryParameters = QueryStringMachine.getAll( {
 
     // shows the game reward regardless of score
     showReward: { type: 'flag' },

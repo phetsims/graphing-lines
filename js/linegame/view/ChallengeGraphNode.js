@@ -39,7 +39,7 @@ define( require => {
       slopeToolEnabled: true
     }, options );
 
-    var self = this;
+    const self = this;
 
     GraphNode.call( this, challenge.graph, challenge.modelViewTransform );
 
@@ -48,7 +48,7 @@ define( require => {
       this.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ), challenge.graph, challenge.modelViewTransform ) );
     }
 
-    var pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
+    const pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
     // @private answer
     this.answerLineNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
@@ -75,7 +75,7 @@ define( require => {
     }
 
     // Sync with the guess
-    var guessObserver = function( line ) {
+    const guessObserver = function( line ) {
       if ( line instanceof Line ) {
         // plot (x1,y1)
         self.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );

@@ -42,18 +42,18 @@ define( require => {
      */
     createChallenges: function() {
 
-      var challenges = [];
+      const challenges = [];
 
       // hoist vars
-      var slope;
-      var point;
-      var description;
-      var manipulationMode;
+      let slope;
+      let point;
+      let description;
+      let manipulationMode;
 
       // pools of values for slope, y-intercept and point
-      var slopePool = new ValuePool( this.createSlopeArrays() );
-      var yInterceptPool = new ValuePool( this.createYInterceptArrays() );
-      var pointPool = new ValuePool( this.createPointArrays() );
+      const slopePool = new ValuePool( this.createSlopeArrays() );
+      const yInterceptPool = new ValuePool( this.createYInterceptArrays() );
+      const pointPool = new ValuePool( this.createPointArrays() );
 
       // CHALLENGE 1: Graph-the-Line, slope-intercept form
       challenges.push( new GraphTheLine(
@@ -88,7 +88,7 @@ define( require => {
         this.xRange, this.yRange ) );
 
       // for point-slope form, one of each manipulation mode
-      var pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
+      const pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
       // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {
@@ -160,7 +160,7 @@ define( require => {
      * @protected
      */
     createYInterceptArrays: function() {
-      var yRangeSubset = new Range( -6, 4 );
+      const yRangeSubset = new Range( -6, 4 );
       assert && assert( this.yRange.containsRange( yRangeSubset ), 'values are out of range' );
       return [
         ValuePool.rangeToArray( new Range( yRangeSubset.min, -1 ) ), // negative intercepts
@@ -175,15 +175,15 @@ define( require => {
      */
     createPointArrays: function() {
 
-      var x1Range = new Range( -9, 4 );
-      var y1Range = new Range( -9, 4 );
+      const x1Range = new Range( -9, 4 );
+      const y1Range = new Range( -9, 4 );
       assert && assert( this.xRange.containsRange( x1Range ) && this.yRange.containsRange( y1Range ) );
 
-      var x;
-      var y;
+      let x;
+      let y;
 
       // all points in Quadrant 1
-      var quadrant1Points = [];
+      const quadrant1Points = [];
       for ( x = 1; x < this.xRange.max; x++ ) {
         for ( y = 1; y < this.yRange.max; y++ ) {
           quadrant1Points.push( new Vector2( x, y ) );
@@ -191,7 +191,7 @@ define( require => {
       }
 
       // all points in Quadrant 3
-      var quadrant3Points = [];
+      const quadrant3Points = [];
       for ( x = x1Range.min; x < 0; x++ ) {
         for ( y = y1Range.min; y < 0; y++ ) {
           quadrant3Points.push( new Vector2( x, y ) );

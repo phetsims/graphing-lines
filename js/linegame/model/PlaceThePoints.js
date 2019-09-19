@@ -43,10 +43,10 @@ define( require => {
 
     // update the guess when the points change
     // unmultilink unnecessary because PlaceThePoints owns these Properties.
-    var self = this;
+    const self = this;
     Property.multilink( [ this.p1Property, this.p2Property, this.p3Property ],
       function( p1, p2, p3 ) {
-        var line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
+        const line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
         if ( line.onLinePoint( p3 ) ) {
           // all 3 points are on a line
           self.guessProperty.set( line );

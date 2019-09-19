@@ -38,9 +38,9 @@ define( require => {
     }, options );
 
     // text and background
-    var textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
+    const textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
     // @private
-    var backgroundNode = new Rectangle( 0, 0, 1, 1, {
+    const backgroundNode = new Rectangle( 0, 0, 1, 1, {
       fill: options.backgroundFill,
       stroke: options.backgroundStroke,
       cornerRadius: options.cornerRadius
@@ -48,14 +48,14 @@ define( require => {
     options.children = [ backgroundNode, textNode ];
     Node.call( this, options );
 
-    var valueObserver = function( value ) {
+    const valueObserver = function( value ) {
 
       // format the value
       textNode.text = Util.toFixed( value, options.decimalPlaces );
 
       // adjust the background to fit the value
-      var backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
-      var backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
+      const backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
+      const backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
       backgroundNode.setRect( 0, 0, backgroundWidth, backgroundHeight );
 
       // center the value in the background

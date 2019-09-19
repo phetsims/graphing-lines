@@ -20,9 +20,9 @@ define( require => {
   const symbolYString = require( 'string!GRAPHING_LINES/symbol.y' );
 
   // constants
-  var SYMBOL_PATTERN = '<i style=\'font-family: ' + new MathSymbolFont( 10 ).family + '\'>{{symbol}}</i>';
+  const SYMBOL_PATTERN = '<i style=\'font-family: ' + new MathSymbolFont( 10 ).family + '\'>{{symbol}}</i>';
 
-  var GLSymbols = {
+  const GLSymbols = {
     b: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolInterceptString } ),
     m: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolSlopeString } ),
     x: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolXString } ),

@@ -26,12 +26,12 @@ define( require => {
     ChallengeGraphNode.call( this, challenge, { slopeToolEnabled: false } );
 
     // manipulators
-    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
-    var p1Manipulator = new PointManipulator( manipulatorRadius,
+    const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    const p1Manipulator = new PointManipulator( manipulatorRadius,
       challenge.p1Property, [ challenge.p2Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.modelViewTransform );
-    var p2Manipulator = new PointManipulator( manipulatorRadius,
+    const p2Manipulator = new PointManipulator( manipulatorRadius,
       challenge.p2Property, [ challenge.p1Property, challenge.p3Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.modelViewTransform );
-    var p3Manipulator = new PointManipulator( manipulatorRadius,
+    const p3Manipulator = new PointManipulator( manipulatorRadius,
       challenge.p3Property, [ challenge.p1Property, challenge.p2Property ], challenge.graph.xRange, challenge.graph.yRange, challenge.modelViewTransform );
 
     // rendering order
@@ -40,7 +40,7 @@ define( require => {
     this.addChild( p3Manipulator );
 
     // Move the manipulators to match points, unmultilink in dispose
-    var pointsMultilink = Property.multilink( [ challenge.p1Property, challenge.p2Property, challenge.p3Property ],
+    const pointsMultilink = Property.multilink( [ challenge.p1Property, challenge.p2Property, challenge.p3Property ],
       function( p1, p2, p3 ) {
         p1Manipulator.translation = challenge.modelViewTransform.modelToViewPosition( p1 );
         p2Manipulator.translation = challenge.modelViewTransform.modelToViewPosition( p2 );

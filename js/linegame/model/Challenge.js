@@ -52,7 +52,7 @@ define( require => {
     this.manipulationMode = manipulationMode;
 
     // @public model-view transform, created in the model because each challenge subclass may have its own transform
-    var modelViewTransformScale = LineGameConstants.GRAPH_WIDTH / xRange.getLength(); // view units / model units
+    const modelViewTransformScale = LineGameConstants.GRAPH_WIDTH / xRange.getLength(); // view units / model units
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( LineGameConstants.ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // graph on right, y inverted
 
     // @public Graph

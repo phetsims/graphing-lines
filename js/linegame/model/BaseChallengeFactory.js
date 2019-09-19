@@ -86,19 +86,19 @@ define( require => {
      */
     choosePointForSlope: function( slope, graphXRange, graphYRange ) {
 
-      var rise = slope.numerator;
-      var run = slope.denominator;
+      const rise = slope.numerator;
+      const run = slope.denominator;
 
       // x
-      var minX = ( run >= 0 ) ? graphXRange.min : graphXRange.min - run;
-      var maxX = (run >= 0) ? graphXRange.max - run : graphXRange.max;
-      var x = Util.roundSymmetric( minX + ( phet.joist.random.nextDouble() * ( maxX - minX ) ) );
+      const minX = ( run >= 0 ) ? graphXRange.min : graphXRange.min - run;
+      const maxX = (run >= 0) ? graphXRange.max - run : graphXRange.max;
+      const x = Util.roundSymmetric( minX + ( phet.joist.random.nextDouble() * ( maxX - minX ) ) );
       assert && assert( x >= minX && x <= maxX, 'x out of range: ' + x );
 
       // y
-      var minY = ( rise >= 0) ? graphYRange.min : graphYRange.min - rise;
-      var maxY = (rise >= 0) ? graphYRange.max - rise : graphYRange.max;
-      var y = Util.roundSymmetric( minY + ( phet.joist.random.nextDouble() * ( maxY - minY ) ) );
+      const minY = ( rise >= 0) ? graphYRange.min : graphYRange.min - rise;
+      const maxY = (rise >= 0) ? graphYRange.max - rise : graphYRange.max;
+      const y = Util.roundSymmetric( minY + ( phet.joist.random.nextDouble() * ( maxY - minY ) ) );
       assert && assert( y >= minY && y <= maxY, 'y out of range: ' + y );
 
       return new Vector2( x, y );
@@ -117,24 +117,24 @@ define( require => {
      */
     choosePointForSlopeInversion: function( slope, graphXRange, graphYRange ) {
 
-      var rise = slope.numerator;
-      var run = slope.denominator;
+      const rise = slope.numerator;
+      const run = slope.denominator;
 
       // x1 coordinates
-      var minX1 = ( run >= 0 ) ? graphXRange.max - run + 1 : graphXRange.min;
-      var maxX1 = ( run >= 0 ) ? graphXRange.max : graphXRange.min - run - 1;
-      var x1 = Util.roundSymmetric( minX1 + ( phet.joist.random.nextDouble() * ( maxX1 - minX1 ) ) );
+      const minX1 = ( run >= 0 ) ? graphXRange.max - run + 1 : graphXRange.min;
+      const maxX1 = ( run >= 0 ) ? graphXRange.max : graphXRange.min - run - 1;
+      const x1 = Util.roundSymmetric( minX1 + ( phet.joist.random.nextDouble() * ( maxX1 - minX1 ) ) );
       assert && assert( x1 >= minX1 && x1 <= maxX1, 'x1 out of range: ' + x1 );
 
       // y1 coordinates
-      var minY1 = ( rise >= 0 ) ? graphYRange.max - rise + 1 : graphYRange.min;
-      var maxY1 = ( rise >= 0 ) ? graphYRange.max : graphYRange.min - rise - 1;
-      var y1 = Util.roundSymmetric( minY1 + ( phet.joist.random.nextDouble() * ( maxY1 - minY1 ) ) );
+      const minY1 = ( rise >= 0 ) ? graphYRange.max - rise + 1 : graphYRange.min;
+      const maxY1 = ( rise >= 0 ) ? graphYRange.max : graphYRange.min - rise - 1;
+      const y1 = Util.roundSymmetric( minY1 + ( phet.joist.random.nextDouble() * ( maxY1 - minY1 ) ) );
       assert && assert( y1 >= minY1 && y1 <= maxY1, 'y1 out of range: ' + y1 );
 
       // compute (x2,y2) for validation
-      var x2 = x1 + run;
-      var y2 = y1 + rise;
+      const x2 = x1 + run;
+      const y2 = y1 + rise;
 
       // (x1,y1) must be on the graph, (x2,y2) must be off the graph
       assert && assert( graphXRange.contains( x1 ) && !graphXRange.contains( x2 ) );

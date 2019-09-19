@@ -34,7 +34,7 @@ define( require => {
 
     // computes value when 'up' button is pressed
     options.upFunction = function( a1 ) {
-      var x1New = a1 + 1;
+      let x1New = a1 + 1;
       if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
         x1New++;
         if ( x1New > rangeProperty.get().max ) { // did we skip too far?
@@ -46,7 +46,7 @@ define( require => {
 
     // computes value when 'down' button is pressed
     options.downFunction = function( a1 ) {
-      var x1New = a1 - 1;
+      let x1New = a1 - 1;
       if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
         x1New--;
         if ( x1New < rangeProperty.get().min ) { // did we skip too far?

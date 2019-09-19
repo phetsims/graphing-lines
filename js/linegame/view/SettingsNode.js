@@ -49,18 +49,18 @@ define( require => {
     }, options );
 
     // Title
-    var title = new Text( chooseYourLevelString, {
+    const title = new Text( chooseYourLevelString, {
       font: new GLFont( 40 ),
       maxWidth: 0.85 * layoutBounds.width
     } );
 
     // Grid of level-selection buttons. levelImages describes the grid.
-    var level = 0;
-    var gridChildren = [];
+    let level = 0;
+    const gridChildren = [];
     levelImages.forEach( function( row ) {
 
       // create the buttons for the current row
-      var rowChildren = [];
+      const rowChildren = [];
       row.forEach( function( levelImage ) {
         rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
         level++;
@@ -73,14 +73,14 @@ define( require => {
         align: 'center'
       } ) );
     } );
-    var buttonGrid = new VBox( {
+    const buttonGrid = new VBox( {
       children: gridChildren,
       spacing: options.buttonsYSpace,
       align: 'center'
     } );
 
     // Timer and Sound controls
-    var timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
+    const timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
       stroke: 'gray',
       scale: 1.3,
       left: GLConstants.SCREEN_X_MARGIN,
@@ -88,7 +88,7 @@ define( require => {
     } );
 
     // Reset All button, at rightBottom
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() { model.reset(); },
       scale: GLConstants.RESET_ALL_BUTTON_SCALE,
       right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
@@ -121,14 +121,14 @@ define( require => {
    */
   var createLevelSelectionButton = function( level, model, levelImage ) {
 
-    var image = new Image( levelImage );
-    var label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
+    const image = new Image( levelImage );
+    const label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
       font: new GLFont( 60 ),
       maxWidth: image.width
     } );
 
     // 'Level N' centered above image
-    var icon = new VBox( { children: [ label, image ], spacing: 20 } );
+    const icon = new VBox( { children: [ label, image ], spacing: 20 } );
 
     return new LevelSelectionButton( icon, model.bestScoreProperties[ level ], {
       baseColor: 'rgb( 180, 205, 255 )',

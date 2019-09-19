@@ -30,11 +30,11 @@ define( require => {
       absoluteValue: false
     }, options );
 
-    var self = this;
+    const self = this;
 
     Text.call( this, '', options );
 
-    var valueObserver = function( value ) {
+    const valueObserver = function( value ) {
       self.text = Util.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
     };
     valueProperty.link( valueObserver ); // unlink in dispose

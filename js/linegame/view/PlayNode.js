@@ -33,7 +33,7 @@ define( require => {
 
     Node.call( this );
 
-    var statusBar = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
+    const statusBar = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
       scoreDisplayConstructor: ScoreDisplayLabeledNumber,
 
       // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #88.
@@ -59,10 +59,10 @@ define( require => {
     this.addChild( statusBar );
 
     // compute the size of the area available for the challenges
-    var challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - statusBar.bottom );
+    const challengeSize = new Dimension2( layoutBounds.width, layoutBounds.height - statusBar.bottom );
 
     // challenge parent, to keep challenge below scoreboard
-    var challengeParent = new Rectangle( 0, 0, 0, 1 );
+    const challengeParent = new Rectangle( 0, 0, 0, 1 );
     challengeParent.top = statusBar.bottom;
     this.addChild( challengeParent );
 
@@ -71,9 +71,9 @@ define( require => {
     model.challengeProperty.link( function( challenge ) {
 
       // dispose of view for previous challenge
-      var challengeNodes = challengeParent.getChildren();
-      for ( var i = 0; i < challengeNodes.length; i++ ) {
-        var challengeNode = challengeNodes[ i ];
+      const challengeNodes = challengeParent.getChildren();
+      for ( let i = 0; i < challengeNodes.length; i++ ) {
+        const challengeNode = challengeNodes[ i ];
         assert && assert( challengeNode instanceof ChallengeNode );
         challengeParent.removeChild( challengeNode );
         challengeNode.dispose();

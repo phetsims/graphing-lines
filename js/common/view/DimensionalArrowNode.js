@@ -75,10 +75,10 @@ define( require => {
      */
     setTailAndTip: function( tailX, tailY, tipX, tipY ) {
 
-      var tipWidth = this.arrowTipSize.width;
-      var tipHeight = this.arrowTipSize.height;
-      var tipOffset = this.lineWidth / 2;
-      var tipShape = new Shape();
+      const tipWidth = this.arrowTipSize.width;
+      const tipHeight = this.arrowTipSize.height;
+      const tipOffset = this.lineWidth / 2;
+      const tipShape = new Shape();
       if ( tailX === tipX ) {
         // vertical arrow
         if ( tipY > tailY ) {

@@ -27,7 +27,7 @@ define( require => {
    */
   function Manipulator( radius, color, options ) {
 
-    var mainColor = Color.toColor( color );
+    const mainColor = Color.toColor( color );
     options = _.extend( {
 
       // Alpha channel of the halo, 0.0 - 1.0. Setting this to 0 results in no halo.
@@ -52,7 +52,7 @@ define( require => {
     // add a halo only if alpha it will be visible, useful for creating non-interactive manipulator icons
     if ( options.haloAlpha !== 0 ) {
 
-      var haloNode = new Circle( 1.75 * radius, {
+      const haloNode = new Circle( 1.75 * radius, {
         fill: mainColor.withAlpha( options.haloAlpha ),
         pickable: false,
         visible: false,
@@ -68,7 +68,7 @@ define( require => {
       } ) );
     }
 
-    var sphereNode = new ShadedSphereNode( 2 * radius, {
+    const sphereNode = new ShadedSphereNode( 2 * radius, {
       mainColor: options.mainColor,
       highlightColor: options.highlightColor,
       shadowColor: options.shadowColor,

@@ -93,26 +93,26 @@ define( require => {
     computeMaxSlopePickerWidth: function( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {
 
       // Create prototypical pickers.
-      var maxRiseNode = new SlopePicker( new Property( riseRangeProperty.get().max ), new Property( runRangeProperty.get().max ), riseRangeProperty, {
+      const maxRiseNode = new SlopePicker( new Property( riseRangeProperty.get().max ), new Property( runRangeProperty.get().max ), riseRangeProperty, {
         font: font,
         decimalPlaces: decimalPlaces
       } );
-      var minRiseNode = new SlopePicker( new Property( riseRangeProperty.get().min ), new Property( runRangeProperty.get().max ), riseRangeProperty, {
+      const minRiseNode = new SlopePicker( new Property( riseRangeProperty.get().min ), new Property( runRangeProperty.get().max ), riseRangeProperty, {
         font: font,
         decimalPlaces: decimalPlaces
       } );
-      var maxRunNode = new SlopePicker( new Property( runRangeProperty.get().max ), new Property( riseRangeProperty.get().max ), runRangeProperty, {
+      const maxRunNode = new SlopePicker( new Property( runRangeProperty.get().max ), new Property( riseRangeProperty.get().max ), runRangeProperty, {
         font: font,
         decimalPlaces: decimalPlaces
       } );
-      var minRunNode = new SlopePicker( new Property( runRangeProperty.get().min ), new Property( riseRangeProperty.get().min ), runRangeProperty, {
+      const minRunNode = new SlopePicker( new Property( runRangeProperty.get().min ), new Property( riseRangeProperty.get().min ), runRangeProperty, {
         font: font,
         decimalPlaces: decimalPlaces
       } );
 
       // Compute the max
-      var maxRiseWidth = Math.max( maxRiseNode.width, minRiseNode.width );
-      var maxRunWidth = Math.max( maxRunNode.width, minRunNode.width );
+      const maxRiseWidth = Math.max( maxRiseNode.width, minRiseNode.width );
+      const maxRunWidth = Math.max( maxRunNode.width, minRunNode.width );
       return Math.max( maxRiseWidth, maxRunWidth );
     }
   } );

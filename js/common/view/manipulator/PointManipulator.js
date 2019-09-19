@@ -29,12 +29,12 @@ define( require => {
    */
   function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
-    var self = this;
+    const self = this;
 
     Manipulator.call( this, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
     // move the manipulator to match the point
-    var lineObserver = function( point ) {
+    const lineObserver = function( point ) {
       self.translation = modelViewTransform.modelToViewPosition( point );
     };
     pointProperty.link( lineObserver ); // unlink in dispose
@@ -72,7 +72,7 @@ define( require => {
    */
   function PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
-    var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
     SimpleDragHandler.call( this, {
 
@@ -80,23 +80,23 @@ define( require => {
 
       // note where the drag started
       start: function( event ) {
-        var location = modelViewTransform.modelToViewPosition( pointProperty.get() );
+        const location = modelViewTransform.modelToViewPosition( pointProperty.get() );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
 
-        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = modelViewTransform.viewToModelPosition( parentPoint );
+        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var x = Util.roundSymmetric( Util.clamp( location.x, xRange.min, xRange.max ) );
-        var y = Util.roundSymmetric( Util.clamp( location.y, yRange.min, yRange.max ) );
-        var p = new Vector2( x, y );
+        const x = Util.roundSymmetric( Util.clamp( location.x, xRange.min, xRange.max ) );
+        const y = Util.roundSymmetric( Util.clamp( location.y, yRange.min, yRange.max ) );
+        const p = new Vector2( x, y );
 
         // is this point the same as one of the others?
-        var same = false;
-        for ( var i = 0; i < otherPointProperties.length; i++ ) {
+        let same = false;
+        for ( let i = 0; i < otherPointProperties.length; i++ ) {
           if ( p.equals( otherPointProperties[ i ].get() ) ) {
             same = true;
             break;

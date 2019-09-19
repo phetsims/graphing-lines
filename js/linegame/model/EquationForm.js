@@ -12,7 +12,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  var EquationForm = Object.freeze( {
+  const EquationForm = Object.freeze( {
     SLOPE_INTERCEPT: 'SLOPE_INTERCEPT', /* y = mx + b */
     POINT_SLOPE: 'POINT_SLOPE' /* (y2 - y1) = m(x2 - x1) */
   } );

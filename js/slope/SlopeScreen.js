@@ -27,7 +27,7 @@ define( require => {
    */
   function SlopeScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenSlopeString,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),

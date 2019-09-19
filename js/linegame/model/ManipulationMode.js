@@ -15,7 +15,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  var ManipulationMode = Object.freeze( {
+  const ManipulationMode = Object.freeze( {
     SLOPE: 'SLOPE',
     INTERCEPT: 'INTERCEPT',
     SLOPE_INTERCEPT: 'SLOPE_INTERCEPT',

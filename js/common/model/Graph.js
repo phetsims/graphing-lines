@@ -53,8 +53,8 @@ define( require => {
      * @returns {Vector2}
      */
     constrain: function( point ) {
-      var x = this.xRange.constrainValue( point.x );
-      var y = this.yRange.constrainValue( point.y );
+      const x = this.xRange.constrainValue( point.x );
+      const y = this.yRange.constrainValue( point.y );
       if ( point.x === x && point.y === y ) {
         return point;
       }

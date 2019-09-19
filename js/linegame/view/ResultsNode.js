@@ -28,7 +28,7 @@ define( require => {
    */
   function ResultsNode( model, layoutBounds, audioPlayer, rewardFactoryFunctions ) {
 
-    var self = this;
+    const self = this;
 
     Node.call( this );
 
@@ -44,8 +44,8 @@ define( require => {
 
           audioPlayer.gameOverPerfectScore();
 
-          var level = model.levelProperty.get();
-          var rewardNodes = rewardFactoryFunctions[ level ]();
+          const level = model.levelProperty.get();
+          const rewardNodes = rewardFactoryFunctions[ level ]();
           self.rewardNode = new GLRewardNode( rewardNodes );
           self.addChild( self.rewardNode );
         }

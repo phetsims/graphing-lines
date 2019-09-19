@@ -24,7 +24,7 @@ define( require => {
    */
   function SlopeScreenView( model ) {
 
-    var viewProperties = new LineFormsViewProperties();
+    const viewProperties = new LineFormsViewProperties();
 
     LineFormsScreenView.call( this, model, viewProperties,
 

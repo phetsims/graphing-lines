@@ -21,8 +21,8 @@ define( require => {
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
-  var GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
-  var ORIGIN_OFFSET = new Vector2( 315, 330 ); // offset of the graph's origin in view coordinates
+  const GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
+  const ORIGIN_OFFSET = new Vector2( 315, 330 ); // offset of the graph's origin in view coordinates
 
   /**
    * @param {Line} interactiveLine
@@ -30,7 +30,7 @@ define( require => {
    */
   function LineFormsModel( interactiveLine ) {
 
-    var self = this;
+    const self = this;
 
     // @public {Property.<Line>} the line that the user interacts with
     this.interactiveLineProperty = new Property( interactiveLine );
@@ -42,7 +42,7 @@ define( require => {
     this.graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
     // @public model-view transform, created in the model because it's dependent on graph axes ranges
-    var modelViewTransformScale = GRID_VIEW_UNITS / Math.max( this.graph.xRange.getLength(), this.graph.yRange.getLength() ); // view units / model units
+    const modelViewTransformScale = GRID_VIEW_UNITS / Math.max( this.graph.xRange.getLength(), this.graph.yRange.getLength() ); // view units / model units
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // y is inverted
 
     // @public static lines

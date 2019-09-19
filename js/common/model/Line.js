@@ -170,9 +170,9 @@ define( require => {
       if ( this.rise === 0 || this.run === 0 ) {
         return new Fraction( this.y1, 1 ); // not technically correct for run===0, but gives the desired result in slope-intercept equations
       }
-      var numerator = Util.roundSymmetric( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
-      var denominator = this.run;
-      var gcd = Util.gcd( numerator, denominator );
+      const numerator = Util.roundSymmetric( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
+      const denominator = this.run;
+      const gcd = Util.gcd( numerator, denominator );
       return new Fraction( Util.roundSymmetric( numerator / gcd ), Util.roundSymmetric( denominator / gcd ) );
     }
   }, {

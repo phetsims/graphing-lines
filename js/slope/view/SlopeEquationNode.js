@@ -27,7 +27,7 @@ define( require => {
   const NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
-  var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
+  const scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   const RichText = require( 'SCENERY/nodes/RichText' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -59,24 +59,24 @@ define( require => {
 
     EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
-    var interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    var staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    var staticOptions = { font: staticFont, fill: options.staticColor };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
+    const interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const staticOptions = { font: staticFont, fill: options.staticColor };
+    const fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
-    var numberPropertyOptions = {
+    const numberPropertyOptions = {
       numberType: 'Integer'
     };
 
     // internal properties that are connected to pickers
-    var x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
-    var y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
-    var x2Property = new NumberProperty( lineProperty.get().x2, numberPropertyOptions );
-    var y2Property = new NumberProperty( lineProperty.get().y2, numberPropertyOptions );
+    const x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
+    const y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
+    const x2Property = new NumberProperty( lineProperty.get().x2, numberPropertyOptions );
+    const y2Property = new NumberProperty( lineProperty.get().y2, numberPropertyOptions );
 
     // internal properties that are connected to number displays
-    var riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
-    var runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
+    const riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
+    const runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.
@@ -84,51 +84,51 @@ define( require => {
      * So if you don't change the pickers atomically to match a new Line instance,
      * the new Line will be inadvertently replaced with an incorrect line.
      */
-    var updatingControls = false;
+    let updatingControls = false;
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    var mNode = new RichText( GLSymbols.m, staticOptions );
-    var interactiveEqualsNode = new Text( MathSymbols.EQUAL_TO, staticOptions );
+    const mNode = new RichText( GLSymbols.m, staticOptions );
+    const interactiveEqualsNode = new Text( MathSymbols.EQUAL_TO, staticOptions );
     // y2 - y1
-    var y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
+    const y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    var numeratorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
-    var y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
+    const numeratorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
+    const y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
     } );
     // fraction line, correct length will be set later
-    var interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions );
+    const interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
-    var x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
+    const x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    var denominatorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
-    var x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
+    const denominatorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
+    const x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
     } );
     // = unsimplified value
-    var unsimplifiedSlopeOptions = {
+    const unsimplifiedSlopeOptions = {
       font: staticFont,
       decimalPlaces: 0,
       backgroundFill: GLColors.SLOPE,
       minWidth: y2Node.width,
       minHeight: y2Node.height - 20
     };
-    var unsimplifiedEqualsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
-    var unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
-    var unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
-    var unsimplifiedFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
+    const unsimplifiedEqualsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
+    const unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
+    const unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
+    const unsimplifiedFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
-    var undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
+    const undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
 
     // rendering order
-    var parentNode = new Node();
+    const parentNode = new Node();
     this.addChild( parentNode );
     this.addChild( undefinedSlopeIndicator );
 
@@ -152,7 +152,7 @@ define( require => {
     parentNode.addChild( unsimplifiedRunNode );
 
     // sync the model with the controls, unmultilink in dispose
-    var controlsMultilink = Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
+    const controlsMultilink = Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
       function() {
         if ( !updatingControls ) {
           lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
@@ -161,7 +161,7 @@ define( require => {
     );
 
     // sync the controls and layout with the model
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
 
       // Synchronize the controls atomically.
       updatingControls = true;
@@ -178,7 +178,7 @@ define( require => {
       runProperty.set( line.run );
 
       // fraction line length
-      var unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );
+      const unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );
       unsimplifiedFractionLineNode.setLine( 0, 0, unsimplifiedFractionLineLength, 0 );
 
       // undefined-slope indicator
@@ -203,7 +203,7 @@ define( require => {
     y1Node.left = numeratorOperatorNode.right + this.operatorXSpacing;
     y1Node.y = y2Node.y;
     // fix fraction line length
-    var fractionLineLength = y1Node.right - y2Node.left;
+    const fractionLineLength = y1Node.right - y2Node.left;
     interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 0 );
     // x2 - x1
     x2Node.left = y2Node.left;
@@ -274,38 +274,38 @@ define( require => {
         maxWidth: 300
       }, options );
 
-      var equationNode = new EquationNode( options.fontSize, options );
+      const equationNode = new EquationNode( options.fontSize, options );
 
-      var font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
+      const font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
 
       // Slope m =
-      var leftSideText = StringUtils.format( '{0}    {1} {2}', slopeString, GLSymbols.m, MathSymbols.EQUAL_TO );
-      var leftSideNode = new RichText( leftSideText, {
+      const leftSideText = StringUtils.format( '{0}    {1} {2}', slopeString, GLSymbols.m, MathSymbols.EQUAL_TO );
+      const leftSideNode = new RichText( leftSideText, {
         font: font,
         fill: options.fill,
         maxWidth: 125 // i18n, determined empirically
       } );
 
       // pattern for numerator and denominator
-      var pattern = '{0}<sub>2</sub> {1} {2}<sub>1</sub>';
+      const pattern = '{0}<sub>2</sub> {1} {2}<sub>1</sub>';
 
       // y2 - y1
-      var numeratorText = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y );
-      var numeratorNode = new RichText( numeratorText, {
+      const numeratorText = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y );
+      const numeratorNode = new RichText( numeratorText, {
         font: font,
         fill: options.fill
       } );
 
       // x2 - x1
-      var denominatorText = StringUtils.format( pattern, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
-      var denominatorNode = new RichText( denominatorText, {
+      const denominatorText = StringUtils.format( pattern, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
+      const denominatorNode = new RichText( denominatorText, {
         font: font,
         fill: options.fill
       } );
 
       // fraction line
-      var length = Math.max( numeratorNode.width, denominatorNode.width );
-      var fractionLineNode = new scenery.Line( 0, 0, length, 0, {
+      const length = Math.max( numeratorNode.width, denominatorNode.width );
+      const fractionLineNode = new scenery.Line( 0, 0, length, 0, {
         stroke: options.fill,
         lineWidth: equationNode.fractionLineThickness
       } );
@@ -363,33 +363,33 @@ define( require => {
       fontSize: 18
     }, options );
 
-    var self = this;
+    const self = this;
 
     EquationNode.call( this, options.fontSize );
 
-    var textOptions = {
+    const textOptions = {
       font: new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } )
     };
 
     // allocate nodes needed to represent all simplified forms
-    var slopeIsNode = new Text( slopeIsString, textOptions );
-    var minusSignNode = new MinusNode( { size: this.signLineSize } );
-    var riseNode = new Text( '?', textOptions );
-    var runNode = new Text( '?', textOptions );
-    var fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
+    const slopeIsNode = new Text( slopeIsString, textOptions );
+    const minusSignNode = new MinusNode( { size: this.signLineSize } );
+    const riseNode = new Text( '?', textOptions );
+    const runNode = new Text( '?', textOptions );
+    const fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     assert && assert( this.getChildrenCount() === 0, 'supertype has unexpected children' );
     this.children = [ slopeIsNode, minusSignNode, riseNode, runNode, fractionLineNode ];
 
     // update visibility, layout and properties of nodes to match the current line
-    var update = function( line ) {
+    const update = function( line ) {
 
-      var lineColor = line.color;
+      const lineColor = line.color;
 
       // start with all children invisible
-      var len = self.children.length;
-      for ( var i = 0; i < len; i++ ) {
+      const len = self.children.length;
+      for ( let i = 0; i < len; i++ ) {
         self.children[ i ].visible = false;
       }
 
@@ -414,7 +414,7 @@ define( require => {
         riseNode.y = slopeIsNode.y;
       }
       else {
-        var nextXOffset;
+        let nextXOffset;
         if ( line.getSlope() < 0 ) {
           // minus sign
           minusSignNode.visible = true;
@@ -456,7 +456,7 @@ define( require => {
       }
     };
 
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
       update( line );
     };
     lineProperty.link( lineObserver ); // unlink in dispose

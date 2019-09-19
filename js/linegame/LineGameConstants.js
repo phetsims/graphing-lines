@@ -14,7 +14,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  var LineGameConstants = {
+  const LineGameConstants = {
     ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates
 
     // fonts

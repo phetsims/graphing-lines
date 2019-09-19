@@ -32,8 +32,8 @@ define( require => {
   const tipImage = require( 'image!GRAPHING_LINES/point_tool_tip.png' );
 
   // constants
-  var NUMBER_OF_DECIMAL_PLACES = 0;
-  var VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
+  const NUMBER_OF_DECIMAL_PLACES = 0;
+  const VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
 
   /**
    * @param {PointTool} pointTool
@@ -52,7 +52,7 @@ define( require => {
       foregroundHighlightColor: 'white'
     }, options );
 
-    var self = this;
+    const self = this;
 
     this.bodyNode = new Image( bodyImage ); // @private body of the tool
 
@@ -66,7 +66,7 @@ define( require => {
     this.tipNode = new Image( tipImage, { pickable: false } );
 
     // @private background behind the displayed value, shows through a transparent hole in the display area portion of the body image
-    var BACKGROUND_MARGIN = 5;
+    const BACKGROUND_MARGIN = 5;
     this.backgroundNode = new Rectangle( 0, 0,
       this.bodyNode.width - ( 2 * BACKGROUND_MARGIN ), this.bodyNode.height - ( 2 * BACKGROUND_MARGIN ),
       { pickable: false } );
@@ -115,11 +115,11 @@ define( require => {
     this.setBackground( options.backgroundNormalColor );
 
     // location and display, unmultilink in dispose
-    var updateMultilink = Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
+    const updateMultilink = Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
       function() {
 
         // move to location
-        var location = pointTool.locationProperty.get();
+        const location = pointTool.locationProperty.get();
         self.translation = modelViewTransform.modelToViewPosition( location );
 
         // display value and highlighting
@@ -195,9 +195,9 @@ define( require => {
    */
   function PointToolDragHandler( pointTool, modelViewTransform, graph ) {
 
-    var startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
+    let startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
 
-    var constrainBounds = function( point, bounds ) {
+    const constrainBounds = function( point, bounds ) {
       if ( !bounds || bounds.containsPoint( point ) ) {
         return point;
       }
@@ -213,15 +213,15 @@ define( require => {
       // note where the drag started
       start: function( event ) {
         // Note the mouse-click offset when dragging starts.
-        var location = modelViewTransform.modelToViewPosition( pointTool.locationProperty.get() );
+        const location = modelViewTransform.modelToViewPosition( pointTool.locationProperty.get() );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
         // Move the tool that we're dragging to the foreground.
         event.currentTarget.moveToFront();
       },
 
       drag: function( event ) {
-        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = modelViewTransform.viewToModelPosition( parentPoint );
+        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        let location = modelViewTransform.viewToModelPosition( parentPoint );
         location = constrainBounds( location, pointTool.dragBounds );
         if ( graph.contains( location ) ) {
           // snap to the graph's grid

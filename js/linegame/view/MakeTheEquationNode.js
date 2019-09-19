@@ -41,29 +41,29 @@ define( require => {
 
     ChallengeNode.call( this, challenge, model, challengeSize, audioPlayer );
 
-    var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
+    const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
     // title, possibly scaled for i18n
-    var titleNode = new Text( challenge.title, {
+    const titleNode = new Text( challenge.title, {
       font: LineGameConstants.TITLE_FONT,
       fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
     } );
 
     // Answer
-    var answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
       } ) );
     answerBoxNode.visible = false;
 
     // Guess
-    var guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
+    const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
       GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color );
-    var guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
+    const guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
 
     // Graph
-    var graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
+    const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
 
     // rendering order
     this.subtypeParent.addChild( titleNode );
@@ -81,7 +81,7 @@ define( require => {
       titleNode.left = guessBoxNode.left;
 
       // stack title and boxes vertically, title top-aligned with graph's grid
-      var ySpacing = 30;
+      const ySpacing = 30;
       titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
       guessBoxNode.top = titleNode.bottom + ySpacing;
       answerBoxNode.top = guessBoxNode.bottom + ySpacing;
@@ -93,7 +93,7 @@ define( require => {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( phet.chipper.queryParameters.showAnswers ) {
-      var devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+      const devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: 14,
         maxWidth: boxSize.width
       } );
@@ -104,21 +104,21 @@ define( require => {
     }
 
     // Update visibility of the correct/incorrect icons.
-    var updateIcons = function() {
-      var playState = model.playStateProperty.get();
+    const updateIcons = function() {
+      const playState = model.playStateProperty.get();
       answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
       guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
       guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess
-    var guessObserver = function() {
+    const guessObserver = function() {
       updateIcons();
     };
     challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     // sync with game state
-    var playStateObserver = function( playState ) {
+    const playStateObserver = function( playState ) {
 
       // states in which the equation is interactive
       guessBoxNode.pickable = (
@@ -165,9 +165,9 @@ define( require => {
    * @param {Color|String} staticColor
    */
   var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
-    var interactivePoint;
-    var interactiveSlope;
-    var interactiveIntercept;
+    let interactivePoint;
+    let interactiveSlope;
+    let interactiveIntercept;
     if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
       interactiveSlope = ( manipulationMode === ManipulationMode.SLOPE ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
       interactiveIntercept = ( manipulationMode === ManipulationMode.INTERCEPT ) || ( manipulationMode === ManipulationMode.SLOPE_INTERCEPT );

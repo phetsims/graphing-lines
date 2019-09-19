@@ -42,17 +42,17 @@ define( require => {
      */
     createChallenges: function() {
 
-      var challenges = [];
+      const challenges = [];
 
       // hoist vars
-      var slope;
-      var point;
-      var description;
-      var manipulationMode;
+      let slope;
+      let point;
+      let description;
+      let manipulationMode;
 
       // pools of values for slope and y-intercept
-      var slopePool = new ValuePool( this.createSlopeArrays() );
-      var yInterceptPool = new ValuePool( this.createYInterceptArrays() );
+      const slopePool = new ValuePool( this.createSlopeArrays() );
+      const yInterceptPool = new ValuePool( this.createYInterceptArrays() );
 
       // CHALLENGE 1: Graph-the-Line, slope-intercept form
       challenges.push( new GraphTheLine(
@@ -87,7 +87,7 @@ define( require => {
         this.xRange, this.yRange ) );
 
       // for point-slope form, one of each manipulation mode
-      var pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
+      const pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
       // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
       {

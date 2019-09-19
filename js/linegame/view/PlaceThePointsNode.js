@@ -28,9 +28,9 @@ define( require => {
 
     GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
 
-    var self = this;
+    const self = this;
 
-    var playStateObserver = function( playState ) {
+    const playStateObserver = function( playState ) {
 
       // show user's line only in states where there guess is wrong.
       self.graphNode.setGuessLineVisible(

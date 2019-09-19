@@ -28,12 +28,12 @@ define( require => {
    */
   function SlopeManipulator( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
 
-    var self = this;
+    const self = this;
 
     Manipulator.call( this, radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
@@ -70,7 +70,7 @@ define( require => {
    */
   function SlopeDragHandler( lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
 
-    var startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
     SimpleDragHandler.call( this, {
 
@@ -78,18 +78,18 @@ define( require => {
 
       // note where the drag started
       start: function( event ) {
-        var line = lineProperty.get();
-        var location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
+        const line = lineProperty.get();
+        const location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
-        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = modelViewTransform.viewToModelPosition( parentPoint );
+        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const location = modelViewTransform.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
-        var line = lineProperty.get();
-        var run = Util.roundSymmetric( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
-        var rise = Util.roundSymmetric( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
+        const line = lineProperty.get();
+        const run = Util.roundSymmetric( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
+        const rise = Util.roundSymmetric( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
           lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );

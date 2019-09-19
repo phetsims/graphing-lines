@@ -24,7 +24,7 @@ define( require => {
    */
   function PointSlopeModel( interactiveLine, parameterRange ) {
 
-    var self = this;
+    const self = this;
 
     interactiveLine = interactiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
     parameterRange = parameterRange || new PointSlopeParameterRange();

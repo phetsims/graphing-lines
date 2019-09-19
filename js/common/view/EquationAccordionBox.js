@@ -24,7 +24,7 @@ define( require => {
   const saveLineString = require( 'string!GRAPHING_LINES/saveLine' );
 
   // constants
-  var BUTTON_FONT = new GLFont( 18 );
+  const BUTTON_FONT = new GLFont( 18 );
 
   /**
    * @param {Node} titleNode
@@ -59,7 +59,7 @@ define( require => {
     options.expandedProperty = expandedProperty;
 
     // Save Line button
-    var saveLineButton = new TextPushButton( saveLineString, {
+    const saveLineButton = new TextPushButton( saveLineString, {
       listener: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
       font: BUTTON_FONT,
       baseColor: 'white',
@@ -67,7 +67,7 @@ define( require => {
     } );
 
     // Erase Lines button
-    var eraseLinesButton = new TextPushButton( eraseLinesString, {
+    const eraseLinesButton = new TextPushButton( eraseLinesString, {
       listener: function() { savedLines.clear(); },
       font: BUTTON_FONT,
       baseColor: 'white',
@@ -75,7 +75,7 @@ define( require => {
     } );
 
     // horizontal layout of buttons
-    var buttonGroup = new HBox( {
+    const buttonGroup = new HBox( {
       spacing: 20,
       maxWidth: 320,
       children: [ saveLineButton, eraseLinesButton ]
@@ -89,7 +89,7 @@ define( require => {
     const separatorWidth = Math.max( interactiveEquationNode.width, buttonGroup.width );
     const separatorOptions = { stroke: 'rgb( 212, 212, 212 )' };
 
-    var contentNode = new VBox( {
+    const contentNode = new VBox( {
       align: 'center',
       spacing: 10,
       children: [

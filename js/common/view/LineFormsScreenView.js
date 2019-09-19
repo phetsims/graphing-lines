@@ -33,19 +33,19 @@ define( require => {
     this.viewProperties = viewProperties; // @private
 
     // Create point tool nodes
-    var pointTool1 = new PointToolNode( model.pointTool1, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
-    var pointTool2 = new PointToolNode( model.pointTool2, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
-    var pointToolParent = new Node(); // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order.
+    const pointTool1 = new PointToolNode( model.pointTool1, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
+    const pointTool2 = new PointToolNode( model.pointTool2, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
+    const pointToolParent = new Node(); // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order.
     pointToolParent.addChild( pointTool1 );
     pointToolParent.addChild( pointTool2 );
 
     // Toggle button for showing/hiding contents of graph
-    var graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty, {
+    const graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty, {
       scale: 0.75
     } );
 
     // Reset All button, at bottom-right
-    var resetAllButton = new ResetAllButton( {
+    const resetAllButton = new ResetAllButton( {
       listener: function() {
         model.reset();
         viewProperties.reset();
@@ -56,7 +56,7 @@ define( require => {
     resetAllButton.bottom = this.layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
 
     // Parent for all controls, to simplify layout
-    var controlsParent = new Node();
+    const controlsParent = new Node();
     controlsParent.addChild( equationAccordionBox );
     controlsParent.addChild( graphControlPanel );
 
@@ -70,12 +70,12 @@ define( require => {
     // layout - position of graphNode is determined by model
 
     // position of control panels:
-    var xMargin = 10;
-    var yMargin = 20;
-    var ySpacing = 15;
+    const xMargin = 10;
+    const yMargin = 20;
+    const ySpacing = 15;
 
     // get the amount of canvas width that's available for the control panels
-    var availableControlPanelWidth = this.layoutBounds.width - graphNode.right - ( 2 * xMargin );
+    const availableControlPanelWidth = this.layoutBounds.width - graphNode.right - ( 2 * xMargin );
 
     // if either control panel is too wide, scale it
     if ( equationAccordionBox.width > availableControlPanelWidth ) {

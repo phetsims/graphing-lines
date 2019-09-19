@@ -31,30 +31,30 @@ define( require => {
     this.setGuessLineVisible( true );
 
     // dynamic ranges
-    var pointSlopeParameterRange = new PointSlopeParameterRange();
-    var x1RangeProperty = new Property( challenge.graph.xRange );
-    var y1RangeProperty = new Property( challenge.graph.yRange );
-    var riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
-    var runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
+    const pointSlopeParameterRange = new PointSlopeParameterRange();
+    const x1RangeProperty = new Property( challenge.graph.xRange );
+    const y1RangeProperty = new Property( challenge.graph.yRange );
+    const riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
+    const runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
 
-    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // point manipulator
-    var pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
-    var pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
+    const pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
+    const pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
       this.addChild( pointManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
-    var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
+    const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
+    const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );
     }
 
     // Sync with the guess
-    var guessObserver = function( line ) {
+    const guessObserver = function( line ) {
 
       // move the manipulators
       pointManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );

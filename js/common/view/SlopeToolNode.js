@@ -22,8 +22,8 @@ define( require => {
   const NumberProperty = require( 'AXON/NumberProperty' );
 
   // constants
-  var VALUE_X_SPACING = 6;
-  var VALUE_Y_SPACING = 6;
+  const VALUE_X_SPACING = 6;
+  const VALUE_Y_SPACING = 6;
 
   /**
    * @param {Property.<Line>} lineProperty
@@ -32,13 +32,13 @@ define( require => {
    */
   function SlopeToolNode( lineProperty, modelViewTransform ) {
 
-    var self = this;
+    const self = this;
 
     this.lineProperty = lineProperty; // @private
     this.modelViewTransform = modelViewTransform; // @private
 
     // Values
-    var numberOptions = {
+    const numberOptions = {
       font: new GLFont( { size: 16, weight: 'bold' } ),
       decimalPlaces: 0,
       textFill: 'black',
@@ -53,7 +53,7 @@ define( require => {
     this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
 
     // Arrows
-    var arrowOptions = {
+    const arrowOptions = {
       lineWidth: 1.75,
       stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
       arrowTipSize: new Dimension2( 10, 10 ),
@@ -74,7 +74,7 @@ define( require => {
 
     Node.call( this, { children: [ this.parentNode ] } );
 
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
       self.update( line, modelViewTransform );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
@@ -107,7 +107,7 @@ define( require => {
      * @public
      */
     setVisible: function( visible ) {
-      var doUpdate = ( visible && !this.visible );
+      const doUpdate = ( visible && !this.visible );
       Node.prototype.setVisible.call( this, visible );
       if ( doUpdate ) {
         this.update( this.lineProperty.get(), this.modelViewTransform );
@@ -131,16 +131,16 @@ define( require => {
       this.runProperty.set( line.run );
 
       // compute view coordinates
-      var gridXSpacing = modelViewTransform.modelToViewDeltaX( 1 );
-      var gridYSpacing = modelViewTransform.modelToViewDeltaY( 1 );
-      var x1 = modelViewTransform.modelToViewX( line.x1 );
-      var y1 = modelViewTransform.modelToViewY( line.y1 );
-      var x2 = modelViewTransform.modelToViewX( line.x2 );
-      var y2 = modelViewTransform.modelToViewY( line.y2 );
+      const gridXSpacing = modelViewTransform.modelToViewDeltaX( 1 );
+      const gridYSpacing = modelViewTransform.modelToViewDeltaY( 1 );
+      const x1 = modelViewTransform.modelToViewX( line.x1 );
+      const y1 = modelViewTransform.modelToViewY( line.y1 );
+      const x2 = modelViewTransform.modelToViewX( line.x2 );
+      const y2 = modelViewTransform.modelToViewY( line.y2 );
 
       // rise
-      var offsetFactor = 0.6;
-      var xOffset = offsetFactor * gridXSpacing;
+      const offsetFactor = 0.6;
+      const xOffset = offsetFactor * gridXSpacing;
       if ( line.run > 0 ) {
         // vertical arrow to left of point
         this.riseArrowNode.setTailAndTip( x1 - xOffset, y1, x1 - xOffset, y2 );
@@ -157,7 +157,7 @@ define( require => {
       }
 
       // run
-      var yOffset = offsetFactor * gridYSpacing;
+      const yOffset = offsetFactor * gridYSpacing;
       if ( line.rise > 0 ) {
         // horizontal arrow below point
         this.runArrowNode.setTailAndTip( x1, y2 + yOffset, x2, y2 + yOffset );

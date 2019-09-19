@@ -22,7 +22,7 @@ define( require => {
    */
   function SlopeModel() {
 
-    var self = this;
+    const self = this;
 
     LineFormsModel.call( this, new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
 
@@ -34,7 +34,7 @@ define( require => {
 
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
     // unlink unnecessary because SlopeModel exists for the lifetime of the sim.
-    var parameterRange = new SlopeParameterRange();
+    const parameterRange = new SlopeParameterRange();
     this.interactiveLineProperty.link( function( line ) {
       self.x1RangeProperty.set( parameterRange.x1( line, self.graph ) );
       self.y1RangeProperty.set( parameterRange.y1( line, self.graph ) );

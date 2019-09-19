@@ -30,31 +30,31 @@ define( require => {
   //----------------------------------------------------------------------------------------
 
   // grid
-  var GRID_BACKGROUND = 'white';
-  var MINOR_GRID_LINE_WIDTH = 1.0;
-  var MINOR_GRID_LINE_COLOR = 'rgb( 230, 230, 230 )';
-  var MAJOR_GRID_LINE_WIDTH = 1.0;
-  var MAJOR_GRID_LINE_COLOR = 'rgb( 192, 192, 192 )';
+  const GRID_BACKGROUND = 'white';
+  const MINOR_GRID_LINE_WIDTH = 1.0;
+  const MINOR_GRID_LINE_COLOR = 'rgb( 230, 230, 230 )';
+  const MAJOR_GRID_LINE_WIDTH = 1.0;
+  const MAJOR_GRID_LINE_COLOR = 'rgb( 192, 192, 192 )';
 
   // axes
-  var AXIS_ARROW_SIZE = new Dimension2( 10, 10 );
-  var AXIS_THICKNESS = 1;
-  var AXIS_COLOR = 'black';
-  var AXIS_EXTENT = 1.0; // how far the arrow extends past the min/max ticks, in model coordinates
-  var AXIS_LABEL_FONT = new GLFont( { size: 16, weight: 'bold' } );
-  var AXIS_LABEL_SPACING = 2; // space between end of axis and label
+  const AXIS_ARROW_SIZE = new Dimension2( 10, 10 );
+  const AXIS_THICKNESS = 1;
+  const AXIS_COLOR = 'black';
+  const AXIS_EXTENT = 1.0; // how far the arrow extends past the min/max ticks, in model coordinates
+  const AXIS_LABEL_FONT = new GLFont( { size: 16, weight: 'bold' } );
+  const AXIS_LABEL_SPACING = 2; // space between end of axis and label
 
   // ticks
-  var MAJOR_TICK_SPACING = 5; // model units
-  var MINOR_TICK_LENGTH = 3; // how far a minor tick extends from the axis
-  var MINOR_TICK_LINE_WIDTH = 0.5;
-  var MINOR_TICK_COLOR = 'black';
-  var MAJOR_TICK_LENGTH = 6; // how far a major tick extends from the axis
-  var MAJOR_TICK_LINE_WIDTH = 1;
-  var MAJOR_TICK_COLOR = 'black';
-  var MAJOR_TICK_FONT = new GLFont( 16 );
-  var TICK_LABEL_SPACING = 2;
-  var MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
+  const MAJOR_TICK_SPACING = 5; // model units
+  const MINOR_TICK_LENGTH = 3; // how far a minor tick extends from the axis
+  const MINOR_TICK_LINE_WIDTH = 0.5;
+  const MINOR_TICK_COLOR = 'black';
+  const MAJOR_TICK_LENGTH = 6; // how far a major tick extends from the axis
+  const MAJOR_TICK_LINE_WIDTH = 1;
+  const MAJOR_TICK_COLOR = 'black';
+  const MAJOR_TICK_FONT = new GLFont( 16 );
+  const TICK_LABEL_SPACING = 2;
+  const MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
 
   /**
    * @param {Graph} graph
@@ -122,7 +122,7 @@ define( require => {
     Node.call( this );
 
     // tick line
-    var tickLineNode = new Path( isVertical ?
+    const tickLineNode = new Path( isVertical ?
                                  Shape.lineSegment( x, y - MAJOR_TICK_LENGTH, x, y + MAJOR_TICK_LENGTH ) :
                                  Shape.lineSegment( x - MAJOR_TICK_LENGTH, y, x + MAJOR_TICK_LENGTH, y ), {
       stroke: MAJOR_TICK_COLOR,
@@ -131,13 +131,13 @@ define( require => {
     this.addChild( tickLineNode );
 
     // tick label
-    var tickLabelNode = new Text( value, { font: MAJOR_TICK_FONT, fill: MAJOR_TICK_COLOR } );
+    const tickLabelNode = new Text( value, { font: MAJOR_TICK_FONT, fill: MAJOR_TICK_COLOR } );
     this.addChild( tickLabelNode );
 
     // label position
     if ( isVertical ) {
       // center label under line, compensate for minus sign
-      var signXOffset = ( value < 0 ) ? -( MINUS_SIGN_WIDTH / 2 ) : 0;
+      const signXOffset = ( value < 0 ) ? -( MINUS_SIGN_WIDTH / 2 ) : 0;
       tickLabelNode.left = tickLineNode.centerX - ( tickLabelNode.width / 2 ) + signXOffset;
       tickLabelNode.top = tickLineNode.bottom + TICK_LABEL_SPACING;
     }
@@ -183,9 +183,9 @@ define( require => {
     Node.call( this );
 
     // horizontal line with arrows at both ends
-    var tailLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.min - AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
-    var tipLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.max + AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
-    var lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
+    const tailLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.min - AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
+    const tipLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.max + AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
+    const lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
       doubleHead: true,
       headHeight: AXIS_ARROW_SIZE.height,
       headWidth: AXIS_ARROW_SIZE.width,
@@ -196,18 +196,18 @@ define( require => {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    var labelNode = new RichText( GLSymbols.x, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    const labelNode = new RichText( GLSymbols.x, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
     labelNode.centerY = lineNode.centerY;
 
     // ticks
-    var numberOfTicks = graph.getWidth() + 1;
-    for ( var i = 0; i < numberOfTicks; i++ ) {
-      var modelX = graph.xRange.min + i;
+    const numberOfTicks = graph.getWidth() + 1;
+    for ( let i = 0; i < numberOfTicks; i++ ) {
+      const modelX = graph.xRange.min + i;
       if ( modelX !== 0 ) { // skip the origin
-        var x = modelViewTransform.modelToViewX( modelX );
-        var y = modelViewTransform.modelToViewY( 0 );
+        const x = modelViewTransform.modelToViewX( modelX );
+        const y = modelViewTransform.modelToViewY( 0 );
         if ( Math.abs( modelX ) % MAJOR_TICK_SPACING === 0 ) {
           // major tick
           this.addChild( new MajorTickNode( x, y, modelX, true ) );
@@ -235,9 +235,9 @@ define( require => {
     Node.call( this );
 
     // vertical line with arrows at both ends
-    var tailLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
-    var tipLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
-    var lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
+    const tailLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
+    const tipLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
+    const lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
       doubleHead: true,
       headHeight: AXIS_ARROW_SIZE.height,
       headWidth: AXIS_ARROW_SIZE.width,
@@ -248,18 +248,18 @@ define( require => {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    var labelNode = new RichText( GLSymbols.y, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    const labelNode = new RichText( GLSymbols.y, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.centerX = lineNode.centerX;
     labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;
 
     // ticks
-    var numberOfTicks = graph.getHeight() + 1;
-    for ( var i = 0; i < numberOfTicks; i++ ) {
-      var modelY = graph.yRange.min + i;
+    const numberOfTicks = graph.getHeight() + 1;
+    for ( let i = 0; i < numberOfTicks; i++ ) {
+      const modelY = graph.yRange.min + i;
       if ( modelY !== 0 ) { // skip the origin
-        var x = modelViewTransform.modelToViewX( 0 );
-        var y = modelViewTransform.modelToViewY( modelY );
+        const x = modelViewTransform.modelToViewX( 0 );
+        const y = modelViewTransform.modelToViewY( modelY );
         if ( Math.abs( modelY ) % MAJOR_TICK_SPACING === 0 ) {
           // major tick
           this.addChild( new MajorTickNode( x, y, modelY, false ) );
@@ -286,7 +286,7 @@ define( require => {
     Node.call( this );
 
     // background
-    var backgroundNode = new Rectangle(
+    const backgroundNode = new Rectangle(
       modelViewTransform.modelToViewX( graph.xRange.min ), modelViewTransform.modelToViewY( graph.yRange.max ),
       modelViewTransform.modelToViewDeltaX( graph.getWidth() ), modelViewTransform.modelToViewDeltaY( -graph.getHeight() ), {
         fill: GRID_BACKGROUND,
@@ -297,14 +297,14 @@ define( require => {
     // @private horizontal grid lines, one line for each unit of grid spacing
     this.horizontalGridLinesNode = new Node();
     this.addChild( this.horizontalGridLinesNode );
-    var numberOfHorizontalGridLines = graph.getHeight() + 1;
-    var minX = modelViewTransform.modelToViewX( graph.xRange.min );
-    var maxX = modelViewTransform.modelToViewX( graph.xRange.max );
-    for ( var i = 0; i < numberOfHorizontalGridLines; i++ ) {
-      var modelY = graph.yRange.min + i;
+    const numberOfHorizontalGridLines = graph.getHeight() + 1;
+    const minX = modelViewTransform.modelToViewX( graph.xRange.min );
+    const maxX = modelViewTransform.modelToViewX( graph.xRange.max );
+    for ( let i = 0; i < numberOfHorizontalGridLines; i++ ) {
+      const modelY = graph.yRange.min + i;
       if ( modelY !== 0 ) { // skip origin, x axis will live here
-        var yOffset = modelViewTransform.modelToViewY( modelY );
-        var isMajorX = Math.abs( modelY ) % MAJOR_TICK_SPACING === 0;
+        const yOffset = modelViewTransform.modelToViewY( modelY );
+        const isMajorX = Math.abs( modelY ) % MAJOR_TICK_SPACING === 0;
         this.horizontalGridLinesNode.addChild( new GridLineNode( minX, yOffset, maxX, yOffset, isMajorX ) );
       }
     }
@@ -312,14 +312,14 @@ define( require => {
     // @private vertical grid lines, one line for each unit of grid spacing
     this.verticalGridLinesNode = new Node();
     this.addChild( this.verticalGridLinesNode );
-    var numberOfVerticalGridLines = graph.getWidth() + 1;
-    var minY = modelViewTransform.modelToViewY( graph.yRange.max ); // yes, swap min and max
-    var maxY = modelViewTransform.modelToViewY( graph.yRange.min );
-    for ( var j = 0; j < numberOfVerticalGridLines; j++ ) {
-      var modelX = graph.xRange.min + j;
+    const numberOfVerticalGridLines = graph.getWidth() + 1;
+    const minY = modelViewTransform.modelToViewY( graph.yRange.max ); // yes, swap min and max
+    const maxY = modelViewTransform.modelToViewY( graph.yRange.min );
+    for ( let j = 0; j < numberOfVerticalGridLines; j++ ) {
+      const modelX = graph.xRange.min + j;
       if ( modelX !== 0 ) { // skip origin, y axis will live here
-        var xOffset = modelViewTransform.modelToViewX( modelX );
-        var isMajorY = Math.abs( modelX ) % MAJOR_TICK_SPACING === 0;
+        const xOffset = modelViewTransform.modelToViewX( modelX );
+        const isMajorY = Math.abs( modelX ) % MAJOR_TICK_SPACING === 0;
         this.verticalGridLinesNode.addChild( new GridLineNode( xOffset, minY, xOffset, maxY, isMajorY ) );
       }
     }

@@ -28,12 +28,12 @@ define( require => {
 
     this.setGuessLineVisible( true );
 
-    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
-    var x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
+    const x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform, false /* constantSlope */ );
 
-    var x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
+    const x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform );
 
     // Rendering order
@@ -41,7 +41,7 @@ define( require => {
     this.addChild( x2y2Manipulator );
 
     // Sync with the guess
-    var guessObserver = function( line ) {
+    const guessObserver = function( line ) {
       // move the manipulators
       x1y1Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
       x2y2Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );

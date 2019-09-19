@@ -15,7 +15,7 @@ define( require => {
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   const Range = require( 'DOT/Range' );
 
-  var GLConstants = {
+  const GLConstants = {
     SCREEN_VIEW_OPTIONS: { layoutBounds: new Bounds2( 0, 0, 1100, 700 ) },
     X_AXIS_RANGE: new Range( -10, 10 ),
     Y_AXIS_RANGE: new Range( -10, 10 ),

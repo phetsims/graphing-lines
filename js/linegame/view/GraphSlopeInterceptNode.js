@@ -31,29 +31,29 @@ define( require => {
     this.setGuessLineVisible( true );
 
     // dynamic ranges
-    var parameterRange = new SlopeInterceptParameterRange();
-    var riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
-    var runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
-    var y1RangeProperty = new Property( challenge.graph.yRange );
+    const parameterRange = new SlopeInterceptParameterRange();
+    const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
+    const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
+    const y1RangeProperty = new Property( challenge.graph.yRange );
 
-    var manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // intercept manipulator
-    var yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
-    var interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
+    const yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
+    const interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
       this.addChild( yInterceptManipulator );
     }
 
     // slope manipulator
-    var slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
-    var slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
+    const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
+    const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );
     }
 
     // Sync with the guess
-    var guessObserver = function( line ) {
+    const guessObserver = function( line ) {
 
       // move the manipulators
       slopeManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );

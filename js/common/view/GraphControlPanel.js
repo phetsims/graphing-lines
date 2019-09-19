@@ -31,9 +31,9 @@ define( require => {
 
   // constants
   // y = x
-  var Y_EQUALS_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + GLSymbols.x;
+  const Y_EQUALS_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + GLSymbols.x;
   // y = -x
-  var Y_EQUALS_NEGATIVE_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + MathSymbols.UNARY_MINUS + GLSymbols.x;
+  const Y_EQUALS_NEGATIVE_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + MathSymbols.UNARY_MINUS + GLSymbols.x;
 
   /**
    * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
@@ -56,19 +56,19 @@ define( require => {
     }, options );
 
     // private properties for standard-line checkboxes
-    var yEqualsXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
-    var yEqualsNegativeXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
+    const yEqualsXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
+    const yEqualsNegativeXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // checkboxes
-    var TEXT_OPTIONS = {
+    const TEXT_OPTIONS = {
       font: new GLFont( 18 ),
       maxWidth: 150 // determined empirically
     };
-    var ICON_SIZE = 60;
-    var ICON_SPACING = 15;
+    const ICON_SIZE = 60;
+    const ICON_SPACING = 15;
 
     // 'Slope' checkbox
-    var slopeCheckbox = new Checkbox( new HBox( {
+    const slopeCheckbox = new Checkbox( new HBox( {
       spacing: ICON_SPACING,
       children: [
         new Text( slopeString, TEXT_OPTIONS ),
@@ -77,7 +77,7 @@ define( require => {
     } ), slopeToolVisibleProperty );
 
     // 'y = x' checkbox
-    var yEqualsXCheckbox = new Checkbox( new HBox( {
+    const yEqualsXCheckbox = new Checkbox( new HBox( {
       spacing: ICON_SPACING,
       children: [
         new RichText( Y_EQUALS_X, TEXT_OPTIONS ),
@@ -86,7 +86,7 @@ define( require => {
     } ), yEqualsXVisibleProperty );
 
     // 'y = -x' checkbox
-    var yEqualsNegativeXCheckbox = new Checkbox( new HBox( {
+    const yEqualsNegativeXCheckbox = new Checkbox( new HBox( {
       spacing: ICON_SPACING,
       children: [
         new RichText( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
@@ -95,11 +95,11 @@ define( require => {
     } ), yEqualsNegativeXVisibleProperty );
 
     // Grid checkbox
-    var gridCheckbox = new GridCheckbox( gridVisibleProperty );
+    const gridCheckbox = new GridCheckbox( gridVisibleProperty );
     gridCheckbox.touchArea = gridCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // vertical layout
-    var contentNode = new LayoutBox( {
+    const contentNode = new LayoutBox( {
       children: ( options.includeStandardLines ) ?
         [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, gridCheckbox ] :
         [ slopeCheckbox, gridCheckbox ],
@@ -110,7 +110,7 @@ define( require => {
 
     Panel.call( this, contentNode, options );
 
-    var setStandardLineVisible = function( visible, line ) {
+    const setStandardLineVisible = function( visible, line ) {
       if ( visible && !standardLines.contains( line ) ) {
         standardLines.add( line );
       }

@@ -21,7 +21,7 @@ define( require => {
    */
   function ValuePool( arrays ) {
 
-    var self = this;
+    const self = this;
 
     // @private 1 value from each array is "required"
     this.requiredValues = [];
@@ -76,9 +76,9 @@ define( require => {
      */
     choose: function( array ) {
       assert && assert( array && array.length > 0, 'array is empty' );
-      var index = phet.joist.random.nextIntBetween( 0, array.length - 1 );
+      const index = phet.joist.random.nextIntBetween( 0, array.length - 1 );
       assert && assert( index !== -1 );
-      var item = array[ index ];
+      const item = array[ index ];
       array.splice( index, 1 );
       return item;
     },
@@ -99,8 +99,8 @@ define( require => {
         excludeZero: false // {boolean} whether to exclude zero from the array
       }, options );
 
-      var array = [];
-      for ( var i = range.min; i <= range.max; i++ ) {
+      const array = [];
+      for ( let i = range.min; i <= range.max; i++ ) {
         if ( !options.excludeZero || i !== 0 ) {
           array.push( i );
         }

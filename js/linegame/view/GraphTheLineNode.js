@@ -41,28 +41,28 @@ define( require => {
    */
   function GraphTheLineNode( challenge, model, challengeSize, audioPlayer ) {
 
-    var self = this;
+    const self = this;
 
     ChallengeNode.call( this, challenge, model, challengeSize, audioPlayer );
 
-    var boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
+    const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
 
     // title, possibly scaled for i18n
-    var titleNode = new Text( challenge.title, {
+    const titleNode = new Text( challenge.title, {
       font: LineGameConstants.TITLE_FONT,
       fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
     } );
 
     // Answer
-    var answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
       } ) );
 
-    var guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
-    var guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, challenge.equationForm, {
+    const guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
+    const guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, challenge.equationForm, {
       fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
 
       // guessEquationNode's default maxWidth is optimized for an equation on the graph, but is not appropriate for
@@ -75,7 +75,7 @@ define( require => {
     this.notALineNode = new Text( notALineString, { font: new GLFont( { size: 24, weight: 'bold' } ), fill: 'black' } );
 
     // Either the equation or 'not a line' is displayed.
-    var equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
+    const equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
 
     // Guess
     this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
@@ -100,7 +100,7 @@ define( require => {
       titleNode.left = answerBoxNode.left;
 
       // stack title and boxes vertically, title top-aligned with graph's grid
-      var ySpacing = 30;
+      const ySpacing = 30;
       titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
       answerBoxNode.top = titleNode.bottom + ySpacing;
       this.guessBoxNode.top = answerBoxNode.bottom + ySpacing;
@@ -111,17 +111,17 @@ define( require => {
     }
 
     // Update visibility of the correct/incorrect icons.
-    var updateIcons = function() {
-      var playState = model.playStateProperty.get();
+    const updateIcons = function() {
+      const playState = model.playStateProperty.get();
       answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
       self.guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
       self.guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess
-    var guessObserver = function( line ) {
+    const guessObserver = function( line ) {
 
-      var isaLine = ( line instanceof Line );
+      const isaLine = ( line instanceof Line );
 
       // line is NotAline if ManipulationMode.THREE_POINTS and points don't make a line
       if ( isaLine ) {
@@ -136,7 +136,7 @@ define( require => {
     challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     // sync with game state
-    var playStateObserver = function( playState ) {
+    const playStateObserver = function( playState ) {
 
       // states in which the graph is interactive
       self.graphNode.pickable = (

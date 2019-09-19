@@ -31,9 +31,9 @@ define( require => {
   const StringProperty = require( 'AXON/StringProperty' );
 
   // constants
-  var INITIAL_GAME_PHASE = GamePhase.SETTINGS;
-  var CHALLENGES_PER_GAME = 6;
-  var DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
+  const INITIAL_GAME_PHASE = GamePhase.SETTINGS;
+  const CHALLENGES_PER_GAME = 6;
+  const DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
     EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
   /**
@@ -42,7 +42,7 @@ define( require => {
    */
   function BaseGameModel( challengeFactories ) {
 
-    var self = this;
+    const self = this;
 
     // @private
     this.challengeFactories = challengeFactories;
@@ -75,7 +75,7 @@ define( require => {
     this.bestScoreProperties = []; // {NumberProperty[]} best scores for each level
     this.bestTimeProperties = []; // {Property.<number|null>[]} best times for each level, in ms
     this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
-    for ( var level = 0; level < this.numberOfLevels; level++ ) {
+    for ( let level = 0; level < this.numberOfLevels; level++ ) {
       this.bestScoreProperties.push( new NumberProperty( 0, {
         numberType: 'Integer'
       } ) );
@@ -91,8 +91,8 @@ define( require => {
     // unlink is unnecessary since BaseGameModel exists for the lifetime of the sim.
     this.playStateProperty.link( function( playState ) {
 
-      var challengeIndex = self.challengeIndexProperty.get();
-      var isLastChallenge = ( challengeIndex === self.challenges.length - 1 );
+      const challengeIndex = self.challengeIndexProperty.get();
+      const isLastChallenge = ( challengeIndex === self.challenges.length - 1 );
 
       if ( isLastChallenge && ( playState === PlayState.NEXT || playState === PlayState.SHOW_ANSWER ) ) {
         // game over, stop the timer
@@ -101,8 +101,8 @@ define( require => {
 
       if ( playState === PlayState.FIRST_CHECK ) {
 
-        var level = self.levelProperty.get();
-        var score = self.scoreProperty.get();
+        const level = self.levelProperty.get();
+        const score = self.scoreProperty.get();
 
         if ( isLastChallenge ) {
           // game has been completed
@@ -113,7 +113,7 @@ define( require => {
         }
         else {
           // next challenge
-          var nextChallengeIndex = challengeIndex + 1;
+          const nextChallengeIndex = challengeIndex + 1;
           self.challengeIndexProperty.set( nextChallengeIndex );
           self.challengeProperty.set( self.challenges[ nextChallengeIndex ] );
         }
@@ -242,8 +242,8 @@ define( require => {
       assert && assert( !this.timer.isRunningProperty.value );
       this.isNewBestTime = false;
       if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
-        var level = this.levelProperty.get();
-        var time = this.timer.elapsedTimeProperty.value;
+        const level = this.levelProperty.get();
+        const time = this.timer.elapsedTimeProperty.value;
         if ( !this.bestTimeProperties[ level ].get() ) {
           // there was no previous time for this level
           this.bestTimeProperties[ level ].set( time );
@@ -263,7 +263,7 @@ define( require => {
       this.challengeIndexProperty.set( -1 );
 
       // level
-      var level = this.levelProperty.get();
+      const level = this.levelProperty.get();
       assert && assert( level >= 0 && level < this.challengeFactories.length );
 
       // generate challenges
@@ -280,9 +280,9 @@ define( require => {
     // @private verify challenge creation by
     verifyChallenges: function() {
       console.log( 'begin: verify creation of challenges' );
-      for ( var level = 0; level < this.challengeFactories.length; level++ ) {
+      for ( let level = 0; level < this.challengeFactories.length; level++ ) {
         console.log( 'verifying level ' + level + '...' );
-        for ( var i = 0; i < 2000; i++ ) {
+        for ( let i = 0; i < 2000; i++ ) {
           this.challengeFactories[ level ].createChallenges();
         }
       }

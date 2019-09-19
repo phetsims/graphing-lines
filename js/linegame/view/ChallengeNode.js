@@ -44,7 +44,7 @@ define( require => {
    */
   function ChallengeNode( challenge, model, challengeSize, audioPlayer ) {
 
-    var self = this;
+    const self = this;
 
     Node.call( this );
 
@@ -58,17 +58,17 @@ define( require => {
     } );
 
     // buttons
-    var buttonOptions = {
+    const buttonOptions = {
       font: LineGameConstants.BUTTON_FONT,
       baseColor: LineGameConstants.BUTTON_COLOR,
       xMargin: 20,
       yMargin: 5,
       centerX: 0 // center aligned
     };
-    var checkButton = new TextPushButton( checkString, buttonOptions );
-    var tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
-    var showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
-    var nextButton = new TextPushButton( nextString, buttonOptions );
+    const checkButton = new TextPushButton( checkString, buttonOptions );
+    const tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
+    const showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
+    const nextButton = new TextPushButton( nextString, buttonOptions );
 
     // @protected
     this.buttonsParent = new Node( {
@@ -77,12 +77,12 @@ define( require => {
     } );
 
     // point tools
-    var linesVisibleProperty = new BooleanProperty( true );
-    var pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
-    var pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    const linesVisibleProperty = new BooleanProperty( true );
+    const pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    const pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
 
     // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
-    var pointToolParent = new Node();
+    const pointToolParent = new Node();
     pointToolParent.addChild( pointToolNode1 );
     pointToolParent.addChild( pointToolNode2 );
 
@@ -100,13 +100,13 @@ define( require => {
     if ( phet.chipper.queryParameters.showAnswers ) {
 
       // description at leftTop
-      var descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      const descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
       descriptionNode.left = 10;
       descriptionNode.top = 10;
       this.addChild( descriptionNode );
 
       // developer buttons (no i18n) to right of main buttons
-      var devButtonOptions = {
+      const devButtonOptions = {
         font: new GLFont( 20 ),
         baseColor: 'red',
         textFill: 'white'
@@ -124,7 +124,7 @@ define( require => {
         model.replayCurrentChallenge();
       } );
 
-      var devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
+      const devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
       devButtonsParent.left = this.buttonsParent.right + 15;
       devButtonsParent.centerY = this.buttonsParent.centerY;
       this.addChild( devButtonsParent );
@@ -136,11 +136,11 @@ define( require => {
       if ( challenge.isCorrect() ) {
         self.faceNode.smile();
         audioPlayer.correctAnswer();
-        var points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+        const points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
 
         // Prevent score from exceeding perfect score, in case we replay challenges with ?gameDebug query parameter.
         // See https://github.com/phetsims/graphing-lines/issues/70
-        var newScore = Math.min( model.scoreProperty.get() + points, model.getPerfectScore() );
+        const newScore = Math.min( model.scoreProperty.get() + points, model.getPerfectScore() );
         model.scoreProperty.set( newScore );
         self.faceNode.setPoints( points );
         model.playStateProperty.set( PlayState.NEXT );
@@ -174,7 +174,7 @@ define( require => {
     } );
 
     // play-state changes
-    var playStateObserver = function( state ) {
+    const playStateObserver = function( state ) {
 
       // visibility of face
       self.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
@@ -196,7 +196,7 @@ define( require => {
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
-    var guessObserver = function( guess ) {
+    const guessObserver = function( guess ) {
       if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
         model.playStateProperty.set( PlayState.SECOND_CHECK );
       }

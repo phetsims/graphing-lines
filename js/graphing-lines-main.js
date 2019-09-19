@@ -21,9 +21,9 @@ define( require => {
   const graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
 
   // constants
-  var tandem = Tandem.rootTandem;
+  const tandem = Tandem.rootTandem;
 
-  var options = {
+  const options = {
     credits: {
       leadDesign: 'Ariel Paul',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
@@ -36,13 +36,13 @@ define( require => {
   };
 
   SimLauncher.launch( function() {
-    var screens = [
+    const screens = [
       new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
       new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
       new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
       new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
     ];
-    var sim = new Sim( graphingLinesTitleString, screens, options );
+    const sim = new Sim( graphingLinesTitleString, screens, options );
     sim.start();
   } );
 } );

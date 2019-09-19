@@ -25,7 +25,7 @@ define( require => {
 
     assert && assert( _.includes( [ 'up', 'down' ], orientation ) );
 
-    var self = this;
+    const self = this;
 
     // @public location of the point tool
     this.locationProperty = new Vector2Property( location );
@@ -41,8 +41,8 @@ define( require => {
     // doesn't require dispose.
     Property.multilink( [ this.locationProperty, lines.lengthProperty ],
       function() {
-        var line;
-        for ( var i = 0; i < lines.length; i++ ) {
+        let line;
+        for ( let i = 0; i < lines.length; i++ ) {
           line = lines.get( i );
           if ( self.isOnLine( line ) ) {
             self.onLineProperty.set( line );

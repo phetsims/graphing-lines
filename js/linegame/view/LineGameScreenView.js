@@ -29,13 +29,13 @@ define( require => {
   function LineGameScreenView( model ) {
 
     // grid of images for the level-selection buttons, ordered by level
-    var levelImages = [
+    const levelImages = [
       [ level1Image, level2Image, level3Image ],
       [ level4Image, level5Image, level6Image ]
     ];
 
     // functions that create nodes for the game reward, ordered by level
-    var rewardFactoryFunctions = [
+    const rewardFactoryFunctions = [
       GLRewardNode.createEquationNodes,
       GLRewardNode.createGraphNodes,
       GLRewardNode.createPointToolNodes,

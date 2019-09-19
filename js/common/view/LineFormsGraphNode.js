@@ -33,7 +33,7 @@ define( require => {
    */
   function LineFormsGraphNode( model, viewProperties, equationType ) {
 
-    var self = this;
+    const self = this;
 
     GraphNode.call( this, model.graph, model.modelViewTransform );
 
@@ -93,7 +93,7 @@ define( require => {
     // @private Updates the visibility of lines and associated decorations
     updateLinesVisibility: function() {
 
-      var linesVisible = this.viewProperties.linesVisibleProperty.get();
+      const linesVisible = this.viewProperties.linesVisibleProperty.get();
 
       // interactive line
       this.interactiveLineNode.visible = linesVisible;
@@ -130,9 +130,9 @@ define( require => {
 
     // @private Removes the node that corresponds to the specified line.
     removeLineNode: function( line, parentNode ) {
-      var removed = false;
-      for ( var i = 0; i < parentNode.getChildrenCount() && !removed; i++ ) {
-        var node = parentNode.getChildAt( i );
+      let removed = false;
+      for ( let i = 0; i < parentNode.getChildrenCount() && !removed; i++ ) {
+        const node = parentNode.getChildAt( i );
         if ( line === node.lineProperty.get() ) {
           assert && assert( node instanceof LineNode );
           parentNode.removeChild( node );

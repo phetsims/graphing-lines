@@ -41,19 +41,19 @@ define( require => {
      */
     createChallenges: function() {
 
-      var challenges = [];
+      const challenges = [];
 
       // hoist vars
-      var slope;
-      var point;
-      var positiveSlopes;
+      let slope;
+      let point;
+      let positiveSlopes;
 
       // pools of values for slope and y-intercept
-      var slopePool = new ValuePool( this.createSlopeArrays() );
-      var yInterceptPool = new ValuePool( this.createYInterceptArrays() );
+      const slopePool = new ValuePool( this.createSlopeArrays() );
+      const yInterceptPool = new ValuePool( this.createYInterceptArrays() );
 
       // equation form for 3rd challenge of each type
-      var equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ];
+      const equationForms = [ EquationForm.SLOPE_INTERCEPT, EquationForm.POINT_SLOPE ];
 
       // CHALLENGE 1: Make-the-Equation, slope-intercept form
       challenges.push( new MakeTheEquation(

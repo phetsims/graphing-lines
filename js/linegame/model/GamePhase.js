@@ -12,7 +12,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
   // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  var GamePhase = Object.freeze( {
+  const GamePhase = Object.freeze( {
     SETTINGS: 'SETTINGS', // user is choosing game settings
     PLAY: 'PLAY', // user is playing the game
     RESULTS: 'RESULTS' // user is viewing results at end of a game

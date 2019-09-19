@@ -11,7 +11,7 @@ define( require => {
   // modules
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
 
-  var GLColors = {
+  const GLColors = {
 
     // various backgrounds
     SCREEN_BACKGROUND: 'rgb( 255, 255, 214 )',

@@ -27,7 +27,7 @@ define( require => {
    */
   function LineGameScreen( tandem ) {
 
-    var options = {
+    const options = {
       name: screenLineGameString,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createGameScreenIcon(),

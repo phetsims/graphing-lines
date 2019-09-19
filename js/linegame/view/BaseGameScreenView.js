@@ -30,7 +30,7 @@ define( require => {
     ScreenView.call( this, GLConstants.SCREEN_VIEW_OPTIONS );
 
     // sounds
-    var audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
+    const audioPlayer = new GameAudioPlayer( model.soundEnabledProperty );
 
     // @private one parent node for each 'phase' of the game
     this.settingsNode = new SettingsNode( model, this.layoutBounds, levelImages );
@@ -44,7 +44,7 @@ define( require => {
 
     // game 'phase' changes
     // unlink unnecessary because BaseGameScreenView exists for the lifetime of the sim.
-    var self = this;
+    const self = this;
     model.gamePhaseProperty.link( function( gamePhase ) {
       self.settingsNode.visible = ( gamePhase === GamePhase.SETTINGS );
       self.playNode.visible = ( gamePhase === GamePhase.PLAY );

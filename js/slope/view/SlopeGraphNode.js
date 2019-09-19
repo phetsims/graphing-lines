@@ -26,14 +26,14 @@ define( require => {
 
     LineFormsGraphNode.call( this, model, viewProperties, SlopeEquationNode );
 
-    var manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
+    const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 
     // (x1,y1) point manipulator
-    var x1y1Manipulator = new X1Y1Manipulator(
+    const x1y1Manipulator = new X1Y1Manipulator(
       manipulatorRadius, model.interactiveLineProperty, model.x1RangeProperty, model.y1RangeProperty, model.modelViewTransform, false /* constantSlope */ );
 
     // (x2,y2) point manipulator
-    var x2y2Manipulator = new X2Y2Manipulator(
+    const x2y2Manipulator = new X2Y2Manipulator(
       manipulatorRadius, model.interactiveLineProperty, model.x2RangeProperty, model.y2RangeProperty, model.modelViewTransform );
 
     // rendering order

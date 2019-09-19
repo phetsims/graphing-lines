@@ -28,12 +28,12 @@ define( require => {
    */
   function YInterceptManipulator( radius, lineProperty, y1RangeProperty, modelViewTransform ) {
 
-    var self = this;
+    const self = this;
 
     Manipulator.call( this, radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
 
     // move the manipulator to match the line's (x1,y1) point
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
       self.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
@@ -69,7 +69,7 @@ define( require => {
    */
   function YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) {
 
-    var startOffset; // where the drag started, relative to the y-intercept, in parent view coordinates
+    let startOffset; // where the drag started, relative to the y-intercept, in parent view coordinates
 
     SimpleDragHandler.call( this, {
 
@@ -77,19 +77,19 @@ define( require => {
 
       // note where the drag started
       start: function( event ) {
-        var line = lineProperty.get();
-        var location = modelViewTransform.modelToViewXY( line.x1, line.y1 );
+        const line = lineProperty.get();
+        const location = modelViewTransform.modelToViewXY( line.x1, line.y1 );
         startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
       },
 
       drag: function( event ) {
 
-        var parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        var location = modelViewTransform.viewToModelPosition( parentPoint );
+        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        var y1 = Util.roundSymmetric( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
-        var line = lineProperty.get();
+        const y1 = Util.roundSymmetric( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
+        const line = lineProperty.get();
 
         // Keep slope constant, change y1.
         lineProperty.set( Line.createSlopeIntercept( line.rise, line.run, y1, line.color ) );

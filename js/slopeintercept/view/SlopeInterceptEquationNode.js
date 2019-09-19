@@ -34,7 +34,7 @@ define( require => {
   const PlusNode = require( 'SCENERY_PHET/PlusNode' );
   const Property = require( 'AXON/Property' );
   const RichText = require( 'SCENERY/nodes/RichText' );
-  var scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
+  const scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   const SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -71,27 +71,27 @@ define( require => {
 
     }, options );
 
-    var self = this;
+    const self = this;
 
     EquationNode.call( this, options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
-    var fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
-    var interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    var staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    var staticOptions = { font: staticFont, fill: options.staticColor };
-    var fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
+    const fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
+    const interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const staticOptions = { font: staticFont, fill: options.staticColor };
+    const fractionLineOptions = { stroke: options.staticColor, lineWidth: self.fractionLineThickness };
 
-    var numberPropertyOptions = {
+    const numberPropertyOptions = {
       numberType: 'Integer'
     };
 
     // internal properties that are connected to pickers
-    var riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
-    var runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
-    var yInterceptProperty = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
-    var fractionalIntercept = lineProperty.get().getYIntercept();
-    var yInterceptNumeratorProperty = new NumberProperty( fractionalIntercept.numerator, numberPropertyOptions );
-    var yInterceptDenominatorProperty = new NumberProperty( fractionalIntercept.denominator, numberPropertyOptions );
+    const riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
+    const runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
+    const yInterceptProperty = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
+    const fractionalIntercept = lineProperty.get().getYIntercept();
+    const yInterceptNumeratorProperty = new NumberProperty( fractionalIntercept.numerator, numberPropertyOptions );
+    const yInterceptDenominatorProperty = new NumberProperty( fractionalIntercept.denominator, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.
@@ -99,17 +99,17 @@ define( require => {
      * So if you don't change the pickers atomically to match a new Line instance,
      * the new Line will be inadvertently replaced with an incorrect line.
      */
-    var updatingControls = false;
+    let updatingControls = false;
 
     // Determine the max width of the rise and run pickers.
-    var maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, self.DECIMAL_PLACES );
+    const maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, self.DECIMAL_PLACES );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
-    var yNode = new RichText( GLSymbols.y, staticOptions );
-    var equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
-    var slopeMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) );
-    var riseNode;
-    var runNode;
+    const yNode = new RichText( GLSymbols.y, staticOptions );
+    const equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
+    const slopeMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) );
+    let riseNode;
+    let runNode;
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
@@ -118,15 +118,15 @@ define( require => {
       riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    var slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    var xNode = new RichText( GLSymbols.x, _.extend( { absoluteValue: true }, staticOptions ) );
-    var plusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    var minusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    var yInterceptMinusSignNode = new MinusNode( _.extend( {
+    const slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    const xNode = new RichText( GLSymbols.x, _.extend( { absoluteValue: true }, staticOptions ) );
+    const plusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
+    const minusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
+    const yInterceptMinusSignNode = new MinusNode( _.extend( {
       size: self.signLineSize,
       absoluteValue: true
     }, staticOptions ) );
-    var yInterceptNumeratorNode; // also used for integer values
+    let yInterceptNumeratorNode; // also used for integer values
     if ( options.interactiveIntercept ) {
       yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
         _.extend( {}, GLConstants.PICKER_OPTIONS, {
@@ -137,9 +137,9 @@ define( require => {
     else {
       yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
     }
-    var yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-    var yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    var slopeUndefinedNode = new RichText( '?', staticOptions );
+    const yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    const yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    const slopeUndefinedNode = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     self.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
@@ -150,15 +150,15 @@ define( require => {
      * This is based on which parts of the equation are interactive, and what the
      * non-interactive parts of the equation should look like when written in simplified form.
      */
-    var updateLayout = function( line ) {
+    const updateLayout = function( line ) {
 
-      var interactive = ( options.interactiveSlope || options.interactiveIntercept );
-      var lineColor = line.color;
+      const interactive = ( options.interactiveSlope || options.interactiveIntercept );
+      const lineColor = line.color;
 
       // Start with all children invisible and at x=0.
       // See https://github.com/phetsims/graphing-lines/issues/120
-      var len = self.children.length;
-      for ( var i = 0; i < len; i++ ) {
+      const len = self.children.length;
+      for ( let i = 0; i < len; i++ ) {
         self.children[ i ].visible = false;
         self.children[ i ].x = 0;
       }
@@ -175,14 +175,14 @@ define( require => {
       }
 
       // slope properties
-      var slope = line.getSlope();
-      var zeroSlope = ( slope === 0 );
-      var unitySlope = ( Math.abs( slope ) === 1 );
-      var integerSlope = Util.isInteger( slope );
-      var positiveSlope = ( slope > 0 );
-      var fractionalSlope = ( !zeroSlope && !unitySlope && !integerSlope );
+      const slope = line.getSlope();
+      const zeroSlope = ( slope === 0 );
+      const unitySlope = ( Math.abs( slope ) === 1 );
+      const integerSlope = Util.isInteger( slope );
+      const positiveSlope = ( slope > 0 );
+      const fractionalSlope = ( !zeroSlope && !unitySlope && !integerSlope );
 
-      var lineWidth;
+      let lineWidth;
 
       // y =
       yNode.visible = equalsNode.visible = true;
@@ -211,8 +211,8 @@ define( require => {
         // slope is not interactive, may be displayed as an integer or improper fraction
 
         // decide whether to include the slope minus sign
-        var previousNode;
-        var previousXOffset;
+        let previousNode;
+        let previousXOffset;
         if ( positiveSlope || zeroSlope ) {
           // no sign
           previousNode = equalsNode;
@@ -294,10 +294,10 @@ define( require => {
         // intercept is not interactive and may be displayed as an integer or improper fraction
 
         // y-intercept properties
-        var fractionalIntercept = line.getYIntercept();
-        var zeroIntercept = ( fractionalIntercept.getValue() === 0 );
-        var integerIntercept = fractionalIntercept.isInteger();
-        var positiveIntercept = ( fractionalIntercept.getValue() > 0 );
+        const fractionalIntercept = line.getYIntercept();
+        const zeroIntercept = ( fractionalIntercept.getValue() === 0 );
+        const integerIntercept = fractionalIntercept.isInteger();
+        const positiveIntercept = ( fractionalIntercept.getValue() > 0 );
 
         if ( zeroIntercept ) {
           if ( zeroSlope && !options.interactiveSlope ) {
@@ -329,7 +329,7 @@ define( require => {
         }
         else {
           // y = mx +/- b
-          var operatorNode = ( positiveIntercept ) ? plusNode : minusNode;
+          const operatorNode = ( positiveIntercept ) ? plusNode : minusNode;
           operatorNode.visible = true;
           operatorNode.fill = lineColor;
           operatorNode.left = xNode.right + self.operatorXSpacing;
@@ -364,14 +364,14 @@ define( require => {
     //***************************************************************
 
     // sync the model with the controls, unmultilink in dispose
-    var controlsMultilink = Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
+    const controlsMultilink = Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
       function() {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {
             lineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), lineProperty.get().color ) );
           }
           else {
-            var line = lineProperty.get();
+            const line = lineProperty.get();
             lineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), lineProperty.get().color ) );
           }
         }
@@ -379,7 +379,7 @@ define( require => {
     );
 
     // sync the controls and layout with the model
-    var lineObserver = function( line ) {
+    const lineObserver = function( line ) {
 
       // If intercept is interactive, then (x1,y1) must be on a grid line on the y intercept.
       assert && assert( !options.interactiveIntercept || ( line.x1 === 0 && Util.isInteger( line.y1 ) ) );
@@ -394,7 +394,7 @@ define( require => {
           yInterceptProperty.set( line.y1 );
         }
         else {
-          var fractionalIntercept = lineProperty.get().getYIntercept();
+          const fractionalIntercept = lineProperty.get().getYIntercept();
           yInterceptNumeratorProperty.set( fractionalIntercept.numerator );
           yInterceptDenominatorProperty.set( fractionalIntercept.denominator );
         }
@@ -413,7 +413,7 @@ define( require => {
       updateLayout( lineProperty.get() );
 
       // add undefinedSlopeIndicator
-      var undefinedSlopeIndicator = new UndefinedSlopeIndicator( self.width, self.height, staticOptions );
+      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( self.width, self.height, staticOptions );
       self.addChild( undefinedSlopeIndicator );
       undefinedSlopeIndicator.centerX = self.centerX;
       undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - self.undefinedSlopeYFudgeFactor;
@@ -468,7 +468,7 @@ define( require => {
       }, options );
 
       // y = mx + b
-      var text = StringUtils.format( '{0} {1} {2}{3} {4} {5}',
+      const text = StringUtils.format( '{0} {1} {2}{3} {4} {5}',
         GLSymbols.y, MathSymbols.EQUAL_TO, GLSymbols.m, GLSymbols.x, MathSymbols.PLUS, GLSymbols.b );
       return new RichText( text, options );
     },

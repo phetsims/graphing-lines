@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.3.8 Thu Oct 03 2019 11:52:54 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# graphing-lines 1.3.8 Mon Oct 14 2019 14:27:28 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "d8a2e8992420327ff72a6fc4bb93ec76549ded0e",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "7d2564aea3eef4b6a22efab0a9dd21561e9312af",
+    "sha": "4e9f719c44821ccb7cbcb1ef1cdd5d5ae1f8b3be",
     "branch": "1.3"
   },
   "joist": {
@@ -33,8 +33,8 @@
     "branch": "HEAD"
   },
   "phet-core": {
-    "sha": "555f7c00d82deedbf6f0f044ed6252476f07b76e",
-    "branch": "HEAD"
+    "sha": "bfd6d63a558f564ab641055b22d757800072c6eb",
+    "branch": "graphing-lines-1.3"
   },
   "phet-io": {
     "sha": "4566046207d6a4712b1b081ec2a0786bae6c44b9",
@@ -85,7 +85,7 @@
     "branch": "HEAD"
   },
   "vibe": {
-    "sha": "aef9d9d593609585a9c9cb627610408c55d12559",
-    "branch": "HEAD"
+    "sha": "3d19b608d0bcb4b2b29986630c915869728ebe5a",
+    "branch": "graphing-lines-1.3"
   }
 }

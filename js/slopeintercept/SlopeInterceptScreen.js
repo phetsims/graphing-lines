@@ -13,6 +13,7 @@ define( require => {
   const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
   const SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
@@ -28,7 +29,7 @@ define( require => {
    */
   function SlopeInterceptScreen( tandem, options ) {
 
-    options = _.extend( {
+    options = merge( {
       name: screenSlopeInterceptString,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()

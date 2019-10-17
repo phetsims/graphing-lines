@@ -28,6 +28,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const merge = require( 'PHET_CORE/merge' );
   const MinusNode = require( 'SCENERY_PHET/MinusNode' );
   const NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -50,7 +51,7 @@ define( require => {
    */
   function SlopeInterceptEquationNode( lineProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
 
       // Don't show 'slope undefined' after non-interactive equations with undefined slope
       // See https://github.com/phetsims/graphing-slope-intercept/issues/7
@@ -107,7 +108,7 @@ define( require => {
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     const yNode = new RichText( GLSymbols.y, staticOptions );
     const equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
-    const slopeMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) );
+    const slopeMinusSignNode = new MinusNode( merge( { size: self.signLineSize }, staticOptions ) );
     let riseNode;
     let runNode;
     if ( options.interactiveSlope ) {
@@ -115,29 +116,29 @@ define( require => {
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-      runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+      riseNode = new DynamicValueNode( riseProperty, merge( { absoluteValue: true }, staticOptions ) );
+      runNode = new DynamicValueNode( runProperty, merge( { absoluteValue: true }, staticOptions ) );
     }
     const slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const xNode = new RichText( GLSymbols.x, _.extend( { absoluteValue: true }, staticOptions ) );
-    const plusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    const minusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    const yInterceptMinusSignNode = new MinusNode( _.extend( {
+    const xNode = new RichText( GLSymbols.x, merge( { absoluteValue: true }, staticOptions ) );
+    const plusNode = new PlusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
+    const minusNode = new MinusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
+    const yInterceptMinusSignNode = new MinusNode( merge( {
       size: self.signLineSize,
       absoluteValue: true
     }, staticOptions ) );
     let yInterceptNumeratorNode; // also used for integer values
     if ( options.interactiveIntercept ) {
       yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
-        _.extend( {}, GLConstants.PICKER_OPTIONS, {
+        merge( {}, GLConstants.PICKER_OPTIONS, {
           color: GLColors.INTERCEPT,
           font: interactiveFont
         } ) );
     }
     else {
-      yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+      yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, merge( { absoluteValue: true }, staticOptions ) );
     }
-    const yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+    const yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, merge( { absoluteValue: true }, staticOptions ) );
     const yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const slopeUndefinedNode = new RichText( '?', staticOptions );
 
@@ -461,7 +462,7 @@ define( require => {
      */
     createGeneralFormNode: function( options ) {
 
-      options = _.extend( {
+      options = merge( {
         pickable: false,
         font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
         maxWidth: 300
@@ -483,7 +484,7 @@ define( require => {
      */
     createDynamicLabel: function( lineProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         interactiveSlope: false,
         interactiveIntercept: false,
         fontSize: 18,

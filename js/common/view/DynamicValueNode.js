@@ -13,6 +13,7 @@ define( require => {
   const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Util = require( 'DOT/Util' );
 
@@ -23,7 +24,7 @@ define( require => {
    */
   function DynamicValueNode( valueProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       fill: 'black',
       font: new GLFont( 12 ),
       decimalPlaces: 0,

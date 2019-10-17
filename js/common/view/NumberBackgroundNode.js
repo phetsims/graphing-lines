@@ -12,6 +12,7 @@ define( require => {
   const GLFont = require( 'GRAPHING_LINES/common/GLFont' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -24,7 +25,7 @@ define( require => {
    */
   function NumberBackgroundNode( valueProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       decimalPlaces: 0,
       font: new GLFont( 12 ),
       textFill: 'black',

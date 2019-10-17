@@ -25,6 +25,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const merge = require( 'PHET_CORE/merge' );
   const MinusNode = require( 'SCENERY_PHET/MinusNode' );
   const NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
   const NumberProperty = require( 'AXON/NumberProperty' );
@@ -48,7 +49,7 @@ define( require => {
    */
   function PointSlopeEquationNode( lineProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
 
       // Don't show 'slope undefined' after non-interactive equations with undefined slope
       // See https://github.com/phetsims/graphing-slope-intercept/issues/7
@@ -104,22 +105,22 @@ define( require => {
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     const yLeftParenNode = new Text( '(', staticOptions );
     const yNode = new RichText( GLSymbols.y, staticOptions );
-    const yPlusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    const yMinusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
+    const yPlusNode = new PlusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
+    const yMinusNode = new MinusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
     let y1Node;
     if ( options.interactivePoint ) {
-      y1Node = new NumberPicker( y1Property, options.y1RangeProperty, _.extend( {}, GLConstants.PICKER_OPTIONS, {
+      y1Node = new NumberPicker( y1Property, options.y1RangeProperty, merge( {}, GLConstants.PICKER_OPTIONS, {
         color: GLColors.POINT_X1_Y1,
         font: interactiveFont
       } ) );
     }
     else {
-      y1Node = new DynamicValueNode( y1Property, _.extend( { absoluteValue: true }, staticOptions ) );
+      y1Node = new DynamicValueNode( y1Property, merge( { absoluteValue: true }, staticOptions ) );
     }
     const yRightParenNode = new Text( ')', staticOptions );
-    const y1MinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) ); // for y=-y1 case
+    const y1MinusSignNode = new MinusNode( merge( { size: self.signLineSize }, staticOptions ) ); // for y=-y1 case
     const equalsNode = new Text( '=', staticOptions );
-    const slopeMinusSignNode = new MinusNode( _.extend( { size: self.signLineSize }, staticOptions ) );
+    const slopeMinusSignNode = new MinusNode( merge( { size: self.signLineSize }, staticOptions ) );
     let riseNode;
     let runNode;
     if ( options.interactiveSlope ) {
@@ -127,23 +128,23 @@ define( require => {
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( riseProperty, _.extend( { absoluteValue: true }, staticOptions ) );
-      runNode = new DynamicValueNode( runProperty, _.extend( { absoluteValue: true }, staticOptions ) );
+      riseNode = new DynamicValueNode( riseProperty, merge( { absoluteValue: true }, staticOptions ) );
+      runNode = new DynamicValueNode( runProperty, merge( { absoluteValue: true }, staticOptions ) );
     }
     const fractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const xLeftParenNode = new Text( '(', staticOptions );
     const xNode = new RichText( GLSymbols.x, staticOptions );
-    const xPlusNode = new PlusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
-    const xMinusNode = new MinusNode( _.extend( { size: self.operatorLineSize }, staticOptions ) );
+    const xPlusNode = new PlusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
+    const xMinusNode = new MinusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
     let x1Node;
     if ( options.interactivePoint ) {
-      x1Node = new NumberPicker( x1Property, options.x1RangeProperty, _.extend( {}, GLConstants.PICKER_OPTIONS, {
+      x1Node = new NumberPicker( x1Property, options.x1RangeProperty, merge( {}, GLConstants.PICKER_OPTIONS, {
         color: GLColors.POINT_X1_Y1,
         font: interactiveFont
       } ) );
     }
     else {
-      x1Node = new DynamicValueNode( x1Property, _.extend( { absoluteValue: true }, staticOptions ) );
+      x1Node = new DynamicValueNode( x1Property, merge( { absoluteValue: true }, staticOptions ) );
     }
     const xRightParenNode = new Text( ')', staticOptions );
     const slopeUndefinedNode = new RichText( '?', staticOptions );
@@ -478,7 +479,7 @@ define( require => {
      */
     createGeneralFormNode: function( options ) {
 
-      options = _.extend( {
+      options = merge( {
         pickable: false,
         font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
         maxWidth: 300
@@ -501,7 +502,7 @@ define( require => {
      */
     createDynamicLabel: function( lineProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         pickable: false,
         interactivePoint: false,
         interactiveSlope: false,

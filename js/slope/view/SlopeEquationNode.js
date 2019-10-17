@@ -22,6 +22,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const merge = require( 'PHET_CORE/merge' );
   const MinusNode = require( 'SCENERY_PHET/MinusNode' );
   const Node = require( 'SCENERY/nodes/Node' );
   const NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
@@ -48,7 +49,7 @@ define( require => {
    */
   function SlopeEquationNode( lineProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       x1RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
       x2RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
       y1RangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
@@ -95,7 +96,7 @@ define( require => {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    const numeratorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
+    const numeratorOperatorNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
     const y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
@@ -107,7 +108,7 @@ define( require => {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    const denominatorOperatorNode = new MinusNode( _.extend( { size: this.operatorLineSize }, staticOptions ) );
+    const denominatorOperatorNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
     const x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
@@ -266,7 +267,7 @@ define( require => {
      */
     createGeneralFormNode: function( options ) {
 
-      options = _.extend( {
+      options = merge( {
         pickable: false,
         fontSize: 20,
         fontWeight: GLConstants.EQUATION_FONT_WEIGHT,
@@ -339,7 +340,7 @@ define( require => {
      */
     createDynamicLabel: function( lineProperty, options ) {
 
-      options = _.extend( {
+      options = merge( {
         pickable: false,
         maxWidth: 200
       }, options );
@@ -359,7 +360,7 @@ define( require => {
    */
   function DynamicLabelNode( lineProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       fontSize: 18
     }, options );
 

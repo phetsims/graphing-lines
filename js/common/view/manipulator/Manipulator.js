@@ -15,6 +15,7 @@ define( require => {
   const Color = require( 'SCENERY/util/Color' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
   const Shape = require( 'KITE/Shape' );
@@ -28,7 +29,7 @@ define( require => {
   function Manipulator( radius, color, options ) {
 
     const mainColor = Color.toColor( color );
-    options = _.extend( {
+    options = merge( {
 
       // Alpha channel of the halo, 0.0 - 1.0. Setting this to 0 results in no halo.
       haloAlpha: 0.5,
@@ -96,7 +97,7 @@ define( require => {
     createIcon: function( radius, color, options ) {
 
       // turn off options related to interactivity, see constructor
-      options = _.extend( {}, options, {
+      options = merge( {}, options, {
         haloAlpha: 0,
         pickable: false,
         mouseArea: null,

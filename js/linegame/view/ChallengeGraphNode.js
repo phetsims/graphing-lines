@@ -18,6 +18,7 @@ define( require => {
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
   const LineNode = require( 'GRAPHING_LINES/common/view/LineNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const PlottedPointNode = require( 'GRAPHING_LINES/common/view/PlottedPointNode' );
   const Property = require( 'AXON/Property' );
   const SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
@@ -30,7 +31,7 @@ define( require => {
    */
   function ChallengeGraphNode( challenge, options ) {
 
-    options = _.extend( {
+    options = merge( {
       answerLineVisible: false,
       answerPointVisible: false,
       guessLineVisible: false,

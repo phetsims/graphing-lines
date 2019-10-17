@@ -14,6 +14,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Util = require( 'DOT/Util' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -23,7 +24,7 @@ define( require => {
    */
   function BaseChallengeFactory( options ) {
 
-    options = _.extend( {
+    options = merge( {
       xRange: GLConstants.X_AXIS_RANGE, // {Range} range of the graph's x axis
       yRange: GLConstants.Y_AXIS_RANGE  // {Range} range of the graph's y axis
     }, options );

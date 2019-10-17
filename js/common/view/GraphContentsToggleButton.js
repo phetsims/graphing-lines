@@ -11,6 +11,7 @@ define( require => {
   // modules
   const EyeToggleButton = require( 'SCENERY_PHET/buttons/EyeToggleButton' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+  const merge = require( 'PHET_CORE/merge' );
   const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
 
   class GraphContentsToggleButton extends EyeToggleButton {
@@ -21,7 +22,7 @@ define( require => {
      */
     constructor( property, options ) {
 
-      options = _.extend( {
+      options = merge( {
         trueColor: 'white', // {Color|string} button color when property.value === true
         falseColor: PhetColorScheme.BUTTON_YELLOW  // {Color|string} button color when property.value === false
       }, options );

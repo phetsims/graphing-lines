@@ -21,6 +21,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Path = require( 'SCENERY/nodes/Path' );
   const Shape = require( 'KITE/Shape' );
@@ -35,7 +36,7 @@ define( require => {
    */
   function DimensionalArrowNode( tailX, tailY, tipX, tipY, options ) {
 
-    options = _.extend( {
+    options = merge( {
       stroke: 'black',
       lineWidth: 1,
       arrowTipSize: new Dimension2( 6, 8 ), // use even-number dimensions, or tip will look asymmetrical due to rounding
@@ -50,8 +51,8 @@ define( require => {
     // nodes with dummy initial shapes
     this.lineNode = new Line( 0, 0, 0, 1, options );  // @private
     this.tipNode = new Path( null, options ); // @private
-    this.tipDelimiterNode = new Line( 0, 0, 0, 1, _.extend( { visible: options.delimitersVisible }, options ) ); // @private
-    this.tailDelimiterNode = new Line( 0, 0, 0, 1, _.extend( { visible: options.delimitersVisible }, options ) ); // @private
+    this.tipDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
+    this.tailDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
 
     options.children = [ this.tipDelimiterNode, this.tailDelimiterNode, this.lineNode, this.tipNode ];
     Node.call( this, options );

@@ -15,6 +15,7 @@ define( require => {
   const GLConstants = require( 'GRAPHING_LINES/common/GLConstants' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const NumberPicker = require( 'SCENERY_PHET/NumberPicker' );
 
   /**
@@ -28,7 +29,7 @@ define( require => {
    */
   function CoordinatePicker( a1Property, b1Property, a2Property, b2Property, rangeProperty, options ) {
 
-    options = _.extend( {}, GLConstants.PICKER_OPTIONS, {
+    options = merge( {}, GLConstants.PICKER_OPTIONS, {
       color: GLColors.POINT_X1_Y1
     }, options );
 

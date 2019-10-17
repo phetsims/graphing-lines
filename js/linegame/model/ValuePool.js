@@ -13,6 +13,7 @@ define( require => {
   // modules
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Util = require( 'DOT/Util' );
 
   /**
@@ -95,7 +96,7 @@ define( require => {
 
       assert && assert( Util.isInteger( range.min ) && Util.isInteger( range.max ) );
 
-      options = _.extend( {
+      options = merge( {
         excludeZero: false // {boolean} whether to exclude zero from the array
       }, options );
 

@@ -21,6 +21,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
   const LineGameConstants = require( 'GRAPHING_LINES/linegame/LineGameConstants' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
   const PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
@@ -236,7 +237,7 @@ define( require => {
      */
     createEquationNode: function( lineProperty, equationForm, options ) {
 
-      options = _.extend( {
+      options = merge( {
         fontSize: 18, // {number},
         slopeUndefinedVisible: true
       }, options );

@@ -16,6 +16,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HSeparator = require( 'SUN/HSeparator' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const TextPushButton = require( 'SUN/buttons/TextPushButton' );
   const VBox = require( 'SCENERY/nodes/VBox' );
 
@@ -38,7 +39,7 @@ define( require => {
   function EquationAccordionBox( titleNode, interactiveEquationNode, interactiveLineProperty, savedLines,
                                  expandedProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
       titleXSpacing: 5,
       titleYMargin: 10,

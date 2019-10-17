@@ -22,6 +22,7 @@ define( require => {
   const LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
+  const merge = require( 'PHET_CORE/merge' );
   const Panel = require( 'SUN/Panel' );
   const RichText = require( 'SCENERY/nodes/RichText' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -44,7 +45,7 @@ define( require => {
    */
   function GraphControlPanel( gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
 
-    options = _.extend( {
+    options = merge( {
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
       stroke: 'black',
       lineWidth: 1,

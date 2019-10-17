@@ -19,6 +19,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const LayoutBox = require( 'SCENERY/nodes/LayoutBox' );
   const LevelSelectionButton = require( 'VEGAS/LevelSelectionButton' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
   const ScoreDisplayStars = require( 'VEGAS/ScoreDisplayStars' );
@@ -43,7 +44,7 @@ define( require => {
     assert && assert( _.flatten( levelImages ).length === model.numberOfLevels,
       'one image is required for each game level' );
 
-    options = _.extend( {
+    options = merge( {
       buttonsXSpace: 50,
       buttonsYSpace: 25
     }, options );

@@ -12,6 +12,7 @@ define( require => {
   const Color = require( 'SCENERY/util/Color' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const ShadedSphereNode = require( 'SCENERY_PHET/ShadedSphereNode' );
 
   /**
@@ -24,7 +25,7 @@ define( require => {
 
     const mainColor = Color.toColor( color );
 
-    options = _.extend( {
+    options = merge( {
       highlightColor: Color.WHITE,
       mainColor: mainColor,
       shadowColor: mainColor.darkerColor(),

@@ -12,6 +12,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'SCENERY/nodes/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
 
   /**
@@ -22,7 +23,7 @@ define( require => {
    */
   function UndefinedSlopeIndicator( width, height, options ) {
 
-    options = _.extend( {
+    options = merge( {
       stroke: 'rgba( 255, 0, 0, 0.3 )',
       lineWidth: 4
     }, options );

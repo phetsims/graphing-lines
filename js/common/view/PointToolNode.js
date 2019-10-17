@@ -14,6 +14,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const Image = require( 'SCENERY/nodes/Image' );
   const inherit = require( 'PHET_CORE/inherit' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
@@ -45,7 +46,7 @@ define( require => {
    */
   function PointToolNode( pointTool, modelViewTransform, graph, linesVisibleProperty, options ) {
 
-    options = _.extend( {
+    options = merge( {
       cursor: 'pointer',
       backgroundNormalColor: 'white',
       foregroundNormalColor: 'black',

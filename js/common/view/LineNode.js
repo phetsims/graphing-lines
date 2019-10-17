@@ -17,6 +17,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line require-statement-match
 
@@ -49,7 +50,7 @@ define( require => {
    */
   function LineNode( lineProperty, graph, modelViewTransform, options ) {
 
-    options = _.extend( {
+    options = merge( {
 
       // type for creating an equation node,
       // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
@@ -64,10 +65,10 @@ define( require => {
 
     // fill in appropriate options based on whether the line has arrows
     if ( options.hasArrows ) {
-      options.lineOptions = _.extend( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
+      options.lineOptions = merge( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
     }
     else {
-      options.lineOptions = _.extend( {}, SCENERY_LINE_DEFAULT_OPTIONS, options.lineOptions );
+      options.lineOptions = merge( {}, SCENERY_LINE_DEFAULT_OPTIONS, options.lineOptions );
     }
 
     const self = this;

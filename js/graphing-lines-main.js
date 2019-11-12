@@ -31,8 +31,7 @@ define( require => {
       graphicArts: 'Megan Lai, Sharon Siman-Tov',
       qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
                         'Benjamin Roberts, Jacob Romero, Katie Woessner, Bryan Yoelin'
-    },
-    supportsSound: true
+    }
   };
 
   SimLauncher.launch( function() {

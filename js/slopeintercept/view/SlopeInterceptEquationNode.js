@@ -39,7 +39,7 @@ define( require => {
   const SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
@@ -179,7 +179,7 @@ define( require => {
       const slope = line.getSlope();
       const zeroSlope = ( slope === 0 );
       const unitySlope = ( Math.abs( slope ) === 1 );
-      const integerSlope = Util.isInteger( slope );
+      const integerSlope = Utils.isInteger( slope );
       const positiveSlope = ( slope > 0 );
       const fractionalSlope = ( !zeroSlope && !unitySlope && !integerSlope );
 
@@ -383,7 +383,7 @@ define( require => {
     const lineObserver = function( line ) {
 
       // If intercept is interactive, then (x1,y1) must be on a grid line on the y intercept.
-      assert && assert( !options.interactiveIntercept || ( line.x1 === 0 && Util.isInteger( line.y1 ) ) );
+      assert && assert( !options.interactiveIntercept || ( line.x1 === 0 && Utils.isInteger( line.y1 ) ) );
 
       // Synchronize the controls atomically.
       updatingControls = true;

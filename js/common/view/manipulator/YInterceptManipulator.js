@@ -16,7 +16,7 @@ define( require => {
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -88,7 +88,7 @@ define( require => {
         const location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const y1 = Util.roundSymmetric( Util.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
+        const y1 = Utils.roundSymmetric( Utils.clamp( location.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
         const line = lineProperty.get();
 
         // Keep slope constant, change y1.

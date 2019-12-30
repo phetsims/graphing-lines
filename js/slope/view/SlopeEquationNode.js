@@ -33,7 +33,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const slopeIsString = require( 'string!GRAPHING_LINES/slopeIs' );
@@ -429,10 +429,10 @@ define( require => {
           nextXOffset = slopeIsNode.right + self.relationalOperatorXSpacing;
         }
 
-        if ( Util.isInteger( line.getSlope() ) ) {
+        if ( Utils.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
           riseNode.visible = true;
-          riseNode.text = Util.toFixed( Math.abs( line.getSlope() ), 0 );
+          riseNode.text = Utils.toFixed( Math.abs( line.getSlope() ), 0 );
           riseNode.fill = lineColor;
           riseNode.left = nextXOffset;
           riseNode.y = slopeIsNode.y;
@@ -441,8 +441,8 @@ define( require => {
           // fractional slope
           riseNode.visible = runNode.visible = fractionLineNode.visible = true;
 
-          riseNode.text = Util.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
-          runNode.text = Util.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+          riseNode.text = Utils.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+          runNode.text = Utils.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
           fractionLineNode.setLine( 0, 0, Math.max( riseNode.width, runNode.width ), 0 );
           riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
 

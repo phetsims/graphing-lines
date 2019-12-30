@@ -15,7 +15,7 @@ define( require => {
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -88,8 +88,8 @@ define( require => {
         const location = modelViewTransform.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
         const line = lineProperty.get();
-        const run = Util.roundSymmetric( Util.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
-        const rise = Util.roundSymmetric( Util.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
+        const run = Utils.roundSymmetric( Utils.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
+        const rise = Utils.roundSymmetric( Utils.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
           lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );

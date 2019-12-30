@@ -14,7 +14,7 @@ define( require => {
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   /**
    * @param {*[][]} arrays - the sets of values
@@ -94,7 +94,7 @@ define( require => {
      */
     rangeToArray: function( range, options ) {
 
-      assert && assert( Util.isInteger( range.min ) && Util.isInteger( range.max ) );
+      assert && assert( Utils.isInteger( range.min ) && Utils.isInteger( range.max ) );
 
       options = merge( {
         excludeZero: false // {boolean} whether to exclude zero from the array

@@ -15,7 +15,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const Line = require( 'GRAPHING_LINES/common/model/Line' );
   const merge = require( 'PHET_CORE/merge' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -93,13 +93,13 @@ define( require => {
       // x
       const minX = ( run >= 0 ) ? graphXRange.min : graphXRange.min - run;
       const maxX = (run >= 0) ? graphXRange.max - run : graphXRange.max;
-      const x = Util.roundSymmetric( minX + ( phet.joist.random.nextDouble() * ( maxX - minX ) ) );
+      const x = Utils.roundSymmetric( minX + ( phet.joist.random.nextDouble() * ( maxX - minX ) ) );
       assert && assert( x >= minX && x <= maxX, 'x out of range: ' + x );
 
       // y
       const minY = ( rise >= 0) ? graphYRange.min : graphYRange.min - rise;
       const maxY = (rise >= 0) ? graphYRange.max - rise : graphYRange.max;
-      const y = Util.roundSymmetric( minY + ( phet.joist.random.nextDouble() * ( maxY - minY ) ) );
+      const y = Utils.roundSymmetric( minY + ( phet.joist.random.nextDouble() * ( maxY - minY ) ) );
       assert && assert( y >= minY && y <= maxY, 'y out of range: ' + y );
 
       return new Vector2( x, y );
@@ -124,13 +124,13 @@ define( require => {
       // x1 coordinates
       const minX1 = ( run >= 0 ) ? graphXRange.max - run + 1 : graphXRange.min;
       const maxX1 = ( run >= 0 ) ? graphXRange.max : graphXRange.min - run - 1;
-      const x1 = Util.roundSymmetric( minX1 + ( phet.joist.random.nextDouble() * ( maxX1 - minX1 ) ) );
+      const x1 = Utils.roundSymmetric( minX1 + ( phet.joist.random.nextDouble() * ( maxX1 - minX1 ) ) );
       assert && assert( x1 >= minX1 && x1 <= maxX1, 'x1 out of range: ' + x1 );
 
       // y1 coordinates
       const minY1 = ( rise >= 0 ) ? graphYRange.max - rise + 1 : graphYRange.min;
       const maxY1 = ( rise >= 0 ) ? graphYRange.max : graphYRange.min - rise - 1;
-      const y1 = Util.roundSymmetric( minY1 + ( phet.joist.random.nextDouble() * ( maxY1 - minY1 ) ) );
+      const y1 = Utils.roundSymmetric( minY1 + ( phet.joist.random.nextDouble() * ( maxY1 - minY1 ) ) );
       assert && assert( y1 >= minY1 && y1 <= maxY1, 'y1 out of range: ' + y1 );
 
       // compute (x2,y2) for validation

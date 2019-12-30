@@ -16,7 +16,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   /**
    * @param {Property.<number>} valueProperty
@@ -52,7 +52,7 @@ define( require => {
     const valueObserver = function( value ) {
 
       // format the value
-      textNode.text = Util.toFixed( value, options.decimalPlaces );
+      textNode.text = Utils.toFixed( value, options.decimalPlaces );
 
       // adjust the background to fit the value
       const backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );

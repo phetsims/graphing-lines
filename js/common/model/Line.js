@@ -14,7 +14,7 @@ define( require => {
   const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
   const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
   const inherit = require( 'PHET_CORE/inherit' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   /**
    * @param x1
@@ -110,7 +110,7 @@ define( require => {
     // @public Gets the simplified rise.
     getSimplifiedRise: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return Util.roundSymmetric( this.rise / Util.gcd( this.rise, this.run ) );
+        return Utils.roundSymmetric( this.rise / Utils.gcd( this.rise, this.run ) );
       }
       else {
         return this.rise;
@@ -120,7 +120,7 @@ define( require => {
     // @public Gets the simplified run.
     getSimplifiedRun: function() {
       if ( this.slopeIsSimplifiable() ) {
-        return Util.roundSymmetric( this.run / Util.gcd( this.rise, this.run ) );
+        return Utils.roundSymmetric( this.run / Utils.gcd( this.rise, this.run ) );
       }
       else {
         return this.run;
@@ -133,7 +133,7 @@ define( require => {
      * @public
      */
     slopeIsSimplifiable: function() {
-      return ( this.rise !== 0 ) && ( this.run !== 0 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run );
+      return ( this.rise !== 0 ) && ( this.run !== 0 ) && Utils.isInteger( this.rise ) && Utils.isInteger( this.run );
     },
 
     /**
@@ -166,14 +166,14 @@ define( require => {
      * @public
      */
     getYIntercept: function() {
-      assert && assert( Util.isInteger( this.x1 ) && Util.isInteger( this.y1 ) && Util.isInteger( this.rise ) && Util.isInteger( this.run ) );
+      assert && assert( Utils.isInteger( this.x1 ) && Utils.isInteger( this.y1 ) && Utils.isInteger( this.rise ) && Utils.isInteger( this.run ) );
       if ( this.rise === 0 || this.run === 0 ) {
         return new Fraction( this.y1, 1 ); // not technically correct for run===0, but gives the desired result in slope-intercept equations
       }
-      const numerator = Util.roundSymmetric( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
+      const numerator = Utils.roundSymmetric( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
       const denominator = this.run;
-      const gcd = Util.gcd( numerator, denominator );
-      return new Fraction( Util.roundSymmetric( numerator / gcd ), Util.roundSymmetric( denominator / gcd ) );
+      const gcd = Utils.gcd( numerator, denominator );
+      return new Fraction( Utils.roundSymmetric( numerator / gcd ), Utils.roundSymmetric( denominator / gcd ) );
     }
   }, {
 

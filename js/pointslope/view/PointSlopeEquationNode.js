@@ -37,7 +37,7 @@ define( require => {
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const slopeUndefinedString = require( 'string!GRAPHING_LINES/slopeUndefined' );
@@ -296,7 +296,7 @@ define( require => {
           const slope = line.getSlope();
           const zeroSlope = ( slope === 0 );
           const unitySlope = ( Math.abs( slope ) === 1 );
-          const integerSlope = Util.isInteger( slope );
+          const integerSlope = Utils.isInteger( slope );
           const positiveSlope = ( slope > 0 );
           const fractionalSlope = ( !zeroSlope && !unitySlope && !integerSlope );
 

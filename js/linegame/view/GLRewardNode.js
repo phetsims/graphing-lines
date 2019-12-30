@@ -38,7 +38,7 @@ define( require => {
   const SlopeInterceptEquationNode = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptEquationNode' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
 
   // strings
   const pointXYString = require( 'string!GRAPHING_LINES/point.XY' );
@@ -80,7 +80,7 @@ define( require => {
   };
 
   var getRandomNonZeroInteger = function( min, max ) {
-    let i = Util.roundSymmetric( min + ( phet.joist.random.nextDouble() * ( max - min ) ) );
+    let i = Utils.roundSymmetric( min + ( phet.joist.random.nextDouble() * ( max - min ) ) );
     if ( i === 0 ) { i = 1; }
     return i;
   };

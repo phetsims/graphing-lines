@@ -21,7 +21,7 @@ define( require => {
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // strings
@@ -167,7 +167,7 @@ define( require => {
 
     // @private Sets the displayed value to a point
     setCoordinatesVector2: function( p ) {
-      this.setCoordinatesString( StringUtils.format( pointXYString, Util.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Util.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
+      this.setCoordinatesString( StringUtils.format( pointXYString, Utils.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Utils.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
     },
 
     // @private Sets the displayed value to an arbitrary string
@@ -203,7 +203,7 @@ define( require => {
         return point;
       }
       else {
-        return new Vector2( Util.clamp( point.x, bounds.minX, bounds.maxX ), Util.clamp( point.y, bounds.minY, bounds.maxY ) );
+        return new Vector2( Utils.clamp( point.x, bounds.minX, bounds.maxX ), Utils.clamp( point.y, bounds.minY, bounds.maxY ) );
       }
     };
 
@@ -226,7 +226,7 @@ define( require => {
         location = constrainBounds( location, pointTool.dragBounds );
         if ( graph.contains( location ) ) {
           // snap to the graph's grid
-          location = new Vector2( Util.toFixedNumber( location.x, 0 ), Util.toFixedNumber( location.y, 0 ) );
+          location = new Vector2( Utils.toFixedNumber( location.x, 0 ), Utils.toFixedNumber( location.y, 0 ) );
         }
         pointTool.locationProperty.set( location );
       }

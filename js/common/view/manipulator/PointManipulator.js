@@ -15,7 +15,7 @@ define( require => {
   const inherit = require( 'PHET_CORE/inherit' );
   const Manipulator = require( 'GRAPHING_LINES/common/view/manipulator/Manipulator' );
   const SimpleDragHandler = require( 'SCENERY/input/SimpleDragHandler' );
-  const Util = require( 'DOT/Util' );
+  const Utils = require( 'DOT/Utils' );
   const Vector2 = require( 'DOT/Vector2' );
 
   /**
@@ -90,8 +90,8 @@ define( require => {
         const location = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const x = Util.roundSymmetric( Util.clamp( location.x, xRange.min, xRange.max ) );
-        const y = Util.roundSymmetric( Util.clamp( location.y, yRange.min, yRange.max ) );
+        const x = Utils.roundSymmetric( Utils.clamp( location.x, xRange.min, xRange.max ) );
+        const y = Utils.roundSymmetric( Utils.clamp( location.y, yRange.min, yRange.max ) );
         const p = new Vector2( x, y );
 
         // is this point the same as one of the others?

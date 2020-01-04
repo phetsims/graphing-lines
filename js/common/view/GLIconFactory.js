@@ -25,13 +25,16 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
-  const scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
+  const SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line
   const Shape = require( 'KITE/Shape' );
   const SlopeToolNode = require( 'GRAPHING_LINES/common/view/SlopeToolNode' );
   const Vector2 = require( 'DOT/Vector2' );
 
   // constants
+  const scenery = {
+    Line: SceneryLine
+  };
   const SCREEN_ICON_BASE_SIZE = new Dimension2( 548, 373 );
   const ARROW_OPTIONS = { doubleHead: true, stroke: 'black', lineWidth: 18, headWidth: 30, headHeight: 30 };
   const DIMENSIONAL_ARROW_OPTIONS = {
@@ -122,7 +125,7 @@ define( require => {
 
       // dashed line where the line would be, tweaked visually
       const lineNode = new Path( Shape.lineSegment( slopeToolNode.left + ( 0.4 * slopeToolNode.width ), slopeToolNode.bottom,
-          slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
+        slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
         {
           lineWidth: 1,
           lineDash: [ 6, 6 ],

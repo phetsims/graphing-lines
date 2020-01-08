@@ -112,20 +112,20 @@ define( require => {
     Node.call( this, options );
 
     // initial state
-    this.setCoordinatesVector2( pointTool.locationProperty.get() );
+    this.setCoordinatesVector2( pointTool.positionProperty.get() );
     this.setBackground( options.backgroundNormalColor );
 
-    // location and display, unmultilink in dispose
-    const updateMultilink = Property.multilink( [ pointTool.locationProperty, pointTool.onLineProperty, linesVisibleProperty ],
+    // position and display, unmultilink in dispose
+    const updateMultilink = Property.multilink( [ pointTool.positionProperty, pointTool.onLineProperty, linesVisibleProperty ],
       function() {
 
-        // move to location
-        const location = pointTool.locationProperty.get();
-        self.translation = modelViewTransform.modelToViewPosition( location );
+        // move to position
+        const position = pointTool.positionProperty.get();
+        self.translation = modelViewTransform.modelToViewPosition( position );
 
         // display value and highlighting
-        if ( graph.contains( location ) ) {
-          self.setCoordinatesVector2( location );
+        if ( graph.contains( position ) ) {
+          self.setCoordinatesVector2( position );
           if ( linesVisibleProperty.get() ) {
             // use the line's color to highlight
             self.setForeground( !pointTool.onLineProperty.get() ? options.foregroundNormalColor : options.foregroundHighlightColor );
@@ -214,21 +214,21 @@ define( require => {
       // note where the drag started
       start: function( event ) {
         // Note the mouse-click offset when dragging starts.
-        const location = modelViewTransform.modelToViewPosition( pointTool.locationProperty.get() );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
+        const position = modelViewTransform.modelToViewPosition( pointTool.positionProperty.get() );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
         // Move the tool that we're dragging to the foreground.
         event.currentTarget.moveToFront();
       },
 
       drag: function( event ) {
         const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        let location = modelViewTransform.viewToModelPosition( parentPoint );
-        location = constrainBounds( location, pointTool.dragBounds );
-        if ( graph.contains( location ) ) {
+        let position = modelViewTransform.viewToModelPosition( parentPoint );
+        position = constrainBounds( position, pointTool.dragBounds );
+        if ( graph.contains( position ) ) {
           // snap to the graph's grid
-          location = new Vector2( Utils.toFixedNumber( location.x, 0 ), Utils.toFixedNumber( location.y, 0 ) );
+          position = new Vector2( Utils.toFixedNumber( position.x, 0 ), Utils.toFixedNumber( position.y, 0 ) );
         }
-        pointTool.locationProperty.set( location );
+        pointTool.positionProperty.set( position );
       }
     } );
   }

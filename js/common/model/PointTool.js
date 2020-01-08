@@ -15,20 +15,20 @@ define( require => {
   const Vector2Property = require( 'DOT/Vector2Property' );
 
   /**
-   * @param {Vector2} location initial location of the tool
+   * @param {Vector2} position initial position of the tool
    * @param {string} orientation direction that the tip points, either 'up', 'down'
    * @param {ObservableArray.<Line>} lines Lines that the tool might intersect
    * @param {Bounds2} dragBounds tool can be dragged within these bounds
    * @constructor
    */
-  function PointTool( location, orientation, lines, dragBounds ) {
+  function PointTool( position, orientation, lines, dragBounds ) {
 
     assert && assert( _.includes( [ 'up', 'down' ], orientation ) );
 
     const self = this;
 
-    // @public location of the point tool
-    this.locationProperty = new Vector2Property( location );
+    // @public position of the point tool
+    this.positionProperty = new Vector2Property( position );
 
     // @public {Property.<Line|null> line that the tool is on, null if it's not on a line
     this.onLineProperty = new Property( null );
@@ -39,7 +39,7 @@ define( require => {
     // Update when the point tool moves or the lines change.
     // unmultilink unneeded because PointTool either exists for sim lifetime, or is owned by a Challenge that
     // doesn't require dispose.
-    Property.multilink( [ this.locationProperty, lines.lengthProperty ],
+    Property.multilink( [ this.positionProperty, lines.lengthProperty ],
       function() {
         let line;
         for ( let i = 0; i < lines.length; i++ ) {
@@ -60,7 +60,7 @@ define( require => {
 
     // @public
     reset: function() {
-      this.locationProperty.reset();
+      this.positionProperty.reset();
       this.onLineProperty.reset();
     },
 
@@ -71,7 +71,7 @@ define( require => {
      * @public
      */
     isOnLine: function( line ) {
-      return line.onLinePoint( this.locationProperty.get() );
+      return line.onLinePoint( this.positionProperty.get() );
     }
   } );
 } );

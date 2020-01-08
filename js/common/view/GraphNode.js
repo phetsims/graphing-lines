@@ -183,9 +183,9 @@ define( require => {
     Node.call( this );
 
     // horizontal line with arrows at both ends
-    const tailLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.min - AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
-    const tipLocation = new Vector2( modelViewTransform.modelToViewX( graph.xRange.max + AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
-    const lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
+    const tailPosition = new Vector2( modelViewTransform.modelToViewX( graph.xRange.min - AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
+    const tipPosition = new Vector2( modelViewTransform.modelToViewX( graph.xRange.max + AXIS_EXTENT ), modelViewTransform.modelToViewY( 0 ) );
+    const lineNode = new ArrowNode( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y, {
       doubleHead: true,
       headHeight: AXIS_ARROW_SIZE.height,
       headWidth: AXIS_ARROW_SIZE.width,
@@ -235,9 +235,9 @@ define( require => {
     Node.call( this );
 
     // vertical line with arrows at both ends
-    const tailLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
-    const tipLocation = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
-    const lineNode = new ArrowNode( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y, {
+    const tailPosition = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.min - AXIS_EXTENT ) );
+    const tipPosition = new Vector2( modelViewTransform.modelToViewX( 0 ), modelViewTransform.modelToViewY( graph.yRange.max + AXIS_EXTENT ) );
+    const lineNode = new ArrowNode( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y, {
       doubleHead: true,
       headHeight: AXIS_ARROW_SIZE.height,
       headWidth: AXIS_ARROW_SIZE.width,

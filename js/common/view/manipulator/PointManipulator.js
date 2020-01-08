@@ -80,18 +80,18 @@ define( require => {
 
       // note where the drag started
       start: function( event ) {
-        const location = modelViewTransform.modelToViewPosition( pointProperty.get() );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
+        const position = modelViewTransform.modelToViewPosition( pointProperty.get() );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
       },
 
       drag: function( event ) {
 
         const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        const location = modelViewTransform.viewToModelPosition( parentPoint );
+        const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const x = Utils.roundSymmetric( Utils.clamp( location.x, xRange.min, xRange.max ) );
-        const y = Utils.roundSymmetric( Utils.clamp( location.y, yRange.min, yRange.max ) );
+        const x = Utils.roundSymmetric( Utils.clamp( position.x, xRange.min, xRange.max ) );
+        const y = Utils.roundSymmetric( Utils.clamp( position.y, yRange.min, yRange.max ) );
         const p = new Vector2( x, y );
 
         // is this point the same as one of the others?

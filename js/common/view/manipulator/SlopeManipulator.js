@@ -79,17 +79,17 @@ define( require => {
       // note where the drag started
       start: function( event ) {
         const line = lineProperty.get();
-        const location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
+        const position = modelViewTransform.modelToViewXY( line.x2, line.y2 );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
       },
 
       drag: function( event ) {
         const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        const location = modelViewTransform.viewToModelPosition( parentPoint );
+        const position = modelViewTransform.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
         const line = lineProperty.get();
-        const run = Utils.roundSymmetric( Utils.clamp( location.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
-        const rise = Utils.roundSymmetric( Utils.clamp( location.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
+        const run = Utils.roundSymmetric( Utils.clamp( position.x - line.x1, runRangeProperty.get().min, runRangeProperty.get().max ) );
+        const rise = Utils.roundSymmetric( Utils.clamp( position.y - line.y1, riseRangeProperty.get().min, riseRangeProperty.get().max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
           lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );

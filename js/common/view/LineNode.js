@@ -191,14 +191,14 @@ define( require => {
       }
 
       // line
-      const tailLocation = this.modelViewTransform.modelToViewXY( tailX, tailY );
-      const tipLocation = this.modelViewTransform.modelToViewXY( tipX, tipY );
+      const tailPosition = this.modelViewTransform.modelToViewXY( tailX, tailY );
+      const tipPosition = this.modelViewTransform.modelToViewXY( tipX, tipY );
       if ( this.lineNode instanceof ArrowNode ) {
-        this.lineNode.setTailAndTip( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
+        this.lineNode.setTailAndTip( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y );
         this.lineNode.fill = line.color;
       }
       else {
-        this.lineNode.setLine( tailLocation.x, tailLocation.y, tipLocation.x, tipLocation.y );
+        this.lineNode.setLine( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y );
         this.lineNode.stroke = line.color;
       }
 
@@ -225,12 +225,12 @@ define( require => {
         if ( line.undefinedSlope() ) {
           // this puts the 'undefined slope' label to the right of the y-axis, at the same end of the line as the slope manipulator
           if ( line.rise < 0 ) {
-            this.equationParentNode.translation = tipLocation;
+            this.equationParentNode.translation = tipPosition;
             this.equationNode.right = -X_OFFSET + rightOffset;
             this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
           else {
-            this.equationParentNode.translation = tailLocation;
+            this.equationParentNode.translation = tailPosition;
             this.equationNode.left = X_OFFSET - leftOffset;
             this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
@@ -238,13 +238,13 @@ define( require => {
         else if ( line.rise <= 0 ) {
           if ( line.run >= 0 ) {
             // quadrant 4: equation above the line, at tip (right)
-            this.equationParentNode.translation = tipLocation;
+            this.equationParentNode.translation = tipPosition;
             this.equationNode.right = -X_OFFSET + rightOffset;
             this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
           else {
             // quadrant 3: equation above the line, at tail (left)
-            this.equationParentNode.translation = tailLocation;
+            this.equationParentNode.translation = tailPosition;
             this.equationNode.left = X_OFFSET - leftOffset;
             this.equationNode.bottom = -Y_OFFSET + bottomOffset;
           }
@@ -252,13 +252,13 @@ define( require => {
         else {
           if ( line.run > 0 ) {
             // quadrant 1: equation below the line, at tip (right)
-            this.equationParentNode.translation = tipLocation;
+            this.equationParentNode.translation = tipPosition;
             this.equationNode.right = -X_OFFSET + rightOffset;
             this.equationNode.top = Y_OFFSET - topOffset;
           }
           else {
             // quadrant 2: equation below the line, at tail (left)
-            this.equationParentNode.translation = tailLocation;
+            this.equationParentNode.translation = tailPosition;
             this.equationNode.left = X_OFFSET - leftOffset;
             this.equationNode.top = Y_OFFSET - topOffset;
           }

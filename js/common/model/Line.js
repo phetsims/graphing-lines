@@ -161,7 +161,7 @@ define( require => {
 
     /**
      * Gets the y-intercept as a simplified fraction.
-     * This is valid only if (x1,y1) and (x2,y2) are at integer locations on the grid.
+     * This is valid only if (x1,y1) and (x2,y2) are at integer positions on the grid.
      * @returns {Fraction}
      * @public
      */

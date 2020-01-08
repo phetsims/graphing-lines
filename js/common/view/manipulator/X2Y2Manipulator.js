@@ -79,19 +79,19 @@ define( require => {
       // note where the drag started
       start: function( event ) {
         const line = lineProperty.get();
-        const location = modelViewTransform.modelToViewXY( line.x2, line.y2 );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( location );
+        const position = modelViewTransform.modelToViewXY( line.x2, line.y2 );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
       },
 
       drag: function( event ) {
 
         const line = lineProperty.get();
         const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-        const location = modelViewTransform.viewToModelPosition( parentPoint );
+        const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const x2 = Utils.roundSymmetric( Utils.clamp( location.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
-        const y2 = Utils.roundSymmetric( Utils.clamp( location.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
+        const x2 = Utils.roundSymmetric( Utils.clamp( position.x, x2RangeProperty.get().min, x2RangeProperty.get().max ) );
+        const y2 = Utils.roundSymmetric( Utils.clamp( position.y, y2RangeProperty.get().min, y2RangeProperty.get().max ) );
 
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)

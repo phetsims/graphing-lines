@@ -28,8 +28,8 @@ define( require => {
   const NumberBackgroundNode = require( 'GRAPHING_LINES/common/view/NumberBackgroundNode' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
-  const scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
   const RichText = require( 'SCENERY/nodes/RichText' );
+  const SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line require-statement-match
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -102,7 +102,7 @@ define( require => {
       color: GLColors.POINT_X1_Y1
     } );
     // fraction line, correct length will be set later
-    const interactiveFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions );
+    const interactiveFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
     const x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
       font: interactiveFont,
@@ -124,7 +124,7 @@ define( require => {
     const unsimplifiedEqualsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     const unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
     const unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
-    const unsimplifiedFractionLineNode = new scenery.Line( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
+    const unsimplifiedFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
     const undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
 
@@ -306,7 +306,7 @@ define( require => {
 
       // fraction line
       const length = Math.max( numeratorNode.width, denominatorNode.width );
-      const fractionLineNode = new scenery.Line( 0, 0, length, 0, {
+      const fractionLineNode = new SceneryLine( 0, 0, length, 0, {
         stroke: options.fill,
         lineWidth: equationNode.fractionLineThickness
       } );
@@ -377,7 +377,7 @@ define( require => {
     const minusSignNode = new MinusNode( { size: this.signLineSize } );
     const riseNode = new Text( '?', textOptions );
     const runNode = new Text( '?', textOptions );
-    const fractionLineNode = new scenery.Line( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
+    const fractionLineNode = new SceneryLine( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     assert && assert( this.getChildrenCount() === 0, 'supertype has unexpected children' );

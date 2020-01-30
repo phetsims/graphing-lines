@@ -35,7 +35,7 @@ define( require => {
   const PlusNode = require( 'SCENERY_PHET/PlusNode' );
   const Property = require( 'AXON/Property' );
   const RichText = require( 'SCENERY/nodes/RichText' );
-  const scenery = { Line: require( 'SCENERY/nodes/Line' ) }; // scenery.Line, workaround for name collision with graphing-lines.Line
+  const SceneryLine = require( 'SCENERY/nodes/Line' ); // eslint-disable-line require-statement-match
   const SlopePicker = require( 'GRAPHING_LINES/common/view/picker/SlopePicker' );
   const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const UndefinedSlopeIndicator = require( 'GRAPHING_LINES/common/view/UndefinedSlopeIndicator' );
@@ -119,7 +119,7 @@ define( require => {
       riseNode = new DynamicValueNode( riseProperty, merge( { absoluteValue: true }, staticOptions ) );
       runNode = new DynamicValueNode( runProperty, merge( { absoluteValue: true }, staticOptions ) );
     }
-    const slopeFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    const slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const xNode = new RichText( GLSymbols.x, merge( { absoluteValue: true }, staticOptions ) );
     const plusNode = new PlusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
     const minusNode = new MinusNode( merge( { size: self.operatorLineSize }, staticOptions ) );
@@ -139,7 +139,7 @@ define( require => {
       yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, merge( { absoluteValue: true }, staticOptions ) );
     }
     const yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, merge( { absoluteValue: true }, staticOptions ) );
-    const yInterceptFractionLineNode = new scenery.Line( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
+    const yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const slopeUndefinedNode = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification

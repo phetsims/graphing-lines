@@ -89,7 +89,7 @@ define( require => {
      * Creates a non-interactive manipulator icon.
      * @param {number} radius radius of the sphere
      * @param {Color|String} color base color used to shade the sphere
-     * @param {Object} options - see constructor
+     * @param {Object} [options] - see constructor
      * @returns {Manipulator}
      * @public
      * @static

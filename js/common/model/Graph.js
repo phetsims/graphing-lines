@@ -5,62 +5,58 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const ObservableArray = require( 'AXON/ObservableArray' );
-  const Vector2 = require( 'DOT/Vector2' );
+import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import graphingLines from '../../graphingLines.js';
+
+/**
+ * @param {Range} xRange
+ * @param {Range} yRange
+ * @constructor
+ */
+function Graph( xRange, yRange ) {
+
+  // @public
+  this.xRange = xRange;
+  this.yRange = yRange;
+  this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
+}
+
+graphingLines.register( 'Graph', Graph );
+
+export default inherit( Object, Graph, {
+
+  // @public
+  getWidth: function() { return this.xRange.getLength(); },
+
+  // @public
+  getHeight: function() { return this.yRange.getLength(); },
 
   /**
-   * @param {Range} xRange
-   * @param {Range} yRange
-   * @constructor
+   * Does the graph contain the specified point?
+   * @param {Vector2} point
+   * @returns {boolean}
+   * @public
    */
-  function Graph( xRange, yRange ) {
+  contains: function( point ) {
+    return this.xRange.contains( point.x ) && this.yRange.contains( point.y );
+  },
 
-    // @public
-    this.xRange = xRange;
-    this.yRange = yRange;
-    this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
-  }
-
-  graphingLines.register( 'Graph', Graph );
-
-  return inherit( Object, Graph, {
-
-    // @public
-    getWidth: function() { return this.xRange.getLength(); },
-
-    // @public
-    getHeight: function() { return this.yRange.getLength(); },
-
-    /**
-     * Does the graph contain the specified point?
-     * @param {Vector2} point
-     * @returns {boolean}
-     * @public
-     */
-    contains: function( point ) {
-      return this.xRange.contains( point.x ) && this.yRange.contains( point.y );
-    },
-
-    /**
-     * Constrains a point to the x,y range of the graph.
-     * @param {Vector2} point
-     * @returns {Vector2}
-     */
-    constrain: function( point ) {
-      const x = this.xRange.constrainValue( point.x );
-      const y = this.yRange.constrainValue( point.y );
-      if ( point.x === x && point.y === y ) {
-        return point;
-      }
-      else {
-        return new Vector2( x, y );
-      }
+  /**
+   * Constrains a point to the x,y range of the graph.
+   * @param {Vector2} point
+   * @returns {Vector2}
+   */
+  constrain: function( point ) {
+    const x = this.xRange.constrainValue( point.x );
+    const y = this.yRange.constrainValue( point.y );
+    if ( point.x === x && point.y === y ) {
+      return point;
     }
-  } );
+    else {
+      return new Vector2( x, y );
+    }
+  }
 } );

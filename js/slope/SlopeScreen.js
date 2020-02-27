@@ -5,42 +5,39 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Property = require( 'AXON/Property' );
-  const Screen = require( 'JOIST/Screen' );
-  const SlopeModel = require( 'GRAPHING_LINES/slope/model/SlopeModel' );
-  const SlopeScreenView = require( 'GRAPHING_LINES/slope/view/SlopeScreenView' );
+import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import GLColors from '../common/GLColors.js';
+import GLIconFactory from '../common/view/GLIconFactory.js';
+import graphingLinesStrings from '../graphing-lines-strings.js';
+import graphingLines from '../graphingLines.js';
+import SlopeModel from './model/SlopeModel.js';
+import SlopeScreenView from './view/SlopeScreenView.js';
 
-  // strings
-  const screenSlopeString = require( 'string!GRAPHING_LINES/screen.slope' );
+const screenSlopeString = graphingLinesStrings.screen.slope;
 
-  /**
-   * @param {Tandem} tandem
-   * @constructor
-   */
-  function SlopeScreen( tandem ) {
+/**
+ * @param {Tandem} tandem
+ * @constructor
+ */
+function SlopeScreen( tandem ) {
 
-    const options = {
-      name: screenSlopeString,
-      backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
-      tandem: tandem
-    };
+  const options = {
+    name: screenSlopeString,
+    backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
+    homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
+    tandem: tandem
+  };
 
-    Screen.call( this,
-      function() { return new SlopeModel(); },
-      function( model ) { return new SlopeScreenView( model ); },
-      options );
-  }
+  Screen.call( this,
+    function() { return new SlopeModel(); },
+    function( model ) { return new SlopeScreenView( model ); },
+    options );
+}
 
-  graphingLines.register( 'SlopeScreen', SlopeScreen );
+graphingLines.register( 'SlopeScreen', SlopeScreen );
 
-  return inherit( Screen, SlopeScreen );
-} );
+inherit( Screen, SlopeScreen );
+export default SlopeScreen;

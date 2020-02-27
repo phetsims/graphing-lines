@@ -11,49 +11,45 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Range = require( 'DOT/Range' );
+import Range from '../../../../dot/js/Range.js';
+import inherit from '../../../../phet-core/js/inherit.js';
+import graphingLines from '../../graphingLines.js';
 
-  /**
-   * @constructor
-   */
-  function SlopeParameterRange() {}
+/**
+ * @constructor
+ */
+function SlopeParameterRange() {}
 
-  graphingLines.register( 'SlopeParameterRange', SlopeParameterRange );
+graphingLines.register( 'SlopeParameterRange', SlopeParameterRange );
 
-  return inherit( Object, SlopeParameterRange, {
+export default inherit( Object, SlopeParameterRange, {
 
-    // @public Range for the x component of the point (x1,y1)
-    x1: function( line, graph ) {
-      const min = ( line.rise === 0 && ( line.x1 + line.run === graph.xRange.min ) ) ? ( graph.xRange.min + 1 ) : graph.xRange.min;
-      const max = ( line.rise === 0 && ( line.x1 + line.run === graph.xRange.max ) ) ? ( graph.xRange.max - 1 ) : graph.xRange.max;
-      return new Range( min, max );
-    },
+  // @public Range for the x component of the point (x1,y1)
+  x1: function( line, graph ) {
+    const min = ( line.rise === 0 && ( line.x1 + line.run === graph.xRange.min ) ) ? ( graph.xRange.min + 1 ) : graph.xRange.min;
+    const max = ( line.rise === 0 && ( line.x1 + line.run === graph.xRange.max ) ) ? ( graph.xRange.max - 1 ) : graph.xRange.max;
+    return new Range( min, max );
+  },
 
-    // @public Range for the y component of the point (x1,y1)
-    y1: function( line, graph ) {
-      const min = ( line.run === 0 && ( line.y1 + line.rise === graph.yRange.min ) ) ? ( graph.yRange.min + 1 ) : graph.yRange.min;
-      const max = ( line.run === 0 && ( line.y1 + line.rise === graph.yRange.max ) ) ? ( graph.yRange.max - 1 ) : graph.yRange.max;
-      return new Range( min, max );
-    },
+  // @public Range for the y component of the point (x1,y1)
+  y1: function( line, graph ) {
+    const min = ( line.run === 0 && ( line.y1 + line.rise === graph.yRange.min ) ) ? ( graph.yRange.min + 1 ) : graph.yRange.min;
+    const max = ( line.run === 0 && ( line.y1 + line.rise === graph.yRange.max ) ) ? ( graph.yRange.max - 1 ) : graph.yRange.max;
+    return new Range( min, max );
+  },
 
-    // @public Range for the x component of the point (x2,y2)
-    x2: function( line, graph ) {
-      const min = ( line.rise === 0 && line.x1 === graph.xRange.min ) ? ( graph.xRange.min + 1 ) : graph.xRange.min;
-      const max = ( line.rise === 0 && line.x1 === graph.xRange.max ) ? ( graph.xRange.max - 1 ) : graph.xRange.max;
-      return new Range( min, max );
-    },
+  // @public Range for the x component of the point (x2,y2)
+  x2: function( line, graph ) {
+    const min = ( line.rise === 0 && line.x1 === graph.xRange.min ) ? ( graph.xRange.min + 1 ) : graph.xRange.min;
+    const max = ( line.rise === 0 && line.x1 === graph.xRange.max ) ? ( graph.xRange.max - 1 ) : graph.xRange.max;
+    return new Range( min, max );
+  },
 
-    // @public Range for the y component of the point (x2,y2)
-    y2: function( line, graph ) {
-      const min = ( line.run === 0 && line.y1 === graph.yRange.min ) ? ( graph.yRange.min + 1 ) : graph.yRange.min;
-      const max = ( line.run === 0 && line.y1 === graph.yRange.max ) ? ( graph.yRange.max - 1 ) : graph.yRange.max;
-      return new Range( min, max );
-    }
-  } );
+  // @public Range for the y component of the point (x2,y2)
+  y2: function( line, graph ) {
+    const min = ( line.run === 0 && line.y1 === graph.yRange.min ) ? ( graph.yRange.min + 1 ) : graph.yRange.min;
+    const max = ( line.run === 0 && line.y1 === graph.yRange.max ) ? ( graph.yRange.max - 1 ) : graph.yRange.max;
+    return new Range( min, max );
+  }
 } );

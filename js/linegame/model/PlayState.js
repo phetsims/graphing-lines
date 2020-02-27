@@ -8,24 +8,19 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
+import graphingLines from '../../graphingLines.js';
 
-  // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-  const PlayState = Object.freeze( {
-    FIRST_CHECK: 'FIRST_CHECK',
-    TRY_AGAIN: 'TRY_AGAIN',
-    SECOND_CHECK: 'SECOND_CHECK',
-    SHOW_ANSWER: 'SHOW_ANSWER',
-    NEXT: 'NEXT',
-    NONE: 'NONE' // use this value when game is not in the 'play' phase
-  } );
-
-  graphingLines.register( 'PlayState', PlayState );
-
-  return PlayState;
+// NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
+const PlayState = Object.freeze( {
+  FIRST_CHECK: 'FIRST_CHECK',
+  TRY_AGAIN: 'TRY_AGAIN',
+  SECOND_CHECK: 'SECOND_CHECK',
+  SHOW_ANSWER: 'SHOW_ANSWER',
+  NEXT: 'NEXT',
+  NONE: 'NONE' // use this value when game is not in the 'play' phase
 } );
 
+graphingLines.register( 'PlayState', PlayState );
+
+export default PlayState;

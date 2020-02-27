@@ -5,46 +5,43 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  const GLIconFactory = require( 'GRAPHING_LINES/common/view/GLIconFactory' );
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const merge = require( 'PHET_CORE/merge' );
-  const Property = require( 'AXON/Property' );
-  const Screen = require( 'JOIST/Screen' );
-  const SlopeInterceptModel = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptModel' );
-  const SlopeInterceptScreenView = require( 'GRAPHING_LINES/slopeintercept/view/SlopeInterceptScreenView' );
+import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
+import inherit from '../../../phet-core/js/inherit.js';
+import merge from '../../../phet-core/js/merge.js';
+import GLColors from '../common/GLColors.js';
+import GLIconFactory from '../common/view/GLIconFactory.js';
+import graphingLinesStrings from '../graphing-lines-strings.js';
+import graphingLines from '../graphingLines.js';
+import SlopeInterceptModel from './model/SlopeInterceptModel.js';
+import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
 
-  // strings
-  const screenSlopeInterceptString = require( 'string!GRAPHING_LINES/screen.slopeIntercept' );
+const screenSlopeInterceptString = graphingLinesStrings.screen.slopeIntercept;
 
-  /**
-   * @param {Tandem} tandem
-   * @param {Object} [options]
-   * @constructor
-   */
-  function SlopeInterceptScreen( tandem, options ) {
+/**
+ * @param {Tandem} tandem
+ * @param {Object} [options]
+ * @constructor
+ */
+function SlopeInterceptScreen( tandem, options ) {
 
-    options = merge( {
-      name: screenSlopeInterceptString,
-      backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
-    }, options );
+  options = merge( {
+    name: screenSlopeInterceptString,
+    backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
+    homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
+  }, options );
 
-    assert && assert( !options.tandem, 'tandem is a constructor parameter' );
-    options.tandem = tandem;
+  assert && assert( !options.tandem, 'tandem is a constructor parameter' );
+  options.tandem = tandem;
 
-    Screen.call( this,
-      function() { return new SlopeInterceptModel(); },
-      function( model ) { return new SlopeInterceptScreenView( model ); },
-      options );
-  }
+  Screen.call( this,
+    function() { return new SlopeInterceptModel(); },
+    function( model ) { return new SlopeInterceptScreenView( model ); },
+    options );
+}
 
-  graphingLines.register( 'SlopeInterceptScreen', SlopeInterceptScreen );
+graphingLines.register( 'SlopeInterceptScreen', SlopeInterceptScreen );
 
-  return inherit( Screen, SlopeInterceptScreen );
-} );
+inherit( Screen, SlopeInterceptScreen );
+export default SlopeInterceptScreen;

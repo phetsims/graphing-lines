@@ -7,72 +7,68 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const GraphTheLineNode = require( 'GRAPHING_LINES/linegame/view/GraphTheLineNode' );
-  const GraphThreePointsNode = require( 'GRAPHING_LINES/linegame/view/GraphThreePointsNode' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const PlayState = require( 'GRAPHING_LINES/linegame/model/PlayState' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import graphingLines from '../../graphingLines.js';
+import PlayState from '../model/PlayState.js';
+import GraphTheLineNode from './GraphTheLineNode.js';
+import GraphThreePointsNode from './GraphThreePointsNode.js';
+
+/**
+ * @param {GraphTheLine} challenge
+ * @param {LineGameModel} model
+ * @param {Dimension2} challengeSize
+ * @param {GameAudioPlayer} audioPlayer
+ * @constructor
+ */
+function PlaceThePointsNode( challenge, model, challengeSize, audioPlayer ) {
+
+  GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
+
+  const self = this;
+
+  const playStateObserver = function( playState ) {
+
+    // show user's line only in states where there guess is wrong.
+    self.graphNode.setGuessLineVisible(
+      !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
+
+    /*
+     * Plot (x1,y1) for answer when user got the challenge wrong.
+     * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
+     */
+    self.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
+    self.graphNode.setGuessPointVisible( false );
+  };
+  model.playStateProperty.link( playStateObserver ); // unlink in dispose
+
+  // @private called by dispose
+  this.disposePlaceThePointsNode = function() {
+    model.playStateProperty.unlink( playStateObserver );
+  };
+}
+
+graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
+
+export default inherit( GraphTheLineNode, PlaceThePointsNode, {
 
   /**
-   * @param {GraphTheLine} challenge
-   * @param {LineGameModel} model
-   * @param {Dimension2} challengeSize
-   * @param {GameAudioPlayer} audioPlayer
-   * @constructor
+   * @public
+   * @override
    */
-  function PlaceThePointsNode( challenge, model, challengeSize, audioPlayer ) {
+  dispose: function() {
+    this.disposePlaceThePointsNode();
+    GraphTheLineNode.prototype.dispose.call( this );
+  },
 
-    GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
-
-    const self = this;
-
-    const playStateObserver = function( playState ) {
-
-      // show user's line only in states where there guess is wrong.
-      self.graphNode.setGuessLineVisible(
-        !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
-
-      /*
-       * Plot (x1,y1) for answer when user got the challenge wrong.
-       * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
-       */
-      self.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
-      self.graphNode.setGuessPointVisible( false );
-    };
-    model.playStateProperty.link( playStateObserver ); // unlink in dispose
-
-    // @private called by dispose
-    this.disposePlaceThePointsNode = function() {
-      model.playStateProperty.unlink( playStateObserver );
-    };
+  /**
+   * Creates the graph portion of the view.
+   * @param {Challenge} challenge
+   * @returns {ChallengeGraphNode}
+   * @override
+   * @public
+   */
+  createGraphNode: function( challenge ) {
+    return new GraphThreePointsNode( challenge );
   }
-
-  graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
-
-  return inherit( GraphTheLineNode, PlaceThePointsNode, {
-
-    /**
-     * @public
-     * @override
-     */
-    dispose: function() {
-      this.disposePlaceThePointsNode();
-      GraphTheLineNode.prototype.dispose.call( this );
-    },
-
-    /**
-     * Creates the graph portion of the view.
-     * @param {Challenge} challenge
-     * @returns {ChallengeGraphNode}
-     * @override
-     * @public
-     */
-    createGraphNode: function( challenge ) {
-      return new GraphThreePointsNode( challenge );
-    }
-  } );
 } );

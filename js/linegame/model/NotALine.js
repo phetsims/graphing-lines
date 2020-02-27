@@ -8,16 +8,13 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import graphingLines from '../../graphingLines.js';
 
-  function NotALine() {}
+function NotALine() {}
 
-  graphingLines.register( 'NotALine', NotALine );
+graphingLines.register( 'NotALine', NotALine );
 
-  return inherit( Object, NotALine );
-} );
+inherit( Object, NotALine );
+export default NotALine;

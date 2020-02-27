@@ -5,63 +5,59 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EquationAccordionBox = require( 'GRAPHING_LINES/common/view/EquationAccordionBox' );
-  const GraphControlPanel = require( 'GRAPHING_LINES/common/view/GraphControlPanel' );
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const LineFormsScreenView = require( 'GRAPHING_LINES/common/view/LineFormsScreenView' );
-  const LineFormsViewProperties = require( 'GRAPHING_LINES/common/view/LineFormsViewProperties' );
-  const PointSlopeEquationNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeEquationNode' );
-  const PointSlopeGraphNode = require( 'GRAPHING_LINES/pointslope/view/PointSlopeGraphNode' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import EquationAccordionBox from '../../common/view/EquationAccordionBox.js';
+import GraphControlPanel from '../../common/view/GraphControlPanel.js';
+import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
+import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
+import graphingLines from '../../graphingLines.js';
+import PointSlopeEquationNode from './PointSlopeEquationNode.js';
+import PointSlopeGraphNode from './PointSlopeGraphNode.js';
 
-  /**
-   * @param {PointSlopeModel} model
-   * @constructor
-   */
-  function PointSlopeScreenView( model ) {
+/**
+ * @param {PointSlopeModel} model
+ * @constructor
+ */
+function PointSlopeScreenView( model ) {
 
-    const viewProperties = new LineFormsViewProperties();
+  const viewProperties = new LineFormsViewProperties();
 
-    LineFormsScreenView.call( this, model, viewProperties,
+  LineFormsScreenView.call( this, model, viewProperties,
 
-      // graph
-      new PointSlopeGraphNode( model, viewProperties ),
+    // graph
+    new PointSlopeGraphNode( model, viewProperties ),
 
-      // graph control panel
-      new GraphControlPanel(
-        viewProperties.gridVisibleProperty,
-        viewProperties.slopeToolVisibleProperty,
-        model.standardLines
-      ),
+    // graph control panel
+    new GraphControlPanel(
+      viewProperties.gridVisibleProperty,
+      viewProperties.slopeToolVisibleProperty,
+      model.standardLines
+    ),
 
-      // equation accordion box
-      new EquationAccordionBox(
+    // equation accordion box
+    new EquationAccordionBox(
+      // title
+      PointSlopeEquationNode.createGeneralFormNode(),
 
-        // title
-        PointSlopeEquationNode.createGeneralFormNode(),
+      // interactive equation
+      new PointSlopeEquationNode( model.interactiveLineProperty, {
+        x1RangeProperty: model.x1RangeProperty,
+        y1RangeProperty: model.y1RangeProperty,
+        riseRangeProperty: model.riseRangeProperty,
+        runRangeProperty: model.runRangeProperty,
+        maxWidth: 400
+      } ),
 
-        // interactive equation
-        new PointSlopeEquationNode( model.interactiveLineProperty, {
-          x1RangeProperty: model.x1RangeProperty,
-          y1RangeProperty: model.y1RangeProperty,
-          riseRangeProperty: model.riseRangeProperty,
-          runRangeProperty: model.runRangeProperty,
-          maxWidth: 400
-        } ),
+      // Properties
+      model.interactiveLineProperty,
+      model.savedLines,
+      viewProperties.interactiveEquationVisibleProperty
+    )
+  );
+}
 
-        // Properties
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty
-      )
-    );
-  }
+graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );
 
-  graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );
-
-  return inherit( LineFormsScreenView, PointSlopeScreenView );
-} );
+inherit( LineFormsScreenView, PointSlopeScreenView );
+export default PointSlopeScreenView;

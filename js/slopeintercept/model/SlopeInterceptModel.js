@@ -7,25 +7,22 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const GLColors = require( 'GRAPHING_LINES/common/GLColors' );
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
-  const Line = require( 'GRAPHING_LINES/common/model/Line' );
-  const PointSlopeModel = require( 'GRAPHING_LINES/pointslope/model/PointSlopeModel' );
-  const SlopeInterceptParameterRange = require( 'GRAPHING_LINES/slopeintercept/model/SlopeInterceptParameterRange' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import GLColors from '../../common/GLColors.js';
+import Line from '../../common/model/Line.js';
+import graphingLines from '../../graphingLines.js';
+import PointSlopeModel from '../../pointslope/model/PointSlopeModel.js';
+import SlopeInterceptParameterRange from './SlopeInterceptParameterRange.js';
 
-  /**
-   * @constructor
-   */
-  function SlopeInterceptModel() {
-    PointSlopeModel.call( this, Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
-  }
+/**
+ * @constructor
+ */
+function SlopeInterceptModel() {
+  PointSlopeModel.call( this, Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
+}
 
-  graphingLines.register( 'SlopeInterceptModel', SlopeInterceptModel );
+graphingLines.register( 'SlopeInterceptModel', SlopeInterceptModel );
 
-  return inherit( PointSlopeModel, SlopeInterceptModel );
-} );
+inherit( PointSlopeModel, SlopeInterceptModel );
+export default SlopeInterceptModel;

@@ -5,36 +5,33 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const EyeToggleButton = require( 'SCENERY_PHET/buttons/EyeToggleButton' );
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const merge = require( 'PHET_CORE/merge' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
+import merge from '../../../../phet-core/js/merge.js';
+import EyeToggleButton from '../../../../scenery-phet/js/buttons/EyeToggleButton.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import graphingLines from '../../graphingLines.js';
 
-  class GraphContentsToggleButton extends EyeToggleButton {
+class GraphContentsToggleButton extends EyeToggleButton {
 
-    /**
-     * @param {BooleanProperty} property
-     * @param {Object} [options]
-     */
-    constructor( property, options ) {
+  /**
+   * @param {BooleanProperty} property
+   * @param {Object} [options]
+   */
+  constructor( property, options ) {
 
-      options = merge( {
-        trueColor: 'white', // {Color|string} button color when property.value === true
-        falseColor: PhetColorScheme.BUTTON_YELLOW  // {Color|string} button color when property.value === false
-      }, options );
+    options = merge( {
+      trueColor: 'white', // {Color|string} button color when property.value === true
+      falseColor: PhetColorScheme.BUTTON_YELLOW  // {Color|string} button color when property.value === false
+    }, options );
 
-      super( property, options );
+    super( property, options );
 
-      // change the button color to emphasize when the graph contents are hidden
-      property.link( visible => {
-        this.setBaseColor( visible ? options.trueColor : options.falseColor );
-      } );
-    }
+    // change the button color to emphasize when the graph contents are hidden
+    property.link( visible => {
+      this.setBaseColor( visible ? options.trueColor : options.falseColor );
+    } );
   }
+}
 
-  return graphingLines.register( 'GraphContentsToggleButton', GraphContentsToggleButton );
-} );
+graphingLines.register( 'GraphContentsToggleButton', GraphContentsToggleButton );
+export default GraphContentsToggleButton;

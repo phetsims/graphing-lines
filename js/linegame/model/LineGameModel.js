@@ -5,40 +5,37 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const BaseGameModel = require( 'GRAPHING_LINES/linegame/model/BaseGameModel' );
-  const ChallengeFactory1 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory1' );
-  const ChallengeFactory2 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory2' );
-  const ChallengeFactory3 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory3' );
-  const ChallengeFactory4 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory4' );
-  const ChallengeFactory5 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory5' );
-  const ChallengeFactory6 = require( 'GRAPHING_LINES/linegame/model/ChallengeFactory6' );
-  const graphingLines = require( 'GRAPHING_LINES/graphingLines' );
-  const inherit = require( 'PHET_CORE/inherit' );
+import inherit from '../../../../phet-core/js/inherit.js';
+import graphingLines from '../../graphingLines.js';
+import BaseGameModel from './BaseGameModel.js';
+import ChallengeFactory1 from './ChallengeFactory1.js';
+import ChallengeFactory2 from './ChallengeFactory2.js';
+import ChallengeFactory3 from './ChallengeFactory3.js';
+import ChallengeFactory4 from './ChallengeFactory4.js';
+import ChallengeFactory5 from './ChallengeFactory5.js';
+import ChallengeFactory6 from './ChallengeFactory6.js';
 
-  /**
-   * @constructor
-   */
-  function LineGameModel() {
+/**
+ * @constructor
+ */
+function LineGameModel() {
 
-    // a challenge factory for each level
-    const challengeFactories = [
-      new ChallengeFactory1(),
-      new ChallengeFactory2(),
-      new ChallengeFactory3(),
-      new ChallengeFactory4(),
-      new ChallengeFactory5(),
-      new ChallengeFactory6()
-    ];
+  // a challenge factory for each level
+  const challengeFactories = [
+    new ChallengeFactory1(),
+    new ChallengeFactory2(),
+    new ChallengeFactory3(),
+    new ChallengeFactory4(),
+    new ChallengeFactory5(),
+    new ChallengeFactory6()
+  ];
 
-    BaseGameModel.call( this, challengeFactories );
-  }
+  BaseGameModel.call( this, challengeFactories );
+}
 
-  graphingLines.register( 'LineGameModel', LineGameModel );
+graphingLines.register( 'LineGameModel', LineGameModel );
 
 
-  return inherit( BaseGameModel, LineGameModel );
-} );
+inherit( BaseGameModel, LineGameModel );
+export default LineGameModel;

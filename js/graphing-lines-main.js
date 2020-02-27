@@ -5,43 +5,39 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const LineGameScreen = require( 'GRAPHING_LINES/linegame/LineGameScreen' );
-  const PointSlopeScreen = require( 'GRAPHING_LINES/pointslope/PointSlopeScreen' );
-  const Sim = require( 'JOIST/Sim' );
-  const SimLauncher = require( 'JOIST/SimLauncher' );
-  const SlopeInterceptScreen = require( 'GRAPHING_LINES/slopeintercept/SlopeInterceptScreen' );
-  const SlopeScreen = require( 'GRAPHING_LINES/slope/SlopeScreen' );
-  const Tandem = require( 'TANDEM/Tandem' );
+import Sim from '../../joist/js/Sim.js';
+import SimLauncher from '../../joist/js/SimLauncher.js';
+import Tandem from '../../tandem/js/Tandem.js';
+import graphingLinesStrings from './graphing-lines-strings.js';
+import LineGameScreen from './linegame/LineGameScreen.js';
+import PointSlopeScreen from './pointslope/PointSlopeScreen.js';
+import SlopeScreen from './slope/SlopeScreen.js';
+import SlopeInterceptScreen from './slopeintercept/SlopeInterceptScreen.js';
 
-  // strings
-  const graphingLinesTitleString = require( 'string!GRAPHING_LINES/graphing-lines.title' );
+const graphingLinesTitleString = graphingLinesStrings[ 'graphing-lines' ].title;
 
-  // constants
-  const tandem = Tandem.ROOT;
+// constants
+const tandem = Tandem.ROOT;
 
-  const options = {
-    credits: {
-      leadDesign: 'Ariel Paul',
-      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-      team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
-      graphicArts: 'Megan Lai, Sharon Siman-Tov',
-      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
-                        'Benjamin Roberts, Jacob Romero, Katie Woessner, Bryan Yoelin'
-    }
-  };
+const options = {
+  credits: {
+    leadDesign: 'Ariel Paul',
+    softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+    team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
+    graphicArts: 'Megan Lai, Sharon Siman-Tov',
+    qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
+                      'Benjamin Roberts, Jacob Romero, Katie Woessner, Bryan Yoelin'
+  }
+};
 
-  SimLauncher.launch( function() {
-    const screens = [
-      new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
-      new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
-      new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
-      new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
-    ];
-    const sim = new Sim( graphingLinesTitleString, screens, options );
-    sim.start();
-  } );
+SimLauncher.launch( function() {
+  const screens = [
+    new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
+    new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
+    new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
+    new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
+  ];
+  const sim = new Sim( graphingLinesTitleString, screens, options );
+  sim.start();
 } );

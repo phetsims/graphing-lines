@@ -33,8 +33,8 @@ class PointSlopeScreen extends Screen {
     };
 
     super(
-      function() { return new PointSlopeModel(); },
-      function( model ) { return new PointSlopeScreenView( model ); },
+      () => new PointSlopeModel(),
+      model => new PointSlopeScreenView( model ),
       options
     );
   }

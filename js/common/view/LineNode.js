@@ -10,7 +10,6 @@
  */
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disable-line require-statement-match
@@ -38,101 +37,96 @@ const SCENERY_LINE_DEFAULT_OPTIONS = {
   lineWidth: TAIL_WIDTH
 };
 
-/**
- * @param {Property.<Line|NotALine>} lineProperty
- * @param {Graph} graph
- * @param {ModelViewTransform2} modelViewTransform
- * @param {Object} [options]
- * @constructor
- */
-function LineNode( lineProperty, graph, modelViewTransform, options ) {
+class LineNode extends Node {
 
-  options = merge( {
+  /**
+   * @param {Property.<Line|NotALine>} lineProperty
+   * @param {Graph} graph
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Object} [options]
+   */
+  constructor( lineProperty, graph, modelViewTransform, options ) {
 
-    // type for creating an equation node,
-    // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
-    equationType: null,
+    options = merge( {
 
-    // whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
-    hasArrows: true,
+      // type for creating an equation node,
+      // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
+      equationType: null,
 
-    // filled in below
-    lineOptions: null
-  }, options );
+      // whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
+      hasArrows: true,
 
-  // fill in appropriate options based on whether the line has arrows
-  if ( options.hasArrows ) {
-    options.lineOptions = merge( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
+      // filled in below
+      lineOptions: null
+    }, options );
+
+    // fill in appropriate options based on whether the line has arrows
+    if ( options.hasArrows ) {
+      options.lineOptions = merge( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
+    }
+    else {
+      options.lineOptions = merge( {}, SCENERY_LINE_DEFAULT_OPTIONS, options.lineOptions );
+    }
+
+    super();
+
+    this.lineProperty = lineProperty; // @public
+    this.graph = graph; // @private
+    this.modelViewTransform = modelViewTransform; // @private
+    this.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
+    this.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
+
+    // @private parent of all children
+    this.parentNode = new Node();
+
+    // @private the line
+    this.lineNode = null;
+    if ( options.hasArrows ) {
+      this.lineNode = new ArrowNode( 0, 0, 0, 1, options.lineOptions );
+    }
+    else {
+      this.lineNode = new SceneryLine( 0, 0, 0, 0, options.lineOptions );
+    }
+    this.parentNode.addChild( this.lineNode );
+
+    // @private optional equation
+    if ( options.equationType ) {
+      this.equationNode = options.equationType.createDynamicLabel( lineProperty, {
+        fontSize: EQUATION_FONT_SIZE
+      } );
+      // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
+      this.equationParentNode = new Node( { children: [ this.equationNode ] } );
+      this.parentNode.addChild( this.equationParentNode );
+    }
+
+    this.addChild( this.parentNode );
+
+    const lineObserver = line => this.update( line );
+    lineProperty.link( lineObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeLineNode = () => {
+      this.equationNode && this.equationNode.dispose();
+      lineProperty.unlink( lineObserver );
+    };
   }
-  else {
-    options.lineOptions = merge( {}, SCENERY_LINE_DEFAULT_OPTIONS, options.lineOptions );
-  }
-
-  const self = this;
-
-  this.lineProperty = lineProperty; // @public
-  this.graph = graph; // @private
-  this.modelViewTransform = modelViewTransform; // @private
-  this.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
-  this.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
-
-  // @private parent of all children
-  this.parentNode = new Node();
-
-  // @private the line
-  this.lineNode = null;
-  if ( options.hasArrows ) {
-    this.lineNode = new ArrowNode( 0, 0, 0, 1, options.lineOptions );
-  }
-  else {
-    this.lineNode = new SceneryLine( 0, 0, 0, 0, options.lineOptions );
-  }
-  this.parentNode.addChild( this.lineNode );
-
-  // @private optional equation
-  if ( options.equationType ) {
-    this.equationNode = options.equationType.createDynamicLabel( lineProperty, {
-      fontSize: EQUATION_FONT_SIZE
-    } );
-    // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
-    this.equationParentNode = new Node( { children: [ this.equationNode ] } );
-    this.parentNode.addChild( this.equationParentNode );
-  }
-
-  Node.call( this, { children: [ this.parentNode ] } );
-
-  const lineObserver = function( line ) {
-    self.update( line );
-  };
-  lineProperty.link( lineObserver ); // unlink in dispose
-
-  // @private called by dispose
-  this.disposeLineNode = function() {
-    this.equationNode && this.equationNode.dispose();
-    lineProperty.unlink( lineObserver );
-  };
-}
-
-graphingLines.register( 'LineNode', LineNode );
-
-export default inherit( Node, LineNode, {
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeLineNode();
-    Node.prototype.dispose.call( this );
-  },
+    super.dispose();
+  }
 
   // @public
-  setEquationVisible: function( visible ) {
+  setEquationVisible( visible ) {
     this.equationParentNode.visible = visible;
-  },
+  }
 
   // @private updates the line and equation
-  update: function( line ) {
+  update( line ) {
 
     // line may be NotALine, for example the user's guess in 'Place The Points' challenge
     const isALine = ( line instanceof Line );
@@ -262,4 +256,8 @@ export default inherit( Node, LineNode, {
       }
     }
   }
-} );
+}
+
+graphingLines.register( 'LineNode', LineNode );
+
+export default LineNode;

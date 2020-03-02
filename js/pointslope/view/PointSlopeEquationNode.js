@@ -434,7 +434,7 @@ class PointSlopeEquationNode extends EquationNode {
       undefinedSlopeIndicator.centerX = this.centerX;
       undefinedSlopeIndicator.centerY = fractionLineNode.centerY - this.undefinedSlopeYFudgeFactor;
 
-      var undefinedSlopeUpdater = function( line ) {
+      var undefinedSlopeUpdater = line => {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
       };
       lineProperty.link( undefinedSlopeUpdater ); // unlink in dispose

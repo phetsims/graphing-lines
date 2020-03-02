@@ -150,16 +150,17 @@ class SlopeEquationNode extends EquationNode {
     parentNode.addChild( unsimplifiedRunNode );
 
     // sync the model with the controls, unmultilink in dispose
-    const controlsMultilink = Property.lazyMultilink( [ x1Property, y1Property, x2Property, y2Property ],
-      function() {
+    const controlsMultilink = Property.lazyMultilink(
+      [ x1Property, y1Property, x2Property, y2Property ],
+      ( x1, y1, x2, y2 ) => {
         if ( !updatingControls ) {
-          lineProperty.set( new Line( x1Property.get(), y1Property.get(), x2Property.get(), y2Property.get(), lineProperty.get().color ) );
+          lineProperty.set( new Line( x1, y1, x2, y2, lineProperty.get().color ) );
         }
       }
     );
 
     // sync the controls and layout with the model
-    const lineObserver = function( line ) {
+    const lineObserver = line => {
 
       // Synchronize the controls atomically.
       updatingControls = true;

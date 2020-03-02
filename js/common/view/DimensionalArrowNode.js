@@ -16,51 +16,49 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Shape from '../../../../kite/js/Shape.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import graphingLines from '../../graphingLines.js';
 
-/**
- * @param {number} tailX
- * @param {number} tailY
- * @param {number} tipX
- * @param {number} tipY
- * @param {Object} [options]
- * @constructor
- */
-function DimensionalArrowNode( tailX, tailY, tipX, tipY, options ) {
+class DimensionalArrowNode extends Node {
+  /**
+   * @param {number} tailX
+   * @param {number} tailY
+   * @param {number} tipX
+   * @param {number} tipY
+   * @param {Object} [options]
+   */
+  constructor( tailX, tailY, tipX, tipY, options ) {
 
-  options = merge( {
-    stroke: 'black',
-    lineWidth: 1,
-    arrowTipSize: new Dimension2( 6, 8 ), // use even-number dimensions, or tip will look asymmetrical due to rounding
-    delimiterLength: 10,
-    delimitersVisible: true
-  }, options );
+    options = merge( {
+      stroke: 'black',
+      lineWidth: 1,
+      arrowTipSize: new Dimension2( 6, 8 ), // use even-number dimensions, or tip will look asymmetrical due to rounding
+      delimiterLength: 10,
+      delimitersVisible: true
+    }, options );
 
-  this.arrowTipSize = options.arrowTipSize; // @private
-  this.delimiterLength = options.delimiterLength; // @private
-  this.lineWidth = options.lineWidth; // @private
+    super();
 
-  // nodes with dummy initial shapes
-  this.lineNode = new Line( 0, 0, 0, 1, options );  // @private
-  this.tipNode = new Path( null, options ); // @private
-  this.tipDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
-  this.tailDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
+    this.arrowTipSize = options.arrowTipSize; // @private
+    this.delimiterLength = options.delimiterLength; // @private
+    this.lineWidth = options.lineWidth; // @private
 
-  options.children = [ this.tipDelimiterNode, this.tailDelimiterNode, this.lineNode, this.tipNode ];
-  Node.call( this, options );
+    // nodes with dummy initial shapes
+    this.lineNode = new Line( 0, 0, 0, 1, options );  // @private
+    this.tipNode = new Path( null, options ); // @private
+    this.tipDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
+    this.tailDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
 
-  // initialize
-  this.setTailAndTip( tailX, tailY, tipX, tipY );
-}
+    options.children = [ this.tipDelimiterNode, this.tailDelimiterNode, this.lineNode, this.tipNode ];
 
-graphingLines.register( 'DimensionalArrowNode', DimensionalArrowNode );
+    this.mutate( options );
 
-export default inherit( Node, DimensionalArrowNode, {
+    // initialize
+    this.setTailAndTip( tailX, tailY, tipX, tipY );
+  }
 
   /**
    * Sets the tail and tip of the arrow, accounting for the lineWidth when positioning the arrow head.
@@ -71,7 +69,7 @@ export default inherit( Node, DimensionalArrowNode, {
    * @param {number} tipY
    * @public
    */
-  setTailAndTip: function( tailX, tailY, tipX, tipY ) {
+  setTailAndTip( tailX, tailY, tipX, tipY ) {
 
     const tipWidth = this.arrowTipSize.width;
     const tipHeight = this.arrowTipSize.height;
@@ -121,4 +119,8 @@ export default inherit( Node, DimensionalArrowNode, {
     }
     this.tipNode.shape = tipShape;
   }
-} );
+}
+
+graphingLines.register( 'DimensionalArrowNode', DimensionalArrowNode );
+
+export default DimensionalArrowNode;

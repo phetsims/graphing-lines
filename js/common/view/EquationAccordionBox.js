@@ -57,7 +57,7 @@ class EquationAccordionBox extends AccordionBox {
 
     // Save Line button
     const saveLineButton = new TextPushButton( saveLineString, {
-      listener: function() { savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ); },
+      listener: () => savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ),
       font: BUTTON_FONT,
       baseColor: 'white',
       xMargin: 10
@@ -65,7 +65,7 @@ class EquationAccordionBox extends AccordionBox {
 
     // Erase Lines button
     const eraseLinesButton = new TextPushButton( eraseLinesString, {
-      listener: function() { savedLines.clear(); },
+      listener: () => savedLines.clear(),
       font: BUTTON_FONT,
       baseColor: 'white',
       xMargin: 10
@@ -79,7 +79,7 @@ class EquationAccordionBox extends AccordionBox {
     } );
 
     // Disable eraseLinesButton when there are no saved lines. unlink not needed.
-    savedLines.lengthProperty.link( function( length ) {
+    savedLines.lengthProperty.link( length => {
       eraseLinesButton.enabled = ( length > 0 );
     } );
 

@@ -31,7 +31,7 @@ const options = {
   }
 };
 
-SimLauncher.launch( function() {
+SimLauncher.launch( () => {
   const screens = [
     new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
     new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),

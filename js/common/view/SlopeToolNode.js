@@ -10,7 +10,6 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
@@ -22,80 +21,74 @@ import NumberBackgroundNode from './NumberBackgroundNode.js';
 const VALUE_X_SPACING = 6;
 const VALUE_Y_SPACING = 6;
 
-/**
- * @param {Property.<Line>} lineProperty
- * @param {ModelViewTransform2} modelViewTransform
- * @constructor
- */
-function SlopeToolNode( lineProperty, modelViewTransform ) {
+class SlopeToolNode extends Node {
+  
+  /**
+   * @param {Property.<Line>} lineProperty
+   * @param {ModelViewTransform2} modelViewTransform
+   */
+  constructor( lineProperty, modelViewTransform ) {
 
-  const self = this;
+    super();
 
-  this.lineProperty = lineProperty; // @private
-  this.modelViewTransform = modelViewTransform; // @private
+    this.lineProperty = lineProperty; // @private
+    this.modelViewTransform = modelViewTransform; // @private
 
-  // Values
-  const numberOptions = {
-    font: new GLFont( { size: 16, weight: 'bold' } ),
-    decimalPlaces: 0,
-    textFill: 'black',
-    backgroundFill: GLColors.SLOPE,
-    xMargin: 6,
-    yMargin: 6,
-    cornerRadius: 5
-  };
-  this.riseProperty = new NumberProperty( lineProperty.get().rise ); // @private
-  this.runProperty = new NumberProperty( lineProperty.get().run ); // @private
-  this.riseValueNode = new NumberBackgroundNode( this.riseProperty, numberOptions ); // @private
-  this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
+    // Values
+    const numberOptions = {
+      font: new GLFont( { size: 16, weight: 'bold' } ),
+      decimalPlaces: 0,
+      textFill: 'black',
+      backgroundFill: GLColors.SLOPE,
+      xMargin: 6,
+      yMargin: 6,
+      cornerRadius: 5
+    };
+    this.riseProperty = new NumberProperty( lineProperty.get().rise ); // @private
+    this.runProperty = new NumberProperty( lineProperty.get().run ); // @private
+    this.riseValueNode = new NumberBackgroundNode( this.riseProperty, numberOptions ); // @private
+    this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
 
-  // Arrows
-  const arrowOptions = {
-    lineWidth: 1.75,
-    stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
-    arrowTipSize: new Dimension2( 10, 10 ),
-    delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
-  };
-  this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
-  this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
+    // Arrows
+    const arrowOptions = {
+      lineWidth: 1.75,
+      stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
+      arrowTipSize: new Dimension2( 10, 10 ),
+      delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
+    };
+    this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
+    this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
 
-  // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
-  this.parentNode = new Node( {
-    children: [
-      this.riseArrowNode,
-      this.riseValueNode,
-      this.runArrowNode,
-      this.runValueNode
-    ]
-  } );
+    // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
+    this.parentNode = new Node( {
+      children: [
+        this.riseArrowNode,
+        this.riseValueNode,
+        this.runArrowNode,
+        this.runValueNode
+      ]
+    } );
+    this.addChild( this.parentNode );
 
-  Node.call( this, { children: [ this.parentNode ] } );
+    const lineObserver = line => this.update( line, modelViewTransform );
+    lineProperty.link( lineObserver ); // unlink in dispose
 
-  const lineObserver = function( line ) {
-    self.update( line, modelViewTransform );
-  };
-  lineProperty.link( lineObserver ); // unlink in dispose
-
-  // @private called by dispose
-  this.disposeSlopeToolNode = function() {
-    self.riseValueNode.dispose();
-    self.runValueNode.dispose();
-    lineProperty.unlink( lineObserver );
-  };
-}
-
-graphingLines.register( 'SlopeToolNode', SlopeToolNode );
-
-export default inherit( Node, SlopeToolNode, {
+    // @private called by dispose
+    this.disposeSlopeToolNode = () => {
+      this.riseValueNode.dispose();
+      this.runValueNode.dispose();
+      lineProperty.unlink( lineObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeSlopeToolNode();
-    Node.prototype.dispose.call( this );
-  },
+    super.dispose();
+  }
 
   /*
    * Slope tool is not updated while invisible.
@@ -103,16 +96,16 @@ export default inherit( Node, SlopeToolNode, {
    * @override
    * @public
    */
-  setVisible: function( visible ) {
+  setVisible( visible ) {
     const doUpdate = ( visible && !this.visible );
-    Node.prototype.setVisible.call( this, visible );
+    super.setVisible( visible );
     if ( doUpdate ) {
       this.update( this.lineProperty.get(), this.modelViewTransform );
     }
-  },
+  }
 
   // @private
-  update: function( line, modelViewTransform ) {
+  update( line, modelViewTransform ) {
 
     // update only if visible
     if ( !this.visible ) { return; }
@@ -170,4 +163,8 @@ export default inherit( Node, SlopeToolNode, {
       this.runValueNode.top = this.runArrowNode.bottom + VALUE_Y_SPACING;
     }
   }
-} );
+}
+
+graphingLines.register( 'SlopeToolNode', SlopeToolNode );
+
+export default SlopeToolNode;

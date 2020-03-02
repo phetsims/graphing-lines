@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import EquationAccordionBox from '../../common/view/EquationAccordionBox.js';
 import GraphControlPanel from '../../common/view/GraphControlPanel.js';
 import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
@@ -15,49 +14,50 @@ import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 import PointSlopeGraphNode from './PointSlopeGraphNode.js';
 
-/**
- * @param {PointSlopeModel} model
- * @constructor
- */
-function PointSlopeScreenView( model ) {
+class PointSlopeScreenView extends LineFormsScreenView {
 
-  const viewProperties = new LineFormsViewProperties();
+  /**
+   * @param {PointSlopeModel} model
+   */
+  constructor( model ) {
 
-  LineFormsScreenView.call( this, model, viewProperties,
+    const viewProperties = new LineFormsViewProperties();
 
-    // graph
-    new PointSlopeGraphNode( model, viewProperties ),
+    super( model, viewProperties,
 
-    // graph control panel
-    new GraphControlPanel(
-      viewProperties.gridVisibleProperty,
-      viewProperties.slopeToolVisibleProperty,
-      model.standardLines
-    ),
+      // graph
+      new PointSlopeGraphNode( model, viewProperties ),
 
-    // equation accordion box
-    new EquationAccordionBox(
-      // title
-      PointSlopeEquationNode.createGeneralFormNode(),
+      // graph control panel
+      new GraphControlPanel(
+        viewProperties.gridVisibleProperty,
+        viewProperties.slopeToolVisibleProperty,
+        model.standardLines
+      ),
 
-      // interactive equation
-      new PointSlopeEquationNode( model.interactiveLineProperty, {
-        x1RangeProperty: model.x1RangeProperty,
-        y1RangeProperty: model.y1RangeProperty,
-        riseRangeProperty: model.riseRangeProperty,
-        runRangeProperty: model.runRangeProperty,
-        maxWidth: 400
-      } ),
+      // equation accordion box
+      new EquationAccordionBox(
+        // title
+        PointSlopeEquationNode.createGeneralFormNode(),
 
-      // Properties
-      model.interactiveLineProperty,
-      model.savedLines,
-      viewProperties.interactiveEquationVisibleProperty
-    )
-  );
+        // interactive equation
+        new PointSlopeEquationNode( model.interactiveLineProperty, {
+          x1RangeProperty: model.x1RangeProperty,
+          y1RangeProperty: model.y1RangeProperty,
+          riseRangeProperty: model.riseRangeProperty,
+          runRangeProperty: model.runRangeProperty,
+          maxWidth: 400
+        } ),
+
+        // Properties
+        model.interactiveLineProperty,
+        model.savedLines,
+        viewProperties.interactiveEquationVisibleProperty
+      )
+    );
+  }
 }
 
 graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );
 
-inherit( LineFormsScreenView, PointSlopeScreenView );
 export default PointSlopeScreenView;

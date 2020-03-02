@@ -7,44 +7,44 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import LineFormsGraphNode from '../../common/view/LineFormsGraphNode.js';
 import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js';
 import YInterceptManipulator from '../../common/view/manipulator/YInterceptManipulator.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeInterceptEquationNode from './SlopeInterceptEquationNode.js';
 
-/**
- * @param {SlopeInterceptModel} model
- * @param {LineFormsViewProperties} viewProperties
- * @constructor
- */
-function SlopeInterceptGraphNode( model, viewProperties ) {
+class SlopeInterceptGraphNode extends LineFormsGraphNode {
 
-  LineFormsGraphNode.call( this, model, viewProperties, SlopeInterceptEquationNode );
+  /**
+   * @param {SlopeInterceptModel} model
+   * @param {LineFormsViewProperties} viewProperties
+   */
+  constructor( model, viewProperties ) {
 
-  const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
+    super( model, viewProperties, SlopeInterceptEquationNode );
 
-  // slope manipulator
-  const slopeManipulator = new SlopeManipulator(
-    manipulatorRadius, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.modelViewTransform );
+    const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 
-  // intercept manipulator
-  const yInterceptManipulator = new YInterceptManipulator(
-    manipulatorRadius, model.interactiveLineProperty, model.y1RangeProperty, model.modelViewTransform );
+    // slope manipulator
+    const slopeManipulator = new SlopeManipulator(
+      manipulatorRadius, model.interactiveLineProperty, model.riseRangeProperty, model.runRangeProperty, model.modelViewTransform );
 
-  // rendering order
-  this.addChild( slopeManipulator );
-  this.addChild( yInterceptManipulator );
+    // intercept manipulator
+    const yInterceptManipulator = new YInterceptManipulator(
+      manipulatorRadius, model.interactiveLineProperty, model.y1RangeProperty, model.modelViewTransform );
 
-  // visibility of manipulators
-  // unlink unnecessary because SlopeInterceptGraphNode exists for the lifetime of the sim.
-  viewProperties.linesVisibleProperty.link( function( linesVisible ) {
-    slopeManipulator.visible = yInterceptManipulator.visible = linesVisible;
-  } );
+    // rendering order
+    this.addChild( slopeManipulator );
+    this.addChild( yInterceptManipulator );
+
+    // visibility of manipulators
+    // unlink unnecessary because SlopeInterceptGraphNode exists for the lifetime of the sim.
+    viewProperties.linesVisibleProperty.link( linesVisible => {
+      slopeManipulator.visible = yInterceptManipulator.visible = linesVisible;
+    } );
+  }
 }
 
 graphingLines.register( 'SlopeInterceptGraphNode', SlopeInterceptGraphNode );
 
-inherit( LineFormsGraphNode, SlopeInterceptGraphNode );
 export default SlopeInterceptGraphNode;

@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import EquationAccordionBox from '../../common/view/EquationAccordionBox.js';
 import GraphControlPanel from '../../common/view/GraphControlPanel.js';
 import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
@@ -15,50 +14,51 @@ import graphingLines from '../../graphingLines.js';
 import SlopeEquationNode from './SlopeEquationNode.js';
 import SlopeGraphNode from './SlopeGraphNode.js';
 
-/**
- * @param {SlopeModel} model
- * @constructor
- */
-function SlopeScreenView( model ) {
+class SlopeScreenView extends LineFormsScreenView {
 
-  const viewProperties = new LineFormsViewProperties();
+  /**
+   * @param {SlopeModel} model
+   */
+  constructor( model ) {
 
-  LineFormsScreenView.call( this, model, viewProperties,
+    const viewProperties = new LineFormsViewProperties();
 
-    // graph
-    new SlopeGraphNode( model, viewProperties ),
+    super( model, viewProperties,
 
-    // graph control panel
-    new GraphControlPanel(
-      viewProperties.gridVisibleProperty,
-      viewProperties.slopeToolVisibleProperty,
-      model.standardLines, {
-        includeStandardLines: false
-      } ),
+      // graph
+      new SlopeGraphNode( model, viewProperties ),
 
-    // equation accordion box
-    new EquationAccordionBox(
-      // title
-      SlopeEquationNode.createGeneralFormNode(),
+      // graph control panel
+      new GraphControlPanel(
+        viewProperties.gridVisibleProperty,
+        viewProperties.slopeToolVisibleProperty,
+        model.standardLines, {
+          includeStandardLines: false
+        } ),
 
-      // interactive equation
-      new SlopeEquationNode( model.interactiveLineProperty, {
-        x1RangeProperty: model.x1RangeProperty,
-        y1RangeProperty: model.y1RangeProperty,
-        x2RangeProperty: model.x2RangeProperty,
-        y2RangeProperty: model.y2RangeProperty,
-        maxWidth: 400
-      } ),
+      // equation accordion box
+      new EquationAccordionBox(
+        // title
+        SlopeEquationNode.createGeneralFormNode(),
 
-      // Properties
-      model.interactiveLineProperty,
-      model.savedLines,
-      viewProperties.interactiveEquationVisibleProperty
-    )
-  );
+        // interactive equation
+        new SlopeEquationNode( model.interactiveLineProperty, {
+          x1RangeProperty: model.x1RangeProperty,
+          y1RangeProperty: model.y1RangeProperty,
+          x2RangeProperty: model.x2RangeProperty,
+          y2RangeProperty: model.y2RangeProperty,
+          maxWidth: 400
+        } ),
+
+        // Properties
+        model.interactiveLineProperty,
+        model.savedLines,
+        viewProperties.interactiveEquationVisibleProperty
+      )
+    );
+  }
 }
 
 graphingLines.register( 'SlopeScreenView', SlopeScreenView );
 
-inherit( LineFormsScreenView, SlopeScreenView );
 export default SlopeScreenView;

@@ -7,44 +7,44 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import LineFormsGraphNode from '../../common/view/LineFormsGraphNode.js';
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import X2Y2Manipulator from '../../common/view/manipulator/X2Y2Manipulator.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeEquationNode from './SlopeEquationNode.js';
 
-/**
- * @param {SlopeModel} model
- * @param {LineFormsViewProperties} viewProperties
- * @constructor
- */
-function SlopeGraphNode( model, viewProperties ) {
+class SlopeGraphNode extends LineFormsGraphNode {
 
-  LineFormsGraphNode.call( this, model, viewProperties, SlopeEquationNode );
+  /**
+   * @param {SlopeModel} model
+   * @param {LineFormsViewProperties} viewProperties
+   */
+  constructor( model, viewProperties ) {
 
-  const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
+    super( model, viewProperties, SlopeEquationNode );
 
-  // (x1,y1) point manipulator
-  const x1y1Manipulator = new X1Y1Manipulator(
-    manipulatorRadius, model.interactiveLineProperty, model.x1RangeProperty, model.y1RangeProperty, model.modelViewTransform, false /* constantSlope */ );
+    const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 
-  // (x2,y2) point manipulator
-  const x2y2Manipulator = new X2Y2Manipulator(
-    manipulatorRadius, model.interactiveLineProperty, model.x2RangeProperty, model.y2RangeProperty, model.modelViewTransform );
+    // (x1,y1) point manipulator
+    const x1y1Manipulator = new X1Y1Manipulator(
+      manipulatorRadius, model.interactiveLineProperty, model.x1RangeProperty, model.y1RangeProperty, model.modelViewTransform, false /* constantSlope */ );
 
-  // rendering order
-  this.addChild( x1y1Manipulator );
-  this.addChild( x2y2Manipulator );
+    // (x2,y2) point manipulator
+    const x2y2Manipulator = new X2Y2Manipulator(
+      manipulatorRadius, model.interactiveLineProperty, model.x2RangeProperty, model.y2RangeProperty, model.modelViewTransform );
 
-  // visibility of manipulators
-  // unlink unnecessary because SlopeGraphNode exists for the lifetime of the sim.
-  viewProperties.linesVisibleProperty.link( function( linesVisible ) {
-    x1y1Manipulator.visible = x2y2Manipulator.visible = linesVisible;
-  } );
+    // rendering order
+    this.addChild( x1y1Manipulator );
+    this.addChild( x2y2Manipulator );
+
+    // visibility of manipulators
+    // unlink unnecessary because SlopeGraphNode exists for the lifetime of the sim.
+    viewProperties.linesVisibleProperty.link( linesVisible => {
+      x1y1Manipulator.visible = x2y2Manipulator.visible = linesVisible;
+    } );
+  }
 }
 
 graphingLines.register( 'SlopeGraphNode', SlopeGraphNode );
 
-inherit( LineFormsGraphNode, SlopeGraphNode );
 export default SlopeGraphNode;

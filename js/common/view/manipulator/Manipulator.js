@@ -8,7 +8,6 @@
  */
 
 import Shape from '../../../../../kite/js/Shape.js';
-import inherit from '../../../../../phet-core/js/inherit.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
 import ButtonListener from '../../../../../scenery/js/input/ButtonListener.js';
@@ -17,70 +16,67 @@ import Node from '../../../../../scenery/js/nodes/Node.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import graphingLines from '../../../graphingLines.js';
 
-/**
- * @param {number} radius radius of the sphere
- * @param {Color|String} color base color used to shade the sphere
- * @param {Object} [options]
- * @constructor
- */
-function Manipulator( radius, color, options ) {
+class Manipulator extends  Node {
 
-  const mainColor = Color.toColor( color );
-  options = merge( {
+  /**
+   * @param {number} radius radius of the sphere
+   * @param {Color|String} color base color used to shade the sphere
+   * @param {Object} [options]
+   */
+  constructor( radius, color, options ) {
 
-    // Alpha channel of the halo, 0.0 - 1.0. Setting this to 0 results in no halo.
-    haloAlpha: 0.5,
+    const mainColor = Color.toColor( color );
+    options = merge( {
 
-    // ShadedSphereNode options
-    mainColor: mainColor,
-    highlightColor: Color.WHITE,
-    shadowColor: mainColor.darkerColor(),
-    lineWidth: 1,
-    stroke: mainColor.darkerColor(),
+      // Alpha channel of the halo, 0.0 - 1.0. Setting this to 0 results in no halo.
+      haloAlpha: 0.5,
 
-    // Node options
-    cursor: 'pointer',
-    mouseArea: Shape.circle( 0, 0, 1.5 * radius ),
-    touchArea: Shape.circle( 0, 0, 1.5 * radius )
+      // ShadedSphereNode options
+      mainColor: mainColor,
+      highlightColor: Color.WHITE,
+      shadowColor: mainColor.darkerColor(),
+      lineWidth: 1,
+      stroke: mainColor.darkerColor(),
 
-  }, options );
+      // Node options
+      cursor: 'pointer',
+      mouseArea: Shape.circle( 0, 0, 1.5 * radius ),
+      touchArea: Shape.circle( 0, 0, 1.5 * radius )
 
-  Node.call( this );
+    }, options );
 
-  // add a halo only if alpha it will be visible, useful for creating non-interactive manipulator icons
-  if ( options.haloAlpha !== 0 ) {
+    super();
 
-    const haloNode = new Circle( 1.75 * radius, {
-      fill: mainColor.withAlpha( options.haloAlpha ),
-      pickable: false,
-      visible: false,
-      renderer: 'canvas' // Workaround for Firefox graphics artifacts, see phetsims/graphing-lines/issues/119
+    // add a halo only if alpha it will be visible, useful for creating non-interactive manipulator icons
+    if ( options.haloAlpha !== 0 ) {
+
+      const haloNode = new Circle( 1.75 * radius, {
+        fill: mainColor.withAlpha( options.haloAlpha ),
+        pickable: false,
+        visible: false,
+        renderer: 'canvas' // Workaround for Firefox graphics artifacts, see phetsims/graphing-lines/issues/119
+      } );
+      this.addChild( haloNode );
+
+      // halo visibility
+      this.addInputListener( new ButtonListener( {
+        up: () => { haloNode.visible = false; },
+        down: () => { haloNode.visible = true; },
+        over: () => { haloNode.visible = true; }
+      } ) );
+    }
+
+    const sphereNode = new ShadedSphereNode( 2 * radius, {
+      mainColor: options.mainColor,
+      highlightColor: options.highlightColor,
+      shadowColor: options.shadowColor,
+      lineWidth: options.lineWidth,
+      stroke: options.stroke
     } );
-    this.addChild( haloNode );
+    this.addChild( sphereNode );
 
-    // halo visibility
-    this.addInputListener( new ButtonListener( {
-      up: function( event ) { haloNode.visible = false; },
-      down: function( event ) { haloNode.visible = true; },
-      over: function( event ) { haloNode.visible = true; }
-    } ) );
+    this.mutate( options );
   }
-
-  const sphereNode = new ShadedSphereNode( 2 * radius, {
-    mainColor: options.mainColor,
-    highlightColor: options.highlightColor,
-    shadowColor: options.shadowColor,
-    lineWidth: options.lineWidth,
-    stroke: options.stroke
-  } );
-  this.addChild( sphereNode );
-
-  this.mutate( options );
-}
-
-graphingLines.register( 'Manipulator', Manipulator );
-
-export default inherit( Node, Manipulator, {}, {
 
   /**
    * Creates a non-interactive manipulator icon.
@@ -91,7 +87,7 @@ export default inherit( Node, Manipulator, {}, {
    * @public
    * @static
    */
-  createIcon: function( radius, color, options ) {
+  static createIcon( radius, color, options ) {
 
     // turn off options related to interactivity, see constructor
     options = merge( {}, options, {
@@ -103,4 +99,8 @@ export default inherit( Node, Manipulator, {}, {
 
     return new Manipulator( radius, color, options );
   }
-} );
+}
+
+graphingLines.register( 'Manipulator', Manipulator );
+
+export default Manipulator;

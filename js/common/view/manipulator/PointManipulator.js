@@ -9,105 +9,103 @@
 
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import inherit from '../../../../../phet-core/js/inherit.js';
 import SimpleDragHandler from '../../../../../scenery/js/input/SimpleDragHandler.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Manipulator from './Manipulator.js';
 
-/**
- * @param {number} radius
- * @param {Vector2Property} pointProperty
- * @param {Vector2Property} otherPointProperties
- * @param {Range} xRange
- * @param {Range} yRange
- * @param {ModelViewTransform2} modelViewTransform
- * @constructor
- */
-function PointManipulator( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
+class PointManipulator extends Manipulator {
 
-  const self = this;
+  /**
+   * @param {number} radius
+   * @param {Vector2Property} pointProperty
+   * @param {Vector2Property} otherPointProperties
+   * @param {Range} xRange
+   * @param {Range} yRange
+   * @param {ModelViewTransform2} modelViewTransform
+   */
+  constructor( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
-  Manipulator.call( this, radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
+    super( radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
-  // move the manipulator to match the point
-  const lineObserver = function( point ) {
-    self.translation = modelViewTransform.modelToViewPosition( point );
-  };
-  pointProperty.link( lineObserver ); // unlink in dispose
+    // move the manipulator to match the point
+    const lineObserver = point => {
+      this.translation = modelViewTransform.modelToViewPosition( point );
+    };
+    pointProperty.link( lineObserver ); // unlink in dispose
 
-  this.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
+    this.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
 
-  // @private called by dispose
-  this.disposePointManipulator = function() {
-    pointProperty.unlink( lineObserver );
-  };
-}
-
-graphingLines.register( 'PointManipulator', PointManipulator );
-
-inherit( Manipulator, PointManipulator, {
+    // @private called by dispose
+    this.disposePointManipulator = () => {
+      pointProperty.unlink( lineObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposePointManipulator();
-    Manipulator.prototype.dispose.call( this );
+    super.dispose();
   }
-} );
-
-/**
- * Drag handler for arbitrary point.
- * @param {Vector2Property} pointProperty
- * @param {Vector2Property[]} otherPointProperties points that the point can't be on
- * @param {Range} xRange
- * @param {Range} yRange
- * @param {ModelViewTransform2} modelViewTransform
- * @constructor
- */
-function PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
-
-  let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
-
-  SimpleDragHandler.call( this, {
-
-    allowTouchSnag: true,
-
-    // note where the drag started
-    start: function( event ) {
-      const position = modelViewTransform.modelToViewPosition( pointProperty.get() );
-      startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
-    },
-
-    drag: function( event ) {
-
-      const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
-      const position = modelViewTransform.viewToModelPosition( parentPoint );
-
-      // constrain to range, snap to grid
-      const x = Utils.roundSymmetric( Utils.clamp( position.x, xRange.min, xRange.max ) );
-      const y = Utils.roundSymmetric( Utils.clamp( position.y, yRange.min, yRange.max ) );
-      const p = new Vector2( x, y );
-
-      // is this point the same as one of the others?
-      let same = false;
-      for ( let i = 0; i < otherPointProperties.length; i++ ) {
-        if ( p.equals( otherPointProperties[ i ].get() ) ) {
-          same = true;
-          break;
-        }
-      }
-
-      // if the point is unique, set it
-      if ( !same ) {
-        pointProperty.set( p );
-      }
-    }
-  } );
 }
 
-inherit( SimpleDragHandler, PointDragHandler );
+/**
+ * Drag handler for an arbitrary point.
+ */
+class PointDragHandler extends SimpleDragHandler {
+
+  /**
+   * @param {Vector2Property} pointProperty
+   * @param {Vector2Property[]} otherPointProperties points that the point can't be on
+   * @param {Range} xRange
+   * @param {Range} yRange
+   * @param {ModelViewTransform2} modelViewTransform
+   */
+  constructor( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
+
+    let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+
+    super( {
+
+      allowTouchSnag: true,
+
+      // note where the drag started
+      start: event => {
+        const position = modelViewTransform.modelToViewPosition( pointProperty.get() );
+        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
+      },
+
+      drag: event => {
+
+        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const position = modelViewTransform.viewToModelPosition( parentPoint );
+
+        // constrain to range, snap to grid
+        const x = Utils.roundSymmetric( Utils.clamp( position.x, xRange.min, xRange.max ) );
+        const y = Utils.roundSymmetric( Utils.clamp( position.y, yRange.min, yRange.max ) );
+        const p = new Vector2( x, y );
+
+        // is this point the same as one of the others?
+        let same = false;
+        for ( let i = 0; i < otherPointProperties.length; i++ ) {
+          if ( p.equals( otherPointProperties[ i ].get() ) ) {
+            same = true;
+            break;
+          }
+        }
+
+        // if the point is unique, set it
+        if ( !same ) {
+          pointProperty.set( p );
+        }
+      }
+    } );
+  }
+}
+
+graphingLines.register( 'PointManipulator', PointManipulator );
 
 export default PointManipulator;

@@ -8,7 +8,6 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js';
 import YInterceptManipulator from '../../common/view/manipulator/YInterceptManipulator.js';
 import graphingLines from '../../graphingLines.js';
@@ -17,71 +16,72 @@ import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from '../model/ManipulationMode.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 
-/**
- * @param {Challenge} challenge
- * @constructor
- */
-function GraphSlopeInterceptNode( challenge ) {
+class GraphSlopeInterceptNode extends ChallengeGraphNode {
 
-  ChallengeGraphNode.call( this, challenge );
+  /**
+   * @param {Challenge} challenge
+   */
+  constructor( challenge ) {
 
-  this.setGuessLineVisible( true );
+    super( challenge );
 
-  // dynamic ranges
-  const parameterRange = new SlopeInterceptParameterRange();
-  const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
-  const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
-  const y1RangeProperty = new Property( challenge.graph.yRange );
+    this.setGuessLineVisible( true );
 
-  const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    // dynamic ranges
+    const parameterRange = new SlopeInterceptParameterRange();
+    const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
+    const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
+    const y1RangeProperty = new Property( challenge.graph.yRange );
 
-  // intercept manipulator
-  const yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
-  const interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
-  if ( interceptIsVariable ) {
-    this.addChild( yInterceptManipulator );
-  }
+    const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
-  // slope manipulator
-  const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
-  const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
-  if ( slopeIsVariable ) {
-    this.addChild( slopeManipulator );
-  }
-
-  // Sync with the guess
-  const guessObserver = function( line ) {
-
-    // move the manipulators
-    slopeManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
-    yInterceptManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
-
-    // adjust ranges
-    if ( challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {
-      riseRangeProperty.set( parameterRange.rise( line, challenge.graph ) );
-      y1RangeProperty.set( parameterRange.y1( line, challenge.graph ) );
+    // intercept manipulator
+    const yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
+    const interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
+    if ( interceptIsVariable ) {
+      this.addChild( yInterceptManipulator );
     }
-  };
-  challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
-  // @private called by dispose
-  this.disposeGraphSlopeInterceptNode = function() {
-    yInterceptManipulator.dispose();
-    slopeManipulator.dispose();
-    challenge.guessProperty.unlink( guessObserver );
-  };
-}
+    // slope manipulator
+    const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
+    const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
+    if ( slopeIsVariable ) {
+      this.addChild( slopeManipulator );
+    }
 
-graphingLines.register( 'GraphSlopeInterceptNode', GraphSlopeInterceptNode );
+    // Sync with the guess
+    const guessObserver = line => {
 
-export default inherit( ChallengeGraphNode, GraphSlopeInterceptNode, {
+      // move the manipulators
+      slopeManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
+      yInterceptManipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
+
+      // adjust ranges
+      if ( challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {
+        riseRangeProperty.set( parameterRange.rise( line, challenge.graph ) );
+        y1RangeProperty.set( parameterRange.y1( line, challenge.graph ) );
+      }
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeGraphSlopeInterceptNode = () => {
+      yInterceptManipulator.dispose();
+      slopeManipulator.dispose();
+      challenge.guessProperty.unlink( guessObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeGraphSlopeInterceptNode();
-    ChallengeGraphNode.prototype.dispose.call( this );
+    super.dispose();
   }
-} );
+}
+
+graphingLines.register( 'GraphSlopeInterceptNode', GraphSlopeInterceptNode );
+
+export default GraphSlopeInterceptNode;

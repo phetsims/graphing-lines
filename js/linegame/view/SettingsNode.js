@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
@@ -26,89 +25,91 @@ import graphingLinesStrings from '../../graphing-lines-strings.js';
 import graphingLines from '../../graphingLines.js';
 import GamePhase from '../model/GamePhase.js';
 
+// strings
 const chooseYourLevelString = graphingLinesStrings.chooseYourLevel;
 const patternLevel0String = graphingLinesStrings.pattern_Level_0;
 
-/**
- * @param {LineGameModel} model
- * @param {Bounds2} layoutBounds
- * @param {HTMLImageElement[][]} levelImages - grid of images for the level-selection buttons, ordered by level
- * @param {Object} [options]
- * @constructor
- */
-function SettingsNode( model, layoutBounds, levelImages, options ) {
+class SettingsNode extends Node {
 
-  assert && assert( _.flatten( levelImages ).length === model.numberOfLevels,
-    'one image is required for each game level' );
+  /**
+   * @param {LineGameModel} model
+   * @param {Bounds2} layoutBounds
+   * @param {HTMLImageElement[][]} levelImages - grid of images for the level-selection buttons, ordered by level
+   * @param {Object} [options]
+   */
+  constructor( model, layoutBounds, levelImages, options ) {
 
-  options = merge( {
-    buttonsXSpace: 50,
-    buttonsYSpace: 25
-  }, options );
+    assert && assert( _.flatten( levelImages ).length === model.numberOfLevels,
+      'one image is required for each game level' );
 
-  // Title
-  const title = new Text( chooseYourLevelString, {
-    font: new GLFont( 40 ),
-    maxWidth: 0.85 * layoutBounds.width
-  } );
+    options = merge( {
+      buttonsXSpace: 50,
+      buttonsYSpace: 25
+    }, options );
 
-  // Grid of level-selection buttons. levelImages describes the grid.
-  let level = 0;
-  const gridChildren = [];
-  levelImages.forEach( function( row ) {
-
-    // create the buttons for the current row
-    const rowChildren = [];
-    row.forEach( function( levelImage ) {
-      rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
-      level++;
+    // Title
+    const title = new Text( chooseYourLevelString, {
+      font: new GLFont( 40 ),
+      maxWidth: 0.85 * layoutBounds.width
     } );
 
-    // layout the row horizontally
-    gridChildren.push( new HBox( {
-      children: rowChildren,
-      spacing: options.buttonsXSpace,
+    // Grid of level-selection buttons. levelImages describes the grid.
+    let level = 0;
+    const gridChildren = [];
+    levelImages.forEach( row => {
+
+      // create the buttons for the current row
+      const rowChildren = [];
+      row.forEach( levelImage => {
+        rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
+        level++;
+      } );
+
+      // layout the row horizontally
+      gridChildren.push( new HBox( {
+        children: rowChildren,
+        spacing: options.buttonsXSpace,
+        align: 'center'
+      } ) );
+    } );
+    const buttonGrid = new VBox( {
+      children: gridChildren,
+      spacing: options.buttonsYSpace,
       align: 'center'
-    } ) );
-  } );
-  const buttonGrid = new VBox( {
-    children: gridChildren,
-    spacing: options.buttonsYSpace,
-    align: 'center'
-  } );
+    } );
 
-  // Timer and Sound controls
-  const timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
-    stroke: 'gray',
-    scale: 1.3,
-    left: GLConstants.SCREEN_X_MARGIN,
-    bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
-  } );
+    // Timer and Sound controls
+    const timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
+      stroke: 'gray',
+      scale: 1.3,
+      left: GLConstants.SCREEN_X_MARGIN,
+      bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
+    } );
 
-  // Reset All button, at rightBottom
-  const resetAllButton = new ResetAllButton( {
-    listener: function() { model.reset(); },
-    scale: GLConstants.RESET_ALL_BUTTON_SCALE,
-    right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
-    bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
-  } );
+    // Reset All button, at rightBottom
+    const resetAllButton = new ResetAllButton( {
+      listener: () => model.reset(),
+      scale: GLConstants.RESET_ALL_BUTTON_SCALE,
+      right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
+      bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
+    } );
 
-  options.children = [
-    // title and level-selection buttons centered
-    new LayoutBox( {
-      children: [ title, buttonGrid ],
-      orientation: 'vertical',
-      align: 'center',
-      spacing: 50,
-      center: layoutBounds.center
-    } ),
-    timerToggleButton,
-    resetAllButton
-  ];
-  Node.call( this, options );
+    options.children = [
+      // title and level-selection buttons centered
+      new LayoutBox( {
+        children: [ title, buttonGrid ],
+        orientation: 'vertical',
+        align: 'center',
+        spacing: 50,
+        center: layoutBounds.center
+      } ),
+      timerToggleButton,
+      resetAllButton
+    ];
+
+    super( options );
+  }
 }
-
-graphingLines.register( 'SettingsNode', SettingsNode );
 
 /**
  * Creates a level selection button
@@ -117,7 +118,7 @@ graphingLines.register( 'SettingsNode', SettingsNode );
  * @param {HTMLImageElement} levelImage
  * @returns {LevelSelectionButton}
  */
-var createLevelSelectionButton = function( level, model, levelImage ) {
+function createLevelSelectionButton( level, model, levelImage ) {
 
   const image = new Image( levelImage );
   const label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
@@ -139,12 +140,13 @@ var createLevelSelectionButton = function( level, model, levelImage ) {
       numberOfStars: model.challengesPerGameProperty.get(),
       perfectScore: model.getPerfectScore( level )
     },
-    listener: function() {
+    listener: () => {
       model.levelProperty.set( level );
       model.setGamePhase( GamePhase.PLAY );
     }
   } );
-};
+}
 
-inherit( Node, SettingsNode );
+graphingLines.register( 'SettingsNode', SettingsNode );
+
 export default SettingsNode;

@@ -12,7 +12,6 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -28,201 +27,192 @@ import LineGameConstants from '../LineGameConstants.js';
 import EquationForm from '../model/EquationForm.js';
 import PlayState from '../model/PlayState.js';
 
+// strings
 const checkString = vegasStrings.check;
 const nextString = vegasStrings.next;
 const showAnswerString = vegasStrings.showAnswer;
 const tryAgainString = vegasStrings.tryAgain;
 
-/**
- * @param {Challenge} challenge the challenge
- * @param {LineGameModel} model the game model
- * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
- * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
- * @constructor
- */
-function ChallengeNode( challenge, model, challengeSize, audioPlayer ) {
+class ChallengeNode extends  Node {
+  
+  /**
+   * @param {Challenge} challenge the challenge
+   * @param {LineGameModel} model the game model
+   * @param {Dimension2} challengeSize dimensions of the view rectangle that is available for rendering the challenge
+   * @param {GameAudioPlayer} audioPlayer the audio player, for providing audio feedback during game play
+   */
+  constructor( challenge, model, challengeSize, audioPlayer ) {
 
-  const self = this;
+    super();
 
-  Node.call( this );
+    this.subtypeParent = new Node(); // @protected subtypes should add children to this node, to preserve rendering order
 
-  this.subtypeParent = new Node(); // @protected subtypes should add children to this node, to preserve rendering order
+    // @protected smiley/frowning face
+    this.faceNode = new FaceWithPointsNode( {
+      faceDiameter: LineGameConstants.FACE_DIAMETER,
+      faceOpacity: 1,
+      pointsAlignment: 'rightCenter'
+    } );
 
-  // @protected smiley/frowning face
-  this.faceNode = new FaceWithPointsNode( {
-    faceDiameter: LineGameConstants.FACE_DIAMETER,
-    faceOpacity: 1,
-    pointsAlignment: 'rightCenter'
-  } );
-
-  // buttons
-  const buttonOptions = {
-    font: LineGameConstants.BUTTON_FONT,
-    baseColor: LineGameConstants.BUTTON_COLOR,
-    xMargin: 20,
-    yMargin: 5,
-    centerX: 0 // center aligned
-  };
-  const checkButton = new TextPushButton( checkString, buttonOptions );
-  const tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
-  const showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
-  const nextButton = new TextPushButton( nextString, buttonOptions );
-
-  // @protected
-  this.buttonsParent = new Node( {
-    children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ],
-    maxWidth: 400 // determined empirically
-  } );
-
-  // point tools
-  const linesVisibleProperty = new BooleanProperty( true );
-  const pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
-  const pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
-
-  // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
-  const pointToolParent = new Node();
-  pointToolParent.addChild( pointToolNode1 );
-  pointToolParent.addChild( pointToolNode2 );
-
-  // rendering order
-  this.addChild( this.subtypeParent );
-  this.addChild( this.buttonsParent );
-  this.addChild( pointToolParent );
-  this.addChild( this.faceNode );
-
-  // buttons at center-bottom
-  this.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
-  this.buttonsParent.bottom = challengeSize.height - 20;
-
-  // debugging controls
-  if ( phet.chipper.queryParameters.showAnswers ) {
-
-    // description at leftTop
-    const descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
-    descriptionNode.left = 10;
-    descriptionNode.top = 10;
-    this.addChild( descriptionNode );
-
-    // developer buttons (no i18n) to right of main buttons
-    const devButtonOptions = {
-      font: new GLFont( 20 ),
-      baseColor: 'red',
-      textFill: 'white'
+    // buttons
+    const buttonOptions = {
+      font: LineGameConstants.BUTTON_FONT,
+      baseColor: LineGameConstants.BUTTON_COLOR,
+      xMargin: 20,
+      yMargin: 5,
+      centerX: 0 // center aligned
     };
+    const checkButton = new TextPushButton( checkString, buttonOptions );
+    const tryAgainButton = new TextPushButton( tryAgainString, buttonOptions );
+    const showAnswerButton = new TextPushButton( showAnswerString, buttonOptions );
+    const nextButton = new TextPushButton( nextString, buttonOptions );
 
-    // skips the current challenge.
-    var skipButton = new TextPushButton( 'Skip', devButtonOptions );
-    skipButton.addListener( function() {
-      model.skipCurrentChallenge();
+    // @protected
+    this.buttonsParent = new Node( {
+      children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ],
+      maxWidth: 400 // determined empirically
     } );
 
-    // replays the current challenge.
-    var replayButton = new TextPushButton( 'Replay', devButtonOptions );
-    replayButton.addListener( function() {
-      model.replayCurrentChallenge();
-    } );
+    // point tools
+    const linesVisibleProperty = new BooleanProperty( true );
+    const pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    const pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
 
-    const devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
-    devButtonsParent.left = this.buttonsParent.right + 15;
-    devButtonsParent.centerY = this.buttonsParent.centerY;
-    this.addChild( devButtonsParent );
-    devButtonsParent.moveToBack();
-  }
+    // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
+    const pointToolParent = new Node();
+    pointToolParent.addChild( pointToolNode1 );
+    pointToolParent.addChild( pointToolNode2 );
 
-  // 'Check' button
-  checkButton.addListener( function() {
-    if ( challenge.isCorrect() ) {
-      self.faceNode.smile();
-      audioPlayer.correctAnswer();
-      const points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+    // rendering order
+    this.addChild( this.subtypeParent );
+    this.addChild( this.buttonsParent );
+    this.addChild( pointToolParent );
+    this.addChild( this.faceNode );
 
-      // Prevent score from exceeding perfect score, in case we replay challenges with ?gameDebug query parameter.
-      // See https://github.com/phetsims/graphing-lines/issues/70
-      const newScore = Math.min( model.scoreProperty.get() + points, model.getPerfectScore() );
-      model.scoreProperty.set( newScore );
-      self.faceNode.setPoints( points );
-      model.playStateProperty.set( PlayState.NEXT );
+    // buttons at center-bottom
+    this.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
+    this.buttonsParent.bottom = challengeSize.height - 20;
+
+    // debugging controls
+    if ( phet.chipper.queryParameters.showAnswers ) {
+
+      // description at leftTop
+      const descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      descriptionNode.left = 10;
+      descriptionNode.top = 10;
+      this.addChild( descriptionNode );
+
+      // developer buttons (no i18n) to right of main buttons
+      const devButtonOptions = {
+        font: new GLFont( 20 ),
+        baseColor: 'red',
+        textFill: 'white'
+      };
+
+      // skips the current challenge.
+      var skipButton = new TextPushButton( 'Skip', devButtonOptions );
+      skipButton.addListener( () => model.skipCurrentChallenge() );
+
+      // replays the current challenge.
+      var replayButton = new TextPushButton( 'Replay', devButtonOptions );
+      replayButton.addListener( () => model.replayCurrentChallenge() );
+
+      const devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
+      devButtonsParent.left = this.buttonsParent.right + 15;
+      devButtonsParent.centerY = this.buttonsParent.centerY;
+      this.addChild( devButtonsParent );
+      devButtonsParent.moveToBack();
     }
-    else {
-      self.faceNode.frown();
-      self.faceNode.setPoints( 0 );
-      audioPlayer.wrongAnswer();
-      if ( model.playStateProperty.get() === PlayState.FIRST_CHECK ) {
-        model.playStateProperty.set( PlayState.TRY_AGAIN );
+
+    // 'Check' button
+    checkButton.addListener( () => {
+      if ( challenge.isCorrect() ) {
+        this.faceNode.smile();
+        audioPlayer.correctAnswer();
+        const points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+
+        // Prevent score from exceeding perfect score, in case we replay challenges with ?gameDebug query parameter.
+        // See https://github.com/phetsims/graphing-lines/issues/70
+        const newScore = Math.min( model.scoreProperty.get() + points, model.getPerfectScore() );
+        model.scoreProperty.set( newScore );
+        this.faceNode.setPoints( points );
+        model.playStateProperty.set( PlayState.NEXT );
       }
       else {
-        model.playStateProperty.set( PlayState.SHOW_ANSWER );
+        this.faceNode.frown();
+        this.faceNode.setPoints( 0 );
+        audioPlayer.wrongAnswer();
+        if ( model.playStateProperty.get() === PlayState.FIRST_CHECK ) {
+          model.playStateProperty.set( PlayState.TRY_AGAIN );
+        }
+        else {
+          model.playStateProperty.set( PlayState.SHOW_ANSWER );
+        }
       }
-    }
-  } );
+    } );
 
-  // 'Try Again' button
-  tryAgainButton.addListener( function() {
-    model.playStateProperty.set( PlayState.SECOND_CHECK );
-  } );
-
-  // 'Show Answer' button
-  showAnswerButton.addListener( function() {
-    model.playStateProperty.set( PlayState.NEXT );
-  } );
-
-  // 'Next' button
-  nextButton.addListener( function() {
-    model.playStateProperty.set( PlayState.FIRST_CHECK );
-  } );
-
-  // play-state changes
-  const playStateObserver = function( state ) {
-
-    // visibility of face
-    self.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
-                              state === PlayState.SHOW_ANSWER ||
-                              ( state === PlayState.NEXT && challenge.isCorrect() ) );
-
-    // visibility of buttons
-    checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
-    tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
-    showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
-    nextButton.visible = ( state === PlayState.NEXT );
-
-    // dev buttons
-    if ( phet.chipper.queryParameters.showAnswers ) {
-      replayButton.visible = ( state === PlayState.NEXT );
-      skipButton.visible = !replayButton.visible;
-    }
-  };
-  model.playStateProperty.link( playStateObserver ); // unlink in dispose
-
-  // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
-  const guessObserver = function( guess ) {
-    if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
+    // 'Try Again' button
+    tryAgainButton.addListener( () => {
       model.playStateProperty.set( PlayState.SECOND_CHECK );
-    }
-  };
-  challenge.guessProperty.link( guessObserver ); // unlink in dispose
+    } );
 
-  // @private called by dispose
-  this.disposeChallengeNode = function() {
-    pointToolNode1.dispose();
-    pointToolNode2.dispose();
-    model.playStateProperty.unlink( playStateObserver );
-    challenge.guessProperty.unlink( guessObserver );
-  };
-}
+    // 'Show Answer' button
+    showAnswerButton.addListener( () => {
+      model.playStateProperty.set( PlayState.NEXT );
+    } );
 
-graphingLines.register( 'ChallengeNode', ChallengeNode );
+    // 'Next' button
+    nextButton.addListener( () => {
+      model.playStateProperty.set( PlayState.FIRST_CHECK );
+    } );
 
-export default inherit( Node, ChallengeNode, {
+    // play-state changes
+    const playStateObserver = state => {
+
+      // visibility of face
+      this.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
+                                state === PlayState.SHOW_ANSWER ||
+                                ( state === PlayState.NEXT && challenge.isCorrect() ) );
+
+      // visibility of buttons
+      checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
+      tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
+      showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
+      nextButton.visible = ( state === PlayState.NEXT );
+
+      // dev buttons
+      if ( phet.chipper.queryParameters.showAnswers ) {
+        replayButton.visible = ( state === PlayState.NEXT );
+        skipButton.visible = !replayButton.visible;
+      }
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
+
+    // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
+    const guessObserver = guess => {
+      if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
+        model.playStateProperty.set( PlayState.SECOND_CHECK );
+      }
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeChallengeNode = () => {
+      pointToolNode1.dispose();
+      pointToolNode2.dispose();
+      model.playStateProperty.unlink( playStateObserver );
+      challenge.guessProperty.unlink( guessObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeChallengeNode();
-    Node.prototype.dispose.call( this );
+    super.dispose();
   }
-}, {
 
   /**
    * Creates a non-interactive equation, used to label the specified line.
@@ -232,7 +222,7 @@ export default inherit( Node, ChallengeNode, {
    * @public
    * @static
    */
-  createEquationNode: function( lineProperty, equationForm, options ) {
+  static createEquationNode( lineProperty, equationForm, options ) {
 
     options = merge( {
       fontSize: 18, // {number},
@@ -249,4 +239,8 @@ export default inherit( Node, ChallengeNode, {
       throw new Error( 'unsupported equation form: ' + equationForm );
     }
   }
-} );
+}
+
+graphingLines.register( 'ChallengeNode', ChallengeNode );
+
+export default ChallengeNode;

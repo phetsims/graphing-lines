@@ -9,7 +9,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLinesStrings from '../../graphing-lines-strings.js';
@@ -27,130 +26,137 @@ import EquationBoxNode from './EquationBoxNode.js';
 const aCorrectEquationString = graphingLinesStrings.aCorrectEquation;
 const yourEquationString = graphingLinesStrings.yourEquation;
 
-/**
- * @param {GraphTheLine} challenge
- * @param {LineGameModel} model
- * @param {Dimension2} challengeSize
- * @param {GameAudioPlayer} audioPlayer
- * @constructor
- */
-function MakeTheEquationNode( challenge, model, challengeSize, audioPlayer ) {
+class MakeTheEquationNode extends ChallengeNode {
 
-  ChallengeNode.call( this, challenge, model, challengeSize, audioPlayer );
+  /**
+   * @param {GraphTheLine} challenge
+   * @param {LineGameModel} model
+   * @param {Dimension2} challengeSize
+   * @param {GameAudioPlayer} audioPlayer
+   */
+  constructor( challenge, model, challengeSize, audioPlayer ) {
 
-  const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
+    super( challenge, model, challengeSize, audioPlayer );
 
-  // title, possibly scaled for i18n
-  const titleNode = new Text( challenge.title, {
-    font: LineGameConstants.TITLE_FONT,
-    fill: LineGameConstants.TITLE_COLOR,
-    maxWidth: boxSize.width
-  } );
+    const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
-  // Answer
-  const answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
-    ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
-      fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
-    } ) );
-  answerBoxNode.visible = false;
-
-  // Guess
-  const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-    GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color );
-  const guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
-
-  // Graph
-  const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
-
-  // rendering order
-  this.subtypeParent.addChild( titleNode );
-  this.subtypeParent.addChild( graphNode );
-  this.subtypeParent.addChild( answerBoxNode );
-  this.subtypeParent.addChild( guessBoxNode );
-
-  // layout
-  {
-    // graphNode is positioned automatically based on modelViewTransform's origin offset.
-
-    // left align the title and boxes
-    guessBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
-    answerBoxNode.left = guessBoxNode.left;
-    titleNode.left = guessBoxNode.left;
-
-    // stack title and boxes vertically, title top-aligned with graph's grid
-    const ySpacing = 30;
-    titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
-    guessBoxNode.top = titleNode.bottom + ySpacing;
-    answerBoxNode.top = guessBoxNode.bottom + ySpacing;
-
-    // face centered below boxes, bottom-aligned with buttons
-    this.faceNode.centerX = guessBoxNode.centerX;
-    this.faceNode.bottom = this.buttonsParent.bottom;
-  }
-
-  // To reduce brain damage during development, show the answer equation in translucent gray.
-  if ( phet.chipper.queryParameters.showAnswers ) {
-    const devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
-      fontSize: 14,
+    // title, possibly scaled for i18n
+    const titleNode = new Text( challenge.title, {
+      font: LineGameConstants.TITLE_FONT,
+      fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
     } );
-    devAnswerNode.left = answerBoxNode.left;
-    devAnswerNode.centerY = answerBoxNode.centerY;
-    this.addChild( devAnswerNode );
-    devAnswerNode.moveToBack();
-  }
 
-  // Update visibility of the correct/incorrect icons.
-  const updateIcons = function() {
-    const playState = model.playStateProperty.get();
-    answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
-    guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
-    guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
-  };
+    // Answer
+    const answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
+      ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+        fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
+      } ) );
+    answerBoxNode.visible = false;
 
-  // sync with guess
-  const guessObserver = function() {
-    updateIcons();
-  };
-  challenge.guessProperty.link( guessObserver ); // unlink in dispose
+    // Guess
+    const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
+      GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color );
+    const guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
 
-  // sync with game state
-  const playStateObserver = function( playState ) {
+    // Graph
+    const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
 
-    // states in which the equation is interactive
-    guessBoxNode.pickable = (
-      playState === PlayState.FIRST_CHECK ||
-      playState === PlayState.SECOND_CHECK ||
-      playState === PlayState.TRY_AGAIN ||
-      ( playState === PlayState.NEXT && !challenge.isCorrect() )
-    );
+    // rendering order
+    this.subtypeParent.addChild( titleNode );
+    this.subtypeParent.addChild( graphNode );
+    this.subtypeParent.addChild( answerBoxNode );
+    this.subtypeParent.addChild( guessBoxNode );
 
-    // Graph the guess line at the end of the challenge.
-    graphNode.setGuessLineVisible( playState === PlayState.NEXT );
+    // layout
+    {
+      // graphNode is positioned automatically based on modelViewTransform's origin offset.
 
-    // show stuff when the user got the challenge wrong
-    if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-      answerBoxNode.setVisible( true );
-      graphNode.setAnswerPointVisible( true );
-      graphNode.setGuessPointVisible( true );
-      graphNode.setSlopeToolVisible( true );
+      // left align the title and boxes
+      guessBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
+      answerBoxNode.left = guessBoxNode.left;
+      titleNode.left = guessBoxNode.left;
+
+      // stack title and boxes vertically, title top-aligned with graph's grid
+      const ySpacing = 30;
+      titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
+      guessBoxNode.top = titleNode.bottom + ySpacing;
+      answerBoxNode.top = guessBoxNode.bottom + ySpacing;
+
+      // face centered below boxes, bottom-aligned with buttons
+      this.faceNode.centerX = guessBoxNode.centerX;
+      this.faceNode.bottom = this.buttonsParent.bottom;
     }
 
-    // visibility of correct/incorrect icons
-    updateIcons();
-  };
-  model.playStateProperty.link( playStateObserver ); // unlink in dispose
+    // To reduce brain damage during development, show the answer equation in translucent gray.
+    if ( phet.chipper.queryParameters.showAnswers ) {
+      const devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+        fontSize: 14,
+        maxWidth: boxSize.width
+      } );
+      devAnswerNode.left = answerBoxNode.left;
+      devAnswerNode.centerY = answerBoxNode.centerY;
+      this.addChild( devAnswerNode );
+      devAnswerNode.moveToBack();
+    }
 
-  // @private called by dispose
-  this.disposeMakeTheEquationNode = function() {
-    challenge.guessProperty.unlink( guessObserver );
-    model.playStateProperty.unlink( playStateObserver );
-    guessEquationNode.dispose();
-    graphNode.dispose();
-  };
+    // Update visibility of the correct/incorrect icons.
+    const updateIcons = () => {
+      const playState = model.playStateProperty.get();
+      answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
+      guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
+      guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
+    };
+
+    // sync with guess
+    const guessObserver = () => updateIcons();
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
+
+    // sync with game state
+    const playStateObserver = playState => {
+
+      // states in which the equation is interactive
+      guessBoxNode.pickable = (
+        playState === PlayState.FIRST_CHECK ||
+        playState === PlayState.SECOND_CHECK ||
+        playState === PlayState.TRY_AGAIN ||
+        ( playState === PlayState.NEXT && !challenge.isCorrect() )
+      );
+
+      // Graph the guess line at the end of the challenge.
+      graphNode.setGuessLineVisible( playState === PlayState.NEXT );
+
+      // show stuff when the user got the challenge wrong
+      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+        answerBoxNode.setVisible( true );
+        graphNode.setAnswerPointVisible( true );
+        graphNode.setGuessPointVisible( true );
+        graphNode.setSlopeToolVisible( true );
+      }
+
+      // visibility of correct/incorrect icons
+      updateIcons();
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
+
+    // @private called by dispose
+    this.disposeMakeTheEquationNode = () => {
+      challenge.guessProperty.unlink( guessObserver );
+      model.playStateProperty.unlink( playStateObserver );
+      guessEquationNode.dispose();
+      graphNode.dispose();
+    };
+  }
+
+  /**
+   * @public
+   * @override
+   */
+  dispose() {
+    this.disposeMakeTheEquationNode();
+    super.dispose();
+  }
 }
-
-graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );
 
 /**
  * Creates an interactive equation.
@@ -161,7 +167,7 @@ graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );
  * @param {number} fontSize
  * @param {Color|String} staticColor
  */
-var createInteractiveEquationNode = function( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
+function createInteractiveEquationNode( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
   let interactivePoint;
   let interactiveSlope;
   let interactiveIntercept;
@@ -195,16 +201,8 @@ var createInteractiveEquationNode = function( equationForm, manipulationMode, li
   else {
     throw new Error( 'unsupported equation form: ' + equationForm );
   }
-};
+}
 
-export default inherit( ChallengeNode, MakeTheEquationNode, {
+graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );
 
-  /**
-   * @public
-   * @override
-   */
-  dispose: function() {
-    this.disposeMakeTheEquationNode();
-    ChallengeNode.prototype.dispose.call( this );
-  }
-} );
+export default MakeTheEquationNode;

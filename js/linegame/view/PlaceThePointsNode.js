@@ -8,58 +8,52 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import graphingLines from '../../graphingLines.js';
 import PlayState from '../model/PlayState.js';
 import GraphTheLineNode from './GraphTheLineNode.js';
 import GraphThreePointsNode from './GraphThreePointsNode.js';
 
-/**
- * @param {GraphTheLine} challenge
- * @param {LineGameModel} model
- * @param {Dimension2} challengeSize
- * @param {GameAudioPlayer} audioPlayer
- * @constructor
- */
-function PlaceThePointsNode( challenge, model, challengeSize, audioPlayer ) {
+class PlaceThePointsNode extends GraphTheLineNode {
 
-  GraphTheLineNode.call( this, challenge, model, challengeSize, audioPlayer );
+  /**
+   * @param {GraphTheLine} challenge
+   * @param {LineGameModel} model
+   * @param {Dimension2} challengeSize
+   * @param {GameAudioPlayer} audioPlayer
+   */
+  constructor( challenge, model, challengeSize, audioPlayer ) {
 
-  const self = this;
+    super( challenge, model, challengeSize, audioPlayer );
 
-  const playStateObserver = function( playState ) {
+    const playStateObserver = playState => {
 
-    // show user's line only in states where there guess is wrong.
-    self.graphNode.setGuessLineVisible(
-      !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
+      // show user's line only in states where there guess is wrong.
+      this.graphNode.setGuessLineVisible(
+        !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
 
-    /*
-     * Plot (x1,y1) for answer when user got the challenge wrong.
-     * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
-     */
-    self.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
-    self.graphNode.setGuessPointVisible( false );
-  };
-  model.playStateProperty.link( playStateObserver ); // unlink in dispose
+      /*
+       * Plot (x1,y1) for answer when user got the challenge wrong.
+       * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
+       */
+      this.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
+      this.graphNode.setGuessPointVisible( false );
+    };
+    model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
-  // @private called by dispose
-  this.disposePlaceThePointsNode = function() {
-    model.playStateProperty.unlink( playStateObserver );
-  };
-}
-
-graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
-
-export default inherit( GraphTheLineNode, PlaceThePointsNode, {
+    // @private called by dispose
+    this.disposePlaceThePointsNode = () => {
+      model.playStateProperty.unlink( playStateObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposePlaceThePointsNode();
-    GraphTheLineNode.prototype.dispose.call( this );
-  },
+    super.dispose();
+  }
 
   /**
    * Creates the graph portion of the view.
@@ -68,7 +62,11 @@ export default inherit( GraphTheLineNode, PlaceThePointsNode, {
    * @override
    * @public
    */
-  createGraphNode: function( challenge ) {
+  createGraphNode( challenge ) {
     return new GraphThreePointsNode( challenge );
   }
-} );
+}
+
+graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
+
+export default PlaceThePointsNode;

@@ -8,61 +8,61 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import X2Y2Manipulator from '../../common/view/manipulator/X2Y2Manipulator.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 
-/**
- * @param {PlaceThePoints} challenge
- * @constructor
- */
-function GraphTwoPointsNode( challenge ) {
+class GraphTwoPointsNode extends ChallengeGraphNode {
 
-  ChallengeGraphNode.call( this, challenge );
+  /**
+   * @param {PlaceThePoints} challenge
+   */
+  constructor( challenge ) {
 
-  this.setGuessLineVisible( true );
+    super( challenge );
 
-  const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
+    this.setGuessLineVisible( true );
 
-  const x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
-    new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform, false /* constantSlope */ );
+    const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
-  const x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
-    new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform );
+    const x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
+      new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform, false /* constantSlope */ );
 
-  // Rendering order
-  this.addChild( x1y1Manipulator );
-  this.addChild( x2y2Manipulator );
+    const x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
+      new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform );
 
-  // Sync with the guess
-  const guessObserver = function( line ) {
-    // move the manipulators
-    x1y1Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
-    x2y2Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
-  };
-  challenge.guessProperty.link( guessObserver ); // unlink in dispose
+    // Rendering order
+    this.addChild( x1y1Manipulator );
+    this.addChild( x2y2Manipulator );
 
-  // @private called by dispose
-  this.disposeGraphTwoPointsNode = function() {
-    x1y1Manipulator.dispose();
-    x2y2Manipulator.dispose();
-    challenge.guessProperty.unlink( guessObserver );
-  };
-}
+    // Sync with the guess
+    const guessObserver = line => {
+      // move the manipulators
+      x1y1Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
+      x2y2Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );
+    };
+    challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
-graphingLines.register( 'GraphTwoPointsNode', GraphTwoPointsNode );
-
-export default inherit( ChallengeGraphNode, GraphTwoPointsNode, {
+    // @private called by dispose
+    this.disposeGraphTwoPointsNode = () => {
+      x1y1Manipulator.dispose();
+      x2y2Manipulator.dispose();
+      challenge.guessProperty.unlink( guessObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeGraphTwoPointsNode();
-    ChallengeGraphNode.prototype.dispose.call( this );
+    super.dispose();
   }
-} );
+}
+
+graphingLines.register( 'GraphTwoPointsNode', GraphTwoPointsNode );
+
+export default GraphTwoPointsNode;

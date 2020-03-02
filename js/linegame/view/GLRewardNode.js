@@ -19,7 +19,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Utils from '../../../../dot/js/Utils.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
 import PaperAirplaneNode from '../../../../scenery-phet/js/PaperAirplaneNode.js';
@@ -53,33 +52,98 @@ const POINT_TOOL_WINDOW_CENTER_X = 44; // center of the value window relative to
 const FACE_DIAMETER = 60;
 const AIRPLANE_SCALE = 1.76;
 
-/**
- * @params {Node[]} nodes to use in the reward
- * @constructor
- */
-function GLRewardNode( rewardNodes ) {
-  RewardNode.call( this, { nodes: rewardNodes } );
-}
+class GLRewardNode extends RewardNode {
 
-graphingLines.register( 'GLRewardNode', GLRewardNode );
+  /**
+   * @params {Node[]} nodes to use in the reward
+   */
+  constructor( rewardNodes ) {
+    super( { nodes: rewardNodes } );
+  }
+
+  /**
+   * Creates a set of equations nodes.
+   * @returns {Node[]}
+   * @public
+   * @static
+   */
+  static createEquationNodes() {
+    return RewardNode.createRandomNodes( createNodes( createEquationNode, NODE_COLORS ), NUMBER_OF_NODES );
+  }
+
+  /**
+   * Creates a set of equations graph.
+   * @returns {Node[]}
+   * @public
+   * @static
+   */
+  static createGraphNodes() {
+    return RewardNode.createRandomNodes( createNodes( createGraphNode, NODE_COLORS ), NUMBER_OF_NODES );
+  }
+
+  /**
+   * Creates a set of 'point tool' nodes.
+   * @returns {Node[]}
+   * @public
+   * @static
+   */
+  static createPointToolNodes() {
+    return RewardNode.createRandomNodes( createNodes( createPointToolNode, NODE_COLORS ), NUMBER_OF_NODES );
+  }
+
+  /**
+   * Creates a set of 'smiley face' nodes.
+   * @returns {Node[]}
+   * @public
+   * @static
+   */
+  static createSmileyFaceNodes() {
+    return RewardNode.createRandomNodes( createNodes( createFaceNode, NODE_COLORS ), NUMBER_OF_NODES );
+  }
+
+  /**
+   * Creates a set of paper airplane nodes, similar to the PhET logo.
+   * @returns {Node[]}
+   * @public
+   * @static
+   */
+  static createPaperAirplaneNodes() {
+    return RewardNode.createRandomNodes( createNodes( createPaperAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
+  }
+
+  /**
+   * Creates an assortment of nodes, using all of the above types.
+   * @returns {Node[]}
+   * @public
+   * @static
+   */
+  static createAssortedNodes() {
+    const nodes = createNodes( createEquationNode, NODE_COLORS )
+      .concat( createNodes( createGraphNode, NODE_COLORS ) )
+      .concat( createNodes( createPointToolNode, NODE_COLORS ) )
+      .concat( createNodes( createFaceNode, NODE_COLORS ) )
+      .concat( createNodes( createPaperAirplaneNode, NODE_COLORS ) );
+    return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
+  }
+}
 
 //-----------------------------------------------------------------------------------------------
 // Misc. utility functions
 //-----------------------------------------------------------------------------------------------
 
-const getRandomX = function() {
+function getRandomX() {
   return getRandomNonZeroInteger( GLConstants.X_AXIS_RANGE.min, GLConstants.X_AXIS_RANGE.max );
-};
+}
 
-const getRandomY = function() {
+function getRandomY() {
   return getRandomNonZeroInteger( GLConstants.Y_AXIS_RANGE.min, GLConstants.Y_AXIS_RANGE.max );
-};
+}
 
-var getRandomNonZeroInteger = function( min, max ) {
+function getRandomNonZeroInteger( min, max ) {
   let i = Utils.roundSymmetric( min + ( phet.joist.random.nextDouble() * ( max - min ) ) );
   if ( i === 0 ) { i = 1; }
   return i;
-};
+}
 
 //-----------------------------------------------------------------------------------------------
 // Functions that create specific types of nodes.
@@ -87,7 +151,7 @@ var getRandomNonZeroInteger = function( min, max ) {
 //-----------------------------------------------------------------------------------------------
 
 // Creates a random equation with the specified color.
-const createEquationNode = function( color ) {
+function createEquationNode( color ) {
   let node;
   if ( phet.joist.random.nextDouble() < 0.5 ) {
     node = SlopeInterceptEquationNode.createDynamicLabel(
@@ -102,10 +166,10 @@ const createEquationNode = function( color ) {
       } );
   }
   return node;
-};
+}
 
 // Creates a random graph with the specified color.
-const createGraphNode = function( color ) {
+function createGraphNode( color ) {
   let node;
   if ( phet.joist.random.nextDouble() < 0.5 ) {
     node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
@@ -114,30 +178,30 @@ const createGraphNode = function( color ) {
     node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, 3, 3, -3 ); // y = -x
   }
   return node;
-};
+}
 
 /*
  * Creates a random point tool with the specified color.
  * This does not use PointToolNode because it has too many model dependencies.
  */
-const createPointToolNode = function( color ) {
+function createPointToolNode( color ) {
   const body = new Image( pointToolBodyImage );
   const tip = new Image( pointToolTipImage, { top: body.bottom, centerX: 0.25 * body.width } );
   const background = new Rectangle( 0, 0, 0.95 * body.width, 0.95 * body.height, { fill: color, center: body.center } );
   const value = new Text( StringUtils.format( pointXYString, getRandomX(), getRandomY() ),
     { font: POINT_TOOL_FONT, centerX: POINT_TOOL_WINDOW_CENTER_X, centerY: body.centerY } );
   return new Node( { children: [ background, body, tip, value ] } );
-};
+}
 
 // Creates a smiley face with the specified color.
-const createFaceNode = function( color ) {
+function createFaceNode( color ) {
   return new FaceNode( FACE_DIAMETER, { headFill: color } );
-};
+}
 
 // Creates a paper airplane with the specified color.
-const createPaperAirplaneNode = function( color ) {
+function createPaperAirplaneNode( color ) {
   return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
-};
+}
 
 /**
  * Creates an array of nodes for a specified array of colors.
@@ -147,78 +211,12 @@ const createPaperAirplaneNode = function( color ) {
  * @param {Color|String[]} colors
  * @returns {Node[]}
  */
-const createNodes = function( creationFunction, colors ) {
+function createNodes( creationFunction, colors ) {
   const nodes = [];
-  colors.forEach( function( color ) {
-    nodes.push( creationFunction( color ) );
-  } );
+  colors.forEach( color => nodes.push( creationFunction( color ) ) );
   return nodes;
-};
+}
 
-export default inherit( RewardNode, GLRewardNode, {}, {
+graphingLines.register( 'GLRewardNode', GLRewardNode );
 
-  /**
-   * Creates a set of equations nodes.
-   * @returns {Node[]}
-   * @public
-   * @static
-   */
-  createEquationNodes: function() {
-    return RewardNode.createRandomNodes( createNodes( createEquationNode, NODE_COLORS ), NUMBER_OF_NODES );
-  },
-
-  /**
-   * Creates a set of equations graph.
-   * @returns {Node[]}
-   * @public
-   * @static
-   */
-  createGraphNodes: function() {
-    return RewardNode.createRandomNodes( createNodes( createGraphNode, NODE_COLORS ), NUMBER_OF_NODES );
-  },
-
-  /**
-   * Creates a set of 'point tool' nodes.
-   * @returns {Node[]}
-   * @public
-   * @static
-   */
-  createPointToolNodes: function() {
-    return RewardNode.createRandomNodes( createNodes( createPointToolNode, NODE_COLORS ), NUMBER_OF_NODES );
-  },
-
-  /**
-   * Creates a set of 'smiley face' nodes.
-   * @returns {Node[]}
-   * @public
-   * @static
-   */
-  createSmileyFaceNodes: function() {
-    return RewardNode.createRandomNodes( createNodes( createFaceNode, NODE_COLORS ), NUMBER_OF_NODES );
-  },
-
-  /**
-   * Creates a set of paper airplane nodes, similar to the PhET logo.
-   * @returns {Node[]}
-   * @public
-   * @static
-   */
-  createPaperAirplaneNodes: function() {
-    return RewardNode.createRandomNodes( createNodes( createPaperAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
-  },
-
-  /**
-   * Creates an assortment of nodes, using all of the above types.
-   * @returns {Node[]}
-   * @public
-   * @static
-   */
-  createAssortedNodes: function() {
-    const nodes = createNodes( createEquationNode, NODE_COLORS )
-      .concat( createNodes( createGraphNode, NODE_COLORS ) )
-      .concat( createNodes( createPointToolNode, NODE_COLORS ) )
-      .concat( createNodes( createFaceNode, NODE_COLORS ) )
-      .concat( createNodes( createPaperAirplaneNode, NODE_COLORS ) );
-    return RewardNode.createRandomNodes( nodes, NUMBER_OF_NODES );
-  }
-} );
+export default GLRewardNode;

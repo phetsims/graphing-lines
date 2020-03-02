@@ -1,39 +1,35 @@
 // Copyright 2017-2020, University of Colorado Boulder
 
 /**
- * Base type for challenge factories in both the 'Graphing Lines' and 'Graphing Slope-Intercept' sims.
+ * Abstract base class for challenge factories in both the 'Graphing Lines' and 'Graphing Slope-Intercept' sims.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function BaseChallengeFactory( options ) {
+class BaseChallengeFactory {
 
-  options = merge( {
-    xRange: GLConstants.X_AXIS_RANGE, // {Range} range of the graph's x axis
-    yRange: GLConstants.Y_AXIS_RANGE  // {Range} range of the graph's y axis
-  }, options );
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
 
-  // @protected
-  this.xRange = options.xRange;
-  this.yRange = options.yRange;
-}
+    options = merge( {
+      xRange: GLConstants.X_AXIS_RANGE, // {Range} range of the graph's x axis
+      yRange: GLConstants.Y_AXIS_RANGE  // {Range} range of the graph's y axis
+    }, options );
 
-graphingLines.register( 'BaseChallengeFactory', BaseChallengeFactory );
-
-export default inherit( Object, BaseChallengeFactory, {
+    // @protected
+    this.xRange = options.xRange;
+    this.yRange = options.yRange;
+  }
 
   /**
    * Creates challenges for the factory's game level.
@@ -42,9 +38,9 @@ export default inherit( Object, BaseChallengeFactory, {
    * @public
    * @abstract
    */
-  createChallenges: function() {
+  createChallenges() {
     throw new Error( 'must be implemented by subtypes' );
-  },
+  }
 
   /**
    * Convenience function for creating a line, give a slope and intercept.
@@ -53,11 +49,11 @@ export default inherit( Object, BaseChallengeFactory, {
    * @returns {Line}
    * @protected
    */
-  createSlopeInterceptLine: function( slope, intercept ) {
+  createSlopeInterceptLine( slope, intercept ) {
     assert && assert( slope instanceof Fraction );
     assert && assert( typeof intercept === 'number' );
     return Line.createSlopeIntercept( slope.numerator, slope.denominator, intercept );
-  },
+  }
 
   /**
    * Convenience function for creating a line, give a point and slope.
@@ -66,12 +62,11 @@ export default inherit( Object, BaseChallengeFactory, {
    * @returns {Line}
    * @protected
    */
-  createPointSlopeLine: function( point, slope ) {
+  createPointSlopeLine( point, slope ) {
     assert && assert( point instanceof Vector2 );
     assert && assert( slope instanceof Fraction );
     return Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator );
   }
-}, {
 
   /**
    * Picks a point that keeps the slope indicator on the graph.
@@ -82,7 +77,7 @@ export default inherit( Object, BaseChallengeFactory, {
    * @public
    * @static
    */
-  choosePointForSlope: function( slope, graphXRange, graphYRange ) {
+  static choosePointForSlope( slope, graphXRange, graphYRange ) {
 
     const rise = slope.numerator;
     const run = slope.denominator;
@@ -100,7 +95,7 @@ export default inherit( Object, BaseChallengeFactory, {
     assert && assert( y >= minY && y <= maxY, 'y out of range: ' + y );
 
     return new Vector2( x, y );
-  },
+  }
 
   /**
    * Picks a point (x1,x2) on the graph that results in the slope indicator (x2,y2) being off the graph.
@@ -113,7 +108,7 @@ export default inherit( Object, BaseChallengeFactory, {
    * @public
    * @static
    */
-  choosePointForSlopeInversion: function( slope, graphXRange, graphYRange ) {
+  static choosePointForSlopeInversion( slope, graphXRange, graphYRange ) {
 
     const rise = slope.numerator;
     const run = slope.denominator;
@@ -140,4 +135,8 @@ export default inherit( Object, BaseChallengeFactory, {
 
     return new Vector2( x1, y1 );
   }
-} );
+}
+
+graphingLines.register( 'BaseChallengeFactory', BaseChallengeFactory );
+
+export default BaseChallengeFactory;

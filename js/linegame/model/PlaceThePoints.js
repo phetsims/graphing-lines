@@ -12,7 +12,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
@@ -21,51 +20,48 @@ import GraphTheLine from './GraphTheLine.js';
 import ManipulationMode from './ManipulationMode.js';
 import NotALine from './NotALine.js';
 
-/**
- * @param {string} description brief description of the challenge, visible in dev versions
- * @param {Line} answer  the correct answer
- * @param {EquationForm} equationForm specifies the form of the equation
- * @param {Range} xRange range of the graph's x axis
- * @param {Range} yRange range of the graph's y axis
- * @constructor
- */
-function PlaceThePoints( description, answer, equationForm, xRange, yRange ) {
+class PlaceThePoints extends GraphTheLine {
 
-  GraphTheLine.call( this, description, answer, equationForm, ManipulationMode.THREE_POINTS, xRange, yRange );
+  /**
+   * @param {string} description brief description of the challenge, visible in dev versions
+   * @param {Line} answer  the correct answer
+   * @param {EquationForm} equationForm specifies the form of the equation
+   * @param {Range} xRange range of the graph's x axis
+   * @param {Range} yRange range of the graph's y axis
+   */
+  constructor( description, answer, equationForm, xRange, yRange ) {
 
-  // @public initial points do not form a line
-  this.p1Property = new Vector2Property( new Vector2( -3, 2 ) );
-  this.p2Property = new Vector2Property( new Vector2( 0, 0 ) );
-  this.p3Property = new Vector2Property( new Vector2( 3, 2 ) );
+    super( description, answer, equationForm, ManipulationMode.THREE_POINTS, xRange, yRange );
 
-  // update the guess when the points change
-  // unmultilink unnecessary because PlaceThePoints owns these Properties.
-  const self = this;
-  Property.multilink( [ this.p1Property, this.p2Property, this.p3Property ],
-    function( p1, p2, p3 ) {
-      const line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
-      if ( line.onLinePoint( p3 ) ) {
-        // all 3 points are on a line
-        self.guessProperty.set( line );
-      }
-      else {
-        // the 3 points don't form a line
-        self.guessProperty.set( new NotALine() );
-      }
-    } );
-}
+    // @public initial points do not form a line
+    this.p1Property = new Vector2Property( new Vector2( -3, 2 ) );
+    this.p2Property = new Vector2Property( new Vector2( 0, 0 ) );
+    this.p3Property = new Vector2Property( new Vector2( 3, 2 ) );
 
-graphingLines.register( 'PlaceThePoints', PlaceThePoints );
+    // update the guess when the points change
+    // unmultilink unnecessary because PlaceThePoints owns these Properties.
+    Property.multilink(
+      [ this.p1Property, this.p2Property, this.p3Property ],
+      ( p1, p2, p3 ) => {
+        const line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
+        if ( line.onLinePoint( p3 ) ) {
+          // all 3 points are on a line
+          this.guessProperty.set( line );
+        }
+        else {
+          // the 3 points don't form a line
+          this.guessProperty.set( new NotALine() );
+        }
+      } );
+  }
 
-export default inherit( GraphTheLine, PlaceThePoints, {
-
-  // @public
-  reset: function() {
-    GraphTheLine.prototype.reset.call( this );
+  // @public @override
+  reset() {
+    super.reset();
     this.p1Property.reset();
     this.p2Property.reset();
     this.p3Property.reset();
-  },
+  }
 
   /**
    * Creates the view for this challenge.
@@ -76,7 +72,11 @@ export default inherit( GraphTheLine, PlaceThePoints, {
    * @override
    * @public
    */
-  createView: function( model, challengeSize, audioPlayer ) {
+  createView( model, challengeSize, audioPlayer ) {
     return new PlaceThePointsNode( this, model, challengeSize, audioPlayer );
   }
-} );
+}
+
+graphingLines.register( 'PlaceThePoints', PlaceThePoints );
+
+export default PlaceThePoints;

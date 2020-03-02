@@ -19,6 +19,7 @@ import LineGameScreenView from './view/LineGameScreenView.js';
 const screenLineGameString = graphingLinesStrings.screen.lineGame;
 
 class LineGameScreen extends Screen {
+
   /**
    * @param {Tandem} tandem
    */

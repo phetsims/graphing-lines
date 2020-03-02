@@ -9,12 +9,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import graphingLines from '../../graphingLines.js';
 
-function NotALine() {}
+class NotALine {}
 
 graphingLines.register( 'NotALine', NotALine );
 
-inherit( Object, NotALine );
 export default NotALine;

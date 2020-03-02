@@ -9,7 +9,6 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
@@ -19,17 +18,14 @@ import MakeTheEquation from './MakeTheEquation.js';
 import ManipulationMode from './ManipulationMode.js';
 import ValuePool from './ValuePool.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function ChallengeFactory2( options ) {
-  BaseChallengeFactory.call( this, options );
-}
+class ChallengeFactory2 extends BaseChallengeFactory {
 
-graphingLines.register( 'ChallengeFactory2', ChallengeFactory2 );
-
-export default inherit( BaseChallengeFactory, ChallengeFactory2, {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( options );
+  }
 
   /**
    * Creates challenges for this game level.
@@ -37,7 +33,7 @@ export default inherit( BaseChallengeFactory, ChallengeFactory2, {
    * @public
    * @override
    */
-  createChallenges: function() {
+  createChallenges() {
 
     const challenges = [];
 
@@ -133,13 +129,13 @@ export default inherit( BaseChallengeFactory, ChallengeFactory2, {
     }
 
     return challenges;
-  },
+  }
 
   /**
    * Creates the 3 sets of slopes that are identified in the design document.
    * @returns {Fraction[][]}
    */
-  createSlopeArrays: function() {
+  createSlopeArrays() {
     return [
 
       // positive and negative integers
@@ -177,7 +173,7 @@ export default inherit( BaseChallengeFactory, ChallengeFactory2, {
         new Fraction( -5, 4 )
       ]
     ];
-  },
+  }
 
   /**
    * Creates the sets of y-intercepts used for generating challenges.
@@ -185,19 +181,19 @@ export default inherit( BaseChallengeFactory, ChallengeFactory2, {
    * @protected
    * @override
    */
-  createYInterceptArrays: function() {
+  createYInterceptArrays() {
     return [
       ValuePool.rangeToArray( new Range( this.yRange.min, -1 ) ), // negative intercepts
       ValuePool.rangeToArray( new Range( 1, this.yRange.max ) )   // positive intercepts
     ];
   }
-}, {
 
   /**
    * Creates the set of positive fractional slopes that are identified in the design document.
    * @returns {Fraction[]}
+   * @static
    */
-  createPositiveFractionalSlopes: function() {
+  static createPositiveFractionalSlopes() {
     return [
       // positive fractions
       new Fraction( 1, 4 ),
@@ -216,4 +212,8 @@ export default inherit( BaseChallengeFactory, ChallengeFactory2, {
       new Fraction( 7, 4 )
     ];
   }
-} );
+}
+
+graphingLines.register( 'ChallengeFactory2', ChallengeFactory2 );
+
+export default ChallengeFactory2;

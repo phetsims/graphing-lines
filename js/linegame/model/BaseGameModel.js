@@ -15,7 +15,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringProperty from '../../../../axon/js/StringProperty.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import GameTimer from '../../../../vegas/js/GameTimer.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
@@ -33,101 +32,96 @@ const CHALLENGES_PER_GAME = 6;
 const DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1 ),
   EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
-/**
- * @param {BaseChallengeFactory[]} challengeFactories
- * @constructor
- */
-function BaseGameModel( challengeFactories ) {
+class BaseGameModel {
+  
+  /**
+   * @param {BaseChallengeFactory[]} challengeFactories
+   */
+  constructor( challengeFactories ) {
 
-  const self = this;
+    // @private
+    this.challengeFactories = challengeFactories;
 
-  // @private
-  this.challengeFactories = challengeFactories;
-
-  // @public Properties
-  this.levelProperty = new NumberProperty( 0, {
-    numberType: 'Integer'
-  } );
-  this.soundEnabledProperty = new BooleanProperty( true );
-  this.timerEnabledProperty = new BooleanProperty( false );
-  this.scoreProperty = new NumberProperty( 0, {
-    numberType: 'Integer'
-  } ); // {number} how many points the user has earned for the current game
-  this.challengeProperty = new Property( DUMMY_CHALLENGE );
-  this.challengeIndexProperty = new NumberProperty( 0, {
-    numberType: 'Integer'
-  } );
-  this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
-    numberType: 'Integer'
-  } );
-  this.playStateProperty = new StringProperty( PlayState.NONE, {
-    reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
-  } );
-
-  // @public
-  this.challenges = []; // {Challenge[]}
-  this.timer = new GameTimer();
-  this.numberOfLevels = challengeFactories.length;
-  this.maxPointsPerChallenge = 2;
-  this.bestScoreProperties = []; // {NumberProperty[]} best scores for each level
-  this.bestTimeProperties = []; // {Property.<number|null>[]} best times for each level, in ms
-  this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
-  for ( let level = 0; level < this.numberOfLevels; level++ ) {
-    this.bestScoreProperties.push( new NumberProperty( 0, {
+    // @public Properties
+    this.levelProperty = new NumberProperty( 0, {
       numberType: 'Integer'
-    } ) );
-    this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
-  }
+    } );
+    this.soundEnabledProperty = new BooleanProperty( true );
+    this.timerEnabledProperty = new BooleanProperty( false );
+    this.scoreProperty = new NumberProperty( 0, {
+      numberType: 'Integer'
+    } ); // {number} how many points the user has earned for the current game
+    this.challengeProperty = new Property( DUMMY_CHALLENGE );
+    this.challengeIndexProperty = new NumberProperty( 0, {
+      numberType: 'Integer'
+    } );
+    this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
+      numberType: 'Integer'
+    } );
+    this.playStateProperty = new StringProperty( PlayState.NONE, {
+      reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
+    } );
 
-  // @public (read-only) {GamePhase} set this using setGamePhase
-  this.gamePhaseProperty = new Property( INITIAL_GAME_PHASE );
-
-  this.initChallenges();
-
-  // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
-  // unlink is unnecessary since BaseGameModel exists for the lifetime of the sim.
-  this.playStateProperty.link( function( playState ) {
-
-    const challengeIndex = self.challengeIndexProperty.get();
-    const isLastChallenge = ( challengeIndex === self.challenges.length - 1 );
-
-    if ( isLastChallenge && ( playState === PlayState.NEXT || playState === PlayState.SHOW_ANSWER ) ) {
-      // game over, stop the timer
-      self.timer.stop();
+    // @public
+    this.challenges = []; // {Challenge[]}
+    this.timer = new GameTimer();
+    this.numberOfLevels = challengeFactories.length;
+    this.maxPointsPerChallenge = 2;
+    this.bestScoreProperties = []; // {NumberProperty[]} best scores for each level
+    this.bestTimeProperties = []; // {Property.<number|null>[]} best times for each level, in ms
+    this.isNewBestTime = false; // is the time for the most-recently-completed game a new best time?
+    for ( let level = 0; level < this.numberOfLevels; level++ ) {
+      this.bestScoreProperties.push( new NumberProperty( 0, {
+        numberType: 'Integer'
+      } ) );
+      this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 
-    if ( playState === PlayState.FIRST_CHECK ) {
+    // @public (read-only) {GamePhase} set this using setGamePhase
+    this.gamePhaseProperty = new Property( INITIAL_GAME_PHASE );
 
-      const level = self.levelProperty.get();
-      const score = self.scoreProperty.get();
+    this.initChallenges();
 
-      if ( isLastChallenge ) {
-        // game has been completed
-        self.setGamePhase( GamePhase.RESULTS );
-        if ( score > self.bestScoreProperties[ level ].get() ) {
-          self.bestScoreProperties[ level ].set( score );
+    // Do this after initChallenges, because this will fire immediately and needs to have an initial set of challenges.
+    // unlink is unnecessary since BaseGameModel exists for the lifetime of the sim.
+    this.playStateProperty.link( playState => {
+
+      const challengeIndex = this.challengeIndexProperty.get();
+      const isLastChallenge = ( challengeIndex === this.challenges.length - 1 );
+
+      if ( isLastChallenge && ( playState === PlayState.NEXT || playState === PlayState.SHOW_ANSWER ) ) {
+        // game over, stop the timer
+        this.timer.stop();
+      }
+
+      if ( playState === PlayState.FIRST_CHECK ) {
+
+        const level = this.levelProperty.get();
+        const score = this.scoreProperty.get();
+
+        if ( isLastChallenge ) {
+          // game has been completed
+          this.setGamePhase( GamePhase.RESULTS );
+          if ( score > this.bestScoreProperties[ level ].get() ) {
+            this.bestScoreProperties[ level ].set( score );
+          }
+        }
+        else {
+          // next challenge
+          const nextChallengeIndex = challengeIndex + 1;
+          this.challengeIndexProperty.set( nextChallengeIndex );
+          this.challengeProperty.set( this.challenges[ nextChallengeIndex ] );
         }
       }
-      else {
-        // next challenge
-        const nextChallengeIndex = challengeIndex + 1;
-        self.challengeIndexProperty.set( nextChallengeIndex );
-        self.challengeProperty.set( self.challenges[ nextChallengeIndex ] );
+      else if ( playState === PlayState.NEXT ) {
+        this.challengeProperty.get().setAnswerVisible( true );
       }
-    }
-    else if ( playState === PlayState.NEXT ) {
-      self.challengeProperty.get().setAnswerVisible( true );
-    }
-  } );
+    } );
 
-  if ( GLQueryParameters.verifyChallenges ) {
-    this.verifyChallenges();
+    if ( GLQueryParameters.verifyChallenges ) {
+      this.verifyChallenges();
+    }
   }
-}
-
-graphingLines.register( 'BaseGameModel', BaseGameModel );
-
-export default inherit( Object, BaseGameModel, {
 
   /**
    * Sets the game phase. Call this instead of setting gamePhaseProperty directly,
@@ -135,7 +129,7 @@ export default inherit( Object, BaseGameModel, {
    * @param {GamePhase} gamePhase
    * @public
    */
-  setGamePhase: function( gamePhase ) {
+  setGamePhase( gamePhase ) {
     if ( gamePhase !== this.gamePhaseProperty.get() ) {
 
       // Do tasks that need to be done before notifying listeners.
@@ -160,10 +154,10 @@ export default inherit( Object, BaseGameModel, {
       // Change the Property, which notifies listeners
       this.gamePhaseProperty.set( gamePhase );
     }
-  },
+  }
 
-  // @override @public
-  reset: function() {
+  // @public
+  reset() {
 
     this.levelProperty.reset();
     this.soundEnabledProperty.reset();
@@ -179,36 +173,32 @@ export default inherit( Object, BaseGameModel, {
     this.resetBestTimes();
 
     this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
-  },
+  }
 
   // @private resets the best score to zero for every level
-  resetBestScores: function() {
-    this.bestScoreProperties.forEach( function( property ) {
-      property.set( 0 );
-    } );
-  },
+  resetBestScores() {
+    this.bestScoreProperties.forEach( property => property.set( 0 ) );
+  }
 
   // @private resets the best times to null (no time) for every level
-  resetBestTimes: function() {
-    this.bestTimeProperties.forEach( function( property ) {
-      property.set( null );
-    } );
-  },
+  resetBestTimes() {
+    this.bestTimeProperties.forEach( property => property.set( null ) );
+  }
 
   // @public
-  isPerfectScore: function() {
+  isPerfectScore() {
     return this.scoreProperty.get() === this.getPerfectScore();
-  },
+  }
 
   // @public Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
-  getPerfectScore: function() {
+  getPerfectScore() {
     return this.challenges.length * this.computePoints( 1 );
-  },
+  }
 
   // @public Compute points to be awarded for a correct answer.
-  computePoints: function( attempts ) {
+  computePoints( attempts ) {
     return Math.max( 0, this.maxPointsPerChallenge - attempts + 1 );
-  },
+  }
 
   /**
    * Skips the current challenge.
@@ -216,10 +206,10 @@ export default inherit( Object, BaseGameModel, {
    * Score and best times are meaningless after using this.
    * @public
    */
-  skipCurrentChallenge: function() {
+  skipCurrentChallenge() {
     this.playStateProperty.set( PlayState.NEXT );
     this.playStateProperty.set( PlayState.FIRST_CHECK );
-  },
+  }
 
   /**
    * Replays the current challenge.
@@ -227,15 +217,15 @@ export default inherit( Object, BaseGameModel, {
    * Score and best times are meaningless after using this.
    * @public
    */
-  replayCurrentChallenge: function() {
+  replayCurrentChallenge() {
     this.challengeProperty.get().reset();
     this.challengeIndexProperty.set( this.challengeIndexProperty.get() - 1 );
     this.challengeProperty.set( DUMMY_CHALLENGE ); // force an update
     this.playStateProperty.set( PlayState.FIRST_CHECK );
-  },
+  }
 
   // @private Updates the best time for the current level, at the end of a timed game with a perfect score.
-  updateBestTime: function() {
+  updateBestTime() {
     assert && assert( !this.timer.isRunningProperty.value );
     this.isNewBestTime = false;
     if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
@@ -251,10 +241,10 @@ export default inherit( Object, BaseGameModel, {
         this.isNewBestTime = true;
       }
     }
-  },
+  }
 
   // @private initializes a new set of challenges for the current level
-  initChallenges: function() {
+  initChallenges() {
 
     // force update
     this.challengeIndexProperty.set( -1 );
@@ -272,10 +262,10 @@ export default inherit( Object, BaseGameModel, {
     // set the number of challenges
     this.challengesPerGameProperty.set( this.challenges.length );
     assert && assert( this.challengesPerGameProperty.get() === CHALLENGES_PER_GAME );
-  },
+  }
 
   // @private verify challenge creation by
-  verifyChallenges: function() {
+  verifyChallenges() {
     console.log( 'begin: verify creation of challenges' );
     for ( let level = 0; level < this.challengeFactories.length; level++ ) {
       console.log( 'verifying level ' + level + '...' );
@@ -285,4 +275,8 @@ export default inherit( Object, BaseGameModel, {
     }
     console.log( 'end: verify creation of challenges' );
   }
-} );
+}
+
+graphingLines.register( 'BaseGameModel', BaseGameModel );
+
+export default BaseGameModel;

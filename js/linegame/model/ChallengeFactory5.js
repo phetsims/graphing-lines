@@ -7,7 +7,6 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import Line from '../../common/model/Line.js';
@@ -20,17 +19,14 @@ import ManipulationMode from './ManipulationMode.js';
 import PlaceThePoints from './PlaceThePoints.js';
 import ValuePool from './ValuePool.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function ChallengeFactory5( options ) {
-  BaseChallengeFactory.call( this, options );
-}
+class ChallengeFactory5 extends BaseChallengeFactory {
 
-graphingLines.register( 'ChallengeFactory5', ChallengeFactory5 );
-
-export default inherit( BaseChallengeFactory, ChallengeFactory5, {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( options );
+  }
 
   /**
    * Creates challenges for this game level.
@@ -38,7 +34,7 @@ export default inherit( BaseChallengeFactory, ChallengeFactory5, {
    * @public
    * @override
    */
-  createChallenges: function() {
+  createChallenges() {
 
     const challenges = [];
 
@@ -189,7 +185,6 @@ export default inherit( BaseChallengeFactory, ChallengeFactory5, {
 
     return challenges;
   }
-}, {
 
   /**
    * Adds 2 'Place the Point' challenges, 1 slope-intercept form, 1 point-slope form.
@@ -201,7 +196,7 @@ export default inherit( BaseChallengeFactory, ChallengeFactory5, {
    * @public
    * @static
    */
-  addPlaceThePointsChallenges: function( challenges, xRange, yRange ) {
+  static addPlaceThePointsChallenges( challenges, xRange, yRange ) {
 
     // all ranges limited to [-5,5]
     const range = new Range( -5, 5 );
@@ -237,4 +232,8 @@ export default inherit( BaseChallengeFactory, ChallengeFactory5, {
       new Line( x1, y1, x1 + run, y1 + rise, Color.BLACK ),
       EquationForm.POINT_SLOPE, xRange, yRange ) );
   }
-} );
+}
+
+graphingLines.register( 'ChallengeFactory5', ChallengeFactory5 );
+
+export default ChallengeFactory5;

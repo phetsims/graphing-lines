@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import ChallengeFactory2 from './ChallengeFactory2.js';
@@ -17,17 +16,14 @@ import MakeTheEquation from './MakeTheEquation.js';
 import ManipulationMode from './ManipulationMode.js';
 import ValuePool from './ValuePool.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function ChallengeFactory3( options ) {
-  ChallengeFactory2.call( this, options );
-}
+class ChallengeFactory3 extends ChallengeFactory2 {
 
-graphingLines.register( 'ChallengeFactory3', ChallengeFactory3 );
-
-export default inherit( ChallengeFactory2, ChallengeFactory3, {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( options );
+  }
 
   /**
    * Creates challenges for this game level.
@@ -35,7 +31,7 @@ export default inherit( ChallengeFactory2, ChallengeFactory3, {
    * @public
    * @override
    */
-  createChallenges: function() {
+  createChallenges() {
 
     const challenges = [];
 
@@ -136,4 +132,8 @@ export default inherit( ChallengeFactory2, ChallengeFactory3, {
 
     return challenges;
   }
-} );
+}
+
+graphingLines.register( 'ChallengeFactory3', ChallengeFactory3 );
+
+export default ChallengeFactory3;

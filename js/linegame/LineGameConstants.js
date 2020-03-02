@@ -12,6 +12,7 @@ import GLFont from '../common/GLFont.js';
 import graphingLines from '../graphingLines.js';
 
 const LineGameConstants = {
+
   ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates
 
   // fonts

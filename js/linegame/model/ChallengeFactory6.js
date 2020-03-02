@@ -7,7 +7,6 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
@@ -19,17 +18,14 @@ import ManipulationMode from './ManipulationMode.js';
 import PlaceThePoints from './PlaceThePoints.js';
 import ValuePool from './ValuePool.js';
 
-/**
- * @param {Object} [options]
- * @constructor
- */
-function ChallengeFactory6( options ) {
-  BaseChallengeFactory.call( this, options );
-}
+class ChallengeFactory6 extends BaseChallengeFactory {
 
-graphingLines.register( 'ChallengeFactory6', ChallengeFactory6 );
-
-export default inherit( BaseChallengeFactory, ChallengeFactory6, {
+  /**
+   * @param {Object} [options]
+   */
+  constructor( options ) {
+    super( options );
+  }
 
   /**
    * Creates challenges for this game level.
@@ -37,7 +33,7 @@ export default inherit( BaseChallengeFactory, ChallengeFactory6, {
    * @public
    * @override
    */
-  createChallenges: function() {
+  createChallenges() {
 
     const challenges = [];
     let challengeNumber = 1;
@@ -110,4 +106,8 @@ export default inherit( BaseChallengeFactory, ChallengeFactory6, {
 
     return challenges;
   }
-} );
+}
+
+graphingLines.register( 'ChallengeFactory6', ChallengeFactory6 );
+
+export default ChallengeFactory6;

@@ -7,39 +7,36 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import Line from '../../common/model/Line.js';
 import graphingLinesStrings from '../../graphing-lines-strings.js';
 import graphingLines from '../../graphingLines.js';
 import GraphTheLineNode from '../view/GraphTheLineNode.js';
 import Challenge from './Challenge.js';
 
+// strings
 const graphTheLineString = graphingLinesStrings.graphTheLine;
 
-/**
- * @param {string} description brief description of the challenge, visible in dev versions
- * @param {Line} answer  the correct answer
- * @param {EquationForm} equationForm specifies the form of the equation
- * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change
- * @param {Range} xRange range of the graph's x axis
- * @param {Range} yRange range of the graph's y axis
- * @constructor
- */
-function GraphTheLine( description, answer, equationForm, manipulationMode, xRange, yRange ) {
-  Challenge.call( this,
-    Challenge.createTitle( graphTheLineString, manipulationMode ),
-    description,
-    answer,
-    equationForm,
-    manipulationMode,
-    xRange,
-    yRange
-  );
-}
+class GraphTheLine extends Challenge {
 
-graphingLines.register( 'GraphTheLine', GraphTheLine );
-
-export default inherit( Challenge, GraphTheLine, {
+  /**
+   * @param {string} description brief description of the challenge, visible in dev versions
+   * @param {Line} answer  the correct answer
+   * @param {EquationForm} equationForm specifies the form of the equation
+   * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change
+   * @param {Range} xRange range of the graph's x axis
+   * @param {Range} yRange range of the graph's y axis
+   */
+  constructor( description, answer, equationForm, manipulationMode, xRange, yRange ) {
+    super(
+      Challenge.createTitle( graphTheLineString, manipulationMode ),
+      description,
+      answer,
+      equationForm,
+      manipulationMode,
+      xRange,
+      yRange
+    );
+  }
 
   /**
    * Creates the view for this challenge.
@@ -50,9 +47,9 @@ export default inherit( Challenge, GraphTheLine, {
    * @override
    * @public
    */
-  createView: function( model, challengeSize, audioPlayer ) {
+  createView( model, challengeSize, audioPlayer ) {
     return new GraphTheLineNode( this, model, challengeSize, audioPlayer );
-  },
+  }
 
   /**
    * Updates the collection of lines that are 'seen' by the point tools.
@@ -60,7 +57,7 @@ export default inherit( Challenge, GraphTheLine, {
    * @override
    * @protected
    */
-  updateGraphLines: function() {
+  updateGraphLines() {
 
     this.graph.lines.clear();
 
@@ -73,4 +70,8 @@ export default inherit( Challenge, GraphTheLine, {
       this.graph.lines.push( this.guessProperty.get() );
     }
   }
-} );
+}
+
+graphingLines.register( 'GraphTheLine', GraphTheLine );
+
+export default GraphTheLine;

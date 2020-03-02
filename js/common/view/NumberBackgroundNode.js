@@ -7,7 +7,6 @@
  */
 
 import Utils from '../../../../dot/js/Utils.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -15,69 +14,70 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import graphingLines from '../../graphingLines.js';
 import GLFont from '../GLFont.js';
 
-/**
- * @param {Property.<number>} valueProperty
- * @param {Object} [options]
- * @constructor
- */
-function NumberBackgroundNode( valueProperty, options ) {
+class NumberBackgroundNode extends Node {
 
-  options = merge( {
-    decimalPlaces: 0,
-    font: new GLFont( 12 ),
-    textFill: 'black',
-    backgroundFill: 'white',
-    backgroundStroke: null,
-    minWidth: 0,
-    minHeight: 0,
-    xMargin: 5,
-    yMargin: 5,
-    cornerRadius: 6
-  }, options );
+  /**
+   * @param {Property.<number>} valueProperty
+   * @param {Object} [options]
+   */
+  constructor( valueProperty, options ) {
 
-  // text and background
-  const textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
-  // @private
-  const backgroundNode = new Rectangle( 0, 0, 1, 1, {
-    fill: options.backgroundFill,
-    stroke: options.backgroundStroke,
-    cornerRadius: options.cornerRadius
-  } );
-  options.children = [ backgroundNode, textNode ];
-  Node.call( this, options );
+    options = merge( {
+      decimalPlaces: 0,
+      font: new GLFont( 12 ),
+      textFill: 'black',
+      backgroundFill: 'white',
+      backgroundStroke: null,
+      minWidth: 0,
+      minHeight: 0,
+      xMargin: 5,
+      yMargin: 5,
+      cornerRadius: 6
+    }, options );
 
-  const valueObserver = function( value ) {
+    // text and background
+    const textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
+    const backgroundNode = new Rectangle( 0, 0, 1, 1, {
+      fill: options.backgroundFill,
+      stroke: options.backgroundStroke,
+      cornerRadius: options.cornerRadius
+    } );
+    options.children = [ backgroundNode, textNode ];
 
-    // format the value
-    textNode.text = Utils.toFixed( value, options.decimalPlaces );
+    super( options );
 
-    // adjust the background to fit the value
-    const backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
-    const backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
-    backgroundNode.setRect( 0, 0, backgroundWidth, backgroundHeight );
+    const valueObserver = value => {
 
-    // center the value in the background
-    textNode.centerX = backgroundNode.centerX;
-    textNode.centerY = backgroundNode.centerY;
-  };
-  valueProperty.link( valueObserver ); // unlink in dispose
+      // format the value
+      textNode.text = Utils.toFixed( value, options.decimalPlaces );
 
-  // @private called by dispose
-  this.disposeNumberBackgroundNode = function() {
-    valueProperty.unlink( valueObserver );
-  };
-}
+      // adjust the background to fit the value
+      const backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );
+      const backgroundHeight = Math.max( options.minHeight, textNode.height + options.yMargin + options.yMargin );
+      backgroundNode.setRect( 0, 0, backgroundWidth, backgroundHeight );
 
-graphingLines.register( 'NumberBackgroundNode', NumberBackgroundNode );
+      // center the value in the background
+      textNode.centerX = backgroundNode.centerX;
+      textNode.centerY = backgroundNode.centerY;
+    };
+    valueProperty.link( valueObserver ); // unlink in dispose
 
-export default inherit( Node, NumberBackgroundNode, {
+    // @private called by dispose
+    this.disposeNumberBackgroundNode = () => {
+      valueProperty.unlink( valueObserver );
+    };
+  }
 
   /**
    * @public
    * @override
    */
-  dispose: function() {
+  dispose() {
     this.disposeNumberBackgroundNode();
-    Node.prototype.dispose.call( this );
+    super.dispose();
   }
-} );
+}
+
+graphingLines.register( 'NumberBackgroundNode', NumberBackgroundNode );
+
+export default NumberBackgroundNode;

@@ -8,7 +8,6 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
-import inherit from '../../../phet-core/js/inherit.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLinesStrings from '../graphing-lines-strings.js';
@@ -16,28 +15,31 @@ import graphingLines from '../graphingLines.js';
 import SlopeModel from './model/SlopeModel.js';
 import SlopeScreenView from './view/SlopeScreenView.js';
 
+// strings
 const screenSlopeString = graphingLinesStrings.screen.slope;
 
-/**
- * @param {Tandem} tandem
- * @constructor
- */
-function SlopeScreen( tandem ) {
+class SlopeScreen extends Screen {
 
-  const options = {
-    name: screenSlopeString,
-    backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
-    homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
-    tandem: tandem
-  };
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-  Screen.call( this,
-    function() { return new SlopeModel(); },
-    function( model ) { return new SlopeScreenView( model ); },
-    options );
+    const options = {
+      name: screenSlopeString,
+      backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
+      homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
+      tandem: tandem
+    };
+
+    super(
+      () => new SlopeModel(),
+      model => new SlopeScreenView( model ),
+      options
+    );
+  }
 }
 
 graphingLines.register( 'SlopeScreen', SlopeScreen );
 
-inherit( Screen, SlopeScreen );
 export default SlopeScreen;

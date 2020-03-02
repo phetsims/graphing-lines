@@ -8,23 +8,21 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import inherit from '../../../../phet-core/js/inherit.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from '../../pointslope/model/PointSlopeParameterRange.js';
 
-/**
- * @constructor
- */
-function SlopeInterceptParameterRange() {
-  PointSlopeParameterRange.call( this );
+class SlopeInterceptParameterRange extends PointSlopeParameterRange {
+
+  constructor() {
+    super();
+  }
+
+  // @override @public Ranges are identical to point-slope, except that x1 is fixed at 0 for slope-intercept.
+  x1() {
+    return new Range( 0, 0 );
+  }
 }
 
 graphingLines.register( 'SlopeInterceptParameterRange', SlopeInterceptParameterRange );
 
-export default inherit( PointSlopeParameterRange, SlopeInterceptParameterRange, {
-
-  // @override @public Ranges are identical to point-slope, except that x1 is fixed at 0 for slope-intercept.
-  x1: function() {
-    return new Range( 0, 0 );
-  }
-} );
+export default SlopeInterceptParameterRange;

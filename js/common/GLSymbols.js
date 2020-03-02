@@ -27,4 +27,5 @@ const GLSymbols = {
 };
 
 graphingLines.register( 'GLSymbols', GLSymbols );
+
 export default GLSymbols;

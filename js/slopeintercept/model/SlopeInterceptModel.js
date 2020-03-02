@@ -8,21 +8,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import inherit from '../../../../phet-core/js/inherit.js';
 import GLColors from '../../common/GLColors.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeModel from '../../pointslope/model/PointSlopeModel.js';
 import SlopeInterceptParameterRange from './SlopeInterceptParameterRange.js';
 
-/**
- * @constructor
- */
-function SlopeInterceptModel() {
-  PointSlopeModel.call( this, Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
+class SlopeInterceptModel extends PointSlopeModel {
+  constructor() {
+    super( Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
+  }
 }
 
 graphingLines.register( 'SlopeInterceptModel', SlopeInterceptModel );
 
-inherit( PointSlopeModel, SlopeInterceptModel );
 export default SlopeInterceptModel;

@@ -404,6 +404,7 @@ class SlopeInterceptEquationNode extends EquationNode {
     lineProperty.link( lineObserver ); // unlink in dispose
 
     // For fully-interactive equations ...
+    let undefinedSlopeUpdater = null;
     if ( fullyInteractive ) {
 
       // update layout once
@@ -415,7 +416,7 @@ class SlopeInterceptEquationNode extends EquationNode {
       undefinedSlopeIndicator.centerX = this.centerX;
       undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - this.undefinedSlopeYFudgeFactor;
 
-      var undefinedSlopeUpdater = line => {
+      undefinedSlopeUpdater = line => {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
       };
       lineProperty.link( undefinedSlopeUpdater ); // unlink in dispose

@@ -94,6 +94,8 @@ class ChallengeNode extends  Node {
     this.buttonsParent.bottom = challengeSize.height - 20;
 
     // debugging controls
+    let skipButton = null;
+    let replayButton = null;
     if ( phet.chipper.queryParameters.showAnswers ) {
 
       // description at leftTop
@@ -110,11 +112,11 @@ class ChallengeNode extends  Node {
       };
 
       // skips the current challenge.
-      var skipButton = new TextPushButton( 'Skip', devButtonOptions );
+      skipButton = new TextPushButton( 'Skip', devButtonOptions );
       skipButton.addListener( () => model.skipCurrentChallenge() );
 
       // replays the current challenge.
-      var replayButton = new TextPushButton( 'Replay', devButtonOptions );
+      replayButton = new TextPushButton( 'Replay', devButtonOptions );
       replayButton.addListener( () => model.replayCurrentChallenge() );
 
       const devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
@@ -181,7 +183,7 @@ class ChallengeNode extends  Node {
       nextButton.visible = ( state === PlayState.NEXT );
 
       // dev buttons
-      if ( phet.chipper.queryParameters.showAnswers ) {
+      if ( replayButton && skipButton ) {
         replayButton.visible = ( state === PlayState.NEXT );
         skipButton.visible = !replayButton.visible;
       }

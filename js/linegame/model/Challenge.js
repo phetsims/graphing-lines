@@ -111,7 +111,7 @@ class Challenge {
     return this.constructor.name + '[' +
            ' title=' + this.title +
            ' answer=' + this.answer.toString() +
-           ' equationForm=' + this.equationForm +
+           ' equationForm=' + this.equationForm.name +
            ' manipulationMode=' + this.manipulationMode +
            ' ]';
   }

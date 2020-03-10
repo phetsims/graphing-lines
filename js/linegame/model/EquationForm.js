@@ -6,13 +6,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import graphingLines from '../../graphingLines.js';
 
-// NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-const EquationForm = Object.freeze( {
-  SLOPE_INTERCEPT: 'SLOPE_INTERCEPT', /* y = mx + b */
-  POINT_SLOPE: 'POINT_SLOPE' /* (y2 - y1) = m(x2 - x1) */
-} );
+const EquationForm = Enumeration.byKeys( [
+  'SLOPE_INTERCEPT', // y = mx + b
+  'POINT_SLOPE'      // (y2 - y1) = m(x2 - x1)
+] );
 
 graphingLines.register( 'EquationForm', EquationForm );
 

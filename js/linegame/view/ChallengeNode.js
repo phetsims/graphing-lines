@@ -238,7 +238,7 @@ class ChallengeNode extends  Node {
       return PointSlopeEquationNode.createDynamicLabel( lineProperty, options );
     }
     else {
-      throw new Error( 'unsupported equation form: ' + equationForm );
+      throw new Error( 'unsupported equation form: ' + equationForm.name );
     }
   }
 }

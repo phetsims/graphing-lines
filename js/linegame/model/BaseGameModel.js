@@ -12,6 +12,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import StringProperty from '../../../../axon/js/StringProperty.js';
@@ -77,8 +78,8 @@ class BaseGameModel {
       this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
     }
 
-    // @public (read-only) {GamePhase} set this using setGamePhase
-    this.gamePhaseProperty = new Property( INITIAL_GAME_PHASE );
+    // @public (read-only) set this using setGamePhase
+    this.gamePhaseProperty = new EnumerationProperty( GamePhase, INITIAL_GAME_PHASE );
 
     this.initChallenges();
 

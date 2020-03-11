@@ -6,14 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import graphingLines from '../../graphingLines.js';
 
-// NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-const GamePhase = Object.freeze( {
-  SETTINGS: 'SETTINGS', // user is choosing game settings
-  PLAY: 'PLAY', // user is playing the game
-  RESULTS: 'RESULTS' // user is viewing results at end of a game
-} );
+const GamePhase = Enumeration.byKeys( [
+  'SETTINGS', // user is choosing game settings
+  'PLAY',     // user is playing the game
+  'RESULTS'   // user is viewing results at end of a game
+] );
 
 graphingLines.register( 'GamePhase', GamePhase );
 

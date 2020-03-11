@@ -15,7 +15,6 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import StringProperty from '../../../../axon/js/StringProperty.js';
 import GameTimer from '../../../../vegas/js/GameTimer.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
@@ -59,7 +58,7 @@ class BaseGameModel {
     this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
       numberType: 'Integer'
     } );
-    this.playStateProperty = new StringProperty( PlayState.NONE, {
+    this.playStateProperty = new EnumerationProperty( PlayState, PlayState.NONE, {
       reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
     } );
 

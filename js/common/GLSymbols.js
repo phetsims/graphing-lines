@@ -8,7 +8,7 @@
 
 import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
-import graphingLinesStrings from '../graphing-lines-strings.js';
+import graphingLinesStrings from '../graphingLinesStrings.js';
 import graphingLines from '../graphingLines.js';
 
 const symbolInterceptString = graphingLinesStrings.symbol.intercept;

@@ -11,7 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GLConstants from '../../common/GLConstants.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';

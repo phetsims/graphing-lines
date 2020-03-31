@@ -14,7 +14,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Graph from '../../common/model/Graph.js';
 import Line from '../../common/model/Line.js';
 import PointTool from '../../common/model/PointTool.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from './ManipulationMode.js';

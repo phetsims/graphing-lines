@@ -8,7 +8,7 @@
  */
 
 import Line from '../../common/model/Line.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import GraphTheLineNode from '../view/GraphTheLineNode.js';
 import Challenge from './Challenge.js';

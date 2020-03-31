@@ -16,7 +16,7 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import GLFont from '../GLFont.js';

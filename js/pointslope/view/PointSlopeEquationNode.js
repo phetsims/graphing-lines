@@ -33,7 +33,7 @@ import DynamicValueNode from '../../common/view/DynamicValueNode.js';
 import EquationNode from '../../common/view/EquationNode.js';
 import SlopePicker from '../../common/view/picker/SlopePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 
 const slopeUndefinedString = graphingLinesStrings.slopeUndefined;

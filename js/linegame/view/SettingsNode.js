@@ -21,7 +21,7 @@ import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLFont from '../../common/GLFont.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import GamePhase from '../model/GamePhase.js';
 

@@ -19,7 +19,7 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import bodyImage from '../../../images/point_tool_body_png.js';
 import tipImage from '../../../images/point_tool_tip_png.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import GLFont from '../GLFont.js';
 

@@ -34,7 +34,7 @@ import GLConstants from '../../common/GLConstants.js';
 import GLFont from '../../common/GLFont.js';
 import Line from '../../common/model/Line.js';
 import GLIconFactory from '../../common/view/GLIconFactory.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';

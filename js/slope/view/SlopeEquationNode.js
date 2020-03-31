@@ -29,7 +29,7 @@ import EquationNode from '../../common/view/EquationNode.js';
 import NumberBackgroundNode from '../../common/view/NumberBackgroundNode.js';
 import CoordinatePicker from '../../common/view/picker/CoordinatePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
-import graphingLinesStrings from '../../graphing-lines-strings.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
 
 // strings

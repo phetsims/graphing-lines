@@ -17,7 +17,7 @@ import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.j
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
-import vegasStrings from '../../../../vegas/js/vegas-strings.js';
+import vegasStrings from '../../../../vegas/js/vegasStrings.js';
 import GLFont from '../../common/GLFont.js';
 import PointToolNode from '../../common/view/PointToolNode.js';
 import graphingLines from '../../graphingLines.js';

@@ -7,13 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import MakeTheEquationNode from '../view/MakeTheEquationNode.js';
 import Challenge from './Challenge.js';
-
-// strings
-const makeTheEquationString = graphingLinesStrings.makeTheEquation;
 
 class MakeTheEquation extends Challenge {
 
@@ -27,7 +24,7 @@ class MakeTheEquation extends Challenge {
    */
   constructor( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     super(
-      Challenge.createTitle( makeTheEquationString, manipulationMode ),
+      Challenge.createTitle( graphingLinesStrings.makeTheEquation, manipulationMode ),
       description,
       answer,
       equationForm,

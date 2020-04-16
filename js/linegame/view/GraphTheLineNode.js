@@ -13,8 +13,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GLFont from '../../common/GLFont.js';
 import Line from '../../common/model/Line.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from '../model/ManipulationMode.js';
 import PlayState from '../model/PlayState.js';
@@ -23,10 +23,6 @@ import EquationBoxNode from './EquationBoxNode.js';
 import GraphPointSlopeNode from './GraphPointSlopeNode.js';
 import GraphSlopeInterceptNode from './GraphSlopeInterceptNode.js';
 import GraphTwoPointsNode from './GraphTwoPointsNode.js';
-
-const lineToGraphString = graphingLinesStrings.lineToGraph;
-const notALineString = graphingLinesStrings.notALine;
-const yourLineString = graphingLinesStrings.yourLine;
 
 class GraphTheLineNode extends ChallengeNode {
 
@@ -50,7 +46,7 @@ class GraphTheLineNode extends ChallengeNode {
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( lineToGraphString, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( graphingLinesStrings.lineToGraph, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
@@ -67,7 +63,7 @@ class GraphTheLineNode extends ChallengeNode {
     } );
 
     // @private 'Not A Line', for situations where 3-points do not define a line
-    this.notALineNode = new Text( notALineString, {
+    this.notALineNode = new Text( graphingLinesStrings.notALine, {
       font: new GLFont( { size: 24, weight: 'bold' } ),
       fill: 'black'
     } );
@@ -76,7 +72,7 @@ class GraphTheLineNode extends ChallengeNode {
     const equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
 
     // Guess
-    this.guessBoxNode = new EquationBoxNode( yourLineString, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
+    this.guessBoxNode = new EquationBoxNode( graphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
     // @private Graph
     this.graphNode = this.createGraphNode( challenge );

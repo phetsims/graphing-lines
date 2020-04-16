@@ -34,13 +34,10 @@ import GLConstants from '../../common/GLConstants.js';
 import GLFont from '../../common/GLFont.js';
 import Line from '../../common/model/Line.js';
 import GLIconFactory from '../../common/view/GLIconFactory.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
-
-const pointXYString = graphingLinesStrings.point.XY;
-
 
 // constants
 const NUMBER_OF_NODES = 150;
@@ -188,7 +185,7 @@ function createPointToolNode( color ) {
   const body = new Image( pointToolBodyImage );
   const tip = new Image( pointToolTipImage, { top: body.bottom, centerX: 0.25 * body.width } );
   const background = new Rectangle( 0, 0, 0.95 * body.width, 0.95 * body.height, { fill: color, center: body.center } );
-  const value = new Text( StringUtils.format( pointXYString, getRandomX(), getRandomY() ),
+  const value = new Text( StringUtils.format( graphingLinesStrings.point.XY, getRandomX(), getRandomY() ),
     { font: POINT_TOOL_FONT, centerX: POINT_TOOL_WINDOW_CENTER_X, centerY: body.centerY } );
   return new Node( { children: [ background, body, tip, value ] } );
 }

@@ -10,13 +10,10 @@ import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
 import graphingLines from '../graphingLines.js';
+import graphingLinesStrings from '../graphingLinesStrings.js';
 import SlopeModel from './model/SlopeModel.js';
 import SlopeScreenView from './view/SlopeScreenView.js';
-
-// strings
-const screenSlopeString = graphingLinesStrings.screen.slope;
 
 class SlopeScreen extends Screen {
 
@@ -26,7 +23,7 @@ class SlopeScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: screenSlopeString,
+      name: graphingLinesStrings.screen.slope,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
       tandem: tandem

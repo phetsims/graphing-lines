@@ -11,13 +11,10 @@ import Screen from '../../../joist/js/Screen.js';
 import merge from '../../../phet-core/js/merge.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
 import graphingLines from '../graphingLines.js';
+import graphingLinesStrings from '../graphingLinesStrings.js';
 import SlopeInterceptModel from './model/SlopeInterceptModel.js';
 import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
-
-// strings
-const screenSlopeInterceptString = graphingLinesStrings.screen.slopeIntercept;
 
 class SlopeInterceptScreen extends Screen {
 
@@ -28,7 +25,7 @@ class SlopeInterceptScreen extends Screen {
   constructor( tandem, options ) {
 
     options = merge( {
-      name: screenSlopeInterceptString,
+      name: graphingLinesStrings.screen.slopeIntercept,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
     }, options );

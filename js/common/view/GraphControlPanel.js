@@ -16,16 +16,13 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 import GLFont from '../GLFont.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
 import GLIconFactory from './GLIconFactory.js';
-
-// strings
-const slopeString = graphingLinesStrings.slope;
 
 // constants
 // y = x
@@ -70,7 +67,7 @@ class GraphControlPanel extends Panel {
     const slopeCheckbox = new Checkbox( new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new Text( slopeString, TEXT_OPTIONS ),
+        new Text( graphingLinesStrings.slope, TEXT_OPTIONS ),
         GLIconFactory.createSlopeToolIcon( ICON_SIZE )
       ]
     } ), slopeToolVisibleProperty );

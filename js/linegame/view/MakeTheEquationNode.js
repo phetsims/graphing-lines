@@ -11,8 +11,8 @@ import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GLConstants from '../../common/GLConstants.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import LineGameConstants from '../LineGameConstants.js';
@@ -22,9 +22,6 @@ import PlayState from '../model/PlayState.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 import ChallengeNode from './ChallengeNode.js';
 import EquationBoxNode from './EquationBoxNode.js';
-
-const aCorrectEquationString = graphingLinesStrings.aCorrectEquation;
-const yourEquationString = graphingLinesStrings.yourEquation;
 
 class MakeTheEquationNode extends ChallengeNode {
 
@@ -48,7 +45,7 @@ class MakeTheEquationNode extends ChallengeNode {
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( aCorrectEquationString, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( graphingLinesStrings.aCorrectEquation, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
       } ) );
@@ -57,7 +54,7 @@ class MakeTheEquationNode extends ChallengeNode {
     // Guess
     const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
       GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color );
-    const guessBoxNode = new EquationBoxNode( yourEquationString, challenge.guessProperty.get().color, boxSize, guessEquationNode );
+    const guessBoxNode = new EquationBoxNode( graphingLinesStrings.yourEquation, challenge.guessProperty.get().color, boxSize, guessEquationNode );
 
     // Graph
     const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );

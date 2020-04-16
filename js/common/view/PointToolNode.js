@@ -19,13 +19,9 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import bodyImage from '../../../images/point_tool_body_png.js';
 import tipImage from '../../../images/point_tool_tip_png.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GLFont from '../GLFont.js';
-
-// strings
-const pointUnknownString = graphingLinesStrings.point.unknown;
-const pointXYString = graphingLinesStrings.point.XY;
 
 // constants
 const NUMBER_OF_DECIMAL_PLACES = 0;
@@ -135,7 +131,7 @@ class PointToolNode extends Node {
           }
         }
         else {
-          this.setCoordinatesString( pointUnknownString );
+          this.setCoordinatesString( graphingLinesStrings.point.unknown );
           this.setForeground( options.foregroundNormalColor );
           this.setBackground( options.backgroundNormalColor );
         }
@@ -161,7 +157,8 @@ class PointToolNode extends Node {
 
   // @private Sets the displayed value to a point
   setCoordinatesVector2( p ) {
-    this.setCoordinatesString( StringUtils.format( pointXYString, Utils.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Utils.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
+    this.setCoordinatesString( StringUtils.format( graphingLinesStrings.point.XY,
+      Utils.toFixed( p.x, NUMBER_OF_DECIMAL_PLACES ), Utils.toFixed( p.y, NUMBER_OF_DECIMAL_PLACES ) ) );
   }
 
   // @private Sets the displayed value to an arbitrary string

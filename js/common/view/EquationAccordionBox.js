@@ -12,13 +12,10 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 import GLFont from '../GLFont.js';
-
-const eraseLinesString = graphingLinesStrings.eraseLines;
-const saveLineString = graphingLinesStrings.saveLine;
 
 // constants
 const BUTTON_FONT = new GLFont( 18 );
@@ -56,7 +53,7 @@ class EquationAccordionBox extends AccordionBox {
     options.expandedProperty = expandedProperty;
 
     // Save Line button
-    const saveLineButton = new TextPushButton( saveLineString, {
+    const saveLineButton = new TextPushButton( graphingLinesStrings.saveLine, {
       listener: () => savedLines.add( interactiveLineProperty.get().withColor( GLColors.SAVED_LINE_NORMAL ) ),
       font: BUTTON_FONT,
       baseColor: 'white',
@@ -64,7 +61,7 @@ class EquationAccordionBox extends AccordionBox {
     } );
 
     // Erase Lines button
-    const eraseLinesButton = new TextPushButton( eraseLinesString, {
+    const eraseLinesButton = new TextPushButton( graphingLinesStrings.eraseLines, {
       listener: () => savedLines.clear(),
       font: BUTTON_FONT,
       baseColor: 'white',

@@ -21,13 +21,9 @@ import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLFont from '../../common/GLFont.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
-
-// strings
-const chooseYourLevelString = graphingLinesStrings.chooseYourLevel;
-const patternLevel0String = graphingLinesStrings.pattern_Level_0;
 
 class SettingsNode extends Node {
 
@@ -48,7 +44,7 @@ class SettingsNode extends Node {
     }, options );
 
     // Title
-    const title = new Text( chooseYourLevelString, {
+    const title = new Text( graphingLinesStrings.chooseYourLevel, {
       font: new GLFont( 40 ),
       maxWidth: 0.85 * layoutBounds.width
     } );
@@ -121,7 +117,7 @@ class SettingsNode extends Node {
 function createLevelSelectionButton( level, model, levelImage ) {
 
   const image = new Image( levelImage );
-  const label = new Text( StringUtils.format( patternLevel0String, level + 1 ), {
+  const label = new Text( StringUtils.format( graphingLinesStrings.pattern_Level_0, level + 1 ), {
     font: new GLFont( 60 ),
     maxWidth: image.width
   } );

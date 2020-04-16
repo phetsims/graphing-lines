@@ -14,15 +14,10 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Graph from '../../common/model/Graph.js';
 import Line from '../../common/model/Line.js';
 import PointTool from '../../common/model/PointTool.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import graphingLines from '../../graphingLines.js';
+import graphingLinesStrings from '../../graphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from './ManipulationMode.js';
-
-const putPointsOnLineString = graphingLinesStrings.putPointsOnLine;
-const setThePointString = graphingLinesStrings.setThePoint;
-const setTheSlopeString = graphingLinesStrings.setTheSlope;
-const setTheYInterceptString = graphingLinesStrings.setTheYIntercept;
 
 class Challenge {
 
@@ -123,16 +118,16 @@ class Challenge {
    */
   static createTitle( defaultTitle, manipulationMode ) {
     if ( manipulationMode === ManipulationMode.SLOPE ) {
-      return setTheSlopeString;
+      return graphingLinesStrings.setTheSlope;
     }
     else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
-      return setTheYInterceptString;
+      return graphingLinesStrings.setTheYIntercept;
     }
     else if ( manipulationMode === ManipulationMode.POINT ) {
-      return setThePointString;
+      return graphingLinesStrings.setThePoint;
     }
     else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
-      return putPointsOnLineString;
+      return graphingLinesStrings.putPointsOnLine;
     }
     else {
       return defaultTitle;

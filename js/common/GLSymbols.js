@@ -8,22 +8,17 @@
 
 import StringUtils from '../../../phetcommon/js/util/StringUtils.js';
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
 import graphingLines from '../graphingLines.js';
-
-const symbolInterceptString = graphingLinesStrings.symbol.intercept;
-const symbolSlopeString = graphingLinesStrings.symbol.slope;
-const symbolXString = graphingLinesStrings.symbol.x;
-const symbolYString = graphingLinesStrings.symbol.y;
+import graphingLinesStrings from '../graphingLinesStrings.js';
 
 // constants
 const SYMBOL_PATTERN = '<i style=\'font-family: ' + new MathSymbolFont( 10 ).family + '\'>{{symbol}}</i>';
 
 const GLSymbols = {
-  b: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolInterceptString } ),
-  m: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolSlopeString } ),
-  x: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolXString } ),
-  y: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: symbolYString } )
+  b: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: graphingLinesStrings.symbol.intercept } ),
+  m: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: graphingLinesStrings.symbol.slope } ),
+  x: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: graphingLinesStrings.symbol.x } ),
+  y: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: graphingLinesStrings.symbol.y } )
 };
 
 graphingLines.register( 'GLSymbols', GLSymbols );

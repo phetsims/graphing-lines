@@ -15,11 +15,6 @@ import PointSlopeScreen from './pointslope/PointSlopeScreen.js';
 import SlopeScreen from './slope/SlopeScreen.js';
 import SlopeInterceptScreen from './slopeintercept/SlopeInterceptScreen.js';
 
-const graphingLinesTitleString = graphingLinesStrings[ 'graphing-lines' ].title;
-
-// constants
-const tandem = Tandem.ROOT;
-
 const options = {
   credits: {
     leadDesign: 'Ariel Paul',
@@ -33,11 +28,11 @@ const options = {
 
 SimLauncher.launch( () => {
   const screens = [
-    new SlopeScreen( tandem.createTandem( 'slopeScreen' ) ),
-    new SlopeInterceptScreen( tandem.createTandem( 'slopeInterceptScreen' ) ),
-    new PointSlopeScreen( tandem.createTandem( 'pointSlopeScreen' ) ),
-    new LineGameScreen( tandem.createTandem( 'lineGameScreen' ) )
+    new SlopeScreen( Tandem.ROOT.createTandem( 'slopeScreen' ) ),
+    new SlopeInterceptScreen( Tandem.ROOT.createTandem( 'slopeInterceptScreen' ) ),
+    new PointSlopeScreen( Tandem.ROOT.createTandem( 'pointSlopeScreen' ) ),
+    new LineGameScreen( Tandem.ROOT.createTandem( 'lineGameScreen' ) )
   ];
-  const sim = new Sim( graphingLinesTitleString, screens, options );
+  const sim = new Sim( graphingLinesStrings[ 'graphing-lines' ].title, screens, options );
   sim.start();
 } );

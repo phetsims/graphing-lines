@@ -7,7 +7,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import graphingLinesStrings from './graphingLinesStrings.js';
 import LineGameScreen from './linegame/LineGameScreen.js';
@@ -26,7 +26,7 @@ const options = {
   }
 };
 
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
   const screens = [
     new SlopeScreen( Tandem.ROOT.createTandem( 'slopeScreen' ) ),
     new SlopeInterceptScreen( Tandem.ROOT.createTandem( 'slopeInterceptScreen' ) ),

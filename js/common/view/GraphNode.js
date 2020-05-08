@@ -325,7 +325,7 @@ class GridNode extends Node {
     }
   }
 
-  // Sets visibility of grid lines
+  // @public Sets visibility of grid lines
   setLinesVisible( visible ) {
     this.horizontalGridLinesNode.visible = this.verticalGridLinesNode.visible = visible;
   }

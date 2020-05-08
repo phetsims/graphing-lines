@@ -53,6 +53,7 @@ class ValuePool {
   /**
    * Is the required pool empty?
    * @returns {boolean}
+   * @public
    */
   isEmpty() {
     return ( this.requiredValues.length === 0 );

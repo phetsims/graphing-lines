@@ -134,6 +134,7 @@ class ChallengeFactory2 extends BaseChallengeFactory {
   /**
    * Creates the 3 sets of slopes that are identified in the design document.
    * @returns {Fraction[][]}
+   * @public
    */
   createSlopeArrays() {
     return [
@@ -191,7 +192,7 @@ class ChallengeFactory2 extends BaseChallengeFactory {
   /**
    * Creates the set of positive fractional slopes that are identified in the design document.
    * @returns {Fraction[]}
-   * @static
+   * @public
    */
   static createPositiveFractionalSlopes() {
     return [

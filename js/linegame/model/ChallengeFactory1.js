@@ -165,6 +165,7 @@ class ChallengeFactory1 extends BaseChallengeFactory {
    * Creates the set of points used for generating challenges.
    * Points are in Quadrant 1 (both coordinates positive) or Quadrant 3 (both coordinates negative).
    * @returns {Vector2[][]}
+   * @public
    */
   createPointArrays() {
 

@@ -44,6 +44,7 @@ class Graph {
    * Constrains a point to the x,y range of the graph.
    * @param {Vector2} point
    * @returns {Vector2}
+   * @public
    */
   constrain( point ) {
     const x = this.xRange.constrainValue( point.x );

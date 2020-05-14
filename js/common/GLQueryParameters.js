@@ -10,17 +10,19 @@ import graphingLines from '../graphingLines.js';
 
 const GLQueryParameters = QueryStringMachine.getAll( {
 
-  // shows the game reward regardless of score
+  // Shows the game reward regardless of score.
+  // For internal use only.
   showReward: { type: 'flag' },
 
-  // whether to shuffle challenges in the game,
-  // set to false if you want to compare challenges to the design doc
+  // Whether to shuffle challenges in the game, set to false if you want to compare challenges to the design doc.
+  // For internal use only.
   shuffle: {
     type: 'boolean',
     defaultValue: true
   },
 
-  // verifies the creation of challenges via stress testing, use this with assertions enabled (?ea)
+  // Verifies the creation of challenges via stress testing, use this with assertions enabled (?ea).
+  // For internal use only.
   verifyChallenges: { type: 'flag' }
 } );
 

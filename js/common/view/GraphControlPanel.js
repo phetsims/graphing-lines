@@ -52,8 +52,8 @@ class GraphControlPanel extends Panel {
     }, options );
 
     // private properties for standard-line checkboxes
-    const yEqualsXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_X_LINE ) );
-    const yEqualsNegativeXVisibleProperty = new BooleanProperty( standardLines.contains( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
+    const yEqualsXVisibleProperty = new BooleanProperty( standardLines.includes( Line.Y_EQUALS_X_LINE ) );
+    const yEqualsNegativeXVisibleProperty = new BooleanProperty( standardLines.includes( Line.Y_EQUALS_NEGATIVE_X_LINE ) );
 
     // checkboxes
     const TEXT_OPTIONS = {
@@ -107,10 +107,10 @@ class GraphControlPanel extends Panel {
     super( contentNode, options );
 
     const setStandardLineVisible = ( visible, line ) => {
-      if ( visible && !standardLines.contains( line ) ) {
+      if ( visible && !standardLines.includes( line ) ) {
         standardLines.add( line );
       }
-      else if ( !visible && standardLines.contains( line ) ) {
+      else if ( !visible && standardLines.includes( line ) ) {
         standardLines.remove( line );
       }
     };

@@ -10,13 +10,13 @@
 import Shape from '../../../../../kite/js/Shape.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
-import ButtonListener from '../../../../../scenery/js/input/ButtonListener.js';
+import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import graphingLines from '../../../graphingLines.js';
 
-class Manipulator extends  Node {
+class Manipulator extends Node {
 
   /**
    * @param {number} radius radius of the sphere
@@ -59,11 +59,11 @@ class Manipulator extends  Node {
       this.addChild( haloNode );
 
       // halo visibility
-      this.addInputListener( new ButtonListener( {
-        up: () => { haloNode.visible = false; },
-        down: () => { haloNode.visible = true; },
-        over: () => { haloNode.visible = true; }
-      } ) );
+      const pressListener = new PressListener( { attach: false } );
+      pressListener.isHighlightedProperty.link( isHighlighted => {
+        haloNode.visible = isHighlighted;
+      } );
+      this.addInputListener( pressListener );
     }
 
     const sphereNode = new ShadedSphereNode( 2 * radius, {

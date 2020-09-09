@@ -9,7 +9,7 @@
 
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import SimpleDragHandler from '../../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
@@ -33,7 +33,7 @@ class YInterceptManipulator extends Manipulator {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new YInterceptDragHandler( lineProperty, y1RangeProperty, modelViewTransform ) );
+    this.addInputListener( new YInterceptDragListener( this, lineProperty, y1RangeProperty, modelViewTransform ) );
 
     // @private called by dispose
     this.disposeYInterceptManipulator = () => {
@@ -52,16 +52,17 @@ class YInterceptManipulator extends Manipulator {
 }
 
 /**
- * Drag handler for y-intercept manipulator.
+ * Drag listener for y-intercept manipulator.
  */
-class YInterceptDragHandler extends SimpleDragHandler {
+class YInterceptDragListener extends DragListener {
 
   /**
+   * @param {Node} targetNode
    * @param {Property.<Line>} lineProperty
    * @param {Property.<Range>} y1RangeProperty
    * @param {ModelViewTransform2} modelViewTransform
    */
-  constructor( lineProperty, y1RangeProperty, modelViewTransform ) {
+  constructor( targetNode, lineProperty, y1RangeProperty, modelViewTransform ) {
 
     let startOffset; // where the drag started, relative to the y-intercept, in parent view coordinates
 
@@ -73,12 +74,12 @@ class YInterceptDragHandler extends SimpleDragHandler {
       start: event => {
         const line = lineProperty.get();
         const position = modelViewTransform.modelToViewXY( line.x1, line.y1 );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
+        startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
       },
 
       drag: event => {
 
-        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const parentPoint = targetNode.globalToParentPoint( event.pointer.point ).minus( startOffset );
         const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid

@@ -1,7 +1,7 @@
 // Copyright 2013-2020, University of Colorado Boulder
 
 /**
- * Drag handler for an arbitrary point (Vector2).
+ * Drag listener for an arbitrary point (Vector2).
  * Used exclusively in 'Place the Points' game challenges.
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -9,7 +9,7 @@
 
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import SimpleDragHandler from '../../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Manipulator from './Manipulator.js';
@@ -34,7 +34,7 @@ class PointManipulator extends Manipulator {
     };
     pointProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new PointDragHandler( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
+    this.addInputListener( new PointDragListener( this, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
 
     // @private called by dispose
     this.disposePointManipulator = () => {
@@ -53,18 +53,19 @@ class PointManipulator extends Manipulator {
 }
 
 /**
- * Drag handler for an arbitrary point.
+ * Drag listener for an arbitrary point.
  */
-class PointDragHandler extends SimpleDragHandler {
+class PointDragListener extends DragListener {
 
   /**
+   * @param {Node} targetNode
    * @param {Vector2Property} pointProperty
    * @param {Vector2Property[]} otherPointProperties points that the point can't be on
    * @param {Range} xRange
    * @param {Range} yRange
    * @param {ModelViewTransform2} modelViewTransform
    */
-  constructor( pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
+  constructor( targetNode, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
 
     let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
@@ -75,12 +76,12 @@ class PointDragHandler extends SimpleDragHandler {
       // note where the drag started
       start: event => {
         const position = modelViewTransform.modelToViewPosition( pointProperty.get() );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
+        startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
       },
 
       drag: event => {
 
-        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const parentPoint = targetNode.globalToParentPoint( event.pointer.point ).minus( startOffset );
         const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid

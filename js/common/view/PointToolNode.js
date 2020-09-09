@@ -12,7 +12,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
-import SimpleDragHandler from '../../../../scenery/js/input/SimpleDragHandler.js';
+import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
@@ -138,7 +138,7 @@ class PointToolNode extends Node {
       } );
 
     // interactivity
-    this.addInputListener( new PointToolDragHandler( pointTool, modelViewTransform, graph ) );
+    this.addInputListener( new PointToolDragListener( this, pointTool, modelViewTransform, graph ) );
 
     // @private called by dispose
     this.disposePointToolNode = () => {
@@ -179,16 +179,17 @@ class PointToolNode extends Node {
 }
 
 /**
- * Drag handler for the point tool.
+ * Drag listener for the point tool.
  */
-class PointToolDragHandler extends SimpleDragHandler {
+class PointToolDragListener extends DragListener {
 
   /**
+   * @param {Node} targetNode
    * @param {PointTool} pointTool
    * @param {ModelViewTransform2} modelViewTransform
    * @param {Graph} graph
    */
-  constructor( pointTool, modelViewTransform, graph ) {
+  constructor( targetNode, pointTool, modelViewTransform, graph ) {
 
     let startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
 
@@ -209,13 +210,13 @@ class PointToolDragHandler extends SimpleDragHandler {
       start: event => {
         // Note the mouse-click offset when dragging starts.
         const position = modelViewTransform.modelToViewPosition( pointTool.positionProperty.get() );
-        startOffset = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( position );
+        startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
         // Move the tool that we're dragging to the foreground.
         event.currentTarget.moveToFront();
       },
 
       drag: event => {
-        const parentPoint = event.currentTarget.globalToParentPoint( event.pointer.point ).minus( startOffset );
+        const parentPoint = targetNode.globalToParentPoint( event.pointer.point ).minus( startOffset );
         let position = modelViewTransform.viewToModelPosition( parentPoint );
         position = constrainBounds( position, pointTool.dragBounds );
         if ( graph.contains( position ) ) {

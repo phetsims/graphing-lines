@@ -14,6 +14,7 @@ import PressListener from '../../../../../scenery/js/listeners/PressListener.js'
 import Circle from '../../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
 import Color from '../../../../../scenery/js/util/Color.js';
+import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
 
 class Manipulator extends Node {
@@ -59,7 +60,10 @@ class Manipulator extends Node {
       this.addChild( haloNode );
 
       // halo visibility
-      const pressListener = new PressListener( { attach: false } );
+      const pressListener = new PressListener( {
+        attach: false,
+        tandem: Tandem.OPT_OUT
+      } );
       pressListener.isHighlightedProperty.link( isHighlighted => {
         haloNode.visible = isHighlighted;
       } );

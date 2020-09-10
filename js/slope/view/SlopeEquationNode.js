@@ -16,13 +16,13 @@ import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disable-line require-statement-match
 import Node from '../../../../scenery/js/nodes/Node.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
-import GLFont from '../../common/GLFont.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
 import EquationNode from '../../common/view/EquationNode.js';
@@ -52,8 +52,8 @@ class SlopeEquationNode extends EquationNode {
 
     super( options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
-    const interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    const staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const interactiveFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const staticFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
     const staticOptions = { font: staticFont, fill: options.staticColor };
     const fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
@@ -265,7 +265,7 @@ class SlopeEquationNode extends EquationNode {
 
     const equationNode = new EquationNode( options.fontSize, options );
 
-    const font = new GLFont( { size: options.fontSize, weight: options.fontWeight } );
+    const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // Slope m =
     const leftSideText = StringUtils.format( '{0}    {1} {2}', graphingLinesStrings.slope, GLSymbols.m, MathSymbols.EQUAL_TO );
@@ -358,7 +358,7 @@ class DynamicLabelNode extends EquationNode {
     super( options.fontSize );
 
     const textOptions = {
-      font: new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } )
+      font: new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } )
     };
 
     // allocate nodes needed to represent all simplified forms

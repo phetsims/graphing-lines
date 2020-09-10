@@ -15,12 +15,12 @@ import Shape from '../../../../kite/js/Shape.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disable-line
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
-import GLFont from '../GLFont.js';
 import Graph from '../model/Graph.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
@@ -103,7 +103,7 @@ const GLIconFactory = {
   createGameScreenIcon: function() {
     const faceNode = new FaceWithPointsNode( {
       faceDiameter: 75,
-      pointsFont: new GLFont( { size: 24, weight: 'bold' } ),
+      pointsFont: new PhetFont( { size: 24, weight: 'bold' } ),
       pointsAlignment: 'rightCenter',
       points: 2
     } );

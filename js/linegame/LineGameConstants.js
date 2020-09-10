@@ -7,8 +7,8 @@
  */
 
 import Vector2 from '../../../dot/js/Vector2.js';
+import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import GLConstants from '../common/GLConstants.js';
-import GLFont from '../common/GLFont.js';
 import graphingLines from '../graphingLines.js';
 
 const LineGameConstants = {
@@ -16,11 +16,11 @@ const LineGameConstants = {
   ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates
 
   // fonts
-  TITLE_FONT: new GLFont( { size: 40, weight: 'bold' } ),
-  BUTTON_FONT: new GLFont( { size: 30, weight: 'bold' } ),
+  TITLE_FONT: new PhetFont( { size: 40, weight: 'bold' } ),
+  BUTTON_FONT: new PhetFont( { size: 30, weight: 'bold' } ),
   INTERACTIVE_EQUATION_FONT_SIZE: 28,
   STATIC_EQUATION_FONT_SIZE: 28,
-  POINTS_AWARDED_FONT: new GLFont( { size: 36, weight: 'bold' } ),
+  POINTS_AWARDED_FONT: new PhetFont( { size: 36, weight: 'bold' } ),
 
   // colors
   TITLE_COLOR: 'black',

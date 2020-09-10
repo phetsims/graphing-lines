@@ -11,6 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import LayoutBox from '../../../../scenery/js/nodes/LayoutBox.js';
@@ -20,7 +21,6 @@ import VBox from '../../../../scenery/js/nodes/VBox.js';
 import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import GLConstants from '../../common/GLConstants.js';
-import GLFont from '../../common/GLFont.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
@@ -45,7 +45,7 @@ class SettingsNode extends Node {
 
     // Title
     const title = new Text( graphingLinesStrings.chooseYourLevel, {
-      font: new GLFont( 40 ),
+      font: new PhetFont( 40 ),
       maxWidth: 0.85 * layoutBounds.width
     } );
 
@@ -118,7 +118,7 @@ function createLevelSelectionButton( level, model, levelImage ) {
 
   const image = new Image( levelImage );
   const label = new Text( StringUtils.format( graphingLinesStrings.pattern_Level_0, level + 1 ), {
-    font: new GLFont( 60 ),
+    font: new PhetFont( 60 ),
     maxWidth: image.width
   } );
 

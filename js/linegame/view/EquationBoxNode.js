@@ -8,11 +8,11 @@
  */
 
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
-import GLFont from '../../common/GLFont.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 
@@ -44,7 +44,7 @@ class EquationBoxNode extends Node {
 
     const titleNode = new Text( title, {
       fill: titleColor,
-      font: new GLFont( { size: 24, weight: 'bold' } ),
+      font: new PhetFont( { size: 24, weight: 'bold' } ),
       maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( this.correctIconNode.width, this.incorrectIconNode.width )
     } );
 

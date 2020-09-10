@@ -9,9 +9,9 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import GLFont from '../../common/GLFont.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
@@ -64,7 +64,7 @@ class GraphTheLineNode extends ChallengeNode {
 
     // @private 'Not A Line', for situations where 3-points do not define a line
     this.notALineNode = new Text( graphingLinesStrings.notALine, {
-      font: new GLFont( { size: 24, weight: 'bold' } ),
+      font: new PhetFont( { size: 24, weight: 'bold' } ),
       fill: 'black'
     } );
 

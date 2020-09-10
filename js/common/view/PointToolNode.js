@@ -12,6 +12,7 @@ import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -21,7 +22,6 @@ import bodyImage from '../../../images/point_tool_body_png.js';
 import tipImage from '../../../images/point_tool_tip_png.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
-import GLFont from '../GLFont.js';
 
 // constants
 const NUMBER_OF_DECIMAL_PLACES = 0;
@@ -66,7 +66,7 @@ class PointToolNode extends Node {
 
     // @private displayed value
     this.valueNode = new Text( '?', {
-      font: new GLFont( { size: 15, weight: 'bold' } ),
+      font: new PhetFont( { size: 15, weight: 'bold' } ),
       pickable: false,
       maxWidth: 60 // constrain width, determined empirically, dependent on bodyImage
     } );

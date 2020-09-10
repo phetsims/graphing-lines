@@ -8,11 +8,11 @@
 
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import graphingLines from '../../graphingLines.js';
-import GLFont from '../GLFont.js';
 
 class NumberBackgroundNode extends Node {
 
@@ -24,7 +24,7 @@ class NumberBackgroundNode extends Node {
 
     options = merge( {
       decimalPlaces: 0,
-      font: new GLFont( 12 ),
+      font: new PhetFont( 12 ),
       textFill: 'black',
       backgroundFill: 'white',
       backgroundStroke: null,

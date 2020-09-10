@@ -7,6 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
@@ -15,10 +16,9 @@ import HSeparator from '../../../../sun/js/HSeparator.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GLColors from '../GLColors.js';
-import GLFont from '../GLFont.js';
 
 // constants
-const BUTTON_FONT = new GLFont( 18 );
+const BUTTON_FONT = new PhetFont( 18 );
 
 class EquationAccordionBox extends AccordionBox {
 

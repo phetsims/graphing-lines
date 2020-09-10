@@ -10,6 +10,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import GridCheckbox from '../../../../scenery-phet/js/GridCheckbox.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import LayoutBox from '../../../../scenery/js/nodes/LayoutBox.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
@@ -19,7 +20,6 @@ import Panel from '../../../../sun/js/Panel.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
 import GLColors from '../GLColors.js';
-import GLFont from '../GLFont.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
 import GLIconFactory from './GLIconFactory.js';
@@ -57,7 +57,7 @@ class GraphControlPanel extends Panel {
 
     // checkboxes
     const TEXT_OPTIONS = {
-      font: new GLFont( 18 ),
+      font: new PhetFont( 18 ),
       maxWidth: 150 // determined empirically
     };
     const ICON_SIZE = 60;

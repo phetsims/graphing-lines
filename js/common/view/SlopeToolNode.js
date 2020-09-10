@@ -10,10 +10,10 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
-import GLFont from '../GLFont.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
 import NumberBackgroundNode from './NumberBackgroundNode.js';
 
@@ -36,7 +36,7 @@ class SlopeToolNode extends Node {
 
     // Values
     const numberOptions = {
-      font: new GLFont( { size: 16, weight: 'bold' } ),
+      font: new PhetFont( { size: 16, weight: 'bold' } ),
       decimalPlaces: 0,
       textFill: 'black',
       backgroundFill: GLColors.SLOPE,

@@ -14,11 +14,11 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import vegasStrings from '../../../../vegas/js/vegasStrings.js';
-import GLFont from '../../common/GLFont.js';
 import PointToolNode from '../../common/view/PointToolNode.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
@@ -99,14 +99,17 @@ class ChallengeNode extends  Node {
     if ( phet.chipper.queryParameters.showAnswers ) {
 
       // description at leftTop
-      const descriptionNode = new Text( challenge.description, { font: new GLFont( 16 ), fill: 'black' } );
+      const descriptionNode = new Text( challenge.description, {
+        font: new PhetFont( 16 ),
+        fill: 'black'
+      } );
       descriptionNode.left = 10;
       descriptionNode.top = 10;
       this.addChild( descriptionNode );
 
       // developer buttons (no i18n) to right of main buttons
       const devButtonOptions = {
-        font: new GLFont( 20 ),
+        font: new PhetFont( 20 ),
         baseColor: 'red',
         textFill: 'white'
       };

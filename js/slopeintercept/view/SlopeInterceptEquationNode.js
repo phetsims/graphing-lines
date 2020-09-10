@@ -23,12 +23,12 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
 import NumberPicker from '../../../../scenery-phet/js/NumberPicker.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
 import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disable-line require-statement-match
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
-import GLFont from '../../common/GLFont.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
 import DynamicValueNode from '../../common/view/DynamicValueNode.js';
@@ -70,8 +70,8 @@ class SlopeInterceptEquationNode extends EquationNode {
     super( options.fontSize ); // call first, because supertype constructor computes various layout metrics
 
     const fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
-    const interactiveFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    const staticFont = new GLFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const interactiveFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
+    const staticFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
     const staticOptions = { font: staticFont, fill: options.staticColor };
     const fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
@@ -453,7 +453,7 @@ class SlopeInterceptEquationNode extends EquationNode {
 
     options = merge( {
       pickable: false,
-      font: new GLFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
+      font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 300
     }, options );
 

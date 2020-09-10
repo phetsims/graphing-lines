@@ -11,6 +11,7 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Shape from '../../../../kite/js/Shape.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
@@ -18,7 +19,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import graphingLines from '../../graphingLines.js';
-import GLFont from '../GLFont.js';
 import GLSymbols from '../GLSymbols.js';
 
 //----------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ const AXIS_ARROW_SIZE = new Dimension2( 10, 10 );
 const AXIS_THICKNESS = 1;
 const AXIS_COLOR = 'black';
 const AXIS_EXTENT = 1.0; // how far the arrow extends past the min/max ticks, in model coordinates
-const AXIS_LABEL_FONT = new GLFont( { size: 16, weight: 'bold' } );
+const AXIS_LABEL_FONT = new PhetFont( { size: 16, weight: 'bold' } );
 const AXIS_LABEL_SPACING = 2; // space between end of axis and label
 
 // ticks
@@ -48,7 +48,7 @@ const MINOR_TICK_COLOR = 'black';
 const MAJOR_TICK_LENGTH = 6; // how far a major tick extends from the axis
 const MAJOR_TICK_LINE_WIDTH = 1;
 const MAJOR_TICK_COLOR = 'black';
-const MAJOR_TICK_FONT = new GLFont( 16 );
+const MAJOR_TICK_FONT = new PhetFont( 16 );
 const TICK_LABEL_SPACING = 2;
 const MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
 

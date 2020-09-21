@@ -31,7 +31,7 @@ class CoordinatePicker extends NumberPicker {
     }, options );
 
     // computes value when 'up' button is pressed
-    options.upFunction = a1 => {
+    options.incrementFunction = a1 => {
       let x1New = a1 + 1;
       if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
         x1New++;
@@ -43,7 +43,7 @@ class CoordinatePicker extends NumberPicker {
     };
 
     // computes value when 'down' button is pressed
-    options.downFunction = a1 => {
+    options.decrementFunction = a1 => {
       let x1New = a1 - 1;
       if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
         x1New--;

@@ -26,13 +26,13 @@ class SlopePicker extends NumberPicker {
       color: GLColors.SLOPE
     }, options );
 
-    // 'up' function, skips over undefined line condition (slope=0/0) - not changeable by clients
-    options.upFunction = variable => {
+    // increment function, skips over undefined line condition (slope=0/0) - not changeable by clients
+    options.incrementFunction = variable => {
       return ( variable === -1 && fixedComponentProperty.get() === 0 ) ? 1 : variable + 1;
     };
 
-    // 'down' function, skips over undefined line condition (slope=0/0) - not changeable by clients
-    options.downFunction = variable => {
+    // decrement function, skips over undefined line condition (slope=0/0) - not changeable by clients
+    options.decrementFunction = variable => {
       return ( variable === 1 && fixedComponentProperty.get() === 0 ) ? -1 : variable - 1;
     };
 

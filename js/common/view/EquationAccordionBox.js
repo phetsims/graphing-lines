@@ -26,7 +26,7 @@ class EquationAccordionBox extends AccordionBox {
    * @param {Node} titleNode
    * @param {Node} interactiveEquationNode
    * @param {Property.<Line>} interactiveLineProperty
-   * @param {ObservableArray.<Line>} savedLines
+   * @param {ObservableArrayDef.<Line>} savedLines
    * @param {Property.<boolean>} expandedProperty
    * @param {Object} [options]
    */

@@ -35,7 +35,7 @@ class GraphControlPanel extends Panel {
   /**
    * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
    * @param {Property.<boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
-   * @param {ObservableArray.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
+   * @param {ObservableArrayDef.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
    * @param {Object} [options] should checkboxes for standard lines be accessible?
    */
   constructor( gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {

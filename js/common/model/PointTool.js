@@ -15,7 +15,7 @@ class PointTool {
   /**
    * @param {Vector2} position initial position of the tool
    * @param {string} orientation direction that the tip points, either 'up', 'down'
-   * @param {ObservableArray.<Line>} lines Lines that the tool might intersect
+   * @param {ObservableArrayDef.<Line>} lines Lines that the tool might intersect
    * @param {Bounds2} dragBounds tool can be dragged within these bounds
    */
   constructor( position, orientation, lines, dragBounds ) {

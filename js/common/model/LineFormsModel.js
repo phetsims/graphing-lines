@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
@@ -41,8 +41,8 @@ class LineFormsModel {
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // y is inverted
 
     // @public static lines
-    this.savedLines = new ObservableArray();
-    this.standardLines = new ObservableArray();
+    this.savedLines = createObservableArray();
+    this.standardLines = createObservableArray();
 
     // Update the lines seen by the graph.
     // unmultilink is unnecessary because we own these Properties, and the model exists for the lifetime of the sim.

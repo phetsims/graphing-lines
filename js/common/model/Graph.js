@@ -6,7 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import ObservableArray from '../../../../axon/js/ObservableArray.js';
+import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import graphingLines from '../../graphingLines.js';
 
@@ -21,7 +21,7 @@ class Graph {
     // @public
     this.xRange = xRange;
     this.yRange = yRange;
-    this.lines = new ObservableArray(); // {Line} lines that the graph is currently displaying
+    this.lines = createObservableArray(); // {Line} lines that the graph is currently displaying
   }
 
   // @public

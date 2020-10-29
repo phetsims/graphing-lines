@@ -131,30 +131,33 @@ class GraphTheLineNode extends ChallengeNode {
 
     // sync with game state
     const playStateObserver = playState => {
-      assert && assert( !this.graphNode.isDisposed, 'graphNode should not be disposed' );
 
-      // states in which the graph is interactive
-      this.graphNode.pickable = (
-        playState === PlayState.FIRST_CHECK ||
-        playState === PlayState.SECOND_CHECK ||
-        playState === PlayState.TRY_AGAIN ||
-        ( playState === PlayState.NEXT && !challenge.isCorrect() )
-      );
+      // No-op if dispose has been called, see https://github.com/phetsims/graphing-lines/issues/133
+      if ( !this.isDisposed ) {
 
-      // Graph the answer line at the end of the challenge.
-      this.graphNode.setAnswerLineVisible( playState === PlayState.NEXT );
-      this.graphNode.setAnswerPointVisible( playState === PlayState.NEXT );
+        // states in which the graph is interactive
+        this.graphNode.pickable = (
+          playState === PlayState.FIRST_CHECK ||
+          playState === PlayState.SECOND_CHECK ||
+          playState === PlayState.TRY_AGAIN ||
+          ( playState === PlayState.NEXT && !challenge.isCorrect() )
+        );
 
-      guessBoxNode.visible = ( playState === PlayState.NEXT );
+        // Graph the answer line at the end of the challenge.
+        this.graphNode.setAnswerLineVisible( playState === PlayState.NEXT );
+        this.graphNode.setAnswerPointVisible( playState === PlayState.NEXT );
 
-      // show stuff when the user got the challenge wrong
-      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-        this.graphNode.setGuessPointVisible( true );
-        this.graphNode.setSlopeToolVisible( true );
+        guessBoxNode.visible = ( playState === PlayState.NEXT );
+
+        // show stuff when the user got the challenge wrong
+        if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+          this.graphNode.setGuessPointVisible( true );
+          this.graphNode.setSlopeToolVisible( true );
+        }
+
+        // visibility of correct/incorrect icons
+        updateIcons();
       }
-
-      // visibility of correct/incorrect icons
-      updateIcons();
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 

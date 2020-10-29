@@ -26,18 +26,21 @@ class PlaceThePointsNode extends GraphTheLineNode {
     super( challenge, model, challengeSize, audioPlayer );
 
     const playStateObserver = playState => {
-      assert && assert( !this.graphNode.isDisposed, 'graphNode should not be disposed' );
 
-      // show user's line only in states where there guess is wrong.
-      this.graphNode.setGuessLineVisible(
-        !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
+      // No-op if dispose has been called, see https://github.com/phetsims/graphing-lines/issues/133
+      if ( !this.isDisposed ) {
 
-      /*
-       * Plot (x1,y1) for answer when user got the challenge wrong.
-       * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
-       */
-      this.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
-      this.graphNode.setGuessPointVisible( false );
+        // show user's line only in states where there guess is wrong.
+        this.graphNode.setGuessLineVisible(
+          !challenge.isCorrect() && ( playState === PlayState.TRY_AGAIN || playState === PlayState.NEXT ) );
+
+        /*
+         * Plot (x1,y1) for answer when user got the challenge wrong.
+         * Do not plot (x1,y1) for guess because none of the 3 points corresponds to (x1,y1).
+         */
+        this.graphNode.setAnswerPointVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
+        this.graphNode.setGuessPointVisible( false );
+      }
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 

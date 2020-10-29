@@ -111,29 +111,32 @@ class MakeTheEquationNode extends ChallengeNode {
 
     // sync with game state
     const playStateObserver = playState => {
-      assert && assert( !graphNode.isDisposed, 'graphNode should not be disposed' );
 
-      // states in which the equation is interactive
-      guessBoxNode.pickable = (
-        playState === PlayState.FIRST_CHECK ||
-        playState === PlayState.SECOND_CHECK ||
-        playState === PlayState.TRY_AGAIN ||
-        ( playState === PlayState.NEXT && !challenge.isCorrect() )
-      );
+      // No-op if dispose has been called, see https://github.com/phetsims/graphing-lines/issues/133
+      if ( !this.isDisposed ) {
 
-      // Graph the guess line at the end of the challenge.
-      graphNode.setGuessLineVisible( playState === PlayState.NEXT );
+        // states in which the equation is interactive
+        guessBoxNode.pickable = (
+          playState === PlayState.FIRST_CHECK ||
+          playState === PlayState.SECOND_CHECK ||
+          playState === PlayState.TRY_AGAIN ||
+          ( playState === PlayState.NEXT && !challenge.isCorrect() )
+        );
 
-      // show stuff when the user got the challenge wrong
-      if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
-        answerBoxNode.setVisible( true );
-        graphNode.setAnswerPointVisible( true );
-        graphNode.setGuessPointVisible( true );
-        graphNode.setSlopeToolVisible( true );
+        // Graph the guess line at the end of the challenge.
+        graphNode.setGuessLineVisible( playState === PlayState.NEXT );
+
+        // show stuff when the user got the challenge wrong
+        if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {
+          answerBoxNode.setVisible( true );
+          graphNode.setAnswerPointVisible( true );
+          graphNode.setGuessPointVisible( true );
+          graphNode.setSlopeToolVisible( true );
+        }
+
+        // visibility of correct/incorrect icons
+        updateIcons();
       }
-
-      // visibility of correct/incorrect icons
-      updateIcons();
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 

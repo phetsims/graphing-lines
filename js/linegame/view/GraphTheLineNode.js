@@ -72,9 +72,9 @@ class GraphTheLineNode extends ChallengeNode {
     const equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
 
     // Guess
-    this.guessBoxNode = new EquationBoxNode( graphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
+    const guessBoxNode = new EquationBoxNode( graphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
-    // @private Graph
+    // @protected Graph
     this.graphNode = this.createGraphNode( challenge );
     this.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
@@ -82,7 +82,7 @@ class GraphTheLineNode extends ChallengeNode {
     this.subtypeParent.addChild( titleNode );
     this.subtypeParent.addChild( this.graphNode );
     this.subtypeParent.addChild( answerBoxNode );
-    this.subtypeParent.addChild( this.guessBoxNode );
+    this.subtypeParent.addChild( guessBoxNode );
 
     // layout
     {
@@ -90,14 +90,14 @@ class GraphTheLineNode extends ChallengeNode {
 
       // left align the title and boxes
       answerBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
-      this.guessBoxNode.left = answerBoxNode.left;
+      guessBoxNode.left = answerBoxNode.left;
       titleNode.left = answerBoxNode.left;
 
       // stack title and boxes vertically, title top-aligned with graph's grid
       const ySpacing = 30;
       titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
       answerBoxNode.top = titleNode.bottom + ySpacing;
-      this.guessBoxNode.top = answerBoxNode.bottom + ySpacing;
+      guessBoxNode.top = answerBoxNode.bottom + ySpacing;
 
       // face centered below boxes, bottom-aligned with buttons
       this.faceNode.centerX = answerBoxNode.centerX;
@@ -108,8 +108,8 @@ class GraphTheLineNode extends ChallengeNode {
     const updateIcons = () => {
       const playState = model.playStateProperty.get();
       answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
-      this.guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
-      this.guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
+      guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
+      guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );
     };
 
     // sync with guess
@@ -144,7 +144,7 @@ class GraphTheLineNode extends ChallengeNode {
       this.graphNode.setAnswerLineVisible( playState === PlayState.NEXT );
       this.graphNode.setAnswerPointVisible( playState === PlayState.NEXT );
 
-      this.guessBoxNode.visible = ( playState === PlayState.NEXT );
+      guessBoxNode.visible = ( playState === PlayState.NEXT );
 
       // show stuff when the user got the challenge wrong
       if ( playState === PlayState.NEXT && !challenge.isCorrect() ) {

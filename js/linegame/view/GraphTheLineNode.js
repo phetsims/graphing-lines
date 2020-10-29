@@ -131,6 +131,7 @@ class GraphTheLineNode extends ChallengeNode {
 
     // sync with game state
     const playStateObserver = playState => {
+      assert && assert( !this.graphNode.isDisposed, 'graphNode should not be disposed' );
 
       // states in which the graph is interactive
       this.graphNode.pickable = (

@@ -111,6 +111,7 @@ class MakeTheEquationNode extends ChallengeNode {
 
     // sync with game state
     const playStateObserver = playState => {
+      assert && assert( !graphNode.isDisposed, 'graphNode should not be disposed' );
 
       // states in which the equation is interactive
       guessBoxNode.pickable = (

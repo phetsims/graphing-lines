@@ -26,6 +26,7 @@ class PlaceThePointsNode extends GraphTheLineNode {
     super( challenge, model, challengeSize, audioPlayer );
 
     const playStateObserver = playState => {
+      assert && assert( !this.graphNode.isDisposed, 'graphNode should not be disposed' );
 
       // show user's line only in states where there guess is wrong.
       this.graphNode.setGuessLineVisible(

@@ -163,7 +163,7 @@ class GraphTheLineNode extends ChallengeNode {
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
       guessEquationNode.dispose();
-      this.graphNode.dispose();
+      // this.graphNode.dispose();
     };
   }
 

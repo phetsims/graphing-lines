@@ -126,7 +126,7 @@ class Line {
    * @public
    */
   slopeIsSimplifiable() {
-    return ( this.rise !== 0 ) && ( this.run !== 0 ) && Utils.isInteger( this.rise ) && Utils.isInteger( this.run );
+    return ( this.rise !== 0 ) && ( this.run !== 0 ) && Number.isInteger( this.rise ) && Number.isInteger( this.run );
   }
 
   /**
@@ -159,7 +159,7 @@ class Line {
    * @public
    */
   getYIntercept() {
-    assert && assert( Utils.isInteger( this.x1 ) && Utils.isInteger( this.y1 ) && Utils.isInteger( this.rise ) && Utils.isInteger( this.run ) );
+    assert && assert( Number.isInteger( this.x1 ) && Number.isInteger( this.y1 ) && Number.isInteger( this.rise ) && Number.isInteger( this.run ) );
     if ( this.rise === 0 || this.run === 0 ) {
       return new Fraction( this.y1, 1 ); // not technically correct for run===0, but gives the desired result in slope-intercept equations
     }

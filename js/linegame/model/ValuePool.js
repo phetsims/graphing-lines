@@ -8,7 +8,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import graphingLines from '../../graphingLines.js';
 
@@ -85,7 +84,7 @@ class ValuePool {
    */
   static rangeToArray( range, options ) {
 
-    assert && assert( Utils.isInteger( range.min ) && Utils.isInteger( range.max ) );
+    assert && assert( Number.isInteger( range.min ) && Number.isInteger( range.max ) );
 
     options = merge( {
       excludeZero: false // {boolean} whether to exclude zero from the array

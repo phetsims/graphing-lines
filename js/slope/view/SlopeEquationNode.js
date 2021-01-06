@@ -418,7 +418,7 @@ class DynamicLabelNode extends EquationNode {
           nextXOffset = slopeIsNode.right + this.relationalOperatorXSpacing;
         }
 
-        if ( Utils.isInteger( line.getSlope() ) ) {
+        if ( Number.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
           riseNode.visible = true;
           riseNode.text = Utils.toFixed( Math.abs( line.getSlope() ), 0 );

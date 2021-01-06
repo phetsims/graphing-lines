@@ -14,7 +14,6 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
@@ -289,7 +288,7 @@ class PointSlopeEquationNode extends EquationNode {
           const slope = line.getSlope();
           const zeroSlope = ( slope === 0 );
           const unitySlope = ( Math.abs( slope ) === 1 );
-          const integerSlope = Utils.isInteger( slope );
+          const integerSlope = Number.isInteger( slope );
           const positiveSlope = ( slope > 0 );
           const fractionalSlope = ( !zeroSlope && !unitySlope && !integerSlope );
 

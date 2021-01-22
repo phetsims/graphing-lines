@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import merge from '../../../../phet-core/js/merge.js';
 import graphingLines from '../../graphingLines.js';
 
@@ -67,7 +68,7 @@ class ValuePool {
    */
   static choose( array ) {
     assert && assert( array && array.length > 0, 'array is empty' );
-    const index = phet.joist.random.nextIntBetween( 0, array.length - 1 );
+    const index = dotRandom.nextIntBetween( 0, array.length - 1 );
     assert && assert( index !== -1 );
     const item = array[ index ];
     array.splice( index, 1 );

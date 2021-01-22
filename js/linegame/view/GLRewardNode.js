@@ -18,6 +18,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
@@ -137,7 +138,7 @@ function getRandomY() {
 }
 
 function getRandomNonZeroInteger( min, max ) {
-  let i = Utils.roundSymmetric( min + ( phet.joist.random.nextDouble() * ( max - min ) ) );
+  let i = Utils.roundSymmetric( min + ( dotRandom.nextDouble() * ( max - min ) ) );
   if ( i === 0 ) { i = 1; }
   return i;
 }
@@ -150,7 +151,7 @@ function getRandomNonZeroInteger( min, max ) {
 // Creates a random equation with the specified color.
 function createEquationNode( color ) {
   let node;
-  if ( phet.joist.random.nextDouble() < 0.5 ) {
+  if ( dotRandom.nextDouble() < 0.5 ) {
     node = SlopeInterceptEquationNode.createDynamicLabel(
       new Property( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ), {
         fontSize: EQUATION_FONT_SIZE
@@ -168,7 +169,7 @@ function createEquationNode( color ) {
 // Creates a random graph with the specified color.
 function createGraphNode( color ) {
   let node;
-  if ( phet.joist.random.nextDouble() < 0.5 ) {
+  if ( dotRandom.nextDouble() < 0.5 ) {
     node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
   }
   else {

@@ -15,6 +15,7 @@ import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import dotRandom from '../../../../dot/js/dotRandom.js';
 import GameTimer from '../../../../vegas/js/GameTimer.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
@@ -256,7 +257,7 @@ class BaseGameModel {
     // generate challenges
     this.challenges = this.challengeFactories[ level ].createChallenges();
     if ( GLQueryParameters.shuffle ) {
-      this.challenges = phet.joist.random.shuffle( this.challenges );
+      this.challenges = dotRandom.shuffle( this.challenges );
     }
 
     // set the number of challenges

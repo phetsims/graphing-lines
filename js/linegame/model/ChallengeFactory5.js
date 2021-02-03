@@ -30,7 +30,7 @@ class ChallengeFactory5 extends BaseChallengeFactory {
 
   /**
    * Creates challenges for this game level.
-   * @returns {Array<Challenge>} array of challenges
+   * @returns {Array.<Challenge>} array of challenges
    * @public
    * @override
    */

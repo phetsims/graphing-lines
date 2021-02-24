@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import logGlobal from '../../../phet-core/js/logGlobal.js';
 import graphingLines from '../graphingLines.js';
 
 const GLQueryParameters = QueryStringMachine.getAll( {
@@ -28,7 +29,9 @@ const GLQueryParameters = QueryStringMachine.getAll( {
 
 graphingLines.register( 'GLQueryParameters', GLQueryParameters );
 
-// log the values of all sim-specific query parameters
-phet.log && phet.log( 'query parameters: ' + JSON.stringify( GLQueryParameters, null, 2 ) );
+// Log query parameters
+logGlobal( 'phet.chipper.queryParameters' );
+logGlobal( 'phet.preloads.phetio.queryParameters' );
+logGlobal( 'phet.graphingLines.GLQueryParameters' );
 
 export default GLQueryParameters;

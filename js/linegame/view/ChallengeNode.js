@@ -33,8 +33,8 @@ const nextString = vegasStrings.next;
 const showAnswerString = vegasStrings.showAnswer;
 const tryAgainString = vegasStrings.tryAgain;
 
-class ChallengeNode extends  Node {
-  
+class ChallengeNode extends Node {
+
   /**
    * @param {Challenge} challenge the challenge
    * @param {LineGameModel} model the game model

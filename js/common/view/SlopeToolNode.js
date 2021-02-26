@@ -22,7 +22,7 @@ const VALUE_X_SPACING = 6;
 const VALUE_Y_SPACING = 6;
 
 class SlopeToolNode extends Node {
-  
+
   /**
    * @param {Property.<Line>} lineProperty
    * @param {ModelViewTransform2} modelViewTransform

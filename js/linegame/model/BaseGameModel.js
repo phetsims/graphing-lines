@@ -34,7 +34,7 @@ const DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1
   EquationForm.SLOPE_INTERCEPT, ManipulationMode.SLOPE, GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
 class BaseGameModel {
-  
+
   /**
    * @param {BaseChallengeFactory[]} challengeFactories
    */

@@ -14,7 +14,7 @@ import graphingLines from '../../graphingLines.js';
 import SlopeParameterRange from './SlopeParameterRange.js';
 
 class SlopeModel extends LineFormsModel {
-  
+
   constructor() {
 
     super( new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );

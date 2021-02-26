@@ -28,7 +28,7 @@ const NUMBER_OF_DECIMAL_PLACES = 0;
 const VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
 
 class PointToolNode extends Node {
-  
+
   /**
    * @param {PointTool} pointTool
    * @param {ModelViewTransform2} modelViewTransform

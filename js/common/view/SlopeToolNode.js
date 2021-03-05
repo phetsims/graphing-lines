@@ -31,9 +31,6 @@ class SlopeToolNode extends Node {
 
     super();
 
-    this.lineProperty = lineProperty; // @private
-    this.modelViewTransform = modelViewTransform; // @private
-
     // Values
     const numberOptions = {
       font: new PhetFont( { size: 16, weight: 'bold' } ),
@@ -73,6 +70,9 @@ class SlopeToolNode extends Node {
     const lineObserver = line => this.update( line, modelViewTransform );
     lineProperty.link( lineObserver ); // unlink in dispose
 
+    // Update when this Node becomes visible
+    this.visibleProperty.link( visible => visible && this.update( lineProperty.get(), modelViewTransform ) );
+
     // @private called by dispose
     this.disposeSlopeToolNode = () => {
       this.riseValueNode.dispose();
@@ -90,21 +90,11 @@ class SlopeToolNode extends Node {
     super.dispose();
   }
 
-  /*
-   * Slope tool is not updated while invisible.
-   * If it becomes visible, update it.
-   * @override
-   * @public
+  /**
+   * @param {Line} line
+   * @param {ModelViewTransform2} modelViewTransform
+   * @private
    */
-  setVisible( visible ) {
-    const doUpdate = ( visible && !this.visible );
-    super.setVisible( visible );
-    if ( doUpdate ) {
-      this.update( this.lineProperty.get(), this.modelViewTransform );
-    }
-  }
-
-  // @private
   update( line, modelViewTransform ) {
 
     // update only if visible

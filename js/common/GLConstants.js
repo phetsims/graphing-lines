@@ -22,7 +22,7 @@ const GLConstants = {
   SCREEN_X_MARGIN: 40,
   SCREEN_Y_MARGIN: 20,
   RESET_ALL_BUTTON_SCALE: 1.32,
-  PATTERN_0VALUE_EQUALS_1VALUE: '{0} ' + MathSymbols.EQUAL_TO + ' {1}', // i18n not required, used for e.g. x = 5
+  PATTERN_0VALUE_EQUALS_1VALUE: `{0} ${MathSymbols.EQUAL_TO} {1}`, // i18n not required, used for e.g. x = 5
   EQUATION_FONT_WEIGHT: 'bold',
 
   // see https://github.com/phetsims/graphing-lines/issues/124

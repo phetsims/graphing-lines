@@ -92,7 +92,7 @@ class PointToolNode extends Node {
       this.valueNode.centerY = this.backgroundNode.centerY;
     }
     else {
-      throw new Error( 'unsupported point tool orientation: ' + pointTool.orientation );
+      throw new Error( `unsupported point tool orientation: ${pointTool.orientation}` );
     }
 
     options.children = [

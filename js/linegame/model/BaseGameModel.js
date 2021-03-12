@@ -149,7 +149,7 @@ class BaseGameModel {
         this.updateBestTime();
       }
       else {
-        throw new Error( 'unsupported game phase: ' + gamePhase );
+        throw new Error( `unsupported game phase: ${gamePhase}` );
       }
 
       // Change the Property, which notifies listeners
@@ -269,7 +269,7 @@ class BaseGameModel {
   verifyChallenges() {
     console.log( 'begin: verify creation of challenges' );
     for ( let level = 0; level < this.challengeFactories.length; level++ ) {
-      console.log( 'verifying level ' + level + '...' );
+      console.log( `verifying level ${level}...` );
       for ( let i = 0; i < 2000; i++ ) {
         this.challengeFactories[ level ].createChallenges();
       }

@@ -44,7 +44,7 @@ class ChallengeFactory6 extends BaseChallengeFactory {
     // CHALLENGE 1:Place-the-Point, slope-intercept form, slope=0 (horizontal line), slope and intercept variable
     const yIntercept = ValuePool.choose( yIntercepts );
     challenges.push( new PlaceThePoints(
-      ( challengeNumber++ ) + ': PlaceThePoints, slope=0, slope and intercept variable',
+      `${challengeNumber++}: PlaceThePoints, slope=0, slope and intercept variable`,
       Line.createSlopeIntercept( 0, 1, yIntercept ),
       EquationForm.SLOPE_INTERCEPT,
       this.xRange, this.yRange ) );
@@ -84,7 +84,7 @@ class ChallengeFactory6 extends BaseChallengeFactory {
         const line = new Line( x1, y1, x2, y2, Color.BLACK );
         if ( equationForm === EquationForm.SLOPE_INTERCEPT ) {
           challenges.push( new GraphTheLine(
-            ( challengeNumber++ ) + ': GraphTheLine, slope-intercept form, point and slope variable',
+            `${challengeNumber++}: GraphTheLine, slope-intercept form, point and slope variable`,
             line,
             equationForm,
             ManipulationMode.POINT_SLOPE,
@@ -92,7 +92,7 @@ class ChallengeFactory6 extends BaseChallengeFactory {
         }
         else {
           challenges.push( new GraphTheLine(
-            ( challengeNumber++ ) + ': GraphTheLine, point-slope form, slope and intercept variable',
+            `${challengeNumber++}: GraphTheLine, point-slope form, slope and intercept variable`,
             line,
             equationForm,
             ManipulationMode.SLOPE_INTERCEPT,

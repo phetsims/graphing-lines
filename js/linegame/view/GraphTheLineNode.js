@@ -197,7 +197,7 @@ class GraphTheLineNode extends ChallengeNode {
       return new GraphTwoPointsNode( challenge );
     }
     else {
-      throw new Error( 'unsupported manipulationMode: ' + challenge.manipulationMode );
+      throw new Error( `unsupported manipulationMode: ${challenge.manipulationMode}` );
     }
   }
 }

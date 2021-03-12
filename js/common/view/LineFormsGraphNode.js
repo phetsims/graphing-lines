@@ -131,7 +131,7 @@ class LineFormsGraphNode extends GraphNode {
         removed = true;
       }
     }
-    assert && assert( removed, 'no Node found for line ' + line.toString() );
+    assert && assert( removed, `no Node found for line ${line.toString()}` );
   }
 }
 

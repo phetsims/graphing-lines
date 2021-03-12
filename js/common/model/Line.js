@@ -24,7 +24,7 @@ class Line {
   constructor( x1, y1, x2, y2, color ) {
 
     // 2 different points are required
-    assert && assert( x1 !== x2 || y1 !== y2, 'points are the same: (' + x1 + ',' + y1 + ')' );
+    assert && assert( x1 !== x2 || y1 !== y2, `points are the same: (${x1},${y1})` );
 
     // @public
     this.x1 = x1;
@@ -43,8 +43,8 @@ class Line {
 
   // @public
   toString() {
-    return 'Line[x1=' + this.x1 + ' y1=' + this.y1 + ' x2=' + this.x2 + ' y2=' + this.y2 +
-           ' rise=' + this.rise + ' run=' + this.run + ' color=' + this.color.toString() + ']';
+    return `Line[x1=${this.x1} y1=${this.y1} x2=${this.x2} y2=${this.y2
+           } rise=${this.rise} run=${this.run} color=${this.color.toString()}]`;
   }
 
   // @public Returns true if 2 points on the specified line are also on this line.

@@ -103,12 +103,12 @@ class Challenge {
 
   // @public
   toString() {
-    return this.constructor.name + '[' +
-           ' title=' + this.title +
-           ' answer=' + this.answer.toString() +
-           ' equationForm=' + this.equationForm.name +
-           ' manipulationMode=' + this.manipulationMode +
-           ' ]';
+    return `${this.constructor.name}[` +
+           ` title=${this.title
+           } answer=${this.answer.toString()
+           } equationForm=${this.equationForm.name
+           } manipulationMode=${this.manipulationMode
+           } ]`;
   }
 
   /*

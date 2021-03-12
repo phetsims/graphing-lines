@@ -26,9 +26,9 @@ import GLIconFactory from './GLIconFactory.js';
 
 // constants
 // y = x
-const Y_EQUALS_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + GLSymbols.x;
+const Y_EQUALS_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${GLSymbols.x}`;
 // y = -x
-const Y_EQUALS_NEGATIVE_X = GLSymbols.y + ' ' + MathSymbols.EQUAL_TO + ' ' + MathSymbols.UNARY_MINUS + GLSymbols.x;
+const Y_EQUALS_NEGATIVE_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${GLSymbols.x}`;
 
 class GraphControlPanel extends Panel {
 

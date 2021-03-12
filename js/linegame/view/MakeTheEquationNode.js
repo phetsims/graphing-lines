@@ -200,7 +200,7 @@ function createInteractiveEquationNode( equationForm, manipulationMode, lineProp
     } );
   }
   else {
-    throw new Error( 'unsupported equation form: ' + equationForm.name );
+    throw new Error( `unsupported equation form: ${equationForm.name}` );
   }
 }
 

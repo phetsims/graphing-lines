@@ -12,7 +12,7 @@ import graphingLines from '../graphingLines.js';
 import graphingLinesStrings from '../graphingLinesStrings.js';
 
 // constants
-const SYMBOL_PATTERN = '<i style=\'font-family: ' + new MathSymbolFont( 10 ).family + '\'>{{symbol}}</i>';
+const SYMBOL_PATTERN = `<i style='font-family: ${new MathSymbolFont( 10 ).family}'>{{symbol}}</i>`;
 
 const GLSymbols = {
   b: StringUtils.fillIn( SYMBOL_PATTERN, { symbol: graphingLinesStrings.symbol.intercept } ),

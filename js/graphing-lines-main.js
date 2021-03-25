@@ -22,7 +22,7 @@ const options = {
     team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
     graphicArts: 'Megan Lai, Sharon Siman-Tov',
     qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
-                      'Benjamin Roberts, Jacob Romero, Katie Woessner, Bryan Yoelin'
+                      'Benjamin Roberts, Jacob Romero, Kathryn Woessner, Bryan Yoelin'
   }
 };
 

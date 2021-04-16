@@ -159,6 +159,7 @@ class SlopeEquationNode extends EquationNode {
 
       // Synchronize the controls atomically.
       updatingControls = true;
+      /* eslint-disable-next-line no-lone-blocks */
       {
         x1Property.set( line.x1 );
         y1Property.set( line.y1 );

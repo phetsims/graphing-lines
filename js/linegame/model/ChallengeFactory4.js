@@ -110,6 +110,7 @@ class ChallengeFactory4 extends ChallengeFactory2 {
 
     // CHALLENGE 6: Graph-the-Line, slope-intercept or point-slope form (random choice), 2 points.
     // Choose y-intercept or point such that (x2,y2) is off the graph, so that user is forced to invert the slope.
+    /* eslint-disable-next-line no-lone-blocks */
     {
       // choose a positive fractional slope
       positiveSlopes = ChallengeFactory2.createPositiveFractionalSlopes();

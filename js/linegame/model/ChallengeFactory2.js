@@ -83,7 +83,6 @@ class ChallengeFactory2 extends BaseChallengeFactory {
     const pointSlopeManipulationModes = [ ManipulationMode.POINT, ManipulationMode.SLOPE ];
 
     // CHALLENGE 5: Graph-the-Line, point-slope form, point or slope variable (random choice)
-    /* eslint-disable-next-line no-lone-blocks */
     {
       // manipulation mode
       manipulationMode = ValuePool.choose( pointSlopeManipulationModes );
@@ -107,7 +106,6 @@ class ChallengeFactory2 extends BaseChallengeFactory {
     }
 
     // CHALLENGE 6: Make-the-Equation, point-slope form, point or slope variable (whichever was not variable above)
-    /* eslint-disable-next-line no-lone-blocks */
     {
       // manipulation mode
       manipulationMode = ValuePool.choose( pointSlopeManipulationModes );

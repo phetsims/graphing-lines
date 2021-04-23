@@ -379,7 +379,6 @@ class SlopeInterceptEquationNode extends EquationNode {
 
       // Synchronize the controls atomically.
       updatingControls = true;
-      /* eslint-disable-next-line no-lone-blocks */
       {
         riseProperty.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
         runProperty.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );

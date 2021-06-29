@@ -139,7 +139,8 @@ function createLevelSelectionButton( level, model, levelImage ) {
     listener: () => {
       model.levelProperty.set( level );
       model.setGamePhase( GamePhase.PLAY );
-    }
+    },
+    soundPlayerIndex: level
   } );
 }
 

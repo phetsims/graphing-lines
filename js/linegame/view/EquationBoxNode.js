@@ -10,9 +10,11 @@
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import FontAwesomeNode from '../../../../sun/js/FontAwesomeNode.js';
+import checkSolidShape from '../../../../sherpa/js/fontawesome-5/checkSolidShape.js';
+import timesSolidShape from '../../../../sherpa/js/fontawesome-5/timesSolidShape.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 
@@ -33,12 +35,12 @@ class EquationBoxNode extends Node {
     super();
 
     // @private icons for 'correct' and 'incorrect'
-    this.correctIconNode = new FontAwesomeNode( 'check', {
-      scale: 1.5,
+    this.correctIconNode = new Path( checkSolidShape, {
+      scale: 0.12,
       fill: LineGameConstants.ANSWER_COLOR
     } );
-    this.incorrectIconNode = new FontAwesomeNode( 'times', {
-      scale: 1.5,
+    this.incorrectIconNode = new Path( timesSolidShape, {
+      scale: 0.12,
       fill: PhetColorScheme.RED_COLORBLIND
     } );
 

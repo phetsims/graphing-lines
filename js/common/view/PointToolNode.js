@@ -18,8 +18,8 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import bodyImage from '../../../images/pointToolBody_png.js';
-import tipImage from '../../../images/pointToolTip_png.js';
+import pointToolBody_png from '../../../images/pointToolBody_png.js';
+import pointToolTip_png from '../../../images/pointToolTip_png.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
 
@@ -47,7 +47,7 @@ class PointToolNode extends Node {
 
     super();
 
-    this.bodyNode = new Image( bodyImage ); // @private body of the tool
+    this.bodyNode = new Image( pointToolBody_png ); // @private body of the tool
 
     /*
      * @private
@@ -56,7 +56,7 @@ class PointToolNode extends Node {
      * to pick a line manipulator when the tip and manipulator were on the same grid point.
      * Making the tip non-pickable was determined to be an acceptable and 'natural feeling' solution.
      */
-    this.tipNode = new Image( tipImage, { pickable: false } );
+    this.tipNode = new Image( pointToolTip_png, { pickable: false } );
 
     // @private background behind the displayed value, shows through a transparent hole in the display area portion of the body image
     const BACKGROUND_MARGIN = 5;
@@ -68,7 +68,7 @@ class PointToolNode extends Node {
     this.valueNode = new Text( '?', {
       font: new PhetFont( { size: 15, weight: 'bold' } ),
       pickable: false,
-      maxWidth: 60 // constrain width, determined empirically, dependent on bodyImage
+      maxWidth: 60 // constrain width, determined empirically, dependent on pointToolBody_png
     } );
 
     // orientation

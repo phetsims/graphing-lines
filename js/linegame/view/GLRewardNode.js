@@ -30,8 +30,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
-import pointToolBodyImage from '../../../images/pointToolBody_png.js';
-import pointToolTipImage from '../../../images/pointToolTip_png.js';
+import pointToolBody_png from '../../../images/pointToolBody_png.js';
+import pointToolTip_png from '../../../images/pointToolTip_png.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
 import GLIconFactory from '../../common/view/GLIconFactory.js';
@@ -183,8 +183,8 @@ function createGraphNode( color ) {
  * This does not use PointToolNode because it has too many model dependencies.
  */
 function createPointToolNode( color ) {
-  const body = new Image( pointToolBodyImage );
-  const tip = new Image( pointToolTipImage, { top: body.bottom, centerX: 0.25 * body.width } );
+  const body = new Image( pointToolBody_png );
+  const tip = new Image( pointToolTip_png, { top: body.bottom, centerX: 0.25 * body.width } );
   const background = new Rectangle( 0, 0, 0.95 * body.width, 0.95 * body.height, { fill: color, center: body.center } );
   const value = new Text( StringUtils.format( graphingLinesStrings.point.XY, getRandomX(), getRandomY() ),
     { font: POINT_TOOL_FONT, centerX: POINT_TOOL_WINDOW_CENTER_X, centerY: body.centerY } );

@@ -18,14 +18,14 @@ import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import bodyImage from '../../../images/point_tool_body_png.js';
-import tipImage from '../../../images/point_tool_tip_png.js';
+import bodyImage from '../../../images/pointToolBody_png.js';
+import tipImage from '../../../images/pointToolTip_png.js';
 import graphingLines from '../../graphingLines.js';
 import graphingLinesStrings from '../../graphingLinesStrings.js';
 
 // constants
 const NUMBER_OF_DECIMAL_PLACES = 0;
-const VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
+const VALUE_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of pointToolBody.png
 
 class PointToolNode extends Node {
 

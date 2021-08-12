@@ -30,8 +30,8 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
-import pointToolBodyImage from '../../../images/point_tool_body_png.js';
-import pointToolTipImage from '../../../images/point_tool_tip_png.js';
+import pointToolBodyImage from '../../../images/pointToolBody_png.js';
+import pointToolTipImage from '../../../images/pointToolTip_png.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
 import GLIconFactory from '../../common/view/GLIconFactory.js';
@@ -46,7 +46,7 @@ const NODE_COLORS = [ 'yellow', PhetColorScheme.RED_COLORBLIND, 'orange', 'magen
 const EQUATION_FONT_SIZE = 24;
 const GRAPH_WIDTH = 60;
 const POINT_TOOL_FONT = new PhetFont( 15 );
-const POINT_TOOL_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of point_tool_body.png
+const POINT_TOOL_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of pointToolBody.png
 const FACE_DIAMETER = 60;
 const AIRPLANE_SCALE = 1.76;
 

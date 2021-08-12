@@ -1,5 +1,5 @@
 {
-  "Level_1.png": {
+  "level1.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -7,7 +7,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Sharon Siman-Tov"
   },
-  "Level_2.png": {
+  "level2.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -15,7 +15,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Sharon Siman-Tov"
   },
-  "Level_3.png": {
+  "level3.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -23,7 +23,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Sharon Siman-Tov"
   },
-  "Level_4.png": {
+  "level4.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -31,7 +31,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Sharon Siman-Tov"
   },
-  "Level_5.png": {
+  "level5.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -39,7 +39,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Sharon Siman-Tov"
   },
-  "Level_6.png": {
+  "level6.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -47,7 +47,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Sharon Siman-Tov"
   },
-  "point_tool_body.png": {
+  "pointToolBody.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],
@@ -55,7 +55,7 @@
     "license": "contact phethelp@colorado.edu",
     "notes": "created by Bryce Gruneich"
   },
-  "point_tool_tip.png": {
+  "pointToolTip.png": {
     "text": [
       "Copyright 2002-2015 University of Colorado Boulder"
     ],

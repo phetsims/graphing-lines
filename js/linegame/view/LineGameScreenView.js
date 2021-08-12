@@ -6,12 +6,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import level1Image from '../../../images/Level_1_png.js';
-import level2Image from '../../../images/Level_2_png.js';
-import level3Image from '../../../images/Level_3_png.js';
-import level4Image from '../../../images/Level_4_png.js';
-import level5Image from '../../../images/Level_5_png.js';
-import level6Image from '../../../images/Level_6_png.js';
+import level1Image from '../../../images/level1_png.js';
+import level2Image from '../../../images/level2_png.js';
+import level3Image from '../../../images/level3_png.js';
+import level4Image from '../../../images/level4_png.js';
+import level5Image from '../../../images/level5_png.js';
+import level6Image from '../../../images/level6_png.js';
 import graphingLines from '../../graphingLines.js';
 import BaseGameScreenView from './BaseGameScreenView.js';
 import GLRewardNode from './GLRewardNode.js';

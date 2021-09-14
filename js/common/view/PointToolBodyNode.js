@@ -9,6 +9,7 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
+import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
@@ -131,7 +132,7 @@ class PointToolBodyNode extends Node {
       if ( coordinates ) {
         const x = Utils.toFixedNumber( coordinates.x, options.decimals );
         const y = Utils.toFixedNumber( coordinates.y, options.decimals );
-        textNode.text = `(${x}, ${y})`;
+        textNode.text = StringUtils.format( graphingLinesStrings.point.XY, x, y );
       }
       else {
         textNode.text = graphingLinesStrings.point.unknown;

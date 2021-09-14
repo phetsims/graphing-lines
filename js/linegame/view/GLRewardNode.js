@@ -20,23 +20,19 @@
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
-import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
+import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
 import PaperAirplaneNode from '../../../../scenery-phet/js/PaperAirplaneNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import Image from '../../../../scenery/js/nodes/Image.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import Text from '../../../../scenery/js/nodes/Text.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
-import pointToolBody_png from '../../../images/pointToolBody_png.js';
-import pointToolTip_png from '../../../images/pointToolTip_png.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
 import GLIconFactory from '../../common/view/GLIconFactory.js';
+import PointToolBodyNode from '../../common/view/PointToolBodyNode.js';
+import PointToolProbeNode from '../../common/view/PointToolProbeNode.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 
@@ -45,8 +41,6 @@ const NUMBER_OF_NODES = 150;
 const NODE_COLORS = [ 'yellow', PhetColorScheme.RED_COLORBLIND, 'orange', 'magenta', 'cyan', 'green' ];
 const EQUATION_FONT_SIZE = 24;
 const GRAPH_WIDTH = 60;
-const POINT_TOOL_FONT = new PhetFont( 15 );
-const POINT_TOOL_WINDOW_CENTER_X = 44; // center of the value window relative to the left edge of pointToolBody.png
 const FACE_DIAMETER = 60;
 const AIRPLANE_SCALE = 1.76;
 
@@ -181,14 +175,19 @@ function createGraphNode( color ) {
 /*
  * Creates a random point tool with the specified color.
  * This does not use PointToolNode because it has too many model dependencies.
+ * @param {ColorDef} color
+ * @returns {Node}
  */
 function createPointToolNode( color ) {
-  const body = new Image( pointToolBody_png );
-  const tip = new Image( pointToolTip_png, { top: body.bottom, centerX: 0.25 * body.width } );
-  const background = new Rectangle( 0, 0, 0.95 * body.width, 0.95 * body.height, { fill: color, center: body.center } );
-  const value = new Text( StringUtils.format( graphingLinesStrings.point.XY, getRandomX(), getRandomY() ),
-    { font: POINT_TOOL_FONT, centerX: POINT_TOOL_WINDOW_CENTER_X, centerY: body.centerY } );
-  return new Node( { children: [ background, body, tip, value ] } );
+  const coordinatesProperty = new Vector2Property( new Vector2( getRandomX(), getRandomY() ) );
+  const bodyNode = new PointToolBodyNode( coordinatesProperty, {
+    backgroundFill: color
+  } );
+  const probeNode = new PointToolProbeNode( {
+    centerX: 0.25 * bodyNode.width,
+    top: bodyNode.bottom - 2 // overlap
+  } );
+  return new Node( { children: [ probeNode, bodyNode ] } );
 }
 
 // Creates a smiley face with the specified color.

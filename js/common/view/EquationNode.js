@@ -10,7 +10,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import SlopePicker from './picker/SlopePicker.js';
 

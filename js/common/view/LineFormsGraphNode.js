@@ -15,7 +15,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GraphNode from './GraphNode.js';
 import LineNode from './LineNode.js';

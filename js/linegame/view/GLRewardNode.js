@@ -25,7 +25,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
 import PaperAirplaneNode from '../../../../scenery-phet/js/PaperAirplaneNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';

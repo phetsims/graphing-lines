@@ -12,8 +12,8 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disable-line require-statement-match
-import Node from '../../../../scenery/js/nodes/Node.js';
+import { Line as SceneryLine } from '../../../../scenery/js/imports.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import Line from '../model/Line.js';
 

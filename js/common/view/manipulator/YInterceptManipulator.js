@@ -9,7 +9,7 @@
 
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import DragListener from '../../../../../scenery/js/listeners/DragListener.js';
+import { DragListener } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';

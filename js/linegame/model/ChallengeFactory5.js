@@ -8,7 +8,7 @@
 
 import Range from '../../../../dot/js/Range.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
-import Color from '../../../../scenery/js/util/Color.js';
+import { Color } from '../../../../scenery/js/imports.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';

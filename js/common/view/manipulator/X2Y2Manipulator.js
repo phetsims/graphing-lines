@@ -1,4 +1,4 @@
-// Copyright 2013-2020, University of Colorado Boulder
+// Copyright 2013-2021, University of Colorado Boulder
 
 /**
  * Manipulator for changing a line's (x2,y2) point.

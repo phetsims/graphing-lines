@@ -9,11 +9,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
 import graphingLines from '../../graphingLines.js';
 
 // NOTE: enum pattern recommends using {} for each value, but strings are more convenient for debugging
-const ManipulationMode = Enumeration.byKeys( [
+const ManipulationMode = EnumerationDeprecated.byKeys( [
   'SLOPE',
   'INTERCEPT',
   'SLOPE_INTERCEPT',

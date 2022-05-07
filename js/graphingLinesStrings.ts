@@ -9,43 +9,43 @@ import graphingLines from './graphingLines.js';
 
 type StringsType = {
   'graphing-lines': {
-    'title': string
-  },
-  'eraseLines': string,
-  'saveLine': string,
-  'slope': string,
-  'slopeUndefined': string,
-  'graphTheLine': string,
-  'makeTheEquation': string,
-  'setTheSlope': string,
-  'setTheYIntercept': string,
-  'setThePoint': string,
-  'putPointsOnLine': string,
-  'lineToGraph': string,
-  'yourLine': string,
-  'yourEquation': string,
-  'aCorrectEquation': string,
-  'undefined': string,
-  'notALine': string,
+    'title': string;
+  };
+  'eraseLines': string;
+  'saveLine': string;
+  'slope': string;
+  'slopeUndefined': string;
+  'graphTheLine': string;
+  'makeTheEquation': string;
+  'setTheSlope': string;
+  'setTheYIntercept': string;
+  'setThePoint': string;
+  'putPointsOnLine': string;
+  'lineToGraph': string;
+  'yourLine': string;
+  'yourEquation': string;
+  'aCorrectEquation': string;
+  'undefined': string;
+  'notALine': string;
   'symbol': {
-    'x': string,
-    'y': string,
-    'slope': string,
-    'intercept': string
-  },
+    'x': string;
+    'y': string;
+    'slope': string;
+    'intercept': string;
+  };
   'screen': {
-    'slope': string,
-    'slopeIntercept': string,
-    'pointSlope': string,
-    'lineGame': string
-  },
+    'slope': string;
+    'slopeIntercept': string;
+    'pointSlope': string;
+    'lineGame': string;
+  };
   'point': {
-    'XY': string,
-    'unknown': string
-  },
-  'slopeIs': string,
-  'chooseYourLevel': string,
-  'pattern_Level_0': string
+    'XY': string;
+    'unknown': string;
+  };
+  'slopeIs': string;
+  'chooseYourLevel': string;
+  'pattern_Level_0': string;
 };
 
 const graphingLinesStrings = getStringModule( 'GRAPHING_LINES' ) as StringsType;

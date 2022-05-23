@@ -7,7 +7,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import PointManipulator from '../../common/view/manipulator/PointManipulator.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
@@ -40,7 +40,7 @@ class GraphThreePointsNode extends ChallengeGraphNode {
     this.addChild( p3Manipulator );
 
     // Move the manipulators to match points, unmultilink in dispose
-    const pointsMultilink = Property.multilink(
+    const pointsMultilink = Multilink.multilink(
       [ challenge.p1Property, challenge.p2Property, challenge.p3Property ],
       ( p1, p2, p3 ) => {
         p1Manipulator.translation = challenge.modelViewTransform.modelToViewPosition( p1 );
@@ -53,7 +53,7 @@ class GraphThreePointsNode extends ChallengeGraphNode {
       p1Manipulator.dispose();
       p2Manipulator.dispose();
       p3Manipulator.dispose();
-      Property.unmultilink( pointsMultilink );
+      Multilink.unmultilink( pointsMultilink );
     };
   }
 

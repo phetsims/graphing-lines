@@ -9,7 +9,7 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -86,7 +86,7 @@ class PointToolNode extends Node {
     this.mutate( options );
 
     // position and display
-    const updateMultilink = Property.multilink(
+    const updateMultilink = Multilink.multilink(
       [ pointTool.positionProperty, pointTool.onLineProperty, linesVisibleProperty ],
       ( position, onLine, linesVisible ) => {
 
@@ -111,7 +111,7 @@ class PointToolNode extends Node {
 
     // @private called by dispose
     this.disposePointToolNode = () => {
-      Property.unmultilink( updateMultilink );
+      Multilink.unmultilink( updateMultilink );
       bodyNode.dispose();
       coordinatesProperty.dispose();
     };

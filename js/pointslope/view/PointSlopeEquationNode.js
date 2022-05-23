@@ -14,6 +14,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
@@ -393,7 +394,7 @@ class PointSlopeEquationNode extends EquationNode {
     };
 
     // sync the model with the controls, unmultilink in dispose
-    const controlsMultilink = Property.lazyMultilink( [ x1Property, y1Property, riseProperty, runProperty ],
+    const controlsMultilink = Multilink.lazyMultilink( [ x1Property, y1Property, riseProperty, runProperty ],
       () => {
         if ( !updatingControls ) {
           lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
@@ -446,7 +447,7 @@ class PointSlopeEquationNode extends EquationNode {
       y1Node.dispose();
       riseNode.dispose();
       runNode.dispose();
-      Property.unmultilink( controlsMultilink );
+      Multilink.unmultilink( controlsMultilink );
       lineProperty.unlink( lineObserver );
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };

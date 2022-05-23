@@ -7,6 +7,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import graphingLines from '../../graphingLines.js';
 
@@ -34,7 +35,7 @@ class PointTool {
     // Update when the point tool moves or the lines change.
     // unmultilink unneeded because PointTool either exists for sim lifetime, or is owned by a Challenge that
     // doesn't require dispose.
-    Property.multilink( [ this.positionProperty, lines.lengthProperty ],
+    Multilink.multilink( [ this.positionProperty, lines.lengthProperty ],
       () => {
         let line;
         for ( let i = 0; i < lines.length; i++ ) {

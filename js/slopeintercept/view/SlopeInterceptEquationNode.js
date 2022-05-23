@@ -17,6 +17,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
@@ -357,7 +358,7 @@ class SlopeInterceptEquationNode extends EquationNode {
     //***************************************************************
 
     // sync the model with the controls, unmultilink in dispose
-    const controlsMultilink = Property.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
+    const controlsMultilink = Multilink.lazyMultilink( [ riseProperty, runProperty, yInterceptProperty ],
       () => {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {
@@ -426,7 +427,7 @@ class SlopeInterceptEquationNode extends EquationNode {
       runNode.dispose();
       yInterceptNumeratorNode.dispose();
       yInterceptDenominatorNode.dispose();
-      Property.unmultilink( controlsMultilink );
+      Multilink.unmultilink( controlsMultilink );
       lineProperty.unlink( lineObserver );
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };

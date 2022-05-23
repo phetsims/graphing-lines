@@ -15,6 +15,7 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GraphNode from './GraphNode.js';
@@ -63,7 +64,7 @@ class LineFormsGraphNode extends GraphNode {
 
     // Visibility of lines
     // unmultilink is unnecessary since LineFormsGraphNode exists for the lifetime of the sim.
-    Property.multilink( [ viewProperties.linesVisibleProperty, viewProperties.slopeToolVisibleProperty ],
+    Multilink.multilink( [ viewProperties.linesVisibleProperty, viewProperties.slopeToolVisibleProperty ],
       this.updateLinesVisibility.bind( this ) );
 
     // Visibility of the grid

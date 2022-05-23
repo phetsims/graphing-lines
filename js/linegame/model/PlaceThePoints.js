@@ -9,7 +9,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Line from '../../common/model/Line.js';
@@ -40,7 +40,7 @@ class PlaceThePoints extends GraphTheLine {
 
     // update the guess when the points change
     // unmultilink unnecessary because PlaceThePoints owns these Properties.
-    Property.multilink(
+    Multilink.multilink(
       [ this.p1Property, this.p2Property, this.p3Property ],
       ( p1, p2, p3 ) => {
         const line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );

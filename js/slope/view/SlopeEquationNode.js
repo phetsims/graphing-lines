@@ -11,6 +11,7 @@
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -145,7 +146,7 @@ class SlopeEquationNode extends EquationNode {
     parentNode.addChild( unsimplifiedRunNode );
 
     // sync the model with the controls, unmultilink in dispose
-    const controlsMultilink = Property.lazyMultilink(
+    const controlsMultilink = Multilink.lazyMultilink(
       [ x1Property, y1Property, x2Property, y2Property ],
       ( x1, y1, x2, y2 ) => {
         if ( !updatingControls ) {
@@ -233,7 +234,7 @@ class SlopeEquationNode extends EquationNode {
       unsimplifiedRiseNode.dispose();
       unsimplifiedRunNode.dispose();
       lineProperty.unlink( lineObserver );
-      Property.unmultilink( controlsMultilink );
+      Multilink.unmultilink( controlsMultilink );
     };
   }
 

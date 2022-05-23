@@ -8,6 +8,7 @@
 
 import createObservableArray from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
@@ -46,7 +47,7 @@ class LineFormsModel {
 
     // Update the lines seen by the graph.
     // unmultilink is unnecessary because we own these Properties, and the model exists for the lifetime of the sim.
-    Property.multilink(
+    Multilink.multilink(
       [ this.interactiveLineProperty, this.savedLines.lengthProperty, this.standardLines.lengthProperty ],
       () => {
         this.graph.lines.clear();

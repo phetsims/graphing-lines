@@ -1,4 +1,4 @@
-// Copyright 2013-2021, University of Colorado Boulder
+// Copyright 2013-2022, University of Colorado Boulder
 
 /**
  * PointToolNode is a tool that displays the (x,y) coordinates of a grid-point on the graph.

@@ -1,4 +1,4 @@
-// Copyright 2013-2020, University of Colorado Boulder
+// Copyright 2013-2022, University of Colorado Boulder
 
 /**
  * Base type for the 'Slope', 'Slope-Intercept' and 'Point-Slope' models.

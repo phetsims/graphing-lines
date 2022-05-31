@@ -11,10 +11,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import GridCheckbox from '../../../../scenery-phet/js/GridCheckbox.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { LayoutBox } from '../../../../scenery/js/imports.js';
-import { RichText } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { HBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import graphingLines from '../../graphingLines.js';
@@ -95,11 +92,10 @@ class GraphControlPanel extends Panel {
     gridCheckbox.touchArea = gridCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // vertical layout
-    const contentNode = new LayoutBox( {
+    const contentNode = new VBox( {
       children: ( options.includeStandardLines ) ?
         [ slopeCheckbox, yEqualsXCheckbox, yEqualsNegativeXCheckbox, gridCheckbox ] :
         [ slopeCheckbox, gridCheckbox ],
-      orientation: 'vertical',
       spacing: 20,
       align: 'left'
     } );

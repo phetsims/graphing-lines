@@ -18,6 +18,10 @@ import graphingLines from '../../graphingLines.js';
 import GamePhase from '../model/GamePhase.js';
 import ChallengeNode from './ChallengeNode.js';
 
+// constants
+const STATUS_BAR_FONT = new PhetFont( 20 );
+const STATUS_BAR_TEXT_FILL = 'white';
+
 class PlayNode extends Node {
   /**
    * @param {LineGameModel} model
@@ -30,7 +34,10 @@ class PlayNode extends Node {
     super();
 
     const statusBar = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
-      createScoreDisplay: scoreProperty => new ScoreDisplayLabeledNumber( scoreProperty ),
+      createScoreDisplay: scoreProperty => new ScoreDisplayLabeledNumber( scoreProperty, {
+        font: STATUS_BAR_FONT,
+        textFill: STATUS_BAR_TEXT_FILL
+      } ),
 
       // FiniteStatusBar uses 1-based level numbering, model is 0-based, see #88.
       levelProperty: new DerivedProperty( [ model.levelProperty ], level => level + 1 ),
@@ -38,8 +45,8 @@ class PlayNode extends Node {
       numberOfChallengesProperty: model.challengesPerGameProperty,
       elapsedTimeProperty: model.timer.elapsedTimeProperty,
       timerEnabledProperty: model.timerEnabledProperty,
-      font: new PhetFont( 20 ),
-      textFill: 'white',
+      font: STATUS_BAR_FONT,
+      textFill: STATUS_BAR_TEXT_FILL,
       barFill: 'rgb( 49, 117, 202 )',
       xMargin: 40,
       startOverButtonOptions: {

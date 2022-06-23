@@ -61,31 +61,31 @@ class GraphControlPanel extends Panel {
     const ICON_SPACING = 15;
 
     // 'Slope' checkbox
-    const slopeCheckbox = new Checkbox( new HBox( {
+    const slopeCheckbox = new Checkbox( slopeToolVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
         new Text( graphingLinesStrings.slope, TEXT_OPTIONS ),
         GLIconFactory.createSlopeToolIcon( ICON_SIZE )
       ]
-    } ), slopeToolVisibleProperty );
+    } ) );
 
     // 'y = x' checkbox
-    const yEqualsXCheckbox = new Checkbox( new HBox( {
+    const yEqualsXCheckbox = new Checkbox( yEqualsXVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
         new RichText( Y_EQUALS_X, TEXT_OPTIONS ),
         GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 )
       ]
-    } ), yEqualsXVisibleProperty );
+    } ) );
 
     // 'y = -x' checkbox
-    const yEqualsNegativeXCheckbox = new Checkbox( new HBox( {
+    const yEqualsNegativeXCheckbox = new Checkbox( yEqualsNegativeXVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
         new RichText( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
         GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 )
       ]
-    } ), yEqualsNegativeXVisibleProperty );
+    } ) );
 
     // Grid checkbox
     const gridCheckbox = new GridCheckbox( gridVisibleProperty );

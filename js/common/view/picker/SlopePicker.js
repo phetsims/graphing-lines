@@ -8,7 +8,7 @@
  */
 
 import merge from '../../../../../phet-core/js/merge.js';
-import NumberPicker from '../../../../../scenery-phet/js/NumberPicker.js';
+import NumberPicker from '../../../../../sun/js/NumberPicker.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import GLConstants from '../../GLConstants.js';

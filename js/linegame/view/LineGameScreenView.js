@@ -23,11 +23,8 @@ class LineGameScreenView extends BaseGameScreenView {
    */
   constructor( model ) {
 
-    // grid of images for the level-selection buttons, ordered by level
-    const levelImages = [
-      [ level1_png, level2_png, level3_png ],
-      [ level4_png, level5_png, level6_png ]
-    ];
+    // Images for the level-selection buttons, ordered by level
+    const levelImages = [ level1_png, level2_png, level3_png, level4_png, level5_png, level6_png ];
 
     // functions that create nodes for the game reward, ordered by level
     const rewardFactoryFunctions = [
@@ -39,7 +36,19 @@ class LineGameScreenView extends BaseGameScreenView {
       GLRewardNode.createAssortedNodes
     ];
 
-    super( model, levelImages, rewardFactoryFunctions );
+    super( model, levelImages, rewardFactoryFunctions, {
+      settingsNodeOptions: {
+        levelSelectionButtonGroupOptions: {
+          flowBoxOptions: {
+            spacing: 50, // x spacing
+            lineSpacing: 25, // y spacing
+            preferredWidth: 800, // set empirically to provide 3 buttons per row
+            wrap: true,
+            justify: 'center'
+          }
+        }
+      }
+    } );
   }
 }
 

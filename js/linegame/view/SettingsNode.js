@@ -12,8 +12,8 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
+import { AlignBox, AlignGroup, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
@@ -25,17 +25,25 @@ class SettingsNode extends Node {
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
-   * @param {HTMLImageElement[][]} levelImages - grid of images for the level-selection buttons, ordered by level
+   * @param {HTMLImageElement[]} levelImages - images for the level-selection buttons, ordered by level
    * @param {Object} [options]
    */
   constructor( model, layoutBounds, levelImages, options ) {
 
-    assert && assert( _.flatten( levelImages ).length === model.numberOfLevels,
-      'one image is required for each game level' );
+    assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
     options = merge( {
-      buttonsXSpace: 50,
-      buttonsYSpace: 25
+      levelSelectionButtonGroupOptions: {
+        levelSelectionButtonOptions: {
+          baseColor: 'rgb( 180, 205, 255 )',
+          buttonWidth: 175,
+          buttonHeight: 210,
+          bestTimeVisibleProperty: model.timerEnabledProperty
+        },
+        flowBoxOptions: {
+          spacing: 50
+        }
+      }
     }, options );
 
     // Title
@@ -44,30 +52,34 @@ class SettingsNode extends Node {
       maxWidth: 0.85 * layoutBounds.width
     } );
 
-    // Grid of level-selection buttons. levelImages describes the grid.
-    let level = 0;
-    const gridChildren = [];
-    levelImages.forEach( row => {
+    // To give all button icons the same effective size
+    const iconAlignGroup = new AlignGroup();
 
-      // create the buttons for the current row
-      const rowChildren = [];
-      row.forEach( levelImage => {
-        rowChildren.push( createLevelSelectionButton( level, model, levelImage ) );
-        level++;
+    // Descriptions of LevelSelectionButtons
+    const levelSelectionButtonItems = [];
+    for ( let level = 0; level < model.numberOfLevels; level++ ) {
+      levelSelectionButtonItems.push( {
+        icon: createLevelSelectionButtonIcon( level, levelImages[ level ], iconAlignGroup ),
+        scoreProperty: model.bestScoreProperties[ level ],
+        options: {
+          bestTimeProperty: model.bestTimeProperties[ level ],
+          bestTimeVisibleProperty: model.timerEnabledProperty,
+          createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
+            numberOfStars: model.challengesPerGameProperty.get(),
+            perfectScore: model.getPerfectScore( level )
+          } ),
+          listener: () => {
+            model.levelProperty.set( level );
+            model.setGamePhase( GamePhase.PLAY );
+          },
+          soundPlayerIndex: level
+        }
       } );
+    }
 
-      // layout the row horizontally
-      gridChildren.push( new HBox( {
-        children: rowChildren,
-        spacing: options.buttonsXSpace,
-        align: 'center'
-      } ) );
-    } );
-    const buttonGrid = new VBox( {
-      children: gridChildren,
-      spacing: options.buttonsYSpace,
-      align: 'center'
-    } );
+    // Group of LevelSelectionButtons
+    const levelSelectionButtonGroup =
+      new LevelSelectionButtonGroup( levelSelectionButtonItems, options.levelSelectionButtonGroupOptions );
 
     // Timer and Sound controls
     const timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
@@ -85,10 +97,11 @@ class SettingsNode extends Node {
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
 
+    assert && assert( !options.children );
     options.children = [
       // title and level-selection buttons centered
       new VBox( {
-        children: [ title, buttonGrid ],
+        children: [ title, levelSelectionButtonGroup ],
         align: 'center',
         spacing: 50,
         center: layoutBounds.center
@@ -102,38 +115,28 @@ class SettingsNode extends Node {
 }
 
 /**
- * Creates a level selection button
+ * Creates an icon for a LevelSelectionButton.
  * @param {number} level
- * @param {LineGameModel} model
  * @param {HTMLImageElement} levelImage
- * @returns {LevelSelectionButton}
+ * @param {AlignGroup} iconAlignGroup
+ * @returns {Node}
  */
-function createLevelSelectionButton( level, model, levelImage ) {
+function createLevelSelectionButtonIcon( level, levelImage, iconAlignGroup ) {
 
-  const image = new Image( levelImage );
+  // Level N
   const label = new Text( StringUtils.format( graphingLinesStrings.pattern_Level_0, level + 1 ), {
-    font: new PhetFont( 60 ),
-    maxWidth: image.width
+    font: new PhetFont( 40 ),
+    maxWidth: 100
+  } );
+
+  const image = new AlignBox( new Image( levelImage, { scale: 0.54 } ), {
+    group: iconAlignGroup
   } );
 
   // 'Level N' centered above image
-  const icon = new VBox( { children: [ label, image ], spacing: 20 } );
-
-  return new LevelSelectionButton( icon, model.bestScoreProperties[ level ], {
-    baseColor: 'rgb( 180, 205, 255 )',
-    buttonWidth: 175,
-    buttonHeight: 210,
-    bestTimeProperty: model.bestTimeProperties[ level ],
-    bestTimeVisibleProperty: model.timerEnabledProperty,
-    createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
-      numberOfStars: model.challengesPerGameProperty.get(),
-      perfectScore: model.getPerfectScore( level )
-    } ),
-    listener: () => {
-      model.levelProperty.set( level );
-      model.setGamePhase( GamePhase.PLAY );
-    },
-    soundPlayerIndex: level
+  return new VBox( {
+    spacing: 15,
+    children: [ label, image ]
   } );
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2022, University of Colorado Boulder
+// Copyright 2013-2022, University of Colorado Boulder
 
 /**
  * LineGameLevelSelectionButtonGroup is the group of level-selection buttons for the 'Line Game' screen.

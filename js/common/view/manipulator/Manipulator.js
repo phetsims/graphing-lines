@@ -10,10 +10,7 @@
 import { Shape } from '../../../../../kite/js/imports.js';
 import merge from '../../../../../phet-core/js/merge.js';
 import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
-import { PressListener } from '../../../../../scenery/js/imports.js';
-import { Circle } from '../../../../../scenery/js/imports.js';
-import { Node } from '../../../../../scenery/js/imports.js';
-import { Color } from '../../../../../scenery/js/imports.js';
+import { Circle, Color, Node, PressListener } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
 

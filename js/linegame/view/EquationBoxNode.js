@@ -9,10 +9,7 @@
 
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import { Path } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import checkSolidShape from '../../../../sherpa/js/fontawesome-5/checkSolidShape.js';
 import timesSolidShape from '../../../../sherpa/js/fontawesome-5/timesSolidShape.js';
 import graphingLines from '../../graphingLines.js';

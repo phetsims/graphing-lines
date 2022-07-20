@@ -12,8 +12,7 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Line as SceneryLine } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import Line from '../model/Line.js';
 

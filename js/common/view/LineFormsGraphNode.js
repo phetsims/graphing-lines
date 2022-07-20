@@ -14,8 +14,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import Property from '../../../../axon/js/Property.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GraphNode from './GraphNode.js';

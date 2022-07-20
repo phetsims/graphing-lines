@@ -15,18 +15,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
-import NumberPicker from '../../../../sun/js/NumberPicker.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
-import { Line as SceneryLine } from '../../../../scenery/js/imports.js';
-import { RichText } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, RichText } from '../../../../scenery/js/imports.js';
+import NumberPicker from '../../../../sun/js/NumberPicker.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';

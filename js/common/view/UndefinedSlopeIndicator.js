@@ -7,8 +7,7 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import { Line } from '../../../../scenery/js/imports.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Line, Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
 class UndefinedSlopeIndicator extends Node {

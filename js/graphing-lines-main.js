@@ -33,6 +33,6 @@ simLauncher.launch( () => {
     new PointSlopeScreen( Tandem.ROOT.createTandem( 'pointSlopeScreen' ) ),
     new LineGameScreen( Tandem.ROOT.createTandem( 'lineGameScreen' ) )
   ];
-  const sim = new Sim( graphingLinesStrings[ 'graphing-lines' ].title, screens, options );
+  const sim = new Sim( graphingLinesStrings[ 'graphing-lines' ].titleStringProperty, screens, options );
   sim.start();
 } );

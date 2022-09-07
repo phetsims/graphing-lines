@@ -11,7 +11,7 @@ import Screen from '../../../joist/js/Screen.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
+import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import PointSlopeModel from './model/PointSlopeModel.js';
 import PointSlopeScreenView from './view/PointSlopeScreenView.js';
 
@@ -23,7 +23,7 @@ class PointSlopeScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: graphingLinesStrings.screen.pointSlope,
+      name: GraphingLinesStrings.screen.pointSlope,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createPointSlopeScreenIcon(),
       tandem: tandem

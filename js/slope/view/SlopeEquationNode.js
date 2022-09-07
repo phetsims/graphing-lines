@@ -28,7 +28,7 @@ import NumberBackgroundNode from '../../common/view/NumberBackgroundNode.js';
 import CoordinatePicker from '../../common/view/picker/CoordinatePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 
 class SlopeEquationNode extends EquationNode {
   /**
@@ -266,7 +266,7 @@ class SlopeEquationNode extends EquationNode {
     const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // Slope m =
-    const leftSideText = StringUtils.format( '{0}    {1} {2}', graphingLinesStrings.slope, GLSymbols.m, MathSymbols.EQUAL_TO );
+    const leftSideText = StringUtils.format( '{0}    {1} {2}', GraphingLinesStrings.slope, GLSymbols.m, MathSymbols.EQUAL_TO );
     const leftSideNode = new RichText( leftSideText, {
       font: font,
       fill: options.fill,
@@ -360,7 +360,7 @@ class DynamicLabelNode extends EquationNode {
     };
 
     // allocate nodes needed to represent all simplified forms
-    const slopeIsNode = new Text( graphingLinesStrings.slopeIs, textOptions );
+    const slopeIsNode = new Text( GraphingLinesStrings.slopeIs, textOptions );
     const minusSignNode = new MinusNode( { size: this.signLineSize } );
     const riseNode = new Text( '?', textOptions );
     const runNode = new Text( '?', textOptions );
@@ -388,7 +388,7 @@ class DynamicLabelNode extends EquationNode {
       if ( line.undefinedSlope() ) {
         // 'undefined'
         riseNode.visible = true;
-        riseNode.text = graphingLinesStrings.undefined;
+        riseNode.text = GraphingLinesStrings.undefined;
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
         riseNode.y = slopeIsNode.y;

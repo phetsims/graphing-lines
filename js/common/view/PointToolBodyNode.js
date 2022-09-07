@@ -14,7 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import ShadedRectangle from '../../../../scenery-phet/js/ShadedRectangle.js';
 import { Color, LinearGradient, Node, Rectangle, RichText, VBox } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 
 // constants
@@ -127,10 +127,10 @@ class PointToolBodyNode extends Node {
       if ( coordinates ) {
         const x = Utils.toFixedNumber( coordinates.x, options.decimals );
         const y = Utils.toFixedNumber( coordinates.y, options.decimals );
-        textNode.text = StringUtils.format( graphingLinesStrings.point.XY, x, y );
+        textNode.text = StringUtils.format( GraphingLinesStrings.point.XY, x, y );
       }
       else {
-        textNode.text = graphingLinesStrings.point.unknown;
+        textNode.text = GraphingLinesStrings.point.unknown;
       }
     };
     coordinatesProperty.link( coordinatesListener );

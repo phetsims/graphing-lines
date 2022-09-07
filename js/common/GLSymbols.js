@@ -8,13 +8,13 @@
 
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import graphingLines from '../graphingLines.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
+import GraphingLinesStrings from '../GraphingLinesStrings.js';
 
 const GLSymbols = {
-  b: MathSymbolFont.getRichTextMarkup( graphingLinesStrings.symbol.intercept ),
-  m: MathSymbolFont.getRichTextMarkup( graphingLinesStrings.symbol.slope ),
-  x: MathSymbolFont.getRichTextMarkup( graphingLinesStrings.symbol.x ),
-  y: MathSymbolFont.getRichTextMarkup( graphingLinesStrings.symbol.y )
+  b: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.intercept ),
+  m: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.slope ),
+  x: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.x ),
+  y: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.y )
 };
 
 graphingLines.register( 'GLSymbols', GLSymbols );

@@ -12,7 +12,7 @@ import merge from '../../../phet-core/js/merge.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
+import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeInterceptModel from './model/SlopeInterceptModel.js';
 import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
 
@@ -25,7 +25,7 @@ class SlopeInterceptScreen extends Screen {
   constructor( tandem, options ) {
 
     options = merge( {
-      name: graphingLinesStrings.screen.slopeIntercept,
+      name: GraphingLinesStrings.screen.slopeIntercept,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
     }, options );

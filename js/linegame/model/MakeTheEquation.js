@@ -8,7 +8,7 @@
  */
 
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import MakeTheEquationNode from '../view/MakeTheEquationNode.js';
 import Challenge from './Challenge.js';
 
@@ -24,7 +24,7 @@ class MakeTheEquation extends Challenge {
    */
   constructor( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     super(
-      Challenge.createTitle( graphingLinesStrings.makeTheEquation, manipulationMode ),
+      Challenge.createTitle( GraphingLinesStrings.makeTheEquation, manipulationMode ),
       description,
       answer,
       equationForm,

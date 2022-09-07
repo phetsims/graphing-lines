@@ -13,7 +13,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from '../model/ManipulationMode.js';
 import PlayState from '../model/PlayState.js';
@@ -45,7 +45,7 @@ class GraphTheLineNode extends ChallengeNode {
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( graphingLinesStrings.lineToGraph, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.lineToGraph, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
@@ -62,7 +62,7 @@ class GraphTheLineNode extends ChallengeNode {
     } );
 
     // @private 'Not A Line', for situations where 3-points do not define a line
-    this.notALineNode = new Text( graphingLinesStrings.notALine, {
+    this.notALineNode = new Text( GraphingLinesStrings.notALine, {
       font: new PhetFont( { size: 24, weight: 'bold' } ),
       fill: 'black'
     } );
@@ -71,7 +71,7 @@ class GraphTheLineNode extends ChallengeNode {
     const equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
 
     // Guess
-    const guessBoxNode = new EquationBoxNode( graphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
+    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
     // @protected Graph
     this.graphNode = this.createGraphNode( challenge );

@@ -9,7 +9,7 @@
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import graphingLinesStrings from './graphingLinesStrings.js';
+import GraphingLinesStrings from './GraphingLinesStrings.js';
 import LineGameScreen from './linegame/LineGameScreen.js';
 import PointSlopeScreen from './pointslope/PointSlopeScreen.js';
 import SlopeScreen from './slope/SlopeScreen.js';
@@ -33,6 +33,6 @@ simLauncher.launch( () => {
     new PointSlopeScreen( Tandem.ROOT.createTandem( 'pointSlopeScreen' ) ),
     new LineGameScreen( Tandem.ROOT.createTandem( 'lineGameScreen' ) )
   ];
-  const sim = new Sim( graphingLinesStrings[ 'graphing-lines' ].titleStringProperty, screens, options );
+  const sim = new Sim( GraphingLinesStrings[ 'graphing-lines' ].titleStringProperty, screens, options );
   sim.start();
 } );

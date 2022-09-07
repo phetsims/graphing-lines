@@ -15,7 +15,7 @@ import { HBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
@@ -64,7 +64,7 @@ class GraphControlPanel extends Panel {
     const slopeCheckbox = new Checkbox( slopeToolVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new Text( graphingLinesStrings.slope, TEXT_OPTIONS ),
+        new Text( GraphingLinesStrings.slope, TEXT_OPTIONS ),
         GLIconFactory.createSlopeToolIcon( ICON_SIZE )
       ]
     } ) );

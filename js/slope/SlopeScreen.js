@@ -11,7 +11,7 @@ import Screen from '../../../joist/js/Screen.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
+import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeModel from './model/SlopeModel.js';
 import SlopeScreenView from './view/SlopeScreenView.js';
 
@@ -23,7 +23,7 @@ class SlopeScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: graphingLinesStrings.screen.slope,
+      name: GraphingLinesStrings.screen.slope,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
       tandem: tandem

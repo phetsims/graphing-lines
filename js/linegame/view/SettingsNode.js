@@ -14,7 +14,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
 
 class SettingsNode extends Node {
@@ -34,7 +34,7 @@ class SettingsNode extends Node {
     }, options );
 
     // Title
-    const title = new Text( graphingLinesStrings.chooseYourLevel, {
+    const title = new Text( GraphingLinesStrings.chooseYourLevel, {
       font: new PhetFont( 40 ),
       maxWidth: 0.85 * layoutBounds.width
     } );

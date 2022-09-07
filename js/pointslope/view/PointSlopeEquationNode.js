@@ -32,7 +32,7 @@ import EquationNode from '../../common/view/EquationNode.js';
 import SlopePicker from '../../common/view/picker/SlopePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 
 class PointSlopeEquationNode extends EquationNode {
 
@@ -171,7 +171,7 @@ class PointSlopeEquationNode extends EquationNode {
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.text = ( options.slopeUndefinedVisible ) ?
-                                  StringUtils.format( graphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
+                                  StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
                                   StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
         return;
       }

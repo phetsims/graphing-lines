@@ -11,7 +11,7 @@ import Screen from '../../../joist/js/Screen.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
-import graphingLinesStrings from '../graphingLinesStrings.js';
+import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import LineGameModel from './model/LineGameModel.js';
 import LineGameScreenView from './view/LineGameScreenView.js';
 
@@ -23,7 +23,7 @@ class LineGameScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: graphingLinesStrings.screen.lineGame,
+      name: GraphingLinesStrings.screen.lineGame,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createGameScreenIcon(),
       tandem: tandem

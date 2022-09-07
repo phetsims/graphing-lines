@@ -9,7 +9,7 @@
 
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GraphTheLineNode from '../view/GraphTheLineNode.js';
 import Challenge from './Challenge.js';
 
@@ -25,7 +25,7 @@ class GraphTheLine extends Challenge {
    */
   constructor( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     super(
-      Challenge.createTitle( graphingLinesStrings.graphTheLine, manipulationMode ),
+      Challenge.createTitle( GraphingLinesStrings.graphTheLine, manipulationMode ),
       description,
       answer,
       equationForm,

@@ -15,7 +15,7 @@ import Graph from '../../common/model/Graph.js';
 import Line from '../../common/model/Line.js';
 import PointTool from '../../common/model/PointTool.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from './ManipulationMode.js';
 
@@ -118,16 +118,16 @@ class Challenge {
    */
   static createTitle( defaultTitle, manipulationMode ) {
     if ( manipulationMode === ManipulationMode.SLOPE ) {
-      return graphingLinesStrings.setTheSlope;
+      return GraphingLinesStrings.setTheSlope;
     }
     else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
-      return graphingLinesStrings.setTheYIntercept;
+      return GraphingLinesStrings.setTheYIntercept;
     }
     else if ( manipulationMode === ManipulationMode.POINT ) {
-      return graphingLinesStrings.setThePoint;
+      return GraphingLinesStrings.setThePoint;
     }
     else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
-      return graphingLinesStrings.putPointsOnLine;
+      return GraphingLinesStrings.putPointsOnLine;
     }
     else {
       return defaultTitle;

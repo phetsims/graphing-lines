@@ -13,7 +13,7 @@ import { AlignBox, AlignGroup, Image, Text, VBox } from '../../../../scenery/js/
 import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import graphingLines from '../../graphingLines.js';
-import graphingLinesStrings from '../../graphingLinesStrings.js';
+import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 
 class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
@@ -77,7 +77,7 @@ class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
 function createLevelSelectionButtonIcon( level, levelImage, iconAlignGroup ) {
 
   // Level N
-  const label = new Text( StringUtils.format( graphingLinesStrings.pattern_Level_0, level + 1 ), {
+  const label = new Text( StringUtils.format( GraphingLinesStrings.pattern_Level_0, level + 1 ), {
     font: new PhetFont( 40 ),
     maxWidth: 100
   } );

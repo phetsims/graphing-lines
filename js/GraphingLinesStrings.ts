@@ -79,8 +79,8 @@ type StringsType = {
   'pattern_Level_0StringProperty': TReadOnlyProperty<string>;
 };
 
-const graphingLinesStrings = getStringModule( 'GRAPHING_LINES' ) as StringsType;
+const GraphingLinesStrings = getStringModule( 'GRAPHING_LINES' ) as StringsType;
 
-graphingLines.register( 'graphingLinesStrings', graphingLinesStrings );
+graphingLines.register( 'GraphingLinesStrings', GraphingLinesStrings );
 
-export default graphingLinesStrings;
+export default GraphingLinesStrings;

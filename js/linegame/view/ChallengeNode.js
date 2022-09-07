@@ -17,7 +17,7 @@ import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.j
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
-import vegasStrings from '../../../../vegas/js/vegasStrings.js';
+import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import PointToolNode from '../../common/view/PointToolNode.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
@@ -27,10 +27,10 @@ import EquationForm from '../model/EquationForm.js';
 import PlayState from '../model/PlayState.js';
 
 // strings
-const checkString = vegasStrings.check;
-const nextString = vegasStrings.next;
-const showAnswerString = vegasStrings.showAnswer;
-const tryAgainString = vegasStrings.tryAgain;
+const checkString = VegasStrings.check;
+const nextString = VegasStrings.next;
+const showAnswerString = VegasStrings.showAnswer;
+const tryAgainString = VegasStrings.tryAgain;
 
 class ChallengeNode extends Node {
 

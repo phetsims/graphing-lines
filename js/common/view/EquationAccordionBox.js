@@ -11,7 +11,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
-import HSeparator from '../../../../sun/js/HSeparator.js';
+import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
@@ -86,9 +86,9 @@ class EquationAccordionBox extends AccordionBox {
       align: 'center',
       spacing: 10,
       children: [
-        new HSeparator( separatorWidth, separatorOptions ),
+        new HSeparatorDeprecated( separatorWidth, separatorOptions ),
         interactiveEquationNode,
-        new HSeparator( separatorWidth, separatorOptions ),
+        new HSeparatorDeprecated( separatorWidth, separatorOptions ),
         buttonGroup
       ]
     } );

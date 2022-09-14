@@ -25,7 +25,7 @@ class SlopeInterceptScreen extends Screen {
   constructor( tandem, options ) {
 
     options = merge( {
-      name: GraphingLinesStrings.screen.slopeIntercept,
+      name: GraphingLinesStrings.screen.slopeInterceptStringProperty,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
     }, options );

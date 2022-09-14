@@ -23,7 +23,7 @@ class PointSlopeScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: GraphingLinesStrings.screen.pointSlope,
+      name: GraphingLinesStrings.screen.pointSlopeStringProperty,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createPointSlopeScreenIcon(),
       tandem: tandem

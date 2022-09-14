@@ -23,7 +23,7 @@ class SlopeScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: GraphingLinesStrings.screen.slope,
+      name: GraphingLinesStrings.screen.slopeStringProperty,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
       tandem: tandem

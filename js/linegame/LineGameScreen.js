@@ -23,7 +23,7 @@ class LineGameScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: GraphingLinesStrings.screen.lineGame,
+      name: GraphingLinesStrings.screen.lineGameStringProperty,
       backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
       homeScreenIcon: GLIconFactory.createGameScreenIcon(),
       tandem: tandem

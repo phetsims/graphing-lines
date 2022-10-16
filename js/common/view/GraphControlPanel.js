@@ -88,7 +88,9 @@ class GraphControlPanel extends Panel {
     } ) );
 
     // Grid checkbox
-    const gridCheckbox = new GridCheckbox( gridVisibleProperty );
+    const gridCheckbox = new GridCheckbox( gridVisibleProperty, {
+      spacing: 10
+    } );
     gridCheckbox.touchArea = gridCheckbox.localBounds.dilatedXY( 15, 10 );
 
     // vertical layout

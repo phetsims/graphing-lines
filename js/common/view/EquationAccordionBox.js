@@ -8,10 +8,9 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, VBox } from '../../../../scenery/js/imports.js';
+import { HBox, HSeparator, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
-import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
@@ -79,16 +78,15 @@ class EquationAccordionBox extends AccordionBox {
       eraseLinesButton.enabled = ( length > 0 );
     } );
 
-    const separatorWidth = Math.max( interactiveEquationNode.width, buttonGroup.width );
     const separatorOptions = { stroke: 'rgb( 212, 212, 212 )' };
 
     const contentNode = new VBox( {
       align: 'center',
       spacing: 10,
       children: [
-        new HSeparatorDeprecated( separatorWidth, separatorOptions ),
+        new HSeparator( separatorOptions ),
         interactiveEquationNode,
-        new HSeparatorDeprecated( separatorWidth, separatorOptions ),
+        new HSeparator( separatorOptions ),
         buttonGroup
       ]
     } );

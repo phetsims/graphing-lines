@@ -164,13 +164,13 @@ class PointSlopeEquationNode extends EquationNode {
         this.children[ i ].visible = false;
         this.children[ i ].x = 0;
       }
-      slopeUndefinedNode.text = ''; // workaround for #114 and #117
+      slopeUndefinedNode.string = ''; // workaround for #114 and #117
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        slopeUndefinedNode.text = ( options.slopeUndefinedVisible ) ?
+        slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
                                   StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
                                   StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
         return;

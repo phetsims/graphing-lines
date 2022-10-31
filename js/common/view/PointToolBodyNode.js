@@ -127,10 +127,10 @@ class PointToolBodyNode extends Node {
       if ( coordinates ) {
         const x = Utils.toFixedNumber( coordinates.x, options.decimals );
         const y = Utils.toFixedNumber( coordinates.y, options.decimals );
-        textNode.text = StringUtils.format( GraphingLinesStrings.point.XY, x, y );
+        textNode.string = StringUtils.format( GraphingLinesStrings.point.XY, x, y );
       }
       else {
-        textNode.text = GraphingLinesStrings.point.unknown;
+        textNode.string = GraphingLinesStrings.point.unknown;
       }
     };
     coordinatesProperty.link( coordinatesListener );

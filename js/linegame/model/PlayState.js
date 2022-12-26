@@ -1,5 +1,6 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * States during the 'play' phase of a game, mutually exclusive. (See GamePhase.)
  * For lack of better names, the state names correspond to the main action that

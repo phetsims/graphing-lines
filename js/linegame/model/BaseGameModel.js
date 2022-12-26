@@ -12,7 +12,7 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
+import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
@@ -59,7 +59,7 @@ class BaseGameModel {
     this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
       numberType: 'Integer'
     } );
-    this.playStateProperty = new EnumerationDeprecatedProperty( PlayState, PlayState.NONE, {
+    this.playStateProperty = new EnumerationProperty( PlayState.NONE, {
       reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
     } );
 
@@ -79,7 +79,7 @@ class BaseGameModel {
     }
 
     // @public (read-only) set this using setGamePhase
-    this.gamePhaseProperty = new EnumerationDeprecatedProperty( GamePhase, INITIAL_GAME_PHASE );
+    this.gamePhaseProperty = new EnumerationProperty( INITIAL_GAME_PHASE );
 
     this.initChallenges();
 

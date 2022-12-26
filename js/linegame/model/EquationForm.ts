@@ -1,20 +1,21 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Used to specify the form of the equations in Game challenges.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import graphingLines from '../../graphingLines.js';
 
-const EquationForm = EnumerationDeprecated.byKeys( [
-  'SLOPE_INTERCEPT', // y = mx + b
-  'POINT_SLOPE'      // (y2 - y1) = m(x2 - x1)
-] );
+export default class EquationForm extends EnumerationValue {
+
+  public static readonly SLOPE_INTERCEPT = new EquationForm(); // y = mx + b
+  public static readonly POINT_SLOPE = new EquationForm(); // (y2 - y1) = m(x2 - x1)
+
+  public static readonly enumeration = new Enumeration( EquationForm );
+}
 
 graphingLines.register( 'EquationForm', EquationForm );
-
-export default EquationForm;

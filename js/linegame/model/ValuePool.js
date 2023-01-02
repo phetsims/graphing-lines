@@ -1,5 +1,6 @@
 // Copyright 2017-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * ValuePool takes sets of values, separates them into "required" and "optional" sets,
  * and provides an API for randomly selecting values from either set.

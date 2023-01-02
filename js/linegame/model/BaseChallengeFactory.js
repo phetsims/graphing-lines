@@ -1,5 +1,6 @@
 // Copyright 2017-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Abstract base class for challenge factories in both the 'Graphing Lines' and 'Graphing Slope-Intercept' sims.
  *

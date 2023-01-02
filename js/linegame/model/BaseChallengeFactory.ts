@@ -1,6 +1,5 @@
 // Copyright 2017-2021, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Abstract base class for challenge factories in both the 'Graphing Lines' and 'Graphing Slope-Intercept' sims.
  *
@@ -9,77 +8,61 @@
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Utils from '../../../../dot/js/Utils.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
+import Challenge from './Challenge.js';
 
-class BaseChallengeFactory {
+type SelfOptions = {
+  xRange?: Range; // range of the graph's x-axis
+  yRange?: Range; // range of the graph's y-axis
+};
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+export type BaseChallengeFactoryOptions = SelfOptions;
 
-    options = merge( {
-      xRange: GLConstants.X_AXIS_RANGE, // {Range} range of the graph's x axis
-      yRange: GLConstants.Y_AXIS_RANGE  // {Range} range of the graph's y axis
-    }, options );
+export default abstract class BaseChallengeFactory {
 
-    // @protected
+  protected readonly xRange: Range;
+  protected readonly yRange: Range;
+
+  protected constructor( providedOptions?: BaseChallengeFactoryOptions ) {
+
+    const options = optionize<BaseChallengeFactoryOptions, SelfOptions>()( {
+      xRange: GLConstants.X_AXIS_RANGE,
+      yRange: GLConstants.Y_AXIS_RANGE
+    }, providedOptions );
+
     this.xRange = options.xRange;
     this.yRange = options.yRange;
   }
 
   /**
    * Creates challenges for the factory's game level.
-   *
-   * @returns {Challenge[]} array of challenges
-   * @public
-   * @abstract
    */
-  createChallenges() {
-    throw new Error( 'must be implemented by subtypes' );
-  }
+  public abstract createChallenges(): Challenge[];
 
   /**
    * Convenience function for creating a line, give a slope and intercept.
-   * @param {Fraction} slope
-   * @param {number} intercept
-   * @returns {Line}
-   * @protected
    */
-  createSlopeInterceptLine( slope, intercept ) {
-    assert && assert( slope instanceof Fraction );
-    assert && assert( typeof intercept === 'number' );
+  protected createSlopeInterceptLine( slope: Fraction, intercept: number ): Line {
     return Line.createSlopeIntercept( slope.numerator, slope.denominator, intercept );
   }
 
   /**
    * Convenience function for creating a line, give a point and slope.
-   * @param {Vector2} point
-   * @param {Fraction} slope
-   * @returns {Line}
-   * @protected
    */
-  createPointSlopeLine( point, slope ) {
-    assert && assert( point instanceof Vector2 );
-    assert && assert( slope instanceof Fraction );
+  protected createPointSlopeLine( point: Vector2, slope: Fraction ): Line {
     return Line.createPointSlope( point.x, point.y, slope.numerator, slope.denominator );
   }
 
   /**
    * Picks a point that keeps the slope indicator on the graph.
-   * @param {Fraction} slope
-   * @param {Range} graphXRange
-   * @param {Range} graphYRange
-   * @returns {Vector2}
-   * @public
-   * @static
    */
-  static choosePointForSlope( slope, graphXRange, graphYRange ) {
+  public static choosePointForSlope( slope: Fraction, graphXRange: Range, graphYRange: Range ): Vector2 {
 
     const rise = slope.numerator;
     const run = slope.denominator;
@@ -102,15 +85,8 @@ class BaseChallengeFactory {
   /**
    * Picks a point (x1,x2) on the graph that results in the slope indicator (x2,y2) being off the graph.
    * This forces the user to invert the slope.
-   *
-   * @param {Fraction} slope
-   * @param {Range} graphXRange
-   * @param {Range} graphYRange
-   * @returns {Vector2}
-   * @public
-   * @static
    */
-  static choosePointForSlopeInversion( slope, graphXRange, graphYRange ) {
+  public static choosePointForSlopeInversion( slope: Fraction, graphXRange: Range, graphYRange: Range ): Vector2 {
 
     const rise = slope.numerator;
     const run = slope.denominator;
@@ -140,5 +116,3 @@ class BaseChallengeFactory {
 }
 
 graphingLines.register( 'BaseChallengeFactory', BaseChallengeFactory );
-
-export default BaseChallengeFactory;

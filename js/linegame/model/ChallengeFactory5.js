@@ -203,8 +203,8 @@ class ChallengeFactory5 extends BaseChallengeFactory {
     assert && assert( xRange.containsRange( range ) && yRange.containsRange( range ) );
     const xList = ValuePool.rangeToArray( range );
     const yList = ValuePool.rangeToArray( range );
-    const riseList = ValuePool.rangeToArray( range, { excludeZero: true } ); // prevent zero slope
-    const runList = ValuePool.rangeToArray( range, { excludeZero: true } );  // prevent undefined slope
+    const riseList = ValuePool.rangeToArray( range, true /* exclude zero slope */ );
+    const runList = ValuePool.rangeToArray( range, true /* exclude undefined slope */ );
 
     // CHALLENGE 5: slope-intercept form, slope and intercept variable
     let x1 = 0; // y-intercept must be an integer

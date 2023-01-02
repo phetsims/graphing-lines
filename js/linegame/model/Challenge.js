@@ -76,7 +76,7 @@ class Challenge {
   /**
    * Updates the collection of lines that are 'seen' by the point tools.
    * @abstract
-   * @public
+   * @protected
    */
   updateGraphLines() {
     throw new Error( 'must be implemented by subtype' );

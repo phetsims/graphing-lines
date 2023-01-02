@@ -19,8 +19,8 @@ class MakeTheEquation extends Challenge {
    * @param {Line} answer  the correct answer
    * @param {EquationForm} equationForm specifies the form of the equation
    * @param {ManipulationMode} manipulationMode indicates which properties of a line the user is able to change
-   * @param {Range} xRange range of the graph's x axis
-   * @param {Range} yRange range of the graph's y axis
+   * @param {dot.Range} xRange range of the graph's x-axis
+   * @param {dot.Range} yRange range of the graph's y-axis
    */
   constructor( description, answer, equationForm, manipulationMode, xRange, yRange ) {
     super(

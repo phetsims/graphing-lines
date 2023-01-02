@@ -8,7 +8,6 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
-import merge from '../../../phet-core/js/merge.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
@@ -20,18 +19,16 @@ class SlopeInterceptScreen extends Screen {
 
   /**
    * @param {Tandem} tandem
-   * @param {Object} [options]
+   * @param {Property} [backgroundColorProperty]
    */
-  constructor( tandem, options ) {
+  constructor( tandem, backgroundColorProperty = new Property( GLColors.SCREEN_BACKGROUND ) ) {
 
-    options = merge( {
+    const options = {
       name: GraphingLinesStrings.screen.slopeInterceptStringProperty,
-      backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
-      homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon()
-    }, options );
-
-    assert && assert( !options.tandem, 'tandem is a constructor parameter' );
-    options.tandem = tandem;
+      backgroundColorProperty: backgroundColorProperty,
+      homeScreenIcon: GLIconFactory.createSlopeInterceptScreenIcon(),
+      tandem: tandem
+    };
 
     super(
       () => new SlopeInterceptModel(),

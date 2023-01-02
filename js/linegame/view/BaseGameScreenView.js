@@ -20,7 +20,7 @@ class BaseGameScreenView extends ScreenView {
 
   /**
    * @param {BaseGameModel} model
-   * @param {HTMLImageElement[][]} levelImages - grid of images for the level-selection buttons, ordered by level
+   * @param {HTMLImageElement[]} levelImages - grid of images for the level-selection buttons, ordered by level
    * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
    * @param {Object} [options]
    */

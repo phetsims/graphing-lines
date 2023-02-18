@@ -13,8 +13,8 @@ import graphingLines from '../../graphingLines.js';
 class Graph {
 
   /**
-   * @param {Range} xRange
-   * @param {Range} yRange
+   * @param {dot.Range} xRange
+   * @param {dot.Range} yRange
    */
   constructor( xRange, yRange ) {
 

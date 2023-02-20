@@ -1,6 +1,5 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Base type for all line manipulators.
  * A pseudo-3D sphere with a halo that appears during interactions.
@@ -9,40 +8,49 @@
  */
 
 import { Shape } from '../../../../../kite/js/imports.js';
-import merge from '../../../../../phet-core/js/merge.js';
-import ShadedSphereNode from '../../../../../scenery-phet/js/ShadedSphereNode.js';
-import { Circle, Color, Node, PressListener } from '../../../../../scenery/js/imports.js';
+import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
+import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../../scenery-phet/js/ShadedSphereNode.js';
+import { Circle, Color, Node, NodeOptions, PressListener, TColor } from '../../../../../scenery/js/imports.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
 
-class Manipulator extends Node {
+type SelfOptions = {
+
+  // Alpha channel of the halo, [0,1]. Setting this to 0 results in no halo.
+  haloAlpha?: number;
+} & PickOptional<ShadedSphereNodeOptions, 'mainColor' | 'highlightColor' | 'shadowColor' | 'lineWidth' | 'stroke'>;
+
+export type ManipulatorOptions = SelfOptions & NodeOptions;
+
+export default class Manipulator extends Node {
 
   /**
-   * @param {number} radius radius of the sphere
-   * @param {Color|String} color base color used to shade the sphere
-   * @param {Object} [options]
+   * @param radius radius of the sphere
+   * @param color base color used to shade the sphere
+   * @param [providedOptions]
    */
-  constructor( radius, color, options ) {
+  public constructor( radius: number, color: TColor, providedOptions?: ManipulatorOptions ) {
 
     const mainColor = Color.toColor( color );
-    options = merge( {
 
-      // Alpha channel of the halo, 0.0 - 1.0. Setting this to 0 results in no halo.
+    const options = optionize<ManipulatorOptions, SelfOptions, NodeOptions>()( {
+
       haloAlpha: 0.5,
 
-      // ShadedSphereNode options
+      // ShadedSphereNodeOptions
       mainColor: mainColor,
       highlightColor: Color.WHITE,
       shadowColor: mainColor.darkerColor(),
       lineWidth: 1,
       stroke: mainColor.darkerColor(),
 
-      // Node options
+      // NodeOptions
       cursor: 'pointer',
       mouseArea: Shape.circle( 0, 0, 1.5 * radius ),
       touchArea: Shape.circle( 0, 0, 1.5 * radius )
 
-    }, options );
+    }, providedOptions );
 
     super();
 
@@ -82,17 +90,11 @@ class Manipulator extends Node {
 
   /**
    * Creates a non-interactive manipulator icon.
-   * @param {number} radius radius of the sphere
-   * @param {Color|String} color base color used to shade the sphere
-   * @param {Object} [options] - see constructor
-   * @returns {Manipulator}
-   * @public
-   * @static
    */
-  static createIcon( radius, color, options ) {
+  public static createIcon( radius: number, color: TColor, providedOptions?: ManipulatorOptions ): Manipulator {
 
     // turn off options related to interactivity, see constructor
-    options = merge( {}, options, {
+    const options = combineOptions<ManipulatorOptions>( {}, providedOptions, {
       haloAlpha: 0,
       pickable: false,
       mouseArea: null,
@@ -104,5 +106,3 @@ class Manipulator extends Node {
 }
 
 graphingLines.register( 'Manipulator', Manipulator );
-
-export default Manipulator;

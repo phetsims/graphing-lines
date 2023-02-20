@@ -1,5 +1,6 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base type for all line manipulators.
  * A pseudo-3D sphere with a halo that appears during interactions.

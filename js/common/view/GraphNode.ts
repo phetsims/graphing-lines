@@ -1,8 +1,7 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Base type for graphs, displays a 2D grid and axes.
+ * Base class for graphs, displays a 2D grid and axes.
  * The node's origin is at model coordinate (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
@@ -11,11 +10,13 @@
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import { Shape } from '../../../../kite/js/imports.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line, Node, Path, Rectangle, RichText, Text } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLSymbols from '../GLSymbols.js';
+import Graph from '../model/Graph.js';
 
 //----------------------------------------------------------------------------------------
 // constants
@@ -48,13 +49,11 @@ const MAJOR_TICK_FONT = new PhetFont( 16 );
 const TICK_LABEL_SPACING = 2;
 const MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
 
-class GraphNode extends Node {
+export default class GraphNode extends Node {
 
-  /**
-   * @param {Graph} graph
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( graph, modelViewTransform ) {
+  private readonly gridNode: GridNode;
+
+  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
 
     // (0,0) and quadrant 1 is visible
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) );
@@ -69,12 +68,11 @@ class GraphNode extends Node {
       ]
     } );
 
-    // @private
     this.gridNode = gridNode;
   }
 
-  // @public Sets the visibility of the grid
-  setGridVisible( visible ) {
+  // Sets the visibility of the grid
+  public setGridVisible( visible: boolean ): void {
     this.gridNode.setLinesVisible( visible );
   }
 }
@@ -86,14 +84,7 @@ class GraphNode extends Node {
  */
 class GridLineNode extends Line {
 
-  /**
-   * @param {number} x1
-   * @param {number} y1
-   * @param {number} x2
-   * @param {number} y2
-   * @param {boolean} isMajor
-   */
-  constructor( x1, y1, x2, y2, isMajor ) {
+  public constructor( x1: number, y1: number, x2: number, y2: number, isMajor: boolean ) {
     super( x1, y1, x2, y2, {
       lineWidth: isMajor ? MAJOR_GRID_LINE_WIDTH : MINOR_GRID_LINE_WIDTH,
       stroke: isMajor ? MAJOR_GRID_LINE_COLOR : MINOR_GRID_LINE_COLOR
@@ -106,13 +97,7 @@ class GridLineNode extends Line {
  */
 class MajorTickNode extends Node {
 
-  /**
-   * @param {number} x
-   * @param {number} y
-   * @param {number} value
-   * @param {boolean} isVertical
-   */
-  constructor( x, y, value, isVertical ) {
+  public constructor( x: number, y: number, value: number, isVertical: boolean ) {
 
     super();
 
@@ -131,7 +116,7 @@ class MajorTickNode extends Node {
 
     // label position
     if ( isVertical ) {
-      // center label under line, compensate for minus sign
+      // center the label under the line, compensate for minus sign
       const signXOffset = ( value < 0 ) ? -( MINUS_SIGN_WIDTH / 2 ) : 0;
       tickLabelNode.left = tickLineNode.centerX - ( tickLabelNode.width / 2 ) + signXOffset;
       tickLabelNode.top = tickLineNode.bottom + TICK_LABEL_SPACING;
@@ -149,12 +134,7 @@ class MajorTickNode extends Node {
  */
 class MinorTickNode extends Path {
 
-  /**
-   * @param {number} x
-   * @param {number} y
-   * @param {boolean} isVertical
-   */
-  constructor( x, y, isVertical ) {
+  public constructor( x: number, y: number, isVertical: boolean ) {
     super( isVertical ?
            Shape.lineSegment( x, y - MINOR_TICK_LENGTH, x, y + MINOR_TICK_LENGTH ) :
            Shape.lineSegment( x - MINOR_TICK_LENGTH, y, x + MINOR_TICK_LENGTH, y ), {
@@ -169,11 +149,7 @@ class MinorTickNode extends Path {
  */
 class XAxisNode extends Node {
 
-  /**
-   * @param {Graph} graph
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( graph, modelViewTransform ) {
+  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -221,11 +197,7 @@ class XAxisNode extends Node {
  */
 class YAxisNode extends Node {
 
-  /**
-   * @param {Graph} graph
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( graph, modelViewTransform ) {
+  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -273,11 +245,10 @@ class YAxisNode extends Node {
  */
 class GridNode extends Node {
 
-  /**
-   * @param {Graph} graph
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( graph, modelViewTransform ) {
+  private readonly horizontalGridLinesNode: Node;
+  private readonly verticalGridLinesNode: Node;
+
+  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -290,7 +261,7 @@ class GridNode extends Node {
       } );
     this.addChild( backgroundNode );
 
-    // @private horizontal grid lines, one line for each unit of grid spacing
+    // horizontal grid lines, one line for each unit of grid spacing
     this.horizontalGridLinesNode = new Node();
     this.addChild( this.horizontalGridLinesNode );
     const numberOfHorizontalGridLines = graph.getHeight() + 1;
@@ -305,7 +276,7 @@ class GridNode extends Node {
       }
     }
 
-    // @private vertical grid lines, one line for each unit of grid spacing
+    // vertical grid lines, one line for each unit of grid spacing
     this.verticalGridLinesNode = new Node();
     this.addChild( this.verticalGridLinesNode );
     const numberOfVerticalGridLines = graph.getWidth() + 1;
@@ -321,12 +292,10 @@ class GridNode extends Node {
     }
   }
 
-  // @public Sets visibility of grid lines
-  setLinesVisible( visible ) {
+  // Sets visibility of grid lines.
+  public setLinesVisible( visible: boolean ): void {
     this.horizontalGridLinesNode.visible = this.verticalGridLinesNode.visible = visible;
   }
 }
 
 graphingLines.register( 'GraphNode', GraphNode );
-
-export default GraphNode;

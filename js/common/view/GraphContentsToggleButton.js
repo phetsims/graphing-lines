@@ -1,5 +1,6 @@
 // Copyright 2018-2020, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Button used to show/hide the contents of the graph.
  *

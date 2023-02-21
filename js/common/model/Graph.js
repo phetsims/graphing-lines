@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model of a simple 2D graph.  Used in the icon as well as the sim screens.
  *

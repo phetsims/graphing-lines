@@ -1,5 +1,6 @@
 // Copyright 2021-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PointToolBodyNode is the body portion of the point tool. It includes everything except the tool's probe.
  *

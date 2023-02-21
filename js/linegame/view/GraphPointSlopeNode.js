@@ -16,7 +16,7 @@ import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from '../model/ManipulationMode.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 
-class GraphPointSlopeNode extends ChallengeGraphNode {
+export default class GraphPointSlopeNode extends ChallengeGraphNode {
 
   /**
    * @param {Challenge} challenge
@@ -86,5 +86,3 @@ class GraphPointSlopeNode extends ChallengeGraphNode {
 }
 
 graphingLines.register( 'GraphPointSlopeNode', GraphPointSlopeNode );
-
-export default GraphPointSlopeNode;

@@ -11,7 +11,7 @@ import Range from '../../../../dot/js/Range.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from '../../pointslope/model/PointSlopeParameterRange.js';
 
-class SlopeInterceptParameterRange extends PointSlopeParameterRange {
+export default class SlopeInterceptParameterRange extends PointSlopeParameterRange {
 
   constructor() {
     super();
@@ -24,5 +24,3 @@ class SlopeInterceptParameterRange extends PointSlopeParameterRange {
 }
 
 graphingLines.register( 'SlopeInterceptParameterRange', SlopeInterceptParameterRange );
-
-export default SlopeInterceptParameterRange;

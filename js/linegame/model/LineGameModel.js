@@ -15,7 +15,7 @@ import ChallengeFactory4 from './ChallengeFactory4.js';
 import ChallengeFactory5 from './ChallengeFactory5.js';
 import ChallengeFactory6 from './ChallengeFactory6.js';
 
-class LineGameModel extends BaseGameModel {
+export default class LineGameModel extends BaseGameModel {
 
   constructor() {
 
@@ -34,5 +34,3 @@ class LineGameModel extends BaseGameModel {
 }
 
 graphingLines.register( 'LineGameModel', LineGameModel );
-
-export default LineGameModel;

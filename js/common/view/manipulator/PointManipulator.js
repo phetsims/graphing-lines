@@ -14,7 +14,7 @@ import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Manipulator from './Manipulator.js';
 
-class PointManipulator extends Manipulator {
+export default class PointManipulator extends Manipulator {
 
   /**
    * @param {number} radius
@@ -108,5 +108,3 @@ class PointDragListener extends DragListener {
 }
 
 graphingLines.register( 'PointManipulator', PointManipulator );
-
-export default PointManipulator;

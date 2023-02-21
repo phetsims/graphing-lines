@@ -15,7 +15,7 @@ import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import LineGameModel from './model/LineGameModel.js';
 import LineGameScreenView from './view/LineGameScreenView.js';
 
-class LineGameScreen extends Screen {
+export default class LineGameScreen extends Screen {
 
   /**
    * @param {Tandem} tandem
@@ -38,5 +38,3 @@ class LineGameScreen extends Screen {
 }
 
 graphingLines.register( 'LineGameScreen', LineGameScreen );
-
-export default LineGameScreen;

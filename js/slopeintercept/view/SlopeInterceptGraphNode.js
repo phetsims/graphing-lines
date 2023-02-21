@@ -13,7 +13,7 @@ import YInterceptManipulator from '../../common/view/manipulator/YInterceptManip
 import graphingLines from '../../graphingLines.js';
 import SlopeInterceptEquationNode from './SlopeInterceptEquationNode.js';
 
-class SlopeInterceptGraphNode extends LineFormsGraphNode {
+export default class SlopeInterceptGraphNode extends LineFormsGraphNode {
 
   /**
    * @param {SlopeInterceptModel} model
@@ -46,5 +46,3 @@ class SlopeInterceptGraphNode extends LineFormsGraphNode {
 }
 
 graphingLines.register( 'SlopeInterceptGraphNode', SlopeInterceptGraphNode );
-
-export default SlopeInterceptGraphNode;

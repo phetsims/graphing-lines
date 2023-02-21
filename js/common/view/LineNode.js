@@ -36,7 +36,7 @@ const SCENERY_LINE_DEFAULT_OPTIONS = {
   lineWidth: TAIL_WIDTH
 };
 
-class LineNode extends Node {
+export default class LineNode extends Node {
 
   /**
    * @param {Property.<Line|NotALine>} lineProperty
@@ -258,5 +258,3 @@ class LineNode extends Node {
 }
 
 graphingLines.register( 'LineNode', LineNode );
-
-export default LineNode;

@@ -21,7 +21,7 @@ import NumberBackgroundNode from './NumberBackgroundNode.js';
 const VALUE_X_SPACING = 6;
 const VALUE_Y_SPACING = 6;
 
-class SlopeToolNode extends Node {
+export default class SlopeToolNode extends Node {
 
   /**
    * @param {Property.<Line>} lineProperty
@@ -156,5 +156,3 @@ class SlopeToolNode extends Node {
 }
 
 graphingLines.register( 'SlopeToolNode', SlopeToolNode );
-
-export default SlopeToolNode;

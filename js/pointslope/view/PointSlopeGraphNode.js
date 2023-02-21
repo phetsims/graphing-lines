@@ -13,7 +13,7 @@ import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 
-class PointSlopeGraphNode extends LineFormsGraphNode {
+export default class PointSlopeGraphNode extends LineFormsGraphNode {
 
   /**
    * @param {PointSlopeModel} model
@@ -46,5 +46,3 @@ class PointSlopeGraphNode extends LineFormsGraphNode {
 }
 
 graphingLines.register( 'PointSlopeGraphNode', PointSlopeGraphNode );
-
-export default PointSlopeGraphNode;

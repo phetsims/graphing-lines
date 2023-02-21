@@ -16,7 +16,7 @@ import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 
-class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
+export default class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
 
   /**
    * @param {LineGameModel} model
@@ -94,4 +94,3 @@ function createLevelSelectionButtonIcon( level, levelImage, iconAlignGroup ) {
 }
 
 graphingLines.register( 'LineGameLevelSelectionButtonGroup', LineGameLevelSelectionButtonGroup );
-export default LineGameLevelSelectionButtonGroup;

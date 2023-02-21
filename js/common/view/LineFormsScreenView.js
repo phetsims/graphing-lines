@@ -14,7 +14,7 @@ import GLConstants from '../GLConstants.js';
 import GraphContentsToggleButton from './GraphContentsToggleButton.js';
 import PointToolNode from './PointToolNode.js';
 
-class LineFormsScreenView extends ScreenView {
+export default class LineFormsScreenView extends ScreenView {
 
   /**
    * @param {LineFormsModel} model
@@ -97,5 +97,3 @@ class LineFormsScreenView extends ScreenView {
 }
 
 graphingLines.register( 'LineFormsScreenView', LineFormsScreenView );
-
-export default LineFormsScreenView;

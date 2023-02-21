@@ -13,7 +13,7 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GraphTheLineNode from '../view/GraphTheLineNode.js';
 import Challenge from './Challenge.js';
 
-class GraphTheLine extends Challenge {
+export default class GraphTheLine extends Challenge {
 
   /**
    * @param {string} description brief description of the challenge, visible in dev versions
@@ -70,5 +70,3 @@ class GraphTheLine extends Challenge {
 }
 
 graphingLines.register( 'GraphTheLine', GraphTheLine );
-
-export default GraphTheLine;

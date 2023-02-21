@@ -11,7 +11,7 @@ import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import { Color } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
-class PlottedPointNode extends ShadedSphereNode {
+export default class PlottedPointNode extends ShadedSphereNode {
 
   /**
    * @param {number} radius
@@ -35,5 +35,3 @@ class PlottedPointNode extends ShadedSphereNode {
 }
 
 graphingLines.register( 'PlottedPointNode', PlottedPointNode );
-
-export default PlottedPointNode;

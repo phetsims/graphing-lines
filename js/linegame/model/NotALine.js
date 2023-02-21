@@ -11,8 +11,6 @@
 
 import graphingLines from '../../graphingLines.js';
 
-class NotALine {}
+export default class NotALine {}
 
 graphingLines.register( 'NotALine', NotALine );
-
-export default NotALine;

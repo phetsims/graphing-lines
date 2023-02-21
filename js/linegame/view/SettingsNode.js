@@ -17,7 +17,7 @@ import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
 
-class SettingsNode extends Node {
+export default class SettingsNode extends Node {
 
   /**
    * @param {LineGameModel} model
@@ -76,5 +76,3 @@ class SettingsNode extends Node {
 }
 
 graphingLines.register( 'SettingsNode', SettingsNode );
-
-export default SettingsNode;

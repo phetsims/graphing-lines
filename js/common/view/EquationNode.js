@@ -14,7 +14,7 @@ import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import SlopePicker from './picker/SlopePicker.js';
 
-class EquationNode extends Node {
+export default class EquationNode extends Node {
 
   /**
    * @param {number} pointSize point size of the font used to render the equation
@@ -111,5 +111,3 @@ class EquationNode extends Node {
 }
 
 graphingLines.register( 'EquationNode', EquationNode );
-
-export default EquationNode;

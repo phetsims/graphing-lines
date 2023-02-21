@@ -27,7 +27,7 @@ const Y_EQUALS_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${GLSymbols.x}`;
 // y = -x
 const Y_EQUALS_NEGATIVE_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${GLSymbols.x}`;
 
-class GraphControlPanel extends Panel {
+export default class GraphControlPanel extends Panel {
 
   /**
    * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
@@ -150,5 +150,3 @@ class GraphControlPanel extends Panel {
 }
 
 graphingLines.register( 'GraphControlPanel', GraphControlPanel );
-
-export default GraphControlPanel;

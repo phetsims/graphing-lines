@@ -16,7 +16,7 @@ import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from '../model/ManipulationMode.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 
-class GraphSlopeInterceptNode extends ChallengeGraphNode {
+export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
 
   /**
    * @param {Challenge} challenge
@@ -83,5 +83,3 @@ class GraphSlopeInterceptNode extends ChallengeGraphNode {
 }
 
 graphingLines.register( 'GraphSlopeInterceptNode', GraphSlopeInterceptNode );
-
-export default GraphSlopeInterceptNode;

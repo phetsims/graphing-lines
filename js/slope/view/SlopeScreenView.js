@@ -14,7 +14,7 @@ import graphingLines from '../../graphingLines.js';
 import SlopeEquationNode from './SlopeEquationNode.js';
 import SlopeGraphNode from './SlopeGraphNode.js';
 
-class SlopeScreenView extends LineFormsScreenView {
+export default class SlopeScreenView extends LineFormsScreenView {
 
   /**
    * @param {SlopeModel} model
@@ -60,5 +60,3 @@ class SlopeScreenView extends LineFormsScreenView {
 }
 
 graphingLines.register( 'SlopeScreenView', SlopeScreenView );
-
-export default SlopeScreenView;

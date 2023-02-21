@@ -44,7 +44,7 @@ const GRAPH_WIDTH = 60;
 const FACE_DIAMETER = 60;
 const AIRPLANE_SCALE = 1.76;
 
-class GLRewardNode extends RewardNode {
+export default class GLRewardNode extends RewardNode {
 
   /**
    * @params {Node[]} nodes to use in the reward
@@ -215,5 +215,3 @@ function createNodes( creationFunction, colors ) {
 }
 
 graphingLines.register( 'GLRewardNode', GLRewardNode );
-
-export default GLRewardNode;

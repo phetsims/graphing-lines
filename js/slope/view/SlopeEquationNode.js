@@ -30,7 +30,7 @@ import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.j
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 
-class SlopeEquationNode extends EquationNode {
+export default class SlopeEquationNode extends EquationNode {
   /**
    * Creates an interactive equation. x1, y1, x2 and y2 are interactive.
    *
@@ -463,5 +463,3 @@ class DynamicLabelNode extends EquationNode {
 }
 
 graphingLines.register( 'SlopeEquationNode', SlopeEquationNode );
-
-export default SlopeEquationNode;

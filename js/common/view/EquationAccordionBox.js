@@ -18,7 +18,7 @@ import GLColors from '../GLColors.js';
 // constants
 const BUTTON_FONT = new PhetFont( 18 );
 
-class EquationAccordionBox extends AccordionBox {
+export default class EquationAccordionBox extends AccordionBox {
 
   /**
    * @param {Node} titleNode
@@ -96,5 +96,3 @@ class EquationAccordionBox extends AccordionBox {
 }
 
 graphingLines.register( 'EquationAccordionBox', EquationAccordionBox );
-
-export default EquationAccordionBox;

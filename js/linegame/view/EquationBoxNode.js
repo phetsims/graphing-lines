@@ -19,7 +19,7 @@ import LineGameConstants from '../LineGameConstants.js';
 const X_MARGIN = 20;
 const Y_MARGIN = 10;
 
-class EquationBoxNode extends Node {
+export default class EquationBoxNode extends Node {
 
   /**
    * @param {string} title
@@ -92,5 +92,3 @@ class EquationBoxNode extends Node {
 }
 
 graphingLines.register( 'EquationBoxNode', EquationBoxNode );
-
-export default EquationBoxNode;

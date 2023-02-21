@@ -14,7 +14,7 @@ import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
 
-class SlopeManipulator extends Manipulator {
+export default class SlopeManipulator extends Manipulator {
 
   /**
    * @param {number} radius
@@ -95,5 +95,3 @@ class SlopeDragListener extends DragListener {
 }
 
 graphingLines.register( 'SlopeManipulator', SlopeManipulator );
-
-export default SlopeManipulator;

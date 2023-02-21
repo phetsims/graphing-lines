@@ -12,7 +12,7 @@ import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 
-class Line {
+export default class Line {
 
   /**
    * @param x1
@@ -195,5 +195,3 @@ Line.Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.Y_EQUALS_X );
 Line.Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.Y_EQUALS_NEGATIVE_X );
 
 graphingLines.register( 'Line', Line );
-
-export default Line;

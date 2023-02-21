@@ -14,7 +14,7 @@ import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
 
-class X2Y2Manipulator extends Manipulator {
+export default class X2Y2Manipulator extends Manipulator {
 
   /**
    * @param {number} radius
@@ -99,5 +99,3 @@ class X2Y2DragListener extends DragListener {
 }
 
 graphingLines.register( 'X2Y2Manipulator', X2Y2Manipulator );
-
-export default X2Y2Manipulator;

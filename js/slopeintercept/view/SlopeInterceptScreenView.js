@@ -14,7 +14,7 @@ import graphingLines from '../../graphingLines.js';
 import SlopeInterceptEquationNode from './SlopeInterceptEquationNode.js';
 import SlopeInterceptGraphNode from './SlopeInterceptGraphNode.js';
 
-class SlopeInterceptScreenView extends LineFormsScreenView {
+export default class SlopeInterceptScreenView extends LineFormsScreenView {
 
   /**
    * @param {SlopeInterceptModel} model
@@ -58,5 +58,3 @@ class SlopeInterceptScreenView extends LineFormsScreenView {
 }
 
 graphingLines.register( 'SlopeInterceptScreenView', SlopeInterceptScreenView );
-
-export default SlopeInterceptScreenView;

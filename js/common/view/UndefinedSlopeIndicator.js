@@ -10,7 +10,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import { Line, Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
-class UndefinedSlopeIndicator extends Node {
+export default class UndefinedSlopeIndicator extends Node {
 
   /**
    * @param {number} width
@@ -45,5 +45,3 @@ class UndefinedSlopeIndicator extends Node {
 }
 
 graphingLines.register( 'UndefinedSlopeIndicator', UndefinedSlopeIndicator );
-
-export default UndefinedSlopeIndicator;

@@ -22,7 +22,7 @@ import GraphNode from './GraphNode.js';
 import LineNode from './LineNode.js';
 import SlopeToolNode from './SlopeToolNode.js';
 
-class LineFormsGraphNode extends GraphNode {
+export default class LineFormsGraphNode extends GraphNode {
 
   /**
    * @param {LineFormsModel } model
@@ -137,5 +137,3 @@ class LineFormsGraphNode extends GraphNode {
 }
 
 graphingLines.register( 'LineFormsGraphNode', LineFormsGraphNode );
-
-export default LineFormsGraphNode;

@@ -13,7 +13,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Text } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
-class DynamicValueNode extends Text {
+export default class DynamicValueNode extends Text {
 
   /**
    * @param {Property.<number>} valueProperty
@@ -52,5 +52,3 @@ class DynamicValueNode extends Text {
 }
 
 graphingLines.register( 'DynamicValueNode', DynamicValueNode );
-
-export default DynamicValueNode;

@@ -11,7 +11,7 @@ import Property from '../../../../axon/js/Property.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import graphingLines from '../../graphingLines.js';
 
-class PointTool {
+export default class PointTool {
 
   /**
    * @param {Vector2} position initial position of the tool
@@ -68,5 +68,3 @@ class PointTool {
 }
 
 graphingLines.register( 'PointTool', PointTool );
-
-export default PointTool;

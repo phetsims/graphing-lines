@@ -13,7 +13,7 @@ import X2Y2Manipulator from '../../common/view/manipulator/X2Y2Manipulator.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeEquationNode from './SlopeEquationNode.js';
 
-class SlopeGraphNode extends LineFormsGraphNode {
+export default class SlopeGraphNode extends LineFormsGraphNode {
 
   /**
    * @param {SlopeModel} model
@@ -46,5 +46,3 @@ class SlopeGraphNode extends LineFormsGraphNode {
 }
 
 graphingLines.register( 'SlopeGraphNode', SlopeGraphNode );
-
-export default SlopeGraphNode;

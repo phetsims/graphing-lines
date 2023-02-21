@@ -21,7 +21,7 @@ import ChallengeNode from './ChallengeNode.js';
 const STATUS_BAR_FONT = new PhetFont( 20 );
 const STATUS_BAR_TEXT_FILL = 'white';
 
-class PlayNode extends Node {
+export default class PlayNode extends Node {
   /**
    * @param {LineGameModel} model
    * @param {Bounds2} layoutBounds
@@ -88,5 +88,3 @@ class PlayNode extends Node {
 }
 
 graphingLines.register( 'PlayNode', PlayNode );
-
-export default PlayNode;

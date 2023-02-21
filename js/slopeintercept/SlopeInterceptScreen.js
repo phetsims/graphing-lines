@@ -15,7 +15,7 @@ import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeInterceptModel from './model/SlopeInterceptModel.js';
 import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
 
-class SlopeInterceptScreen extends Screen {
+export default class SlopeInterceptScreen extends Screen {
 
   /**
    * @param {Tandem} tandem
@@ -39,5 +39,3 @@ class SlopeInterceptScreen extends Screen {
 }
 
 graphingLines.register( 'SlopeInterceptScreen', SlopeInterceptScreen );
-
-export default SlopeInterceptScreen;

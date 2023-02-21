@@ -20,7 +20,8 @@ import merge from '../../../../phet-core/js/merge.js';
 import { Line, Node, Path } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
-class DimensionalArrowNode extends Node {
+export default class DimensionalArrowNode extends Node {
+
   /**
    * @param {number} tailX
    * @param {number} tailY
@@ -120,5 +121,3 @@ class DimensionalArrowNode extends Node {
 }
 
 graphingLines.register( 'DimensionalArrowNode', DimensionalArrowNode );
-
-export default DimensionalArrowNode;

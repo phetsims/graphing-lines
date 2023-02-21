@@ -17,7 +17,7 @@ import MakeTheEquation from './MakeTheEquation.js';
 import ManipulationMode from './ManipulationMode.js';
 import ValuePool from './ValuePool.js';
 
-class ChallengeFactory4 extends ChallengeFactory2 {
+export default class ChallengeFactory4 extends ChallengeFactory2 {
 
   /**
    * @param {Object} [options]
@@ -148,5 +148,3 @@ class ChallengeFactory4 extends ChallengeFactory2 {
 }
 
 graphingLines.register( 'ChallengeFactory4', ChallengeFactory4 );
-
-export default ChallengeFactory4;

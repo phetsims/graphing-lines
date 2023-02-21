@@ -19,7 +19,7 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from './ManipulationMode.js';
 
-class Challenge {
+export default class Challenge {
 
   /**
    * @param {string} title title that is visible to the user
@@ -167,5 +167,3 @@ function createInitialGuess( answer, manipulationMode, xRange, yRange ) {
 }
 
 graphingLines.register( 'Challenge', Challenge );
-
-export default Challenge;

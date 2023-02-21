@@ -32,7 +32,7 @@ const nextString = VegasStrings.next;
 const showAnswerString = VegasStrings.showAnswer;
 const tryAgainString = VegasStrings.tryAgain;
 
-class ChallengeNode extends Node {
+export default class ChallengeNode extends Node {
 
   /**
    * @param {Challenge} challenge the challenge
@@ -246,5 +246,3 @@ class ChallengeNode extends Node {
 }
 
 graphingLines.register( 'ChallengeNode', ChallengeNode );
-
-export default ChallengeNode;

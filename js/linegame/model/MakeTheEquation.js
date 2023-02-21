@@ -12,7 +12,7 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import MakeTheEquationNode from '../view/MakeTheEquationNode.js';
 import Challenge from './Challenge.js';
 
-class MakeTheEquation extends Challenge {
+export default class MakeTheEquation extends Challenge {
 
   /**
    * @param {string} description brief description of the challenge, visible in dev versions
@@ -63,5 +63,3 @@ class MakeTheEquation extends Challenge {
 }
 
 graphingLines.register( 'MakeTheEquation', MakeTheEquation );
-
-export default MakeTheEquation;

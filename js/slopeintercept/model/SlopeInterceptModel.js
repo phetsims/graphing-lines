@@ -14,12 +14,10 @@ import graphingLines from '../../graphingLines.js';
 import PointSlopeModel from '../../pointslope/model/PointSlopeModel.js';
 import SlopeInterceptParameterRange from './SlopeInterceptParameterRange.js';
 
-class SlopeInterceptModel extends PointSlopeModel {
+export default class SlopeInterceptModel extends PointSlopeModel {
   constructor() {
     super( Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
   }
 }
 
 graphingLines.register( 'SlopeInterceptModel', SlopeInterceptModel );
-
-export default SlopeInterceptModel;

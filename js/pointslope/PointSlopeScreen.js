@@ -15,7 +15,7 @@ import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import PointSlopeModel from './model/PointSlopeModel.js';
 import PointSlopeScreenView from './view/PointSlopeScreenView.js';
 
-class PointSlopeScreen extends Screen {
+export default class PointSlopeScreen extends Screen {
 
   /**
    * @param {Tandem} tandem
@@ -38,5 +38,3 @@ class PointSlopeScreen extends Screen {
 }
 
 graphingLines.register( 'PointSlopeScreen', PointSlopeScreen );
-
-export default PointSlopeScreen;

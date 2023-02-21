@@ -16,7 +16,7 @@ import graphingLines from '../../graphingLines.js';
 import BaseGameScreenView from './BaseGameScreenView.js';
 import GLRewardNode from './GLRewardNode.js';
 
-class LineGameScreenView extends BaseGameScreenView {
+export default class LineGameScreenView extends BaseGameScreenView {
 
   /**
    * @param {LineGameModel} model
@@ -53,5 +53,3 @@ class LineGameScreenView extends BaseGameScreenView {
 }
 
 graphingLines.register( 'LineGameScreenView', LineGameScreenView );
-
-export default LineGameScreenView;

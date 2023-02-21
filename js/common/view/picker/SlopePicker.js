@@ -13,7 +13,7 @@ import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import GLConstants from '../../GLConstants.js';
 
-class SlopePicker extends NumberPicker {
+export default class SlopePicker extends NumberPicker {
   /**
    * @param {Property.<number>} variableComponentProperty - the part of the slope we're manipulating
    * @param {Property.<number>} fixedComponentProperty - the part of the slope we're not manipulating
@@ -41,5 +41,3 @@ class SlopePicker extends NumberPicker {
 }
 
 graphingLines.register( 'SlopePicker', SlopePicker );
-
-export default SlopePicker;

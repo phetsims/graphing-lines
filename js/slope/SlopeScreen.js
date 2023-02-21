@@ -15,7 +15,7 @@ import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeModel from './model/SlopeModel.js';
 import SlopeScreenView from './view/SlopeScreenView.js';
 
-class SlopeScreen extends Screen {
+export default class SlopeScreen extends Screen {
 
   /**
    * @param {Tandem} tandem
@@ -38,5 +38,3 @@ class SlopeScreen extends Screen {
 }
 
 graphingLines.register( 'SlopeScreen', SlopeScreen );
-
-export default SlopeScreen;

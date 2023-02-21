@@ -37,7 +37,7 @@ import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.j
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 
-class SlopeInterceptEquationNode extends EquationNode {
+export default class SlopeInterceptEquationNode extends EquationNode {
 
   /**
    * @param {Property.<Line>} lineProperty
@@ -484,5 +484,3 @@ class SlopeInterceptEquationNode extends EquationNode {
 }
 
 graphingLines.register( 'SlopeInterceptEquationNode', SlopeInterceptEquationNode );
-
-export default SlopeInterceptEquationNode;

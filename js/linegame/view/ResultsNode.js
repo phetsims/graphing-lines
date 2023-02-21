@@ -15,7 +15,7 @@ import LineGameConstants from '../LineGameConstants.js';
 import GamePhase from '../model/GamePhase.js';
 import GLRewardNode from './GLRewardNode.js';
 
-class ResultsNode extends Node {
+export default class ResultsNode extends Node {
 
   /**
    * @param {LineGameModel} model
@@ -85,5 +85,3 @@ class ResultsNode extends Node {
 }
 
 graphingLines.register( 'ResultsNode', ResultsNode );
-
-export default ResultsNode;

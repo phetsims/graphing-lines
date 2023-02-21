@@ -18,7 +18,7 @@ import graphingLines from '../../graphingLines.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
 import PointToolProbeNode from './PointToolProbeNode.js';
 
-class PointToolNode extends Node {
+export default class PointToolNode extends Node {
 
   /**
    * @param {PointTool} pointTool
@@ -178,5 +178,3 @@ class PointToolDragListener extends DragListener {
 }
 
 graphingLines.register( 'PointToolNode', PointToolNode );
-
-export default PointToolNode;

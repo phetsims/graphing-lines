@@ -14,7 +14,7 @@ import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 import PointSlopeGraphNode from './PointSlopeGraphNode.js';
 
-class PointSlopeScreenView extends LineFormsScreenView {
+export default class PointSlopeScreenView extends LineFormsScreenView {
 
   /**
    * @param {PointSlopeModel} model
@@ -59,5 +59,3 @@ class PointSlopeScreenView extends LineFormsScreenView {
 }
 
 graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );
-
-export default PointSlopeScreenView;

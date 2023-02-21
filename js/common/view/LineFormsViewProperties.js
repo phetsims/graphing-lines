@@ -9,7 +9,7 @@
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import graphingLines from '../../graphingLines.js';
 
-class LineFormsViewProperties {
+export default class LineFormsViewProperties {
 
   constructor() {
 
@@ -36,5 +36,3 @@ class LineFormsViewProperties {
 }
 
 graphingLines.register( 'LineFormsViewProperties', LineFormsViewProperties );
-
-export default LineFormsViewProperties;

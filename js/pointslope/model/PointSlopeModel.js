@@ -13,7 +13,7 @@ import LineFormsModel from '../../common/model/LineFormsModel.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from './PointSlopeParameterRange.js';
 
-class PointSlopeModel extends LineFormsModel {
+export default class PointSlopeModel extends LineFormsModel {
 
   /**
    * @param {Line} interactiveLine
@@ -44,5 +44,3 @@ class PointSlopeModel extends LineFormsModel {
 }
 
 graphingLines.register( 'PointSlopeModel', PointSlopeModel );
-
-export default PointSlopeModel;

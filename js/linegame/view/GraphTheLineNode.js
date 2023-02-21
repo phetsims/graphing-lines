@@ -23,7 +23,7 @@ import GraphPointSlopeNode from './GraphPointSlopeNode.js';
 import GraphSlopeInterceptNode from './GraphSlopeInterceptNode.js';
 import GraphTwoPointsNode from './GraphTwoPointsNode.js';
 
-class GraphTheLineNode extends ChallengeNode {
+export default class GraphTheLineNode extends ChallengeNode {
 
   /**
    * @param {GraphTheLine} challenge
@@ -202,5 +202,3 @@ class GraphTheLineNode extends ChallengeNode {
 }
 
 graphingLines.register( 'GraphTheLineNode', GraphTheLineNode );
-
-export default GraphTheLineNode;

@@ -16,7 +16,7 @@ import PlayNode from './PlayNode.js';
 import ResultsNode from './ResultsNode.js';
 import SettingsNode from './SettingsNode.js';
 
-class BaseGameScreenView extends ScreenView {
+export default class BaseGameScreenView extends ScreenView {
 
   /**
    * @param {BaseGameModel} model
@@ -63,5 +63,3 @@ class BaseGameScreenView extends ScreenView {
 }
 
 graphingLines.register( 'BaseGameScreenView', BaseGameScreenView );
-
-export default BaseGameScreenView;

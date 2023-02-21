@@ -14,7 +14,7 @@ import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import GLConstants from '../../GLConstants.js';
 
-class CoordinatePicker extends NumberPicker {
+export default class CoordinatePicker extends NumberPicker {
 
   /**
    * @param {Property.<number>} a1Property - the coordinate that this picker changes
@@ -59,5 +59,3 @@ class CoordinatePicker extends NumberPicker {
 }
 
 graphingLines.register( 'CoordinatePicker', CoordinatePicker );
-
-export default CoordinatePicker;

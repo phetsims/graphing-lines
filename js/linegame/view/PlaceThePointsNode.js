@@ -13,7 +13,7 @@ import PlayState from '../model/PlayState.js';
 import GraphTheLineNode from './GraphTheLineNode.js';
 import GraphThreePointsNode from './GraphThreePointsNode.js';
 
-class PlaceThePointsNode extends GraphTheLineNode {
+export default class PlaceThePointsNode extends GraphTheLineNode {
 
   /**
    * @param {GraphTheLine} challenge
@@ -72,5 +72,3 @@ class PlaceThePointsNode extends GraphTheLineNode {
 }
 
 graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );
-
-export default PlaceThePointsNode;

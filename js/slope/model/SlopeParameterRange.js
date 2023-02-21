@@ -15,7 +15,7 @@
 import Range from '../../../../dot/js/Range.js';
 import graphingLines from '../../graphingLines.js';
 
-class SlopeParameterRange {
+export default class SlopeParameterRange {
 
   constructor() {}
 
@@ -49,5 +49,3 @@ class SlopeParameterRange {
 }
 
 graphingLines.register( 'SlopeParameterRange', SlopeParameterRange );
-
-export default SlopeParameterRange;

@@ -21,7 +21,7 @@ import PointTool from './PointTool.js';
 const GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
 const ORIGIN_OFFSET = new Vector2( 315, 330 ); // offset of the graph's origin in view coordinates
 
-class LineFormsModel {
+export default class LineFormsModel {
 
   /**
    * @param {Line} interactiveLine
@@ -78,5 +78,3 @@ class LineFormsModel {
 }
 
 graphingLines.register( 'LineFormsModel', LineFormsModel );
-
-export default LineFormsModel;

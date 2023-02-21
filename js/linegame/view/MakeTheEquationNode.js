@@ -23,7 +23,7 @@ import ChallengeGraphNode from './ChallengeGraphNode.js';
 import ChallengeNode from './ChallengeNode.js';
 import EquationBoxNode from './EquationBoxNode.js';
 
-class MakeTheEquationNode extends ChallengeNode {
+export default class MakeTheEquationNode extends ChallengeNode {
 
   /**
    * @param {GraphTheLine} challenge
@@ -205,5 +205,3 @@ function createInteractiveEquationNode( equationForm, manipulationMode, lineProp
 }
 
 graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );
-
-export default MakeTheEquationNode;

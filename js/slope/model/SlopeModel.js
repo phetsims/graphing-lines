@@ -13,7 +13,7 @@ import LineFormsModel from '../../common/model/LineFormsModel.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeParameterRange from './SlopeParameterRange.js';
 
-class SlopeModel extends LineFormsModel {
+export default class SlopeModel extends LineFormsModel {
 
   constructor() {
 
@@ -38,5 +38,3 @@ class SlopeModel extends LineFormsModel {
 }
 
 graphingLines.register( 'SlopeModel', SlopeModel );
-
-export default SlopeModel;

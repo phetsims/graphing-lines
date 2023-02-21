@@ -13,7 +13,7 @@ import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 
-class GraphThreePointsNode extends ChallengeGraphNode {
+export default class GraphThreePointsNode extends ChallengeGraphNode {
 
   /**
    * @param {PlaceThePoints} challenge
@@ -68,5 +68,3 @@ class GraphThreePointsNode extends ChallengeGraphNode {
 }
 
 graphingLines.register( 'GraphThreePointsNode', GraphThreePointsNode );
-
-export default GraphThreePointsNode;

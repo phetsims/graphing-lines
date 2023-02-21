@@ -20,7 +20,7 @@ import GraphTheLine from './GraphTheLine.js';
 import ManipulationMode from './ManipulationMode.js';
 import NotALine from './NotALine.js';
 
-class PlaceThePoints extends GraphTheLine {
+export default class PlaceThePoints extends GraphTheLine {
 
   /**
    * @param {string} description brief description of the challenge, visible in dev versions
@@ -78,5 +78,3 @@ class PlaceThePoints extends GraphTheLine {
 }
 
 graphingLines.register( 'PlaceThePoints', PlaceThePoints );
-
-export default PlaceThePoints;

@@ -12,7 +12,7 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
-class NumberBackgroundNode extends Node {
+export default class NumberBackgroundNode extends Node {
 
   /**
    * @param {Property.<number>} valueProperty
@@ -77,5 +77,3 @@ class NumberBackgroundNode extends Node {
 }
 
 graphingLines.register( 'NumberBackgroundNode', NumberBackgroundNode );
-
-export default NumberBackgroundNode;

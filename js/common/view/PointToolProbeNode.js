@@ -14,7 +14,7 @@ import { Color, Path } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 
-class PointToolProbeNode extends Path {
+export default class PointToolProbeNode extends Path {
 
   /**
    * @param {Object} [options]
@@ -38,4 +38,3 @@ class PointToolProbeNode extends Path {
 }
 
 graphingLines.register( 'PointToolProbeNode', PointToolProbeNode );
-export default PointToolProbeNode;

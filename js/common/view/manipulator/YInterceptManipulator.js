@@ -15,7 +15,7 @@ import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
 
-class YInterceptManipulator extends Manipulator {
+export default class YInterceptManipulator extends Manipulator {
 
   /**
    * @param {number} radius
@@ -94,5 +94,3 @@ class YInterceptDragListener extends DragListener {
 }
 
 graphingLines.register( 'YInterceptManipulator', YInterceptManipulator );
-
-export default YInterceptManipulator;

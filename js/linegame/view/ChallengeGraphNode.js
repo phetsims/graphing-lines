@@ -20,7 +20,7 @@ import SlopeToolNode from '../../common/view/SlopeToolNode.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 
-class ChallengeGraphNode extends GraphNode {
+export default class ChallengeGraphNode extends GraphNode {
 
   /**
    * @param {Challenge} challenge
@@ -132,5 +132,3 @@ class ChallengeGraphNode extends GraphNode {
 }
 
 graphingLines.register( 'ChallengeGraphNode', ChallengeGraphNode );
-
-export default ChallengeGraphNode;

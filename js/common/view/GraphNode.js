@@ -1,5 +1,6 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base type for graphs, displays a 2D grid and axes.
  * The node's origin is at model coordinate (0,0).

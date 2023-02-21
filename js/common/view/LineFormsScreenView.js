@@ -37,9 +37,7 @@ class LineFormsScreenView extends ScreenView {
     pointToolParent.addChild( pointTool2 );
 
     // Toggle button for showing/hiding contents of graph
-    const graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty, {
-      scale: 0.75
-    } );
+    const graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty );
 
     // Reset All button, at bottom-right
     const resetAllButton = new ResetAllButton( {

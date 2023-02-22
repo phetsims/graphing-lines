@@ -1,4 +1,4 @@
-// Copyright 2013-2020, University of Colorado Boulder
+// Copyright 2013-2023, University of Colorado Boulder
 
 /**
  * Challenge graph with manipulators for 2 points, (x1,y1) and (x2,y2), of the guess line.

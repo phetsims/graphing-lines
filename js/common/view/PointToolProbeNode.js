@@ -1,4 +1,4 @@
-// Copyright 2021-2022, University of Colorado Boulder
+// Copyright 2021-2023, University of Colorado Boulder
 
 /**
  * PointToolProbeNode is the probe for the point tool. It's a triangle that points down, described from the upper-left.

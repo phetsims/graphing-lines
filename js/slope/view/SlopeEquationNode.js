@@ -339,7 +339,7 @@ export default class SlopeEquationNode extends EquationNode {
  * A non-interactive equation, used to label a dynamic line.
  * This takes the form 'Slope is rise/run', which is different than the interactive equation form.
  * Note that while this is a sentence, it's order is not localized, due to the fact that it is
- * composed of multiple scenery.Text nodes.
+ * composed of multiple phet.scenery.Text nodes.
  */
 class DynamicLabelNode extends EquationNode {
 

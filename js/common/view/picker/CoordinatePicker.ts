@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Picker for one coordinate of a 2D point.
  * It prevents the point from having the same value as some other point,
@@ -9,27 +8,34 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../../phet-core/js/merge.js';
-import NumberPicker from '../../../../../sun/js/NumberPicker.js';
+import Range from '../../../../../dot/js/Range.js';
+import Property from '../../../../../axon/js/Property.js';
+import NumberPicker, { NumberPickerOptions } from '../../../../../sun/js/NumberPicker.js';
 import graphingLines from '../../../graphingLines.js';
-import GLColors from '../../GLColors.js';
 import GLConstants from '../../GLConstants.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type CoordinatePickerOptions = SelfOptions & PickRequired<NumberPickerOptions, 'font' | 'color'>;
 
 export default class CoordinatePicker extends NumberPicker {
 
   /**
-   * @param {Property.<number>} a1Property - the coordinate that this picker changes
-   * @param {Property.<number>} b1Property - the other coordinate of the point that has coordinate a1Property
-   * @param {Property.<number>} a2Property - the coordinate in the second point that is on the same axis as a1Property
-   * @param {Property.<number>} b2Property - the coordinate in the second point that is on the same axis as b1Property
-   * @param {Property.<Range>} rangeProperty - the range of a1Property
-   * @param {Object} [options]
+   * @param a1Property - the coordinate that this picker changes
+   * @param b1Property - the other coordinate of the point that has coordinate a1Property
+   * @param a2Property - the coordinate in the second point that is on the same axis as a1Property
+   * @param b2Property - the coordinate in the second point that is on the same axis as b1Property
+   * @param rangeProperty - the range of a1Property
+   * @param providedOptions
    */
-  constructor( a1Property, b1Property, a2Property, b2Property, rangeProperty, options ) {
+  public constructor( a1Property: Property<number>, b1Property: TReadOnlyProperty<number>,
+                      a2Property: TReadOnlyProperty<number>, b2Property: TReadOnlyProperty<number>,
+                      rangeProperty: TReadOnlyProperty<Range>, providedOptions: CoordinatePickerOptions ) {
 
-    options = merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
-      color: GLColors.POINT_X1_Y1
-    }, options );
+    const options = optionize3<CoordinatePickerOptions, SelfOptions, NumberPickerOptions>()( {}, GLConstants.NUMBER_PICKER_OPTIONS, providedOptions );
 
     // computes value when 'up' button is pressed
     options.incrementFunction = a1 => {

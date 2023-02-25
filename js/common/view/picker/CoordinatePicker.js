@@ -26,7 +26,7 @@ export default class CoordinatePicker extends NumberPicker {
    */
   constructor( a1Property, b1Property, a2Property, b2Property, rangeProperty, options ) {
 
-    options = merge( {}, GLConstants.PICKER_OPTIONS, {
+    options = merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
       color: GLColors.POINT_X1_Y1
     }, options );
 

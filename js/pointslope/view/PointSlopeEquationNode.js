@@ -100,7 +100,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     const yMinusNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
     let y1Node;
     if ( options.interactivePoint ) {
-      y1Node = new NumberPicker( y1Property, options.y1RangeProperty, merge( {}, GLConstants.PICKER_OPTIONS, {
+      y1Node = new NumberPicker( y1Property, options.y1RangeProperty, merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
         color: GLColors.POINT_X1_Y1,
         font: interactiveFont
       } ) );
@@ -129,7 +129,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     const xMinusNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
     let x1Node;
     if ( options.interactivePoint ) {
-      x1Node = new NumberPicker( x1Property, options.x1RangeProperty, merge( {}, GLConstants.PICKER_OPTIONS, {
+      x1Node = new NumberPicker( x1Property, options.x1RangeProperty, merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
         color: GLColors.POINT_X1_Y1,
         font: interactiveFont
       } ) );

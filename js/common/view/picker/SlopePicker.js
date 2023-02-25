@@ -22,7 +22,7 @@ export default class SlopePicker extends NumberPicker {
    */
   constructor( variableComponentProperty, fixedComponentProperty, variableRangeProperty, options ) {
 
-    options = merge( {}, GLConstants.PICKER_OPTIONS, {
+    options = merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
       color: GLColors.SLOPE
     }, options );
 

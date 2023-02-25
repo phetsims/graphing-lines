@@ -1,15 +1,18 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Manipulator for changing a line's slope.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../../dot/js/Range.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { DragListener } from '../../../../../scenery/js/imports.js';
+import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { DragListener, Node } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
@@ -17,36 +20,30 @@ import Manipulator from './Manipulator.js';
 
 export default class SlopeManipulator extends Manipulator {
 
-  /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} riseRangeProperty
-   * @param {Property.<Range>} runRangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( radius, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
+  private readonly disposeSlopeManipulator: () => void;
+
+  public constructor( radius: number,
+                      lineProperty: Property<Line>,
+                      riseRangeProperty: TReadOnlyProperty<Range>,
+                      runRangeProperty: TReadOnlyProperty<Range>,
+                      modelViewTransform: ModelViewTransform2 ) {
 
     super( radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
-    const lineObserver = line => {
+    const lineObserver = ( line: Line ) => {
       this.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new SlopeDragListener( this, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
 
-    // @private called by dispose
     this.disposeSlopeManipulator = () => {
       lineProperty.unlink( lineObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeSlopeManipulator();
     super.dispose();
   }
@@ -57,16 +54,13 @@ export default class SlopeManipulator extends Manipulator {
  */
 class SlopeDragListener extends DragListener {
 
-  /**
-   * @param {Node} targetNode
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} riseRangeProperty
-   * @param {Property.<Range>} runRangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( targetNode, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) {
+  public constructor( targetNode: Node,
+                      lineProperty: Property<Line>,
+                      riseRangeProperty: TReadOnlyProperty<Range>,
+                      runRangeProperty: TReadOnlyProperty<Range>,
+                      modelViewTransform: ModelViewTransform2 ) {
 
-    let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    let startOffset: Vector2; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
     super( {
 

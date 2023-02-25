@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Drag listener for an arbitrary point (Vector2).
  * Used exclusively in 'Place the Points' game challenges.
@@ -8,46 +7,44 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../../dot/js/Range.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { DragListener } from '../../../../../scenery/js/imports.js';
+import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { DragListener, Node } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Manipulator from './Manipulator.js';
 
 export default class PointManipulator extends Manipulator {
 
-  /**
-   * @param {number} radius
-   * @param {Vector2Property} pointProperty
-   * @param {Vector2Property} otherPointProperties
-   * @param {Range} xRange
-   * @param {Range} yRange
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( radius, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
+  private readonly disposePointManipulator: () => void;
+
+  public constructor( radius: number,
+                      pointProperty: Property<Vector2>,
+                      otherPointProperties: TReadOnlyProperty<Vector2>[], // points that pointProperty cannot be on
+                      xRange: Range,
+                      yRange: Range,
+                      modelViewTransform: ModelViewTransform2 ) {
 
     super( radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
     // move the manipulator to match the point
-    const lineObserver = point => {
+    const lineObserver = ( point: Vector2 ) => {
       this.translation = modelViewTransform.modelToViewPosition( point );
     };
     pointProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new PointDragListener( this, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
 
-    // @private called by dispose
     this.disposePointManipulator = () => {
       pointProperty.unlink( lineObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposePointManipulator();
     super.dispose();
   }
@@ -58,17 +55,14 @@ export default class PointManipulator extends Manipulator {
  */
 class PointDragListener extends DragListener {
 
-  /**
-   * @param {Node} targetNode
-   * @param {Vector2Property} pointProperty
-   * @param {Vector2Property[]} otherPointProperties points that the point can't be on
-   * @param {Range} xRange
-   * @param {Range} yRange
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( targetNode, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) {
+  public constructor( targetNode: Node,
+                      pointProperty: Property<Vector2>,
+                      otherPointProperties: TReadOnlyProperty<Vector2>[],
+                      xRange: Range,
+                      yRange: Range,
+                      modelViewTransform: ModelViewTransform2 ) {
 
-    let startOffset; // where the drag started, relative to the slope manipulator, in parent view coordinates
+    let startOffset: Vector2; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
     super( {
 

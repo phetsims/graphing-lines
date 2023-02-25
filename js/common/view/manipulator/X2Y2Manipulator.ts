@@ -1,15 +1,18 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Manipulator for changing a line's (x2,y2) point.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../../dot/js/Range.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { DragListener } from '../../../../../scenery/js/imports.js';
+import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { DragListener, Node } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
@@ -17,36 +20,30 @@ import Manipulator from './Manipulator.js';
 
 export default class X2Y2Manipulator extends Manipulator {
 
-  /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} x2RangeProperty
-   * @param {Property.<Range>} y2RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( radius, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
+  private readonly disposeX2Y2Manipulator: () => void;
+
+  public constructor( radius: number,
+                      lineProperty: Property<Line>,
+                      x2RangeProperty: TReadOnlyProperty<Range>,
+                      y2RangeProperty: TReadOnlyProperty<Range>,
+                      modelViewTransform: ModelViewTransform2 ) {
 
     super( radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
 
     // move the manipulator to match the line's (x2,y2) point
-    const lineObserver = line => {
+    const lineObserver = ( line: Line ) => {
       this.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x2, line.y2 ) );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new X2Y2DragListener( this, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) );
 
-    // @private called by dispose
     this.disposeX2Y2Manipulator = () => {
       lineProperty.unlink( lineObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeX2Y2Manipulator();
     super.dispose();
   }
@@ -57,16 +54,13 @@ export default class X2Y2Manipulator extends Manipulator {
  */
 class X2Y2DragListener extends DragListener {
 
-  /**
-   * @param {Node} targetNode
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} x2RangeProperty
-   * @param {Property.<Range>} y2RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( targetNode, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) {
+  public constructor( targetNode: Node,
+                      lineProperty: Property<Line>,
+                      x2RangeProperty: TReadOnlyProperty<Range>,
+                      y2RangeProperty: TReadOnlyProperty<Range>,
+                      modelViewTransform: ModelViewTransform2 ) {
 
-    let startOffset; // where the drag started, relative to (x2,y2), in parent view coordinates
+    let startOffset: Vector2; // where the drag started, relative to (x2,y2), in parent view coordinates
 
     super( {
 

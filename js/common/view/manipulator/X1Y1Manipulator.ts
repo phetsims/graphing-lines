@@ -1,15 +1,18 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Manipulator for changing a line's (x1,y1) point.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../../dot/js/Range.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
-import { DragListener } from '../../../../../scenery/js/imports.js';
+import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { DragListener, Node } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
@@ -17,37 +20,39 @@ import Manipulator from './Manipulator.js';
 
 export default class X1Y1Manipulator extends Manipulator {
 
+  private readonly disposeX1Y1Manipulator: () => void;
+
   /**
-   * @param {number} radius
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} x1RangeProperty
-   * @param {Property.<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
+   * @param radius
+   * @param lineProperty
+   * @param x1RangeProperty
+   * @param y1RangeProperty
+   * @param modelViewTransform
+   * @param constantSlope - true: slope is constant, false: (x2,y2) is constant
    */
-  constructor( radius, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
+  public constructor( radius: number,
+                      lineProperty: Property<Line>,
+                      x1RangeProperty: TReadOnlyProperty<Range>,
+                      y1RangeProperty: TReadOnlyProperty<Range>,
+                      modelViewTransform: ModelViewTransform2,
+                      constantSlope: boolean ) {
 
     super( radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
 
     // move the manipulator to match the line's (x1,y1) point
-    const lineObserver = line => {
+    const lineObserver = ( line: Line ) => {
       this.translation = modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
     this.addInputListener( new X1Y1DragListener( this, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
 
-    // @private called by dispose
     this.disposeX1Y1Manipulator = () => {
       lineProperty.unlink( lineObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeX1Y1Manipulator();
     super.dispose();
   }
@@ -58,17 +63,14 @@ export default class X1Y1Manipulator extends Manipulator {
  */
 class X1Y1DragListener extends DragListener {
 
-  /**
-   * @param {Node} targetNode
-   * @param {Property.<Line>} lineProperty
-   * @param {Property.<Range>} x1RangeProperty
-   * @param {Property.<Range>} y1RangeProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {boolean} constantSlope true: slope is constant, false: (x2,y2) is constant
-   */
-  constructor( targetNode, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) {
+  public constructor( targetNode: Node,
+                      lineProperty: Property<Line>,
+                      x1RangeProperty: TReadOnlyProperty<Range>,
+                      y1RangeProperty: TReadOnlyProperty<Range>,
+                      modelViewTransform: ModelViewTransform2,
+                      constantSlope: boolean ) {
 
-    let startOffset; // where the drag started, relative to (x1,y1), in parent view coordinates
+    let startOffset: Vector2; // where the drag started, relative to (x1,y1), in parent view coordinates
 
     super( {
 

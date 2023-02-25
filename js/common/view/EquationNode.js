@@ -90,18 +90,18 @@ export default class EquationNode extends Node {
     };
 
     // Create prototypical pickers.
-    const maxRiseNode = new SlopePicker( new Property( riseRangeProperty.get().max ),
-      new Property( runRangeProperty.get().max ), riseRangeProperty, pickerOptions );
+    const maxRiseNode = new SlopePicker( new Property( riseRangeProperty.value.max ),
+      new Property( runRangeProperty.value.max ), riseRangeProperty, pickerOptions );
 
-    const minRiseNode = new SlopePicker( new Property( riseRangeProperty.get().min ),
-      new Property( runRangeProperty.get().max ), riseRangeProperty, pickerOptions );
+    const minRiseNode = new SlopePicker( new Property( riseRangeProperty.value.min ),
+      new Property( runRangeProperty.value.max ), riseRangeProperty, pickerOptions );
 
     const maxRunNode = new SlopePicker(
-      new Property( runRangeProperty.get().max ),
-      new Property( riseRangeProperty.get().max ), runRangeProperty, pickerOptions );
+      new Property( runRangeProperty.value.max ),
+      new Property( riseRangeProperty.value.max ), runRangeProperty, pickerOptions );
 
-    const minRunNode = new SlopePicker( new Property( runRangeProperty.get().min ),
-      new Property( riseRangeProperty.get().min ), runRangeProperty, pickerOptions );
+    const minRunNode = new SlopePicker( new Property( runRangeProperty.value.min ),
+      new Property( riseRangeProperty.value.min ), runRangeProperty, pickerOptions );
 
     // Compute the max width
     const maxRiseWidth = Math.max( maxRiseNode.width, minRiseNode.width );

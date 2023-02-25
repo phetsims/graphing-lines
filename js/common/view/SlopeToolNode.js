@@ -41,8 +41,8 @@ export default class SlopeToolNode extends Node {
       yMargin: 6,
       cornerRadius: 5
     };
-    this.riseProperty = new NumberProperty( lineProperty.get().rise ); // @private
-    this.runProperty = new NumberProperty( lineProperty.get().run ); // @private
+    this.riseProperty = new NumberProperty( lineProperty.value.rise ); // @private
+    this.runProperty = new NumberProperty( lineProperty.value.run ); // @private
     this.riseValueNode = new NumberBackgroundNode( this.riseProperty, numberOptions ); // @private
     this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
 
@@ -71,7 +71,7 @@ export default class SlopeToolNode extends Node {
     lineProperty.link( lineObserver ); // unlink in dispose
 
     // Update when this Node becomes visible
-    this.visibleProperty.link( visible => visible && this.update( lineProperty.get(), modelViewTransform ) );
+    this.visibleProperty.link( visible => visible && this.update( lineProperty.value, modelViewTransform ) );
 
     // @private called by dispose
     this.disposeSlopeToolNode = () => {

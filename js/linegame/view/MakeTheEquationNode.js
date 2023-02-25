@@ -53,8 +53,8 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
     // Guess
     const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-      GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.get().color );
-    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquation, challenge.guessProperty.get().color, boxSize, guessEquationNode );
+      GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.value.color );
+    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquation, challenge.guessProperty.value.color, boxSize, guessEquationNode );
 
     // Graph
     const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
@@ -99,7 +99,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
     // Update visibility of the correct/incorrect icons.
     const updateIcons = () => {
-      const playState = model.playStateProperty.get();
+      const playState = model.playStateProperty.value;
       answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
       guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
       guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );

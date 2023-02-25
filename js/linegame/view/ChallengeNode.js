@@ -133,11 +133,11 @@ export default class ChallengeNode extends Node {
       if ( challenge.isCorrect() ) {
         this.faceNode.smile();
         audioPlayer.correctAnswer();
-        const points = model.computePoints( model.playStateProperty.get() === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
+        const points = model.computePoints( model.playStateProperty.value === PlayState.FIRST_CHECK ? 1 : 2 /* number of attempts */ );
 
         // Prevent score from exceeding perfect score, in case we replay challenges with ?gameDebug query parameter.
         // See https://github.com/phetsims/graphing-lines/issues/70
-        const newScore = Math.min( model.scoreProperty.get() + points, model.getPerfectScore() );
+        const newScore = Math.min( model.scoreProperty.value + points, model.getPerfectScore() );
         model.scoreProperty.set( newScore );
         this.faceNode.setPoints( points );
         model.playStateProperty.set( PlayState.NEXT );
@@ -146,7 +146,7 @@ export default class ChallengeNode extends Node {
         this.faceNode.frown();
         this.faceNode.setPoints( 0 );
         audioPlayer.wrongAnswer();
-        if ( model.playStateProperty.get() === PlayState.FIRST_CHECK ) {
+        if ( model.playStateProperty.value === PlayState.FIRST_CHECK ) {
           model.playStateProperty.set( PlayState.TRY_AGAIN );
         }
         else {
@@ -194,7 +194,7 @@ export default class ChallengeNode extends Node {
 
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
     const guessObserver = guess => {
-      if ( model.playStateProperty.get() === PlayState.TRY_AGAIN ) {
+      if ( model.playStateProperty.value === PlayState.TRY_AGAIN ) {
         model.playStateProperty.set( PlayState.SECOND_CHECK );
       }
     };

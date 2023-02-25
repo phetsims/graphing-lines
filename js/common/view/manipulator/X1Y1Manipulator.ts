@@ -78,7 +78,7 @@ class X1Y1DragListener extends DragListener {
 
       // note where the drag started
       start: event => {
-        const line = lineProperty.get();
+        const line = lineProperty.value;
         const position = modelViewTransform.modelToViewXY( line.x1, line.y1 );
         startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
       },
@@ -89,15 +89,15 @@ class X1Y1DragListener extends DragListener {
         const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const x1 = Utils.roundSymmetric( Utils.clamp( position.x, x1RangeProperty.get().min, x1RangeProperty.get().max ) );
-        const y1 = Utils.roundSymmetric( Utils.clamp( position.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
-        const line = lineProperty.get();
+        const x1 = Utils.roundSymmetric( Utils.clamp( position.x, x1RangeProperty.value.min, x1RangeProperty.value.max ) );
+        const y1 = Utils.roundSymmetric( Utils.clamp( position.y, y1RangeProperty.value.min, y1RangeProperty.value.max ) );
+        const line = lineProperty.value;
 
         if ( constantSlope ) {
           // Keep slope constant, change (x1,y1) and (x2,y2).
           lineProperty.set( Line.createPointSlope( x1, y1, line.rise, line.run, line.color ) );
         }
-        else if ( x1 !== lineProperty.get().x2 || y1 !== lineProperty.get().y2 ) {
+        else if ( x1 !== lineProperty.value.x2 || y1 !== lineProperty.value.y2 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
           // Keep (x2,y2) constant, change (x1,y1) and slope.
           lineProperty.set( new Line( x1, y1, line.x2, line.y2, line.color ) );

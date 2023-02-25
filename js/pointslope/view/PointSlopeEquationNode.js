@@ -77,10 +77,10 @@ export default class PointSlopeEquationNode extends EquationNode {
     };
 
     // internal properties that are connected to pickers
-    const x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
-    const y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
-    const riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
-    const runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
+    const x1Property = new NumberProperty( lineProperty.value.x1, numberPropertyOptions );
+    const y1Property = new NumberProperty( lineProperty.value.y1, numberPropertyOptions );
+    const riseProperty = new NumberProperty( lineProperty.value.rise, numberPropertyOptions );
+    const runProperty = new NumberProperty( lineProperty.value.run, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.

@@ -73,7 +73,7 @@ export default class PointTool {
    * Determines if the point tool is on the specified line.
    */
   public isOnLine( line: Line ): boolean {
-    return line.onLinePoint( this.positionProperty.get() );
+    return line.onLinePoint( this.positionProperty.value );
   }
 }
 

@@ -33,9 +33,9 @@ export default class CoordinatePicker extends NumberPicker {
     // computes value when 'up' button is pressed
     options.incrementFunction = a1 => {
       let x1New = a1 + 1;
-      if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
+      if ( x1New === a2Property.value && b1Property.value === b2Property.value ) { // will points be the same?
         x1New++;
-        if ( x1New > rangeProperty.get().max ) { // did we skip too far?
+        if ( x1New > rangeProperty.value.max ) { // did we skip too far?
           x1New = a1;
         }
       }
@@ -45,9 +45,9 @@ export default class CoordinatePicker extends NumberPicker {
     // computes value when 'down' button is pressed
     options.decrementFunction = a1 => {
       let x1New = a1 - 1;
-      if ( x1New === a2Property.get() && b1Property.get() === b2Property.get() ) { // will points be the same?
+      if ( x1New === a2Property.value && b1Property.value === b2Property.value ) { // will points be the same?
         x1New--;
-        if ( x1New < rangeProperty.get().min ) { // did we skip too far?
+        if ( x1New < rangeProperty.value.min ) { // did we skip too far?
           x1New = a1;
         }
       }

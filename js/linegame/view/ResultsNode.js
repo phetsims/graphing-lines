@@ -39,7 +39,7 @@ export default class ResultsNode extends Node {
 
           audioPlayer.gameOverPerfectScore();
 
-          const level = model.levelProperty.get();
+          const level = model.levelProperty.value;
           const rewardNodes = rewardFactoryFunctions[ level ]();
           this.rewardNode = new GLRewardNode( rewardNodes );
           this.addChild( this.rewardNode );
@@ -50,13 +50,13 @@ export default class ResultsNode extends Node {
 
         // game results
         this.addChild( new LevelCompletedNode(
-          model.levelProperty.get() + 1,
-          model.scoreProperty.get(),
+          model.levelProperty.value + 1,
+          model.scoreProperty.value,
           model.getPerfectScore(),
           model.getPerfectScore() / model.maxPointsPerChallenge, // number of stars in the progress indicator
-          model.timerEnabledProperty.get(),
+          model.timerEnabledProperty.value,
           model.timer.elapsedTimeProperty.value,
-          model.bestTimeProperties[ model.levelProperty.get() ].get(),
+          model.bestTimeProperties[ model.levelProperty.value ].value,
           model.isNewBestTime,
           () => model.setGamePhase( GamePhase.SETTINGS ),
           {

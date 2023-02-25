@@ -68,7 +68,7 @@ export default class LineFormsModel implements TModel {
 
         // Add lines in the order that PointTool will see them: interactiveLine, standardLines, savedLines
         // This should match the order of rendering in LineFormsGraphNode.
-        this.graph.lines.add( this.interactiveLineProperty.get() );
+        this.graph.lines.add( this.interactiveLineProperty.value );
         this.standardLines.forEach( line => this.graph.lines.add( line ) );
         this.savedLines.forEach( line => this.graph.lines.add( line ) );
       }

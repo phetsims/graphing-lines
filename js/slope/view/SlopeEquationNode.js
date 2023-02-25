@@ -60,14 +60,14 @@ export default class SlopeEquationNode extends EquationNode {
     };
 
     // internal properties that are connected to pickers
-    const x1Property = new NumberProperty( lineProperty.get().x1, numberPropertyOptions );
-    const y1Property = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
-    const x2Property = new NumberProperty( lineProperty.get().x2, numberPropertyOptions );
-    const y2Property = new NumberProperty( lineProperty.get().y2, numberPropertyOptions );
+    const x1Property = new NumberProperty( lineProperty.value.x1, numberPropertyOptions );
+    const y1Property = new NumberProperty( lineProperty.value.y1, numberPropertyOptions );
+    const x2Property = new NumberProperty( lineProperty.value.x2, numberPropertyOptions );
+    const y2Property = new NumberProperty( lineProperty.value.y2, numberPropertyOptions );
 
     // internal properties that are connected to number displays
-    const riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
-    const runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
+    const riseProperty = new NumberProperty( lineProperty.value.rise, numberPropertyOptions );
+    const runProperty = new NumberProperty( lineProperty.value.run, numberPropertyOptions );
 
     /*
      * Flag that allows us to update all controls atomically when the model changes.
@@ -147,7 +147,7 @@ export default class SlopeEquationNode extends EquationNode {
       [ x1Property, y1Property, x2Property, y2Property ],
       ( x1, y1, x2, y2 ) => {
         if ( !updatingControls ) {
-          lineProperty.set( new Line( x1, y1, x2, y2, lineProperty.get().color ) );
+          lineProperty.set( new Line( x1, y1, x2, y2, lineProperty.value.color ) );
         }
       }
     );

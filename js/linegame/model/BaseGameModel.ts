@@ -109,7 +109,7 @@ export default class BaseGameModel {
     // unlink is unnecessary since BaseGameModel exists for the lifetime of the sim.
     this.playStateProperty.link( playState => {
 
-      const challengeIndex = this.challengeIndexProperty.get();
+      const challengeIndex = this.challengeIndexProperty.value;
       const isLastChallenge = ( challengeIndex === this.challenges.length - 1 );
 
       if ( isLastChallenge && ( playState === PlayState.NEXT || playState === PlayState.SHOW_ANSWER ) ) {
@@ -119,13 +119,13 @@ export default class BaseGameModel {
 
       if ( playState === PlayState.FIRST_CHECK ) {
 
-        const level = this.levelProperty.get();
-        const score = this.scoreProperty.get();
+        const level = this.levelProperty.value;
+        const score = this.scoreProperty.value;
 
         if ( isLastChallenge ) {
           // game has been completed
           this.setGamePhase( GamePhase.RESULTS );
-          if ( score > this.bestScoreProperties[ level ].get() ) {
+          if ( score > this.bestScoreProperties[ level ].value ) {
             this.bestScoreProperties[ level ].set( score );
           }
         }
@@ -137,7 +137,7 @@ export default class BaseGameModel {
         }
       }
       else if ( playState === PlayState.NEXT ) {
-        this.challengeProperty.get().setAnswerVisible( true );
+        this.challengeProperty.value.setAnswerVisible( true );
       }
     } );
 
@@ -151,7 +151,7 @@ export default class BaseGameModel {
    * because there are tasks that needs to be done before listeners are notified.
    */
   public setGamePhase( gamePhase: GamePhase ): void {
-    if ( gamePhase !== this.gamePhaseProperty.get() ) {
+    if ( gamePhase !== this.gamePhaseProperty.value ) {
 
       // Do tasks that need to be done before notifying listeners.
       if ( gamePhase === GamePhase.SETTINGS ) {
@@ -206,7 +206,7 @@ export default class BaseGameModel {
   }
 
   public isPerfectScore(): boolean {
-    return ( this.scoreProperty.get() === this.getPerfectScore() );
+    return ( this.scoreProperty.value === this.getPerfectScore() );
   }
 
   // Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
@@ -235,8 +235,8 @@ export default class BaseGameModel {
    * Score and best times are meaningless after using this.
    */
   public replayCurrentChallenge(): void {
-    this.challengeProperty.get().reset();
-    this.challengeIndexProperty.set( this.challengeIndexProperty.get() - 1 );
+    this.challengeProperty.value.reset();
+    this.challengeIndexProperty.set( this.challengeIndexProperty.value - 1 );
     this.challengeProperty.set( DUMMY_CHALLENGE ); // force an update
     this.playStateProperty.set( PlayState.FIRST_CHECK );
   }

@@ -79,10 +79,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     };
 
     // internal properties that are connected to pickers
-    const riseProperty = new NumberProperty( lineProperty.get().rise, numberPropertyOptions );
-    const runProperty = new NumberProperty( lineProperty.get().run, numberPropertyOptions );
-    const yInterceptProperty = new NumberProperty( lineProperty.get().y1, numberPropertyOptions );
-    const fractionalIntercept = lineProperty.get().getYIntercept();
+    const riseProperty = new NumberProperty( lineProperty.value.rise, numberPropertyOptions );
+    const runProperty = new NumberProperty( lineProperty.value.run, numberPropertyOptions );
+    const yInterceptProperty = new NumberProperty( lineProperty.value.y1, numberPropertyOptions );
+    const fractionalIntercept = lineProperty.value.getYIntercept();
     const yInterceptNumeratorProperty = new NumberProperty( fractionalIntercept.numerator, numberPropertyOptions );
     const yInterceptDenominatorProperty = new NumberProperty( fractionalIntercept.denominator, numberPropertyOptions );
 

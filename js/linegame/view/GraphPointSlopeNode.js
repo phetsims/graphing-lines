@@ -31,8 +31,8 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
     const pointSlopeParameterRange = new PointSlopeParameterRange();
     const x1RangeProperty = new Property( challenge.graph.xRange );
     const y1RangeProperty = new Property( challenge.graph.yRange );
-    const riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
-    const runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
+    const riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.value, challenge.graph ) );
+    const runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.value, challenge.graph ) );
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 

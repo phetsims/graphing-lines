@@ -113,7 +113,7 @@ export default abstract class Challenge {
 
   // True if the guess and answer are descriptions of the same line.
   public isCorrect(): boolean {
-    const guess = this.guessProperty.get(); // {Line | NotALine}
+    const guess = this.guessProperty.value; // {Line | NotALine}
     return ( guess instanceof Line ) && this.answer.same( guess );
   }
 

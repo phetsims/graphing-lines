@@ -29,8 +29,8 @@ export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
 
     // dynamic ranges
     const parameterRange = new SlopeInterceptParameterRange();
-    const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.get(), challenge.graph ) );
-    const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.get(), challenge.graph ) );
+    const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.value, challenge.graph ) );
+    const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.value, challenge.graph ) );
     const y1RangeProperty = new Property( challenge.graph.yRange );
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );

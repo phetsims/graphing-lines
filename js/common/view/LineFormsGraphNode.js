@@ -85,7 +85,7 @@ export default class LineFormsGraphNode extends GraphNode {
   // @private Updates the visibility of lines and associated decorations
   updateLinesVisibility() {
 
-    const linesVisible = this.viewProperties.linesVisibleProperty.get();
+    const linesVisible = this.viewProperties.linesVisibleProperty.value;
 
     // interactive line
     this.interactiveLineNode.visible = linesVisible;
@@ -95,7 +95,7 @@ export default class LineFormsGraphNode extends GraphNode {
     this.standardLinesParentNode.visible = linesVisible;
 
     // slope tool
-    this.slopeToolNode.visible = ( this.viewProperties.slopeToolVisibleProperty.get() && linesVisible );
+    this.slopeToolNode.visible = ( this.viewProperties.slopeToolVisibleProperty.value && linesVisible );
   }
 
   // @private Called when a standard line is added to the model.
@@ -125,7 +125,7 @@ export default class LineFormsGraphNode extends GraphNode {
     let removed = false;
     for ( let i = 0; i < parentNode.getChildrenCount() && !removed; i++ ) {
       const node = parentNode.getChildAt( i );
-      if ( line === node.lineProperty.get() ) {
+      if ( line === node.lineProperty.value ) {
         assert && assert( node instanceof LineNode );
         parentNode.removeChild( node );
         node.dispose();

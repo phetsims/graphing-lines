@@ -67,7 +67,7 @@ class YInterceptDragListener extends DragListener {
 
       // note where the drag started
       start: event => {
-        const line = lineProperty.get();
+        const line = lineProperty.value;
         const position = modelViewTransform.modelToViewXY( line.x1, line.y1 );
         startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
       },
@@ -78,8 +78,8 @@ class YInterceptDragListener extends DragListener {
         const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const y1 = Utils.roundSymmetric( Utils.clamp( position.y, y1RangeProperty.get().min, y1RangeProperty.get().max ) );
-        const line = lineProperty.get();
+        const y1 = Utils.roundSymmetric( Utils.clamp( position.y, y1RangeProperty.value.min, y1RangeProperty.value.max ) );
+        const line = lineProperty.value;
 
         // Keep slope constant, change y1.
         lineProperty.set( Line.createSlopeIntercept( line.rise, line.run, y1, line.color ) );

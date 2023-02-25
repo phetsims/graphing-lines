@@ -62,7 +62,7 @@ export default class GraphTheLine extends Challenge {
     }
 
     // Account for guesses that might be NotALine (not a valid line).
-    const guess = this.guessProperty.get();
+    const guess = this.guessProperty.value;
     if ( guess instanceof Line ) {
       this.graph.lines.push( guess );
     }

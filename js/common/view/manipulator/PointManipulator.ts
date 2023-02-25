@@ -70,7 +70,7 @@ class PointDragListener extends DragListener {
 
       // note where the drag started
       start: event => {
-        const position = modelViewTransform.modelToViewPosition( pointProperty.get() );
+        const position = modelViewTransform.modelToViewPosition( pointProperty.value );
         startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
       },
 
@@ -87,7 +87,7 @@ class PointDragListener extends DragListener {
         // is this point the same as one of the others?
         let same = false;
         for ( let i = 0; i < otherPointProperties.length; i++ ) {
-          if ( p.equals( otherPointProperties[ i ].get() ) ) {
+          if ( p.equals( otherPointProperties[ i ].value ) ) {
             same = true;
             break;
           }

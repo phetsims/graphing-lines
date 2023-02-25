@@ -58,7 +58,7 @@ export default class MakeTheEquation extends Challenge {
     this.graph.lines.push( this.answer );
 
     // Account for guesses that might be NotALine (not a valid line).
-    const guess = this.guessProperty.get();
+    const guess = this.guessProperty.value;
     if ( this.answerVisible && guess instanceof Line ) {
       this.graph.lines.push( guess );
     }

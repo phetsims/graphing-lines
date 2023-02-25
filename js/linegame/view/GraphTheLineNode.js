@@ -105,7 +105,7 @@ export default class GraphTheLineNode extends ChallengeNode {
 
     // Update visibility of the correct/incorrect icons.
     const updateIcons = () => {
-      const playState = model.playStateProperty.get();
+      const playState = model.playStateProperty.value;
       answerBoxNode.setCorrectIconVisible( playState === PlayState.NEXT );
       guessBoxNode.setCorrectIconVisible( playState === PlayState.NEXT && challenge.isCorrect() );
       guessBoxNode.setIncorrectIconVisible( playState === PlayState.NEXT && !challenge.isCorrect() );

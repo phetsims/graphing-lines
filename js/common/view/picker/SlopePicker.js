@@ -28,12 +28,12 @@ export default class SlopePicker extends NumberPicker {
 
     // increment function, skips over undefined line condition (slope=0/0) - not changeable by clients
     options.incrementFunction = variable => {
-      return ( variable === -1 && fixedComponentProperty.get() === 0 ) ? 1 : variable + 1;
+      return ( variable === -1 && fixedComponentProperty.value === 0 ) ? 1 : variable + 1;
     };
 
     // decrement function, skips over undefined line condition (slope=0/0) - not changeable by clients
     options.decrementFunction = variable => {
-      return ( variable === 1 && fixedComponentProperty.get() === 0 ) ? -1 : variable - 1;
+      return ( variable === 1 && fixedComponentProperty.value === 0 ) ? -1 : variable - 1;
     };
 
     super( variableComponentProperty, variableRangeProperty, options );

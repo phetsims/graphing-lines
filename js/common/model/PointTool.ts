@@ -1,37 +1,50 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Model of the point tool. Highlights when it is placed on one of the lines.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import graphingLines from '../../graphingLines.js';
+import Line from './Line.js';
+
+// direction that the tip points
+type PointToolOrientation = 'up' | 'down';
 
 export default class PointTool {
 
+  // position of the point tool
+  public readonly positionProperty: Property<Vector2>;
+
+  // line that the tool is on, null if it's not on a line
+  public readonly onLineProperty: Property<Line | null>;
+
+  public readonly orientation: PointToolOrientation;
+  public readonly dragBounds: Bounds2;
+
   /**
-   * @param {Vector2} position initial position of the tool
-   * @param {string} orientation direction that the tip points, either 'up', 'down'
-   * @param {ObservableArrayDef.<Line>} lines Lines that the tool might intersect
-   * @param {Bounds2} dragBounds tool can be dragged within these bounds
+   * @param position - initial position of the tool
+   * @param orientation - direction that the tip points
+   * @param lines - Lines that the tool might intersect
+   * @param dragBounds - tool can be dragged within these bounds
    */
-  constructor( position, orientation, lines, dragBounds ) {
+  public constructor( position: Vector2, orientation: PointToolOrientation, lines: ObservableArray<Line>, dragBounds: Bounds2 ) {
 
     assert && assert( _.includes( [ 'up', 'down' ], orientation ) );
 
-    // @public position of the point tool
     this.positionProperty = new Vector2Property( position );
 
-    // @public {Property.<Line|null> line that the tool is on, null if it's not on a line
-    this.onLineProperty = new Property( null );
+    this.onLineProperty = new Property<Line | null>( null );
 
-    this.orientation = orientation; // @public
-    this.dragBounds = dragBounds; // @public
+    this.orientation = orientation;
+    this.dragBounds = dragBounds;
 
     // Update when the point tool moves or the lines change.
     // unmultilink unneeded because PointTool either exists for sim lifetime, or is owned by a Challenge that
@@ -51,19 +64,15 @@ export default class PointTool {
     );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.positionProperty.reset();
     this.onLineProperty.reset();
   }
 
   /**
    * Determines if the point tool is on the specified line.
-   * @param {Line} line
-   * @returns {boolean}
-   * @public
    */
-  isOnLine( line ) {
+  public isOnLine( line: Line ): boolean {
     return line.onLinePoint( this.positionProperty.get() );
   }
 }

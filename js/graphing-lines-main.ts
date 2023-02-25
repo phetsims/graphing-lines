@@ -17,7 +17,7 @@ import SlopeInterceptScreen from './slopeintercept/SlopeInterceptScreen.js';
 
 simLauncher.launch( () => {
 
-  const title = GraphingLinesStrings[ 'graphing-lines' ].titleStringProperty;
+  const titleStringProperty = GraphingLinesStrings[ 'graphing-lines' ].titleStringProperty;
 
   const screens = [
     new SlopeScreen( Tandem.ROOT.createTandem( 'slopeScreen' ) ),
@@ -37,6 +37,6 @@ simLauncher.launch( () => {
     }
   };
 
-  const sim = new Sim( title, screens, options );
+  const sim = new Sim( titleStringProperty, screens, options );
   sim.start();
 } );

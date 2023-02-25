@@ -55,7 +55,7 @@ export default class Line {
 
   // Returns true if 2 points on the specified line are also on this line.
   public same( line: Line ): boolean {
-    return ( line !== null ) && this.onLineXY( line.x1, line.y1 ) && this.onLineXY( line.x2, line.y2 );
+    return this.onLineXY( line.x1, line.y1 ) && this.onLineXY( line.x2, line.y2 );
   }
 
   // Returns true if the slope is undefined.

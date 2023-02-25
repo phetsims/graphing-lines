@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base class for game challenges.
  * In all challenges, the user is trying to match a given line.

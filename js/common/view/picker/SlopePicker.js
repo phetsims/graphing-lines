@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Picker for changing a component of slope.
  * Avoids creating an undefined line with slope=0/0.

@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Picker for one coordinate of a 2D point.
  * It prevents the point from having the same value as some other point,

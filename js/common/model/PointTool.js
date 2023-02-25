@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model of the point tool. Highlights when it is placed on one of the lines.
  *

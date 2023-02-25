@@ -1,5 +1,6 @@
 // Copyright 2017-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Methods for computing ranges of line parameters for slope form,
  * so that points are within the visible range of the graph and points do not overlap.

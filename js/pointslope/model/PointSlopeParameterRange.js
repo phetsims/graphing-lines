@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Methods for computing ranges of line parameters for point-slope form,
  * so that point and slope are within the visible range of the graph,

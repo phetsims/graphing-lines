@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Methods for computing ranges of line parameters for slope-intercept form,
  * so that slope and intercept are within the visible range of the graph.

@@ -171,7 +171,7 @@ class PointToolDragListener extends DragListener {
           // snap to the graph's grid
           position = new Vector2( Utils.toFixedNumber( position.x, 0 ), Utils.toFixedNumber( position.y, 0 ) );
         }
-        pointTool.positionProperty.set( position );
+        pointTool.positionProperty.value = position;
       }
     } );
   }

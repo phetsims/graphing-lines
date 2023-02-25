@@ -95,7 +95,7 @@ class PointDragListener extends DragListener {
 
         // if the point is unique, set it
         if ( !same ) {
-          pointProperty.set( p );
+          pointProperty.value = p;
         }
       }
     } );

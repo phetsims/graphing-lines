@@ -55,7 +55,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
             perfectScore: model.getPerfectScore( level )
           } ),
           listener: () => {
-            model.levelProperty.set( level );
+            model.levelProperty.value = level;
             model.setGamePhase( GamePhase.PLAY );
           },
           soundPlayerIndex: level

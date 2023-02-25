@@ -82,7 +82,7 @@ class YInterceptDragListener extends DragListener {
         const line = lineProperty.value;
 
         // Keep slope constant, change y1.
-        lineProperty.set( Line.createSlopeIntercept( line.rise, line.run, y1, line.color ) );
+        lineProperty.value = Line.createSlopeIntercept( line.rise, line.run, y1, line.color );
       }
     } );
   }

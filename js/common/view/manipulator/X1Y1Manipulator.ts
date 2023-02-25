@@ -95,12 +95,12 @@ class X1Y1DragListener extends DragListener {
 
         if ( constantSlope ) {
           // Keep slope constant, change (x1,y1) and (x2,y2).
-          lineProperty.set( Line.createPointSlope( x1, y1, line.rise, line.run, line.color ) );
+          lineProperty.value = Line.createPointSlope( x1, y1, line.rise, line.run, line.color );
         }
         else if ( x1 !== lineProperty.value.x2 || y1 !== lineProperty.value.y2 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
           // Keep (x2,y2) constant, change (x1,y1) and slope.
-          lineProperty.set( new Line( x1, y1, line.x2, line.y2, line.color ) );
+          lineProperty.value = new Line( x1, y1, line.x2, line.y2, line.color );
         }
       }
     } );

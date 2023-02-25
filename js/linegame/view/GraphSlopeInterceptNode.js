@@ -58,8 +58,8 @@ export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
 
       // adjust ranges
       if ( challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT ) {
-        riseRangeProperty.set( parameterRange.rise( line, challenge.graph ) );
-        y1RangeProperty.set( parameterRange.y1( line, challenge.graph ) );
+        riseRangeProperty.value = parameterRange.rise( line, challenge.graph );
+        y1RangeProperty.value = parameterRange.y1( line, challenge.graph );
       }
     };
     challenge.guessProperty.link( guessObserver ); // unlink in dispose

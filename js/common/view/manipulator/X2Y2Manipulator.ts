@@ -86,7 +86,7 @@ class X2Y2DragListener extends DragListener {
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)
           // Keep (x1,y1) constant, change (x2,y2) and slope.
-          lineProperty.set( new Line( line.x1, line.y1, x2, y2, line.color ) );
+          lineProperty.value = new Line( line.x1, line.y1, x2, y2, line.color );
         }
       }
     } );

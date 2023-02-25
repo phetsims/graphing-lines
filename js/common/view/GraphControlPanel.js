@@ -129,10 +129,10 @@ export default class GraphControlPanel extends Panel {
     // removeItemAddedListener is unnecessary since GraphControlPanel exists for the lifetime of the sim.
     standardLines.addItemAddedListener( line => {
       if ( line === Line.Y_EQUALS_X_LINE ) {
-        yEqualsXVisibleProperty.set( true );
+        yEqualsXVisibleProperty.value = true;
       }
       else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
-        yEqualsNegativeXVisibleProperty.set( true );
+        yEqualsNegativeXVisibleProperty.value = true;
       }
     } );
 
@@ -140,10 +140,10 @@ export default class GraphControlPanel extends Panel {
     // removeItemRemovedListener is unnecessary since GraphControlPanel exists for the lifetime of the sim.
     standardLines.addItemRemovedListener( line => {
       if ( line === Line.Y_EQUALS_X_LINE ) {
-        yEqualsXVisibleProperty.set( false );
+        yEqualsXVisibleProperty.value = false;
       }
       else if ( line === Line.Y_EQUALS_NEGATIVE_X_LINE ) {
-        yEqualsNegativeXVisibleProperty.set( false );
+        yEqualsNegativeXVisibleProperty.value = false;
       }
     } );
   }

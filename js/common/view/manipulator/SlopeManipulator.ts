@@ -82,7 +82,7 @@ class SlopeDragListener extends DragListener {
         const rise = Utils.roundSymmetric( Utils.clamp( position.y - line.y1, riseRangeProperty.value.min, riseRangeProperty.value.max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
-          lineProperty.set( Line.createPointSlope( line.x1, line.y1, rise, run, line.color ) );
+          lineProperty.value = Line.createPointSlope( line.x1, line.y1, rise, run, line.color );
         }
       }
     } );

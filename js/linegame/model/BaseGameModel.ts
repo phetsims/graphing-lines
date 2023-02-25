@@ -126,14 +126,14 @@ export default class BaseGameModel {
           // game has been completed
           this.setGamePhase( GamePhase.RESULTS );
           if ( score > this.bestScoreProperties[ level ].value ) {
-            this.bestScoreProperties[ level ].set( score );
+            this.bestScoreProperties[ level ].value = score;
           }
         }
         else {
           // next challenge
           const nextChallengeIndex = challengeIndex + 1;
-          this.challengeIndexProperty.set( nextChallengeIndex );
-          this.challengeProperty.set( this.challenges[ nextChallengeIndex ] );
+          this.challengeIndexProperty.value = nextChallengeIndex;
+          this.challengeProperty.value = this.challenges[ nextChallengeIndex ];
         }
       }
       else if ( playState === PlayState.NEXT ) {
@@ -155,17 +155,17 @@ export default class BaseGameModel {
 
       // Do tasks that need to be done before notifying listeners.
       if ( gamePhase === GamePhase.SETTINGS ) {
-        this.playStateProperty.set( PlayState.NONE );
+        this.playStateProperty.value = PlayState.NONE;
         this.timer.stop();
       }
       else if ( gamePhase === GamePhase.PLAY ) {
         this.initChallenges();
-        this.playStateProperty.set( PlayState.FIRST_CHECK );
-        this.scoreProperty.set( 0 );
+        this.playStateProperty.value = PlayState.FIRST_CHECK;
+        this.scoreProperty.value = 0;
         this.timer.start();
       }
       else if ( gamePhase === GamePhase.RESULTS ) {
-        this.playStateProperty.set( PlayState.NONE );
+        this.playStateProperty.value = PlayState.NONE;
         this.updateBestTime();
       }
       else {
@@ -173,7 +173,7 @@ export default class BaseGameModel {
       }
 
       // Change the Property, which notifies listeners
-      this.gamePhaseProperty.set( gamePhase );
+      this.gamePhaseProperty.value = gamePhase;
     }
   }
 
@@ -197,12 +197,16 @@ export default class BaseGameModel {
 
   // Resets the best score to zero for every level.
   private resetBestScores(): void {
-    this.bestScoreProperties.forEach( property => property.set( 0 ) );
+    this.bestScoreProperties.forEach( property => {
+      property.value = 0;
+    } );
   }
 
   // Resets the best times to null (no time) for every level.
   private resetBestTimes(): void {
-    this.bestTimeProperties.forEach( property => property.set( null ) );
+    this.bestTimeProperties.forEach( property => {
+      property.value = null;
+    } );
   }
 
   public isPerfectScore(): boolean {
@@ -225,8 +229,8 @@ export default class BaseGameModel {
    * Score and best times are meaningless after using this.
    */
   public skipCurrentChallenge(): void {
-    this.playStateProperty.set( PlayState.NEXT );
-    this.playStateProperty.set( PlayState.FIRST_CHECK );
+    this.playStateProperty.value = PlayState.NEXT;
+    this.playStateProperty.value = PlayState.FIRST_CHECK;
   }
 
   /**
@@ -236,26 +240,26 @@ export default class BaseGameModel {
    */
   public replayCurrentChallenge(): void {
     this.challengeProperty.value.reset();
-    this.challengeIndexProperty.set( this.challengeIndexProperty.value - 1 );
-    this.challengeProperty.set( DUMMY_CHALLENGE ); // force an update
-    this.playStateProperty.set( PlayState.FIRST_CHECK );
+    this.challengeIndexProperty.value = this.challengeIndexProperty.value - 1;
+    this.challengeProperty.value = DUMMY_CHALLENGE; // force an update
+    this.playStateProperty.value = PlayState.FIRST_CHECK;
   }
 
   // Updates the best time for the current level, at the end of a timed game with a perfect score.
   private updateBestTime(): void {
     assert && assert( !this.timer.isRunningProperty.value );
     this.isNewBestTime = false;
-    if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
-      const level = this.levelProperty.get();
+    if ( this.timerEnabledProperty.value && this.isPerfectScore() ) {
+      const level = this.levelProperty.value;
       const time = this.timer.elapsedTimeProperty.value;
-      const bestTime = this.bestTimeProperties[ level ].get();
+      const bestTime = this.bestTimeProperties[ level ].value;
       if ( !bestTime ) {
         // There was no previous best time for this level.
-        this.bestTimeProperties[ level ].set( time );
+        this.bestTimeProperties[ level ].value = time;
       }
       else if ( time < bestTime ) {
         // We have a new best time for this level.
-        this.bestTimeProperties[ level ].set( time );
+        this.bestTimeProperties[ level ].value = time;
         this.isNewBestTime = true;
       }
     }
@@ -265,10 +269,10 @@ export default class BaseGameModel {
   private initChallenges(): void {
 
     // force update
-    this.challengeIndexProperty.set( -1 );
+    this.challengeIndexProperty.value = -1;
 
     // level
-    const level = this.levelProperty.get();
+    const level = this.levelProperty.value;
     assert && assert( level >= 0 && level < this.challengeFactories.length );
 
     // generate challenges
@@ -278,8 +282,8 @@ export default class BaseGameModel {
     }
 
     // set the number of challenges
-    this.challengesPerGameProperty.set( this.challenges.length );
-    assert && assert( this.challengesPerGameProperty.get() === CHALLENGES_PER_GAME );
+    this.challengesPerGameProperty.value = this.challenges.length;
+    assert && assert( this.challengesPerGameProperty.value === CHALLENGES_PER_GAME );
   }
 
   // Verify challenge creation.

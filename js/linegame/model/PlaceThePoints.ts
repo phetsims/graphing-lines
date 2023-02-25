@@ -57,11 +57,11 @@ export default class PlaceThePoints extends GraphTheLine {
         const line = new Line( p1.x, p1.y, p2.x, p2.y, LineGameConstants.GUESS_COLOR );
         if ( line.onLinePoint( p3 ) ) {
           // all 3 points are on a line
-          this.guessProperty.set( line );
+          this.guessProperty.value = line;
         }
         else {
           // the 3 points don't form a line
-          this.guessProperty.set( new NotALine() );
+          this.guessProperty.value = new NotALine();
         }
       } );
   }

@@ -171,8 +171,8 @@ export default class PointSlopeEquationNode extends EquationNode {
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
-                                  StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
-                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
+                                    StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
+                                    StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
         return;
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
@@ -395,7 +395,8 @@ export default class PointSlopeEquationNode extends EquationNode {
     const controlsMultilink = Multilink.lazyMultilink( [ x1Property, y1Property, riseProperty, runProperty ],
       () => {
         if ( !updatingControls ) {
-          lineProperty.set( Line.createPointSlope( x1Property.get(), y1Property.get(), riseProperty.get(), runProperty.get(), lineProperty.get().color ) );
+          lineProperty.value = Line.createPointSlope( x1Property.value, y1Property.value,
+            riseProperty.value, runProperty.value, lineProperty.value.color );
         }
       }
     );
@@ -406,10 +407,10 @@ export default class PointSlopeEquationNode extends EquationNode {
       // Synchronize the controls atomically.
       updatingControls = true;
       {
-        x1Property.set( line.x1 );
-        y1Property.set( line.y1 );
-        riseProperty.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
-        runProperty.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
+        x1Property.value = line.x1;
+        y1Property.value = line.y1;
+        riseProperty.value = options.interactiveSlope ? line.rise : line.getSimplifiedRise();
+        runProperty.value = options.interactiveSlope ? line.run : line.getSimplifiedRun();
       }
       updatingControls = false;
 
@@ -423,7 +424,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     if ( fullyInteractive ) {
 
       // update layout once
-      updateLayout( lineProperty.get() );
+      updateLayout( lineProperty.value );
 
       // add undefinedSlopeIndicator
       const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height, staticOptions );

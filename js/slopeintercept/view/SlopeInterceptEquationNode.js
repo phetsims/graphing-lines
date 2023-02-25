@@ -162,8 +162,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
-                                  StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
-                                  StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
+                                    StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
+                                    StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
         return;
       }
 
@@ -361,11 +361,13 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       () => {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {
-            lineProperty.set( Line.createSlopeIntercept( riseProperty.get(), runProperty.get(), yInterceptProperty.get(), lineProperty.get().color ) );
+            lineProperty.value = Line.createSlopeIntercept( riseProperty.value, runProperty.value,
+              yInterceptProperty.value, lineProperty.value.color );
           }
           else {
-            const line = lineProperty.get();
-            lineProperty.set( new Line( line.x1, line.y1, line.x1 + runProperty.get(), line.y1 + riseProperty.get(), lineProperty.get().color ) );
+            const line = lineProperty.value;
+            lineProperty.value = new Line( line.x1, line.y1,
+              line.x1 + runProperty.value, line.y1 + riseProperty.value, lineProperty.value.color );
           }
         }
       }
@@ -380,16 +382,16 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       // Synchronize the controls atomically.
       updatingControls = true;
       {
-        riseProperty.set( options.interactiveSlope ? line.rise : line.getSimplifiedRise() );
-        runProperty.set( options.interactiveSlope ? line.run : line.getSimplifiedRun() );
+        riseProperty.value = options.interactiveSlope ? line.rise : line.getSimplifiedRise();
+        runProperty.value = options.interactiveSlope ? line.run : line.getSimplifiedRun();
 
         if ( options.interactiveIntercept ) {
-          yInterceptProperty.set( line.y1 );
+          yInterceptProperty.value = line.y1;
         }
         else {
-          const fractionalIntercept = lineProperty.get().getYIntercept();
-          yInterceptNumeratorProperty.set( fractionalIntercept.numerator );
-          yInterceptDenominatorProperty.set( fractionalIntercept.denominator );
+          const fractionalIntercept = lineProperty.value.getYIntercept();
+          yInterceptNumeratorProperty.value = fractionalIntercept.numerator;
+          yInterceptDenominatorProperty.value = fractionalIntercept.denominator;
         }
       }
       updatingControls = false;
@@ -404,7 +406,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     if ( fullyInteractive ) {
 
       // update layout once
-      updateLayout( lineProperty.get() );
+      updateLayout( lineProperty.value );
 
       // add undefinedSlopeIndicator
       const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height, staticOptions );

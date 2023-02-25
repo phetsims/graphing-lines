@@ -147,7 +147,7 @@ export default class SlopeEquationNode extends EquationNode {
       [ x1Property, y1Property, x2Property, y2Property ],
       ( x1, y1, x2, y2 ) => {
         if ( !updatingControls ) {
-          lineProperty.set( new Line( x1, y1, x2, y2, lineProperty.value.color ) );
+          lineProperty.value = new Line( x1, y1, x2, y2, lineProperty.value.color );
         }
       }
     );
@@ -158,16 +158,16 @@ export default class SlopeEquationNode extends EquationNode {
       // Synchronize the controls atomically.
       updatingControls = true;
       {
-        x1Property.set( line.x1 );
-        y1Property.set( line.y1 );
-        x2Property.set( line.x2 );
-        y2Property.set( line.y2 );
+        x1Property.value = line.x1;
+        y1Property.value = line.y1;
+        x2Property.value = line.x2;
+        y2Property.value = line.y2;
       }
       updatingControls = false;
 
       // Update the unsimplified slope
-      riseProperty.set( line.rise );
-      runProperty.set( line.run );
+      riseProperty.value = line.rise;
+      runProperty.value = line.run;
 
       // fraction line length
       const unsimplifiedFractionLineLength = Math.max( unsimplifiedRiseNode.width, unsimplifiedRunNode.width );

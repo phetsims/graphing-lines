@@ -107,8 +107,8 @@ export default class SlopeToolNode extends Node {
     }
 
     // update internal properties before doing any layout
-    this.riseProperty.set( line.rise );
-    this.runProperty.set( line.run );
+    this.riseProperty.value = line.rise;
+    this.runProperty.value = line.run;
 
     // compute view coordinates
     const gridXSpacing = modelViewTransform.modelToViewDeltaX( 1 );

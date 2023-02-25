@@ -59,10 +59,10 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
 
       // adjust ranges
       if ( challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {
-        x1RangeProperty.set( pointSlopeParameterRange.x1( line, challenge.graph ) );
-        y1RangeProperty.set( pointSlopeParameterRange.y1( line, challenge.graph ) );
-        riseRangeProperty.set( pointSlopeParameterRange.rise( line, challenge.graph ) );
-        runRangeProperty.set( pointSlopeParameterRange.run( line, challenge.graph ) );
+        x1RangeProperty.value = pointSlopeParameterRange.x1( line, challenge.graph );
+        y1RangeProperty.value = pointSlopeParameterRange.y1( line, challenge.graph );
+        riseRangeProperty.value = pointSlopeParameterRange.rise( line, challenge.graph );
+        runRangeProperty.value = pointSlopeParameterRange.run( line, challenge.graph );
       }
     };
     challenge.guessProperty.link( guessObserver ); // unlink in dispose

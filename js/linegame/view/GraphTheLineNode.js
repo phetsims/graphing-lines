@@ -118,7 +118,7 @@ export default class GraphTheLineNode extends ChallengeNode {
 
       // line is NotAline if ManipulationMode.THREE_POINTS and points don't make a line
       if ( isaLine ) {
-        guessLineProperty.set( line ); // updates guessEquationNode
+        guessLineProperty.value = line; // updates guessEquationNode
       }
       guessEquationNode.visible = isaLine;
       this.notALineNode.visible = !isaLine;

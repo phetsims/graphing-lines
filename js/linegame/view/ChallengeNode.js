@@ -138,36 +138,36 @@ export default class ChallengeNode extends Node {
         // Prevent score from exceeding perfect score, in case we replay challenges with ?gameDebug query parameter.
         // See https://github.com/phetsims/graphing-lines/issues/70
         const newScore = Math.min( model.scoreProperty.value + points, model.getPerfectScore() );
-        model.scoreProperty.set( newScore );
+        model.scoreProperty.value = newScore;
         this.faceNode.setPoints( points );
-        model.playStateProperty.set( PlayState.NEXT );
+        model.playStateProperty.value = PlayState.NEXT;
       }
       else {
         this.faceNode.frown();
         this.faceNode.setPoints( 0 );
         audioPlayer.wrongAnswer();
         if ( model.playStateProperty.value === PlayState.FIRST_CHECK ) {
-          model.playStateProperty.set( PlayState.TRY_AGAIN );
+          model.playStateProperty.value = PlayState.TRY_AGAIN;
         }
         else {
-          model.playStateProperty.set( PlayState.SHOW_ANSWER );
+          model.playStateProperty.value = PlayState.SHOW_ANSWER;
         }
       }
     } );
 
     // 'Try Again' button
     tryAgainButton.addListener( () => {
-      model.playStateProperty.set( PlayState.SECOND_CHECK );
+      model.playStateProperty.value = PlayState.SECOND_CHECK;
     } );
 
     // 'Show Answer' button
     showAnswerButton.addListener( () => {
-      model.playStateProperty.set( PlayState.NEXT );
+      model.playStateProperty.value = PlayState.NEXT;
     } );
 
     // 'Next' button
     nextButton.addListener( () => {
-      model.playStateProperty.set( PlayState.FIRST_CHECK );
+      model.playStateProperty.value = PlayState.FIRST_CHECK;
     } );
 
     // play-state changes
@@ -195,7 +195,7 @@ export default class ChallengeNode extends Node {
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
     const guessObserver = guess => {
       if ( model.playStateProperty.value === PlayState.TRY_AGAIN ) {
-        model.playStateProperty.set( PlayState.SECOND_CHECK );
+        model.playStateProperty.value = PlayState.SECOND_CHECK;
       }
     };
     challenge.guessProperty.link( guessObserver ); // unlink in dispose

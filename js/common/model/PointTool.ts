@@ -55,11 +55,11 @@ export default class PointTool {
         for ( let i = 0; i < lines.length; i++ ) {
           line = lines.get( i );
           if ( this.isOnLine( line ) ) {
-            this.onLineProperty.set( line );
+            this.onLineProperty.value = line;
             return;
           }
         }
-        this.onLineProperty.set( null );
+        this.onLineProperty.value = null;
       }
     );
   }

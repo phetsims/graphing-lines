@@ -40,10 +40,10 @@ export default class PointSlopeModel extends LineFormsModel {
     // Dynamically adjust ranges so that variables are constrained to the bounds of the graph.
     // unlink unnecessary because PointSlopeModel exists for the lifetime of the sim.
     this.interactiveLineProperty.link( line => {
-      this.x1RangeProperty.set( parameterRange.x1( line, this.graph ) );
-      this.y1RangeProperty.set( parameterRange.y1( line, this.graph ) );
-      this.riseRangeProperty.set( parameterRange.rise( line, this.graph ) );
-      this.runRangeProperty.set( parameterRange.run( line, this.graph ) );
+      this.x1RangeProperty.value = parameterRange.x1( line, this.graph );
+      this.y1RangeProperty.value = parameterRange.y1( line, this.graph );
+      this.riseRangeProperty.value = parameterRange.rise( line, this.graph );
+      this.runRangeProperty.value = parameterRange.run( line, this.graph );
     } );
   }
 }

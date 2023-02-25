@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * An immutable line, described by 2 points, (x1,y1) and (x2,y2).
  * Slope components (rise and run) are signed relative to (x1,y1).

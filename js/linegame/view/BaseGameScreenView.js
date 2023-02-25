@@ -27,8 +27,9 @@ export default class BaseGameScreenView extends ScreenView {
   constructor( model, levelImages, rewardFactoryFunctions, options ) {
 
     options = merge( {
+      layoutBounds: GLConstants.SCREEN_VIEW_LAYOUT_BOUNDS,
       settingsNodeOptions: {} // propagated to SettingsNode
-    }, GLConstants.SCREEN_VIEW_OPTIONS, options );
+    }, options );
 
     super( options );
 

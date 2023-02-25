@@ -17,7 +17,10 @@ import ChallengeFactory6 from './ChallengeFactory6.js';
 
 export default class LineGameModel extends BaseGameModel {
 
-  constructor() {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
     // a challenge factory for each level
     const challengeFactories = [
@@ -29,7 +32,7 @@ export default class LineGameModel extends BaseGameModel {
       new ChallengeFactory6()
     ];
 
-    super( challengeFactories );
+    super( challengeFactories, tandem );
   }
 }
 

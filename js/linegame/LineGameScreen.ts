@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Line Game' screen. Conforms to the contract specified in joist/Screen.
  *
@@ -9,6 +8,7 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
@@ -16,12 +16,9 @@ import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import LineGameModel from './model/LineGameModel.js';
 import LineGameScreenView from './view/LineGameScreenView.js';
 
-export default class LineGameScreen extends Screen {
+export default class LineGameScreen extends Screen<LineGameModel, LineGameScreenView> {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
     const options = {
       name: GraphingLinesStrings.screen.lineGameStringProperty,
@@ -31,8 +28,8 @@ export default class LineGameScreen extends Screen {
     };
 
     super(
-      () => new LineGameModel(),
-      model => new LineGameScreenView( model ),
+      () => new LineGameModel( tandem.createTandem( 'model' ) ),
+      model => new LineGameScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

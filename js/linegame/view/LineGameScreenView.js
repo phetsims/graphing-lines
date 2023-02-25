@@ -20,8 +20,9 @@ export default class LineGameScreenView extends BaseGameScreenView {
 
   /**
    * @param {LineGameModel} model
+   * @param {Tandem} tandem
    */
-  constructor( model ) {
+  constructor( model, tandem ) {
 
     // Images for the level-selection buttons, ordered by level
     const levelImages = [ level1_png, level2_png, level3_png, level4_png, level5_png, level6_png ];
@@ -36,7 +37,7 @@ export default class LineGameScreenView extends BaseGameScreenView {
       GLRewardNode.createAssortedNodes
     ];
 
-    super( model, levelImages, rewardFactoryFunctions, {
+    super( model, levelImages, rewardFactoryFunctions, tandem, {
       settingsNodeOptions: {
         levelSelectionButtonGroupOptions: {
           flowBoxOptions: {

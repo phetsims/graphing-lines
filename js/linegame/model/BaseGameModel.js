@@ -37,8 +37,9 @@ export default class BaseGameModel {
 
   /**
    * @param {BaseChallengeFactory[]} challengeFactories
+   * @param {Tandem} tandem
    */
-  constructor( challengeFactories ) {
+  constructor( challengeFactories, tandem ) {
 
     // @private
     this.challengeFactories = challengeFactories;

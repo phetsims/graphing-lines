@@ -22,13 +22,15 @@ export default class BaseGameScreenView extends ScreenView {
    * @param {BaseGameModel} model
    * @param {HTMLImageElement[]} levelImages - grid of images for the level-selection buttons, ordered by level
    * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
+   * @param {Tandem} tandem
    * @param {Object} [options]
    */
-  constructor( model, levelImages, rewardFactoryFunctions, options ) {
+  constructor( model, levelImages, rewardFactoryFunctions, tandem, options ) {
 
     options = merge( {
       layoutBounds: GLConstants.SCREEN_VIEW_LAYOUT_BOUNDS,
-      settingsNodeOptions: {} // propagated to SettingsNode
+      settingsNodeOptions: {}, // propagated to SettingsNode
+      tandem: tandem
     }, options );
 
     super( options );

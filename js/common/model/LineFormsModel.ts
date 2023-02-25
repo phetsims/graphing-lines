@@ -1,13 +1,12 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Base type for the 'Slope', 'Slope-Intercept' and 'Point-Slope' models.
+ * LineFormsModel is the base class for the 'Slope', 'Slope-Intercept' and 'Point-Slope' models.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import createObservableArray from '../../../../axon/js/createObservableArray.js';
+import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
@@ -16,6 +15,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import Graph from './Graph.js';
+import Line from './Line.js';
 import PointTool from './PointTool.js';
 
 // constants
@@ -24,25 +24,36 @@ const ORIGIN_OFFSET = new Vector2( 315, 330 ); // offset of the graph's origin i
 
 export default class LineFormsModel {
 
-  /**
-   * @param {Line} interactiveLine
-   */
-  constructor( interactiveLine ) {
+  // the line that the user interacts with
+  public readonly interactiveLineProperty: Property<Line>;
 
-    // @public {Property.<Line>} the line that the user interacts with
+  // radius of the manipulators
+  public readonly manipulatorRadius: number;
+
+  public readonly graph: Graph;
+
+  // model-view transform, created in the model because it's dependent on graph axes ranges
+  public readonly modelViewTransform: ModelViewTransform2;
+
+  // static lines
+  public readonly savedLines: ObservableArray<Line>;
+  public readonly standardLines: ObservableArray<Line>;
+
+  // point tools, drag bounds determined by 'eye balling' so that the point tool nodes remain on screen
+  public readonly pointTool1: PointTool;
+  public readonly pointTool2: PointTool;
+
+  protected constructor( interactiveLine: Line ) {
+
     this.interactiveLineProperty = new Property( interactiveLine );
 
-    // @public (read-only) radius of the manipulators
     this.manipulatorRadius = GLConstants.MANIPULATOR_RADIUS;
 
-    // @public graph
     this.graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
-    // @public model-view transform, created in the model because it's dependent on graph axes ranges
     const modelViewTransformScale = GRID_VIEW_UNITS / Math.max( this.graph.xRange.getLength(), this.graph.yRange.getLength() ); // view units / model units
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // y is inverted
 
-    // @public static lines
     this.savedLines = createObservableArray();
     this.standardLines = createObservableArray();
 
@@ -61,15 +72,13 @@ export default class LineFormsModel {
       }
     );
 
-    // @public point tools, drag bounds determined by 'eye balling' so that the point tool nodes remain on screen.
     this.pointTool1 = new PointTool( new Vector2( -5, -10.5 ), 'up', this.graph.lines,
       new Bounds2( this.graph.xRange.min - 1, this.graph.yRange.min - 1, this.graph.xRange.max + 3, this.graph.yRange.max + 3 ) );
     this.pointTool2 = new PointTool( new Vector2( 3, -13 ), 'down', this.graph.lines,
       new Bounds2( this.graph.xRange.min - 1, this.graph.yRange.min - 3, this.graph.xRange.max + 3, this.graph.yRange.max + 1 ) );
   }
 
-  // @public
-  reset() {
+  public reset(): void {
     this.interactiveLineProperty.reset();
     this.savedLines.clear();
     this.standardLines.clear();

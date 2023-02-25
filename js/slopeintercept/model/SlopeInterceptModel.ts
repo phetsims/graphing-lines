@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Model for the 'Slope-Intercept' screen.
  * This is a specialization of the Point-Slope model.
@@ -16,7 +15,7 @@ import PointSlopeModel from '../../pointslope/model/PointSlopeModel.js';
 import SlopeInterceptParameterRange from './SlopeInterceptParameterRange.js';
 
 export default class SlopeInterceptModel extends PointSlopeModel {
-  constructor() {
+  public constructor() {
     super( Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
   }
 }

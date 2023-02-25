@@ -1,12 +1,12 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Model for the 'Slope' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../../dot/js/Range.js';
 import Property from '../../../../axon/js/Property.js';
 import GLColors from '../../common/GLColors.js';
 import Line from '../../common/model/Line.js';
@@ -16,11 +16,16 @@ import SlopeParameterRange from './SlopeParameterRange.js';
 
 export default class SlopeModel extends LineFormsModel {
 
-  constructor() {
+  // Ranges of the points that define a line
+  public readonly x1RangeProperty: Property<Range>;
+  public readonly y1RangeProperty: Property<Range>;
+  public readonly x2RangeProperty: Property<Range>;
+  public readonly y2RangeProperty: Property<Range>;
+
+  public constructor() {
 
     super( new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
 
-    // @public ranges
     this.x1RangeProperty = new Property( this.graph.xRange );
     this.y1RangeProperty = new Property( this.graph.yRange );
     this.x2RangeProperty = new Property( this.graph.xRange );

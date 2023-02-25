@@ -11,6 +11,7 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import TModel from '../../../../joist/js/TModel.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
@@ -22,7 +23,7 @@ import PointTool from './PointTool.js';
 const GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
 const ORIGIN_OFFSET = new Vector2( 315, 330 ); // offset of the graph's origin in view coordinates
 
-export default class LineFormsModel {
+export default class LineFormsModel implements TModel {
 
   // the line that the user interacts with
   public readonly interactiveLineProperty: Property<Line>;

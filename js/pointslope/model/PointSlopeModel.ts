@@ -1,12 +1,12 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Model for the 'Point-Slope' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Range from '../../../../dot/js/Range.js';
 import Property from '../../../../axon/js/Property.js';
 import GLColors from '../../common/GLColors.js';
 import Line from '../../common/model/Line.js';
@@ -16,18 +16,21 @@ import PointSlopeParameterRange from './PointSlopeParameterRange.js';
 
 export default class PointSlopeModel extends LineFormsModel {
 
-  /**
-   * @param {Line} interactiveLine
-   * @param {PointSlopeParameterRange} [parameterRange]
-   */
-  constructor( interactiveLine, parameterRange ) {
+  // Ranges of the point
+  public readonly x1RangeProperty: Property<Range>;
+  public readonly y1RangeProperty: Property<Range>;
 
-    interactiveLine = interactiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
-    parameterRange = parameterRange || new PointSlopeParameterRange();
+  // Ranges of the slope = rise / run
+  public readonly riseRangeProperty: Property<Range>;
+  public readonly runRangeProperty: Property<Range>;
+
+  public constructor( providedInteractiveLine?: Line, providedParameterRange?: PointSlopeParameterRange ) {
+
+    const interactiveLine = providedInteractiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
+    const parameterRange = providedParameterRange || new PointSlopeParameterRange();
 
     super( interactiveLine );
 
-    // @public ranges
     this.x1RangeProperty = new Property( this.graph.xRange );
     this.y1RangeProperty = new Property( this.graph.yRange );
     this.riseRangeProperty = new Property( this.graph.yRange );

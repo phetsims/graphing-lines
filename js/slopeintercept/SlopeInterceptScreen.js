@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * The 'Slope-Intercept' screen. Conforms to the contract specified in joist/Screen.
  *

@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model for the 'Slope-Intercept' screen.
  * This is a specialization of the Point-Slope model.

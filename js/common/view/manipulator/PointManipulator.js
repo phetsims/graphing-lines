@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Drag listener for an arbitrary point (Vector2).
  * Used exclusively in 'Place the Points' game challenges.

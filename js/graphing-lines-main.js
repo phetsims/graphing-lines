@@ -15,24 +15,28 @@ import PointSlopeScreen from './pointslope/PointSlopeScreen.js';
 import SlopeScreen from './slope/SlopeScreen.js';
 import SlopeInterceptScreen from './slopeintercept/SlopeInterceptScreen.js';
 
-const options = {
-  credits: {
-    leadDesign: 'Ariel Paul',
-    softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
-    team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
-    graphicArts: 'Megan Lai, Sharon Siman-Tov',
-    qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
-                      'Benjamin Roberts, Jacob Romero, Kathryn Woessner, Bryan Yoelin'
-  }
-};
-
 simLauncher.launch( () => {
+
+  const title = GraphingLinesStrings[ 'graphing-lines' ].titleStringProperty;
+
   const screens = [
     new SlopeScreen( Tandem.ROOT.createTandem( 'slopeScreen' ) ),
     new SlopeInterceptScreen( Tandem.ROOT.createTandem( 'slopeInterceptScreen' ) ),
     new PointSlopeScreen( Tandem.ROOT.createTandem( 'pointSlopeScreen' ) ),
     new LineGameScreen( Tandem.ROOT.createTandem( 'lineGameScreen' ) )
   ];
-  const sim = new Sim( GraphingLinesStrings[ 'graphing-lines' ].titleStringProperty, screens, options );
+
+  const options = {
+    credits: {
+      leadDesign: 'Ariel Paul',
+      softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
+      team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
+      graphicArts: 'Megan Lai, Sharon Siman-Tov',
+      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
+                        'Benjamin Roberts, Jacob Romero, Kathryn Woessner, Bryan Yoelin'
+    }
+  };
+
+  const sim = new Sim( title, screens, options );
   sim.start();
 } );

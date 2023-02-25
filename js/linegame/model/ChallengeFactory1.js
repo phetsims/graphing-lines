@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Creates game challenges for Level 1, as specified in the design document.
  * Slope, intercept, and point (x1,y1) are all uniquely chosen.

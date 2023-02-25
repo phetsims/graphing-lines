@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Creates game challenges for Level 3, as specified in the design document.
  * Uses the same sets of slopes and y-intercepts as Level 2, but generates different challenges.

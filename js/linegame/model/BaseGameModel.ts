@@ -1,8 +1,7 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Base type for the 'Line Game' model.
+ * BaseGameModel is the base class for LineGameModel and GSILineGameModel.
  *
  * Responsibilities include:
  * - creation of challenges (delegated to factory)
@@ -17,11 +16,14 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GameTimer from '../../../../vegas/js/GameTimer.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
+import BaseChallengeFactory from './BaseChallengeFactory.js';
+import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
 import GamePhase from './GamePhase.js';
 import GraphTheLine from './GraphTheLine.js';
@@ -36,36 +38,55 @@ const DUMMY_CHALLENGE = new GraphTheLine( '', Line.createSlopeIntercept( 1, 1, 1
 
 export default class BaseGameModel {
 
-  /**
-   * @param {BaseChallengeFactory[]} challengeFactories
-   * @param {Tandem} tandem
-   */
-  constructor( challengeFactories, tandem ) {
+  private readonly challengeFactories: BaseChallengeFactory[];
+  public readonly levelProperty: Property<number>;
+  public readonly soundEnabledProperty: Property<boolean>;
+  public readonly timerEnabledProperty: Property<boolean>;
+  public readonly scoreProperty: Property<number>; // how many points the user has earned for the current game
+  public readonly challengeProperty: Property<Challenge>;
+  public readonly challengeIndexProperty: Property<number>;
+  public readonly challengesPerGameProperty: Property<number>;
+  public readonly playStateProperty: EnumerationProperty<PlayState>;
 
-    // @private
+  public challenges: Challenge[];
+  public readonly timer: GameTimer;
+  public readonly numberOfLevels: number;
+  public readonly maxPointsPerChallenge: number;
+  public readonly bestScoreProperties: Property<number>[];
+  public readonly bestTimeProperties: Property<number | null>[]; // null if a level has no best time yet
+  public isNewBestTime: boolean;
+  public readonly gamePhaseProperty: EnumerationProperty<GamePhase>; // set this using setGamePhase
+
+  protected constructor( challengeFactories: BaseChallengeFactory[], tandem: Tandem ) {
+
     this.challengeFactories = challengeFactories;
 
-    // @public Properties
     this.levelProperty = new NumberProperty( 0, {
       numberType: 'Integer'
     } );
+
     this.soundEnabledProperty = new BooleanProperty( true );
+
     this.timerEnabledProperty = new BooleanProperty( false );
+
     this.scoreProperty = new NumberProperty( 0, {
       numberType: 'Integer'
-    } ); // {number} how many points the user has earned for the current game
-    this.challengeProperty = new Property( DUMMY_CHALLENGE );
+    } );
+
+    this.challengeProperty = new Property<Challenge>( DUMMY_CHALLENGE );
+
     this.challengeIndexProperty = new NumberProperty( 0, {
       numberType: 'Integer'
     } );
+
     this.challengesPerGameProperty = new NumberProperty( CHALLENGES_PER_GAME, {
       numberType: 'Integer'
     } );
+
     this.playStateProperty = new EnumerationProperty( PlayState.NONE, {
       reentrant: true // see https://github.com/phetsims/graphing-lines/issues/102
     } );
 
-    // @public
     this.challenges = []; // {Challenge[]}
     this.timer = new GameTimer();
     this.numberOfLevels = challengeFactories.length;
@@ -77,10 +98,9 @@ export default class BaseGameModel {
       this.bestScoreProperties.push( new NumberProperty( 0, {
         numberType: 'Integer'
       } ) );
-      this.bestTimeProperties.push( new Property( null ) ); // null if a level has no best time yet
+      this.bestTimeProperties.push( new Property<number | null>( null ) );
     }
 
-    // @public (read-only) set this using setGamePhase
     this.gamePhaseProperty = new EnumerationProperty( INITIAL_GAME_PHASE );
 
     this.initChallenges();
@@ -129,10 +149,8 @@ export default class BaseGameModel {
   /**
    * Sets the game phase. Call this instead of setting gamePhaseProperty directly,
    * because there are tasks that needs to be done before listeners are notified.
-   * @param {GamePhase} gamePhase
-   * @public
    */
-  setGamePhase( gamePhase ) {
+  public setGamePhase( gamePhase: GamePhase ): void {
     if ( gamePhase !== this.gamePhaseProperty.get() ) {
 
       // Do tasks that need to be done before notifying listeners.
@@ -159,8 +177,7 @@ export default class BaseGameModel {
     }
   }
 
-  // @public
-  reset() {
+  public reset(): void {
 
     this.levelProperty.reset();
     this.soundEnabledProperty.reset();
@@ -178,28 +195,27 @@ export default class BaseGameModel {
     this.initChallenges(); // takes care of challengeProperty, challengeIndexProperty, challengesPerGameProperty
   }
 
-  // @private resets the best score to zero for every level
-  resetBestScores() {
+  // Resets the best score to zero for every level.
+  private resetBestScores(): void {
     this.bestScoreProperties.forEach( property => property.set( 0 ) );
   }
 
-  // @private resets the best times to null (no time) for every level
-  resetBestTimes() {
+  // Resets the best times to null (no time) for every level.
+  private resetBestTimes(): void {
     this.bestTimeProperties.forEach( property => property.set( null ) );
   }
 
-  // @public
-  isPerfectScore() {
-    return this.scoreProperty.get() === this.getPerfectScore();
+  public isPerfectScore(): boolean {
+    return ( this.scoreProperty.get() === this.getPerfectScore() );
   }
 
-  // @public Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
-  getPerfectScore() {
+  // Gets the number of points in a perfect score (ie, correct answers for all challenges on the first try)
+  public getPerfectScore(): number {
     return this.challenges.length * this.computePoints( 1 );
   }
 
-  // @public Compute points to be awarded for a correct answer.
-  computePoints( attempts ) {
+  // Compute points to be awarded for a correct answer.
+  public computePoints( attempts: number ): number {
     return Math.max( 0, this.maxPointsPerChallenge - attempts + 1 );
   }
 
@@ -207,9 +223,8 @@ export default class BaseGameModel {
    * Skips the current challenge.
    * This is a developer feature.
    * Score and best times are meaningless after using this.
-   * @public
    */
-  skipCurrentChallenge() {
+  public skipCurrentChallenge(): void {
     this.playStateProperty.set( PlayState.NEXT );
     this.playStateProperty.set( PlayState.FIRST_CHECK );
   }
@@ -218,36 +233,36 @@ export default class BaseGameModel {
    * Replays the current challenge.
    * This is a developer feature.
    * Score and best times are meaningless after using this.
-   * @public
    */
-  replayCurrentChallenge() {
+  public replayCurrentChallenge(): void {
     this.challengeProperty.get().reset();
     this.challengeIndexProperty.set( this.challengeIndexProperty.get() - 1 );
     this.challengeProperty.set( DUMMY_CHALLENGE ); // force an update
     this.playStateProperty.set( PlayState.FIRST_CHECK );
   }
 
-  // @private Updates the best time for the current level, at the end of a timed game with a perfect score.
-  updateBestTime() {
+  // Updates the best time for the current level, at the end of a timed game with a perfect score.
+  private updateBestTime(): void {
     assert && assert( !this.timer.isRunningProperty.value );
     this.isNewBestTime = false;
     if ( this.timerEnabledProperty.get() && this.isPerfectScore() ) {
       const level = this.levelProperty.get();
       const time = this.timer.elapsedTimeProperty.value;
-      if ( !this.bestTimeProperties[ level ].get() ) {
-        // there was no previous time for this level
+      const bestTime = this.bestTimeProperties[ level ].get();
+      if ( !bestTime ) {
+        // There was no previous best time for this level.
         this.bestTimeProperties[ level ].set( time );
       }
-      else if ( time < this.bestTimeProperties[ level ].get() ) {
-        // we have a new best time for this level
+      else if ( time < bestTime ) {
+        // We have a new best time for this level.
         this.bestTimeProperties[ level ].set( time );
         this.isNewBestTime = true;
       }
     }
   }
 
-  // @private initializes a new set of challenges for the current level
-  initChallenges() {
+  // Initializes a new set of challenges for the current level.
+  private initChallenges(): void {
 
     // force update
     this.challengeIndexProperty.set( -1 );
@@ -267,8 +282,8 @@ export default class BaseGameModel {
     assert && assert( this.challengesPerGameProperty.get() === CHALLENGES_PER_GAME );
   }
 
-  // @private verify challenge creation by
-  verifyChallenges() {
+  // Verify challenge creation.
+  private verifyChallenges(): void {
     console.log( 'begin: verify creation of challenges' );
     for ( let level = 0; level < this.challengeFactories.length; level++ ) {
       console.log( `verifying level ${level}...` );

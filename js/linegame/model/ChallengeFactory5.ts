@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Creates game challenges for Level 5, as specified in the design document.
  *
@@ -13,6 +12,7 @@ import { Color } from '../../../../scenery/js/imports.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
+import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
 import GraphTheLine from './GraphTheLine.js';
 import MakeTheEquation from './MakeTheEquation.js';
@@ -22,20 +22,14 @@ import ValuePool from './ValuePool.js';
 
 export default class ChallengeFactory5 extends BaseChallengeFactory {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-    super( options );
+  public constructor() {
+    super();
   }
 
   /**
    * Creates challenges for this game level.
-   * @returns {Array.<Challenge>} array of challenges
-   * @public
-   * @override
    */
-  createChallenges() {
+  public override createChallenges(): Challenge[] {
 
     const challenges = [];
 
@@ -190,14 +184,11 @@ export default class ChallengeFactory5 extends BaseChallengeFactory {
   /**
    * Adds 2 'Place the Point' challenges, 1 slope-intercept form, 1 point-slope form.
    * Pulled out into a method that can be reused in level=6.
-   *
-   * @param {Challenge[]} challenges - add challenges to this array
-   * @param {Range} xRange - range of the graph's x axis
-   * @param {Range} yRange - range of the graph's y axis
-   * @public
-   * @static
+   * @param challenges - add challenges to this array
+   * @param xRange - range of the graph's x-axis
+   * @param yRange - range of the graph's y-axis
    */
-  static addPlaceThePointsChallenges( challenges, xRange, yRange ) {
+  public static addPlaceThePointsChallenges( challenges: Challenge[], xRange: Range, yRange: Range ): void {
 
     // all ranges limited to [-5,5]
     const range = new Range( -5, 5 );

@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Creates game challenges for Level 4, as specified in the design document.
  * Uses the same sets of slopes and y-intercepts as Level 2, but generates different challenges.
@@ -11,6 +10,7 @@
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
+import Challenge from './Challenge.js';
 import ChallengeFactory2 from './ChallengeFactory2.js';
 import EquationForm from './EquationForm.js';
 import GraphTheLine from './GraphTheLine.js';
@@ -20,20 +20,14 @@ import ValuePool from './ValuePool.js';
 
 export default class ChallengeFactory4 extends ChallengeFactory2 {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-    super( options );
+  public constructor() {
+    super();
   }
 
   /**
    * Creates challenges for this game level.
-   * @returns {Challenge[]} array of challenges
-   * @public
-   * @override
    */
-  createChallenges() {
+  public override createChallenges(): Challenge[] {
 
     const challenges = [];
 

@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Creates game challenges for Level 6, as specified in the design document.
  *
@@ -12,6 +11,7 @@ import { Color } from '../../../../scenery/js/imports.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
+import Challenge from './Challenge.js';
 import ChallengeFactory5 from './ChallengeFactory5.js';
 import EquationForm from './EquationForm.js';
 import GraphTheLine from './GraphTheLine.js';
@@ -21,20 +21,14 @@ import ValuePool from './ValuePool.js';
 
 export default class ChallengeFactory6 extends BaseChallengeFactory {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-    super( options );
+  public constructor() {
+    super();
   }
 
   /**
    * Creates challenges for this game level.
-   * @returns {Challenge[]} array of challenges
-   * @public
-   * @override
    */
-  createChallenges() {
+  public override createChallenges(): Challenge[] {
 
     const challenges = [];
     let challengeNumber = 1;

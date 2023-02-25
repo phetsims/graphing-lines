@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Creates game challenges for Level 3, as specified in the design document.
  * Uses the same sets of slopes and y-intercepts as Level 2, but generates different challenges.
@@ -16,23 +15,18 @@ import GraphTheLine from './GraphTheLine.js';
 import MakeTheEquation from './MakeTheEquation.js';
 import ManipulationMode from './ManipulationMode.js';
 import ValuePool from './ValuePool.js';
+import Challenge from './Challenge.js';
 
 export default class ChallengeFactory3 extends ChallengeFactory2 {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-    super( options );
+  public constructor() {
+    super();
   }
 
   /**
    * Creates challenges for this game level.
-   * @returns {Challenge[]} array of challenges
-   * @public
-   * @override
    */
-  createChallenges() {
+  public override createChallenges(): Challenge[] {
 
     const challenges = [];
 

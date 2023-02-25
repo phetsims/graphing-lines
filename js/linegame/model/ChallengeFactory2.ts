@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Creates game challenges for Level 2, as specified in the design document.
  * Slope and intercept are uniquely chosen.
@@ -13,6 +12,7 @@ import Range from '../../../../dot/js/Range.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
+import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
 import GraphTheLine from './GraphTheLine.js';
 import MakeTheEquation from './MakeTheEquation.js';
@@ -21,20 +21,14 @@ import ValuePool from './ValuePool.js';
 
 export default class ChallengeFactory2 extends BaseChallengeFactory {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
-    super( options );
+  public constructor() {
+    super();
   }
 
   /**
    * Creates challenges for this game level.
-   * @returns {Challenge[]} array of challenges
-   * @public
-   * @override
    */
-  createChallenges() {
+  public override createChallenges(): Challenge[] {
 
     const challenges = [];
 
@@ -134,10 +128,8 @@ export default class ChallengeFactory2 extends BaseChallengeFactory {
 
   /**
    * Creates the 3 sets of slopes that are identified in the design document.
-   * @returns {Fraction[][]}
-   * @public
    */
-  createSlopeArrays() {
+  protected createSlopeArrays(): Fraction[][] {
     return [
 
       // positive and negative integers
@@ -179,11 +171,8 @@ export default class ChallengeFactory2 extends BaseChallengeFactory {
 
   /**
    * Creates the sets of y-intercepts used for generating challenges.
-   * @returns {number[][]}
-   * @protected
-   * @override
    */
-  createYInterceptArrays() {
+  protected createYInterceptArrays(): number[][] {
     return [
       ValuePool.rangeToArray( new Range( this.yRange.min, -1 ) ), // negative intercepts
       ValuePool.rangeToArray( new Range( 1, this.yRange.max ) )   // positive intercepts
@@ -192,10 +181,8 @@ export default class ChallengeFactory2 extends BaseChallengeFactory {
 
   /**
    * Creates the set of positive fractional slopes that are identified in the design document.
-   * @returns {Fraction[]}
-   * @public
    */
-  static createPositiveFractionalSlopes() {
+  public static createPositiveFractionalSlopes(): Fraction[] {
     return [
       // positive fractions
       new Fraction( 1, 4 ),

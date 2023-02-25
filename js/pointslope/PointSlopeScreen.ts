@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Point Slope' screen. Conforms to the contract specified in joist/Screen.
  *
@@ -9,6 +8,7 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
@@ -18,10 +18,7 @@ import PointSlopeScreenView from './view/PointSlopeScreenView.js';
 
 export default class PointSlopeScreen extends Screen {
 
-  /**
-   * @param {Tandem} tandem
-   */
-  constructor( tandem ) {
+  public constructor( tandem: Tandem ) {
 
     const options = {
       name: GraphingLinesStrings.screen.pointSlopeStringProperty,
@@ -31,8 +28,8 @@ export default class PointSlopeScreen extends Screen {
     };
 
     super(
-      () => new PointSlopeModel(),
-      model => new PointSlopeScreenView( model ),
+      () => new PointSlopeModel( tandem.createTandem( 'model' ) ),
+      model => new PointSlopeScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

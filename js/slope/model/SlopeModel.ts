@@ -13,6 +13,7 @@ import Line from '../../common/model/Line.js';
 import LineFormsModel from '../../common/model/LineFormsModel.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeParameterRange from './SlopeParameterRange.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class SlopeModel extends LineFormsModel {
 
@@ -22,9 +23,9 @@ export default class SlopeModel extends LineFormsModel {
   public readonly x2RangeProperty: Property<Range>;
   public readonly y2RangeProperty: Property<Range>;
 
-  public constructor() {
+  public constructor( tandem: Tandem ) {
 
-    super( new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ) );
+    super( new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ), tandem );
 
     this.x1RangeProperty = new Property( this.graph.xRange );
     this.y1RangeProperty = new Property( this.graph.yRange );

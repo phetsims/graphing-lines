@@ -18,8 +18,9 @@ export default class PointSlopeScreenView extends LineFormsScreenView {
 
   /**
    * @param {PointSlopeModel} model
+   * @param {Tandem} tandem
    */
-  constructor( model ) {
+  constructor( model, tandem ) {
 
     const viewProperties = new LineFormsViewProperties();
 
@@ -53,7 +54,8 @@ export default class PointSlopeScreenView extends LineFormsScreenView {
         model.interactiveLineProperty,
         model.savedLines,
         viewProperties.interactiveEquationVisibleProperty
-      )
+      ),
+      tandem
     );
   }
 }

@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * The 'Slope-Intercept' screen. Conforms to the contract specified in joist/Screen.
  *
@@ -9,6 +8,8 @@
 
 import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
+import { Color } from '../../../scenery/js/imports.js';
+import Tandem from '../../../tandem/js/Tandem.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
 import graphingLines from '../graphingLines.js';
@@ -18,11 +19,7 @@ import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
 
 export default class SlopeInterceptScreen extends Screen {
 
-  /**
-   * @param {Tandem} tandem
-   * @param {Property} [backgroundColorProperty]
-   */
-  constructor( tandem, backgroundColorProperty = new Property( GLColors.SCREEN_BACKGROUND ) ) {
+  public constructor( tandem: Tandem, backgroundColorProperty = new Property<Color | string>( GLColors.SCREEN_BACKGROUND ) ) {
 
     const options = {
       name: GraphingLinesStrings.screen.slopeInterceptStringProperty,
@@ -32,8 +29,8 @@ export default class SlopeInterceptScreen extends Screen {
     };
 
     super(
-      () => new SlopeInterceptModel(),
-      model => new SlopeInterceptScreenView( model ),
+      () => new SlopeInterceptModel( tandem.createTandem( 'model' ) ),
+      model => new SlopeInterceptScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

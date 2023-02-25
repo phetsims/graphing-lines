@@ -13,6 +13,7 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import TModel from '../../../../joist/js/TModel.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import Graph from './Graph.js';
@@ -44,7 +45,7 @@ export default class LineFormsModel implements TModel {
   public readonly pointTool1: PointTool;
   public readonly pointTool2: PointTool;
 
-  protected constructor( interactiveLine: Line ) {
+  protected constructor( interactiveLine: Line, tandem: Tandem ) {
 
     this.interactiveLineProperty = new Property( interactiveLine );
 

@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GLColors from '../../common/GLColors.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
@@ -15,8 +16,8 @@ import PointSlopeModel from '../../pointslope/model/PointSlopeModel.js';
 import SlopeInterceptParameterRange from './SlopeInterceptParameterRange.js';
 
 export default class SlopeInterceptModel extends PointSlopeModel {
-  public constructor() {
-    super( Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
+  public constructor( tandem: Tandem ) {
+    super( tandem, Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
   }
 }
 

@@ -18,8 +18,9 @@ export default class SlopeInterceptScreenView extends LineFormsScreenView {
 
   /**
    * @param {SlopeInterceptModel} model
+   * @param {Tandem} tandem
    */
-  constructor( model ) {
+  constructor( model, tandem ) {
 
     const viewProperties = new LineFormsViewProperties();
 
@@ -52,7 +53,8 @@ export default class SlopeInterceptScreenView extends LineFormsScreenView {
         model.interactiveLineProperty,
         model.savedLines,
         viewProperties.interactiveEquationVisibleProperty
-      )
+      ),
+      tandem
     );
   }
 }

@@ -13,6 +13,7 @@ import Line from '../../common/model/Line.js';
 import LineFormsModel from '../../common/model/LineFormsModel.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from './PointSlopeParameterRange.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class PointSlopeModel extends LineFormsModel {
 
@@ -24,12 +25,12 @@ export default class PointSlopeModel extends LineFormsModel {
   public readonly riseRangeProperty: Property<Range>;
   public readonly runRangeProperty: Property<Range>;
 
-  public constructor( providedInteractiveLine?: Line, providedParameterRange?: PointSlopeParameterRange ) {
+  public constructor( tandem: Tandem, providedInteractiveLine?: Line, providedParameterRange?: PointSlopeParameterRange ) {
 
     const interactiveLine = providedInteractiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
     const parameterRange = providedParameterRange || new PointSlopeParameterRange();
 
-    super( interactiveLine );
+    super( interactiveLine, tandem );
 
     this.x1RangeProperty = new Property( this.graph.xRange );
     this.y1RangeProperty = new Property( this.graph.yRange );

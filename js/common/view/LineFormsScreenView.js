@@ -22,11 +22,13 @@ export default class LineFormsScreenView extends ScreenView {
    * @param {Node} graphNode
    * @param {GraphControlPanel} graphControlPanel
    * @param {AccordionBox} equationAccordionBox
+   * @param {Tandem} tandem
    */
-  constructor( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox ) {
+  constructor( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox, tandem ) {
 
     super( {
-      layoutBounds: GLConstants.SCREEN_VIEW_LAYOUT_BOUNDS
+      layoutBounds: GLConstants.SCREEN_VIEW_LAYOUT_BOUNDS,
+      tandem: tandem
     } );
 
     this.viewProperties = viewProperties; // @private

@@ -1,5 +1,6 @@
 // Copyright 2013-2021, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Constants that are global to this sim.
  * Additional constants for the 'Line Game' screen are in LineGameConstants.

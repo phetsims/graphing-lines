@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model for 'Graph the Line' challenges.
  * In this challenge, the user is given an equation and must graph the line.

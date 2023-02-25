@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Model for 'Make the Equation' challenges.
  * In this challenge, the user is given a graphed line and must make the equation.

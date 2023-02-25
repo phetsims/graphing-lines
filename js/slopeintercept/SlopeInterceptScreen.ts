@@ -17,7 +17,7 @@ import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeInterceptModel from './model/SlopeInterceptModel.js';
 import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
 
-export default class SlopeInterceptScreen extends Screen {
+export default class SlopeInterceptScreen extends Screen<SlopeInterceptModel, SlopeInterceptScreenView> {
 
   public constructor( tandem: Tandem, backgroundColorProperty = new Property<Color | string>( GLColors.SCREEN_BACKGROUND ) ) {
 

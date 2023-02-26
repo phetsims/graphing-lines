@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * A translucent red 'X', to be placed on top of an equation whose slope is undefined.
  *

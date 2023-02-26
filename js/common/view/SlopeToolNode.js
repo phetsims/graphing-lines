@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Slope indicator that the design team referred to as the 'slope tool'.
  * It displays the rise and run values of the slope.

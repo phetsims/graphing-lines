@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Control panel for various features related to the graph.
  *

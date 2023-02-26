@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Slope indicator that the design team referred to as the 'slope tool'.
  * It displays the rise and run values of the slope.
@@ -10,42 +9,52 @@
  */
 
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
+import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
 import NumberBackgroundNode from './NumberBackgroundNode.js';
 
 // constants
 const VALUE_X_SPACING = 6;
 const VALUE_Y_SPACING = 6;
+const NUMBER_BACKGROUND_NODE_OPTIONS = {
+  font: new PhetFont( { size: 16, weight: 'bold' } ),
+  decimalPlaces: 0,
+  textFill: 'black',
+  backgroundFill: GLColors.SLOPE,
+  xMargin: 6,
+  yMargin: 6,
+  cornerRadius: 5
+};
 
 export default class SlopeToolNode extends Node {
 
-  /**
-   * @param {Property.<Line>} lineProperty
-   * @param {ModelViewTransform2} modelViewTransform
-   */
-  constructor( lineProperty, modelViewTransform ) {
+  private readonly riseProperty: Property<number>;
+  private readonly runProperty: Property<number>;
+  private readonly riseValueNode: NumberBackgroundNode;
+  private readonly runValueNode: NumberBackgroundNode;
+  private readonly riseArrowNode: DimensionalArrowNode;
+  private readonly runArrowNode: DimensionalArrowNode;
+  private readonly parentNode: Node;
+
+  private readonly disposeSlopeToolNode: () => void;
+
+  public constructor( lineProperty: TReadOnlyProperty<Line>, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
-    // Values
-    const numberOptions = {
-      font: new PhetFont( { size: 16, weight: 'bold' } ),
-      decimalPlaces: 0,
-      textFill: 'black',
-      backgroundFill: GLColors.SLOPE,
-      xMargin: 6,
-      yMargin: 6,
-      cornerRadius: 5
-    };
-    this.riseProperty = new NumberProperty( lineProperty.value.rise ); // @private
-    this.runProperty = new NumberProperty( lineProperty.value.run ); // @private
-    this.riseValueNode = new NumberBackgroundNode( this.riseProperty, numberOptions ); // @private
-    this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
+    this.runProperty = new NumberProperty( lineProperty.value.run );
+    this.riseProperty = new NumberProperty( lineProperty.value.rise );
+
+    this.riseValueNode = new NumberBackgroundNode( this.riseProperty, NUMBER_BACKGROUND_NODE_OPTIONS );
+    this.runValueNode = new NumberBackgroundNode( this.runProperty, NUMBER_BACKGROUND_NODE_OPTIONS );
 
     // Arrows
     const arrowNodeOptions = {
@@ -54,10 +63,10 @@ export default class SlopeToolNode extends Node {
       arrowTipSize: new Dimension2( 10, 10 ),
       delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
     };
-    this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowNodeOptions ); // @private
-    this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowNodeOptions ); // @private
+    this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowNodeOptions );
+    this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowNodeOptions );
 
-    // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
+    // Put all nodes under a common parent, so we can hide for zero or undefined slopes
     this.parentNode = new Node( {
       children: [
         this.riseArrowNode,
@@ -68,13 +77,12 @@ export default class SlopeToolNode extends Node {
     } );
     this.addChild( this.parentNode );
 
-    const lineObserver = line => this.update( line, modelViewTransform );
+    const lineObserver = ( line: Line ) => this.update( line, modelViewTransform );
     lineProperty.link( lineObserver ); // unlink in dispose
 
     // Update when this Node becomes visible
     this.visibleProperty.link( visible => visible && this.update( lineProperty.value, modelViewTransform ) );
 
-    // @private called by dispose
     this.disposeSlopeToolNode = () => {
       this.riseValueNode.dispose();
       this.runValueNode.dispose();
@@ -82,21 +90,12 @@ export default class SlopeToolNode extends Node {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeSlopeToolNode();
     super.dispose();
   }
 
-  /**
-   * @param {Line} line
-   * @param {ModelViewTransform2} modelViewTransform
-   * @private
-   */
-  update( line, modelViewTransform ) {
+  private update( line: Line, modelViewTransform: ModelViewTransform2 ): void {
 
     // update only if visible
     if ( !this.visible ) { return; }

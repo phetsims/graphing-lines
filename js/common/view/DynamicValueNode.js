@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Text node that stays synchronized with a dynamic value. This is used in interactive equations,
  * to keep non-interactive parts of the equation synchronized with the model.

@@ -27,7 +27,7 @@ export default class LineFormsGraphNode extends GraphNode {
   /**
    * @param {LineFormsModel } model
    * @param {LineFormsViewProperties} viewProperties
-   * @param {function( {Property.<Line>} lineProperty, {Object}} createDynamicLabel
+   * @param {function(lineProperty,options):Node} createDynamicLabel
    */
   constructor( model, viewProperties, createDynamicLabel ) {
 

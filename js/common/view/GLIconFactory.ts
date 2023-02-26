@@ -1,6 +1,5 @@
 // Copyright 2013-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Factory for creating icons that appear in this sim.
  *
@@ -17,7 +16,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Line as SceneryLine, Node, Path } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node, Path, TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import Graph from '../model/Graph.js';
@@ -46,7 +45,7 @@ const MANIPULATOR_RADIUS = 40;
 const GLIconFactory = {
 
   // Creates the icon for the 'Slope' screen. Positions and sizes are 'eye balled'.
-  createSlopeScreenIcon: function() {
+  createSlopeScreenIcon(): ScreenIcon {
     const lineNode = new ArrowNode( 0.25 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.75 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_NODE_OPTIONS );
     const riseNode = new DimensionalArrowNode( 0, 0.65 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const runNode = new DimensionalArrowNode( 0, 0, 0.36 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
@@ -59,7 +58,7 @@ const GLIconFactory = {
   },
 
   // Creates the icon for the 'Slope-Intercept' screen. Positions and sizes are 'eye balled'.
-  createSlopeInterceptScreenIcon: function() {
+  createSlopeInterceptScreenIcon(): ScreenIcon {
     const lineNode = new ArrowNode( 0.1 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.9 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_NODE_OPTIONS );
     const axisNode = new scenery.Line( 0, -0.05 * SCREEN_ICON_BASE_SIZE.height, 0, 1.05 * SCREEN_ICON_BASE_SIZE.height, {
       stroke: 'rgb(134,134,134)',
@@ -80,7 +79,7 @@ const GLIconFactory = {
   },
 
   // Creates the icon for the 'Point-Slope' screen. Positions and sizes are 'eye balled'.
-  createPointSlopeScreenIcon: function() {
+  createPointSlopeScreenIcon(): ScreenIcon {
     const lineNode = new ArrowNode( 0, 0.75 * SCREEN_ICON_BASE_SIZE.height, SCREEN_ICON_BASE_SIZE.width, 0.25 * SCREEN_ICON_BASE_SIZE.height, ARROW_NODE_OPTIONS );
     const riseNode = new DimensionalArrowNode( 0, 0.37 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const runNode = new DimensionalArrowNode( 0, 0, 0.54 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
@@ -99,7 +98,7 @@ const GLIconFactory = {
   },
 
   // Creates the icon for the 'Line Game' screen
-  createGameScreenIcon: function() {
+  createGameScreenIcon(): ScreenIcon {
     const faceNode = new FaceWithPointsNode( {
       faceDiameter: 75,
       pointsFont: new PhetFont( { size: 24, weight: 'bold' } ),
@@ -110,7 +109,7 @@ const GLIconFactory = {
   },
 
   // Creates an icon for the slope-tool feature
-  createSlopeToolIcon: function( width ) {
+  createSlopeToolIcon( width: number ): Node {
 
     const parentNode = new Node();
 
@@ -121,7 +120,7 @@ const GLIconFactory = {
 
     // dashed line where the line would be, tweaked visually
     const lineNode = new Path( Shape.lineSegment( slopeToolNode.left + ( 0.4 * slopeToolNode.width ), slopeToolNode.bottom,
-      slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
+        slopeToolNode.right, slopeToolNode.top + ( 0.5 * slopeToolNode.height ) ),
       {
         lineWidth: 1,
         lineDash: [ 6, 6 ],
@@ -134,7 +133,7 @@ const GLIconFactory = {
   },
 
   // Creates an icon that shows a line on a graph.
-  createGraphIcon: function( width, color, x1, y1, x2, y2 ) {
+  createGraphIcon( width: number, color: TColor, x1: number, y1: number, x2: number, y2: number ): Node {
     const axisRange = new Range( -3, 3 );
     const graph = new Graph( axisRange, axisRange );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );

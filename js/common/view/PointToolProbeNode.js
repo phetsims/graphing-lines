@@ -1,5 +1,6 @@
 // Copyright 2021-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PointToolProbeNode is the probe for the point tool. It's a triangle that points down, described from the upper-left.
  * Origin is at the upper-left.

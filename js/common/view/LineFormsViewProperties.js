@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Properties that are specific to subtypes of LineFormsView as well as graphing-quadratics
  *

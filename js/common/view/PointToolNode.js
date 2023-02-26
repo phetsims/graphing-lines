@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * PointToolNode is a tool that displays the (x,y) coordinates of a grid-point on the graph.
  * If it's not on the graph, it will display '( ?, ? )'.

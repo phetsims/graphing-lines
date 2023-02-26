@@ -16,7 +16,7 @@ import graphingLines from '../../graphingLines.js';
 
 type SelfOptions = {
   decimalPlaces?: number;
-  absoluteValue?: boolean;
+  absoluteValue?: boolean; // whether to display the absolute value of valueProperty
 };
 
 type DynamicValueNodeOptions = SelfOptions & TextOptions;

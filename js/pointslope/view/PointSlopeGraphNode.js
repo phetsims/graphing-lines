@@ -21,7 +21,7 @@ export default class PointSlopeGraphNode extends LineFormsGraphNode {
    */
   constructor( model, viewProperties ) {
 
-    super( model, viewProperties, PointSlopeEquationNode );
+    super( model, viewProperties, PointSlopeEquationNode.createDynamicLabel );
 
     const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 

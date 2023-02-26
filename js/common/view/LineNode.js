@@ -48,9 +48,9 @@ export default class LineNode extends Node {
 
     options = merge( {
 
-      // type for creating an equation node,
-      // must have static function createDynamicLabel( {Property.<Line>} lineProperty, {Object} [options] )
-      equationType: null,
+      // Function for creating a dynamic label that updates as the line changes.
+      // function( {Property.<Line>} lineProperty, {Object} [options] )
+      createDynamicLabel: null,
 
       // whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
       hasArrows: true,
@@ -89,8 +89,8 @@ export default class LineNode extends Node {
     this.parentNode.addChild( this.lineNode );
 
     // @private optional equation
-    if ( options.equationType ) {
-      this.equationNode = options.equationType.createDynamicLabel( lineProperty, {
+    if ( options.createDynamicLabel ) {
+      this.equationNode = options.createDynamicLabel( lineProperty, {
         fontSize: EQUATION_FONT_SIZE
       } );
       // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok

@@ -21,7 +21,7 @@ export default class SlopeInterceptGraphNode extends LineFormsGraphNode {
    */
   constructor( model, viewProperties ) {
 
-    super( model, viewProperties, SlopeInterceptEquationNode );
+    super( model, viewProperties, SlopeInterceptEquationNode.createDynamicLabel );
 
     const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );
 

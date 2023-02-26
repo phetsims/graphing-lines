@@ -27,19 +27,19 @@ export default class LineFormsGraphNode extends GraphNode {
   /**
    * @param {LineFormsModel } model
    * @param {LineFormsViewProperties} viewProperties
-   * @param {constructor} equationType a subtype of EquationNode
+   * @param {function( {Property.<Line>} lineProperty, {Object}} createDynamicLabel
    */
-  constructor( model, viewProperties, equationType ) {
+  constructor( model, viewProperties, createDynamicLabel ) {
 
     super( model.graph, model.modelViewTransform );
 
     this.model = model; // @private
     this.viewProperties = viewProperties; // @private
-    this.equationType = equationType; // @private
+    this.createDynamicLabel = createDynamicLabel; // @private
 
     // @private Nodes for each category of line (interactive, standard, saved) to maintain rendering order
     this.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform,
-      { equationType: equationType } ); // @private
+      { createDynamicLabel: createDynamicLabel } ); // @private
     this.standardLinesParentNode = new Node(); // @private
     this.savedLinesParentNode = new Node(); // @private
 
@@ -101,7 +101,7 @@ export default class LineFormsGraphNode extends GraphNode {
   // @private Called when a standard line is added to the model.
   standardLineAdded( line ) {
     this.standardLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform,
-      { equationType: this.equationType } ) );
+      { createDynamicLabel: this.createDynamicLabel } ) );
   }
 
   // @private Called when a standard line is removed from the model.
@@ -112,7 +112,7 @@ export default class LineFormsGraphNode extends GraphNode {
   // @private Called when a saved line is added to the model.
   savedLineAdded( line ) {
     this.savedLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform,
-      { equationType: this.equationType } ) );
+      { createDynamicLabel: this.createDynamicLabel } ) );
   }
 
   // @private Called when a saved line is removed from the model.

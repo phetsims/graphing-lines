@@ -409,7 +409,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       updateLayout( lineProperty.value );
 
       // add undefinedSlopeIndicator
-      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height, staticOptions );
+      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height );
       this.addChild( undefinedSlopeIndicator );
       undefinedSlopeIndicator.centerX = this.centerX;
       undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - this.undefinedSlopeYFudgeFactor;

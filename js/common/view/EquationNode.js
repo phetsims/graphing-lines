@@ -28,7 +28,7 @@ export default class EquationNode extends Node {
 
     super();
 
-    this.DECIMAL_PLACES = 0; // @private
+    this.decimalPlaces = 0; // @public (read-only)
 
     /*
      * @protected (read-only)

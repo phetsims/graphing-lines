@@ -95,7 +95,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     let updatingControls = false;
 
     // Determine the max width of the rise and run pickers.
-    const maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, this.DECIMAL_PLACES );
+    const maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty,
+      options.runRangeProperty, interactiveFont, this.decimalPlaces );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     const yNode = new RichText( GLSymbols.y, staticOptions );

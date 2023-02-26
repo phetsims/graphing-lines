@@ -91,7 +91,8 @@ export default class PointSlopeEquationNode extends EquationNode {
     let updatingControls = false;
 
     // Determine the max width of the rise and run pickers.
-    const maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty, options.runRangeProperty, interactiveFont, this.DECIMAL_PLACES );
+    const maxSlopePickerWidth = EquationNode.computeMaxSlopePickerWidth( options.riseRangeProperty,
+      options.runRangeProperty, interactiveFont, this.decimalPlaces );
 
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     const yLeftParenNode = new Text( '(', staticOptions );

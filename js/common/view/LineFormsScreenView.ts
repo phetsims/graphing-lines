@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Base ScreenView for the various screens that deal with line forms (Slope, Slope-Intercept, Point-Slope).
  *
@@ -12,27 +11,26 @@ import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.j
 import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
+import LineFormsModel from '../model/LineFormsModel.js';
 import GraphContentsToggleButton from './GraphContentsToggleButton.js';
 import PointToolNode from './PointToolNode.js';
+import LineFormsViewProperties from './LineFormsViewProperties.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class LineFormsScreenView extends ScreenView {
 
-  /**
-   * @param {LineFormsModel} model
-   * @param {LineFormsViewProperties} viewProperties
-   * @param {Node} graphNode
-   * @param {GraphControlPanel} graphControlPanel
-   * @param {AccordionBox} equationAccordionBox
-   * @param {Tandem} tandem
-   */
-  constructor( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox, tandem ) {
+  private readonly viewProperties: LineFormsViewProperties;
+
+  public constructor( model: LineFormsModel, viewProperties: LineFormsViewProperties,
+                      graphNode: Node, graphControlPanel: Node, equationAccordionBox: Node,
+                      tandem: Tandem ) {
 
     super( {
       layoutBounds: GLConstants.SCREEN_VIEW_LAYOUT_BOUNDS,
       tandem: tandem
     } );
 
-    this.viewProperties = viewProperties; // @private
+    this.viewProperties = viewProperties;
 
     // Create point tool nodes
     const pointTool1 = new PointToolNode( model.pointTool1, model.modelViewTransform, model.graph, viewProperties.linesVisibleProperty );
@@ -79,10 +77,10 @@ export default class LineFormsScreenView extends ScreenView {
 
     // if either control panel is too wide, scale it
     if ( equationAccordionBox.width > availableControlPanelWidth ) {
-      equationAccordionBox.scale = availableControlPanelWidth / equationAccordionBox.width;
+      equationAccordionBox.setScaleMagnitude( availableControlPanelWidth / equationAccordionBox.width );
     }
     if ( graphControlPanel.width > availableControlPanelWidth ) {
-      graphControlPanel.scale = availableControlPanelWidth / graphControlPanel.width;
+      graphControlPanel.setScaleMagnitude( availableControlPanelWidth / graphControlPanel.width );
     }
 
     // vertically stack controls, horizontally align centers

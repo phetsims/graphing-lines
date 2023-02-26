@@ -247,7 +247,7 @@ export default class SlopeEquationNode extends EquationNode {
   /**
    * Creates a node that displays the general form of the slope equation: m = (y2-y1)/(x2-x1)
    * @param {Object} [options]
-   * @returns {Node}
+   * @returns {scenery.Node}
    * @public
    * @static
    */

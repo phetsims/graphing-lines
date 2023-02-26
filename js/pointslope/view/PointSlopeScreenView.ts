@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for the 'Point-Slope' screen.
  *
@@ -14,51 +13,44 @@ import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.j
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 import PointSlopeGraphNode from './PointSlopeGraphNode.js';
+import PointSlopeModel from '../model/PointSlopeModel.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class PointSlopeScreenView extends LineFormsScreenView {
 
-  /**
-   * @param {PointSlopeModel} model
-   * @param {Tandem} tandem
-   */
-  constructor( model, tandem ) {
+  public constructor( model: PointSlopeModel, tandem: Tandem ) {
 
     const viewProperties = new LineFormsViewProperties();
 
-    super( model, viewProperties,
+    const graphNode = new PointSlopeGraphNode( model, viewProperties );
 
-      // graph
-      new PointSlopeGraphNode( model, viewProperties ),
-
-      // graph control panel
-      new GraphControlPanel(
-        viewProperties.gridVisibleProperty,
-        viewProperties.slopeToolVisibleProperty,
-        model.standardLines
-      ),
-
-      // equation accordion box
-      new EquationAccordionBox(
-        // title
-        PointSlopeEquationNode.createGeneralFormNode(),
-
-        // interactive equation
-        new PointSlopeEquationNode( model.interactiveLineProperty, {
-          x1RangeProperty: model.x1RangeProperty,
-          y1RangeProperty: model.y1RangeProperty,
-          riseRangeProperty: model.riseRangeProperty,
-          runRangeProperty: model.runRangeProperty,
-          maxWidth: 400
-        } ),
-
-        // Properties
-        model.interactiveLineProperty,
-        model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty,
-        tandem.createTandem( 'equationAccordionBox' )
-      ),
-      tandem
+    const graphControlPanel = new GraphControlPanel(
+      viewProperties.gridVisibleProperty,
+      viewProperties.slopeToolVisibleProperty,
+      model.standardLines
     );
+
+    const equationAccordionBox = new EquationAccordionBox(
+      // title
+      PointSlopeEquationNode.createGeneralFormNode(),
+
+      // interactive equation
+      new PointSlopeEquationNode( model.interactiveLineProperty, {
+        x1RangeProperty: model.x1RangeProperty,
+        y1RangeProperty: model.y1RangeProperty,
+        riseRangeProperty: model.riseRangeProperty,
+        runRangeProperty: model.runRangeProperty,
+        maxWidth: 400
+      } ),
+
+      // Properties
+      model.interactiveLineProperty,
+      model.savedLines,
+      viewProperties.interactiveEquationVisibleProperty,
+      tandem.createTandem( 'equationAccordionBox' )
+    );
+
+    super( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox, tandem );
   }
 }
 

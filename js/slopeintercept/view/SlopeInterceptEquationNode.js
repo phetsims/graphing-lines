@@ -446,7 +446,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
   /**
    * Creates a node that displays the general form of this equation: y = mx + b
    * @param {Object} [options]
-   * @returns {Node}
+   * @returns {scenery.Node}
    * @public
    * @static
    */

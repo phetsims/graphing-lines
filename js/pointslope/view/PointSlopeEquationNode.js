@@ -461,7 +461,7 @@ export default class PointSlopeEquationNode extends EquationNode {
   /**
    * Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
    * @param {Object} [options]
-   * @returns {Node}
+   * @returns {scenery.Node}
    * @public
    * @static
    */

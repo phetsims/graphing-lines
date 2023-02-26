@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Control panel for various features related to the graph.
  *
@@ -8,13 +7,15 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import merge from '../../../../phet-core/js/merge.js';
+import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import Property from '../../../../axon/js/Property.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import GridCheckbox from '../../../../scenery-phet/js/GridCheckbox.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { HBox, RichText, Text, VBox } from '../../../../scenery/js/imports.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import Panel from '../../../../sun/js/Panel.js';
+import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
@@ -28,26 +29,37 @@ const Y_EQUALS_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${GLSymbols.x}`;
 // y = -x
 const Y_EQUALS_NEGATIVE_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${GLSymbols.x}`;
 
+type SelfOptions = {
+  includeStandardLines?: boolean; // if true, includes visibility controls for 'y = x' and 'y = -x'
+};
+
+type GraphControlPanelOptions = SelfOptions;
+
 export default class GraphControlPanel extends Panel {
 
   /**
-   * @param {Property.<boolean>} gridVisibleProperty is grid visible on the graph?
-   * @param {Property.<boolean>} slopeToolVisibleProperty is the slope tool visible on the graphed interactive line?
-   * @param {ObservableArrayDef.<Lines>} standardLines standard lines (y = x, y = -x) that are available for viewing
-   * @param {Object} [options] should checkboxes for standard lines be accessible?
+   * @param gridVisibleProperty - is grid visible on the graph?
+   * @param slopeToolVisibleProperty - is the slope tool visible on the graphed interactive line?
+   * @param standardLines - standard lines (y = x, y = -x) that are available for viewing
+   * @param [providedOptions]
    */
-  constructor( gridVisibleProperty, slopeToolVisibleProperty, standardLines, options ) {
+  public constructor( gridVisibleProperty: Property<boolean>, slopeToolVisibleProperty: Property<boolean>,
+                      standardLines: ObservableArray<Line>, providedOptions?: GraphControlPanelOptions ) {
 
-    options = merge( {
+    const options = optionize<GraphControlPanelOptions, SelfOptions, PanelOptions>()( {
+
+      // SelfOptions
+      includeStandardLines: true,
+
+      // PanelOptions
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
       stroke: 'black',
       lineWidth: 1,
       xMargin: 20,
       yMargin: 15,
       cornerRadius: 10,
-      maxWidth: 400, // determined empirically
-      includeStandardLines: true // if true, includes visibility controls for 'y = x' and 'y = -x'
-    }, options );
+      maxWidth: 400 // determined empirically
+    }, providedOptions );
 
     // private properties for standard-line checkboxes
     const yEqualsXVisibleProperty = new BooleanProperty( standardLines.includes( Line.Y_EQUALS_X_LINE ) );
@@ -105,7 +117,7 @@ export default class GraphControlPanel extends Panel {
 
     super( contentNode, options );
 
-    const setStandardLineVisible = ( visible, line ) => {
+    const setStandardLineVisible = ( visible: boolean, line: Line ) => {
       if ( visible && !standardLines.includes( line ) ) {
         standardLines.add( line );
       }

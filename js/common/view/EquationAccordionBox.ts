@@ -1,7 +1,7 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
 /**
- * Accordion box that contains the interactive equation and related controls
+ * Base class for accordion boxes that contains the interactive equation and related controls
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
@@ -24,8 +24,8 @@ const BUTTON_FONT = new PhetFont( 18 );
 
 export default class EquationAccordionBox extends AccordionBox {
 
-  public constructor( titleNode: Node, interactiveEquationNode: Node, interactiveLineProperty: TReadOnlyProperty<Line>,
-                      savedLines: ObservableArray<Line>, expandedProperty: Property<boolean>, tandem: Tandem ) {
+  protected constructor( titleNode: Node, interactiveEquationNode: Node, interactiveLineProperty: TReadOnlyProperty<Line>,
+                         savedLines: ObservableArray<Line>, expandedProperty: Property<boolean>, tandem: Tandem ) {
 
     const options: AccordionBoxOptions = {
       titleNode: titleNode,

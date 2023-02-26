@@ -6,15 +6,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EquationAccordionBox from '../../common/view/EquationAccordionBox.js';
 import GraphControlPanel from '../../common/view/GraphControlPanel.js';
 import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
 import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
 import graphingLines from '../../graphingLines.js';
-import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 import PointSlopeGraphNode from './PointSlopeGraphNode.js';
 import PointSlopeModel from '../model/PointSlopeModel.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import PointSlopeEquationAccordionBox from './PointSlopeEquationAccordionBox.js';
 
 export default class PointSlopeScreenView extends LineFormsScreenView {
 
@@ -24,31 +23,11 @@ export default class PointSlopeScreenView extends LineFormsScreenView {
 
     const graphNode = new PointSlopeGraphNode( model, viewProperties );
 
-    const graphControlPanel = new GraphControlPanel(
-      viewProperties.gridVisibleProperty,
-      viewProperties.slopeToolVisibleProperty,
-      model.standardLines
-    );
+    const graphControlPanel = new GraphControlPanel( viewProperties.gridVisibleProperty,
+      viewProperties.slopeToolVisibleProperty, model.standardLines );
 
-    const equationAccordionBox = new EquationAccordionBox(
-      // title
-      PointSlopeEquationNode.createGeneralFormNode(),
-
-      // interactive equation
-      new PointSlopeEquationNode( model.interactiveLineProperty, {
-        x1RangeProperty: model.x1RangeProperty,
-        y1RangeProperty: model.y1RangeProperty,
-        riseRangeProperty: model.riseRangeProperty,
-        runRangeProperty: model.runRangeProperty,
-        maxWidth: 400
-      } ),
-
-      // Properties
-      model.interactiveLineProperty,
-      model.savedLines,
-      viewProperties.interactiveEquationVisibleProperty,
-      tandem.createTandem( 'equationAccordionBox' )
-    );
+    const equationAccordionBox = new PointSlopeEquationAccordionBox( model,
+      viewProperties.interactiveEquationVisibleProperty, tandem.createTandem( 'equationAccordionBox' ) );
 
     super( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox, tandem );
   }

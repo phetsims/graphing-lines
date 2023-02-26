@@ -1,27 +1,42 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * A number displayed on a rectangular background.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+
+type SelfOptions = {
+  decimalPlaces?: number;
+  font?: PhetFont;
+  textFill?: TColor;
+  backgroundFill?: TColor;
+  backgroundStroke?: TColor;
+  minWidth?: number;
+  minHeight?: number;
+  xMargin?: number;
+  yMargin?: number;
+  cornerRadius?: number;
+};
+
+type NumberBackgroundNodeOptions = SelfOptions;
 
 export default class NumberBackgroundNode extends Node {
 
-  /**
-   * @param {Property.<number>} valueProperty
-   * @param {Object} [options]
-   */
-  constructor( valueProperty, options ) {
+  private readonly disposeNumberBackgroundNode: () => void;
 
-    options = merge( {
+  public constructor( valueProperty: TReadOnlyProperty<number>, providedOptions?: NumberBackgroundNodeOptions ) {
+
+    const options = optionize<NumberBackgroundNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       decimalPlaces: 0,
       font: new PhetFont( 12 ),
       textFill: 'black',
@@ -32,20 +47,24 @@ export default class NumberBackgroundNode extends Node {
       xMargin: 5,
       yMargin: 5,
       cornerRadius: 6
-    }, options );
+    }, providedOptions );
 
-    // text and background
-    const textNode = new Text( '?', { fill: options.textFill, font: options.font } ); // @private
+    const textNode = new Text( '?', {
+      fill: options.textFill,
+      font: options.font
+    } );
+
     const backgroundNode = new Rectangle( 0, 0, 1, 1, {
       fill: options.backgroundFill,
       stroke: options.backgroundStroke,
       cornerRadius: options.cornerRadius
     } );
+
     options.children = [ backgroundNode, textNode ];
 
     super( options );
 
-    const valueObserver = value => {
+    const valueObserver = ( value: number ) => {
 
       // format the value
       textNode.text = Utils.toFixed( value, options.decimalPlaces );
@@ -61,17 +80,12 @@ export default class NumberBackgroundNode extends Node {
     };
     valueProperty.link( valueObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposeNumberBackgroundNode = () => {
       valueProperty.unlink( valueObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeNumberBackgroundNode();
     super.dispose();
   }

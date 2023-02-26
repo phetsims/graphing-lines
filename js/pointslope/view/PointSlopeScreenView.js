@@ -53,7 +53,8 @@ export default class PointSlopeScreenView extends LineFormsScreenView {
         // Properties
         model.interactiveLineProperty,
         model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty
+        viewProperties.interactiveEquationVisibleProperty,
+        tandem.createTandem( 'equationAccordionBox' )
       ),
       tandem
     );

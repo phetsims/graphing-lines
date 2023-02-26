@@ -1,37 +1,35 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Accordion box that contains the interactive equation and related controls
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import Property from '../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, HSeparator, VBox } from '../../../../scenery/js/imports.js';
-import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import { HBox, HSeparator, Node, VBox } from '../../../../scenery/js/imports.js';
+import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
+import Line from '../model/Line.js';
 
 // constants
 const BUTTON_FONT = new PhetFont( 18 );
 
 export default class EquationAccordionBox extends AccordionBox {
 
-  /**
-   * @param {Node} titleNode
-   * @param {Node} interactiveEquationNode
-   * @param {Property.<Line>} interactiveLineProperty
-   * @param {ObservableArrayDef.<Line>} savedLines
-   * @param {Property.<boolean>} expandedProperty
-   * @param {Object} [options]
-   */
-  constructor( titleNode, interactiveEquationNode, interactiveLineProperty, savedLines, expandedProperty, options ) {
+  public constructor( titleNode: Node, interactiveEquationNode: Node, interactiveLineProperty: TReadOnlyProperty<Line>,
+                      savedLines: ObservableArray<Line>, expandedProperty: Property<boolean>, tandem: Tandem ) {
 
-    options = merge( {
+    const options: AccordionBoxOptions = {
+      titleNode: titleNode,
+      expandedProperty: expandedProperty,
       fill: GLColors.CONTROL_PANEL_BACKGROUND,
       titleXSpacing: 5,
       titleYMargin: 10,
@@ -42,14 +40,9 @@ export default class EquationAccordionBox extends AccordionBox {
       buttonYMargin: 10,
       expandCollapseButtonOptions: {
         sideLength: 30
-      }
-    }, options );
-
-    assert && assert( !options.titleNode, 'EquationAccordionBox sets titleNode' );
-    options.titleNode = titleNode;
-
-    assert && assert( !options.expandedProperty, 'EquationAccordionBox sets expandedProperty' );
-    options.expandedProperty = expandedProperty;
+      },
+      tandem: tandem
+    };
 
     // Save Line button
     const saveLineButton = new TextPushButton( GraphingLinesStrings.saveLine, {

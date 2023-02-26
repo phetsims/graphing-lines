@@ -52,7 +52,8 @@ export default class SlopeInterceptScreenView extends LineFormsScreenView {
         // Properties
         model.interactiveLineProperty,
         model.savedLines,
-        viewProperties.interactiveEquationVisibleProperty
+        viewProperties.interactiveEquationVisibleProperty,
+        tandem.createTandem( 'equationAccordionBox' )
       ),
       tandem
     );

@@ -66,7 +66,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
     }, options );
 
-    super( options.fontSize ); // call first, because supertype constructor computes various layout metrics
+    super( options ); // call first, because super computes various layout metrics
 
     const fullyInteractive = ( options.interactiveSlope && options.interactiveIntercept );
     const interactiveFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );

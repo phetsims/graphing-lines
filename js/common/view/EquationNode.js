@@ -8,6 +8,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import merge from '../../../../phet-core/js/merge.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -17,12 +18,13 @@ import SlopePicker from './picker/SlopePicker.js';
 export default class EquationNode extends Node {
 
   /**
-   * @param {number} pointSize point size of the font used to render the equation
    * @param {Object} [options]
    */
-  constructor( pointSize, options ) {
+  constructor( options ) {
 
-    assert && assert( typeof pointSize === 'number' );
+    options = merge( {
+      fontSize: 18
+    }, options );
 
     super();
 
@@ -40,7 +42,7 @@ export default class EquationNode extends Node {
      * @protected (read-only)
      * Fudge factors for horizontal lines, to vertically center them with equals sign (set by visual inspection).
      * Note that these are currently all zero, and that looks good in JavaScript.
-     * In Java, they were a function of pointSize.
+     * In Java, they were a function of fontSize.
      * We're keeping this feature in case future 'tweaks' are needed.
      */
     this.slopeSignYFudgeFactor = 0;
@@ -48,27 +50,29 @@ export default class EquationNode extends Node {
     this.fractionLineYFudgeFactor = 0;
     this.undefinedSlopeYFudgeFactor = 0;
     this.equalsSignFudgeFactor = 0;
+    
+    const fontSize = options.fontSize;
 
     // @protected (read-only) thickness of the fraction divisor line
-    this.fractionLineThickness = 0.06 * pointSize;
+    this.fractionLineThickness = 0.06 * fontSize;
 
     // @protected (read-only) size of the lines used to create + and - operators
-    this.operatorLineSize = new Dimension2( 0.54 * pointSize, 0.07 * pointSize );
+    this.operatorLineSize = new Dimension2( 0.54 * fontSize, 0.07 * fontSize );
 
     // @protected (read-only) size of the lines used to create + and - signs
-    this.signLineSize = new Dimension2( 0.54 * pointSize, 0.11 * pointSize );
+    this.signLineSize = new Dimension2( 0.54 * fontSize, 0.11 * fontSize );
 
     // @protected (read-only) spacing between components of an equation (set by visual inspection)
-    this.integerSignXSpacing = 0.18 * pointSize; // spacing between a sign and the integer to the right of it
-    this.fractionSignXSpacing = 0.36 * pointSize; // spacing between a sign and the fraction to the right of it
-    this.integerSlopeXSpacing = 0.04 * pointSize; // spacing between a fractional slope and what's to the right of it
-    this.fractionalSlopeXSpacing = 0.15 * pointSize; // spacing between an integer slope and what's to the right of it
-    this.operatorXSpacing = 0.25 * pointSize; // space around an operator (eg, +)
-    this.relationalOperatorXSpacing = 0.35 * pointSize; // space around the relational operator (eg, =)
-    this.parenXSpacing = 0.07 * pointSize; // space between a parenthesis and the thing it encloses
-    this.pickersYSpacing = 0.2 * pointSize; // y spacing between spinners and fraction line
-    this.slopeYSpacing = 0.4 * pointSize; // y spacing between rise and run values (with blue backgrounds) and fraction line
-    this.ySpacing = 0.1 * pointSize; // all other y spacing
+    this.integerSignXSpacing = 0.18 * fontSize; // spacing between a sign and the integer to the right of it
+    this.fractionSignXSpacing = 0.36 * fontSize; // spacing between a sign and the fraction to the right of it
+    this.integerSlopeXSpacing = 0.04 * fontSize; // spacing between a fractional slope and what's to the right of it
+    this.fractionalSlopeXSpacing = 0.15 * fontSize; // spacing between an integer slope and what's to the right of it
+    this.operatorXSpacing = 0.25 * fontSize; // space around an operator (eg, +)
+    this.relationalOperatorXSpacing = 0.35 * fontSize; // space around the relational operator (eg, =)
+    this.parenXSpacing = 0.07 * fontSize; // space between a parenthesis and the thing it encloses
+    this.pickersYSpacing = 0.2 * fontSize; // y spacing between spinners and fraction line
+    this.slopeYSpacing = 0.4 * fontSize; // y spacing between rise and run values (with blue backgrounds) and fraction line
+    this.ySpacing = 0.1 * fontSize; // all other y spacing
 
     this.mutate( options );
   }

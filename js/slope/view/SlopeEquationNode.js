@@ -48,7 +48,7 @@ export default class SlopeEquationNode extends EquationNode {
       staticColor: 'black'
     }, options );
 
-    super( options.fontSize ); // call first, because supertype constructor computes various layout metrics
+    super( options ); // call first, because supertype constructor computes various layout metrics
 
     const interactiveFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
     const staticFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
@@ -246,22 +246,19 @@ export default class SlopeEquationNode extends EquationNode {
 
   /**
    * Creates a node that displays the general form of the slope equation: m = (y2-y1)/(x2-x1)
-   * @param {Object} [options]
    * @returns {scenery.Node}
    * @public
    * @static
    */
-  static createGeneralFormNode( options ) {
+  static createGeneralFormNode() {
 
-    options = merge( {
+    const options = {
       pickable: false,
       fontSize: 20,
       fontWeight: GLConstants.EQUATION_FONT_WEIGHT,
       fill: 'black',
       maxWidth: 300
-    }, options );
-
-    const equationNode = new EquationNode( options.fontSize, options );
+    };
 
     const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
@@ -294,14 +291,13 @@ export default class SlopeEquationNode extends EquationNode {
     const length = Math.max( numeratorNode.width, denominatorNode.width );
     const fractionLineNode = new SceneryLine( 0, 0, length, 0, {
       stroke: options.fill,
-      lineWidth: equationNode.fractionLineThickness
+      lineWidth: 0.06 * options.fontSize
     } );
 
     // rendering order
-    equationNode.addChild( leftSideNode );
-    equationNode.addChild( fractionLineNode );
-    equationNode.addChild( numeratorNode );
-    equationNode.addChild( denominatorNode );
+    const parent = new Node( {
+      children: [ leftSideNode, fractionLineNode, numeratorNode, denominatorNode ]
+    } );
 
     // layout
     leftSideNode.x = 0;
@@ -313,7 +309,7 @@ export default class SlopeEquationNode extends EquationNode {
     denominatorNode.centerX = fractionLineNode.centerX;
     denominatorNode.top = fractionLineNode.bottom + 1;
 
-    return equationNode;
+    return parent;
   }
 
   /**
@@ -353,7 +349,7 @@ class DynamicLabelNode extends EquationNode {
       fontSize: 18
     }, options );
 
-    super( options.fontSize );
+    super( options );
 
     const textOptions = {
       font: new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } )

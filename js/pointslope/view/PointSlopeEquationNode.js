@@ -64,7 +64,7 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     }, options );
 
-    super( options.fontSize ); // call first, because supertype constructor computes various layout metrics
+    super( options ); // call first, because super computes various layout metrics
 
     const fullyInteractive = ( options.interactivePoint && options.interactiveSlope );
     const interactiveFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );

@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * PointToolNode is a tool that displays the (x,y) coordinates of a grid-point on the graph.
  * If it's not on the graph, it will display '( ?, ? )'.
@@ -11,31 +10,45 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { DragListener, Node } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import { DragListener, Node, NodeOptions, TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+import Graph from '../model/Graph.js';
+import PointTool from '../model/PointTool.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
 import PointToolProbeNode from './PointToolProbeNode.js';
 
+type SelfOptions = {
+  backgroundNormalColor?: TColor;
+  foregroundNormalColor?: TColor;
+  foregroundHighlightColor?: TColor;
+};
+
+type PointToolNodeOptions = SelfOptions & PickOptional<NodeOptions, 'scale'>;
+
 export default class PointToolNode extends Node {
 
-  /**
-   * @param {PointTool} pointTool
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Graph} graph
-   * @param {Property.<Boolean>} linesVisibleProperty
-   * @param {Object} [options]
-   */
-  constructor( pointTool, modelViewTransform, graph, linesVisibleProperty, options ) {
+  private readonly disposePointToolNode: () => void;
 
-    options = merge( {
-      cursor: 'pointer',
+  public constructor( pointTool: PointTool, modelViewTransform: ModelViewTransform2, graph: Graph,
+                      linesVisibleProperty: TReadOnlyProperty<boolean>, providedOptions?: PointToolNodeOptions ) {
+
+    const options = optionize<PointToolNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       backgroundNormalColor: 'white',
       foregroundNormalColor: 'black',
-      foregroundHighlightColor: 'white'
-    }, options );
+      foregroundHighlightColor: 'white',
+
+      // NodeOptions
+      cursor: 'pointer'
+    }, providedOptions );
 
     super();
 
@@ -80,7 +93,6 @@ export default class PointToolNode extends Node {
       throw new Error( `unsupported point tool orientation: ${pointTool.orientation}` );
     }
 
-    assert && assert( !options.children );
     options.children = [ probeNode, bodyNode ];
 
     this.mutate( options );
@@ -109,7 +121,6 @@ export default class PointToolNode extends Node {
     // interactivity
     this.addInputListener( new PointToolDragListener( this, pointTool, modelViewTransform, graph ) );
 
-    // @private called by dispose
     this.disposePointToolNode = () => {
       Multilink.unmultilink( updateMultilink );
       bodyNode.dispose();
@@ -117,11 +128,7 @@ export default class PointToolNode extends Node {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposePointToolNode();
     super.dispose();
   }
@@ -132,17 +139,11 @@ export default class PointToolNode extends Node {
  */
 class PointToolDragListener extends DragListener {
 
-  /**
-   * @param {Node} targetNode
-   * @param {PointTool} pointTool
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Graph} graph
-   */
-  constructor( targetNode, pointTool, modelViewTransform, graph ) {
+  public constructor( targetNode: Node, pointTool: PointTool, modelViewTransform: ModelViewTransform2, graph: Graph ) {
 
-    let startOffset; // where the drag started, relative to the tool's origin, in parent view coordinates
+    let startOffset: Vector2; // where the drag started, relative to the tool's origin, in parent view coordinates
 
-    const constrainBounds = ( point, bounds ) => {
+    const constrainBounds = ( point: Vector2, bounds: Bounds2 ) => {
       if ( !bounds || bounds.containsPoint( point ) ) {
         return point;
       }
@@ -161,7 +162,7 @@ class PointToolDragListener extends DragListener {
         const position = modelViewTransform.modelToViewPosition( pointTool.positionProperty.value );
         startOffset = targetNode.globalToParentPoint( event.pointer.point ).minus( position );
         // Move the tool that we're dragging to the foreground.
-        event.currentTarget.moveToFront();
+        targetNode.moveToFront();
       },
 
       drag: event => {

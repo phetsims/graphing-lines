@@ -1,6 +1,5 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * A dimensional arrow is used in engineering drawings or technical drawings to denote the dimensions
  * of something in the drawing. It includes an arrow drawn between two perpendicular lines which mark
@@ -17,40 +16,62 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Shape } from '../../../../kite/js/imports.js';
-import merge from '../../../../phet-core/js/merge.js';
-import { Line, Node, Path } from '../../../../scenery/js/imports.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import { Line, LineOptions, Node, NodeOptions, Path, TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+
+type SelfOptions = {
+  stroke?: TColor;
+  lineWidth?: number;
+  arrowTipSize?: Dimension2; // use even-number dimensions, or tip will look asymmetrical due to rounding
+  delimiterLength?: number;
+  delimitersVisible?: boolean;
+};
+
+type DimensionalArrowNodeOptions = SelfOptions;
 
 export default class DimensionalArrowNode extends Node {
 
-  /**
-   * @param {number} tailX
-   * @param {number} tailY
-   * @param {number} tipX
-   * @param {number} tipY
-   * @param {Object} [options]
-   */
-  constructor( tailX, tailY, tipX, tipY, options ) {
+  private readonly arrowTipSize: Dimension2;
+  private readonly delimiterLength: number;
+  private readonly lineWidth: number;
+  private readonly lineNode: Line;
+  private readonly tipNode: Path;
+  private readonly tipDelimiterNode: Line;
+  private readonly tailDelimiterNode: Line;
 
-    options = merge( {
+  public constructor( tailX: number, tailY: number, tipX: number, tipY: number, providedOptions?: DimensionalArrowNodeOptions ) {
+
+    const options = optionize<DimensionalArrowNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       stroke: 'black',
       lineWidth: 1,
-      arrowTipSize: new Dimension2( 6, 8 ), // use even-number dimensions, or tip will look asymmetrical due to rounding
+      arrowTipSize: new Dimension2( 6, 8 ),
       delimiterLength: 10,
       delimitersVisible: true
-    }, options );
+    }, providedOptions );
 
     super();
 
-    this.arrowTipSize = options.arrowTipSize; // @private
-    this.delimiterLength = options.delimiterLength; // @private
-    this.lineWidth = options.lineWidth; // @private
+    this.arrowTipSize = options.arrowTipSize;
+    this.delimiterLength = options.delimiterLength;
+    this.lineWidth = options.lineWidth;
 
-    // nodes with dummy initial shapes
-    this.lineNode = new Line( 0, 0, 0, 1, options );  // @private
-    this.tipNode = new Path( null, options ); // @private
-    this.tipDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
-    this.tailDelimiterNode = new Line( 0, 0, 0, 1, merge( { visible: options.delimitersVisible }, options ) ); // @private
+    // Arrow
+    const pathOptions = {
+      stroke: options.stroke,
+      lineWidth: options.lineWidth
+    };
+    this.lineNode = new Line( 0, 0, 0, 1, pathOptions );
+    this.tipNode = new Path( null, pathOptions );
+
+    // Delimiters
+    const delimiterOptions = combineOptions<LineOptions>( {
+      visible: options.delimitersVisible
+    }, pathOptions );
+    this.tipDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions );
+    this.tailDelimiterNode = new Line( 0, 0, 0, 1, delimiterOptions );
 
     options.children = [ this.tipDelimiterNode, this.tailDelimiterNode, this.lineNode, this.tipNode ];
 
@@ -62,14 +83,8 @@ export default class DimensionalArrowNode extends Node {
 
   /**
    * Sets the tail and tip of the arrow, accounting for the lineWidth when positioning the arrow head.
-   *
-   * @param {number} tailX
-   * @param {number} tailY
-   * @param {number} tipX
-   * @param {number} tipY
-   * @public
    */
-  setTailAndTip( tailX, tailY, tipX, tipY ) {
+  public setTailAndTip( tailX: number, tailY: number, tipX: number, tipY: number ): void {
 
     const tipWidth = this.arrowTipSize.width;
     const tipHeight = this.arrowTipSize.height;

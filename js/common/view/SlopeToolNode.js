@@ -47,14 +47,14 @@ export default class SlopeToolNode extends Node {
     this.runValueNode = new NumberBackgroundNode( this.runProperty, numberOptions ); // @private
 
     // Arrows
-    const arrowOptions = {
+    const arrowNodeOptions = {
       lineWidth: 1.75,
       stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
       arrowTipSize: new Dimension2( 10, 10 ),
       delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
     };
-    this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
-    this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowOptions ); // @private
+    this.riseArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowNodeOptions ); // @private
+    this.runArrowNode = new DimensionalArrowNode( 0, 0, 0, 50, arrowNodeOptions ); // @private
 
     // @private put all nodes under a common parent, so we can hide for zero or undefined slopes
     this.parentNode = new Node( {

@@ -31,8 +31,8 @@ const scenery = {
   Line: SceneryLine
 };
 const SCREEN_ICON_BASE_SIZE = new Dimension2( 548, 373 );
-const ARROW_OPTIONS = { doubleHead: true, stroke: 'black', lineWidth: 18, headWidth: 30, headHeight: 30 };
-const DIMENSIONAL_ARROW_OPTIONS = {
+const ARROW_NODE_OPTIONS = { doubleHead: true, stroke: 'black', lineWidth: 18, headWidth: 30, headHeight: 30 };
+const DIMENSIONAL_ARROW_NODE_OPTIONS = {
   stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
   lineWidth: 18,
   arrowTipSize: new Dimension2( 55, 45 ),
@@ -46,9 +46,9 @@ const GLIconFactory = {
 
   // Creates the icon for the 'Slope' screen. Positions and sizes are 'eye balled'.
   createSlopeScreenIcon: function() {
-    const lineNode = new ArrowNode( 0.25 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.75 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_OPTIONS );
-    const riseNode = new DimensionalArrowNode( 0, 0.65 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
-    const runNode = new DimensionalArrowNode( 0, 0, 0.36 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
+    const lineNode = new ArrowNode( 0.25 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.75 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_NODE_OPTIONS );
+    const riseNode = new DimensionalArrowNode( 0, 0.65 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
+    const runNode = new DimensionalArrowNode( 0, 0, 0.36 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const iconNode = new Node( { children: [ lineNode, riseNode, runNode ] } );
     riseNode.centerX = lineNode.left + 10;
     riseNode.bottom = lineNode.bottom - ( 0.2 * lineNode.height );
@@ -59,13 +59,13 @@ const GLIconFactory = {
 
   // Creates the icon for the 'Slope-Intercept' screen. Positions and sizes are 'eye balled'.
   createSlopeInterceptScreenIcon: function() {
-    const lineNode = new ArrowNode( 0.1 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.9 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_OPTIONS );
+    const lineNode = new ArrowNode( 0.1 * SCREEN_ICON_BASE_SIZE.width, SCREEN_ICON_BASE_SIZE.height, 0.9 * SCREEN_ICON_BASE_SIZE.width, 0, ARROW_NODE_OPTIONS );
     const axisNode = new scenery.Line( 0, -0.05 * SCREEN_ICON_BASE_SIZE.height, 0, 1.05 * SCREEN_ICON_BASE_SIZE.height, {
       stroke: 'rgb(134,134,134)',
       lineWidth: 10
     } );
-    const riseNode = new DimensionalArrowNode( 0, 0.5 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
-    const runNode = new DimensionalArrowNode( 0, 0, 0.45 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
+    const riseNode = new DimensionalArrowNode( 0, 0.5 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
+    const runNode = new DimensionalArrowNode( 0, 0, 0.45 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const interceptNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
     const iconNode = new Node( { children: [ axisNode, lineNode, riseNode, runNode, interceptNode ] } );
     axisNode.centerX = 0.35 * SCREEN_ICON_BASE_SIZE.width;
@@ -80,9 +80,9 @@ const GLIconFactory = {
 
   // Creates the icon for the 'Point-Slope' screen. Positions and sizes are 'eye balled'.
   createPointSlopeScreenIcon: function() {
-    const lineNode = new ArrowNode( 0, 0.75 * SCREEN_ICON_BASE_SIZE.height, SCREEN_ICON_BASE_SIZE.width, 0.25 * SCREEN_ICON_BASE_SIZE.height, ARROW_OPTIONS );
-    const riseNode = new DimensionalArrowNode( 0, 0.37 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_OPTIONS );
-    const runNode = new DimensionalArrowNode( 0, 0, 0.54 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_OPTIONS );
+    const lineNode = new ArrowNode( 0, 0.75 * SCREEN_ICON_BASE_SIZE.height, SCREEN_ICON_BASE_SIZE.width, 0.25 * SCREEN_ICON_BASE_SIZE.height, ARROW_NODE_OPTIONS );
+    const riseNode = new DimensionalArrowNode( 0, 0.37 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
+    const runNode = new DimensionalArrowNode( 0, 0, 0.54 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const pointNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
     const slopeNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.SLOPE );
     const iconNode = new Node( { children: [ lineNode, riseNode, runNode, pointNode, slopeNode ] } );

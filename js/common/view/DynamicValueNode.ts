@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Text node that stays synchronized with a dynamic value. This is used in interactive equations,
  * to keep non-interactive parts of the equation synchronized with the model.
@@ -8,45 +7,50 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Text, TextOptions } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+
+type SelfOptions = {
+  decimalPlaces?: number;
+  absoluteValue?: boolean;
+};
+
+type DynamicValueNodeOptions = SelfOptions & TextOptions;
 
 export default class DynamicValueNode extends Text {
 
-  /**
-   * @param {Property.<number>} valueProperty
-   * @param {Object} [options]
-   */
-  constructor( valueProperty, options ) {
+  private readonly disposeDynamicValueNode: () => void;
 
-    options = merge( {
-      fill: 'black',
-      font: new PhetFont( 12 ),
+  public constructor( valueProperty: TReadOnlyProperty<number>, providedOptions?: DynamicValueNodeOptions ) {
+
+    const options = optionize<DynamicValueNodeOptions, SelfOptions, TextOptions>()( {
+
+      // SelfOptions
       decimalPlaces: 0,
-      absoluteValue: false
-    }, options );
+      absoluteValue: false,
+
+      // TextOptions
+      fill: 'black',
+      font: new PhetFont( 12 )
+    }, providedOptions );
 
     super( '', options );
 
-    const valueObserver = value => {
+    const valueObserver = ( value: number ) => {
       this.text = Utils.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
     };
     valueProperty.link( valueObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposeDynamicValueNode = () => {
       valueProperty.unlink( valueObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeDynamicValueNode();
     super.dispose();
   }

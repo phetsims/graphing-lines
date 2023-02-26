@@ -1,37 +1,28 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * A plotted point on a graph, not interactive.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import { Color, TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 
 export default class PlottedPointNode extends ShadedSphereNode {
 
-  /**
-   * @param {number} radius
-   * @param {Color|String} color
-   * @param {Object} [options]
-   */
-  constructor( radius, color, options ) {
+  public constructor( radius: number, color: TColor ) {
 
     const mainColor = Color.toColor( color );
 
-    options = merge( {
+    super( 2 * radius, {
       highlightColor: Color.WHITE,
       mainColor: mainColor,
       shadowColor: mainColor.darkerColor(),
       stroke: mainColor.darkerColor().darkerColor(),
       lineWidth: 1
-    }, options );
-
-    super( 2 * radius, options );
+    } );
   }
 }
 

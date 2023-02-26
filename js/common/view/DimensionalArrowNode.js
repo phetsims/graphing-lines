@@ -1,5 +1,6 @@
 // Copyright 2014-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * A dimensional arrow is used in engineering drawings or technical drawings to denote the dimensions
  * of something in the drawing. It includes an arrow drawn between two perpendicular lines which mark

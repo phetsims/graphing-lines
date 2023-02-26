@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base ScreenView for the various screens that deal with line forms (Slope, Slope-Intercept, Point-Slope).
  *

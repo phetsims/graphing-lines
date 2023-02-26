@@ -77,7 +77,7 @@ export default class EquationNode extends Node {
    * Gets the max width for the rise and run pickers used in an interactive equation.
    * @param {Property.<Range>} riseRangeProperty
    * @param {Property.<Range>} runRangeProperty
-   * @param {GLFont} font
+   * @param {PhetFont} font
    * @param {number} decimalPlaces
    * @static
    * @public

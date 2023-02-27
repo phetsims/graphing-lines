@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Portion of the scenegraph that corresponds to the 'results' game phase. (See GamePhase.RESULTS)
  * Displays a panel with the game results.
@@ -15,20 +14,22 @@ import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import GamePhase from '../model/GamePhase.js';
 import GLRewardNode from './GLRewardNode.js';
+import LineGameModel from '../model/LineGameModel.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+
+// Function that creates the Nodes that are passed to RewardNode.
+export type RewardNodesFunction = () => Node[];
 
 export default class ResultsNode extends Node {
 
-  /**
-   * @param {LineGameModel} model
-   * @param {Bounds2} layoutBounds
-   * @param {GameAudioPlayer} audioPlayer
-   * @param {function[]} rewardFactoryFunctions - functions that create nodes for the game reward, ordered by level
-   */
-  constructor( model, layoutBounds, audioPlayer, rewardFactoryFunctions ) {
+  private rewardNode: GLRewardNode | null; // created on demand
+
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, audioPlayer: GameAudioPlayer, rewardFactoryFunctions: RewardNodesFunction[] ) {
 
     super();
 
-    this.rewardNode = null; // @private
+    this.rewardNode = null;
 
     // show results when we enter this phase
     // unlink unnecessary because ResultsNode exists for the lifetime of the sim.
@@ -77,10 +78,9 @@ export default class ResultsNode extends Node {
     } );
   }
 
-  // @public
-  step( elapsedTime ) {
+  public step( dt: number ): void {
     if ( this.rewardNode ) {
-      this.rewardNode.step( elapsedTime );
+      this.rewardNode.step( dt );
     }
   }
 }

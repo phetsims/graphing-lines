@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Base type for graph nodes in game challenges.
  * Renders the answer line, guess line, and slope tool.
@@ -12,7 +11,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import merge from '../../../../phet-core/js/merge.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import Line from '../../common/model/Line.js';
 import GraphNode from '../../common/view/GraphNode.js';
 import LineNode from '../../common/view/LineNode.js';
@@ -20,23 +19,46 @@ import PlottedPointNode from '../../common/view/PlottedPointNode.js';
 import SlopeToolNode from '../../common/view/SlopeToolNode.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
+import Challenge from '../model/Challenge.js';
+import NotALine from '../model/NotALine.js';
+
+type SelfOptions = {
+  answerLineVisible?: boolean;
+  answerPointVisible?: boolean;
+  guessLineVisible?: boolean;
+  guessPointVisible?: boolean;
+  slopeToolVisible?: boolean;
+  slopeToolEnabled?: boolean;
+};
+
+type ChallengeGraphNodeOptions = SelfOptions;
 
 export default class ChallengeGraphNode extends GraphNode {
 
-  /**
-   * @param {Challenge} challenge
-   * @param {Object} [options]
-   */
-  constructor( challenge, options ) {
+  // answer to the challenge
+  private readonly answerLineNode: LineNode;
+  private readonly answerPointNode: PlottedPointNode;
 
-    options = merge( {
+  // the user's guess
+  private readonly guessLineNode: LineNode;
+  private readonly guessPointNode: PlottedPointNode;
+
+  private readonly slopeToolNode: SlopeToolNode | null;
+
+  private readonly disposeChallengeGraphNode: () => void;
+
+  public constructor( challenge: Challenge, providedOptions?: ChallengeGraphNodeOptions ) {
+
+    const options = optionize<ChallengeGraphNodeOptions, SelfOptions>()( {
+
+      // SelfOptions
       answerLineVisible: false,
       answerPointVisible: false,
       guessLineVisible: false,
       guessPointVisible: false,
       slopeToolVisible: false,
       slopeToolEnabled: true
-    }, options );
+    }, providedOptions );
 
     super( challenge.graph, challenge.modelViewTransform );
 
@@ -47,19 +69,20 @@ export default class ChallengeGraphNode extends GraphNode {
 
     const pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
-    // @private answer
+    // answer
     this.answerLineNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
     this.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
     this.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 
-    // @private guess
+    // guess
     this.guessLineNode = new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform );
     this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
 
-    // @private slope tool
-    if ( options.slopeToolEnabled ) {
-      this.slopeToolNode = new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform );
-    }
+    // optional slope tool
+    this.slopeToolNode = ( options.slopeToolEnabled ) ?
+                         // @ts-expect-error SlopeToolNode is only created when guessProperty will not have value NotALine
+                         new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform ) :
+                         null;
 
     // Rendering order: lines behind points, guess behind answer
     // See https://github.com/phetsims/graphing-lines/issues/115
@@ -72,7 +95,7 @@ export default class ChallengeGraphNode extends GraphNode {
     }
 
     // Sync with the guess
-    const guessObserver = line => {
+    const guessObserver = ( line: Line | NotALine ) => {
       if ( line instanceof Line ) {
         // plot (x1,y1)
         this.guessPointNode.translation = challenge.modelViewTransform.modelToViewPosition( new Vector2( line.x1, line.y1 ) );
@@ -87,7 +110,6 @@ export default class ChallengeGraphNode extends GraphNode {
     this.setGuessPointVisible( options.guessPointVisible );
     this.setSlopeToolVisible( options.slopeToolVisible );
 
-    // @private called by dispose
     this.disposeChallengeGraphNode = () => {
       this.guessLineNode.dispose();
       this.slopeToolNode && this.slopeToolNode.dispose();
@@ -95,37 +117,33 @@ export default class ChallengeGraphNode extends GraphNode {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeChallengeGraphNode();
     super.dispose();
   }
 
-  // @public Sets the visibility of the answer line.
-  setAnswerLineVisible( visible ) {
+  // Sets the visibility of the answer line.
+  public setAnswerLineVisible( visible: boolean ): void {
     this.answerLineNode.visible = visible;
   }
 
-  // @public Sets the visibility of (x1,y1) for the answer.
-  setAnswerPointVisible( visible ) {
+  // Sets the visibility of (x1,y1) for the answer.
+  public setAnswerPointVisible( visible: boolean ): void {
     this.answerPointNode.visible = visible;
   }
 
-  // @public Sets the visibility of the guess line.
-  setGuessLineVisible( visible ) {
+  // Sets the visibility of the guess line.
+  public setGuessLineVisible( visible: boolean ): void {
     this.guessLineNode.visible = visible;
   }
 
-  // @public Sets the visibility of (x1,y1) for the guess.
-  setGuessPointVisible( visible ) {
+  // Sets the visibility of (x1,y1) for the guess.
+  public setGuessPointVisible( visible: boolean ): void {
     this.guessPointNode.visible = visible;
   }
 
-  // @public Sets the visibility of the slope tool for the guess.
-  setSlopeToolVisible( visible ) {
+  // Sets the visibility of the slope tool for the guess.
+  public setSlopeToolVisible( visible: boolean ): void {
     if ( this.slopeToolNode ) {
       this.slopeToolNode.visible = visible;
     }

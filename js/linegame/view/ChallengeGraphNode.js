@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base type for graph nodes in game challenges.
  * Renders the answer line, guess line, and slope tool.

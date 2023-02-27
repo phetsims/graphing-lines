@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Portion of the scenegraph that corresponds to the 'results' game phase. (See GamePhase.RESULTS)
  * Displays a panel with the game results.

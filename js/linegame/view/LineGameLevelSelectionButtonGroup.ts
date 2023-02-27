@@ -1,33 +1,41 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * LineGameLevelSelectionButtonGroup is the group of level-selection buttons for the 'Line Game' screen.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, Image, Text, VBox } from '../../../../scenery/js/imports.js';
-import LevelSelectionButtonGroup from '../../../../vegas/js/LevelSelectionButtonGroup.js';
+import { AlignBox, AlignGroup, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import LevelSelectionButtonGroup, { LevelSelectionButtonGroupItem, LevelSelectionButtonGroupOptions } from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
+import LineGameModel from '../model/LineGameModel.js';
+
+type SelfOptions = EmptySelfOptions;
+
+type LineGameLevelSelectionButtonGroupOptions = SelfOptions &
+  StrictOmit<LevelSelectionButtonGroupOptions, 'levelSelectionButtonOptions' | 'flowBoxOptions'>;
 
 export default class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
 
   /**
-   * @param {LineGameModel} model
-   * @param {HTMLImageElement[]} levelImages - images for the level-selection buttons, ordered by level
-   * @param {Object} [options]
+   * @param model
+   * @param levelImages - images for the level-selection buttons, ordered by level
+   * @param [providedOptions]
    */
-  constructor( model, levelImages, options ) {
+  public constructor( model: LineGameModel, levelImages: HTMLImageElement[], providedOptions?: LineGameLevelSelectionButtonGroupOptions ) {
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
-    options = merge( {
+    const options = optionize<LineGameLevelSelectionButtonGroupOptions, SelfOptions, LevelSelectionButtonGroupOptions>()( {
+
+      // LevelSelectionButtonGroupOptions
       levelSelectionButtonOptions: {
         baseColor: 'rgb( 180, 205, 255 )',
         buttonWidth: 175,
@@ -37,13 +45,13 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       flowBoxOptions: {
         spacing: 50
       }
-    }, options );
+    }, providedOptions );
 
     // To give all button icons the same effective size
     const iconAlignGroup = new AlignGroup();
 
     // Descriptions of LevelSelectionButtons
-    const levelSelectionButtonItems = [];
+    const levelSelectionButtonItems: LevelSelectionButtonGroupItem[] = [];
     for ( let level = 0; level < model.numberOfLevels; level++ ) {
       levelSelectionButtonItems.push( {
         icon: createLevelSelectionButtonIcon( level, levelImages[ level ], iconAlignGroup ),
@@ -53,7 +61,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
           bestTimeVisibleProperty: model.timerEnabledProperty,
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
             numberOfStars: model.challengesPerGameProperty.value,
-            perfectScore: model.getPerfectScore( level )
+            perfectScore: model.getPerfectScore()
           } ),
           listener: () => {
             model.levelProperty.value = level;
@@ -70,12 +78,8 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 
 /**
  * Creates an icon for a LevelSelectionButton.
- * @param {number} level
- * @param {HTMLImageElement} levelImage
- * @param {AlignGroup} iconAlignGroup
- * @returns {Node}
  */
-function createLevelSelectionButtonIcon( level, levelImage, iconAlignGroup ) {
+function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageElement, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
   const label = new Text( StringUtils.format( GraphingLinesStrings.pattern_Level_0, level + 1 ), {

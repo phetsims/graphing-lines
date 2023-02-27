@@ -19,13 +19,13 @@ import Bounds2 from '../../../../dot/js/Bounds2.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 
 // Function that creates the Nodes that are passed to RewardNode.
-export type RewardNodesFunction = () => Node[];
+export type RewardNodeFunction = () => Node[];
 
 export default class ResultsNode extends Node {
 
   private rewardNode: GLRewardNode | null; // created on demand
 
-  public constructor( model: LineGameModel, layoutBounds: Bounds2, audioPlayer: GameAudioPlayer, rewardFactoryFunctions: RewardNodesFunction[] ) {
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, audioPlayer: GameAudioPlayer, rewardNodeFunctions: RewardNodeFunction[] ) {
 
     super();
 
@@ -42,7 +42,7 @@ export default class ResultsNode extends Node {
           audioPlayer.gameOverPerfectScore();
 
           const level = model.levelProperty.value;
-          const rewardNodes = rewardFactoryFunctions[ level ]();
+          const rewardNodes = rewardNodeFunctions[ level ]();
           this.rewardNode = new GLRewardNode( rewardNodes );
           this.addChild( this.rewardNode );
         }

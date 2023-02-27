@@ -8,12 +8,13 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import optionize from '../../../../phet-core/js/optionize.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, NodeOptions, Text, VBox } from '../../../../scenery/js/imports.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
@@ -21,10 +22,10 @@ import LineGameModel from '../model/LineGameModel.js';
 import LineGameLevelSelectionButtonGroup, { LineGameLevelSelectionButtonGroupOptions } from './LineGameLevelSelectionButtonGroup.js';
 
 type SelfOptions = {
-  levelSelectionButtonGroupOptions?: LineGameLevelSelectionButtonGroupOptions;
+  levelSelectionButtonGroupOptions?: StrictOmit<LineGameLevelSelectionButtonGroupOptions, 'tandem'>;
 };
 
-export type SettingsNodeOptions = SelfOptions;
+export type SettingsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
 
 export default class SettingsNode extends Node {
 
@@ -41,9 +42,7 @@ export default class SettingsNode extends Node {
     const options = optionize<SettingsNodeOptions, SelfOptions, NodeOptions>()( {
 
       // SelfOptions
-      levelSelectionButtonGroupOptions: {
-        tandem: Tandem.OPT_OUT
-      }
+      levelSelectionButtonGroupOptions: {}
     }, providedOptions );
 
     // Title
@@ -53,7 +52,10 @@ export default class SettingsNode extends Node {
     } );
 
     // Group of LevelSelectionButtons
-    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImages, options.levelSelectionButtonGroupOptions );
+    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImages,
+      combineOptions<LineGameLevelSelectionButtonGroupOptions>( {
+        tandem: options.tandem.createTandem( 'levelSelectionButtonGroup' )
+      }, options.levelSelectionButtonGroupOptions ) );
 
     // Timer and Sound controls
     const timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {

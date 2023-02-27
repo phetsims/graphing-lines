@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Portion of the scenegraph that corresponds to the 'settings' game phase. (See GamePhase.SETTINGS)
  * The displays a panel with controls used to configure a game.

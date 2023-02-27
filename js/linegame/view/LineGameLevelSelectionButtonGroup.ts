@@ -20,8 +20,8 @@ import LineGameModel from '../model/LineGameModel.js';
 
 type SelfOptions = EmptySelfOptions;
 
-type LineGameLevelSelectionButtonGroupOptions = SelfOptions &
-  StrictOmit<LevelSelectionButtonGroupOptions, 'levelSelectionButtonOptions' | 'flowBoxOptions'>;
+export type LineGameLevelSelectionButtonGroupOptions = SelfOptions &
+  StrictOmit<LevelSelectionButtonGroupOptions, 'levelSelectionButtonOptions'>;
 
 export default class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
 

@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Portion of the scenegraph that corresponds to the 'settings' game phase. (See GamePhase.SETTINGS)
  * The displays a panel with controls used to configure a game.
@@ -8,31 +7,44 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
+import Bounds2 from '../../../../dot/js/Bounds2.js';
+import optionize from '../../../../phet-core/js/optionize.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Node, NodeOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
-import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
+import LineGameModel from '../model/LineGameModel.js';
+import LineGameLevelSelectionButtonGroup, { LineGameLevelSelectionButtonGroupOptions } from './LineGameLevelSelectionButtonGroup.js';
+
+type SelfOptions = {
+  levelSelectionButtonGroupOptions?: LineGameLevelSelectionButtonGroupOptions;
+};
+
+export type SettingsNodeOptions = SelfOptions;
 
 export default class SettingsNode extends Node {
 
   /**
-   * @param {LineGameModel} model
-   * @param {Bounds2} layoutBounds
-   * @param {HTMLImageElement[]} levelImages - images for the level-selection buttons, ordered by level
-   * @param {Object} [options]
+   * @param model
+   * @param layoutBounds
+   * @param levelImages - images for the level-selection buttons, ordered by level
+   * @param [providedOptions]
    */
-  constructor( model, layoutBounds, levelImages, options ) {
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: HTMLImageElement[], providedOptions?: SettingsNodeOptions ) {
 
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
-    options = merge( {
-      levelSelectionButtonGroupOptions: {}
-    }, options );
+    const options = optionize<SettingsNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
+      levelSelectionButtonGroupOptions: {
+        tandem: Tandem.OPT_OUT
+      }
+    }, providedOptions );
 
     // Title
     const title = new Text( GraphingLinesStrings.chooseYourLevel, {
@@ -59,7 +71,6 @@ export default class SettingsNode extends Node {
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
 
-    assert && assert( !options.children );
     options.children = [
       // title and level-selection buttons centered
       new VBox( {

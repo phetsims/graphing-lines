@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * LineGameLevelSelectionButtonGroup is the group of level-selection buttons for the 'Line Game' screen.
  *

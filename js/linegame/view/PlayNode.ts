@@ -75,8 +75,7 @@ export default class PlayNode extends Node {
 
       // dispose of view for previous challenge
       if ( previousChallengeNode ) {
-        challengeParent.removeChild( previousChallengeNode );
-        previousChallengeNode.dispose();
+        previousChallengeNode.dispose(); // handles challengeParent.removeChild
       }
 
       // add view for current challenge

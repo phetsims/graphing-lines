@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Box around an equation in the 'Line Game'.
  * Has an icon that indicates 'correct' (check mark) or 'incorrect' (red 'X').
@@ -8,9 +7,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, Path, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import { Node, Path, Rectangle, TColor, Text } from '../../../../scenery/js/imports.js';
 import checkSolidShape from '../../../../sherpa/js/fontawesome-5/checkSolidShape.js';
 import timesSolidShape from '../../../../sherpa/js/fontawesome-5/timesSolidShape.js';
 import graphingLines from '../../graphingLines.js';
@@ -22,21 +22,19 @@ const Y_MARGIN = 10;
 
 export default class EquationBoxNode extends Node {
 
-  /**
-   * @param {string} title
-   * @param {Color|String} titleColor
-   * @param {Dimension2} boxSize
-   * @param {Node} equationNode
-   */
-  constructor( title, titleColor, boxSize, equationNode ) {
+  // icons for 'correct' and 'incorrect'
+  private readonly correctIconNode: Path;
+  private readonly incorrectIconNode: Path;
+
+  public constructor( title: string, titleColor: TColor, boxSize: Dimension2, equationNode: Node ) {
 
     super();
 
-    // @private icons for 'correct' and 'incorrect'
     this.correctIconNode = new Path( checkSolidShape, {
       scale: 0.12,
       fill: LineGameConstants.ANSWER_COLOR
     } );
+
     this.incorrectIconNode = new Path( timesSolidShape, {
       scale: 0.12,
       fill: PhetColorScheme.RED_COLORBLIND
@@ -81,13 +79,13 @@ export default class EquationBoxNode extends Node {
     this.incorrectIconNode.visible = false;
   }
 
-  // @public Sets the visibility of the correct icon (green check mark).
-  setCorrectIconVisible( visible ) {
+  // Sets the visibility of the correct icon (green check mark).
+  public setCorrectIconVisible( visible: boolean ): void {
     this.correctIconNode.visible = visible;
   }
 
-  // @public Sets the visibility of the incorrect icon (red X).
-  setIncorrectIconVisible( visible ) {
+  // Sets the visibility of the incorrect icon (red X).
+  public setIncorrectIconVisible( visible: boolean ): void {
     this.incorrectIconNode.visible = visible;
   }
 }

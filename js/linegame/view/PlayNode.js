@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Portion of the scenegraph that corresponds to the 'play' game phase. (See GamePhase.PLAY)
  * Displays the scoreboard and current challenge.

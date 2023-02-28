@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Box around an equation in the 'Line Game'.
  * Has an icon that indicates 'correct' (check mark) or 'incorrect' (red 'X').

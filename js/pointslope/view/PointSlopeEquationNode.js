@@ -44,7 +44,8 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     options = merge( {
 
-      // Don't show 'slope undefined' after non-interactive equations with undefined slope
+      // Whether to show 'slope undefined' after non-interactive equations with undefined slope, for example
+      // 'x = 3' versus 'x = 3 (slope undefined)'.
       // See https://github.com/phetsims/graphing-slope-intercept/issues/7
       slopeUndefinedVisible: true,
 

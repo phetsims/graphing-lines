@@ -67,7 +67,7 @@ export default class NumberBackgroundNode extends Node {
     const valueObserver = ( value: number ) => {
 
       // format the value
-      textNode.text = Utils.toFixed( value, options.decimalPlaces );
+      textNode.string = Utils.toFixed( value, options.decimalPlaces );
 
       // adjust the background to fit the value
       const backgroundWidth = Math.max( options.minWidth, textNode.width + options.xMargin + options.xMargin );

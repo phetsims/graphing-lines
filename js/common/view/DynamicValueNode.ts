@@ -41,7 +41,7 @@ export default class DynamicValueNode extends Text {
     super( '', options );
 
     const valueObserver = ( value: number ) => {
-      this.text = Utils.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
+      this.string = Utils.toFixed( ( options.absoluteValue ) ? Math.abs( value ) : value, options.decimalPlaces );
     };
     valueProperty.link( valueObserver ); // unlink in dispose
 

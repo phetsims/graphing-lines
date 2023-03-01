@@ -384,7 +384,7 @@ class DynamicLabelNode extends EquationNode {
       if ( line.undefinedSlope() ) {
         // 'undefined'
         riseNode.visible = true;
-        riseNode.text = GraphingLinesStrings.undefined;
+        riseNode.string = GraphingLinesStrings.undefined;
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
         riseNode.y = slopeIsNode.y;
@@ -392,7 +392,7 @@ class DynamicLabelNode extends EquationNode {
       else if ( line.getSlope() === 0 ) {
         // 0
         riseNode.visible = true;
-        riseNode.text = '0';
+        riseNode.string = '0';
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
         riseNode.y = slopeIsNode.y;
@@ -415,7 +415,7 @@ class DynamicLabelNode extends EquationNode {
         if ( Number.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
           riseNode.visible = true;
-          riseNode.text = Utils.toFixed( Math.abs( line.getSlope() ), 0 );
+          riseNode.string = Utils.toFixed( Math.abs( line.getSlope() ), 0 );
           riseNode.fill = lineColor;
           riseNode.left = nextXOffset;
           riseNode.y = slopeIsNode.y;
@@ -424,8 +424,8 @@ class DynamicLabelNode extends EquationNode {
           // fractional slope
           riseNode.visible = runNode.visible = fractionLineNode.visible = true;
 
-          riseNode.text = Utils.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
-          runNode.text = Utils.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+          riseNode.string = Utils.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+          runNode.string = Utils.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
           fractionLineNode.setLine( 0, 0, Math.max( riseNode.width, runNode.width ), 0 );
           riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
 

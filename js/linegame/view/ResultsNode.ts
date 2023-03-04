@@ -11,7 +11,6 @@ import { Node } from '../../../../scenery/js/imports.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 import graphingLines from '../../graphingLines.js';
-import LineGameConstants from '../LineGameConstants.js';
 import GamePhase from '../model/GamePhase.js';
 import GLRewardNode from './GLRewardNode.js';
 import LineGameModel from '../model/LineGameModel.js';
@@ -63,7 +62,6 @@ export default class ResultsNode extends Node {
           () => model.setGamePhase( GamePhase.SETTINGS ),
           {
             starDiameter: 45,
-            buttonFill: LineGameConstants.BUTTON_COLOR,
             centerX: layoutBounds.centerX,
             centerY: layoutBounds.centerY
           } ) );

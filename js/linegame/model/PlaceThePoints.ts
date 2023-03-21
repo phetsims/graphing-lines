@@ -16,7 +16,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
-import PlaceThePointsNode from '../view/PlaceThePointsNode.js';
+import PlaceThePointsNode from '../view/PlaceThePointsNode.js'; // eslint-disable-line no-view-imported-from-model
 import GraphTheLine from './GraphTheLine.js';
 import ManipulationMode from './ManipulationMode.js';
 import NotALine from './NotALine.js';

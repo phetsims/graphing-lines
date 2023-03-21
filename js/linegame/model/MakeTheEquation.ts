@@ -10,7 +10,7 @@
 import Range from '../../../../dot/js/Range.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
-import MakeTheEquationNode from '../view/MakeTheEquationNode.js';
+import MakeTheEquationNode from '../view/MakeTheEquationNode.js'; // eslint-disable-line no-view-imported-from-model
 import Challenge from './Challenge.js';
 import Line from '../../common/model/Line.js';
 import EquationForm from './EquationForm.js';

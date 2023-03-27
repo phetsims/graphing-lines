@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Renderer for slope-intercept equations, with optional interactivity of slope and intercept.
  * General slope-intercept form is: y = mx + b

@@ -209,12 +209,6 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
         // (rise/run)x
         riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
-        if ( riseNode instanceof DynamicValueNode ) {
-          riseNode.fill = lineColor;
-        }
-        if ( runNode instanceof DynamicValueNode ) {
-          runNode.fill = lineColor;
-        }
         slopeFractionLineNode.stroke = xNode.fill = lineColor;
         slopeFractionLineNode.left = equalsNode.right + this.relationalOperatorXSpacing;
         slopeFractionLineNode.centerY = equalsNode.centerY + this.fractionLineYFudgeFactor;
@@ -226,7 +220,11 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         xNode.y = yNode.y;
       }
       else {
-        // slope is not interactive, may be displayed as an integer or improper fraction
+        // slope (rise/run) is not interactive, may be displayed as an integer or improper fraction
+        const riseDynamicValueNode = riseNode as DynamicValueNode;
+        assert && assert( riseDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line no-simple-type-checking-assertions
+        const runDynamicValueNode = runNode as DynamicValueNode;
+        assert && assert( runDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line no-simple-type-checking-assertions
 
         // decide whether to include the slope minus sign
         let previousNode;
@@ -249,13 +247,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         if ( line.undefinedSlope() || fractionalSlope ) {
           // rise/run x
           riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
-          if ( riseNode instanceof DynamicValueNode ) {
-            riseNode.fill = lineColor;
-          }
-          if ( runNode instanceof DynamicValueNode ) {
-            runNode.fill = lineColor;
-          }
-          slopeFractionLineNode.stroke = xNode.fill = lineColor;
+          riseDynamicValueNode.fill = runDynamicValueNode.fill = slopeFractionLineNode.stroke = xNode.fill = lineColor;
           // adjust fraction line width
           lineWidth = Math.max( riseNode.width, runNode.width );
           slopeFractionLineNode.setLine( 0, 0, lineWidth, 0 );
@@ -282,10 +274,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         else if ( integerSlope ) {
           // Nx
           riseNode.visible = xNode.visible = true;
-          if ( riseNode instanceof DynamicValueNode ) {
-            riseNode.fill = lineColor;
-          }
-          xNode.fill = lineColor;
+          riseDynamicValueNode.fill = xNode.fill = lineColor;
           riseNode.left = previousNode.right + previousXOffset;
           riseNode.y = yNode.y;
           xNode.left = riseNode.right + this.integerSlopeXSpacing;
@@ -302,9 +291,6 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         if ( zeroSlope && !options.interactiveSlope ) {
           // y = b
           yInterceptNumeratorNode.visible = true;
-          if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-            yInterceptNumeratorNode.fill = lineColor;
-          }
           yInterceptNumeratorNode.left = equalsNode.right + this.relationalOperatorXSpacing;
           yInterceptNumeratorNode.centerY = yNode.centerY;
         }
@@ -313,9 +299,6 @@ export default class SlopeInterceptEquationNode extends EquationNode {
           plusNode.visible = yInterceptNumeratorNode.visible = true;
           minusNode.visible = false;
           plusNode.fill = lineColor;
-          if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-            yInterceptNumeratorNode.fill = lineColor;
-          }
           plusNode.left = xNode.right + this.operatorXSpacing;
           plusNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
           yInterceptNumeratorNode.left = plusNode.right + this.operatorXSpacing;
@@ -324,6 +307,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       }
       else {
         // intercept is not interactive and may be displayed as an integer or improper fraction
+        const yInterceptNumeratorDynamicValueNode = yInterceptNumeratorNode as DynamicValueNode;
+        assert && assert( yInterceptNumeratorDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line no-simple-type-checking-assertions
 
         // y-intercept properties
         const fractionalIntercept = line.getYIntercept();
@@ -334,12 +319,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         if ( zeroIntercept ) {
           if ( zeroSlope && !options.interactiveSlope ) {
             // y = 0
-            yInterceptNumeratorNode.visible = true;
-            if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-              yInterceptNumeratorNode.fill = lineColor;
-            }
-            yInterceptNumeratorNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-            yInterceptNumeratorNode.centerY = yNode.centerY;
+            yInterceptNumeratorDynamicValueNode.visible = true;
+            yInterceptNumeratorDynamicValueNode.fill = lineColor;
+            yInterceptNumeratorDynamicValueNode.left = equalsNode.right + this.relationalOperatorXSpacing;
+            yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
           }
           else {
             // no intercept
@@ -347,24 +330,20 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         }
         else if ( positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = b
-          yInterceptNumeratorNode.visible = true;
-          if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-            yInterceptNumeratorNode.fill = lineColor;
-          }
-          yInterceptNumeratorNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          yInterceptNumeratorNode.centerY = yNode.centerY;
+          yInterceptNumeratorDynamicValueNode.visible = true;
+          yInterceptNumeratorDynamicValueNode.fill = lineColor;
+          yInterceptNumeratorDynamicValueNode.left = equalsNode.right + this.relationalOperatorXSpacing;
+          yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
         }
         else if ( !positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = -b
-          yInterceptMinusSignNode.visible = yInterceptNumeratorNode.visible = true;
+          yInterceptMinusSignNode.visible = yInterceptNumeratorDynamicValueNode.visible = true;
           yInterceptMinusSignNode.fill = lineColor;
-          if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-            yInterceptNumeratorNode.fill = lineColor;
-          }
+          yInterceptNumeratorDynamicValueNode.fill = lineColor;
           yInterceptMinusSignNode.left = equalsNode.right + this.relationalOperatorXSpacing;
           yInterceptMinusSignNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
-          yInterceptNumeratorNode.left = yInterceptMinusSignNode.right + this.integerSignXSpacing;
-          yInterceptNumeratorNode.centerY = yNode.centerY;
+          yInterceptNumeratorDynamicValueNode.left = yInterceptMinusSignNode.right + this.integerSignXSpacing;
+          yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
         }
         else {
           // y = mx +/- b
@@ -376,28 +355,24 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
           if ( integerIntercept ) {
             // b is an integer
-            yInterceptNumeratorNode.visible = true;
-            if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-              yInterceptNumeratorNode.fill = lineColor;
-            }
-            yInterceptNumeratorNode.left = operatorNode.right + this.operatorXSpacing;
-            yInterceptNumeratorNode.centerY = yNode.centerY;
+            yInterceptNumeratorDynamicValueNode.visible = true;
+            yInterceptNumeratorDynamicValueNode.fill = lineColor;
+            yInterceptNumeratorDynamicValueNode.left = operatorNode.right + this.operatorXSpacing;
+            yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
           }
           else {
             // b is an improper fraction
-            yInterceptNumeratorNode.visible = yInterceptDenominatorNode.visible = yInterceptFractionLineNode.visible = true;
-            if ( yInterceptNumeratorNode instanceof DynamicValueNode ) {
-              yInterceptNumeratorNode.fill = lineColor;
-            }
+            yInterceptNumeratorDynamicValueNode.visible = yInterceptDenominatorNode.visible = yInterceptFractionLineNode.visible = true;
+            yInterceptNumeratorDynamicValueNode.fill = lineColor;
             yInterceptDenominatorNode.fill = yInterceptFractionLineNode.stroke = lineColor;
             // adjust fraction line width
-            lineWidth = Math.max( yInterceptNumeratorNode.width, yInterceptDenominatorNode.width );
+            lineWidth = Math.max( yInterceptNumeratorDynamicValueNode.width, yInterceptDenominatorNode.width );
             yInterceptFractionLineNode.setLine( 0, 0, lineWidth, 0 );
             // layout
             yInterceptFractionLineNode.left = operatorNode.right + this.operatorXSpacing;
             yInterceptFractionLineNode.centerY = equalsNode.centerY + this.fractionLineYFudgeFactor;
-            yInterceptNumeratorNode.centerX = yInterceptFractionLineNode.centerX;
-            yInterceptNumeratorNode.bottom = yInterceptFractionLineNode.top - this.ySpacing;
+            yInterceptNumeratorDynamicValueNode.centerX = yInterceptFractionLineNode.centerX;
+            yInterceptNumeratorDynamicValueNode.bottom = yInterceptFractionLineNode.top - this.ySpacing;
             yInterceptDenominatorNode.centerX = yInterceptFractionLineNode.centerX;
             yInterceptDenominatorNode.top = yInterceptFractionLineNode.bottom + this.ySpacing;
           }

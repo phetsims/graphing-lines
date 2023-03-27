@@ -1,93 +1,106 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Base class for all equations.
+ * EquationNode is the base class for all equations.
  * Dimensions and layout offsets are computed as percentages of the font's point size.
  * These multipliers were determined empirically by committee - modify at your peril!
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import merge from '../../../../phet-core/js/merge.js';
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Range from '../../../../dot/js/Range.js';
+import { Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import SlopePicker from './picker/SlopePicker.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+
+type SelfOptions = {
+  fontSize?: number;
+};
+
+export type EquationNodeOptions = SelfOptions;
 
 export default class EquationNode extends Node {
 
-  /**
-   * @param {Object} [options]
-   */
-  constructor( options ) {
+  public readonly decimalPlaces = 0;
 
-    options = merge( {
+  // Controls the vertical offset of the slope's sign.
+  // Zero is vertically centered on the equals sign, positive values move it down, negative move it up.
+  // This was created because there was a great deal of discussion about where the sign should be placed.
+  protected readonly slopeSignYOffset = 0;
+
+  // Fudge factors for horizontal lines, to vertically center them with equals sign (set by visual inspection).
+  // Note that these are currently all zero, and that looks good in JavaScript.
+  // In Java, they were a function of fontSize.
+  // We're keeping this feature in case future 'tweaks' are needed.
+  protected readonly slopeSignYFudgeFactor = 0;
+  protected readonly operatorYFudgeFactor = 0;
+  protected readonly fractionLineYFudgeFactor = 0;
+  protected readonly undefinedSlopeYFudgeFactor = 0;
+  protected readonly equalsSignFudgeFactor = 0;
+
+  // thickness of the fraction divisor line
+  protected readonly fractionLineThickness: number;
+
+  // size of the lines used to create + and - operators
+  protected readonly operatorLineSize: Dimension2;
+
+  // size of the lines used to create + and - signs
+  protected readonly signLineSize: Dimension2;
+
+  // spacing between components of an equation
+  protected readonly integerSignXSpacing: number; // spacing between a sign and the integer to the right of it
+  protected readonly fractionSignXSpacing: number; // spacing between a sign and the fraction to the right of it
+  protected readonly integerSlopeXSpacing: number; // spacing between a fractional slope and what's to the right of it
+  protected readonly fractionalSlopeXSpacing: number; // spacing between an integer slope and what's to the right of it
+  protected readonly operatorXSpacing: number; // space around an operator (eg, +)
+  protected readonly relationalOperatorXSpacing: number; // space around the relational operator (eg, =)
+  protected readonly parenXSpacing: number; // space between a parenthesis and the thing it encloses
+  protected readonly pickersYSpacing: number; // y spacing between spinners and fraction line
+  protected readonly slopeYSpacing: number; // y spacing between rise and run values (with blue backgrounds) and fraction line
+  protected readonly ySpacing: number; // all other y spacing
+
+  protected constructor( providedOptions?: EquationNodeOptions ) {
+
+    const options = optionize<EquationNodeOptions, SelfOptions, NodeOptions>()( {
+
+      // SelfOptions
       fontSize: 18
-    }, options );
+    }, providedOptions );
 
     super();
 
-    this.decimalPlaces = 0; // @public (read-only)
-
-    /*
-     * @protected (read-only)
-     * Controls the vertical offset of the slope's sign.
-     * Zero is vertically centered on the equals sign, positive values move it down, negative move it up.
-     * This was created because there was a great deal of discussion and disagreement about where the sign should be placed.
-     */
-    this.slopeSignYOffset = 0;
-
-    /*
-     * @protected (read-only)
-     * Fudge factors for horizontal lines, to vertically center them with equals sign (set by visual inspection).
-     * Note that these are currently all zero, and that looks good in JavaScript.
-     * In Java, they were a function of fontSize.
-     * We're keeping this feature in case future 'tweaks' are needed.
-     */
-    this.slopeSignYFudgeFactor = 0;
-    this.operatorYFudgeFactor = 0;
-    this.fractionLineYFudgeFactor = 0;
-    this.undefinedSlopeYFudgeFactor = 0;
-    this.equalsSignFudgeFactor = 0;
-    
     const fontSize = options.fontSize;
 
-    // @protected (read-only) thickness of the fraction divisor line
+    // Multipliers were chosen empirically.
     this.fractionLineThickness = 0.06 * fontSize;
-
-    // @protected (read-only) size of the lines used to create + and - operators
     this.operatorLineSize = new Dimension2( 0.54 * fontSize, 0.07 * fontSize );
-
-    // @protected (read-only) size of the lines used to create + and - signs
     this.signLineSize = new Dimension2( 0.54 * fontSize, 0.11 * fontSize );
-
-    // @protected (read-only) spacing between components of an equation (set by visual inspection)
-    this.integerSignXSpacing = 0.18 * fontSize; // spacing between a sign and the integer to the right of it
-    this.fractionSignXSpacing = 0.36 * fontSize; // spacing between a sign and the fraction to the right of it
-    this.integerSlopeXSpacing = 0.04 * fontSize; // spacing between a fractional slope and what's to the right of it
-    this.fractionalSlopeXSpacing = 0.15 * fontSize; // spacing between an integer slope and what's to the right of it
-    this.operatorXSpacing = 0.25 * fontSize; // space around an operator (eg, +)
-    this.relationalOperatorXSpacing = 0.35 * fontSize; // space around the relational operator (eg, =)
-    this.parenXSpacing = 0.07 * fontSize; // space between a parenthesis and the thing it encloses
-    this.pickersYSpacing = 0.2 * fontSize; // y spacing between spinners and fraction line
-    this.slopeYSpacing = 0.4 * fontSize; // y spacing between rise and run values (with blue backgrounds) and fraction line
-    this.ySpacing = 0.1 * fontSize; // all other y spacing
+    this.integerSignXSpacing = 0.18 * fontSize;
+    this.fractionSignXSpacing = 0.36 * fontSize;
+    this.integerSlopeXSpacing = 0.04 * fontSize;
+    this.fractionalSlopeXSpacing = 0.15 * fontSize;
+    this.operatorXSpacing = 0.25 * fontSize;
+    this.relationalOperatorXSpacing = 0.35 * fontSize;
+    this.parenXSpacing = 0.07 * fontSize;
+    this.pickersYSpacing = 0.2 * fontSize;
+    this.slopeYSpacing = 0.4 * fontSize;
+    this.ySpacing = 0.1 * fontSize;
 
     this.mutate( options );
   }
 
   /**
    * Gets the max width for the rise and run pickers used in an interactive equation.
-   * @param {Property.<Range>} riseRangeProperty
-   * @param {Property.<Range>} runRangeProperty
-   * @param {PhetFont} font
-   * @param {number} decimalPlaces
-   * @static
-   * @public
    */
-  static computeMaxSlopePickerWidth( riseRangeProperty, runRangeProperty, font, decimalPlaces ) {
+  public static computeMaxSlopePickerWidth( riseRangeProperty: TReadOnlyProperty<Range>,
+                                            runRangeProperty: TReadOnlyProperty<Range>,
+                                            font: PhetFont,
+                                            decimalPlaces: number ): number {
 
     const pickerOptions = {
       font: font,

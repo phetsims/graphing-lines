@@ -19,7 +19,7 @@ type SelfOptions = {
   absoluteValue?: boolean; // whether to display the absolute value of valueProperty
 };
 
-type DynamicValueNodeOptions = SelfOptions & TextOptions;
+export type DynamicValueNodeOptions = SelfOptions & TextOptions;
 
 export default class DynamicValueNode extends Text {
 

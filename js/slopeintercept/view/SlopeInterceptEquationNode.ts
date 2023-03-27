@@ -19,19 +19,18 @@ import Range from '../../../../dot/js/Range.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
-import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
+import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
+import PlusNode, { PlusNodeOptions } from '../../../../scenery-phet/js/PlusNode.js';
 import { Line as SceneryLine, Node, RichText, TColor } from '../../../../scenery/js/imports.js';
-import NumberPicker from '../../../../sun/js/NumberPicker.js';
+import NumberPicker, { NumberPickerOptions } from '../../../../sun/js/NumberPicker.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
-import DynamicValueNode from '../../common/view/DynamicValueNode.js';
+import DynamicValueNode, { DynamicValueNodeOptions } from '../../common/view/DynamicValueNode.js';
 import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNode.js';
 import SlopePicker from '../../common/view/picker/SlopePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
@@ -116,7 +115,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     const yNode = new RichText( GLSymbols.y, staticOptions );
     const equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
-    const slopeMinusSignNode = new MinusNode( merge( { size: this.signLineSize }, staticOptions ) );
+    const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( {
+      size: this.signLineSize
+    }, staticOptions ) );
     let riseNode: SlopePicker | DynamicValueNode;
     let runNode: SlopePicker | DynamicValueNode;
     if ( options.interactiveSlope ) {
@@ -124,29 +125,42 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( riseProperty, merge( { absoluteValue: true }, staticOptions ) );
-      runNode = new DynamicValueNode( runProperty, merge( { absoluteValue: true }, staticOptions ) );
+      riseNode = new DynamicValueNode( riseProperty, combineOptions<DynamicValueNodeOptions>( {
+        absoluteValue: true
+      }, staticOptions ) );
+      runNode = new DynamicValueNode( runProperty, combineOptions<DynamicValueNodeOptions>( {
+        absoluteValue: true
+      }, staticOptions ) );
     }
     const slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const xNode = new RichText( GLSymbols.x, merge( { absoluteValue: true }, staticOptions ) );
-    const plusNode = new PlusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
-    const minusNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
-    const yInterceptMinusSignNode = new MinusNode( merge( {
-      size: this.signLineSize,
-      absoluteValue: true
+    const xNode = new RichText( GLSymbols.x, staticOptions );
+    const plusNode = new PlusNode( combineOptions<PlusNodeOptions>( {
+      size: this.operatorLineSize
+    }, staticOptions ) );
+    const minusNode = new MinusNode( combineOptions<MinusNodeOptions>( {
+      size: this.operatorLineSize
+    }, staticOptions ) );
+    const yInterceptMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( {
+      size: this.signLineSize
     }, staticOptions ) );
     let yInterceptNumeratorNode: NumberPicker | DynamicValueNode; // also used for integer values
     if ( options.interactiveIntercept ) {
       yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
-        merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
+        combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
           color: GLColors.INTERCEPT,
           font: interactiveFont
         } ) );
     }
     else {
-      yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty, merge( { absoluteValue: true }, staticOptions ) );
+      yInterceptNumeratorNode = new DynamicValueNode( yInterceptNumeratorProperty,
+        combineOptions<DynamicValueNodeOptions>( {
+          absoluteValue: true
+        }, staticOptions ) );
     }
-    const yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty, merge( { absoluteValue: true }, staticOptions ) );
+    const yInterceptDenominatorNode = new DynamicValueNode( yInterceptDenominatorProperty,
+      combineOptions<DynamicValueNodeOptions>( {
+        absoluteValue: true
+      }, staticOptions ) );
     const yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const slopeUndefinedNode = new RichText( '?', staticOptions );
 

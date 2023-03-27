@@ -14,11 +14,10 @@ import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/Numbe
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
-import merge from '../../../../phet-core/js/merge.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
-import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
+import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
 import GLColors from '../../common/GLColors.js';
@@ -121,7 +120,9 @@ export default class SlopeEquationNode extends EquationNode {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    const numeratorOperatorNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
+    const numeratorOperatorNode = new MinusNode( combineOptions<MinusNodeOptions>( {
+      size: this.operatorLineSize
+    }, staticOptions ) );
     const y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1
@@ -133,7 +134,9 @@ export default class SlopeEquationNode extends EquationNode {
       font: interactiveFont,
       color: GLColors.POINT_X2_Y2
     } );
-    const denominatorOperatorNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
+    const denominatorOperatorNode = new MinusNode( combineOptions<MinusNodeOptions>( {
+      size: this.operatorLineSize
+    }, staticOptions ) );
     const x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
       font: interactiveFont,
       color: GLColors.POINT_X1_Y1

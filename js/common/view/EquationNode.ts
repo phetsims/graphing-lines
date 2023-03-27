@@ -17,12 +17,13 @@ import SlopePicker from './picker/SlopePicker.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 
 type SelfOptions = {
   fontSize?: number;
 };
 
-export type EquationNodeOptions = SelfOptions;
+export type EquationNodeOptions = SelfOptions & PickOptional<NodeOptions, 'maxWidth'>;
 
 export default class EquationNode extends Node {
 

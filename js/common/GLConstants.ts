@@ -10,6 +10,7 @@
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
 import MathSymbols from '../../../scenery-phet/js/MathSymbols.js';
+import { FontWeight } from '../../../scenery/js/imports.js';
 import { NumberPickerOptions } from '../../../sun/js/NumberPicker.js';
 import graphingLines from '../graphingLines.js';
 
@@ -21,6 +22,8 @@ const NUMBER_PICKER_OPTIONS: NumberPickerOptions = {
   mouseAreaYDilation: 4
 };
 
+const EQUATION_FONT_WEIGHT: FontWeight = 'bold';
+
 const GLConstants = {
   SCREEN_VIEW_LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ),
   X_AXIS_RANGE: new Range( -10, 10 ),
@@ -31,7 +34,7 @@ const GLConstants = {
   SCREEN_Y_MARGIN: 20,
   RESET_ALL_BUTTON_SCALE: 1.32,
   PATTERN_0VALUE_EQUALS_1VALUE: `{0} ${MathSymbols.EQUAL_TO} {1}`, // i18n not required, used for e.g. x = 5
-  EQUATION_FONT_WEIGHT: 'bold',
+  EQUATION_FONT_WEIGHT: EQUATION_FONT_WEIGHT,
   NUMBER_PICKER_OPTIONS: NUMBER_PICKER_OPTIONS
 };
 

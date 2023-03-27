@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Renderer for slope equations.
  * General form is m = (y2 - y1) / (x2 - x1) = rise/run
@@ -11,62 +10,97 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import merge from '../../../../phet-core/js/merge.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Line as SceneryLine, Node, RichText, Text } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
-import EquationNode from '../../common/view/EquationNode.js';
+import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNode.js';
 import NumberBackgroundNode from '../../common/view/NumberBackgroundNode.js';
 import CoordinatePicker from '../../common/view/picker/CoordinatePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
+import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
+
+type SelfOptions = {
+
+  // Ranges for the NumberPickers
+  x1RangeProperty?: Property<Range>;
+  x2RangeProperty?: Property<Range>;
+  y1RangeProperty?: Property<Range>;
+  y2RangeProperty?: Property<Range>;
+
+  // font size for all elements
+  fontSize?: number;
+
+  // Color of static elements
+  staticColor?: TColor;
+};
+
+type SlopeEquationNodeOptions = SelfOptions & EquationNodeOptions;
 
 export default class SlopeEquationNode extends EquationNode {
+
+  private readonly disposeSlopeEquationNode: () => void;
+
   /**
    * Creates an interactive equation. x1, y1, x2 and y2 are interactive.
-   *
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
    */
-  constructor( lineProperty, options ) {
+  public constructor( lineProperty: Property<Line>, providedOptions?: SlopeEquationNodeOptions ) {
 
-    options = merge( {
+    const options = optionize<SlopeEquationNodeOptions, SelfOptions, EquationNodeOptions>()( {
+
+      // SelfOptions
       x1RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
       x2RangeProperty: new Property( GLConstants.X_AXIS_RANGE ),
       y1RangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       y2RangeProperty: new Property( GLConstants.Y_AXIS_RANGE ),
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
-    }, options );
+    }, providedOptions );
 
     super( options ); // call first, because supertype constructor computes various layout metrics
 
-    const interactiveFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    const staticFont = new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } );
-    const staticOptions = { font: staticFont, fill: options.staticColor };
-    const fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
+    const interactiveFont = new PhetFont( {
+      size: options.fontSize,
+      weight: GLConstants.EQUATION_FONT_WEIGHT
+    } );
+    const staticFont = new PhetFont( {
+      size: options.fontSize,
+      weight: GLConstants.EQUATION_FONT_WEIGHT
+    } );
 
-    const numberPropertyOptions = {
+    const staticOptions = {
+      font: staticFont,
+      fill: options.staticColor
+    };
+    const fractionLineOptions = {
+      stroke: options.staticColor,
+      lineWidth: this.fractionLineThickness
+    };
+
+    const numberPropertyOptions: NumberPropertyOptions = {
       numberType: 'Integer'
     };
 
-    // internal properties that are connected to pickers
+    // internal Properties that are connected to pickers
     const x1Property = new NumberProperty( lineProperty.value.x1, numberPropertyOptions );
     const y1Property = new NumberProperty( lineProperty.value.y1, numberPropertyOptions );
     const x2Property = new NumberProperty( lineProperty.value.x2, numberPropertyOptions );
     const y2Property = new NumberProperty( lineProperty.value.y2, numberPropertyOptions );
 
-    // internal properties that are connected to number displays
+    // internal Properties that are connected to number displays
     const riseProperty = new NumberProperty( lineProperty.value.rise, numberPropertyOptions );
     const runProperty = new NumberProperty( lineProperty.value.run, numberPropertyOptions );
 
@@ -154,7 +188,7 @@ export default class SlopeEquationNode extends EquationNode {
     );
 
     // sync the controls and layout with the model
-    const lineObserver = line => {
+    const lineObserver = ( line: Line ) => {
 
       // Synchronize the controls atomically.
       updatingControls = true;
@@ -223,7 +257,6 @@ export default class SlopeEquationNode extends EquationNode {
 
     this.mutate( options );
 
-    // @private called by dispose
     this.disposeSlopeEquationNode = () => {
       x1Node.dispose();
       x2Node.dispose();
@@ -236,22 +269,15 @@ export default class SlopeEquationNode extends EquationNode {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeSlopeEquationNode();
     super.dispose();
   }
 
   /**
    * Creates a node that displays the general form of the slope equation: m = (y2-y1)/(x2-x1)
-   * @returns {scenery.Node}
-   * @public
-   * @static
    */
-  static createGeneralFormNode() {
+  public static createGeneralFormNode(): Node {
 
     const options = {
       pickable: false,
@@ -315,18 +341,13 @@ export default class SlopeEquationNode extends EquationNode {
 
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   * @returns {Node}
-   * @public
-   * @static
    */
-  static createDynamicLabel( lineProperty, options ) {
+  public static createDynamicLabel( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
-    options = merge( {
+    const options = combineOptions<CreateDynamicLabelOptions>( {
       pickable: false,
       maxWidth: 200
-    }, options );
+    }, providedOptions );
 
     return new DynamicLabelNode( lineProperty, options );
   }
@@ -340,15 +361,13 @@ export default class SlopeEquationNode extends EquationNode {
  */
 class DynamicLabelNode extends EquationNode {
 
-  /**
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   */
-  constructor( lineProperty, options ) {
+  private readonly disposeDynamicLabelNode: () => void;
 
-    options = merge( {
+  public constructor( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ) {
+
+    const options = combineOptions<CreateDynamicLabelOptions>( {
       fontSize: 18
-    }, options );
+    }, providedOptions );
 
     super( options );
 
@@ -368,7 +387,7 @@ class DynamicLabelNode extends EquationNode {
     this.children = [ slopeIsNode, minusSignNode, riseNode, runNode, fractionLineNode ];
 
     // update visibility, layout and properties of nodes to match the current line
-    const update = line => {
+    const update = ( line: Line ) => {
 
       const lineColor = line.color;
 
@@ -441,10 +460,9 @@ class DynamicLabelNode extends EquationNode {
       }
     };
 
-    const lineObserver = line => update( line );
+    const lineObserver = ( line: Line ) => update( line );
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposeDynamicLabelNode = () => {
       lineProperty.unlink( lineObserver );
     };
@@ -452,8 +470,7 @@ class DynamicLabelNode extends EquationNode {
     this.mutate( options );
   }
 
-  // @public @override
-  dispose() {
+  public override dispose(): void {
     this.disposeDynamicLabelNode();
     super.dispose();
   }

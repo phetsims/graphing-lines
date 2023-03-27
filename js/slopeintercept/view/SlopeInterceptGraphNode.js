@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Graph that provides direct manipulation of a line in slope-intercept form.
  * Adds manipulators for slope and intercept to the base class functionality.

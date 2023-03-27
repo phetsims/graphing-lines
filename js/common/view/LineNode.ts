@@ -14,8 +14,8 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
-import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
-import { Line as SceneryLine, LineOptions, Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import { Line as SceneryLine, Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import NotALine from '../../linegame/model/NotALine.js';
 import Line from '../model/Line.js';
@@ -41,8 +41,10 @@ const SCENERY_LINE_OPTIONS = {
   lineWidth: TAIL_WIDTH
 };
 
+type LineProperty = Property<Line> | Property<Line | NotALine>;
+
 // Options for SelfOptions.createDynamicLabel
-type CreateDynamicLabelOptions = {
+export type CreateDynamicLabelOptions = {
   pickable?: boolean;
   interactivePoint?: boolean;
   interactiveSlope?: boolean;
@@ -50,23 +52,22 @@ type CreateDynamicLabelOptions = {
   maxWidth?: number;
 };
 
+export type CreateDynamicLabelFunction = ( lineProperty: LineProperty, providedOptions?: CreateDynamicLabelOptions ) => Node;
+
 type SelfOptions = {
 
   // Function for creating a dynamic label that updates as the line changes.
-  createDynamicLabel?: ( lineProperty: Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ) => Node;
+  createDynamicLabel?: CreateDynamicLabelFunction;
 
-  // Whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line.
+  // Whether the line has arrows on its ends.
   hasArrows?: boolean;
-
-  // filled in below
-  lineOptions?: ArrowNodeOptions | LineOptions;
 };
 
 type LineNodeOptions = SelfOptions;
 
 export default class LineNode extends Node {
 
-  public readonly lineProperty: Property<Line | NotALine>;
+  public readonly lineProperty: LineProperty;
   private readonly graph: Graph;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly xExtent: number;
@@ -83,10 +84,12 @@ export default class LineNode extends Node {
 
   private readonly disposeLineNode: () => void;
 
-  public constructor( lineProperty: Property<Line | NotALine>, graph: Graph, modelViewTransform: ModelViewTransform2,
+  public constructor( lineProperty: LineProperty,
+                      graph: Graph,
+                      modelViewTransform: ModelViewTransform2,
                       providedOptions?: LineNodeOptions ) {
 
-    const options = optionize<LineNodeOptions, StrictOmit<SelfOptions, 'createDynamicLabel' | 'lineOptions'>, NodeOptions>()( {
+    const options = optionize<LineNodeOptions, StrictOmit<SelfOptions, 'createDynamicLabel'>, NodeOptions>()( {
 
       // SelfOptions
       hasArrows: true

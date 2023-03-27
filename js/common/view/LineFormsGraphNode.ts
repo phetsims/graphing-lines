@@ -1,8 +1,7 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Base type for the 'Slope', 'Slope-Intercept' and 'Point-Slope' graphs.
+ * LineFormsGraphNode is the base class graphs in the 'Slope', 'Slope-Intercept' and 'Point-Slope' screens.
  *
  * Displays the following:
  * - one interactive line
@@ -19,33 +18,43 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+import LineFormsModel from '../model/LineFormsModel.js';
 import GraphNode from './GraphNode.js';
-import LineNode from './LineNode.js';
+import LineNode, { CreateDynamicLabelFunction } from './LineNode.js';
 import SlopeToolNode from './SlopeToolNode.js';
+import LineFormsViewProperties from './LineFormsViewProperties.js';
+import Line from '../model/Line.js';
 
 export default class LineFormsGraphNode extends GraphNode {
 
-  /**
-   * @param {LineFormsModel } model
-   * @param {LineFormsViewProperties} viewProperties
-   * @param {function(lineProperty,options):Node} createDynamicLabel
-   */
-  constructor( model, viewProperties, createDynamicLabel ) {
+  private readonly model: LineFormsModel;
+  private readonly viewProperties: LineFormsViewProperties;
+  private readonly createDynamicLabel: CreateDynamicLabelFunction;
+
+  // Nodes for each category of line (interactive, standard, saved) to maintain rendering order
+  private readonly interactiveLineNode: LineNode;
+  private readonly standardLinesParentNode: Node;
+  private readonly savedLinesParentNode: Node;
+
+  private readonly slopeToolNode: SlopeToolNode;
+
+  protected constructor( model: LineFormsModel,
+                         viewProperties: LineFormsViewProperties,
+                         createDynamicLabel: CreateDynamicLabelFunction ) {
 
     super( model.graph, model.modelViewTransform );
 
-    this.model = model; // @private
-    this.viewProperties = viewProperties; // @private
-    this.createDynamicLabel = createDynamicLabel; // @private
+    this.model = model;
+    this.viewProperties = viewProperties;
+    this.createDynamicLabel = createDynamicLabel;
 
-    // @private Nodes for each category of line (interactive, standard, saved) to maintain rendering order
-    this.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform,
-      { createDynamicLabel: createDynamicLabel } ); // @private
-    this.standardLinesParentNode = new Node(); // @private
-    this.savedLinesParentNode = new Node(); // @private
+    this.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform, {
+      createDynamicLabel: createDynamicLabel
+    } );
+    this.standardLinesParentNode = new Node();
+    this.savedLinesParentNode = new Node();
 
-    // @private Slope tool
-    this.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform ); // @private
+    this.slopeToolNode = new SlopeToolNode( model.interactiveLineProperty, model.modelViewTransform );
 
     // Rendering order. The order of lines should match the order of LineFormsModel.graph.lines.
     this.addChild( this.savedLinesParentNode );
@@ -83,8 +92,8 @@ export default class LineFormsGraphNode extends GraphNode {
     } );
   }
 
-  // @private Updates the visibility of lines and associated decorations
-  updateLinesVisibility() {
+  // Updates the visibility of lines and associated decorations.
+  private updateLinesVisibility(): void {
 
     const linesVisible = this.viewProperties.linesVisibleProperty.value;
 
@@ -99,35 +108,39 @@ export default class LineFormsGraphNode extends GraphNode {
     this.slopeToolNode.visible = ( this.viewProperties.slopeToolVisibleProperty.value && linesVisible );
   }
 
-  // @private Called when a standard line is added to the model.
-  standardLineAdded( line ) {
-    this.standardLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform,
-      { createDynamicLabel: this.createDynamicLabel } ) );
+  // Called when a standard line is added to the model.
+  private standardLineAdded( line: Line ): void {
+    const lineNode = new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform, {
+      createDynamicLabel: this.createDynamicLabel
+    } );
+    this.standardLinesParentNode.addChild( lineNode );
   }
 
-  // @private Called when a standard line is removed from the model.
-  standardLineRemoved( line ) {
+  // Called when a standard line is removed from the model.
+  private standardLineRemoved( line: Line ): void {
     this.removeLineNode( line, this.standardLinesParentNode );
   }
 
-  // @private Called when a saved line is added to the model.
-  savedLineAdded( line ) {
-    this.savedLinesParentNode.addChild( new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform,
-      { createDynamicLabel: this.createDynamicLabel } ) );
+  // Called when a saved line is added to the model.
+  private savedLineAdded( line: Line ): void {
+    const lineNode = new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform, {
+      createDynamicLabel: this.createDynamicLabel
+    } );
+    this.savedLinesParentNode.addChild( lineNode );
   }
 
-  // @private Called when a saved line is removed from the model.
-  savedLineRemoved( line ) {
+  // Called when a saved line is removed from the model.
+  private savedLineRemoved( line: Line ): void {
     this.removeLineNode( line, this.savedLinesParentNode );
   }
 
-  // @private Removes the node that corresponds to the specified line.
-  removeLineNode( line, parentNode ) {
+  // Removes the LineNode that corresponds to the specified Line.
+  private removeLineNode( line: Line, parentNode: Node ): void {
     let removed = false;
     for ( let i = 0; i < parentNode.getChildrenCount() && !removed; i++ ) {
-      const node = parentNode.getChildAt( i );
+      const node = parentNode.getChildAt( i ) as LineNode;
+      assert && assert( node instanceof LineNode ); // eslint-disable-line no-simple-type-checking-assertions
       if ( line === node.lineProperty.value ) {
-        assert && assert( node instanceof LineNode );
         parentNode.removeChild( node );
         node.dispose();
         removed = true;

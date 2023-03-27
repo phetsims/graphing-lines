@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Visual representation of a line.
  * By default, a line is not labeled with an equation. Clients are responsible for decorating the line

@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base type for the 'Slope', 'Slope-Intercept' and 'Point-Slope' graphs.
  *

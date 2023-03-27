@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Base class for all equations.
  * Dimensions and layout offsets are computed as percentages of the font's point size.

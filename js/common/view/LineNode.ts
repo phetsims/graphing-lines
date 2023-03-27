@@ -48,6 +48,7 @@ export type CreateDynamicLabelOptions = {
   pickable?: boolean;
   interactivePoint?: boolean;
   interactiveSlope?: boolean;
+  interactiveIntercept?: boolean;
   fontSize?: number;
   maxWidth?: number;
 };

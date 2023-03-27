@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Renderer for slope equations.
  * General form is m = (y2 - y1) / (x2 - x1) = rise/run

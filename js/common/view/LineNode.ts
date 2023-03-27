@@ -1,21 +1,25 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * Visual representation of a line.
+ * LineNode is the visual representation of a line.
  * By default, a line is not labeled with an equation. Clients are responsible for decorating the line
- * with an equation in the correct form (slope, slope-intercept, point-slope.) The line's equation is
+ * with an equation of the correct form (slope, slope-intercept, point-slope.) The line's equation is
  * positioned towards the tip, parallel with the line.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import merge from '../../../../phet-core/js/merge.js';
-import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Line as SceneryLine, Node } from '../../../../scenery/js/imports.js';
+import optionize from '../../../../phet-core/js/optionize.js';
+import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
+import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import ArrowNode, { ArrowNodeOptions } from '../../../../scenery-phet/js/ArrowNode.js';
+import { Line as SceneryLine, LineOptions, Node, NodeOptions } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+import NotALine from '../../linegame/model/NotALine.js';
 import Line from '../model/Line.js';
+import Graph from '../model/Graph.js';
 
 // constants
 const HEAD_SIZE = new Dimension2( 10, 10 );
@@ -23,8 +27,8 @@ const TAIL_WIDTH = 3;
 const LINE_EXTENT = 25; // how far the line extends past the grid
 const EQUATION_FONT_SIZE = 18;
 
-// default options passed to SCENERY_PHET/ArrowNode
-const ARROW_NODE_DEFAULT_OPTIONS = {
+// Options for SCENERY_PHET/ArrowNode
+const ARROW_NODE_OPTIONS = {
   doubleHead: true,
   tailWidth: TAIL_WIDTH,
   headWidth: HEAD_SIZE.width,
@@ -32,105 +36,122 @@ const ARROW_NODE_DEFAULT_OPTIONS = {
   stroke: null
 };
 
-// default options pass to SCENERY/Line
-const SCENERY_LINE_DEFAULT_OPTIONS = {
+// Options for SCENERY/Line
+const SCENERY_LINE_OPTIONS = {
   lineWidth: TAIL_WIDTH
 };
 
+// Options for SelfOptions.createDynamicLabel
+type CreateDynamicLabelOptions = {
+  pickable?: boolean;
+  interactivePoint?: boolean;
+  interactiveSlope?: boolean;
+  fontSize?: number;
+  maxWidth?: number;
+};
+
+type SelfOptions = {
+
+  // Function for creating a dynamic label that updates as the line changes.
+  createDynamicLabel?: ( lineProperty: Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ) => Node;
+
+  // Whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line.
+  hasArrows?: boolean;
+
+  // filled in below
+  lineOptions?: ArrowNodeOptions | LineOptions;
+};
+
+type LineNodeOptions = SelfOptions;
+
 export default class LineNode extends Node {
 
-  /**
-   * @param {Property.<Line|NotALine>} lineProperty
-   * @param {Graph} graph
-   * @param {ModelViewTransform2} modelViewTransform
-   * @param {Object} [options]
-   */
-  constructor( lineProperty, graph, modelViewTransform, options ) {
+  public readonly lineProperty: Property<Line | NotALine>;
+  private readonly graph: Graph;
+  private readonly modelViewTransform: ModelViewTransform2;
+  private readonly xExtent: number;
+  private readonly yExtent: number;
+  private readonly parentNode: Node; // parent of all children
 
-    options = merge( {
+  // One of these will be instantiated, based on the value of SelfOptions.hasArrows.
+  private readonly arrowNode?: ArrowNode;
+  private readonly lineNode?: SceneryLine;
 
-      // Function for creating a dynamic label that updates as the line changes.
-      // function( {Property.<Line>} lineProperty, {Object} [options] )
-      createDynamicLabel: null,
+  // optional equationNode and its parent.
+  private readonly equationNode?: Node;
+  private readonly equationParentNode?: Node;
 
-      // whether the line has arrows on its ends. true: use SCENERY_PHET/ArrowNode, false: use SCENERY/Line
-      hasArrows: true,
+  private readonly disposeLineNode: () => void;
 
-      // filled in below
-      lineOptions: null
-    }, options );
+  public constructor( lineProperty: Property<Line | NotALine>, graph: Graph, modelViewTransform: ModelViewTransform2,
+                      providedOptions?: LineNodeOptions ) {
 
-    // fill in appropriate options based on whether the line has arrows
-    if ( options.hasArrows ) {
-      options.lineOptions = merge( {}, ARROW_NODE_DEFAULT_OPTIONS, options.lineOptions );
-    }
-    else {
-      options.lineOptions = merge( {}, SCENERY_LINE_DEFAULT_OPTIONS, options.lineOptions );
-    }
+    const options = optionize<LineNodeOptions, StrictOmit<SelfOptions, 'createDynamicLabel' | 'lineOptions'>, NodeOptions>()( {
+
+      // SelfOptions
+      hasArrows: true
+    }, providedOptions );
 
     super();
 
-    this.lineProperty = lineProperty; // @public
-    this.graph = graph; // @private
-    this.modelViewTransform = modelViewTransform; // @private
-    this.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT ); // @private
-    this.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) ); // @private
+    this.lineProperty = lineProperty;
+    this.graph = graph;
+    this.modelViewTransform = modelViewTransform;
+    this.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT );
+    this.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) );
 
-    // @private parent of all children
     this.parentNode = new Node();
 
-    // @private the line
-    this.lineNode = null;
     if ( options.hasArrows ) {
-      this.lineNode = new ArrowNode( 0, 0, 0, 1, options.lineOptions );
+      this.arrowNode = new ArrowNode( 0, 0, 0, 1, ARROW_NODE_OPTIONS );
+      this.parentNode.addChild( this.arrowNode );
     }
     else {
-      this.lineNode = new SceneryLine( 0, 0, 0, 0, options.lineOptions );
+      this.lineNode = new SceneryLine( 0, 0, 0, 0, SCENERY_LINE_OPTIONS );
+      this.parentNode.addChild( this.lineNode );
     }
-    this.parentNode.addChild( this.lineNode );
 
-    // @private optional equation
     if ( options.createDynamicLabel ) {
       this.equationNode = options.createDynamicLabel( lineProperty, {
         fontSize: EQUATION_FONT_SIZE
       } );
-      // rotation is applied to equationParentNode, this makes positioning the equation a little easier to grok
-      this.equationParentNode = new Node( { children: [ this.equationNode ] } );
+
+      // Rotation is applied to equationParentNode. This makes positioning the equation a little easier to grok.
+      this.equationParentNode = new Node( {
+        children: [ this.equationNode ]
+      } );
       this.parentNode.addChild( this.equationParentNode );
     }
 
     this.addChild( this.parentNode );
 
-    const lineObserver = line => this.update( line );
+    const lineObserver = ( line: Line | NotALine ) => this.update( line );
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposeLineNode = () => {
       this.equationNode && this.equationNode.dispose();
       lineProperty.unlink( lineObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeLineNode();
     super.dispose();
   }
 
-  // @public
-  setEquationVisible( visible ) {
-    this.equationParentNode.visible = visible;
+  public setEquationVisible( visible: boolean ): void {
+    assert && assert( this.equationParentNode );
+    if ( this.equationParentNode ) {
+      this.equationParentNode.visible = visible;
+    }
   }
 
-  // @private updates the line and equation
-  update( line ) {
+  // Updates the line and equation.
+  private update( line: Line | NotALine ): void {
 
     // line may be NotALine, for example the user's guess in 'Place The Points' challenge
     const isALine = ( line instanceof Line );
-    this.parentNode.visible = isALine; // cast to boolean
+    this.parentNode.visible = isALine;
     if ( !isALine ) { return; }
 
     // compute the new tip and tail for the line
@@ -184,13 +205,15 @@ export default class LineNode extends Node {
     // line
     const tailPosition = this.modelViewTransform.modelToViewXY( tailX, tailY );
     const tipPosition = this.modelViewTransform.modelToViewXY( tipX, tipY );
-    if ( this.lineNode instanceof ArrowNode ) {
-      this.lineNode.setTailAndTip( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y );
-      this.lineNode.fill = line.color;
+    if ( this.arrowNode ) {
+      this.arrowNode.setTailAndTip( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y );
+      this.arrowNode.fill = line.color;
     }
     else {
-      this.lineNode.setLine( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y );
-      this.lineNode.stroke = line.color;
+      const lineNode = this.lineNode!;
+      assert && assert( lineNode );
+      lineNode.setLine( tailPosition.x, tailPosition.y, tipPosition.x, tipPosition.y );
+      lineNode.stroke = line.color;
     }
 
     /*
@@ -198,11 +221,14 @@ export default class LineNode extends Node {
      * Rotation is applied to equationParentNode.
      * Translation is applied to equationNode, relative to a horizontal line whose tip points right.
      */
-    if ( this.equationParentNode ) {
+    if ( this.equationNode ) {
 
-      this.equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
+      const equationParentNode = this.equationParentNode!;
+      assert && assert( equationParentNode );
 
-      // equations have some invisible nodes, compensate so that layout is for visible nodes
+      equationParentNode.rotation = line.undefinedSlope() ? Math.PI / 2 : -Math.atan( line.getSlope() );
+
+      // Equations have some invisible nodes. Compensate so that layout is for visible nodes.
       const equationBounds = this.equationNode.bounds;
       const equationVisibleBounds = this.equationNode.visibleBounds;
       const leftOffset = equationVisibleBounds.left - equationBounds.left;
@@ -210,46 +236,51 @@ export default class LineNode extends Node {
       const topOffset = equationVisibleBounds.top - equationBounds.top;
       const bottomOffset = equationBounds.bottom - equationVisibleBounds.bottom;
 
-      // Put equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
+      // Put the equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
       const X_OFFSET = 60;
       const Y_OFFSET = 12;
       if ( line.undefinedSlope() ) {
-        // this puts the 'undefined slope' label to the right of the y-axis, at the same end of the line as the slope manipulator
+
+        // This puts the 'undefined slope' label to the right of the y-axis, at the same end of the line as the slope manipulator.
         if ( line.rise < 0 ) {
-          this.equationParentNode.translation = tipPosition;
+          equationParentNode.translation = tipPosition;
           this.equationNode.right = -X_OFFSET + rightOffset;
           this.equationNode.bottom = -Y_OFFSET + bottomOffset;
         }
         else {
-          this.equationParentNode.translation = tailPosition;
+          equationParentNode.translation = tailPosition;
           this.equationNode.left = X_OFFSET - leftOffset;
           this.equationNode.bottom = -Y_OFFSET + bottomOffset;
         }
       }
       else if ( line.rise <= 0 ) {
         if ( line.run >= 0 ) {
+
           // quadrant 4: equation above the line, at tip (right)
-          this.equationParentNode.translation = tipPosition;
+          equationParentNode.translation = tipPosition;
           this.equationNode.right = -X_OFFSET + rightOffset;
           this.equationNode.bottom = -Y_OFFSET + bottomOffset;
         }
         else {
+
           // quadrant 3: equation above the line, at tail (left)
-          this.equationParentNode.translation = tailPosition;
+          equationParentNode.translation = tailPosition;
           this.equationNode.left = X_OFFSET - leftOffset;
           this.equationNode.bottom = -Y_OFFSET + bottomOffset;
         }
       }
       else {
         if ( line.run > 0 ) {
+
           // quadrant 1: equation below the line, at tip (right)
-          this.equationParentNode.translation = tipPosition;
+          equationParentNode.translation = tipPosition;
           this.equationNode.right = -X_OFFSET + rightOffset;
           this.equationNode.top = Y_OFFSET - topOffset;
         }
         else {
+
           // quadrant 2: equation below the line, at tail (left)
-          this.equationParentNode.translation = tailPosition;
+          equationParentNode.translation = tailPosition;
           this.equationNode.left = X_OFFSET - leftOffset;
           this.equationNode.top = Y_OFFSET - topOffset;
         }

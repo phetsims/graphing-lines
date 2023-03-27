@@ -290,7 +290,10 @@ export default class SlopeEquationNode extends EquationNode {
     const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // Slope m =
-    const leftSideText = StringUtils.format( '{0}    {1} {2}', GraphingLinesStrings.slope, GLSymbols.m, MathSymbols.EQUAL_TO );
+    const leftSideText = StringUtils.fillIn( `{{slope}}    {{m}} ${MathSymbols.EQUAL_TO}`, {
+      slope: GraphingLinesStrings.slope,
+      m: GLSymbols.m
+    } );
     const leftSideNode = new RichText( leftSideText, {
       font: font,
       fill: options.fill,
@@ -298,17 +301,17 @@ export default class SlopeEquationNode extends EquationNode {
     } );
 
     // pattern for numerator and denominator
-    const pattern = '{0}<sub>2</sub> {1} {2}<sub>1</sub>';
+    const pattern = `{{symbol}}<sub>2</sub> ${MathSymbols.MINUS} {{symbol}}<sub>1</sub>`;
 
     // y2 - y1
-    const numeratorText = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y );
+    const numeratorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.y } );
     const numeratorNode = new RichText( numeratorText, {
       font: font,
       fill: options.fill
     } );
 
     // x2 - x1
-    const denominatorText = StringUtils.format( pattern, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
+    const denominatorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.x } );
     const denominatorNode = new RichText( denominatorText, {
       font: font,
       fill: options.fill

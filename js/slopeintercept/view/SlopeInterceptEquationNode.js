@@ -164,7 +164,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
-                                    StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
+                                    StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
+                                      x: GLSymbols.x,
+                                      value: line.x1
+                                    } );
         return;
       }
 
@@ -446,23 +449,25 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
   /**
    * Creates a node that displays the general form of this equation: y = mx + b
-   * @param {Object} [options]
    * @returns {scenery.Node}
    * @public
    * @static
    */
-  static createGeneralFormNode( options ) {
+  static createGeneralFormNode() {
 
-    options = merge( {
+    // y = mx + b
+    const string = StringUtils.fillIn( `{{y}} ${MathSymbols.EQUAL_TO} {{m}}{{x}} ${MathSymbols.PLUS} {{b}}`, {
+      y: GLSymbols.y,
+      m: GLSymbols.m,
+      x: GLSymbols.x,
+      b: GLSymbols.b
+    } );
+
+    return new RichText( string, {
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 300
-    }, options );
-
-    // y = mx + b
-    const text = StringUtils.format( '{0} {1} {2}{3} {4} {5}',
-      GLSymbols.y, MathSymbols.EQUAL_TO, GLSymbols.m, GLSymbols.x, MathSymbols.PLUS, GLSymbols.b );
-    return new RichText( text, options );
+    } );
   }
 
   /**

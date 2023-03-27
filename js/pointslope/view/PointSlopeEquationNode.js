@@ -174,7 +174,10 @@ export default class PointSlopeEquationNode extends EquationNode {
         slopeUndefinedNode.fill = lineColor;
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
-                                    StringUtils.format( GLConstants.PATTERN_0VALUE_EQUALS_1VALUE, GLSymbols.x, line.x1 );
+                                    StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
+                                      x: GLSymbols.x,
+                                      value: line.x1
+                                    } );
         return;
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
@@ -462,24 +465,25 @@ export default class PointSlopeEquationNode extends EquationNode {
 
   /**
    * Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
-   * @param {Object} [options]
    * @returns {scenery.Node}
    * @public
    * @static
    */
-  static createGeneralFormNode( options ) {
+  static createGeneralFormNode() {
 
-    options = merge( {
+    // (y - y1) = m(x - x1)
+    const string = StringUtils.fillIn(
+      `({{y}} ${MathSymbols.MINUS} {{y}}<sub>1</sub>) ${MathSymbols.EQUAL_TO} {{m}}({{x}} ${MathSymbols.MINUS} {{x}}<sub>1</sub>)`, {
+        y: GLSymbols.y,
+        m: GLSymbols.m,
+        x: GLSymbols.x
+      } );
+
+    return new RichText( string, {
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 300
-    }, options );
-
-    // (y - y1) = m(x - x1)
-    const pattern = '({0} {1} {2}<sub>1</sub>) {3} {4}({5} {6} {7}<sub>1</sub>)';
-    const html = StringUtils.format( pattern, GLSymbols.y, MathSymbols.MINUS, GLSymbols.y, MathSymbols.EQUAL_TO,
-      GLSymbols.m, GLSymbols.x, MathSymbols.MINUS, GLSymbols.x );
-    return new RichText( html, options );
+    } );
   }
 
   /**

@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Challenge graph with manipulators for 3 arbitrary points, which may or may not form a guess line.
  * The answer line is initially hidden.

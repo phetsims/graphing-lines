@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * View for 'Place the Points' challenges.
  * This is a specialization of the 'Graph the Line' view.

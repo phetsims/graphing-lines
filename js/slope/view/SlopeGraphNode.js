@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Graph that provides direct manipulation of a line in point-slope form.
  * Adds manipulators for (x1,y1) and (x2,y2) to the base class functionality.

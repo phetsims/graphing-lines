@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Graph that provides direct manipulation of a line in point-slope form.
  * Extends the base type by adding manipulators for point and slope.
@@ -13,15 +12,14 @@ import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js'
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from './PointSlopeEquationNode.js';
+import PointSlopeModel from '../model/PointSlopeModel.js';
+import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
 
 export default class PointSlopeGraphNode extends LineFormsGraphNode {
 
-  /**
-   * @param {PointSlopeModel} model
-   * @param {LineFormsViewProperties} viewProperties
-   */
-  constructor( model, viewProperties ) {
+  public constructor( model: PointSlopeModel, viewProperties: LineFormsViewProperties ) {
 
+    // @ts-expect-error
     super( model, viewProperties, PointSlopeEquationNode.createDynamicLabel );
 
     const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );

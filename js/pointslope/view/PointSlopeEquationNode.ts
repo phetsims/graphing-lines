@@ -122,7 +122,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     const yNode = new RichText( GLSymbols.y, staticOptions );
     const yPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const yMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
-    let y1Node: Node;
+    let y1Node: NumberPicker | DynamicValueNode;
     if ( options.interactivePoint ) {
       y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
         combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
@@ -137,8 +137,8 @@ export default class PointSlopeEquationNode extends EquationNode {
     const y1MinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.signLineSize }, staticOptions ) ); // for y=-y1 case
     const equalsNode = new Text( '=', staticOptions );
     const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.signLineSize }, staticOptions ) );
-    let riseNode: Node;
-    let runNode: Node;
+    let riseNode: SlopePicker | DynamicValueNode;
+    let runNode: SlopePicker | DynamicValueNode;
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
@@ -152,7 +152,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     const xNode = new RichText( GLSymbols.x, staticOptions );
     const xPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const xMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
-    let x1Node: Node;
+    let x1Node: NumberPicker | DynamicValueNode;
     if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
         combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
@@ -230,8 +230,10 @@ export default class PointSlopeEquationNode extends EquationNode {
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
         yNode.visible = equalsNode.visible = y1Node.visible = true;
-        // @ts-expect-error y1Node.fill
-        yNode.fill = equalsNode.fill = y1Node.fill = lineColor;
+        yNode.fill = equalsNode.fill = lineColor;
+        if ( y1Node instanceof DynamicValueNode ) {
+          y1Node.fill = lineColor;
+        }
         equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
         if ( options.interactivePoint || line.y1 >= 0 ) {
           // y = y1
@@ -263,8 +265,10 @@ export default class PointSlopeEquationNode extends EquationNode {
         else if ( !interactive ) {
           // y - y1
           yNode.visible = yOperatorNode.visible = y1Node.visible = true;
-          // @ts-expect-error y1Node.fill
-          yNode.fill = yOperatorNode.fill = y1Node.fill = lineColor;
+          yNode.fill = yOperatorNode.fill = lineColor;
+          if ( y1Node instanceof DynamicValueNode ) {
+            y1Node.fill = lineColor;
+          }
           yNode.x = 0;
           yNode.y = 0;
           yOperatorNode.left = yNode.right + this.operatorXSpacing;
@@ -276,8 +280,10 @@ export default class PointSlopeEquationNode extends EquationNode {
         else {
           // (y - y1)
           yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
-          // @ts-expect-error y1Node.fill
-          yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
+          yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = yRightParenNode.fill = lineColor;
+          if ( y1Node instanceof DynamicValueNode ) {
+            y1Node.fill = lineColor;
+          }
           yLeftParenNode.x = 0;
           yLeftParenNode.y = 0;
           yNode.left = yLeftParenNode.right + this.parenXSpacing;
@@ -302,8 +308,13 @@ export default class PointSlopeEquationNode extends EquationNode {
         if ( options.interactiveSlope ) {
           // (rise/run), where rise and run are pickers, and the sign is integrated into the pickers
           riseNode.visible = runNode.visible = fractionLineNode.visible = true;
-          // @ts-expect-error riseNode.fill, runNode.fill
-          riseNode.fill = runNode.fill = fractionLineNode.fill = lineColor;
+          if ( riseNode instanceof DynamicValueNode ) {
+            riseNode.fill = lineColor;
+          }
+          if ( runNode instanceof DynamicValueNode ) {
+            runNode.fill = lineColor;
+          }
+          fractionLineNode.fill = lineColor;
           fractionLineNode.left = equalsNode.right + this.relationalOperatorXSpacing;
           fractionLineNode.centerY = equalsNode.centerY;
           riseNode.centerX = fractionLineNode.centerX;
@@ -347,8 +358,13 @@ export default class PointSlopeEquationNode extends EquationNode {
           if ( line.undefinedSlope() || fractionalSlope ) {
             // rise/run
             riseNode.visible = runNode.visible = fractionLineNode.visible = true;
-            // @ts-expect-error riseNode.fill, runNode.fill
-            riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
+            if ( riseNode instanceof DynamicValueNode ) {
+              riseNode.fill = lineColor;
+            }
+            if ( runNode instanceof DynamicValueNode ) {
+              runNode.fill = lineColor;
+            }
+            fractionLineNode.stroke = lineColor;
             fractionLineNode.left = previousNode.right + previousXOffset;
             fractionLineNode.centerY = equalsNode.centerY;
             riseNode.centerX = fractionLineNode.centerX;
@@ -361,8 +377,9 @@ export default class PointSlopeEquationNode extends EquationNode {
           else if ( zeroSlope ) {
             // 0
             riseNode.visible = true;
-            // @ts-expect-error riseNode.fill
-            riseNode.fill = lineColor;
+            if ( riseNode instanceof DynamicValueNode ) {
+              riseNode.fill = lineColor;
+            }
             riseNode.left = equalsNode.right + this.relationalOperatorXSpacing;
             riseNode.y = yNode.y;
             previousNode = riseNode;
@@ -375,8 +392,9 @@ export default class PointSlopeEquationNode extends EquationNode {
           else if ( integerSlope ) {
             // N
             riseNode.visible = true;
-            // @ts-expect-error riseNode.fill
-            riseNode.fill = lineColor;
+            if ( riseNode instanceof DynamicValueNode ) {
+              riseNode.fill = lineColor;
+            }
             riseNode.left = previousNode.right + previousXOffset;
             riseNode.y = yNode.y;
             previousNode = riseNode;
@@ -391,8 +409,10 @@ export default class PointSlopeEquationNode extends EquationNode {
         if ( interactive || ( line.x1 !== 0 && line.getSlope() !== 0 && line.getSlope() !== 1 ) ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
-          // @ts-expect-error x1Node.fill
-          xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
+          xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = xRightParenNode.fill = lineColor;
+          if ( x1Node instanceof DynamicValueNode ) {
+            x1Node.fill = lineColor;
+          }
           xLeftParenNode.left = previousNode.right + previousXOffset;
           xLeftParenNode.y = yNode.y;
           xNode.left = xLeftParenNode.right + this.parenXSpacing;
@@ -407,8 +427,10 @@ export default class PointSlopeEquationNode extends EquationNode {
         else if ( line.getSlope() === 1 && line.x1 !== 0 ) {
           // x - x1
           xNode.visible = xOperatorNode.visible = x1Node.visible = true;
-          // @ts-expect-error x1Node.fill
-          xNode.fill = xOperatorNode.fill = x1Node.fill = lineColor;
+          xNode.fill = xOperatorNode.fill = lineColor;
+          if ( x1Node instanceof DynamicValueNode ) {
+            x1Node.fill = lineColor;
+          }
           xNode.left = previousNode.right + previousXOffset;
           xNode.y = yNode.y;
           xOperatorNode.left = xNode.right + this.operatorXSpacing;

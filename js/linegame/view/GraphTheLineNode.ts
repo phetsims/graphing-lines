@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for 'Graph the Line' challenges.
  * User manipulates a graphed line on the right, equations are displayed on the left.
@@ -23,16 +22,22 @@ import EquationBoxNode from './EquationBoxNode.js';
 import GraphPointSlopeNode from './GraphPointSlopeNode.js';
 import GraphSlopeInterceptNode from './GraphSlopeInterceptNode.js';
 import GraphTwoPointsNode from './GraphTwoPointsNode.js';
+import LineGameModel from '../model/LineGameModel.js';
+import GraphTheLine from '../model/GraphTheLine.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
+import NotALine from '../model/NotALine.js';
 
 export default class GraphTheLineNode extends ChallengeNode {
 
-  /**
-   * @param {GraphTheLine} challenge
-   * @param {LineGameModel} model
-   * @param {Dimension2} challengeSize
-   * @param {GameAudioPlayer} audioPlayer
-   */
-  constructor( challenge, model, challengeSize, audioPlayer ) {
+  // 'Not A Line', for situations where 3-points do not define a line
+  private readonly notALineNode: Node;
+
+  protected readonly graphNode: ChallengeGraphNode;
+
+  private readonly disposeGraphTheLineNode: () => void;
+
+  public constructor( challenge: GraphTheLine, model: LineGameModel, challengeSize: Dimension2, audioPlayer: GameAudioPlayer ) {
 
     super( challenge, model, challengeSize, audioPlayer );
 
@@ -62,7 +67,6 @@ export default class GraphTheLineNode extends ChallengeNode {
       maxWidth: null
     } );
 
-    // @private 'Not A Line', for situations where 3-points do not define a line
     this.notALineNode = new Text( GraphingLinesStrings.notALine, {
       font: new PhetFont( { size: 24, weight: 'bold' } ),
       fill: 'black'
@@ -74,7 +78,6 @@ export default class GraphTheLineNode extends ChallengeNode {
     // Guess
     const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
-    // @protected Graph
     this.graphNode = this.createGraphNode( challenge );
     this.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
@@ -113,7 +116,7 @@ export default class GraphTheLineNode extends ChallengeNode {
     };
 
     // sync with guess
-    const guessObserver = line => {
+    const guessObserver = ( line: Line | NotALine ) => {
 
       const isaLine = ( line instanceof Line );
 
@@ -130,7 +133,7 @@ export default class GraphTheLineNode extends ChallengeNode {
     challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     // sync with game state
-    const playStateObserver = playState => {
+    const playStateObserver = ( playState: PlayState ) => {
 
       // No-op if dispose has been called, see https://github.com/phetsims/graphing-lines/issues/133
       if ( !this.isDisposed ) {
@@ -161,7 +164,6 @@ export default class GraphTheLineNode extends ChallengeNode {
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposeGraphTheLineNode = () => {
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
@@ -170,22 +172,15 @@ export default class GraphTheLineNode extends ChallengeNode {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeGraphTheLineNode();
     super.dispose();
   }
 
   /**
    * Creates the graph portion of the view.
-   * @param {Challenge} challenge
-   * @returns {ChallengeGraphNode}
-   * @public
    */
-  createGraphNode( challenge ) {
+  public createGraphNode( challenge: GraphTheLine ): ChallengeGraphNode {
     if ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE ) {
       return new GraphPointSlopeNode( challenge );
     }
@@ -194,6 +189,7 @@ export default class GraphTheLineNode extends ChallengeNode {
       return new GraphSlopeInterceptNode( challenge );
     }
     else if ( challenge.manipulationMode === ManipulationMode.TWO_POINTS ) {
+      // @ts-expect-error
       return new GraphTwoPointsNode( challenge );
     }
     else {

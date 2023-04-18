@@ -50,7 +50,7 @@ export type CreateDynamicLabelOptions = {
   interactiveSlope?: boolean;
   interactiveIntercept?: boolean;
   fontSize?: number;
-  maxWidth?: number;
+  maxWidth?: number | null;
   slopeUndefinedVisible?: boolean;
 };
 

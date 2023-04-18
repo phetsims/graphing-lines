@@ -80,10 +80,8 @@ export default class ChallengeGraphNode extends GraphNode {
     this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
 
     // optional slope tool
-    this.slopeToolNode = ( options.slopeToolEnabled ) ?
-      // @ts-expect-error SlopeToolNode is only created when guessProperty will not have value NotALine
-                         new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform ) :
-                         null;
+    // @ts-expect-error
+    this.slopeToolNode = ( options.slopeToolEnabled ) ? new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform ) : null;
 
     // Rendering order: lines behind points, guess behind answer
     // See https://github.com/phetsims/graphing-lines/issues/115

@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Renderer for point-slope equations, with optional interactivity of point and slope.
  * General point-slope form is: (y - y1) = m(x - x1)
@@ -14,36 +13,58 @@
  */
 
 import Multilink from '../../../../axon/js/Multilink.js';
-import NumberProperty from '../../../../axon/js/NumberProperty.js';
+import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import merge from '../../../../phet-core/js/merge.js';
+import Range from '../../../../dot/js/Range.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
-import MinusNode from '../../../../scenery-phet/js/MinusNode.js';
+import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import PlusNode from '../../../../scenery-phet/js/PlusNode.js';
-import { Line as SceneryLine, RichText, Text } from '../../../../scenery/js/imports.js';
-import NumberPicker from '../../../../sun/js/NumberPicker.js';
+import PlusNode, { PlusNodeOptions } from '../../../../scenery-phet/js/PlusNode.js';
+import { Color, Line as SceneryLine, Node, RichText, Text } from '../../../../scenery/js/imports.js';
+import NumberPicker, { NumberPickerOptions } from '../../../../sun/js/NumberPicker.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
-import DynamicValueNode from '../../common/view/DynamicValueNode.js';
-import EquationNode from '../../common/view/EquationNode.js';
+import DynamicValueNode, { DynamicValueNodeOptions } from '../../common/view/DynamicValueNode.js';
+import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNode.js';
 import SlopePicker from '../../common/view/picker/SlopePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
+import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
+
+type SelfOptions = {
+
+  // Whether to show 'slope undefined' after non-interactive equations with undefined slope, for example
+  // 'x = 3' versus 'x = 3 (slope undefined)'.
+  // See https://github.com/phetsims/graphing-slope-intercept/issues/7
+  slopeUndefinedVisible?: boolean;
+
+  // components that can be interactive
+  interactivePoint?: boolean;
+  interactiveSlope?: boolean;
+
+  // dynamic range of components
+  x1RangeProperty?: Property<Range>;
+  y1RangeProperty?: Property<Range>;
+  riseRangeProperty?: Property<Range>;
+  runRangeProperty?: Property<Range>;
+
+  staticColor?: Color | string;
+};
+
+type PointSlopeEquationNodeOptions = SelfOptions & EquationNodeOptions;
 
 export default class PointSlopeEquationNode extends EquationNode {
 
-  /**
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   */
-  constructor( lineProperty, options ) {
+  private readonly disposePointSlopeEquationNode: () => void;
 
-    options = merge( {
+  public constructor( lineProperty: Property<Line>, providedOptions?: PointSlopeEquationNodeOptions ) {
+
+    const options = optionize<PointSlopeEquationNodeOptions, SelfOptions, EquationNodeOptions>()( {
 
       // Whether to show 'slope undefined' after non-interactive equations with undefined slope, for example
       // 'x = 3' versus 'x = 3 (slope undefined)'.
@@ -64,7 +85,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       fontSize: GLConstants.INTERACTIVE_EQUATION_FONT_SIZE,
       staticColor: 'black'
 
-    }, options );
+    }, providedOptions );
 
     super( options ); // call first, because super computes various layout metrics
 
@@ -74,7 +95,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     const staticOptions = { font: staticFont, fill: options.staticColor };
     const fractionLineOptions = { stroke: options.staticColor, lineWidth: this.fractionLineThickness };
 
-    const numberPropertyOptions = {
+    const numberPropertyOptions: NumberPropertyOptions = {
       numberType: 'Integer'
     };
 
@@ -99,46 +120,48 @@ export default class PointSlopeEquationNode extends EquationNode {
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     const yLeftParenNode = new Text( '(', staticOptions );
     const yNode = new RichText( GLSymbols.y, staticOptions );
-    const yPlusNode = new PlusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
-    const yMinusNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
-    let y1Node;
+    const yPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
+    const yMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
+    let y1Node: Node;
     if ( options.interactivePoint ) {
-      y1Node = new NumberPicker( y1Property, options.y1RangeProperty, merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
-        color: GLColors.POINT_X1_Y1,
-        font: interactiveFont
-      } ) );
+      y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
+        combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
+          color: GLColors.POINT_X1_Y1,
+          font: interactiveFont
+        } ) );
     }
     else {
-      y1Node = new DynamicValueNode( y1Property, merge( { absoluteValue: true }, staticOptions ) );
+      y1Node = new DynamicValueNode( y1Property, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
     }
     const yRightParenNode = new Text( ')', staticOptions );
-    const y1MinusSignNode = new MinusNode( merge( { size: this.signLineSize }, staticOptions ) ); // for y=-y1 case
+    const y1MinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.signLineSize }, staticOptions ) ); // for y=-y1 case
     const equalsNode = new Text( '=', staticOptions );
-    const slopeMinusSignNode = new MinusNode( merge( { size: this.signLineSize }, staticOptions ) );
-    let riseNode;
-    let runNode;
+    const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.signLineSize }, staticOptions ) );
+    let riseNode: Node;
+    let runNode: Node;
     if ( options.interactiveSlope ) {
       riseNode = new SlopePicker( riseProperty, runProperty, options.riseRangeProperty, { font: interactiveFont } );
       runNode = new SlopePicker( runProperty, riseProperty, options.runRangeProperty, { font: interactiveFont } );
     }
     else {
-      riseNode = new DynamicValueNode( riseProperty, merge( { absoluteValue: true }, staticOptions ) );
-      runNode = new DynamicValueNode( runProperty, merge( { absoluteValue: true }, staticOptions ) );
+      riseNode = new DynamicValueNode( riseProperty, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
+      runNode = new DynamicValueNode( runProperty, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
     }
     const fractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const xLeftParenNode = new Text( '(', staticOptions );
     const xNode = new RichText( GLSymbols.x, staticOptions );
-    const xPlusNode = new PlusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
-    const xMinusNode = new MinusNode( merge( { size: this.operatorLineSize }, staticOptions ) );
-    let x1Node;
+    const xPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
+    const xMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
+    let x1Node: Node;
     if ( options.interactivePoint ) {
-      x1Node = new NumberPicker( x1Property, options.x1RangeProperty, merge( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
-        color: GLColors.POINT_X1_Y1,
-        font: interactiveFont
-      } ) );
+      x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
+        combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
+          color: GLColors.POINT_X1_Y1,
+          font: interactiveFont
+        } ) );
     }
     else {
-      x1Node = new DynamicValueNode( x1Property, merge( { absoluteValue: true }, staticOptions ) );
+      x1Node = new DynamicValueNode( x1Property, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
     }
     const xRightParenNode = new Text( ')', staticOptions );
     const slopeUndefinedNode = new RichText( '?', staticOptions );
@@ -155,7 +178,7 @@ export default class PointSlopeEquationNode extends EquationNode {
      * This is based on which parts of the equation are interactive, and what the
      * non-interactive parts of the equation should look like when written in simplified form.
      */
-    const updateLayout = line => {
+    const updateLayout = ( line: Line ) => {
 
       const interactive = options.interactivePoint || options.interactiveSlope;
       const lineColor = line.color;
@@ -207,6 +230,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
         yNode.visible = equalsNode.visible = y1Node.visible = true;
+        // @ts-expect-error
         yNode.fill = equalsNode.fill = y1Node.fill = lineColor;
         equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
         if ( options.interactivePoint || line.y1 >= 0 ) {
@@ -239,6 +263,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         else if ( !interactive ) {
           // y - y1
           yNode.visible = yOperatorNode.visible = y1Node.visible = true;
+          // @ts-expect-error
           yNode.fill = yOperatorNode.fill = y1Node.fill = lineColor;
           yNode.x = 0;
           yNode.y = 0;
@@ -251,6 +276,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         else {
           // (y - y1)
           yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
+          // @ts-expect-error
           yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
           yLeftParenNode.x = 0;
           yLeftParenNode.y = 0;
@@ -276,6 +302,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         if ( options.interactiveSlope ) {
           // (rise/run), where rise and run are pickers, and the sign is integrated into the pickers
           riseNode.visible = runNode.visible = fractionLineNode.visible = true;
+          // @ts-expect-error
           riseNode.fill = runNode.fill = fractionLineNode.fill = lineColor;
           fractionLineNode.left = equalsNode.right + this.relationalOperatorXSpacing;
           fractionLineNode.centerY = equalsNode.centerY;
@@ -320,6 +347,7 @@ export default class PointSlopeEquationNode extends EquationNode {
           if ( line.undefinedSlope() || fractionalSlope ) {
             // rise/run
             riseNode.visible = runNode.visible = fractionLineNode.visible = true;
+            // @ts-expect-error
             riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
             fractionLineNode.left = previousNode.right + previousXOffset;
             fractionLineNode.centerY = equalsNode.centerY;
@@ -333,6 +361,7 @@ export default class PointSlopeEquationNode extends EquationNode {
           else if ( zeroSlope ) {
             // 0
             riseNode.visible = true;
+            // @ts-expect-error
             riseNode.fill = lineColor;
             riseNode.left = equalsNode.right + this.relationalOperatorXSpacing;
             riseNode.y = yNode.y;
@@ -346,6 +375,7 @@ export default class PointSlopeEquationNode extends EquationNode {
           else if ( integerSlope ) {
             // N
             riseNode.visible = true;
+            // @ts-expect-error
             riseNode.fill = lineColor;
             riseNode.left = previousNode.right + previousXOffset;
             riseNode.y = yNode.y;
@@ -361,6 +391,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         if ( interactive || ( line.x1 !== 0 && line.getSlope() !== 0 && line.getSlope() !== 1 ) ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
+          // @ts-expect-error
           xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
           xLeftParenNode.left = previousNode.right + previousXOffset;
           xLeftParenNode.y = yNode.y;
@@ -376,6 +407,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         else if ( line.getSlope() === 1 && line.x1 !== 0 ) {
           // x - x1
           xNode.visible = xOperatorNode.visible = x1Node.visible = true;
+          // @ts-expect-error
           xNode.fill = xOperatorNode.fill = x1Node.fill = lineColor;
           xNode.left = previousNode.right + previousXOffset;
           xNode.y = yNode.y;
@@ -408,7 +440,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     );
 
     // sync the controls and layout with the model
-    const lineObserver = line => {
+    const lineObserver = ( line: Line ) => {
 
       // Synchronize the controls atomically.
       updatingControls = true;
@@ -426,7 +458,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     lineProperty.link( lineObserver ); // unlink in dispose
 
     // For fully-interactive equations ...
-    let undefinedSlopeUpdater = null;
+    let undefinedSlopeUpdater: ( line: Line ) => void;
     if ( fullyInteractive ) {
 
       // update layout once
@@ -438,7 +470,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       undefinedSlopeIndicator.centerX = this.centerX;
       undefinedSlopeIndicator.centerY = fractionLineNode.centerY - this.undefinedSlopeYFudgeFactor;
 
-      undefinedSlopeUpdater = line => {
+      undefinedSlopeUpdater = ( line: Line ) => {
         undefinedSlopeIndicator.visible = line.undefinedSlope();
       };
       lineProperty.link( undefinedSlopeUpdater ); // unlink in dispose
@@ -446,7 +478,6 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     this.mutate( options );
 
-    // @private called by dispose
     this.disposePointSlopeEquationNode = () => {
       x1Node.dispose();
       y1Node.dispose();
@@ -458,19 +489,15 @@ export default class PointSlopeEquationNode extends EquationNode {
     };
   }
 
-  // @public @override
-  dispose() {
+  public override dispose(): void {
     this.disposePointSlopeEquationNode();
     super.dispose();
   }
 
   /**
    * Creates a node that displays the general form of this equation: (y - y1) = m(x - x1)
-   * @returns {scenery.Node}
-   * @public
-   * @static
    */
-  static createGeneralFormNode() {
+  public static createGeneralFormNode(): Node {
 
     // (y - y1) = m(x - x1)
     const string = StringUtils.fillIn(
@@ -489,21 +516,16 @@ export default class PointSlopeEquationNode extends EquationNode {
 
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
-   * @param {Property.<Line>} lineProperty
-   * @param {Object} [options]
-   * @returns {scenery.Node}
-   * @public
-   * @static
    */
-  static createDynamicLabel( lineProperty, options ) {
+  public static createDynamicLabel( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
-    options = merge( {
+    const options = combineOptions<CreateDynamicLabelOptions>( {
       pickable: false,
       interactivePoint: false,
       interactiveSlope: false,
       fontSize: 18,
       maxWidth: 200
-    }, options );
+    }, providedOptions );
 
     return new PointSlopeEquationNode( lineProperty, options );
   }

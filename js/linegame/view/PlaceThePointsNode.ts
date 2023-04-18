@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for 'Place the Points' challenges.
  * This is a specialization of the 'Graph the Line' view.
@@ -13,20 +12,22 @@ import graphingLines from '../../graphingLines.js';
 import PlayState from '../model/PlayState.js';
 import GraphTheLineNode from './GraphTheLineNode.js';
 import GraphThreePointsNode from './GraphThreePointsNode.js';
+import GraphTheLine from '../model/GraphTheLine.js';
+import LineGameModel from '../model/LineGameModel.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
+import PlaceThePoints from '../model/PlaceThePoints.js';
 
 export default class PlaceThePointsNode extends GraphTheLineNode {
 
-  /**
-   * @param {GraphTheLine} challenge
-   * @param {LineGameModel} model
-   * @param {Dimension2} challengeSize
-   * @param {GameAudioPlayer} audioPlayer
-   */
-  constructor( challenge, model, challengeSize, audioPlayer ) {
+  private readonly disposePlaceThePointsNode: () => void;
+
+  public constructor( challenge: GraphTheLine, model: LineGameModel, challengeSize: Dimension2, audioPlayer: GameAudioPlayer ) {
 
     super( challenge, model, challengeSize, audioPlayer );
 
-    const playStateObserver = playState => {
+    const playStateObserver = ( playState: PlayState ) => {
 
       // No-op if dispose has been called, see https://github.com/phetsims/graphing-lines/issues/133
       if ( !this.isDisposed ) {
@@ -45,29 +46,20 @@ export default class PlaceThePointsNode extends GraphTheLineNode {
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposePlaceThePointsNode = () => {
       model.playStateProperty.unlink( playStateObserver );
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposePlaceThePointsNode();
     super.dispose();
   }
 
   /**
    * Creates the graph portion of the view.
-   * @param {Challenge} challenge
-   * @returns {ChallengeGraphNode}
-   * @override
-   * @public
    */
-  createGraphNode( challenge ) {
+  public override createGraphNode( challenge: PlaceThePoints ): ChallengeGraphNode {
     return new GraphThreePointsNode( challenge );
   }
 }

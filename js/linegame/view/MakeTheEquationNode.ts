@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * View for 'Make the Equation' challenges.
  * User manipulates an equation on the right, graph is displayed on the left.
@@ -10,7 +9,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import { Text } from '../../../../scenery/js/imports.js';
+import { Color, Node, Text } from '../../../../scenery/js/imports.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
@@ -23,16 +22,17 @@ import PlayState from '../model/PlayState.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 import ChallengeNode from './ChallengeNode.js';
 import EquationBoxNode from './EquationBoxNode.js';
+import Line from '../../common/model/Line.js';
+import LineGameModel from '../model/LineGameModel.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import Graph from '../../common/model/Graph.js';
+import MakeTheEquation from '../model/MakeTheEquation.js';
 
 export default class MakeTheEquationNode extends ChallengeNode {
 
-  /**
-   * @param {GraphTheLine} challenge
-   * @param {LineGameModel} model
-   * @param {Dimension2} challengeSize
-   * @param {GameAudioPlayer} audioPlayer
-   */
-  constructor( challenge, model, challengeSize, audioPlayer ) {
+  private readonly disposeMakeTheEquationNode: () => void;
+
+  public constructor( challenge: MakeTheEquation, model: LineGameModel, challengeSize: Dimension2, audioPlayer: GameAudioPlayer ) {
 
     super( challenge, model, challengeSize, audioPlayer );
 
@@ -53,9 +53,12 @@ export default class MakeTheEquationNode extends ChallengeNode {
     answerBoxNode.visible = false;
 
     // Guess
+    // @ts-expect-error
+    const guessColor: Color | string = challenge.guessProperty.value.color;
+    // @ts-expect-error
     const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
-      GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, challenge.guessProperty.value.color );
-    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquation, challenge.guessProperty.value.color, boxSize, guessEquationNode );
+      GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, guessColor );
+    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquation, guessColor, boxSize, guessEquationNode );
 
     // Graph
     const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
@@ -70,8 +73,8 @@ export default class MakeTheEquationNode extends ChallengeNode {
     {
       // graphNode is positioned automatically based on modelViewTransform's origin offset.
 
-      // left align the title and boxes
-      guessBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
+      // left align the title and boxes, centered in space to left of graph
+      guessBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2;
       answerBoxNode.left = guessBoxNode.left;
       titleNode.left = guessBoxNode.left;
 
@@ -111,7 +114,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
     challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     // sync with game state
-    const playStateObserver = playState => {
+    const playStateObserver = ( playState: PlayState ) => {
 
       // No-op if dispose has been called, see https://github.com/phetsims/graphing-lines/issues/133
       if ( !this.isDisposed ) {
@@ -141,7 +144,6 @@ export default class MakeTheEquationNode extends ChallengeNode {
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
-    // @private called by dispose
     this.disposeMakeTheEquationNode = () => {
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
@@ -150,11 +152,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeMakeTheEquationNode();
     super.dispose();
   }
@@ -162,14 +160,11 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
 /**
  * Creates an interactive equation.
- * @param {EquationForm} equationForm
- * @param {ManipulationMode} manipulationMode
- * @param {Property.<Line>} lineProperty
- * @param {Graph} graph
- * @param {number} fontSize
- * @param {Color|String} staticColor
  */
-function createInteractiveEquationNode( equationForm, manipulationMode, lineProperty, graph, fontSize, staticColor ) {
+function createInteractiveEquationNode( equationForm: EquationForm,
+                                        manipulationMode: ManipulationMode,
+                                        lineProperty: Property<Line>, graph: Graph, fontSize: number,
+                                        staticColor: Color | string ): Node {
   let interactivePoint;
   let interactiveSlope;
   let interactiveIntercept;

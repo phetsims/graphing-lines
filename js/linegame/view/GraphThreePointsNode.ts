@@ -1,6 +1,5 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Challenge graph with manipulators for 3 arbitrary points, which may or may not form a guess line.
  * The answer line is initially hidden.
@@ -13,13 +12,13 @@ import PointManipulator from '../../common/view/manipulator/PointManipulator.js'
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
+import PlaceThePoints from '../model/PlaceThePoints.js';
 
 export default class GraphThreePointsNode extends ChallengeGraphNode {
 
-  /**
-   * @param {PlaceThePoints} challenge
-   */
-  constructor( challenge ) {
+  private readonly disposeGraphThreePointsNode: () => void;
+
+  public constructor( challenge: PlaceThePoints ) {
 
     super( challenge, { slopeToolEnabled: false } );
 
@@ -49,7 +48,6 @@ export default class GraphThreePointsNode extends ChallengeGraphNode {
         p3Manipulator.translation = challenge.modelViewTransform.modelToViewPosition( p3 );
       } );
 
-    // @private called by dispose
     this.disposeGraphThreePointsNode = () => {
       p1Manipulator.dispose();
       p2Manipulator.dispose();
@@ -58,11 +56,7 @@ export default class GraphThreePointsNode extends ChallengeGraphNode {
     };
   }
 
-  /**
-   * @public
-   * @override
-   */
-  dispose() {
+  public override dispose(): void {
     this.disposeGraphThreePointsNode();
     super.dispose();
   }

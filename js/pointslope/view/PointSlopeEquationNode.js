@@ -490,7 +490,7 @@ export default class PointSlopeEquationNode extends EquationNode {
    * Creates a non-interactive equation, used to label a dynamic line.
    * @param {Property.<Line>} lineProperty
    * @param {Object} [options]
-   * @returns {Node}
+   * @returns {scenery.Node}
    * @public
    * @static
    */

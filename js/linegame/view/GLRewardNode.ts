@@ -1,8 +1,7 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
-// @ts-nocheck
 /**
- * The reward that is displayed when a game is completed with a perfect score.
+ * GLRewardNode is the reward that is displayed when a game is completed with a perfect score.
  * Various images (based on game level) move from top to bottom in the play area.
  * Run with the 'reward' query parameter to show the reward at the end of every game, regardless of score.
  *
@@ -26,7 +25,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
 import PaperAirplaneNode from '../../../../scenery-phet/js/PaperAirplaneNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Color, Node } from '../../../../scenery/js/imports.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
@@ -47,70 +46,49 @@ const AIRPLANE_SCALE = 1.76;
 
 export default class GLRewardNode extends RewardNode {
 
-  /**
-   * @params {Node[]} nodes to use in the reward
-   */
-  constructor( rewardNodes ) {
+  public constructor( rewardNodes: Node[] ) {
     super( { nodes: rewardNodes } );
   }
 
   /**
    * Creates a set of equations nodes.
-   * @returns {Node[]}
-   * @public
-   * @static
    */
-  static createEquationNodes() {
+  public static createEquationNodes(): Node[] {
     return RewardNode.createRandomNodes( createNodes( createEquationNode, NODE_COLORS ), NUMBER_OF_NODES );
   }
 
   /**
    * Creates a set of equations graph.
-   * @returns {Node[]}
-   * @public
-   * @static
    */
-  static createGraphNodes() {
+  public static createGraphNodes(): Node[] {
     return RewardNode.createRandomNodes( createNodes( createGraphNode, NODE_COLORS ), NUMBER_OF_NODES );
   }
 
   /**
    * Creates a set of 'point tool' nodes.
-   * @returns {Node[]}
-   * @public
-   * @static
    */
-  static createPointToolNodes() {
+  public static createPointToolNodes(): Node[] {
     return RewardNode.createRandomNodes( createNodes( createPointToolNode, NODE_COLORS ), NUMBER_OF_NODES );
   }
 
   /**
    * Creates a set of 'smiley face' nodes.
-   * @returns {Node[]}
-   * @public
-   * @static
    */
-  static createSmileyFaceNodes() {
+  public static createSmileyFaceNodes(): Node[] {
     return RewardNode.createRandomNodes( createNodes( createFaceNode, NODE_COLORS ), NUMBER_OF_NODES );
   }
 
   /**
    * Creates a set of paper airplane nodes, similar to the PhET logo.
-   * @returns {Node[]}
-   * @public
-   * @static
    */
-  static createPaperAirplaneNodes() {
+  public static createPaperAirplaneNodes(): Node[] {
     return RewardNode.createRandomNodes( createNodes( createPaperAirplaneNode, NODE_COLORS ), NUMBER_OF_NODES );
   }
 
   /**
    * Creates an assortment of nodes, using all of the above types.
-   * @returns {Node[]}
-   * @public
-   * @static
    */
-  static createAssortedNodes() {
+  public static createAssortedNodes(): Node[] {
     const nodes = createNodes( createEquationNode, NODE_COLORS )
       .concat( createNodes( createGraphNode, NODE_COLORS ) )
       .concat( createNodes( createPointToolNode, NODE_COLORS ) )
@@ -124,15 +102,15 @@ export default class GLRewardNode extends RewardNode {
 // Misc. utility functions
 //-----------------------------------------------------------------------------------------------
 
-function getRandomX() {
+function getRandomX(): number {
   return getRandomNonZeroInteger( GLConstants.X_AXIS_RANGE.min, GLConstants.X_AXIS_RANGE.max );
 }
 
-function getRandomY() {
+function getRandomY(): number {
   return getRandomNonZeroInteger( GLConstants.Y_AXIS_RANGE.min, GLConstants.Y_AXIS_RANGE.max );
 }
 
-function getRandomNonZeroInteger( min, max ) {
+function getRandomNonZeroInteger( min: number, max: number ): number {
   let i = Utils.roundSymmetric( min + ( dotRandom.nextDouble() * ( max - min ) ) );
   if ( i === 0 ) { i = 1; }
   return i;
@@ -144,7 +122,7 @@ function getRandomNonZeroInteger( min, max ) {
 //-----------------------------------------------------------------------------------------------
 
 // Creates a random equation with the specified color.
-function createEquationNode( color ) {
+function createEquationNode( color: Color | string ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = SlopeInterceptEquationNode.createDynamicLabel(
@@ -162,7 +140,7 @@ function createEquationNode( color ) {
 }
 
 // Creates a random graph with the specified color.
-function createGraphNode( color ) {
+function createGraphNode( color: Color | string ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
@@ -173,13 +151,11 @@ function createGraphNode( color ) {
   return node;
 }
 
-/*
+/**
  * Creates a random point tool with the specified color.
  * This does not use PointToolNode because it has too many model dependencies.
- * @param {ColorDef} color
- * @returns {Node}
  */
-function createPointToolNode( color ) {
+function createPointToolNode( color: Color | string ): Node {
   const coordinatesProperty = new Vector2Property( new Vector2( getRandomX(), getRandomY() ) );
   const bodyNode = new PointToolBodyNode( coordinatesProperty, {
     backgroundFill: color
@@ -192,27 +168,21 @@ function createPointToolNode( color ) {
 }
 
 // Creates a smiley face with the specified color.
-function createFaceNode( color ) {
+function createFaceNode( color: Color | string ): Node {
   return new FaceNode( FACE_DIAMETER, { headFill: color } );
 }
 
 // Creates a paper airplane with the specified color.
-function createPaperAirplaneNode( color ) {
+function createPaperAirplaneNode( color: Color | string ): Node {
   return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
 }
 
 /**
  * Creates an array of nodes for a specified array of colors.
  * The functions above serve as the creationFunction argument.
- *
- * @param {function} creationFunction a function with one parameter of type {Color|String}
- * @param {Color|String[]} colors
- * @returns {Node[]}
  */
-function createNodes( creationFunction, colors ) {
-  const nodes = [];
-  colors.forEach( color => nodes.push( creationFunction( color ) ) );
-  return nodes;
+function createNodes( creationFunction: ( color: Color | string ) => Node, colors: Array<Color | string> ): Node[] {
+  return colors.map( color => creationFunction( color ) );
 }
 
 graphingLines.register( 'GLRewardNode', GLRewardNode );

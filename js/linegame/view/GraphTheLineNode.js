@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * View for 'Graph the Line' challenges.
  * User manipulates a graphed line on the right, equations are displayed on the left.

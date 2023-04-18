@@ -51,6 +51,7 @@ export type CreateDynamicLabelOptions = {
   interactiveIntercept?: boolean;
   fontSize?: number;
   maxWidth?: number;
+  slopeUndefinedVisible?: boolean;
 };
 
 export type CreateDynamicLabelFunction = ( lineProperty: LineProperty, providedOptions?: CreateDynamicLabelOptions ) => Node;

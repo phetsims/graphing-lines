@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * View for 'Make the Equation' challenges.
  * User manipulates an equation on the right, graph is displayed on the left.

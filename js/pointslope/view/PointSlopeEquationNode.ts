@@ -230,7 +230,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
         yNode.visible = equalsNode.visible = y1Node.visible = true;
-        // @ts-expect-error
+        // @ts-expect-error y1Node.fill
         yNode.fill = equalsNode.fill = y1Node.fill = lineColor;
         equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
         if ( options.interactivePoint || line.y1 >= 0 ) {
@@ -263,7 +263,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         else if ( !interactive ) {
           // y - y1
           yNode.visible = yOperatorNode.visible = y1Node.visible = true;
-          // @ts-expect-error
+          // @ts-expect-error y1Node.fill
           yNode.fill = yOperatorNode.fill = y1Node.fill = lineColor;
           yNode.x = 0;
           yNode.y = 0;
@@ -276,7 +276,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         else {
           // (y - y1)
           yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
-          // @ts-expect-error
+          // @ts-expect-error y1Node.fill
           yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = y1Node.fill = yRightParenNode.fill = lineColor;
           yLeftParenNode.x = 0;
           yLeftParenNode.y = 0;
@@ -302,7 +302,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         if ( options.interactiveSlope ) {
           // (rise/run), where rise and run are pickers, and the sign is integrated into the pickers
           riseNode.visible = runNode.visible = fractionLineNode.visible = true;
-          // @ts-expect-error
+          // @ts-expect-error riseNode.fill, runNode.fill
           riseNode.fill = runNode.fill = fractionLineNode.fill = lineColor;
           fractionLineNode.left = equalsNode.right + this.relationalOperatorXSpacing;
           fractionLineNode.centerY = equalsNode.centerY;
@@ -347,7 +347,7 @@ export default class PointSlopeEquationNode extends EquationNode {
           if ( line.undefinedSlope() || fractionalSlope ) {
             // rise/run
             riseNode.visible = runNode.visible = fractionLineNode.visible = true;
-            // @ts-expect-error
+            // @ts-expect-error riseNode.fill, runNode.fill
             riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
             fractionLineNode.left = previousNode.right + previousXOffset;
             fractionLineNode.centerY = equalsNode.centerY;
@@ -361,7 +361,7 @@ export default class PointSlopeEquationNode extends EquationNode {
           else if ( zeroSlope ) {
             // 0
             riseNode.visible = true;
-            // @ts-expect-error
+            // @ts-expect-error riseNode.fill
             riseNode.fill = lineColor;
             riseNode.left = equalsNode.right + this.relationalOperatorXSpacing;
             riseNode.y = yNode.y;
@@ -375,7 +375,7 @@ export default class PointSlopeEquationNode extends EquationNode {
           else if ( integerSlope ) {
             // N
             riseNode.visible = true;
-            // @ts-expect-error
+            // @ts-expect-error riseNode.fill
             riseNode.fill = lineColor;
             riseNode.left = previousNode.right + previousXOffset;
             riseNode.y = yNode.y;
@@ -391,7 +391,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         if ( interactive || ( line.x1 !== 0 && line.getSlope() !== 0 && line.getSlope() !== 1 ) ) {
           // (x - x1)
           xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
-          // @ts-expect-error
+          // @ts-expect-error x1Node.fill
           xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = x1Node.fill = xRightParenNode.fill = lineColor;
           xLeftParenNode.left = previousNode.right + previousXOffset;
           xLeftParenNode.y = yNode.y;
@@ -407,7 +407,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         else if ( line.getSlope() === 1 && line.x1 !== 0 ) {
           // x - x1
           xNode.visible = xOperatorNode.visible = x1Node.visible = true;
-          // @ts-expect-error
+          // @ts-expect-error x1Node.fill
           xNode.fill = xOperatorNode.fill = x1Node.fill = lineColor;
           xNode.left = previousNode.right + previousXOffset;
           xNode.y = yNode.y;

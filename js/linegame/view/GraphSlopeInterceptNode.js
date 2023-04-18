@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Challenge graph with manipulators for slope and y-intercept of the guess line.
  * The answer line is initially hidden.

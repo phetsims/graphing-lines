@@ -1,5 +1,6 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
+// @ts-nocheck
 /**
  * Challenge graph with manipulators for 2 points, (x1,y1) and (x2,y2), of the guess line.
  * The answer line is initially hidden.

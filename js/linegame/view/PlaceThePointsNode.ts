@@ -12,7 +12,6 @@ import graphingLines from '../../graphingLines.js';
 import PlayState from '../model/PlayState.js';
 import GraphTheLineNode from './GraphTheLineNode.js';
 import GraphThreePointsNode from './GraphThreePointsNode.js';
-import GraphTheLine from '../model/GraphTheLine.js';
 import LineGameModel from '../model/LineGameModel.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
@@ -23,7 +22,7 @@ export default class PlaceThePointsNode extends GraphTheLineNode {
 
   private readonly disposePlaceThePointsNode: () => void;
 
-  public constructor( challenge: GraphTheLine, model: LineGameModel, challengeSize: Dimension2, audioPlayer: GameAudioPlayer ) {
+  public constructor( challenge: PlaceThePoints, model: LineGameModel, challengeSize: Dimension2, audioPlayer: GameAudioPlayer ) {
 
     super( challenge, model, challengeSize, audioPlayer );
 

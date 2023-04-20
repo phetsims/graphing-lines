@@ -19,7 +19,7 @@ export default class SlopeGraphNode extends LineFormsGraphNode {
 
   public constructor( model: SlopeModel, viewProperties: LineFormsViewProperties ) {
 
-    // @ts-expect-error
+    // @ts-expect-error Property<Line | NotALine>
     super( model, viewProperties, SlopeEquationNode.createDynamicLabel );
 
     const manipulatorRadius = model.modelViewTransform.modelToViewDeltaX( model.manipulatorRadius );

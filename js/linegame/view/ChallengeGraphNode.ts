@@ -80,7 +80,7 @@ export default class ChallengeGraphNode extends GraphNode {
     this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
 
     // optional slope tool
-    // @ts-expect-error
+    // @ts-expect-error Property<Line | NotALine>
     this.slopeToolNode = ( options.slopeToolEnabled ) ? new SlopeToolNode( challenge.guessProperty, challenge.modelViewTransform ) : null;
 
     // Rendering order: lines behind points, guess behind answer

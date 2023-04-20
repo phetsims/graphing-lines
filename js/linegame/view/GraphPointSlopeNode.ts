@@ -15,7 +15,7 @@ import PointSlopeParameterRange from '../../pointslope/model/PointSlopeParameter
 import LineGameConstants from '../LineGameConstants.js';
 import ManipulationMode from '../model/ManipulationMode.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
-import Challenge from '../model/Challenge.js';
+import GraphTheLine from '../model/GraphTheLine.js';
 import NotALine from '../model/NotALine.js';
 import Line from '../../common/model/Line.js';
 
@@ -23,7 +23,7 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
 
   private readonly disposeGraphPointSlopeNode: () => void;
 
-  public constructor( challenge: Challenge ) {
+  public constructor( challenge: GraphTheLine ) {
 
     super( challenge );
 

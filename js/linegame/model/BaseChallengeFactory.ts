@@ -62,7 +62,7 @@ export default abstract class BaseChallengeFactory {
   /**
    * Picks a point that keeps the slope indicator on the graph.
    */
-  public static choosePointForSlope( slope: Fraction, graphXRange: Range, graphYRange: Range ): Vector2 {
+  protected static choosePointForSlope( slope: Fraction, graphXRange: Range, graphYRange: Range ): Vector2 {
 
     const rise = slope.numerator;
     const run = slope.denominator;
@@ -86,7 +86,7 @@ export default abstract class BaseChallengeFactory {
    * Picks a point (x1,x2) on the graph that results in the slope indicator (x2,y2) being off the graph.
    * This forces the user to invert the slope.
    */
-  public static choosePointForSlopeInversion( slope: Fraction, graphXRange: Range, graphYRange: Range ): Vector2 {
+  protected static choosePointForSlopeInversion( slope: Fraction, graphXRange: Range, graphYRange: Range ): Vector2 {
 
     const rise = slope.numerator;
     const run = slope.denominator;

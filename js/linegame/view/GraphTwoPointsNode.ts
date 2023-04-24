@@ -14,14 +14,14 @@ import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
-import PlaceThePoints from '../model/PlaceThePoints.js';
 import NotALine from '../model/NotALine.js';
+import GraphTheLine from '../model/GraphTheLine.js';
 
 export default class GraphTwoPointsNode extends ChallengeGraphNode {
 
   private readonly disposeGraphTwoPointsNode: () => void;
 
-  public constructor( challenge: PlaceThePoints ) {
+  public constructor( challenge: GraphTheLine ) {
 
     super( challenge );
 

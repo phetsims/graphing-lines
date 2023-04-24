@@ -189,7 +189,6 @@ export default class GraphTheLineNode extends ChallengeNode {
       return new GraphSlopeInterceptNode( challenge );
     }
     else if ( challenge.manipulationMode === ManipulationMode.TWO_POINTS ) {
-      // @ts-expect-error Argument of type 'GraphTheLine' is not assignable to parameter of type 'PlaceThePoints'.
       return new GraphTwoPointsNode( challenge );
     }
     else {

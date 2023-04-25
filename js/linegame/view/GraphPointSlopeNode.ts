@@ -33,15 +33,15 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
     const pointSlopeParameterRange = new PointSlopeParameterRange();
     const x1RangeProperty = new Property( challenge.graph.xRange );
     const y1RangeProperty = new Property( challenge.graph.yRange );
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.value, challenge.graph ) );
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.value, challenge.graph ) );
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // point manipulator
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
     const pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
@@ -49,7 +49,7 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
     }
 
     // slope manipulator
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( slopeIsVariable ) {

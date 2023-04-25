@@ -31,16 +31,16 @@ export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
 
     // dynamic ranges
     const parameterRange = new SlopeInterceptParameterRange();
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.value, challenge.graph ) );
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.value, challenge.graph ) );
     const y1RangeProperty = new Property( challenge.graph.yRange );
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // intercept manipulator
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
     const interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
@@ -48,7 +48,7 @@ export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
     }
 
     // slope manipulator
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {

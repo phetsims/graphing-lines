@@ -53,9 +53,9 @@ export default class MakeTheEquationNode extends ChallengeNode {
     answerBoxNode.visible = false;
 
     // Guess
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const guessColor: Color | string = challenge.guessProperty.value.color;
-    // @ts-expect-error Property<Line | NotALine>
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
     const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
       GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, guessColor );
     const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquation, guessColor, boxSize, guessEquationNode );

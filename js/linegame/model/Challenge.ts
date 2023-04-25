@@ -151,7 +151,6 @@ export default abstract class Challenge {
 
 /*
  * Creates an initial guess, based on the answer and what the user can manipulate.
- * null if the points don't form a valid line.
  */
 function createInitialGuess( answer: Line, manipulationMode: ManipulationMode, xRange: Range, yRange: Range ): Line | NotALine {
   if ( manipulationMode === ManipulationMode.SLOPE ) {

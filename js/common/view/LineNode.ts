@@ -41,8 +41,6 @@ const SCENERY_LINE_OPTIONS = {
   lineWidth: TAIL_WIDTH
 };
 
-type LineProperty = Property<Line> | Property<Line | NotALine>;
-
 // Options for SelfOptions.createDynamicLabel
 export type CreateDynamicLabelOptions = {
   pickable?: boolean;
@@ -54,7 +52,7 @@ export type CreateDynamicLabelOptions = {
   slopeUndefinedVisible?: boolean;
 };
 
-export type CreateDynamicLabelFunction = ( lineProperty: LineProperty, providedOptions?: CreateDynamicLabelOptions ) => Node;
+export type CreateDynamicLabelFunction = ( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ) => Node;
 
 type SelfOptions = {
 
@@ -69,7 +67,7 @@ type LineNodeOptions = SelfOptions;
 
 export default class LineNode extends Node {
 
-  public readonly lineProperty: LineProperty;
+  public readonly lineProperty: Property<Line>;
   private readonly graph: Graph;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly xExtent: number;
@@ -86,7 +84,7 @@ export default class LineNode extends Node {
 
   private readonly disposeLineNode: () => void;
 
-  public constructor( lineProperty: LineProperty,
+  public constructor( lineProperty: Property<Line>,
                       graph: Graph,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions?: LineNodeOptions ) {

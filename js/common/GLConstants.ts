@@ -24,7 +24,7 @@ const NUMBER_PICKER_OPTIONS: NumberPickerOptions = {
 const EQUATION_FONT_WEIGHT: FontWeight = 'bold';
 
 const GLConstants = {
-  SCREEN_VIEW_LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ),
+  SCREEN_VIEW_LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ), //TODO https://github.com/phetsims/graphing-lines/issues/138
   X_AXIS_RANGE: new Range( -10, 10 ),
   Y_AXIS_RANGE: new Range( -10, 10 ),
   INTERACTIVE_EQUATION_FONT_SIZE: 34,

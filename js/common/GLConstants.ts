@@ -24,6 +24,10 @@ const NUMBER_PICKER_OPTIONS: NumberPickerOptions = {
 const EQUATION_FONT_WEIGHT: FontWeight = 'bold';
 
 const GLConstants = {
+
+  // While these layoutBounds differ from the default, PhET-iO customizations may rely on these bounds. And these
+  // layoutBounds are used by graphing-quadratics, which has been published as a PHET-iO version.
+  // So do not change. See https://github.com/phetsims/graphing-lines/issues/138
   SCREEN_VIEW_LAYOUT_BOUNDS: new Bounds2( 0, 0, 1100, 700 ), //TODO https://github.com/phetsims/graphing-lines/issues/138
   X_AXIS_RANGE: new Range( -10, 10 ),
   Y_AXIS_RANGE: new Range( -10, 10 ),

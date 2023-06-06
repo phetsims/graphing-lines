@@ -77,7 +77,7 @@ export default class GraphControlPanel extends Panel {
     const slopeCheckbox = new Checkbox( slopeToolVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new Text( GraphingLinesStrings.slope, TEXT_OPTIONS ),
+        new Text( GraphingLinesStrings.slopeStringProperty, TEXT_OPTIONS ),
         GLIconFactory.createSlopeToolIcon( ICON_SIZE )
       ]
     } ) );

@@ -45,7 +45,7 @@ export default class EquationAccordionBox extends AccordionBox {
     };
 
     // Save Line button
-    const saveLineButton = new TextPushButton( GraphingLinesStrings.saveLine, {
+    const saveLineButton = new TextPushButton( GraphingLinesStrings.saveLineStringProperty, {
       listener: () => savedLines.add( interactiveLineProperty.value.withColor( GLColors.SAVED_LINE_NORMAL ) ),
       font: BUTTON_FONT,
       baseColor: 'white',
@@ -53,7 +53,7 @@ export default class EquationAccordionBox extends AccordionBox {
     } );
 
     // Erase Lines button
-    const eraseLinesButton = new TextPushButton( GraphingLinesStrings.eraseLines, {
+    const eraseLinesButton = new TextPushButton( GraphingLinesStrings.eraseLinesStringProperty, {
       listener: () => savedLines.clear(),
       font: BUTTON_FONT,
       baseColor: 'white',

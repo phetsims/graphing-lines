@@ -8,7 +8,7 @@
 
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Node, VBox } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import LineFormsModel from '../model/LineFormsModel.js';
@@ -54,9 +54,11 @@ export default class LineFormsScreenView extends ScreenView {
     resetAllButton.bottom = this.layoutBounds.height - GLConstants.SCREEN_Y_MARGIN;
 
     // Parent for all controls, to simplify layout
-    const controlsParent = new Node();
-    controlsParent.addChild( equationAccordionBox );
-    controlsParent.addChild( graphControlPanel );
+    const controlsParent = new VBox( {
+      children: [ equationAccordionBox, graphControlPanel ],
+      spacing: 15,
+      align: 'center'
+    } );
 
     // rendering order
     this.addChild( controlsParent );
@@ -70,7 +72,6 @@ export default class LineFormsScreenView extends ScreenView {
     // position of control panels:
     const xMargin = 10;
     const yMargin = 20;
-    const ySpacing = 15;
 
     // get the amount of canvas width that's available for the control panels
     const availableControlPanelWidth = this.layoutBounds.width - graphNode.right - ( 2 * xMargin );
@@ -83,15 +84,11 @@ export default class LineFormsScreenView extends ScreenView {
       graphControlPanel.setScaleMagnitude( availableControlPanelWidth / graphControlPanel.width );
     }
 
-    // vertically stack controls, horizontally align centers
-    equationAccordionBox.centerX = availableControlPanelWidth / 2;
-    equationAccordionBox.y = 0;
-    graphControlPanel.centerX = equationAccordionBox.centerX;
-    graphControlPanel.top = equationAccordionBox.bottom + ySpacing;
-
     // center controls in the space to the right of the graph
-    controlsParent.centerX = graphNode.right + xMargin + ( availableControlPanelWidth / 2 );
-    controlsParent.top = yMargin;
+    controlsParent.boundsProperty.link( () => {
+      controlsParent.centerX = graphNode.right + xMargin + ( availableControlPanelWidth / 2 );
+      controlsParent.top = yMargin;
+    } );
 
     // graphContentsToggleButton at lower right of graph
     graphContentsToggleButton.left = model.modelViewTransform.modelToViewX( model.graph.xRange.max ) + 21;

@@ -17,7 +17,7 @@ import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.j
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
-import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
+import TextPushButton, { TextPushButtonOptions } from '../../../../sun/js/buttons/TextPushButton.js';
 import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import PointToolNode from '../../common/view/PointToolNode.js';
@@ -73,22 +73,50 @@ export default class ChallengeNode extends Node {
       baseColor: LineGameConstants.BUTTON_COLOR,
       xMargin: 20,
       yMargin: 5,
-      centerX: 0 // center aligned
+      textNodeOptions: {
+        maxWidth: 375
+      }
     };
-    const checkButton = new TextPushButton( checkStringProperty, buttonOptions );
-    const tryAgainButton = new TextPushButton( tryAgainStringProperty, buttonOptions );
-    const showAnswerButton = new TextPushButton( showAnswerStringProperty, buttonOptions );
-    const nextButton = new TextPushButton( nextStringProperty, buttonOptions );
 
+    // 'Check' button
+    const checkButton = new TextPushButton( checkStringProperty, buttonOptions );
+
+    // 'Try Again' button
+    const tryAgainButton = new TextPushButton( tryAgainStringProperty, combineOptions<TextPushButtonOptions>( {
+      listener: () => {
+        model.playStateProperty.value = PlayState.SECOND_CHECK;
+      }
+    }, buttonOptions ) );
+
+    // 'Show Answer' button
+    const showAnswerButton = new TextPushButton( showAnswerStringProperty, combineOptions<TextPushButtonOptions>( {
+      listener: () => {
+        model.playStateProperty.value = PlayState.NEXT;
+      }
+    }, buttonOptions ) );
+
+    const nextButton = new TextPushButton( nextStringProperty, combineOptions<TextPushButtonOptions>( {
+      listener: () => {
+        model.playStateProperty.value = PlayState.FIRST_CHECK;
+      }
+    }, buttonOptions ) );
+
+    // buttons at center-bottom
     this.buttonsParent = new Node( {
-      children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ],
-      maxWidth: 400 // determined empirically
+      children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ]
+    } );
+    this.buttonsParent.boundsProperty.link( () => {
+      this.buttonsParent.centerX = challengeSize.width / 2;
+      this.buttonsParent.bottom = challengeSize.height - 20;
     } );
 
     // point tools
     const linesVisibleProperty = new BooleanProperty( true );
-    const pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
-    const pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, { scale: LineGameConstants.POINT_TOOL_SCALE } );
+    const pointToolOptions = {
+      scale: LineGameConstants.POINT_TOOL_SCALE
+    };
+    const pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, pointToolOptions );
+    const pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, pointToolOptions );
 
     // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
     const pointToolParent = new Node();
@@ -101,10 +129,6 @@ export default class ChallengeNode extends Node {
     this.addChild( pointToolParent );
     this.addChild( this.faceNode );
 
-    // buttons at center-bottom
-    this.buttonsParent.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ); // centered on left edge of graph
-    this.buttonsParent.bottom = challengeSize.height - 20;
-
     // debugging controls
     let skipButton: TextPushButton;
     let replayButton: TextPushButton;
@@ -113,7 +137,7 @@ export default class ChallengeNode extends Node {
       // description at leftTop
       const descriptionNode = new Text( challenge.description, {
         font: new PhetFont( 16 ),
-        fill: 'black'
+        fill: 'red'
       } );
       descriptionNode.left = 10;
       descriptionNode.top = 10;
@@ -134,14 +158,15 @@ export default class ChallengeNode extends Node {
       replayButton = new TextPushButton( 'Replay', devButtonOptions );
       replayButton.addListener( () => model.replayCurrentChallenge() );
 
+      // lower-left corner
       const devButtonsParent = new Node( { children: [ skipButton, replayButton ] } );
-      devButtonsParent.left = this.buttonsParent.right + 15;
-      devButtonsParent.centerY = this.buttonsParent.centerY;
+      devButtonsParent.left = 20;
+      devButtonsParent.bottom = challengeSize.height - 20;
       this.addChild( devButtonsParent );
       devButtonsParent.moveToBack();
     }
 
-    // 'Check' button
+    // 'Check' button listener
     checkButton.addListener( () => {
       if ( challenge.isCorrect() ) {
         this.faceNode.smile();
@@ -167,22 +192,7 @@ export default class ChallengeNode extends Node {
       }
     } );
 
-    // 'Try Again' button
-    tryAgainButton.addListener( () => {
-      model.playStateProperty.value = PlayState.SECOND_CHECK;
-    } );
-
-    // 'Show Answer' button
-    showAnswerButton.addListener( () => {
-      model.playStateProperty.value = PlayState.NEXT;
-    } );
-
-    // 'Next' button
-    nextButton.addListener( () => {
-      model.playStateProperty.value = PlayState.FIRST_CHECK;
-    } );
-
-    // play-state changes
+    // playStateProperty listener
     const playStateObserver = ( state: PlayState ) => {
 
       // visibility of face

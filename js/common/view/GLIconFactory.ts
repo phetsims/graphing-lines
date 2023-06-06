@@ -25,6 +25,7 @@ import DimensionalArrowNode from './DimensionalArrowNode.js';
 import GraphNode from './GraphNode.js';
 import Manipulator from './manipulator/Manipulator.js';
 import SlopeToolNode from './SlopeToolNode.js';
+import GLSymbols from '../GLSymbols.js';
 
 // constants
 const scenery = {
@@ -137,7 +138,7 @@ const GLIconFactory = {
     const axisRange = new Range( -3, 3 );
     const graph = new Graph( axisRange, axisRange );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
-    const graphNode = new GraphNode( graph, modelViewTransform );
+    const graphNode = new GraphNode( graph, modelViewTransform, GLSymbols.x, GLSymbols.y );
     const p1 = modelViewTransform.modelToViewXY( x1, y1 );
     const p2 = modelViewTransform.modelToViewXY( x2, y2 );
     graphNode.addChild( new Path( Shape.lineSegment( p1.x, p1.y, p2.x, p2.y ), {

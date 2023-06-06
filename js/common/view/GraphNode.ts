@@ -15,8 +15,8 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line, Node, Path, Rectangle, RichText, Text } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
-import GLSymbols from '../GLSymbols.js';
 import Graph from '../model/Graph.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 //----------------------------------------------------------------------------------------
 // constants
@@ -53,7 +53,10 @@ export default class GraphNode extends Node {
 
   private readonly gridNode: GridNode;
 
-  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph,
+                      modelViewTransform: ModelViewTransform2,
+                      xAxisLabelString: TReadOnlyProperty<string> | string,
+                      yAxisLabelString: TReadOnlyProperty<string> | string ) {
 
     // (0,0) and quadrant 1 is visible
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) );
@@ -63,8 +66,8 @@ export default class GraphNode extends Node {
     super( {
       children: [
         gridNode,
-        new XAxisNode( graph, modelViewTransform ),
-        new YAxisNode( graph, modelViewTransform )
+        new XAxisNode( graph, xAxisLabelString, modelViewTransform ),
+        new YAxisNode( graph, yAxisLabelString, modelViewTransform )
       ]
     } );
 
@@ -149,7 +152,7 @@ class MinorTickNode extends Path {
  */
 class XAxisNode extends Node {
 
-  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph, xAxisLabelString: TReadOnlyProperty<string> | string, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -167,7 +170,7 @@ class XAxisNode extends Node {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    const labelNode = new RichText( GLSymbols.x, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    const labelNode = new RichText( xAxisLabelString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
     labelNode.centerY = lineNode.centerY;
@@ -197,7 +200,7 @@ class XAxisNode extends Node {
  */
 class YAxisNode extends Node {
 
-  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph, yAxisLabelString: TReadOnlyProperty<string> | string, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -215,7 +218,7 @@ class YAxisNode extends Node {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    const labelNode = new RichText( GLSymbols.y, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    const labelNode = new RichText( yAxisLabelString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.centerX = lineNode.centerX;
     labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;

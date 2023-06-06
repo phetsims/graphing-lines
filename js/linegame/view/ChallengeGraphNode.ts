@@ -21,6 +21,7 @@ import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import Challenge from '../model/Challenge.js';
 import NotALine from '../model/NotALine.js';
+import GLSymbols from '../../common/GLSymbols.js';
 
 type SelfOptions = {
   answerLineVisible?: boolean;
@@ -60,7 +61,7 @@ export default class ChallengeGraphNode extends GraphNode {
       slopeToolEnabled: true
     }, providedOptions );
 
-    super( challenge.graph, challenge.modelViewTransform );
+    super( challenge.graph, challenge.modelViewTransform, GLSymbols.x, GLSymbols.y );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( phet.chipper.queryParameters.showAnswers ) {

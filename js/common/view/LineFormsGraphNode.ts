@@ -24,6 +24,7 @@ import LineNode, { CreateDynamicLabelFunction } from './LineNode.js';
 import SlopeToolNode from './SlopeToolNode.js';
 import LineFormsViewProperties from './LineFormsViewProperties.js';
 import Line from '../model/Line.js';
+import GLSymbols from '../GLSymbols.js';
 
 export default class LineFormsGraphNode extends GraphNode {
 
@@ -42,7 +43,7 @@ export default class LineFormsGraphNode extends GraphNode {
                          viewProperties: LineFormsViewProperties,
                          createDynamicLabel: CreateDynamicLabelFunction ) {
 
-    super( model.graph, model.modelViewTransform );
+    super( model.graph, model.modelViewTransform, GLSymbols.x, GLSymbols.y );
 
     this.model = model;
     this.viewProperties = viewProperties;

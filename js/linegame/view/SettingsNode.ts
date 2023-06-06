@@ -46,7 +46,7 @@ export default class SettingsNode extends Node {
     }, providedOptions );
 
     // Title
-    const title = new Text( GraphingLinesStrings.chooseYourLevel, {
+    const title = new Text( GraphingLinesStrings.chooseYourLevelStringProperty, {
       font: new PhetFont( 40 ),
       maxWidth: 0.85 * layoutBounds.width
     } );
@@ -56,6 +56,16 @@ export default class SettingsNode extends Node {
       combineOptions<LineGameLevelSelectionButtonGroupOptions>( {
         tandem: options.tandem.createTandem( 'levelSelectionButtonGroup' )
       }, options.levelSelectionButtonGroupOptions ) );
+
+    // title is centered on level-selection buttons
+    const vBox = new VBox( {
+      children: [ title, levelSelectionButtonGroup ],
+      align: 'center',
+      spacing: 50
+    } );
+    vBox.boundsProperty.link( () => {
+      vBox.center = layoutBounds.center;
+    } );
 
     // Timer and Sound controls
     const timerToggleButton = new TimerToggleButton( model.timerEnabledProperty, {
@@ -74,13 +84,7 @@ export default class SettingsNode extends Node {
     } );
 
     options.children = [
-      // title and level-selection buttons centered
-      new VBox( {
-        children: [ title, levelSelectionButtonGroup ],
-        align: 'center',
-        spacing: 50,
-        center: layoutBounds.center
-      } ),
+      vBox,
       timerToggleButton,
       resetAllButton
     ];

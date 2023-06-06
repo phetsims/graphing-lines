@@ -17,6 +17,7 @@ import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -82,7 +83,10 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageElement, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
-  const label = new Text( StringUtils.format( GraphingLinesStrings.pattern_Level_0, level + 1 ), {
+  const stringProperty = new DerivedProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
+    pattern => StringUtils.format( GraphingLinesStrings.pattern_Level_0, level + 1 ) );
+
+  const text = new Text( stringProperty, {
     font: new PhetFont( 40 ),
     maxWidth: 100
   } );
@@ -94,7 +98,7 @@ function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageEle
   // 'Level N' centered above image
   return new VBox( {
     spacing: 15,
-    children: [ label, image ]
+    children: [ text, image ]
   } );
 }
 

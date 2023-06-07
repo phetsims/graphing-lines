@@ -172,8 +172,10 @@ class XAxisNode extends Node {
     // label at positive (right) end
     const labelNode = new RichText( xAxisLabelString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
-    labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
-    labelNode.centerY = lineNode.centerY;
+    labelNode.boundsProperty.link( () => {
+      labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
+      labelNode.centerY = lineNode.centerY;
+    } );
 
     // ticks
     const numberOfTicks = graph.getWidth() + 1;
@@ -220,8 +222,10 @@ class YAxisNode extends Node {
     // label at positive (top) end
     const labelNode = new RichText( yAxisLabelString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
-    labelNode.centerX = lineNode.centerX;
-    labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;
+    labelNode.boundsProperty.link( () => {
+      labelNode.centerX = lineNode.centerX;
+      labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;
+    } );
 
     // ticks
     const numberOfTicks = graph.getHeight() + 1;

@@ -18,6 +18,7 @@ import { Color, LinearGradient, Node, NodeOptions, Rectangle, RichText, TColor, 
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 // constants
 const DEFAULT_FONT = new PhetFont( { size: 15, weight: 'bold' } );
@@ -59,7 +60,7 @@ type PointToolBodyNodeOptions = SelfOptions;
 export default class PointToolBodyNode extends Node {
 
   private readonly background: Rectangle;
-  private readonly textNode: RichText;
+  private readonly coordinatesText: RichText;
   private readonly disposePointToolBodyNode: () => void;
 
   public constructor( coordinatesProperty: TReadOnlyProperty<Vector2 | null>, providedOptions?: PointToolBodyNodeOptions ) {
@@ -101,7 +102,21 @@ export default class PointToolBodyNode extends Node {
     } );
 
     // The text that displays the coordinates
-    const textNode = new RichText( '', {
+    const coordinatesStringProperty = new DerivedProperty(
+      [ coordinatesProperty, GraphingLinesStrings.point.unknownStringProperty ],
+      ( coordinates, unknownString ) => {
+        if ( coordinates ) {
+
+          // Use toFixedNumber so that trailing zeros are removed.
+          const x = Utils.toFixedNumber( coordinates.x, options.decimals );
+          const y = Utils.toFixedNumber( coordinates.y, options.decimals );
+          return StringUtils.format( GraphingLinesStrings.point.XY, x, y );
+        }
+        else {
+          return unknownString;
+        }
+      } );
+    const coordinatesText = new RichText( coordinatesStringProperty, {
       font: options.font,
       fill: options.textFill,
       maxWidth: options.backgroundWidth - ( 2 * options.backgroundXMargin ),
@@ -142,36 +157,21 @@ export default class PointToolBodyNode extends Node {
     }
 
     assert && assert( !options.children );
-    options.children = [ bodyRectangle, background, textNode, gripsBox ];
+    options.children = [ bodyRectangle, background, coordinatesText, gripsBox ];
 
     super( options );
 
-    // Update the displayed coordinates. Use toFixedNumber so that trailing zeros are removed.
-    const coordinatesListener = ( coordinates: Vector2 | null ) => {
-      if ( coordinates ) {
-        const x = Utils.toFixedNumber( coordinates.x, options.decimals );
-        const y = Utils.toFixedNumber( coordinates.y, options.decimals );
-        textNode.string = StringUtils.format( GraphingLinesStrings.point.XY, x, y );
-      }
-      else {
-        textNode.string = GraphingLinesStrings.point.unknown;
-      }
-    };
-    coordinatesProperty.link( coordinatesListener );
-
     // Keep the coordinates centered in the background.
-    textNode.boundsProperty.link( () => {
-      textNode.center = background.center;
+    coordinatesText.boundsProperty.link( () => {
+      coordinatesText.center = background.center;
     } );
 
     this.disposePointToolBodyNode = () => {
-      if ( coordinatesProperty.hasListener( coordinatesListener ) ) {
-        coordinatesProperty.unlink( coordinatesListener );
-      }
+      coordinatesText.dispose();
     };
 
     this.background = background;
-    this.textNode = textNode;
+    this.coordinatesText = coordinatesText;
   }
 
   public override dispose(): void {
@@ -183,7 +183,7 @@ export default class PointToolBodyNode extends Node {
    * Sets the fill for the text.
    */
   public setTextFill( fill: TColor ): void {
-    this.textNode.fill = fill;
+    this.coordinatesText.fill = fill;
   }
 
   /**

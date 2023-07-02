@@ -12,10 +12,12 @@ import { Node, VBox } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import LineFormsModel from '../model/LineFormsModel.js';
-import GraphContentsToggleButton from './GraphContentsToggleButton.js';
 import PointToolNode from './PointToolNode.js';
 import LineFormsViewProperties from './LineFormsViewProperties.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import EyeToggleButton from '../../../../scenery-phet/js/buttons/EyeToggleButton.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 
 export default class LineFormsScreenView extends ScreenView {
 
@@ -40,7 +42,11 @@ export default class LineFormsScreenView extends ScreenView {
     pointToolParent.addChild( pointTool2 );
 
     // Toggle button for showing/hiding contents of graph
-    const graphContentsToggleButton = new GraphContentsToggleButton( viewProperties.linesVisibleProperty );
+    const graphContentsToggleButton = new EyeToggleButton( viewProperties.linesVisibleProperty, {
+      scale: 0.75,
+      baseColor: new DerivedProperty( [ viewProperties.linesVisibleProperty ],
+        linesVisible => linesVisible ? 'white' : PhetColorScheme.BUTTON_YELLOW )
+    } );
 
     // Reset All button, at bottom-right
     const resetAllButton = new ResetAllButton( {

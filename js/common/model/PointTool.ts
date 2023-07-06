@@ -37,8 +37,6 @@ export default class PointTool {
    */
   public constructor( position: Vector2, orientation: PointToolOrientation, lines: ObservableArray<Line>, dragBounds: Bounds2 ) {
 
-    assert && assert( _.includes( [ 'up', 'down' ], orientation ) );
-
     this.positionProperty = new Vector2Property( position );
 
     this.onLineProperty = new Property<Line | null>( null );

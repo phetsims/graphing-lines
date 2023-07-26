@@ -15,6 +15,7 @@ import checkSolidShape from '../../../../sherpa/js/fontawesome-5/checkSolidShape
 import timesSolidShape from '../../../../sherpa/js/fontawesome-5/timesSolidShape.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 // constants
 const X_MARGIN = 20;
@@ -26,7 +27,7 @@ export default class EquationBoxNode extends Node {
   private readonly correctIconNode: Path;
   private readonly incorrectIconNode: Path;
 
-  public constructor( title: string, titleColor: TColor, boxSize: Dimension2, equationNode: Node ) {
+  public constructor( titleStringProperty: TReadOnlyProperty<string>, titleColor: TColor, boxSize: Dimension2, equationNode: Node ) {
 
     super();
 
@@ -40,7 +41,7 @@ export default class EquationBoxNode extends Node {
       fill: PhetColorScheme.RED_COLORBLIND
     } );
 
-    const titleNode = new Text( title, {
+    const titleNode = new Text( titleStringProperty, {
       fill: titleColor,
       font: new PhetFont( { size: 24, weight: 'bold' } ),
       maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( this.correctIconNode.width, this.incorrectIconNode.width )

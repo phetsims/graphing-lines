@@ -43,15 +43,14 @@ export default class GraphTheLineNode extends ChallengeNode {
 
     const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
 
-    // title, possibly scaled for i18n
-    const titleNode = new Text( challenge.title, {
+    const titleNode = new Text( challenge.titleStringProperty, {
       font: LineGameConstants.TITLE_FONT,
       fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.lineToGraph, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.lineToGraphStringProperty, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
@@ -67,7 +66,7 @@ export default class GraphTheLineNode extends ChallengeNode {
       maxWidth: null
     } );
 
-    this.notALineNode = new Text( GraphingLinesStrings.notALine, {
+    this.notALineNode = new Text( GraphingLinesStrings.notALineStringProperty, {
       font: new PhetFont( { size: 24, weight: 'bold' } ),
       fill: 'black'
     } );
@@ -76,7 +75,7 @@ export default class GraphTheLineNode extends ChallengeNode {
     const equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
 
     // Guess
-    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourLine, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
+    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourLineStringProperty, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
 
     this.graphNode = this.createGraphNode( challenge );
     this.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope

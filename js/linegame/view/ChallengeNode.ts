@@ -34,12 +34,6 @@ import NotALine from '../model/NotALine.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import { combineOptions } from '../../../../phet-core/js/optionize.js';
 
-// strings
-const checkStringProperty = VegasStrings.checkStringProperty;
-const nextStringProperty = VegasStrings.nextStringProperty;
-const showAnswerStringProperty = VegasStrings.showAnswerStringProperty;
-const tryAgainStringProperty = VegasStrings.tryAgainStringProperty;
-
 export default class ChallengeNode extends Node {
 
   // subclasses should add children to this node, to preserve rendering order
@@ -79,23 +73,23 @@ export default class ChallengeNode extends Node {
     };
 
     // 'Check' button
-    const checkButton = new TextPushButton( checkStringProperty, buttonOptions );
+    const checkButton = new TextPushButton( VegasStrings.checkStringProperty, buttonOptions );
 
     // 'Try Again' button
-    const tryAgainButton = new TextPushButton( tryAgainStringProperty, combineOptions<TextPushButtonOptions>( {
+    const tryAgainButton = new TextPushButton( VegasStrings.tryAgainStringProperty, combineOptions<TextPushButtonOptions>( {
       listener: () => {
         model.playStateProperty.value = PlayState.SECOND_CHECK;
       }
     }, buttonOptions ) );
 
     // 'Show Answer' button
-    const showAnswerButton = new TextPushButton( showAnswerStringProperty, combineOptions<TextPushButtonOptions>( {
+    const showAnswerButton = new TextPushButton( VegasStrings.showAnswerStringProperty, combineOptions<TextPushButtonOptions>( {
       listener: () => {
         model.playStateProperty.value = PlayState.NEXT;
       }
     }, buttonOptions ) );
 
-    const nextButton = new TextPushButton( nextStringProperty, combineOptions<TextPushButtonOptions>( {
+    const nextButton = new TextPushButton( VegasStrings.nextStringProperty, combineOptions<TextPushButtonOptions>( {
       listener: () => {
         model.playStateProperty.value = PlayState.FIRST_CHECK;
       }

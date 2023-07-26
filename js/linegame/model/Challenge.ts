@@ -25,6 +25,7 @@ import EquationForm from './EquationForm.js';
 import LineGameModel from './LineGameModel.js';
 import ManipulationMode from './ManipulationMode.js';
 import NotALine from './NotALine.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 
 export default abstract class Challenge {
 
@@ -34,7 +35,7 @@ export default abstract class Challenge {
   public readonly guessProperty: Property<Line | NotALine>;
 
   // title that is visible to the user
-  public readonly title: string;
+  public readonly titleStringProperty: TReadOnlyProperty<string>;
 
   // brief description of the challenge, visible in dev versions
   public readonly description: string;
@@ -57,12 +58,12 @@ export default abstract class Challenge {
   public readonly pointTool1: PointTool;
   public readonly pointTool2: PointTool;
 
-  public constructor( title: string, description: string, answer: Line, equationForm: EquationForm,
-                      manipulationMode: ManipulationMode, xRange: Range, yRange: Range ) {
+  public constructor( titleStringProperty: TReadOnlyProperty<string>, description: string, answer: Line,
+                      equationForm: EquationForm, manipulationMode: ManipulationMode, xRange: Range, yRange: Range ) {
 
     this.guessProperty = new Property( createInitialGuess( answer, manipulationMode, xRange, yRange ) );
 
-    this.title = title;
+    this.titleStringProperty = titleStringProperty;
     this.description = description;
     this.answer = answer.withColor( LineGameConstants.ANSWER_COLOR );
     this.equationForm = equationForm;
@@ -119,32 +120,31 @@ export default abstract class Challenge {
 
   // For debugging, do not rely on format.
   public toString(): string {
-    return `${this.constructor.name}[` +
-           ` title=${this.title
-           } answer=${this.answer.toString()
-           } equationForm=${this.equationForm.name
-           } manipulationMode=${this.manipulationMode
-           } ]`;
+    return `${this.constructor.name}[ ` +
+           `title=${this.titleStringProperty.value} ` +
+           `answer=${this.answer.toString()} ` +
+           `equationForm=${this.equationForm.name} ` +
+           `manipulationMode=${this.manipulationMode} ]`;
   }
 
   /*
-   * Creates a standard title for the challenge, based on what the user can manipulate.
+   * Gets the StringProperty for the challenge's title, based on what the user can manipulate.
    */
-  protected static createTitle( defaultTitle: string, manipulationMode: ManipulationMode ): string {
+  protected static getTitleStringProperty( defaultTitleStringProperty: TReadOnlyProperty<string>, manipulationMode: ManipulationMode ): TReadOnlyProperty<string> {
     if ( manipulationMode === ManipulationMode.SLOPE ) {
-      return GraphingLinesStrings.setTheSlope;
+      return GraphingLinesStrings.setTheSlopeStringProperty;
     }
     else if ( manipulationMode === ManipulationMode.INTERCEPT ) {
-      return GraphingLinesStrings.setTheYIntercept;
+      return GraphingLinesStrings.setTheYInterceptStringProperty;
     }
     else if ( manipulationMode === ManipulationMode.POINT ) {
-      return GraphingLinesStrings.setThePoint;
+      return GraphingLinesStrings.setThePointStringProperty;
     }
     else if ( manipulationMode === ManipulationMode.THREE_POINTS ) {
-      return GraphingLinesStrings.putPointsOnLine;
+      return GraphingLinesStrings.putPointsOnLineStringProperty;
     }
     else {
-      return defaultTitle;
+      return defaultTitleStringProperty;
     }
   }
 }

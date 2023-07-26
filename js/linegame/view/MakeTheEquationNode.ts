@@ -38,15 +38,14 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
     const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
-    // title, possibly scaled for i18n
-    const titleNode = new Text( challenge.title, {
+    const titleNode = new Text( challenge.titleStringProperty, {
       font: LineGameConstants.TITLE_FONT,
       fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.aCorrectEquation, challenge.answer.color, boxSize,
+    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.aCorrectEquationStringProperty, challenge.answer.color, boxSize,
       ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
       } ) );
@@ -58,7 +57,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
     // @ts-expect-error guessProperty is Property<Line | NotALine>
     const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
       GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, guessColor );
-    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquation, guessColor, boxSize, guessEquationNode );
+    const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquationStringProperty, guessColor, boxSize, guessEquationNode );
 
     // Graph
     const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );

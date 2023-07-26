@@ -32,7 +32,7 @@ export default class GraphTheLine extends Challenge {
   public constructor( description: string, answer: Line, equationForm: EquationForm,
                       manipulationMode: ManipulationMode, xRange: Range, yRange: Range ) {
     super(
-      Challenge.createTitle( GraphingLinesStrings.graphTheLine, manipulationMode ),
+      Challenge.getTitleStringProperty( GraphingLinesStrings.graphTheLineStringProperty, manipulationMode ),
       description,
       answer,
       equationForm,

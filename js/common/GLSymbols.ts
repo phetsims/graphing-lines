@@ -10,6 +10,7 @@ import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 
+//TODO https://github.com/phetsims/graphing-lines/issues/140 use GraphingLinesStrings.symbol.*StringProperty
 const GLSymbols = {
   b: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.intercept ),
   m: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.slope ),

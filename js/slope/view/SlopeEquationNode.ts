@@ -293,6 +293,7 @@ export default class SlopeEquationNode extends EquationNode {
     const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // Slope m =
+    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
     const leftSideText = StringUtils.fillIn( `{{slope}}    {{m}} ${MathSymbols.EQUAL_TO}`, {
       slope: GraphingLinesStrings.slope,
       m: GLSymbols.m
@@ -382,7 +383,7 @@ class DynamicLabelNode extends EquationNode {
     };
 
     // allocate nodes needed to represent all simplified forms
-    const slopeIsNode = new Text( GraphingLinesStrings.slopeIs, textOptions );
+    const slopeIsNode = new Text( GraphingLinesStrings.slopeIsStringProperty, textOptions );
     const minusSignNode = new MinusNode( { size: this.signLineSize } );
     const riseNode = new Text( '?', textOptions );
     const runNode = new Text( '?', textOptions );
@@ -410,6 +411,7 @@ class DynamicLabelNode extends EquationNode {
       if ( line.undefinedSlope() ) {
         // 'undefined'
         riseNode.visible = true;
+        //TODO https://github.com/phetsims/graphing-lines/issues/140 use  GraphingLinesStrings.undefinedStringProperty
         riseNode.string = GraphingLinesStrings.undefined;
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;

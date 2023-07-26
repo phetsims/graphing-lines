@@ -196,6 +196,7 @@ export default class PointSlopeEquationNode extends EquationNode {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
+        //TODO https://github.com/phetsims/graphing-lines/issues/140 use GraphingLinesStrings.slopeUndefinedStringProperty
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {

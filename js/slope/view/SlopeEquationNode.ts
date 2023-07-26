@@ -31,6 +31,8 @@ import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.j
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
+import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
+import StringProperty from '../../../../axon/js/StringProperty.js';
 
 type SelfOptions = {
 
@@ -293,12 +295,11 @@ export default class SlopeEquationNode extends EquationNode {
     const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // Slope m =
-    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
-    const leftSideText = StringUtils.fillIn( `{{slope}}    {{m}} ${MathSymbols.EQUAL_TO}`, {
-      slope: GraphingLinesStrings.slope,
-      m: GLSymbols.m
+    const leftSideStringProperty = new PatternStringProperty( new StringProperty( `{{slope}}    {{m}} ${MathSymbols.EQUAL_TO}` ), {
+      slope: GraphingLinesStrings.slopeStringProperty,
+      m: GLSymbols.m //TODO https://github.com/phetsims/graphing-lines/issues/140 should be a StringProperty
     } );
-    const leftSideNode = new RichText( leftSideText, {
+    const leftSideNode = new RichText( leftSideStringProperty, {
       font: font,
       fill: options.fill,
       maxWidth: 125 // i18n, determined empirically

@@ -6,16 +6,19 @@ is software developers who need to review, enhance or maintain the simulation.
 Before reading this document, it's recommended that you read the model description in model.txt.
 
 Directory structure under `graphing-lines/js/`:
+
 - `common/` directory contains code used by >1 screen
 - other directories are organized by screen. For example, `slope/` is the "Slope" screen.
 - directories are further divided into model and view subdirectories, per MVC design pattern
 
 Naming conventions:
+
 - types with prefix "GL" (for Graphing Lines) contain constants for the entire project
 - types with prefix "LineForms" are used by the 3 screens that deal with line forms:
   Slope, Slope-Intercept, and Point-Slope
 
 Terminology:
+
 - _manipulators_ are the spheres on the graph that the user drags to change some property of a line
 - _challenges_ are the individual problems that the user tries to solve
 - a _game_ is a collection of challenges

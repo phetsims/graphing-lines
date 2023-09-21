@@ -177,10 +177,10 @@ export default class Line {
   }
 
   // y = x (a standard line)
-  public static readonly Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.Y_EQUALS_X );
+  public static readonly Y_EQUALS_X_LINE = new Line( 0, 0, 1, 1, GLColors.yEqualsXLineColorProperty );
 
   // y = -x (a standard line)
-  public static readonly Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.Y_EQUALS_NEGATIVE_X );
+  public static readonly Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.yEqualsNegativeXLineColorProperty );
 }
 
 graphingLines.register( 'Line', Line );

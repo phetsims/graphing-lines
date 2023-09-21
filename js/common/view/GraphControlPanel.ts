@@ -87,7 +87,7 @@ export default class GraphControlPanel extends Panel {
       spacing: ICON_SPACING,
       children: [
         new RichText( Y_EQUALS_X, TEXT_OPTIONS ),
-        GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_X, -3, -3, 3, 3 )
+        GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.yEqualsXLineColorProperty, -3, -3, 3, 3 )
       ]
     } ) );
 
@@ -96,7 +96,7 @@ export default class GraphControlPanel extends Panel {
       spacing: ICON_SPACING,
       children: [
         new RichText( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
-        GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.Y_EQUALS_NEGATIVE_X, -3, 3, 3, -3 )
+        GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.yEqualsNegativeXLineColorProperty, -3, 3, 3, -3 )
       ]
     } ) );
 

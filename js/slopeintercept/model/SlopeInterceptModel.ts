@@ -17,7 +17,7 @@ import SlopeInterceptParameterRange from './SlopeInterceptParameterRange.js';
 
 export default class SlopeInterceptModel extends PointSlopeModel {
   public constructor( tandem: Tandem ) {
-    super( tandem, Line.createSlopeIntercept( 2, 3, 1, GLColors.INTERACTIVE_LINE ), new SlopeInterceptParameterRange() );
+    super( tandem, Line.createSlopeIntercept( 2, 3, 1, GLColors.interactiveLineColorProperty ), new SlopeInterceptParameterRange() );
   }
 }
 

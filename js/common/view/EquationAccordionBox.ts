@@ -46,7 +46,7 @@ export default class EquationAccordionBox extends AccordionBox {
 
     // Save Line button
     const saveLineButton = new TextPushButton( GraphingLinesStrings.saveLineStringProperty, {
-      listener: () => savedLines.add( interactiveLineProperty.value.withColor( GLColors.SAVED_LINE_NORMAL ) ),
+      listener: () => savedLines.add( interactiveLineProperty.value.withColor( GLColors.savedLineColorProperty ) ),
       font: BUTTON_FONT,
       baseColor: 'white',
       xMargin: 10

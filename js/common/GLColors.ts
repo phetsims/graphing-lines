@@ -27,11 +27,18 @@ const GLColors = {
   } ),
 
   // lines
-  INTERACTIVE_LINE: 'black',
-  Y_EQUALS_X: 'rgb( 16, 178, 15 )',
-  Y_EQUALS_NEGATIVE_X: 'rgb( 16, 178, 15 )',
-  SAVED_LINE_NORMAL: 'rgb( 160, 160, 160 )',
-  SAVED_LINE_HIGHLIGHT: 'rgb( 0, 0, 255 )',
+  interactiveLineColorProperty: new ProfileColorProperty( graphingLines, 'interactiveLineColor', {
+    default: 'black'
+  } ),
+  yEqualsXLineColorProperty: new ProfileColorProperty( graphingLines, 'yEqualsXLineColor', {
+    default: 'rgb( 16, 178, 15 )'
+  } ),
+  yEqualsNegativeXLineColorProperty: new ProfileColorProperty( graphingLines, 'yEqualsNegativeXLineColor', {
+    default: 'rgb( 16, 178, 15 )'
+  } ),
+  savedLineColorProperty: new ProfileColorProperty( graphingLines, 'savedLineColor', {
+    default: 'rgb( 160, 160, 160 )'
+  } ),
 
   // interactive aspects of lines
   slopeColorProperty: new ProfileColorProperty( graphingLines, 'slopeColor', {

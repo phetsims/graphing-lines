@@ -25,7 +25,7 @@ export default class SlopeModel extends LineFormsModel {
 
   public constructor( tandem: Tandem ) {
 
-    super( new Line( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE ), tandem );
+    super( new Line( 1, 2, 3, 4, GLColors.interactiveLineColorProperty ), tandem );
 
     this.x1RangeProperty = new Property( this.graph.xRange );
     this.y1RangeProperty = new Property( this.graph.yRange );

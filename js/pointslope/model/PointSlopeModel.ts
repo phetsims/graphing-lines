@@ -27,7 +27,7 @@ export default class PointSlopeModel extends LineFormsModel {
 
   public constructor( tandem: Tandem, providedInteractiveLine?: Line, providedParameterRange?: PointSlopeParameterRange ) {
 
-    const interactiveLine = providedInteractiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.INTERACTIVE_LINE );
+    const interactiveLine = providedInteractiveLine || Line.createPointSlope( 1, 2, 3, 4, GLColors.interactiveLineColorProperty );
     const parameterRange = providedParameterRange || new PointSlopeParameterRange();
 
     super( interactiveLine, tandem );

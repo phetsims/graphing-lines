@@ -31,7 +31,7 @@ export default class PointToolProbeNode extends Path {
       size: new Dimension2( 18, 21 ),
 
       // PathOptions
-      fill: GLColors.POINT_TOOL_COLOR,
+      fill: GLColors.pointToolColorProperty,
       stroke: Color.grayColor( 135 )
     }, providedOptions );
 

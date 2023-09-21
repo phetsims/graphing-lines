@@ -21,6 +21,11 @@ const GLColors = {
     default: 'rgb( 238, 238, 238 )'
   } ),
 
+  // point tool
+  pointToolColorProperty: new ProfileColorProperty( graphingLines, 'pointToolColor', {
+    default: Color.grayColor( 200 )
+  } ),
+
   // lines
   INTERACTIVE_LINE: 'black',
   Y_EQUALS_X: 'rgb( 16, 178, 15 )',
@@ -35,9 +40,6 @@ const GLColors = {
   POINT_X1_Y1: 'rgb( 200, 0, 200 )',
   POINT_X2_Y2: 'rgb( 210, 255, 0 )',
   POINT: 'rgb( 200, 0, 200 )',
-
-  // point tool
-  POINT_TOOL_COLOR: Color.grayColor( 200 ),
 
   // alpha channel (0-1) of the halo around the various manipulators, manually tuned for above colors
   HALO_ALPHA: {

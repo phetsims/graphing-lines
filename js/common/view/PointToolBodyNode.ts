@@ -72,7 +72,7 @@ export default class PointToolBodyNode extends Node {
       cornerRadius: 8,
       bodyWidth: 130,
       bodyHeight: 48,
-      bodyColor: GLColors.POINT_TOOL_COLOR,
+      bodyColor: GLColors.pointToolColorProperty,
       bodyXMargin: 7,
       backgroundWidth: 70,
       backgroundHeight: 35,

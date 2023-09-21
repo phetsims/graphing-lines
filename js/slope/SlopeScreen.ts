@@ -6,7 +6,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import GLColors from '../common/GLColors.js';
@@ -22,7 +21,7 @@ export default class SlopeScreen extends Screen<SlopeModel, SlopeScreenView> {
 
     const options = {
       name: GraphingLinesStrings.screen.slopeStringProperty,
-      backgroundColorProperty: new Property( GLColors.SCREEN_BACKGROUND ),
+      backgroundColorProperty: GLColors.screenBackgroundColorProperty,
       homeScreenIcon: GLIconFactory.createSlopeScreenIcon(),
       tandem: tandem
     };

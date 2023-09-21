@@ -6,14 +6,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Color } from '../../../scenery/js/imports.js';
+import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
 import graphingLines from '../graphingLines.js';
 
 const GLColors = {
 
-  // various backgrounds
-  SCREEN_BACKGROUND: 'rgb( 255, 255, 214 )',
-  CONTROL_PANEL_BACKGROUND: 'rgb( 238, 238, 238 )',
+  // Background color used for all screens
+  screenBackgroundColorProperty: new ProfileColorProperty( graphingLines, 'screenBackgroundColor', {
+    default: 'rgb( 255, 255, 214 )'
+  } ),
+
+  // Fill used for all control panels
+  controlPanelFillProperty: new ProfileColorProperty( graphingLines, 'controlPanelFill', {
+    default: 'rgb( 238, 238, 238 )'
+  } ),
 
   // lines
   INTERACTIVE_LINE: 'black',

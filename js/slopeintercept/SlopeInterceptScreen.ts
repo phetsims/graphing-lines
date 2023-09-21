@@ -6,9 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
-import { Color } from '../../../scenery/js/imports.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
@@ -16,10 +14,12 @@ import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeInterceptModel from './model/SlopeInterceptModel.js';
 import SlopeInterceptScreenView from './view/SlopeInterceptScreenView.js';
+import Property from '../../../axon/js/Property.js';
+import { Color } from '../../../scenery/js/imports.js';
 
 export default class SlopeInterceptScreen extends Screen<SlopeInterceptModel, SlopeInterceptScreenView> {
 
-  public constructor( tandem: Tandem, backgroundColorProperty = new Property<Color | string>( GLColors.SCREEN_BACKGROUND ) ) {
+  public constructor( tandem: Tandem, backgroundColorProperty: Property<Color> | Property<string> | Property<Color | string> = GLColors.screenBackgroundColorProperty ) {
 
     const options = {
       name: GraphingLinesStrings.screen.slopeInterceptStringProperty,

@@ -30,7 +30,7 @@ export default class EquationAccordionBox extends AccordionBox {
     const options: AccordionBoxOptions = {
       titleNode: titleNode,
       expandedProperty: expandedProperty,
-      fill: GLColors.CONTROL_PANEL_BACKGROUND,
+      fill: GLColors.controlPanelFillProperty,
       titleXSpacing: 5,
       titleYMargin: 10,
       contentXMargin: 10,

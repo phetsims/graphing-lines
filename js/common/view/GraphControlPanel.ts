@@ -52,7 +52,7 @@ export default class GraphControlPanel extends Panel {
       includeStandardLines: true,
 
       // PanelOptions
-      fill: GLColors.CONTROL_PANEL_BACKGROUND,
+      fill: GLColors.controlPanelFillProperty,
       stroke: 'black',
       lineWidth: 1,
       xMargin: 20,

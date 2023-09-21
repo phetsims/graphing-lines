@@ -10,7 +10,7 @@
 import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import { TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 
@@ -26,9 +26,9 @@ export default class Line {
   public readonly rise: number;
   public readonly run: number;
 
-  public readonly color: Color | string;
+  public readonly color: TColor;
 
-  public constructor( x1: number, y1: number, x2: number, y2: number, color: Color | string = 'black' ) {
+  public constructor( x1: number, y1: number, x2: number, y2: number, color: TColor = 'black' ) {
 
     // 2 different points are required
     assert && assert( x1 !== x2 || y1 !== y2, `points are the same: (${x1},${y1})` );
@@ -43,14 +43,13 @@ export default class Line {
   }
 
   // Convenience method for creating a line with a different color.
-  public withColor( color: Color | string ): Line {
+  public withColor( color: TColor ): Line {
     return new Line( this.x1, this.y1, this.x2, this.y2, color );
   }
 
   // For debugging, do not rely on format!
   public toString(): string {
-    return `Line[x1=${this.x1} y1=${this.y1} x2=${this.x2} y2=${this.y2
-    } rise=${this.rise} run=${this.run} color=${this.color.toString()}]`;
+    return `Line[x1=${this.x1} y1=${this.y1} x2=${this.x2} y2=${this.y2} rise=${this.rise} run=${this.run}]`;
   }
 
   // Returns true if 2 points on the specified line are also on this line.
@@ -166,14 +165,14 @@ export default class Line {
   /**
    * Creates a line by describing it in point-slope form: (y - y1) = m(x - x1)
    */
-  public static createPointSlope( x1: number, y1: number, rise: number, run: number, color?: Color | string ): Line {
+  public static createPointSlope( x1: number, y1: number, rise: number, run: number, color?: TColor ): Line {
     return new Line( x1, y1, x1 + run, y1 + rise, color );
   }
 
   /**
    * Creates a line by describing it in slope-intercept form: y = mx + b
    */
-  public static createSlopeIntercept( rise: number, run: number, yIntercept: number, color?: Color | string ): Line {
+  public static createSlopeIntercept( rise: number, run: number, yIntercept: number, color?: TColor ): Line {
     return Line.createPointSlope( 0, yIntercept, rise, run, color );
   }
 

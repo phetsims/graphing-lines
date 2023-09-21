@@ -403,7 +403,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {
             lineProperty.value = Line.createSlopeIntercept( riseProperty.value, runProperty.value,
-              yInterceptProperty.value, lineProperty.value.color );
+                yInterceptProperty.value, lineProperty.value.color );
           }
           else {
             const line = lineProperty.value;

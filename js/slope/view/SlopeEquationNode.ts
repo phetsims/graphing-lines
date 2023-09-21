@@ -120,34 +120,34 @@ export default class SlopeEquationNode extends EquationNode {
     // y2 - y1
     const y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
       font: interactiveFont,
-      color: GLColors.POINT_X2_Y2
+      color: GLColors.pointX2Y2ColorProperty
     } );
     const numeratorOperatorNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.operatorLineSize
     }, staticOptions ) );
     const y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
       font: interactiveFont,
-      color: GLColors.POINT_X1_Y1
+      color: GLColors.pointX1Y1ColorProperty
     } );
     // fraction line, correct length will be set later
     const interactiveFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
     const x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
       font: interactiveFont,
-      color: GLColors.POINT_X2_Y2
+      color: GLColors.pointX2Y2ColorProperty
     } );
     const denominatorOperatorNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.operatorLineSize
     }, staticOptions ) );
     const x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
       font: interactiveFont,
-      color: GLColors.POINT_X1_Y1
+      color: GLColors.pointX1Y1ColorProperty
     } );
     // = unsimplified value
     const unsimplifiedSlopeOptions = {
       font: staticFont,
       decimalPlaces: 0,
-      backgroundFill: GLColors.SLOPE,
+      backgroundFill: GLColors.slopeColorProperty,
       minWidth: y2Node.width,
       minHeight: y2Node.height - 20
     };

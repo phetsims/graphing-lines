@@ -29,7 +29,7 @@ export default class PointManipulator extends Manipulator {
                       yRange: Range,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    super( radius, GLColors.POINT, { haloAlpha: GLColors.HALO_ALPHA.point } );
+    super( radius, GLColors.pointColorProperty, { haloAlpha: GLColors.HALO_ALPHA.point } );
 
     // move the manipulator to match the point
     const lineObserver = ( point: Vector2 ) => {

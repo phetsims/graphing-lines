@@ -126,7 +126,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     if ( options.interactivePoint ) {
       y1Node = new NumberPicker( y1Property, options.y1RangeProperty,
         combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
-          color: GLColors.POINT_X1_Y1,
+          color: GLColors.pointX1Y1ColorProperty,
           font: interactiveFont
         } ) );
     }
@@ -156,7 +156,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     if ( options.interactivePoint ) {
       x1Node = new NumberPicker( x1Property, options.x1RangeProperty,
         combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
-          color: GLColors.POINT_X1_Y1,
+          color: GLColors.pointX1Y1ColorProperty,
           font: interactiveFont
         } ) );
     }

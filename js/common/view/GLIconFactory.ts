@@ -34,7 +34,7 @@ const scenery = {
 const SCREEN_ICON_BASE_SIZE = new Dimension2( 548, 373 );
 const ARROW_NODE_OPTIONS = { doubleHead: true, stroke: 'black', lineWidth: 18, headWidth: 30, headHeight: 30 };
 const DIMENSIONAL_ARROW_NODE_OPTIONS = {
-  stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
+  stroke: GLColors.slopeToolDimensionalLinesColorProperty,
   lineWidth: 18,
   arrowTipSize: new Dimension2( 55, 45 ),
   delimitersVisible: false,
@@ -67,7 +67,7 @@ const GLIconFactory = {
     } );
     const riseNode = new DimensionalArrowNode( 0, 0.5 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const runNode = new DimensionalArrowNode( 0, 0, 0.45 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
-    const interceptNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
+    const interceptNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.interceptColorProperty );
     const iconNode = new Node( { children: [ axisNode, lineNode, riseNode, runNode, interceptNode ] } );
     axisNode.centerX = 0.35 * SCREEN_ICON_BASE_SIZE.width;
     riseNode.centerX = axisNode.left - 60;
@@ -84,8 +84,8 @@ const GLIconFactory = {
     const lineNode = new ArrowNode( 0, 0.75 * SCREEN_ICON_BASE_SIZE.height, SCREEN_ICON_BASE_SIZE.width, 0.25 * SCREEN_ICON_BASE_SIZE.height, ARROW_NODE_OPTIONS );
     const riseNode = new DimensionalArrowNode( 0, 0.37 * SCREEN_ICON_BASE_SIZE.height, 0, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
     const runNode = new DimensionalArrowNode( 0, 0, 0.54 * SCREEN_ICON_BASE_SIZE.width, 0, DIMENSIONAL_ARROW_NODE_OPTIONS );
-    const pointNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.INTERCEPT );
-    const slopeNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.SLOPE );
+    const pointNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.interceptColorProperty );
+    const slopeNode = Manipulator.createIcon( MANIPULATOR_RADIUS, GLColors.slopeColorProperty );
     const iconNode = new Node( { children: [ lineNode, riseNode, runNode, pointNode, slopeNode ] } );
     riseNode.centerX = 0.2 * SCREEN_ICON_BASE_SIZE.width;
     riseNode.bottom = lineNode.bottom - ( 0.4 * lineNode.height );

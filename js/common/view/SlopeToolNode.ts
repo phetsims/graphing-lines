@@ -28,7 +28,7 @@ const NUMBER_BACKGROUND_NODE_OPTIONS = {
   font: new PhetFont( { size: 16, weight: 'bold' } ),
   decimalPlaces: 0,
   textFill: 'black',
-  backgroundFill: GLColors.SLOPE,
+  backgroundFill: GLColors.slopeColorProperty,
   xMargin: 6,
   yMargin: 6,
   cornerRadius: 5
@@ -59,7 +59,7 @@ export default class SlopeToolNode extends Node {
     // Arrows
     const arrowNodeOptions = {
       lineWidth: 1.75,
-      stroke: GLColors.SLOPE_TOOL_DIMENSIONAL_LINES,
+      stroke: GLColors.slopeToolDimensionalLinesColorProperty,
       arrowTipSize: new Dimension2( 10, 10 ),
       delimiterLength: 0.5 * modelViewTransform.modelToViewDeltaX( 1 ) // half of one cell in the graph
     };

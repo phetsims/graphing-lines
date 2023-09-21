@@ -28,7 +28,7 @@ export default class SlopeManipulator extends Manipulator {
                       runRangeProperty: TReadOnlyProperty<Range>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    super( radius, GLColors.SLOPE, { haloAlpha: GLColors.HALO_ALPHA.slope } );
+    super( radius, GLColors.slopeColorProperty, { haloAlpha: GLColors.HALO_ALPHA.slope } );
 
     // move the manipulator to match the line's slope
     const lineObserver = ( line: Line ) => {

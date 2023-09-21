@@ -28,7 +28,7 @@ export default class X2Y2Manipulator extends Manipulator {
                       y2RangeProperty: TReadOnlyProperty<Range>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    super( radius, GLColors.POINT_X2_Y2, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
+    super( radius, GLColors.pointX2Y2ColorProperty, { haloAlpha: GLColors.HALO_ALPHA.x2y2 } );
 
     // move the manipulator to match the line's (x2,y2) point
     const lineObserver = ( line: Line ) => {

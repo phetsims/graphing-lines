@@ -34,12 +34,24 @@ const GLColors = {
   SAVED_LINE_HIGHLIGHT: 'rgb( 0, 0, 255 )',
 
   // interactive aspects of lines
-  SLOPE: 'rgb( 117, 217, 255 )',
-  SLOPE_TOOL_DIMENSIONAL_LINES: 'rgb( 76, 199, 255 )',
-  INTERCEPT: 'rgb( 200, 0, 200 )',
-  POINT: 'rgb( 200, 0, 200 )',
-  POINT_X1_Y1: 'rgb( 200, 0, 200 )',
-  POINT_X2_Y2: 'rgb( 210, 255, 0 )',
+  slopeColorProperty: new ProfileColorProperty( graphingLines, 'slopeColor', {
+    default: 'rgb( 117, 217, 255 )'
+  } ),
+  slopeToolDimensionalLinesColorProperty: new ProfileColorProperty( graphingLines, 'slopeToolDimensionalLinesColor', {
+    default: 'rgb( 76, 199, 255 )'
+  } ),
+  interceptColorProperty: new ProfileColorProperty( graphingLines, 'interceptColor', {
+    default: 'rgb( 200, 0, 200 )'
+  } ),
+  pointColorProperty: new ProfileColorProperty( graphingLines, 'pointColor', {
+    default: 'rgb( 200, 0, 200 )'
+  } ),
+  pointX1Y1ColorProperty: new ProfileColorProperty( graphingLines, 'pointX1Y1Color', {
+    default: 'rgb( 200, 0, 200 )'
+  } ),
+  pointX2Y2ColorProperty: new ProfileColorProperty( graphingLines, 'pointX2Y2Color', {
+    default: 'rgb( 210, 255, 0 )'
+  } ),
 
   // alpha channel (0-1) of the halo around the various manipulators, manually tuned for above colors
   HALO_ALPHA: {

@@ -147,7 +147,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     if ( options.interactiveIntercept ) {
       yInterceptNumeratorNode = new NumberPicker( yInterceptProperty, options.yInterceptRangeProperty,
         combineOptions<NumberPickerOptions>( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
-          color: GLColors.INTERCEPT,
+          color: GLColors.interceptColorProperty,
           font: interactiveFont
         } ) );
     }

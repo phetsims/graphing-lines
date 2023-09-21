@@ -28,7 +28,7 @@ export default class YInterceptManipulator extends Manipulator {
                       y1RangeProperty: TReadOnlyProperty<Range>,
                       modelViewTransform: ModelViewTransform2 ) {
 
-    super( radius, GLColors.INTERCEPT, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
+    super( radius, GLColors.interceptColorProperty, { haloAlpha: GLColors.HALO_ALPHA.intercept } );
 
     // move the manipulator to match the line's (x1,y1) point
     const lineObserver = ( line: Line ) => {

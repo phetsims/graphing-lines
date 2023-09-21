@@ -37,7 +37,7 @@ export default class SlopePicker extends NumberPicker {
     const options = optionize4<SlopePickerOptions, SelfOptions, NumberPickerOptions>()( {}, GLConstants.NUMBER_PICKER_OPTIONS, {
 
       // NumberPickerOptions
-      color: GLColors.SLOPE
+      color: GLColors.slopeColorProperty
     }, providedOptions );
 
     // increment function, skips over undefined line condition (slope=0/0) - not changeable by clients

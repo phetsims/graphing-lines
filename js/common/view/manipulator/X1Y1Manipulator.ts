@@ -37,7 +37,7 @@ export default class X1Y1Manipulator extends Manipulator {
                       modelViewTransform: ModelViewTransform2,
                       constantSlope: boolean ) {
 
-    super( radius, GLColors.POINT_X1_Y1, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
+    super( radius, GLColors.pointX1Y1ColorProperty, { haloAlpha: GLColors.HALO_ALPHA.x1y1 } );
 
     // move the manipulator to match the line's (x1,y1) point
     const lineObserver = ( line: Line ) => {

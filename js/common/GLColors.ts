@@ -37,9 +37,9 @@ const GLColors = {
   SLOPE: 'rgb( 117, 217, 255 )',
   SLOPE_TOOL_DIMENSIONAL_LINES: 'rgb( 76, 199, 255 )',
   INTERCEPT: 'rgb( 200, 0, 200 )',
+  POINT: 'rgb( 200, 0, 200 )',
   POINT_X1_Y1: 'rgb( 200, 0, 200 )',
   POINT_X2_Y2: 'rgb( 210, 255, 0 )',
-  POINT: 'rgb( 200, 0, 200 )',
 
   // alpha channel (0-1) of the halo around the various manipulators, manually tuned for above colors
   HALO_ALPHA: {

@@ -3,7 +3,7 @@
 ## General
 
 The model describes a line using 2 points, (x1,y1) and (x2,y2). All tabs use this internal representation, but present
-the line in different forms. See Line.js for more details.
+the line in different forms. See Line.ts for more details.
 
 Internally, slope is computed and stored as separate rise and run values. When slope is not interactive, it is typically
 presented in simplified form. That is, the rise and run are reduced to their simplest terms. For example, a slope stored

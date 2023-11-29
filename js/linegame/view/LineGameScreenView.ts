@@ -40,7 +40,7 @@ export default class LineGameScreenView extends BaseGameScreenView {
         levelSelectionButtonGroupOptions: {
           flowBoxOptions: {
             spacing: 50, // x spacing
-            lineSpacing: 25, // y spacing
+            lineSpacing: 50, // y spacing
             preferredWidth: 800, // set empirically to provide 3 buttons per row
             wrap: true,
             justify: 'center'

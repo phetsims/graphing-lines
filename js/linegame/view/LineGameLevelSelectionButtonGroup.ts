@@ -39,10 +39,10 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       // LevelSelectionButtonGroupOptions
       levelSelectionButtonOptions: {
         baseColor: 'rgb( 180, 205, 255 )',
-        buttonWidth: 175,
-        buttonHeight: 210,
         bestTimeVisibleProperty: model.timerEnabledProperty
       },
+      groupButtonWidth: 175,
+      groupButtonHeight: 210,
       flowBoxOptions: {
         spacing: 50
       }

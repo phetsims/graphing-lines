@@ -38,6 +38,7 @@ import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
+import NotALine from '../../linegame/model/NotALine.js';
 
 type SelfOptions = {
 
@@ -502,7 +503,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    */
-  public static createDynamicLabel( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ): Node {
+  public static createDynamicLabel( lineProperty: Property<Line> | Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
     const options = combineOptions<CreateDynamicLabelOptions>( {
       interactiveSlope: false,
@@ -511,7 +512,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       maxWidth: 200
     }, providedOptions );
 
-    return new SlopeInterceptEquationNode( lineProperty, options );
+    assert && assert( lineProperty.value instanceof Line );
+    return new SlopeInterceptEquationNode( lineProperty as Property<Line>, options );
   }
 }
 

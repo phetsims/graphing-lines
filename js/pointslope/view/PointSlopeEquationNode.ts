@@ -35,6 +35,7 @@ import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.j
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
+import NotALine from '../../linegame/model/NotALine.js';
 
 type SelfOptions = {
 
@@ -540,7 +541,7 @@ export default class PointSlopeEquationNode extends EquationNode {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    */
-  public static createDynamicLabel( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ): Node {
+  public static createDynamicLabel( lineProperty: Property<Line> | Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
     const options = combineOptions<CreateDynamicLabelOptions>( {
       pickable: false,
@@ -550,7 +551,8 @@ export default class PointSlopeEquationNode extends EquationNode {
       maxWidth: 200
     }, providedOptions );
 
-    return new PointSlopeEquationNode( lineProperty, options );
+    assert && assert( lineProperty.value instanceof Line );
+    return new PointSlopeEquationNode( lineProperty as Property<Line>, options );
   }
 }
 

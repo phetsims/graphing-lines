@@ -77,7 +77,6 @@ export default class ChallengeGraphNode extends GraphNode {
     this.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 
     // guess
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
     this.guessLineNode = new LineNode( challenge.guessProperty, challenge.graph, challenge.modelViewTransform );
     this.guessPointNode = new PlottedPointNode( pointRadius, LineGameConstants.GUESS_COLOR );
 

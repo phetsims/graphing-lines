@@ -33,6 +33,7 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
 import StringProperty from '../../../../axon/js/StringProperty.js';
+import NotALine from '../../linegame/model/NotALine.js';
 
 type SelfOptions = {
 
@@ -350,14 +351,15 @@ export default class SlopeEquationNode extends EquationNode {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    */
-  public static createDynamicLabel( lineProperty: Property<Line>, providedOptions?: CreateDynamicLabelOptions ): Node {
+  public static createDynamicLabel( lineProperty: Property<Line> | Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
     const options = combineOptions<CreateDynamicLabelOptions>( {
       pickable: false,
       maxWidth: 200
     }, providedOptions );
 
-    return new DynamicLabelNode( lineProperty, options );
+    assert && assert( lineProperty.value instanceof Line );
+    return new DynamicLabelNode( lineProperty as Property<Line>, options );
   }
 }
 

@@ -27,6 +27,7 @@ import LineGameModel from '../model/LineGameModel.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import Graph from '../../common/model/Graph.js';
 import MakeTheEquation from '../model/MakeTheEquation.js';
+import NotALine from '../model/NotALine.js';
 
 export default class MakeTheEquationNode extends ChallengeNode {
 
@@ -46,7 +47,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
     // Answer
     const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.aCorrectEquationStringProperty, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+      ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
       } ) );
     answerBoxNode.visible = false;
@@ -89,7 +90,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
     // To reduce brain damage during development, show the answer equation in translucent gray.
     if ( phet.chipper.queryParameters.showAnswers ) {
-      const devAnswerNode = ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+      const devAnswerNode = ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
         fontSize: 14,
         maxWidth: boxSize.width
       } );

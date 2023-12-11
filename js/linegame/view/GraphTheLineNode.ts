@@ -51,12 +51,12 @@ export default class GraphTheLineNode extends ChallengeNode {
 
     // Answer
     const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.lineToGraphStringProperty, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property( challenge.answer ), challenge.equationForm, {
+      ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
         fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
         slopeUndefinedVisible: false
       } ) );
 
-    const guessLineProperty = new Property( Line.Y_EQUALS_X_LINE ); // start with any non-null line
+    const guessLineProperty = new Property<Line | NotALine>( Line.Y_EQUALS_X_LINE ); // start with any non-null line
     const guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, challenge.equationForm, {
       fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
 

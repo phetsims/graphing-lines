@@ -35,6 +35,7 @@ import PointToolProbeNode from '../../common/view/PointToolProbeNode.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
+import NotALine from '../model/NotALine.js';
 
 // constants
 const NUMBER_OF_NODES = 150;
@@ -126,13 +127,13 @@ function createEquationNode( color: TColor ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = SlopeInterceptEquationNode.createDynamicLabel(
-      new Property( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ), {
+      new Property<Line | NotALine>( Line.createSlopeIntercept( getRandomY(), getRandomX(), getRandomY(), color ) ), {
         fontSize: EQUATION_FONT_SIZE
       } );
   }
   else {
     node = PointSlopeEquationNode.createDynamicLabel(
-      new Property( Line.createPointSlope( getRandomX(), getRandomY(), getRandomX(), getRandomY(), color ) ), {
+      new Property<Line | NotALine>( Line.createPointSlope( getRandomX(), getRandomY(), getRandomX(), getRandomY(), color ) ), {
         fontSize: EQUATION_FONT_SIZE
       } );
   }

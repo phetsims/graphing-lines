@@ -541,7 +541,7 @@ export default class PointSlopeEquationNode extends EquationNode {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    */
-  public static createDynamicLabel( lineProperty: Property<Line> | Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
+  public static createDynamicLabel( lineProperty: Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
     const options = combineOptions<CreateDynamicLabelOptions>( {
       pickable: false,
@@ -551,7 +551,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       maxWidth: 200
     }, providedOptions );
 
-    // @ts-expect-error lineProperty is Property<Line> | Property<Line | NotALine>
+    // @ts-expect-error lineProperty is Property<Line | NotALine>
     return new PointSlopeEquationNode( lineProperty, options );
   }
 }

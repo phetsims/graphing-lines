@@ -351,14 +351,14 @@ export default class SlopeEquationNode extends EquationNode {
   /**
    * Creates a non-interactive equation, used to label a dynamic line.
    */
-  public static createDynamicLabel( lineProperty: Property<Line> | Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
+  public static createDynamicLabel( lineProperty: Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ): Node {
 
     const options = combineOptions<CreateDynamicLabelOptions>( {
       pickable: false,
       maxWidth: 200
     }, providedOptions );
 
-    // @ts-expect-error lineProperty is Property<Line> | Property<Line | NotALine>
+    // @ts-expect-error lineProperty Property<Line | NotALine>
     return new DynamicLabelNode( lineProperty, options );
   }
 }

@@ -232,7 +232,7 @@ export default class ChallengeNode extends Node {
   /**
    * Creates a non-interactive equation, used to label the specified line.
    */
-  public static createEquationNode( lineProperty: Property<Line>,
+  public static createEquationNode( lineProperty: Property<Line | NotALine>,
                                     equationForm: EquationForm,
                                     providedOptions?: CreateDynamicLabelOptions ): Node {
 

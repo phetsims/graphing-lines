@@ -22,7 +22,7 @@ import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PlusNode, { PlusNodeOptions } from '../../../../scenery-phet/js/PlusNode.js';
-import { Color, Line as SceneryLine, Node, RichText, Text } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
 import NumberPicker, { NumberPickerOptions } from '../../../../sun/js/NumberPicker.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
@@ -53,7 +53,7 @@ type SelfOptions = {
   riseRangeProperty?: Property<Range>;
   runRangeProperty?: Property<Range>;
 
-  staticColor?: Color | string;
+  staticColor?: TColor;
 };
 
 type PointSlopeEquationNodeOptions = SelfOptions & EquationNodeOptions;

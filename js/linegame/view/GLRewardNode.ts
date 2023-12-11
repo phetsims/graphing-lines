@@ -25,7 +25,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
 import PaperAirplaneNode from '../../../../scenery-phet/js/PaperAirplaneNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import { Color, Node } from '../../../../scenery/js/imports.js';
+import { Node, TColor } from '../../../../scenery/js/imports.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
@@ -122,7 +122,7 @@ function getRandomNonZeroInteger( min: number, max: number ): number {
 //-----------------------------------------------------------------------------------------------
 
 // Creates a random equation with the specified color.
-function createEquationNode( color: Color | string ): Node {
+function createEquationNode( color: TColor ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = SlopeInterceptEquationNode.createDynamicLabel(
@@ -140,7 +140,7 @@ function createEquationNode( color: Color | string ): Node {
 }
 
 // Creates a random graph with the specified color.
-function createGraphNode( color: Color | string ): Node {
+function createGraphNode( color: TColor ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
@@ -155,7 +155,7 @@ function createGraphNode( color: Color | string ): Node {
  * Creates a random point tool with the specified color.
  * This does not use PointToolNode because it has too many model dependencies.
  */
-function createPointToolNode( color: Color | string ): Node {
+function createPointToolNode( color: TColor ): Node {
   const coordinatesProperty = new Vector2Property( new Vector2( getRandomX(), getRandomY() ) );
   const bodyNode = new PointToolBodyNode( coordinatesProperty, {
     backgroundFill: color
@@ -168,12 +168,12 @@ function createPointToolNode( color: Color | string ): Node {
 }
 
 // Creates a smiley face with the specified color.
-function createFaceNode( color: Color | string ): Node {
+function createFaceNode( color: TColor ): Node {
   return new FaceNode( FACE_DIAMETER, { headFill: color } );
 }
 
 // Creates a paper airplane with the specified color.
-function createPaperAirplaneNode( color: Color | string ): Node {
+function createPaperAirplaneNode( color: TColor ): Node {
   return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
 }
 
@@ -181,7 +181,7 @@ function createPaperAirplaneNode( color: Color | string ): Node {
  * Creates an array of nodes for a specified array of colors.
  * The functions above serve as the creationFunction argument.
  */
-function createNodes( creationFunction: ( color: Color | string ) => Node, colors: Array<Color | string> ): Node[] {
+function createNodes( creationFunction: ( color: TColor ) => Node, colors: Array<TColor> ): Node[] {
   return colors.map( color => creationFunction( color ) );
 }
 

@@ -9,7 +9,7 @@
 
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import { Color, Node, Text } from '../../../../scenery/js/imports.js';
+import { Node, TColor, Text } from '../../../../scenery/js/imports.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
@@ -51,11 +51,13 @@ export default class MakeTheEquationNode extends ChallengeNode {
       } ) );
     answerBoxNode.visible = false;
 
+    // See https://github.com/phetsims/graphing-lines/issues/139#issuecomment-1522149688
+    assert && assert( challenge.guessProperty.value instanceof Line );
+    const guessProperty = challenge.guessProperty as Property<Line>;
+
     // Guess
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const guessColor: Color | string = challenge.guessProperty.value.color;
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
+    const guessColor = guessProperty.value.color;
+    const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, guessProperty, challenge.graph,
       GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, guessColor );
     const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquationStringProperty, guessColor, boxSize, guessEquationNode );
 
@@ -163,7 +165,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
 function createInteractiveEquationNode( equationForm: EquationForm,
                                         manipulationMode: ManipulationMode,
                                         lineProperty: Property<Line>, graph: Graph, fontSize: number,
-                                        staticColor: Color | string ): Node {
+                                        staticColor: TColor ): Node {
   let interactivePoint;
   let interactiveSlope;
   let interactiveIntercept;

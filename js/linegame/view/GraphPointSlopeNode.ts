@@ -29,28 +29,28 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
 
     this.setGuessLineVisible( true );
 
+    // See https://github.com/phetsims/graphing-lines/issues/139#issuecomment-1522149688
+    assert && assert( challenge.guessProperty.value instanceof Line );
+    const guessProperty = challenge.guessProperty as Property<Line>;
+
     // dynamic ranges
     const pointSlopeParameterRange = new PointSlopeParameterRange();
     const x1RangeProperty = new Property( challenge.graph.xRange );
     const y1RangeProperty = new Property( challenge.graph.yRange );
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const riseRangeProperty = new Property( pointSlopeParameterRange.rise( challenge.guessProperty.value, challenge.graph ) );
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const runRangeProperty = new Property( pointSlopeParameterRange.run( challenge.guessProperty.value, challenge.graph ) );
+    const riseRangeProperty = new Property( pointSlopeParameterRange.rise( guessProperty.value, challenge.graph ) );
+    const runRangeProperty = new Property( pointSlopeParameterRange.run( guessProperty.value, challenge.graph ) );
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // point manipulator
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const pointManipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
+    const pointManipulator = new X1Y1Manipulator( manipulatorRadius, guessProperty, x1RangeProperty, y1RangeProperty, challenge.modelViewTransform, true /* constantSlope */ );
     const pointIsVariable = ( challenge.manipulationMode === ManipulationMode.POINT || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( pointIsVariable ) {
       this.addChild( pointManipulator );
     }
 
     // slope manipulator
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
+    const slopeManipulator = new SlopeManipulator( manipulatorRadius, guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.POINT_SLOPE );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );

@@ -29,27 +29,27 @@ export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
 
     this.setGuessLineVisible( true );
 
+    // See https://github.com/phetsims/graphing-lines/issues/139#issuecomment-1522149688
+    assert && assert( challenge.guessProperty.value instanceof Line );
+    const guessProperty = challenge.guessProperty as Property<Line>;
+
     // dynamic ranges
     const parameterRange = new SlopeInterceptParameterRange();
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const riseRangeProperty = new Property( parameterRange.rise( challenge.guessProperty.value, challenge.graph ) );
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const runRangeProperty = new Property( parameterRange.run( challenge.guessProperty.value, challenge.graph ) );
+    const riseRangeProperty = new Property( parameterRange.rise( guessProperty.value, challenge.graph ) );
+    const runRangeProperty = new Property( parameterRange.run( guessProperty.value, challenge.graph ) );
     const y1RangeProperty = new Property( challenge.graph.yRange );
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
     // intercept manipulator
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, challenge.guessProperty, y1RangeProperty, challenge.modelViewTransform );
+    const yInterceptManipulator = new YInterceptManipulator( manipulatorRadius, guessProperty, y1RangeProperty, challenge.modelViewTransform );
     const interceptIsVariable = ( challenge.manipulationMode === ManipulationMode.INTERCEPT || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( interceptIsVariable ) {
       this.addChild( yInterceptManipulator );
     }
 
     // slope manipulator
-    // @ts-expect-error guessProperty is Property<Line | NotALine>
-    const slopeManipulator = new SlopeManipulator( manipulatorRadius, challenge.guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
+    const slopeManipulator = new SlopeManipulator( manipulatorRadius, guessProperty, riseRangeProperty, runRangeProperty, challenge.modelViewTransform );
     const slopeIsVariable = ( challenge.manipulationMode === ManipulationMode.SLOPE || challenge.manipulationMode === ManipulationMode.SLOPE_INTERCEPT );
     if ( slopeIsVariable ) {
       this.addChild( slopeManipulator );

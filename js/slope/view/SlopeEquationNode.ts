@@ -358,8 +358,8 @@ export default class SlopeEquationNode extends EquationNode {
       maxWidth: 200
     }, providedOptions );
 
-    assert && assert( lineProperty.value instanceof Line );
-    return new DynamicLabelNode( lineProperty as Property<Line>, options );
+    // @ts-expect-error lineProperty is Property<Line> | Property<Line | NotALine>
+    return new DynamicLabelNode( lineProperty, options );
   }
 }
 

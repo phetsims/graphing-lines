@@ -551,8 +551,8 @@ export default class PointSlopeEquationNode extends EquationNode {
       maxWidth: 200
     }, providedOptions );
 
-    assert && assert( lineProperty.value instanceof Line );
-    return new PointSlopeEquationNode( lineProperty as Property<Line>, options );
+    // @ts-expect-error lineProperty is Property<Line> | Property<Line | NotALine>
+    return new PointSlopeEquationNode( lineProperty, options );
   }
 }
 

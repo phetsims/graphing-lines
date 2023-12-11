@@ -512,8 +512,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       maxWidth: 200
     }, providedOptions );
 
-    assert && assert( lineProperty.value instanceof Line );
-    return new SlopeInterceptEquationNode( lineProperty as Property<Line>, options );
+    // @ts-expect-error lineProperty is Property<Line> | Property<Line | NotALine>
+    return new SlopeInterceptEquationNode( lineProperty, options );
   }
 }
 

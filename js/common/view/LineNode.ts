@@ -52,7 +52,7 @@ export type CreateDynamicLabelOptions = {
   slopeUndefinedVisible?: boolean;
 };
 
-export type CreateDynamicLabelFunction = ( lineProperty: Property<Line> | Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ) => Node;
+export type CreateDynamicLabelFunction = ( lineProperty: Property<Line | NotALine>, providedOptions?: CreateDynamicLabelOptions ) => Node;
 
 type SelfOptions = {
 
@@ -67,7 +67,7 @@ type LineNodeOptions = SelfOptions;
 
 export default class LineNode extends Node {
 
-  public readonly lineProperty: Property<Line> | Property<Line | NotALine>;
+  public readonly lineProperty: Property<Line | NotALine>;
   private readonly graph: Graph;
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly xExtent: number;
@@ -84,7 +84,7 @@ export default class LineNode extends Node {
 
   private readonly disposeLineNode: () => void;
 
-  public constructor( lineProperty: Property<Line> | Property<Line | NotALine>,
+  public constructor( lineProperty: Property<Line | NotALine>,
                       graph: Graph,
                       modelViewTransform: ModelViewTransform2,
                       providedOptions?: LineNodeOptions ) {

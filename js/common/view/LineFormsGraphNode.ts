@@ -25,6 +25,7 @@ import SlopeToolNode from './SlopeToolNode.js';
 import LineFormsViewProperties from './LineFormsViewProperties.js';
 import Line from '../model/Line.js';
 import GLSymbols from '../GLSymbols.js';
+import NotALine from '../../linegame/model/NotALine.js';
 
 export default class LineFormsGraphNode extends GraphNode {
 
@@ -49,6 +50,7 @@ export default class LineFormsGraphNode extends GraphNode {
     this.viewProperties = viewProperties;
     this.createDynamicLabel = createDynamicLabel;
 
+    // @ts-expect-error interactiveLineProperty is not Property<Line | NotALine>
     this.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform, {
       createDynamicLabel: createDynamicLabel
     } );
@@ -111,7 +113,7 @@ export default class LineFormsGraphNode extends GraphNode {
 
   // Called when a standard line is added to the model.
   private standardLineAdded( line: Line ): void {
-    const lineNode = new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform, {
+    const lineNode = new LineNode( new Property<Line | NotALine>( line ), this.model.graph, this.model.modelViewTransform, {
       createDynamicLabel: this.createDynamicLabel
     } );
     this.standardLinesParentNode.addChild( lineNode );
@@ -124,7 +126,7 @@ export default class LineFormsGraphNode extends GraphNode {
 
   // Called when a saved line is added to the model.
   private savedLineAdded( line: Line ): void {
-    const lineNode = new LineNode( new Property( line ), this.model.graph, this.model.modelViewTransform, {
+    const lineNode = new LineNode( new Property<Line | NotALine>( line ), this.model.graph, this.model.modelViewTransform, {
       createDynamicLabel: this.createDynamicLabel
     } );
     this.savedLinesParentNode.addChild( lineNode );

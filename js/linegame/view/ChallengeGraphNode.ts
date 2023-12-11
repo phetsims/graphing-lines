@@ -65,14 +65,14 @@ export default class ChallengeGraphNode extends GraphNode {
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( phet.chipper.queryParameters.showAnswers ) {
-      this.addChild( new LineNode( new Property( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ),
+      this.addChild( new LineNode( new Property<Line | NotALine>( challenge.answer.withColor( 'rgba( 0, 0, 0, 0.1 )' ) ),
         challenge.graph, challenge.modelViewTransform ) );
     }
 
     const pointRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.POINT_RADIUS );
 
     // answer
-    this.answerLineNode = new LineNode( new Property( challenge.answer ), challenge.graph, challenge.modelViewTransform );
+    this.answerLineNode = new LineNode( new Property<Line | NotALine>( challenge.answer ), challenge.graph, challenge.modelViewTransform );
     this.answerPointNode = new PlottedPointNode( pointRadius, LineGameConstants.ANSWER_COLOR );
     this.answerPointNode.translation = challenge.modelViewTransform.modelToViewXY( challenge.answer.x1, challenge.answer.y1 );
 

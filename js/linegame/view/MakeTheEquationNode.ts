@@ -51,13 +51,10 @@ export default class MakeTheEquationNode extends ChallengeNode {
       } ) );
     answerBoxNode.visible = false;
 
-    // See https://github.com/phetsims/graphing-lines/issues/139#issuecomment-1522149688
-    assert && assert( challenge.guessProperty.value instanceof Line );
-    const guessProperty = challenge.guessProperty as Property<Line>;
-
     // Guess
-    const guessColor = guessProperty.value.color;
-    const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, guessProperty, challenge.graph,
+    const guessColor = ( challenge.guessProperty.value instanceof Line ) ? challenge.guessProperty.value.color : null;
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
+    const guessEquationNode = createInteractiveEquationNode( challenge.equationForm, challenge.manipulationMode, challenge.guessProperty, challenge.graph,
       GLConstants.INTERACTIVE_EQUATION_FONT_SIZE, guessColor );
     const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourEquationStringProperty, guessColor, boxSize, guessEquationNode );
 

@@ -29,14 +29,12 @@ export default class GraphTwoPointsNode extends ChallengeGraphNode {
 
     const manipulatorRadius = challenge.modelViewTransform.modelToViewDeltaX( LineGameConstants.MANIPULATOR_RADIUS );
 
-    // See https://github.com/phetsims/graphing-lines/issues/139#issuecomment-1522149688
-    assert && assert( challenge.guessProperty.value instanceof Line );
-    const guessProperty = challenge.guessProperty as Property<Line>;
-
-    const x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, guessProperty,
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
+    const x1y1Manipulator = new X1Y1Manipulator( manipulatorRadius, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform, false /* constantSlope */ );
 
-    const x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, guessProperty,
+    // @ts-expect-error guessProperty is Property<Line | NotALine>
+    const x2y2Manipulator = new X2Y2Manipulator( manipulatorRadius, challenge.guessProperty,
       new Property( challenge.graph.xRange ), new Property( challenge.graph.yRange ), challenge.modelViewTransform );
 
     // Rendering order

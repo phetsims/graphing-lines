@@ -38,8 +38,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 
       // LevelSelectionButtonGroupOptions
       levelSelectionButtonOptions: {
-        baseColor: 'rgb( 180, 205, 255 )',
-        bestTimeVisibleProperty: model.timerEnabledProperty
+        baseColor: 'rgb( 180, 205, 255 )'
       },
       groupButtonWidth: 175,
       groupButtonHeight: 210,
@@ -58,8 +57,6 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
         icon: createLevelSelectionButtonIcon( level, levelImages[ level ], iconAlignGroup ),
         scoreProperty: model.bestScoreProperties[ level ],
         options: {
-          bestTimeProperty: model.bestTimeProperties[ level ],
-          bestTimeVisibleProperty: model.timerEnabledProperty,
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
             numberOfStars: model.challengesPerGameProperty.value,
             perfectScore: model.getPerfectScore()

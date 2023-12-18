@@ -13,10 +13,11 @@ import Range from '../../../../../dot/js/Range.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { DragListener, Node } from '../../../../../scenery/js/imports.js';
+import { Node } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Manipulator from './Manipulator.js';
+import ManipulatorDragListener from './ManipulatorDragListener.js';
 
 export default class PointManipulator extends Manipulator {
 
@@ -53,7 +54,7 @@ export default class PointManipulator extends Manipulator {
 /**
  * Drag listener for an arbitrary point.
  */
-class PointDragListener extends DragListener {
+class PointDragListener extends ManipulatorDragListener {
 
   public constructor( targetNode: Node,
                       pointProperty: Property<Vector2>,
@@ -65,8 +66,6 @@ class PointDragListener extends DragListener {
     let startOffset: Vector2; // where the drag started, relative to the slope manipulator, in parent view coordinates
 
     super( {
-
-      allowTouchSnag: true,
 
       // note where the drag started
       start: event => {

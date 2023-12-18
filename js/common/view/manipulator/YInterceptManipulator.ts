@@ -13,11 +13,12 @@ import Range from '../../../../../dot/js/Range.js';
 import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
-import { DragListener, Node } from '../../../../../scenery/js/imports.js';
+import { Node } from '../../../../../scenery/js/imports.js';
 import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
+import ManipulatorDragListener from './ManipulatorDragListener.js';
 
 export default class YInterceptManipulator extends Manipulator {
 
@@ -52,7 +53,7 @@ export default class YInterceptManipulator extends Manipulator {
 /**
  * Drag listener for y-intercept manipulator.
  */
-class YInterceptDragListener extends DragListener {
+class YInterceptDragListener extends ManipulatorDragListener {
 
   public constructor( targetNode: Node,
                       lineProperty: Property<Line>,
@@ -62,8 +63,6 @@ class YInterceptDragListener extends DragListener {
     let startOffset: Vector2; // where the drag started, relative to the y-intercept, in parent view coordinates
 
     super( {
-
-      allowTouchSnag: true,
 
       // note where the drag started
       start: event => {

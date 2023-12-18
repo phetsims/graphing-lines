@@ -23,6 +23,11 @@ import Graph from '../model/Graph.js';
 import PointTool from '../model/PointTool.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
 import PointToolProbeNode from './PointToolProbeNode.js';
+import SoundClip from '../../../../tambo/js/sound-generators/SoundClip.js';
+import grab_mp3 from '../../../../tambo/sounds/grab_mp3.js';
+import release_mp3 from '../../../../tambo/sounds/release_mp3.js';
+import soundManager from '../../../../tambo/js/soundManager.js';
+import GLConstants from '../GLConstants.js';
 
 type SelfOptions = {
   backgroundNormalColor?: TColor;
@@ -152,9 +157,18 @@ class PointToolDragListener extends DragListener {
       }
     };
 
+    // Sounds clips associated with dragging
+    const grabClip = new SoundClip( grab_mp3, GLConstants.GRAB_RELEASE_SOUND_CLIP_OPTIONS );
+    const releaseClip = new SoundClip( release_mp3, GLConstants.GRAB_RELEASE_SOUND_CLIP_OPTIONS );
+    soundManager.addSoundGenerator( grabClip );
+    soundManager.addSoundGenerator( releaseClip );
+
     super( {
 
       allowTouchSnag: true,
+
+      press: () => grabClip.play(),
+      release: () => releaseClip.play(),
 
       // note where the drag started
       start: event => {

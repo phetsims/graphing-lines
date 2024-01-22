@@ -200,7 +200,6 @@ export default class PointSlopeEquationNode extends EquationNode {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty.value, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
@@ -484,6 +483,14 @@ export default class PointSlopeEquationNode extends EquationNode {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
+    // If dynamic strings change, update the layout. The boundsProperty dependencies are RichText that
+    // are observing a StringProperty. The StringProperty dependencies are used in this.updateLayout.
+    //TODO https://github.com/phetsims/graphing-lines/issues/140 Fails with 'stack size exceeded'
+    // const dynamicStringMultilink = Multilink.lazyMultilink(
+    //   [ xNode.boundsProperty, yNode.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
+    //   ( xBounds, yBounds, slopeUndefinedString ) => updateLayout( lineProperty.value )
+    // );
+
     // For fully-interactive equations ...
     let undefinedSlopeUpdater: ( line: Line ) => void;
     if ( fullyInteractive ) {
@@ -509,11 +516,11 @@ export default class PointSlopeEquationNode extends EquationNode {
       x1Node.dispose();
       y1Node.dispose();
       slopeUndefinedNode.dispose();
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of any derived StringProperty?
       riseNode.dispose();
       runNode.dispose();
       controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 dynamicStringMultilink.dispose();
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };
   }
@@ -531,8 +538,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     // (y - y1) = m(x - x1)
     const stringProperty = new DerivedStringProperty(
       [ GLSymbols.yStringProperty, GLSymbols.mStringProperty, GLSymbols.xStringProperty ],
-      ( y, m, x ) =>
-        `(${y} ${MathSymbols.MINUS} ${y}<sub>1</sub>) ${MathSymbols.EQUAL_TO} ${m}(${x} ${MathSymbols.MINUS} ${x}<sub>1</sub>)`
+      ( y, m, x ) => `(${y} ${MathSymbols.MINUS} ${y}<sub>1</sub>) ${MathSymbols.EQUAL_TO} ${m}(${x} ${MathSymbols.MINUS} ${x}<sub>1</sub>)`
     );
 
     return new RichText( stringProperty, {

@@ -197,7 +197,6 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
@@ -448,6 +447,14 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
+    // If dynamic strings change, update the layout. The boundsProperty dependencies are RichText that
+    // are observing a StringProperty. The StringProperty dependencies are used in this.updateLayout.
+    //TODO https://github.com/phetsims/graphing-lines/issues/140 Fails with 'stack size exceeded'
+    // const dynamicStringMultilink = Multilink.lazyMultilink(
+    //   [ xNode.boundsProperty, yNode.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
+    //   ( xBounds, yBounds, slopeUndefinedString ) => updateLayout( lineProperty.value )
+    // );
+
     // For fully-interactive equations ...
     let undefinedSlopeUpdater: ( line: Line ) => void;
     if ( fullyInteractive ) {
@@ -473,13 +480,13 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       xNode.dispose();
       yNode.dispose();
       slopeUndefinedNode.dispose();
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of any derived StringProperty?
       riseNode.dispose();
       runNode.dispose();
       yInterceptNumeratorNode.dispose();
       yInterceptDenominatorNode.dispose();
       controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 dynamicStringMultilink.dispose();
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };
   }

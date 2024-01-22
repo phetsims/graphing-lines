@@ -1,8 +1,8 @@
-// Copyright 2013-2023, University of Colorado Boulder
+// Copyright 2013-2024, University of Colorado Boulder
 
 /**
- * Base class for graphs, displays a 2D grid and axes.
- * The node's origin is at model coordinate (0,0).
+ * GraphNode is the base class for graphs. It displays a 2D grid and axes.
+ * The origin is at model coordinate (0,0).
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */

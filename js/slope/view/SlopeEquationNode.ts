@@ -19,7 +19,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { HBox, HStrut, Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
+import { HBox, HStrut, Line as SceneryLine, Node, RichText, RichTextOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
@@ -115,7 +115,9 @@ export default class SlopeEquationNode extends EquationNode {
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    const mNode = new RichText( GLSymbols.mStringProperty, staticOptions );
+    const mNode = new RichText( GLSymbols.mStringProperty, combineOptions<RichTextOptions>( {
+      maxWidth: 85
+    }, staticOptions ) );
     const interactiveEqualsNode = new Text( MathSymbols.EQUAL_TO, staticOptions );
     // y2 - y1
     const y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
@@ -218,47 +220,53 @@ export default class SlopeEquationNode extends EquationNode {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    // layout, after registering observers
-    // m =
-    mNode.x = 0;
-    mNode.y = 0;
-    interactiveEqualsNode.left = mNode.right + this.relationalOperatorXSpacing;
-    interactiveEqualsNode.y = mNode.y;
-    // fraction line
-    interactiveFractionLineNode.left = interactiveEqualsNode.right + this.relationalOperatorXSpacing;
-    interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + this.fractionLineYFudgeFactor;
-    // y2 - y1
-    y2Node.left = interactiveFractionLineNode.left;
-    y2Node.bottom = interactiveFractionLineNode.top - this.pickersYSpacing;
-    numeratorOperatorNode.left = y2Node.right + this.operatorXSpacing;
-    numeratorOperatorNode.centerY = y2Node.centerY;
-    y1Node.left = numeratorOperatorNode.right + this.operatorXSpacing;
-    y1Node.y = y2Node.y;
-    // fix fraction line length
-    const fractionLineLength = y1Node.right - y2Node.left;
-    interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 0 );
-    // x2 - x1
-    x2Node.left = y2Node.left;
-    x2Node.top = interactiveFractionLineNode.bottom + this.pickersYSpacing;
-    denominatorOperatorNode.left = x2Node.right + this.operatorXSpacing;
-    denominatorOperatorNode.centerY = x2Node.centerY;
-    x1Node.left = denominatorOperatorNode.right + this.operatorXSpacing;
-    x1Node.y = x2Node.y;
-    // = rise/run
-    unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + this.relationalOperatorXSpacing;
-    unsimplifiedEqualsNode.y = interactiveEqualsNode.y;
-    unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + this.relationalOperatorXSpacing;
-    unsimplifiedFractionLineNode.y = interactiveFractionLineNode.y;
-    // horizontally center rise and run above fraction line
-    unsimplifiedRiseNode.centerX = unsimplifiedFractionLineNode.centerX;
-    unsimplifiedRiseNode.bottom = unsimplifiedFractionLineNode.top - this.slopeYSpacing;
-    unsimplifiedRunNode.centerX = unsimplifiedFractionLineNode.centerX;
-    unsimplifiedRunNode.top = unsimplifiedFractionLineNode.bottom + this.slopeYSpacing;
+    // Dynamic layout, after registering observers
+    Multilink.multilink( [
+        // 'm =' is the only part of the interactive equation that involves a StringProperty.
+        mNode.boundsProperty
+      ],
+      () => {
+        // m =
+        mNode.x = 0;
+        mNode.y = 0;
+        interactiveEqualsNode.left = mNode.right + this.relationalOperatorXSpacing;
+        interactiveEqualsNode.y = mNode.y;
+        // fraction line
+        interactiveFractionLineNode.left = interactiveEqualsNode.right + this.relationalOperatorXSpacing;
+        interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + this.fractionLineYFudgeFactor;
+        // y2 - y1
+        y2Node.left = interactiveFractionLineNode.left;
+        y2Node.bottom = interactiveFractionLineNode.top - this.pickersYSpacing;
+        numeratorOperatorNode.left = y2Node.right + this.operatorXSpacing;
+        numeratorOperatorNode.centerY = y2Node.centerY;
+        y1Node.left = numeratorOperatorNode.right + this.operatorXSpacing;
+        y1Node.y = y2Node.y;
+        // fix fraction line length
+        const fractionLineLength = y1Node.right - y2Node.left;
+        interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 0 );
+        // x2 - x1
+        x2Node.left = y2Node.left;
+        x2Node.top = interactiveFractionLineNode.bottom + this.pickersYSpacing;
+        denominatorOperatorNode.left = x2Node.right + this.operatorXSpacing;
+        denominatorOperatorNode.centerY = x2Node.centerY;
+        x1Node.left = denominatorOperatorNode.right + this.operatorXSpacing;
+        x1Node.y = x2Node.y;
+        // = rise/run
+        unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + this.relationalOperatorXSpacing;
+        unsimplifiedEqualsNode.y = interactiveEqualsNode.y;
+        unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + this.relationalOperatorXSpacing;
+        unsimplifiedFractionLineNode.y = interactiveFractionLineNode.y;
+        // horizontally center rise and run above fraction line
+        unsimplifiedRiseNode.centerX = unsimplifiedFractionLineNode.centerX;
+        unsimplifiedRiseNode.bottom = unsimplifiedFractionLineNode.top - this.slopeYSpacing;
+        unsimplifiedRunNode.centerX = unsimplifiedFractionLineNode.centerX;
+        unsimplifiedRunNode.top = unsimplifiedFractionLineNode.bottom + this.slopeYSpacing;
 
-    // set up undefined-slope indicator last
-    undefinedSlopeIndicator.setSize( parentNode.getWidth(), parentNode.getHeight() );
-    undefinedSlopeIndicator.centerX = parentNode.centerX;
-    undefinedSlopeIndicator.centerY = parentNode.centerY + this.undefinedSlopeYFudgeFactor;
+        // set up undefined-slope indicator last
+        undefinedSlopeIndicator.setSize( parentNode.getWidth(), parentNode.getHeight() );
+        undefinedSlopeIndicator.centerX = parentNode.centerX;
+        undefinedSlopeIndicator.centerY = parentNode.centerY + this.undefinedSlopeYFudgeFactor;
+      } );
 
     this.mutate( options );
 

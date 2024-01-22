@@ -22,14 +22,18 @@ import GLColors from '../GLColors.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
 import GLIconFactory from './GLIconFactory.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 // y = x
-//TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
-const Y_EQUALS_X = `${GLSymbols.yStringProperty.value} ${MathSymbols.EQUAL_TO} ${GLSymbols.xStringProperty.value}`;
+const yEqualsXStringProperty = new DerivedStringProperty(
+  [ GLSymbols.yStringProperty, GLSymbols.xStringProperty ],
+  ( yString, xString ) => `${yString} ${MathSymbols.EQUAL_TO} ${xString}` );
+
 // y = -x
-//TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
-const Y_EQUALS_NEGATIVE_X = `${GLSymbols.yStringProperty.value} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${GLSymbols.xStringProperty.value}`;
+const yEqualsNegativeXStringProperty = new DerivedStringProperty(
+  [ GLSymbols.yStringProperty, GLSymbols.xStringProperty ],
+  ( yString, xString ) => `${yString} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${xString}` );
 
 type SelfOptions = {
   includeStandardLines?: boolean; // if true, includes visibility controls for 'y = x' and 'y = -x'
@@ -70,7 +74,7 @@ export default class GraphControlPanel extends Panel {
     // checkboxes
     const TEXT_OPTIONS = {
       font: new PhetFont( 18 ),
-      maxWidth: 150 // determined empirically
+      maxWidth: 120 // determined empirically
     };
     const ICON_SIZE = 60;
     const ICON_SPACING = 15;
@@ -88,7 +92,7 @@ export default class GraphControlPanel extends Panel {
     const yEqualsXCheckbox = new Checkbox( yEqualsXVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new RichText( Y_EQUALS_X, TEXT_OPTIONS ),
+        new RichText( yEqualsXStringProperty, TEXT_OPTIONS ),
         GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.yEqualsXLineColorProperty, -3, -3, 3, 3 )
       ]
     } ) );
@@ -97,7 +101,7 @@ export default class GraphControlPanel extends Panel {
     const yEqualsNegativeXCheckbox = new Checkbox( yEqualsNegativeXVisibleProperty, new HBox( {
       spacing: ICON_SPACING,
       children: [
-        new RichText( Y_EQUALS_NEGATIVE_X, TEXT_OPTIONS ),
+        new RichText( yEqualsNegativeXStringProperty, TEXT_OPTIONS ),
         GLIconFactory.createGraphIcon( ICON_SIZE, GLColors.yEqualsNegativeXLineColorProperty, -3, 3, 3, -3 )
       ]
     } ) );

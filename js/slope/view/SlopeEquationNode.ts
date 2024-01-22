@@ -399,18 +399,18 @@ class DynamicLabelNode extends EquationNode {
       font: new PhetFont( { size: options.fontSize, weight: GLConstants.EQUATION_FONT_WEIGHT } )
     };
 
-    // allocate nodes needed to represent all simplified forms
+    // Allocate nodes needed to represent all simplified forms.
     const slopeIsText = new Text( GraphingLinesStrings.slopeIsStringProperty, textOptions );
     const minusSignNode = new MinusNode( { size: this.signLineSize } );
     const riseText = new Text( '?', textOptions );
     const runText = new Text( '?', textOptions );
     const fractionLineNode = new SceneryLine( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
 
-    // add all nodes, we'll set which ones are visible bases on desired simplification
+    // Add all nodes. We'll set which ones are visible based on desired simplification.
     assert && assert( this.getChildrenCount() === 0, 'supertype has unexpected children' );
     this.children = [ slopeIsText, minusSignNode, riseText, runText, fractionLineNode ];
 
-    // update visibility, layout and properties of nodes to match the current line
+    // Update visibility, layout and properties of nodes to match the current line.
     const update = ( line: Line ) => {
 
       const lineColor = line.color;

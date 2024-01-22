@@ -470,6 +470,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposeSlopeInterceptEquationNode = () => {
+      xNode.dispose();
+      yNode.dispose();
+      slopeUndefinedNode.dispose();
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of any derived StringProperty?
       riseNode.dispose();
       runNode.dispose();
       yInterceptNumeratorNode.dispose();
@@ -496,6 +500,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       ( y, m, x, b ) => `${y} ${MathSymbols.EQUAL_TO} ${m}${x} ${MathSymbols.PLUS} ${b}` );
 
     return new RichText( stringProperty, {
+      isDisposable: false,
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 200

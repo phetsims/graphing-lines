@@ -508,6 +508,8 @@ export default class PointSlopeEquationNode extends EquationNode {
     this.disposePointSlopeEquationNode = () => {
       x1Node.dispose();
       y1Node.dispose();
+      slopeUndefinedNode.dispose();
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of any derived StringProperty?
       riseNode.dispose();
       runNode.dispose();
       Multilink.unmultilink( controlsMultilink );
@@ -534,6 +536,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     );
 
     return new RichText( stringProperty, {
+      isDisposable: false,
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 200

@@ -271,6 +271,7 @@ export default class SlopeEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposeSlopeEquationNode = () => {
+      mNode.dispose();
       x1Node.dispose();
       x2Node.dispose();
       y1Node.dispose();
@@ -355,6 +356,7 @@ export default class SlopeEquationNode extends EquationNode {
     } );
 
     return new Node( {
+      isDisposable: false,
       children: [ hBox ], // Wrap with Node to prevent the equation from stretching inside of other layout Nodes.
       maxWidth: 200 // Apply maxWidth to the entire equation, so that all parts of the equation scale uniformly.
     } );
@@ -488,6 +490,7 @@ class DynamicLabelNode extends EquationNode {
 
     this.disposeDynamicLabelNode = () => {
       lineProperty.unlink( lineObserver );
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of anything linked to StringProperty
     };
 
     this.mutate( options );

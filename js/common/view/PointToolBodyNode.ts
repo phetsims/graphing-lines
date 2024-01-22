@@ -114,7 +114,6 @@ export default class PointToolBodyNode extends Node {
           // Use toFixedNumber so that trailing zeros are removed.
           const x = Utils.toFixedNumber( coordinates.x, options.decimals );
           const y = Utils.toFixedNumber( coordinates.y, options.decimals );
-          //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
           return StringUtils.format( XYString, x, y );
         }
         else {

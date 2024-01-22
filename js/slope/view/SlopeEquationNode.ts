@@ -1,8 +1,8 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
 /**
- * Renderer for slope equations.
- * General form is m = (y2 - y1) / (x2 - x1) = rise/run
+ * SlopeEquationNode is the renderer for slope equations.
+ * The general form is m = (y2 - y1) / (x2 - x1) = rise/run
  *
  * x1, y1, x2, and y2 are all interactive.
  *
@@ -19,7 +19,7 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
+import { HBox, HStrut, Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
@@ -31,9 +31,8 @@ import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.j
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
-import PatternStringProperty from '../../../../axon/js/PatternStringProperty.js';
-import StringProperty from '../../../../axon/js/StringProperty.js';
 import NotALine from '../../linegame/model/NotALine.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = {
 
@@ -293,62 +292,64 @@ export default class SlopeEquationNode extends EquationNode {
       maxWidth: 300
     };
 
-    const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
+    const richTextOptions = {
+      font: new PhetFont( { size: options.fontSize, weight: options.fontWeight } ),
+      fill: options.fill
+    };
 
-    // Slope m =
-    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
-    const leftSideStringProperty = new PatternStringProperty( new StringProperty( `{{slope}}    {{m}} ${MathSymbols.EQUAL_TO}` ), {
-      slope: GraphingLinesStrings.slopeStringProperty,
-      m: GLSymbols.mStringProperty.value
-    } );
-    const leftSideNode = new RichText( leftSideStringProperty, {
-      font: font,
-      fill: options.fill,
-      maxWidth: 125 // i18n, determined empirically
+    // Slope   m =
+    const slopeText = new RichText( GraphingLinesStrings.slopeStringProperty, richTextOptions );
+    const mEqualsStringProperty = new DerivedStringProperty( [ GLSymbols.mStringProperty ],
+      mString => `${mString} ${MathSymbols.EQUAL_TO}` );
+    const mEqualsText = new RichText( mEqualsStringProperty, richTextOptions );
+    const leftSideNode = new HBox( {
+      spacing: 0,
+      children: [ slopeText, new HStrut( 22 ), mEqualsText ]
     } );
 
     // pattern for numerator and denominator
     const pattern = `{{symbol}}<sub>2</sub> ${MathSymbols.MINUS} {{symbol}}<sub>1</sub>`;
 
     // y2 - y1
-    //TODO https://github.com/phetsims/graphing-lines/issues/140
-    const numeratorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.yStringProperty.value } );
-    const numeratorNode = new RichText( numeratorText, {
-      font: font,
-      fill: options.fill
-    } );
+    const numeratorStringProperty = new DerivedStringProperty( [ GLSymbols.yStringProperty ],
+      yString => StringUtils.fillIn( pattern, { symbol: yString } ) );
+    const numeratorNode = new RichText( numeratorStringProperty, richTextOptions );
 
     // x2 - x1
-    //TODO https://github.com/phetsims/graphing-lines/issues/140
-    const denominatorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.xStringProperty.value } );
-    const denominatorNode = new RichText( denominatorText, {
-      font: font,
-      fill: options.fill
-    } );
+    const denominatorStringProperty = new DerivedStringProperty( [ GLSymbols.xStringProperty ],
+      xString => StringUtils.fillIn( pattern, { symbol: xString } ) );
+    const denominatorNode = new RichText( denominatorStringProperty, richTextOptions );
 
-    // fraction line
-    const length = Math.max( numeratorNode.width, denominatorNode.width );
-    const fractionLineNode = new SceneryLine( 0, 0, length, 0, {
+    // fraction line, with dynamic length
+    const fractionLineNode = new SceneryLine( 0, 0, 1, 0, {
       stroke: options.fill,
       lineWidth: 0.06 * options.fontSize
     } );
+    Multilink.multilink( [ numeratorNode.boundsProperty, denominatorNode.boundsProperty ],
+      () => {
+        const length = Math.max( numeratorNode.width, denominatorNode.width );
+        fractionLineNode.setLine( 0, 0, length, 0 );
+        numeratorNode.centerX = fractionLineNode.centerX;
+        numeratorNode.bottom = fractionLineNode.top - 5;
+        denominatorNode.centerX = fractionLineNode.centerX;
+        denominatorNode.top = fractionLineNode.top + 3;
+      } );
 
-    // rendering order
-    const parent = new Node( {
-      children: [ leftSideNode, fractionLineNode, numeratorNode, denominatorNode ]
+    // Tried to use VBox here, but the spacing was a little off.
+    const fractionNode = new Node( {
+      children: [ numeratorNode, fractionLineNode, denominatorNode ]
     } );
 
-    // layout
-    leftSideNode.x = 0;
-    leftSideNode.y = 0;
-    fractionLineNode.left = leftSideNode.right + 5;
-    fractionLineNode.centerY = leftSideNode.centerY;
-    numeratorNode.centerX = fractionLineNode.centerX;
-    numeratorNode.bottom = fractionLineNode.top - 5;
-    denominatorNode.centerX = fractionLineNode.centerX;
-    denominatorNode.top = fractionLineNode.bottom + 1;
+    const hBox = new HBox( {
+      align: 'center',
+      spacing: 5,
+      children: [ leftSideNode, fractionNode ]
+    } );
 
-    return parent;
+    return new Node( {
+      children: [ hBox ], // Wrap with Node to prevent the equation from stretching inside of other layout Nodes.
+      maxWidth: 200 // Apply maxWidth to the entire equation, so that all parts of the equation scale uniformly.
+    } );
   }
 
   /**

@@ -115,10 +115,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       options.runRangeProperty, interactiveFont, this.decimalPlaces );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
-    const yNode = new RichText( GLSymbols.yStringProperty, combineOptions<RichTextOptions>( {
+    const yText = new RichText( GLSymbols.yStringProperty, combineOptions<RichTextOptions>( {
       maxWidth: 85
     }, staticOptions ) );
-    const equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
+    const equalsText = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.signLineSize
     }, staticOptions ) );
@@ -137,7 +137,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       }, staticOptions ) );
     }
     const slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const xNode = new RichText( GLSymbols.xStringProperty, combineOptions<RichTextOptions>( {
+    const xText = new RichText( GLSymbols.xStringProperty, combineOptions<RichTextOptions>( {
       maxWidth: 85
     }, staticOptions ) );
     const plusNode = new PlusNode( combineOptions<PlusNodeOptions>( {
@@ -168,11 +168,11 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         absoluteValue: true
       }, staticOptions ) );
     const yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const slopeUndefinedNode = new RichText( '?', staticOptions );
+    const slopeUndefinedText = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
-    this.children = [ yNode, equalsNode, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xNode, plusNode, minusNode,
-      yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedNode ];
+    this.children = [ yText, equalsText, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xText, plusNode, minusNode,
+      yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedText ];
 
     /*
      * Updates the layout to match the desired form of the equation.
@@ -191,13 +191,13 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         this.children[ i ].visible = false;
         this.children[ i ].x = 0;
       }
-      slopeUndefinedNode.string = ''; // workaround for #114 and #117
+      slopeUndefinedText.string = ''; // workaround for #114 and #117
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        slopeUndefinedNode.visible = true;
-        slopeUndefinedNode.fill = lineColor;
-        slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
+        slopeUndefinedText.visible = true;
+        slopeUndefinedText.fill = lineColor;
+        slopeUndefinedText.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
                                       x: GLSymbols.xStringProperty,
@@ -217,10 +217,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       let lineWidth;
 
       // y =
-      yNode.visible = equalsNode.visible = true;
-      yNode.fill = equalsNode.fill = lineColor;
-      equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
-      equalsNode.y = yNode.y;
+      yText.visible = equalsText.visible = true;
+      yText.fill = equalsText.fill = lineColor;
+      equalsText.left = yText.right + this.relationalOperatorXSpacing;
+      equalsText.y = yText.y;
 
       // Layout the 'mx' part of the equation.
       if ( options.interactiveSlope ) {
@@ -228,16 +228,16 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         // slope is interactive, will be displayed as a fraction
 
         // (rise/run)x
-        riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
-        slopeFractionLineNode.stroke = xNode.fill = lineColor;
-        slopeFractionLineNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-        slopeFractionLineNode.centerY = equalsNode.centerY + this.fractionLineYFudgeFactor;
+        riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xText.visible = true;
+        slopeFractionLineNode.stroke = xText.fill = lineColor;
+        slopeFractionLineNode.left = equalsText.right + this.relationalOperatorXSpacing;
+        slopeFractionLineNode.centerY = equalsText.centerY + this.fractionLineYFudgeFactor;
         riseNode.centerX = slopeFractionLineNode.centerX;
         riseNode.bottom = slopeFractionLineNode.top - this.pickersYSpacing;
         runNode.centerX = slopeFractionLineNode.centerX;
         runNode.top = slopeFractionLineNode.bottom + this.pickersYSpacing;
-        xNode.left = slopeFractionLineNode.right + this.fractionalSlopeXSpacing;
-        xNode.y = yNode.y;
+        xText.left = slopeFractionLineNode.right + this.fractionalSlopeXSpacing;
+        xText.y = yText.y;
       }
       else {
         // slope (rise/run) is not interactive, may be displayed as an integer or improper fraction
@@ -251,54 +251,54 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         let previousXOffset;
         if ( positiveSlope || zeroSlope ) {
           // no sign
-          previousNode = equalsNode;
+          previousNode = equalsText;
           previousXOffset = this.relationalOperatorXSpacing;
         }
         else {
           // -
           slopeMinusSignNode.visible = true;
           slopeMinusSignNode.fill = lineColor;
-          slopeMinusSignNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          slopeMinusSignNode.centerY = equalsNode.centerY + this.slopeSignYFudgeFactor + this.slopeSignYOffset;
+          slopeMinusSignNode.left = equalsText.right + this.relationalOperatorXSpacing;
+          slopeMinusSignNode.centerY = equalsText.centerY + this.slopeSignYFudgeFactor + this.slopeSignYOffset;
           previousNode = slopeMinusSignNode;
           previousXOffset = ( fractionalSlope ? this.fractionSignXSpacing : this.integerSignXSpacing );
         }
 
         if ( line.undefinedSlope() || fractionalSlope ) {
           // rise/run x
-          riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xNode.visible = true;
-          riseDynamicValueNode.fill = runDynamicValueNode.fill = slopeFractionLineNode.stroke = xNode.fill = lineColor;
+          riseNode.visible = runNode.visible = slopeFractionLineNode.visible = xText.visible = true;
+          riseDynamicValueNode.fill = runDynamicValueNode.fill = slopeFractionLineNode.stroke = xText.fill = lineColor;
           // adjust fraction line width
           lineWidth = Math.max( riseNode.width, runNode.width );
           slopeFractionLineNode.setLine( 0, 0, lineWidth, 0 );
           // layout
           slopeFractionLineNode.left = previousNode.right + previousXOffset;
-          slopeFractionLineNode.centerY = equalsNode.centerY + this.fractionLineYFudgeFactor;
+          slopeFractionLineNode.centerY = equalsText.centerY + this.fractionLineYFudgeFactor;
           riseNode.centerX = slopeFractionLineNode.centerX;
           riseNode.bottom = slopeFractionLineNode.top - this.ySpacing;
           runNode.centerX = slopeFractionLineNode.centerX;
           runNode.top = slopeFractionLineNode.bottom + this.ySpacing;
-          xNode.left = slopeFractionLineNode.right + this.fractionalSlopeXSpacing;
-          xNode.y = yNode.y;
+          xText.left = slopeFractionLineNode.right + this.fractionalSlopeXSpacing;
+          xText.y = yText.y;
         }
         else if ( zeroSlope ) {
           // no x term
         }
         else if ( unitySlope ) {
           // x
-          xNode.visible = true;
-          xNode.fill = lineColor;
-          xNode.left = previousNode.right + previousXOffset;
-          xNode.y = yNode.y;
+          xText.visible = true;
+          xText.fill = lineColor;
+          xText.left = previousNode.right + previousXOffset;
+          xText.y = yText.y;
         }
         else if ( integerSlope ) {
           // Nx
-          riseNode.visible = xNode.visible = true;
-          riseDynamicValueNode.fill = xNode.fill = lineColor;
+          riseNode.visible = xText.visible = true;
+          riseDynamicValueNode.fill = xText.fill = lineColor;
           riseNode.left = previousNode.right + previousXOffset;
-          riseNode.y = yNode.y;
-          xNode.left = riseNode.right + this.integerSlopeXSpacing;
-          xNode.y = yNode.y;
+          riseNode.y = yText.y;
+          xText.left = riseNode.right + this.integerSlopeXSpacing;
+          xText.y = yText.y;
         }
         else {
           throw new Error( 'programming error, forgot to handle some slope case' );
@@ -311,18 +311,18 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         if ( zeroSlope && !options.interactiveSlope ) {
           // y = b
           yInterceptNumeratorNode.visible = true;
-          yInterceptNumeratorNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          yInterceptNumeratorNode.centerY = yNode.centerY;
+          yInterceptNumeratorNode.left = equalsText.right + this.relationalOperatorXSpacing;
+          yInterceptNumeratorNode.centerY = yText.centerY;
         }
         else {
           // y = (rise/run)x + b
           plusNode.visible = yInterceptNumeratorNode.visible = true;
           minusNode.visible = false;
           plusNode.fill = lineColor;
-          plusNode.left = xNode.right + this.operatorXSpacing;
-          plusNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
+          plusNode.left = xText.right + this.operatorXSpacing;
+          plusNode.centerY = equalsText.centerY + this.operatorYFudgeFactor;
           yInterceptNumeratorNode.left = plusNode.right + this.operatorXSpacing;
-          yInterceptNumeratorNode.centerY = yNode.centerY;
+          yInterceptNumeratorNode.centerY = yText.centerY;
         }
       }
       else {
@@ -341,8 +341,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
             // y = 0
             yInterceptNumeratorDynamicValueNode.visible = true;
             yInterceptNumeratorDynamicValueNode.fill = lineColor;
-            yInterceptNumeratorDynamicValueNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-            yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
+            yInterceptNumeratorDynamicValueNode.left = equalsText.right + this.relationalOperatorXSpacing;
+            yInterceptNumeratorDynamicValueNode.centerY = yText.centerY;
           }
           else {
             // no intercept
@@ -352,33 +352,33 @@ export default class SlopeInterceptEquationNode extends EquationNode {
           // y = b
           yInterceptNumeratorDynamicValueNode.visible = true;
           yInterceptNumeratorDynamicValueNode.fill = lineColor;
-          yInterceptNumeratorDynamicValueNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
+          yInterceptNumeratorDynamicValueNode.left = equalsText.right + this.relationalOperatorXSpacing;
+          yInterceptNumeratorDynamicValueNode.centerY = yText.centerY;
         }
         else if ( !positiveIntercept && zeroSlope && !options.interactiveSlope ) {
           // y = -b
           yInterceptMinusSignNode.visible = yInterceptNumeratorDynamicValueNode.visible = true;
           yInterceptMinusSignNode.fill = lineColor;
           yInterceptNumeratorDynamicValueNode.fill = lineColor;
-          yInterceptMinusSignNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          yInterceptMinusSignNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
+          yInterceptMinusSignNode.left = equalsText.right + this.relationalOperatorXSpacing;
+          yInterceptMinusSignNode.centerY = equalsText.centerY + this.operatorYFudgeFactor;
           yInterceptNumeratorDynamicValueNode.left = yInterceptMinusSignNode.right + this.integerSignXSpacing;
-          yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
+          yInterceptNumeratorDynamicValueNode.centerY = yText.centerY;
         }
         else {
           // y = mx +/- b
           const operatorNode = ( positiveIntercept ) ? plusNode : minusNode;
           operatorNode.visible = true;
           operatorNode.fill = lineColor;
-          operatorNode.left = xNode.right + this.operatorXSpacing;
-          operatorNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
+          operatorNode.left = xText.right + this.operatorXSpacing;
+          operatorNode.centerY = equalsText.centerY + this.operatorYFudgeFactor;
 
           if ( integerIntercept ) {
             // b is an integer
             yInterceptNumeratorDynamicValueNode.visible = true;
             yInterceptNumeratorDynamicValueNode.fill = lineColor;
             yInterceptNumeratorDynamicValueNode.left = operatorNode.right + this.operatorXSpacing;
-            yInterceptNumeratorDynamicValueNode.centerY = yNode.centerY;
+            yInterceptNumeratorDynamicValueNode.centerY = yText.centerY;
           }
           else {
             // b is an improper fraction
@@ -390,7 +390,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
             yInterceptFractionLineNode.setLine( 0, 0, lineWidth, 0 );
             // layout
             yInterceptFractionLineNode.left = operatorNode.right + this.operatorXSpacing;
-            yInterceptFractionLineNode.centerY = equalsNode.centerY + this.fractionLineYFudgeFactor;
+            yInterceptFractionLineNode.centerY = equalsText.centerY + this.fractionLineYFudgeFactor;
             yInterceptNumeratorDynamicValueNode.centerX = yInterceptFractionLineNode.centerX;
             yInterceptNumeratorDynamicValueNode.bottom = yInterceptFractionLineNode.top - this.ySpacing;
             yInterceptDenominatorNode.centerX = yInterceptFractionLineNode.centerX;
@@ -477,9 +477,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposeSlopeInterceptEquationNode = () => {
-      xNode.dispose();
-      yNode.dispose();
-      slopeUndefinedNode.dispose();
+      xText.dispose();
+      yText.dispose();
+      slopeUndefinedText.dispose();
       riseNode.dispose();
       runNode.dispose();
       yInterceptNumeratorNode.dispose();

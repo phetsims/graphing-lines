@@ -41,7 +41,7 @@ export default class EquationBoxNode extends Node {
       fill: PhetColorScheme.RED_COLORBLIND
     } );
 
-    const titleNode = new Text( titleStringProperty, {
+    const titleText = new Text( titleStringProperty, {
       fill: titleColor,
       font: new PhetFont( { size: 24, weight: 'bold' } ),
       maxWidth: boxSize.width - ( 2 * X_MARGIN ) - Math.max( this.correctIconNode.width, this.incorrectIconNode.width )
@@ -57,18 +57,18 @@ export default class EquationBoxNode extends Node {
 
     // rendering order
     this.addChild( boxNode );
-    this.addChild( titleNode );
+    this.addChild( titleText );
     this.addChild( equationNode );
     this.addChild( this.correctIconNode );
     this.addChild( this.incorrectIconNode );
 
     // layout
     // title in upper left
-    titleNode.left = X_MARGIN;
-    titleNode.top = Y_MARGIN;
+    titleText.left = X_MARGIN;
+    titleText.top = Y_MARGIN;
     // equation left-justified, vertically centered in space below title
     equationNode.left = X_MARGIN;
-    equationNode.centerY = titleNode.bottom + ( ( boxNode.bottom - titleNode.bottom ) / 2 );
+    equationNode.centerY = titleText.bottom + ( ( boxNode.bottom - titleText.bottom ) / 2 );
     // icons in upper-right corner
     this.correctIconNode.right = boxNode.right - X_MARGIN;
     this.correctIconNode.top = boxNode.top + Y_MARGIN;

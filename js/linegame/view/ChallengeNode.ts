@@ -136,13 +136,13 @@ export default class ChallengeNode extends Node {
     if ( phet.chipper.queryParameters.showAnswers ) {
 
       // description at leftTop
-      const descriptionNode = new Text( challenge.description, {
+      const descriptionText = new Text( challenge.description, {
         font: new PhetFont( 16 ),
         fill: 'red'
       } );
-      descriptionNode.left = 10;
-      descriptionNode.top = 10;
-      this.addChild( descriptionNode );
+      descriptionText.left = 10;
+      descriptionText.top = 10;
+      this.addChild( descriptionText );
 
       // developer buttons (no i18n) to right of main buttons
       const devButtonOptions = {

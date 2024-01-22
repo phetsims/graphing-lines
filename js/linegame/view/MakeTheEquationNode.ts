@@ -39,7 +39,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
 
     const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.3 * challengeSize.height );
 
-    const titleNode = new Text( challenge.titleStringProperty, {
+    const titleText = new Text( challenge.titleStringProperty, {
       font: LineGameConstants.TITLE_FONT,
       fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
@@ -63,7 +63,7 @@ export default class MakeTheEquationNode extends ChallengeNode {
     const graphNode = new ChallengeGraphNode( challenge, { answerLineVisible: true } );
 
     // rendering order
-    this.subtypeParent.addChild( titleNode );
+    this.subtypeParent.addChild( titleText );
     this.subtypeParent.addChild( graphNode );
     this.subtypeParent.addChild( answerBoxNode );
     this.subtypeParent.addChild( guessBoxNode );
@@ -75,12 +75,12 @@ export default class MakeTheEquationNode extends ChallengeNode {
       // left align the title and boxes, centered in space to left of graph
       guessBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2;
       answerBoxNode.left = guessBoxNode.left;
-      titleNode.left = guessBoxNode.left;
+      titleText.left = guessBoxNode.left;
 
       // stack title and boxes vertically, title top-aligned with graph's grid
       const ySpacing = 30;
-      titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
-      guessBoxNode.top = titleNode.bottom + ySpacing;
+      titleText.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
+      guessBoxNode.top = titleText.bottom + ySpacing;
       answerBoxNode.top = guessBoxNode.bottom + ySpacing;
 
       // face centered below boxes, bottom-aligned with buttons

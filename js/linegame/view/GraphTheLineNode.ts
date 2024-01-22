@@ -31,7 +31,7 @@ import NotALine from '../model/NotALine.js';
 export default class GraphTheLineNode extends ChallengeNode {
 
   // 'Not A Line', for situations where 3-points do not define a line
-  private readonly notALineNode: Node;
+  private readonly notALineText: Node;
 
   protected readonly graphNode: ChallengeGraphNode;
 
@@ -43,7 +43,7 @@ export default class GraphTheLineNode extends ChallengeNode {
 
     const boxSize = new Dimension2( 0.4 * challengeSize.width, 0.22 * challengeSize.height );
 
-    const titleNode = new Text( challenge.titleStringProperty, {
+    const titleText = new Text( challenge.titleStringProperty, {
       font: LineGameConstants.TITLE_FONT,
       fill: LineGameConstants.TITLE_COLOR,
       maxWidth: boxSize.width
@@ -66,13 +66,13 @@ export default class GraphTheLineNode extends ChallengeNode {
       maxWidth: null
     } );
 
-    this.notALineNode = new Text( GraphingLinesStrings.notALineStringProperty, {
+    this.notALineText = new Text( GraphingLinesStrings.notALineStringProperty, {
       font: new PhetFont( { size: 24, weight: 'bold' } ),
       fill: 'black'
     } );
 
     // Either the equation or 'not a line' is displayed.
-    const equationNode = new Node( { children: [ guessEquationNode, this.notALineNode ] } );
+    const equationNode = new Node( { children: [ guessEquationNode, this.notALineText ] } );
 
     // Guess
     const guessBoxNode = new EquationBoxNode( GraphingLinesStrings.yourLineStringProperty, LineGameConstants.GUESS_COLOR, boxSize, equationNode );
@@ -81,7 +81,7 @@ export default class GraphTheLineNode extends ChallengeNode {
     this.graphNode.setGuessPointVisible( challenge.manipulationMode === ManipulationMode.SLOPE ); // plot the point if we're only manipulating slope
 
     // rendering order
-    this.subtypeParent.addChild( titleNode );
+    this.subtypeParent.addChild( titleText );
     this.subtypeParent.addChild( this.graphNode );
     this.subtypeParent.addChild( answerBoxNode );
     this.subtypeParent.addChild( guessBoxNode );
@@ -93,12 +93,12 @@ export default class GraphTheLineNode extends ChallengeNode {
       // left align the title and boxes
       answerBoxNode.centerX = challenge.modelViewTransform.modelToViewX( challenge.graph.xRange.min ) / 2; // centered in space to left of graph
       guessBoxNode.left = answerBoxNode.left;
-      titleNode.left = answerBoxNode.left;
+      titleText.left = answerBoxNode.left;
 
       // stack title and boxes vertically, title top-aligned with graph's grid
       const ySpacing = 30;
-      titleNode.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
-      answerBoxNode.top = titleNode.bottom + ySpacing;
+      titleText.top = challenge.modelViewTransform.modelToViewY( challenge.graph.yRange.max );
+      answerBoxNode.top = titleText.bottom + ySpacing;
       guessBoxNode.top = answerBoxNode.bottom + ySpacing;
 
       // face centered below boxes, bottom-aligned with buttons
@@ -124,7 +124,7 @@ export default class GraphTheLineNode extends ChallengeNode {
         guessLineProperty.value = line; // updates guessEquationNode
       }
       guessEquationNode.visible = isaLine;
-      this.notALineNode.visible = !isaLine;
+      this.notALineText.visible = !isaLine;
 
       // visibility of correct/incorrect icons
       updateIcons();

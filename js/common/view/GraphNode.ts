@@ -114,20 +114,20 @@ class MajorTickNode extends Node {
     this.addChild( tickLineNode );
 
     // tick label
-    const tickLabelNode = new Text( value, { font: MAJOR_TICK_FONT, fill: MAJOR_TICK_COLOR } );
-    this.addChild( tickLabelNode );
+    const tickLabelText = new Text( value, { font: MAJOR_TICK_FONT, fill: MAJOR_TICK_COLOR } );
+    this.addChild( tickLabelText );
 
     // label position
     if ( isVertical ) {
       // center the label under the line, compensate for minus sign
       const signXOffset = ( value < 0 ) ? -( MINUS_SIGN_WIDTH / 2 ) : 0;
-      tickLabelNode.left = tickLineNode.centerX - ( tickLabelNode.width / 2 ) + signXOffset;
-      tickLabelNode.top = tickLineNode.bottom + TICK_LABEL_SPACING;
+      tickLabelText.left = tickLineNode.centerX - ( tickLabelText.width / 2 ) + signXOffset;
+      tickLabelText.top = tickLineNode.bottom + TICK_LABEL_SPACING;
     }
     else {
       // center label to left of line
-      tickLabelNode.right = tickLineNode.left - TICK_LABEL_SPACING;
-      tickLabelNode.centerY = tickLineNode.centerY;
+      tickLabelText.right = tickLineNode.left - TICK_LABEL_SPACING;
+      tickLabelText.centerY = tickLineNode.centerY;
     }
   }
 }
@@ -170,11 +170,11 @@ class XAxisNode extends Node {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    const labelNode = new RichText( xAxisLabelStringProperty, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
-    this.addChild( labelNode );
-    labelNode.boundsProperty.link( () => {
-      labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
-      labelNode.centerY = lineNode.centerY;
+    const labelText = new RichText( xAxisLabelStringProperty, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    this.addChild( labelText );
+    labelText.boundsProperty.link( () => {
+      labelText.left = lineNode.right + AXIS_LABEL_SPACING;
+      labelText.centerY = lineNode.centerY;
     } );
 
     // ticks

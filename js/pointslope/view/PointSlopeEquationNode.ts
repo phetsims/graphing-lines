@@ -120,8 +120,8 @@ export default class PointSlopeEquationNode extends EquationNode {
       options.runRangeProperty, interactiveFont, this.decimalPlaces );
 
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
-    const yLeftParenNode = new Text( '(', staticOptions );
-    const yNode = new RichText( GLSymbols.yStringProperty, staticOptions );
+    const yLeftParenText = new Text( '(', staticOptions );
+    const yText = new RichText( GLSymbols.yStringProperty, staticOptions );
     const yPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const yMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     let y1Node: NumberPicker | DynamicValueNode;
@@ -135,9 +135,9 @@ export default class PointSlopeEquationNode extends EquationNode {
     else {
       y1Node = new DynamicValueNode( y1Property, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
     }
-    const yRightParenNode = new Text( ')', staticOptions );
+    const yRightParenText = new Text( ')', staticOptions );
     const y1MinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.signLineSize }, staticOptions ) ); // for y=-y1 case
-    const equalsNode = new Text( '=', staticOptions );
+    const equalsText = new Text( '=', staticOptions );
     const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.signLineSize }, staticOptions ) );
     let riseNode: SlopePicker | DynamicValueNode;
     let runNode: SlopePicker | DynamicValueNode;
@@ -150,8 +150,8 @@ export default class PointSlopeEquationNode extends EquationNode {
       runNode = new DynamicValueNode( runProperty, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
     }
     const fractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const xLeftParenNode = new Text( '(', staticOptions );
-    const xNode = new RichText( GLSymbols.xStringProperty, staticOptions );
+    const xLeftParentText = new Text( '(', staticOptions );
+    const xText = new RichText( GLSymbols.xStringProperty, staticOptions );
     const xPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const xMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     let x1Node: NumberPicker | DynamicValueNode;
@@ -165,14 +165,14 @@ export default class PointSlopeEquationNode extends EquationNode {
     else {
       x1Node = new DynamicValueNode( x1Property, combineOptions<DynamicValueNodeOptions>( { absoluteValue: true }, staticOptions ) );
     }
-    const xRightParenNode = new Text( ')', staticOptions );
-    const slopeUndefinedNode = new RichText( '?', staticOptions );
+    const xRightParenText = new Text( ')', staticOptions );
+    const slopeUndefinedText = new RichText( '?', staticOptions );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     this.children = [
-      yLeftParenNode, yNode, yPlusNode, yMinusNode, y1Node, yRightParenNode, y1MinusSignNode, equalsNode,
-      slopeMinusSignNode, riseNode, runNode, fractionLineNode, xLeftParenNode, xNode, xPlusNode, xMinusNode, x1Node, xRightParenNode,
-      slopeUndefinedNode
+      yLeftParenText, yText, yPlusNode, yMinusNode, y1Node, yRightParenText, y1MinusSignNode, equalsText,
+      slopeMinusSignNode, riseNode, runNode, fractionLineNode, xLeftParentText, xText, xPlusNode, xMinusNode, x1Node, xRightParenText,
+      slopeUndefinedText
     ];
 
     /*
@@ -194,13 +194,13 @@ export default class PointSlopeEquationNode extends EquationNode {
       }
 
       // Workaround for https://github.com/phetsims/graphing-lines/issues/#114 and https://github.com/phetsims/graphing-lines/issues/#117
-      slopeUndefinedNode.string = '';
+      slopeUndefinedText.string = '';
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
-        slopeUndefinedNode.visible = true;
-        slopeUndefinedNode.fill = lineColor;
-        slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
+        slopeUndefinedText.visible = true;
+        slopeUndefinedText.fill = lineColor;
+        slopeUndefinedText.string = ( options.slopeUndefinedVisible ) ?
                                     StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty.value, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
                                       x: GLSymbols.xStringProperty.value,
@@ -210,20 +210,20 @@ export default class PointSlopeEquationNode extends EquationNode {
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_X_LINE ) ) {
         // use slope-intercept form for y=x
-        yNode.visible = equalsNode.visible = xNode.visible = true;
-        yNode.fill = equalsNode.fill = xNode.fill = lineColor;
-        equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
-        xNode.left = equalsNode.right + this.relationalOperatorXSpacing;
+        yText.visible = equalsText.visible = xText.visible = true;
+        yText.fill = equalsText.fill = xText.fill = lineColor;
+        equalsText.left = yText.right + this.relationalOperatorXSpacing;
+        xText.left = equalsText.right + this.relationalOperatorXSpacing;
         return;
       }
       else if ( !interactive && line.same( Line.Y_EQUALS_NEGATIVE_X_LINE ) ) {
         // use slope-intercept form for y=-x
-        yNode.visible = equalsNode.visible = slopeMinusSignNode.visible = xNode.visible = true;
-        yNode.fill = equalsNode.fill = slopeMinusSignNode.fill = xNode.fill = lineColor;
-        equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
-        slopeMinusSignNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-        slopeMinusSignNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
-        xNode.left = slopeMinusSignNode.right + this.integerSignXSpacing;
+        yText.visible = equalsText.visible = slopeMinusSignNode.visible = xText.visible = true;
+        yText.fill = equalsText.fill = slopeMinusSignNode.fill = xText.fill = lineColor;
+        equalsText.left = yText.right + this.relationalOperatorXSpacing;
+        slopeMinusSignNode.left = equalsText.right + this.relationalOperatorXSpacing;
+        slopeMinusSignNode.centerY = equalsText.centerY + this.operatorYFudgeFactor;
+        xText.left = slopeMinusSignNode.right + this.integerSignXSpacing;
         return;
       }
 
@@ -233,25 +233,25 @@ export default class PointSlopeEquationNode extends EquationNode {
 
       if ( line.rise === 0 && !options.interactiveSlope && !options.interactivePoint ) {
         // y1 is on the right side of the equation
-        yNode.visible = equalsNode.visible = y1Node.visible = true;
-        yNode.fill = equalsNode.fill = lineColor;
+        yText.visible = equalsText.visible = y1Node.visible = true;
+        yText.fill = equalsText.fill = lineColor;
         if ( y1Node instanceof DynamicValueNode ) {
           y1Node.fill = lineColor;
         }
-        equalsNode.left = yNode.right + this.relationalOperatorXSpacing;
+        equalsText.left = yText.right + this.relationalOperatorXSpacing;
         if ( options.interactivePoint || line.y1 >= 0 ) {
           // y = y1
-          y1Node.left = equalsNode.right + this.relationalOperatorXSpacing;
-          y1Node.y = yNode.y;
+          y1Node.left = equalsText.right + this.relationalOperatorXSpacing;
+          y1Node.y = yText.y;
         }
         else {
           // y = -y1
           y1MinusSignNode.visible = true;
           y1MinusSignNode.fill = lineColor;
-          y1MinusSignNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          y1MinusSignNode.centerY = equalsNode.centerY + this.operatorYFudgeFactor;
+          y1MinusSignNode.left = equalsText.right + this.relationalOperatorXSpacing;
+          y1MinusSignNode.centerY = equalsText.centerY + this.operatorYFudgeFactor;
           y1Node.left = y1MinusSignNode.right + this.integerSignXSpacing;
-          y1Node.y = yNode.y;
+          y1Node.y = yText.y;
         }
       }
       else {  // y1 is on the left side of the equation
@@ -260,52 +260,52 @@ export default class PointSlopeEquationNode extends EquationNode {
 
         if ( !options.interactivePoint && line.y1 === 0 ) {
           // y
-          yNode.x = 0;
-          yNode.y = 0;
-          yNode.fill = lineColor;
-          yNode.visible = true;
-          previousNode = yNode;
+          yText.x = 0;
+          yText.y = 0;
+          yText.fill = lineColor;
+          yText.visible = true;
+          previousNode = yText;
         }
         else if ( !interactive ) {
           // y - y1
-          yNode.visible = yOperatorNode.visible = y1Node.visible = true;
-          yNode.fill = yOperatorNode.fill = lineColor;
+          yText.visible = yOperatorNode.visible = y1Node.visible = true;
+          yText.fill = yOperatorNode.fill = lineColor;
           if ( y1Node instanceof DynamicValueNode ) {
             y1Node.fill = lineColor;
           }
-          yNode.x = 0;
-          yNode.y = 0;
-          yOperatorNode.left = yNode.right + this.operatorXSpacing;
-          yOperatorNode.centerY = yNode.centerY + this.operatorYFudgeFactor;
+          yText.x = 0;
+          yText.y = 0;
+          yOperatorNode.left = yText.right + this.operatorXSpacing;
+          yOperatorNode.centerY = yText.centerY + this.operatorYFudgeFactor;
           y1Node.left = yOperatorNode.right + this.operatorXSpacing;
-          y1Node.centerY = yNode.centerY;
+          y1Node.centerY = yText.centerY;
           previousNode = y1Node;
         }
         else {
           // (y - y1)
-          yLeftParenNode.visible = yNode.visible = yOperatorNode.visible = y1Node.visible = yRightParenNode.visible = true;
-          yLeftParenNode.fill = yNode.fill = yOperatorNode.fill = yRightParenNode.fill = lineColor;
+          yLeftParenText.visible = yText.visible = yOperatorNode.visible = y1Node.visible = yRightParenText.visible = true;
+          yLeftParenText.fill = yText.fill = yOperatorNode.fill = yRightParenText.fill = lineColor;
           if ( y1Node instanceof DynamicValueNode ) {
             y1Node.fill = lineColor;
           }
-          yLeftParenNode.x = 0;
-          yLeftParenNode.y = 0;
-          yNode.left = yLeftParenNode.right + this.parenXSpacing;
-          yNode.y = yLeftParenNode.y;
-          yOperatorNode.left = yNode.right + this.operatorXSpacing;
-          yOperatorNode.centerY = yNode.centerY + this.operatorYFudgeFactor;
+          yLeftParenText.x = 0;
+          yLeftParenText.y = 0;
+          yText.left = yLeftParenText.right + this.parenXSpacing;
+          yText.y = yLeftParenText.y;
+          yOperatorNode.left = yText.right + this.operatorXSpacing;
+          yOperatorNode.centerY = yText.centerY + this.operatorYFudgeFactor;
           y1Node.left = yOperatorNode.right + this.operatorXSpacing;
-          y1Node.centerY = yNode.centerY;
-          yRightParenNode.left = y1Node.right + this.parenXSpacing;
-          yRightParenNode.y = yNode.y;
-          previousNode = yRightParenNode;
+          y1Node.centerY = yText.centerY;
+          yRightParenText.left = y1Node.right + this.parenXSpacing;
+          yRightParenText.y = yText.y;
+          previousNode = yRightParenText;
         }
 
         // =
-        equalsNode.visible = true;
-        equalsNode.fill = lineColor;
-        equalsNode.left = previousNode.right + this.relationalOperatorXSpacing;
-        equalsNode.y = yNode.y + this.equalsSignFudgeFactor;
+        equalsText.visible = true;
+        equalsText.fill = lineColor;
+        equalsText.left = previousNode.right + this.relationalOperatorXSpacing;
+        equalsText.y = yText.y + this.equalsSignFudgeFactor;
 
         // slope
         let previousXOffset;
@@ -319,8 +319,8 @@ export default class PointSlopeEquationNode extends EquationNode {
             runNode.fill = lineColor;
           }
           fractionLineNode.fill = lineColor;
-          fractionLineNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-          fractionLineNode.centerY = equalsNode.centerY;
+          fractionLineNode.left = equalsText.right + this.relationalOperatorXSpacing;
+          fractionLineNode.centerY = equalsText.centerY;
           riseNode.centerX = fractionLineNode.centerX;
           riseNode.bottom = fractionLineNode.top - this.pickersYSpacing;
           runNode.centerX = fractionLineNode.centerX;
@@ -346,15 +346,15 @@ export default class PointSlopeEquationNode extends EquationNode {
           // decide whether to include the slope minus sign
           if ( positiveSlope || zeroSlope ) {
             // no sign
-            previousNode = equalsNode;
+            previousNode = equalsText;
             previousXOffset = this.relationalOperatorXSpacing;
           }
           else {
             // -
             slopeMinusSignNode.visible = true;
             slopeMinusSignNode.fill = lineColor;
-            slopeMinusSignNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-            slopeMinusSignNode.centerY = equalsNode.centerY + this.slopeSignYFudgeFactor + this.slopeSignYOffset;
+            slopeMinusSignNode.left = equalsText.right + this.relationalOperatorXSpacing;
+            slopeMinusSignNode.centerY = equalsText.centerY + this.slopeSignYFudgeFactor + this.slopeSignYOffset;
             previousNode = slopeMinusSignNode;
             previousXOffset = ( fractionalSlope ? this.fractionSignXSpacing : this.integerSignXSpacing );
           }
@@ -370,7 +370,7 @@ export default class PointSlopeEquationNode extends EquationNode {
             }
             fractionLineNode.stroke = lineColor;
             fractionLineNode.left = previousNode.right + previousXOffset;
-            fractionLineNode.centerY = equalsNode.centerY;
+            fractionLineNode.centerY = equalsText.centerY;
             riseNode.centerX = fractionLineNode.centerX;
             riseNode.bottom = fractionLineNode.top - this.ySpacing;
             runNode.centerX = fractionLineNode.centerX;
@@ -384,8 +384,8 @@ export default class PointSlopeEquationNode extends EquationNode {
             if ( riseNode instanceof DynamicValueNode ) {
               riseNode.fill = lineColor;
             }
-            riseNode.left = equalsNode.right + this.relationalOperatorXSpacing;
-            riseNode.y = yNode.y;
+            riseNode.left = equalsText.right + this.relationalOperatorXSpacing;
+            riseNode.y = yText.y;
             previousNode = riseNode;
             previousXOffset = this.integerSlopeXSpacing;
           }
@@ -400,7 +400,7 @@ export default class PointSlopeEquationNode extends EquationNode {
               riseNode.fill = lineColor;
             }
             riseNode.left = previousNode.right + previousXOffset;
-            riseNode.y = yNode.y;
+            riseNode.y = yText.y;
             previousNode = riseNode;
             previousXOffset = this.integerSlopeXSpacing;
           }
@@ -412,42 +412,42 @@ export default class PointSlopeEquationNode extends EquationNode {
         // x term
         if ( interactive || ( line.x1 !== 0 && line.getSlope() !== 0 && line.getSlope() !== 1 ) ) {
           // (x - x1)
-          xLeftParenNode.visible = xNode.visible = xOperatorNode.visible = x1Node.visible = xRightParenNode.visible = true;
-          xLeftParenNode.fill = xNode.fill = xOperatorNode.fill = xRightParenNode.fill = lineColor;
+          xLeftParentText.visible = xText.visible = xOperatorNode.visible = x1Node.visible = xRightParenText.visible = true;
+          xLeftParentText.fill = xText.fill = xOperatorNode.fill = xRightParenText.fill = lineColor;
           if ( x1Node instanceof DynamicValueNode ) {
             x1Node.fill = lineColor;
           }
-          xLeftParenNode.left = previousNode.right + previousXOffset;
-          xLeftParenNode.y = yNode.y;
-          xNode.left = xLeftParenNode.right + this.parenXSpacing;
-          xNode.y = yNode.y;
-          xOperatorNode.left = xNode.right + this.operatorXSpacing;
-          xOperatorNode.centerY = xNode.centerY + this.operatorYFudgeFactor;
+          xLeftParentText.left = previousNode.right + previousXOffset;
+          xLeftParentText.y = yText.y;
+          xText.left = xLeftParentText.right + this.parenXSpacing;
+          xText.y = yText.y;
+          xOperatorNode.left = xText.right + this.operatorXSpacing;
+          xOperatorNode.centerY = xText.centerY + this.operatorYFudgeFactor;
           x1Node.left = xOperatorNode.right + this.operatorXSpacing;
-          x1Node.centerY = yNode.centerY;
-          xRightParenNode.left = x1Node.right + this.parenXSpacing;
-          xRightParenNode.y = yNode.y;
+          x1Node.centerY = yText.centerY;
+          xRightParenText.left = x1Node.right + this.parenXSpacing;
+          xRightParenText.y = yText.y;
         }
         else if ( line.getSlope() === 1 && line.x1 !== 0 ) {
           // x - x1
-          xNode.visible = xOperatorNode.visible = x1Node.visible = true;
-          xNode.fill = xOperatorNode.fill = lineColor;
+          xText.visible = xOperatorNode.visible = x1Node.visible = true;
+          xText.fill = xOperatorNode.fill = lineColor;
           if ( x1Node instanceof DynamicValueNode ) {
             x1Node.fill = lineColor;
           }
-          xNode.left = previousNode.right + previousXOffset;
-          xNode.y = yNode.y;
-          xOperatorNode.left = xNode.right + this.operatorXSpacing;
-          xOperatorNode.centerY = xNode.centerY + this.operatorYFudgeFactor;
+          xText.left = previousNode.right + previousXOffset;
+          xText.y = yText.y;
+          xOperatorNode.left = xText.right + this.operatorXSpacing;
+          xOperatorNode.centerY = xText.centerY + this.operatorYFudgeFactor;
           x1Node.left = xOperatorNode.right + this.operatorXSpacing;
-          x1Node.centerY = yNode.centerY;
+          x1Node.centerY = yText.centerY;
         }
         else if ( line.x1 === 0 ) {
           // x
-          xNode.visible = true;
-          xNode.fill = lineColor;
-          xNode.left = previousNode.right + previousXOffset;
-          xNode.centerY = yNode.centerY;
+          xText.visible = true;
+          xText.fill = lineColor;
+          xText.left = previousNode.right + previousXOffset;
+          xText.centerY = yText.centerY;
         }
         else {
           throw new Error( 'programming error, forgot to handle some x-term case' );
@@ -515,7 +515,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     this.disposePointSlopeEquationNode = () => {
       x1Node.dispose();
       y1Node.dispose();
-      slopeUndefinedNode.dispose();
+      slopeUndefinedText.dispose();
       riseNode.dispose();
       runNode.dispose();
       controlsMultilink.dispose();

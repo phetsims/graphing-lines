@@ -46,7 +46,7 @@ export default class SettingsNode extends Node {
     }, providedOptions );
 
     // Title
-    const title = new Text( GraphingLinesStrings.chooseYourLevelStringProperty, {
+    const titleText = new Text( GraphingLinesStrings.chooseYourLevelStringProperty, {
       font: new PhetFont( 40 ),
       maxWidth: 0.85 * layoutBounds.width
     } );
@@ -59,7 +59,7 @@ export default class SettingsNode extends Node {
 
     // title is centered on level-selection buttons
     const vBox = new VBox( {
-      children: [ title, levelSelectionButtonGroup ],
+      children: [ titleText, levelSelectionButtonGroup ],
       align: 'center',
       spacing: 50
     } );

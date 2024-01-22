@@ -115,33 +115,33 @@ export default class SlopeEquationNode extends EquationNode {
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    const mNode = new RichText( GLSymbols.mStringProperty, combineOptions<RichTextOptions>( {
+    const mText = new RichText( GLSymbols.mStringProperty, combineOptions<RichTextOptions>( {
       maxWidth: 85
     }, staticOptions ) );
-    const interactiveEqualsNode = new Text( MathSymbols.EQUAL_TO, staticOptions );
+    const interactiveEqualsText = new Text( MathSymbols.EQUAL_TO, staticOptions );
     // y2 - y1
-    const y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
+    const y2Picker = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
       font: interactiveFont,
       color: GLColors.pointX2Y2ColorProperty
     } );
     const numeratorOperatorNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.operatorLineSize
     }, staticOptions ) );
-    const y1Node = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
+    const y1Picker = new CoordinatePicker( y1Property, x1Property, y2Property, x2Property, options.y1RangeProperty, {
       font: interactiveFont,
       color: GLColors.pointX1Y1ColorProperty
     } );
     // fraction line, correct length will be set later
     const interactiveFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions );
     // x2 - x1
-    const x2Node = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
+    const x2Picker = new CoordinatePicker( x2Property, y2Property, x1Property, y1Property, options.x2RangeProperty, {
       font: interactiveFont,
       color: GLColors.pointX2Y2ColorProperty
     } );
     const denominatorOperatorNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.operatorLineSize
     }, staticOptions ) );
-    const x1Node = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
+    const x1Picker = new CoordinatePicker( x1Property, y1Property, x2Property, y2Property, options.x1RangeProperty, {
       font: interactiveFont,
       color: GLColors.pointX1Y1ColorProperty
     } );
@@ -150,8 +150,8 @@ export default class SlopeEquationNode extends EquationNode {
       font: staticFont,
       decimalPlaces: 0,
       backgroundFill: GLColors.slopeColorProperty,
-      minWidth: y2Node.width,
-      minHeight: y2Node.height - 20
+      minWidth: y2Picker.width,
+      minHeight: y2Picker.height - 20
     };
     const unsimplifiedEqualsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     const unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
@@ -166,18 +166,18 @@ export default class SlopeEquationNode extends EquationNode {
     this.addChild( undefinedSlopeIndicator );
 
     // m =
-    parentNode.addChild( mNode );
-    parentNode.addChild( interactiveEqualsNode );
+    parentNode.addChild( mText );
+    parentNode.addChild( interactiveEqualsText );
     // y2 - y1
-    parentNode.addChild( y2Node );
+    parentNode.addChild( y2Picker );
     parentNode.addChild( numeratorOperatorNode );
-    parentNode.addChild( y1Node );
+    parentNode.addChild( y1Picker );
     // fraction line
     parentNode.addChild( interactiveFractionLineNode );
     // x2 - x1
-    parentNode.addChild( x2Node );
+    parentNode.addChild( x2Picker );
     parentNode.addChild( denominatorOperatorNode );
-    parentNode.addChild( x1Node );
+    parentNode.addChild( x1Picker );
     // = rise/run
     parentNode.addChild( unsimplifiedEqualsNode );
     parentNode.addChild( unsimplifiedRiseNode );
@@ -223,37 +223,37 @@ export default class SlopeEquationNode extends EquationNode {
     // Dynamic layout, after registering observers
     Multilink.multilink( [
         // 'm =' is the only part of the interactive equation that involves a StringProperty.
-        mNode.boundsProperty
+        mText.boundsProperty
       ],
       () => {
         // m =
-        mNode.x = 0;
-        mNode.y = 0;
-        interactiveEqualsNode.left = mNode.right + this.relationalOperatorXSpacing;
-        interactiveEqualsNode.y = mNode.y;
+        mText.x = 0;
+        mText.y = 0;
+        interactiveEqualsText.left = mText.right + this.relationalOperatorXSpacing;
+        interactiveEqualsText.y = mText.y;
         // fraction line
-        interactiveFractionLineNode.left = interactiveEqualsNode.right + this.relationalOperatorXSpacing;
-        interactiveFractionLineNode.centerY = interactiveEqualsNode.centerY + this.fractionLineYFudgeFactor;
+        interactiveFractionLineNode.left = interactiveEqualsText.right + this.relationalOperatorXSpacing;
+        interactiveFractionLineNode.centerY = interactiveEqualsText.centerY + this.fractionLineYFudgeFactor;
         // y2 - y1
-        y2Node.left = interactiveFractionLineNode.left;
-        y2Node.bottom = interactiveFractionLineNode.top - this.pickersYSpacing;
-        numeratorOperatorNode.left = y2Node.right + this.operatorXSpacing;
-        numeratorOperatorNode.centerY = y2Node.centerY;
-        y1Node.left = numeratorOperatorNode.right + this.operatorXSpacing;
-        y1Node.y = y2Node.y;
+        y2Picker.left = interactiveFractionLineNode.left;
+        y2Picker.bottom = interactiveFractionLineNode.top - this.pickersYSpacing;
+        numeratorOperatorNode.left = y2Picker.right + this.operatorXSpacing;
+        numeratorOperatorNode.centerY = y2Picker.centerY;
+        y1Picker.left = numeratorOperatorNode.right + this.operatorXSpacing;
+        y1Picker.y = y2Picker.y;
         // fix fraction line length
-        const fractionLineLength = y1Node.right - y2Node.left;
+        const fractionLineLength = y1Picker.right - y2Picker.left;
         interactiveFractionLineNode.setLine( 0, 0, fractionLineLength, 0 );
         // x2 - x1
-        x2Node.left = y2Node.left;
-        x2Node.top = interactiveFractionLineNode.bottom + this.pickersYSpacing;
-        denominatorOperatorNode.left = x2Node.right + this.operatorXSpacing;
-        denominatorOperatorNode.centerY = x2Node.centerY;
-        x1Node.left = denominatorOperatorNode.right + this.operatorXSpacing;
-        x1Node.y = x2Node.y;
+        x2Picker.left = y2Picker.left;
+        x2Picker.top = interactiveFractionLineNode.bottom + this.pickersYSpacing;
+        denominatorOperatorNode.left = x2Picker.right + this.operatorXSpacing;
+        denominatorOperatorNode.centerY = x2Picker.centerY;
+        x1Picker.left = denominatorOperatorNode.right + this.operatorXSpacing;
+        x1Picker.y = x2Picker.y;
         // = rise/run
         unsimplifiedEqualsNode.left = interactiveFractionLineNode.right + this.relationalOperatorXSpacing;
-        unsimplifiedEqualsNode.y = interactiveEqualsNode.y;
+        unsimplifiedEqualsNode.y = interactiveEqualsText.y;
         unsimplifiedFractionLineNode.left = unsimplifiedEqualsNode.right + this.relationalOperatorXSpacing;
         unsimplifiedFractionLineNode.y = interactiveFractionLineNode.y;
         // horizontally center rise and run above fraction line
@@ -271,11 +271,11 @@ export default class SlopeEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposeSlopeEquationNode = () => {
-      mNode.dispose();
-      x1Node.dispose();
-      x2Node.dispose();
-      y1Node.dispose();
-      y2Node.dispose();
+      mText.dispose();
+      x1Picker.dispose();
+      x2Picker.dispose();
+      y1Picker.dispose();
+      y2Picker.dispose();
       unsimplifiedRiseNode.dispose();
       unsimplifiedRunNode.dispose();
       lineProperty.unlink( lineObserver );
@@ -322,31 +322,31 @@ export default class SlopeEquationNode extends EquationNode {
     // y2 - y1
     const numeratorStringProperty = new DerivedStringProperty( [ GLSymbols.yStringProperty ],
       y => StringUtils.fillIn( pattern, { symbol: y } ) );
-    const numeratorNode = new RichText( numeratorStringProperty, richTextOptions );
+    const numeratorText = new RichText( numeratorStringProperty, richTextOptions );
 
     // x2 - x1
     const denominatorStringProperty = new DerivedStringProperty( [ GLSymbols.xStringProperty ],
       x => StringUtils.fillIn( pattern, { symbol: x } ) );
-    const denominatorNode = new RichText( denominatorStringProperty, richTextOptions );
+    const denominatorText = new RichText( denominatorStringProperty, richTextOptions );
 
     // fraction line, with dynamic length
     const fractionLineNode = new SceneryLine( 0, 0, 1, 0, {
       stroke: options.fill,
       lineWidth: 0.06 * options.fontSize
     } );
-    Multilink.multilink( [ numeratorNode.boundsProperty, denominatorNode.boundsProperty ],
+    Multilink.multilink( [ numeratorText.boundsProperty, denominatorText.boundsProperty ],
       ( numeratorBounds, denominatorBounds ) => {
         const length = 1.1 * Math.max( numeratorBounds.width, denominatorBounds.width );
         fractionLineNode.setLine( 0, 0, length, 0 );
-        numeratorNode.centerX = fractionLineNode.centerX;
-        numeratorNode.bottom = fractionLineNode.top - 5;
-        denominatorNode.centerX = fractionLineNode.centerX;
-        denominatorNode.top = fractionLineNode.top + 3;
+        numeratorText.centerX = fractionLineNode.centerX;
+        numeratorText.bottom = fractionLineNode.top - 5;
+        denominatorText.centerX = fractionLineNode.centerX;
+        denominatorText.top = fractionLineNode.top + 3;
       } );
 
     // Tried to use VBox here, but the spacing was a little off.
     const fractionNode = new Node( {
-      children: [ numeratorNode, fractionLineNode, denominatorNode ]
+      children: [ numeratorText, fractionLineNode, denominatorText ]
     } );
 
     const hBox = new HBox( {
@@ -400,15 +400,15 @@ class DynamicLabelNode extends EquationNode {
     };
 
     // allocate nodes needed to represent all simplified forms
-    const slopeIsNode = new Text( GraphingLinesStrings.slopeIsStringProperty, textOptions );
+    const slopeIsText = new Text( GraphingLinesStrings.slopeIsStringProperty, textOptions );
     const minusSignNode = new MinusNode( { size: this.signLineSize } );
-    const riseNode = new Text( '?', textOptions );
-    const runNode = new Text( '?', textOptions );
+    const riseText = new Text( '?', textOptions );
+    const runText = new Text( '?', textOptions );
     const fractionLineNode = new SceneryLine( 0, 0, 1, 0, { lineWidth: this.fractionLineThickness } );
 
     // add all nodes, we'll set which ones are visible bases on desired simplification
     assert && assert( this.getChildrenCount() === 0, 'supertype has unexpected children' );
-    this.children = [ slopeIsNode, minusSignNode, riseNode, runNode, fractionLineNode ];
+    this.children = [ slopeIsText, minusSignNode, riseText, runText, fractionLineNode ];
 
     // update visibility, layout and properties of nodes to match the current line
     const update = ( line: Line ) => {
@@ -422,24 +422,24 @@ class DynamicLabelNode extends EquationNode {
       }
 
       // 'Slope is'
-      slopeIsNode.visible = true;
-      slopeIsNode.fill = lineColor;
+      slopeIsText.visible = true;
+      slopeIsText.fill = lineColor;
 
       if ( line.undefinedSlope() ) {
         // 'undefined'
-        riseNode.visible = true;
-        riseNode.string = GraphingLinesStrings.undefinedStringProperty.value;
-        riseNode.fill = lineColor;
-        riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
-        riseNode.y = slopeIsNode.y;
+        riseText.visible = true;
+        riseText.string = GraphingLinesStrings.undefinedStringProperty.value;
+        riseText.fill = lineColor;
+        riseText.left = slopeIsText.right + this.relationalOperatorXSpacing;
+        riseText.y = slopeIsText.y;
       }
       else if ( line.getSlope() === 0 ) {
         // 0
-        riseNode.visible = true;
-        riseNode.string = '0';
-        riseNode.fill = lineColor;
-        riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
-        riseNode.y = slopeIsNode.y;
+        riseText.visible = true;
+        riseText.string = '0';
+        riseText.fill = lineColor;
+        riseText.left = slopeIsText.right + this.relationalOperatorXSpacing;
+        riseText.y = slopeIsText.y;
       }
       else {
         let nextXOffset;
@@ -447,53 +447,53 @@ class DynamicLabelNode extends EquationNode {
           // minus sign
           minusSignNode.visible = true;
           minusSignNode.fill = lineColor;
-          minusSignNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
-          minusSignNode.centerY = slopeIsNode.centerY + this.slopeSignYFudgeFactor + this.slopeSignYOffset;
+          minusSignNode.left = slopeIsText.right + this.relationalOperatorXSpacing;
+          minusSignNode.centerY = slopeIsText.centerY + this.slopeSignYFudgeFactor + this.slopeSignYOffset;
           nextXOffset = minusSignNode.right + this.fractionalSlopeXSpacing;
         }
         else {
           // no sign
-          nextXOffset = slopeIsNode.right + this.relationalOperatorXSpacing;
+          nextXOffset = slopeIsText.right + this.relationalOperatorXSpacing;
         }
 
         if ( Number.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
-          riseNode.visible = true;
-          riseNode.string = Utils.toFixed( Math.abs( line.getSlope() ), 0 );
-          riseNode.fill = lineColor;
-          riseNode.left = nextXOffset;
-          riseNode.y = slopeIsNode.y;
+          riseText.visible = true;
+          riseText.string = Utils.toFixed( Math.abs( line.getSlope() ), 0 );
+          riseText.fill = lineColor;
+          riseText.left = nextXOffset;
+          riseText.y = slopeIsText.y;
         }
         else {
           // fractional slope
-          riseNode.visible = runNode.visible = fractionLineNode.visible = true;
+          riseText.visible = runText.visible = fractionLineNode.visible = true;
 
-          riseNode.string = Utils.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
-          runNode.string = Utils.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
-          fractionLineNode.setLine( 0, 0, Math.max( riseNode.width, runNode.width ), 0 );
-          riseNode.fill = runNode.fill = fractionLineNode.stroke = lineColor;
+          riseText.string = Utils.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+          runText.string = Utils.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+          fractionLineNode.setLine( 0, 0, Math.max( riseText.width, runText.width ), 0 );
+          riseText.fill = runText.fill = fractionLineNode.stroke = lineColor;
 
           // layout, values horizontally centered
           fractionLineNode.left = nextXOffset;
-          fractionLineNode.centerY = slopeIsNode.centerY + this.fractionLineYFudgeFactor;
-          riseNode.centerX = fractionLineNode.centerX;
-          riseNode.bottom = fractionLineNode.top - this.ySpacing;
-          runNode.centerX = fractionLineNode.centerX;
-          runNode.top = fractionLineNode.bottom + this.ySpacing;
+          fractionLineNode.centerY = slopeIsText.centerY + this.fractionLineYFudgeFactor;
+          riseText.centerX = fractionLineNode.centerX;
+          riseText.bottom = fractionLineNode.top - this.ySpacing;
+          runText.centerX = fractionLineNode.centerX;
+          runText.top = fractionLineNode.bottom + this.ySpacing;
         }
       }
     };
 
     const multilink = new Multilink( [
         lineProperty,
-        slopeIsNode.boundsProperty, // links to a StringProperty, and layout is handled in this.update
+        slopeIsText.boundsProperty, // links to a StringProperty, and layout is handled in this.update
         GraphingLinesStrings.undefinedStringProperty // used in this.update
       ],
       line => update( line )
     );
 
     this.disposeDynamicLabelNode = () => {
-      slopeIsNode.dispose();
+      slopeIsText.dispose();
       multilink.dispose();
     };
 

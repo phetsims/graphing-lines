@@ -279,7 +279,7 @@ export default class SlopeEquationNode extends EquationNode {
       unsimplifiedRiseNode.dispose();
       unsimplifiedRunNode.dispose();
       lineProperty.unlink( lineObserver );
-      Multilink.unmultilink( controlsMultilink );
+      controlsMultilink.dispose();
     };
   }
 

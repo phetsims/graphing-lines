@@ -127,7 +127,7 @@ export default class PointToolNode extends Node {
     this.addInputListener( new PointToolDragListener( this, pointTool, modelViewTransform, graph ) );
 
     this.disposePointToolNode = () => {
-      Multilink.unmultilink( updateMultilink );
+      updateMultilink.dispose();
       bodyNode.dispose();
       coordinatesProperty.dispose();
     };

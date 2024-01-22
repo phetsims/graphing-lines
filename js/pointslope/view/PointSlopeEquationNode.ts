@@ -512,7 +512,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of any derived StringProperty?
       riseNode.dispose();
       runNode.dispose();
-      Multilink.unmultilink( controlsMultilink );
+      controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };

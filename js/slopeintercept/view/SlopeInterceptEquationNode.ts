@@ -478,7 +478,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       runNode.dispose();
       yInterceptNumeratorNode.dispose();
       yInterceptDenominatorNode.dispose();
-      Multilink.unmultilink( controlsMultilink );
+      controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };

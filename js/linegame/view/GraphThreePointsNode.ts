@@ -52,7 +52,7 @@ export default class GraphThreePointsNode extends ChallengeGraphNode {
       p1Manipulator.dispose();
       p2Manipulator.dispose();
       p3Manipulator.dispose();
-      Multilink.unmultilink( pointsMultilink );
+      pointsMultilink.dispose();
     };
   }
 

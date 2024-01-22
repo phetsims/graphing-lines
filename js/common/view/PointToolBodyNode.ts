@@ -18,7 +18,7 @@ import { Color, LinearGradient, Node, NodeOptions, Rectangle, RichText, TColor, 
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 const DEFAULT_FONT = new PhetFont( { size: 15, weight: 'bold' } );
@@ -102,7 +102,7 @@ export default class PointToolBodyNode extends Node {
     } );
 
     // The text that displays the coordinates
-    const coordinatesStringProperty = new DerivedProperty(
+    const coordinatesStringProperty = new DerivedStringProperty(
       [
         coordinatesProperty,
         GraphingLinesStrings.point.unknownStringProperty,

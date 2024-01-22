@@ -17,7 +17,7 @@ import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -80,8 +80,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageElement, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
-  //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty or DerivedStringProperty
-  const stringProperty = new DerivedProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
+  const stringProperty = new DerivedStringProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
     pattern => StringUtils.format( pattern, level + 1 ) );
 
   const text = new Text( stringProperty, {

@@ -61,14 +61,14 @@ export default class ChallengeNode extends Node {
       pointsAlignment: 'rightCenter'
     } );
 
-    // buttons
+    // Options shared by all buttons
     const buttonOptions = {
       font: LineGameConstants.BUTTON_FONT,
       baseColor: LineGameConstants.BUTTON_COLOR,
       xMargin: 20,
       yMargin: 5,
       textNodeOptions: {
-        maxWidth: 375
+        maxWidth: 225
       }
     };
 
@@ -89,17 +89,24 @@ export default class ChallengeNode extends Node {
       }
     }, buttonOptions ) );
 
+    // 'Next' button
     const nextButton = new TextPushButton( VegasStrings.nextStringProperty, combineOptions<TextPushButtonOptions>( {
       listener: () => {
         model.playStateProperty.value = PlayState.FIRST_CHECK;
       }
     }, buttonOptions ) );
 
-    // buttons at center-bottom
     this.buttonsParent = new Node( {
       children: [ checkButton, tryAgainButton, showAnswerButton, nextButton ]
     } );
     this.buttonsParent.boundsProperty.link( () => {
+
+      // All buttons share the same center, which may change if their associated StringProperties change.
+      tryAgainButton.center = checkButton.center;
+      showAnswerButton.center = checkButton.center;
+      nextButton.center = checkButton.center;
+
+      // Center the buttons at the bottom.
       this.buttonsParent.centerX = challengeSize.width / 2;
       this.buttonsParent.bottom = challengeSize.height - 20;
     } );

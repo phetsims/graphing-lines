@@ -300,7 +300,7 @@ export default class SlopeEquationNode extends EquationNode {
     // Slope   m =
     const slopeText = new RichText( GraphingLinesStrings.slopeStringProperty, richTextOptions );
     const mEqualsStringProperty = new DerivedStringProperty( [ GLSymbols.mStringProperty ],
-      mString => `${mString} ${MathSymbols.EQUAL_TO}` );
+      m => `${m} ${MathSymbols.EQUAL_TO}` );
     const mEqualsText = new RichText( mEqualsStringProperty, richTextOptions );
     const leftSideNode = new HBox( {
       spacing: 0,
@@ -312,12 +312,12 @@ export default class SlopeEquationNode extends EquationNode {
 
     // y2 - y1
     const numeratorStringProperty = new DerivedStringProperty( [ GLSymbols.yStringProperty ],
-      yString => StringUtils.fillIn( pattern, { symbol: yString } ) );
+      y => StringUtils.fillIn( pattern, { symbol: y } ) );
     const numeratorNode = new RichText( numeratorStringProperty, richTextOptions );
 
     // x2 - x1
     const denominatorStringProperty = new DerivedStringProperty( [ GLSymbols.xStringProperty ],
-      xString => StringUtils.fillIn( pattern, { symbol: xString } ) );
+      x => StringUtils.fillIn( pattern, { symbol: x } ) );
     const denominatorNode = new RichText( denominatorStringProperty, richTextOptions );
 
     // fraction line, with dynamic length

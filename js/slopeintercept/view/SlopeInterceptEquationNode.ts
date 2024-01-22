@@ -39,6 +39,7 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import NotALine from '../../linegame/model/NotALine.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = {
 
@@ -404,7 +405,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         if ( !updatingControls ) {
           if ( options.interactiveIntercept ) {
             lineProperty.value = Line.createSlopeIntercept( riseProperty.value, runProperty.value,
-                yInterceptProperty.value, lineProperty.value.color );
+              yInterceptProperty.value, lineProperty.value.color );
           }
           else {
             const line = lineProperty.value;
@@ -486,18 +487,14 @@ export default class SlopeInterceptEquationNode extends EquationNode {
   public static createGeneralFormNode(): Node {
 
     // y = mx + b
-    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
-    const string = StringUtils.fillIn( `{{y}} ${MathSymbols.EQUAL_TO} {{m}}{{x}} ${MathSymbols.PLUS} {{b}}`, {
-      y: GLSymbols.yStringProperty.value,
-      m: GLSymbols.mStringProperty.value,
-      x: GLSymbols.xStringProperty.value,
-      b: GLSymbols.bStringProperty.value
-    } );
+    const stringProperty = new DerivedStringProperty(
+      [ GLSymbols.yStringProperty, GLSymbols.mStringProperty, GLSymbols.xStringProperty, GLSymbols.bStringProperty ],
+      ( y, m, x, b ) => `${y} ${MathSymbols.EQUAL_TO} ${m}${x} ${MathSymbols.PLUS} ${b}` );
 
-    return new RichText( string, {
+    return new RichText( stringProperty, {
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
-      maxWidth: 300
+      maxWidth: 200
     } );
   }
 

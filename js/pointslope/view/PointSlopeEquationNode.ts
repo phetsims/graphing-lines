@@ -536,7 +536,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     return new RichText( stringProperty, {
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
-      maxWidth: 300
+      maxWidth: 200
     } );
   }
 

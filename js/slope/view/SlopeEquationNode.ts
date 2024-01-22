@@ -484,9 +484,13 @@ class DynamicLabelNode extends EquationNode {
       }
     };
 
-    const multilink = new Multilink(
-      [ lineProperty, slopeIsNode.boundsProperty, GraphingLinesStrings.undefinedStringProperty ],
-      line => update( line ) );
+    const multilink = new Multilink( [
+        lineProperty,
+        slopeIsNode.boundsProperty, // links to a StringProperty, and layout is handled in this.update
+        GraphingLinesStrings.undefinedStringProperty // used in this.update
+      ],
+      line => update( line )
+    );
 
     this.disposeDynamicLabelNode = () => {
       slopeIsNode.dispose();

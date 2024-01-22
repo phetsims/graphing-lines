@@ -66,8 +66,8 @@ export default class GraphNode extends Node {
     super( {
       children: [
         gridNode,
-        new XAxisNode( graph, xAxisLabelStringProperty, modelViewTransform ),
-        new YAxisNode( graph, yAxisLabelStringProperty, modelViewTransform )
+        new XAxisNode( graph, modelViewTransform, xAxisLabelStringProperty ),
+        new YAxisNode( graph, modelViewTransform, yAxisLabelStringProperty )
       ]
     } );
 
@@ -152,7 +152,7 @@ class MinorTickNode extends Path {
  */
 class XAxisNode extends Node {
 
-  public constructor( graph: Graph, xAxisLabelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2, xAxisLabelStringProperty: TReadOnlyProperty<string> ) {
 
     super();
 
@@ -202,7 +202,7 @@ class XAxisNode extends Node {
  */
 class YAxisNode extends Node {
 
-  public constructor( graph: Graph, yAxisLabelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph, modelViewTransform: ModelViewTransform2, yAxisLabelStringProperty: TReadOnlyProperty<string> ) {
 
     super();
 

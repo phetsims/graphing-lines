@@ -223,6 +223,10 @@ export default class LineNode extends Node {
      * If this line has an equation, update its orientation and position.
      * Rotation is applied to equationParentNode.
      * Translation is applied to equationNode, relative to a horizontal line whose tip points right.
+     *
+     * NOTE: We are NOT going to immediately update the position of the equation if a translated StringProperty
+     * changes. It's too much of a corner case, too difficult, not worth the trouble. The layout will adjust
+     * correctly the next time the line changes. See https://github.com/phetsims/graphing-lines/issues/140
      */
     if ( this.equationNode ) {
 

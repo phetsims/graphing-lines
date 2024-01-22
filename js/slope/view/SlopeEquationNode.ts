@@ -428,7 +428,6 @@ class DynamicLabelNode extends EquationNode {
       if ( line.undefinedSlope() ) {
         // 'undefined'
         riseNode.visible = true;
-        //TODO https://github.com/phetsims/graphing-lines/issues/140
         riseNode.string = GraphingLinesStrings.undefinedStringProperty.value;
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
@@ -485,12 +484,13 @@ class DynamicLabelNode extends EquationNode {
       }
     };
 
-    const lineObserver = ( line: Line ) => update( line );
-    lineProperty.link( lineObserver ); // unlink in dispose
+    const multilink = new Multilink(
+      [ lineProperty, slopeIsNode.boundsProperty, GraphingLinesStrings.undefinedStringProperty ],
+      line => update( line ) );
 
     this.disposeDynamicLabelNode = () => {
-      lineProperty.unlink( lineObserver );
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 dispose of anything linked to StringProperty
+      slopeIsNode.dispose();
+      multilink.dispose();
     };
 
     this.mutate( options );

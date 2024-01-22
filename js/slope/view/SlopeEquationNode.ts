@@ -116,7 +116,7 @@ export default class SlopeEquationNode extends EquationNode {
 
     // Nodes that could appear is all possible ways to write the equation
     // m =
-    const mNode = new RichText( GLSymbols.m, staticOptions );
+    const mNode = new RichText( GLSymbols.mStringProperty, staticOptions );
     const interactiveEqualsNode = new Text( MathSymbols.EQUAL_TO, staticOptions );
     // y2 - y1
     const y2Node = new CoordinatePicker( y2Property, x2Property, y1Property, x1Property, options.y2RangeProperty, {
@@ -296,9 +296,10 @@ export default class SlopeEquationNode extends EquationNode {
     const font = new PhetFont( { size: options.fontSize, weight: options.fontWeight } );
 
     // Slope m =
+    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
     const leftSideStringProperty = new PatternStringProperty( new StringProperty( `{{slope}}    {{m}} ${MathSymbols.EQUAL_TO}` ), {
       slope: GraphingLinesStrings.slopeStringProperty,
-      m: GLSymbols.m //TODO https://github.com/phetsims/graphing-lines/issues/140 should be a StringProperty
+      m: GLSymbols.mStringProperty.value
     } );
     const leftSideNode = new RichText( leftSideStringProperty, {
       font: font,
@@ -310,14 +311,16 @@ export default class SlopeEquationNode extends EquationNode {
     const pattern = `{{symbol}}<sub>2</sub> ${MathSymbols.MINUS} {{symbol}}<sub>1</sub>`;
 
     // y2 - y1
-    const numeratorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.y } );
+    //TODO https://github.com/phetsims/graphing-lines/issues/140
+    const numeratorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.yStringProperty.value } );
     const numeratorNode = new RichText( numeratorText, {
       font: font,
       fill: options.fill
     } );
 
     // x2 - x1
-    const denominatorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.x } );
+    //TODO https://github.com/phetsims/graphing-lines/issues/140
+    const denominatorText = StringUtils.fillIn( pattern, { symbol: GLSymbols.xStringProperty.value } );
     const denominatorNode = new RichText( denominatorText, {
       font: font,
       fill: options.fill
@@ -414,8 +417,8 @@ class DynamicLabelNode extends EquationNode {
       if ( line.undefinedSlope() ) {
         // 'undefined'
         riseNode.visible = true;
-        //TODO https://github.com/phetsims/graphing-lines/issues/140 use  GraphingLinesStrings.undefinedStringProperty
-        riseNode.string = GraphingLinesStrings.undefined;
+        //TODO https://github.com/phetsims/graphing-lines/issues/140
+        riseNode.string = GraphingLinesStrings.undefinedStringProperty.value;
         riseNode.fill = lineColor;
         riseNode.left = slopeIsNode.right + this.relationalOperatorXSpacing;
         riseNode.y = slopeIsNode.y;

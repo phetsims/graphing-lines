@@ -44,7 +44,7 @@ export default class LineFormsGraphNode extends GraphNode {
                          viewProperties: LineFormsViewProperties,
                          createDynamicLabel: CreateDynamicLabelFunction ) {
 
-    super( model.graph, model.modelViewTransform, GLSymbols.x, GLSymbols.y );
+    super( model.graph, model.modelViewTransform, GLSymbols.xStringProperty, GLSymbols.yStringProperty );
 
     this.model = model;
     this.viewProperties = viewProperties;

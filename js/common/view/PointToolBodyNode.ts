@@ -103,14 +103,19 @@ export default class PointToolBodyNode extends Node {
 
     // The text that displays the coordinates
     const coordinatesStringProperty = new DerivedProperty(
-      [ coordinatesProperty, GraphingLinesStrings.point.unknownStringProperty ],
-      ( coordinates, unknownString ) => {
+      [
+        coordinatesProperty,
+        GraphingLinesStrings.point.unknownStringProperty,
+        GraphingLinesStrings.point.XYStringProperty
+      ],
+      ( coordinates, unknownString, XYString ) => {
         if ( coordinates ) {
 
           // Use toFixedNumber so that trailing zeros are removed.
           const x = Utils.toFixedNumber( coordinates.x, options.decimals );
           const y = Utils.toFixedNumber( coordinates.y, options.decimals );
-          return StringUtils.format( GraphingLinesStrings.point.XY, x, y );
+          //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
+          return StringUtils.format( XYString, x, y );
         }
         else {
           return unknownString;

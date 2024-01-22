@@ -80,8 +80,9 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageElement, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
+  //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty or DerivedStringProperty
   const stringProperty = new DerivedProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
-    pattern => StringUtils.format( GraphingLinesStrings.pattern_Level_0, level + 1 ) );
+    pattern => StringUtils.format( pattern, level + 1 ) );
 
   const text = new Text( stringProperty, {
     font: new PhetFont( 40 ),

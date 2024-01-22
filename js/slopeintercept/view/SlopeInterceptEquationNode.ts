@@ -114,7 +114,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       options.runRangeProperty, interactiveFont, this.decimalPlaces );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
-    const yNode = new RichText( GLSymbols.y, staticOptions );
+    const yNode = new RichText( GLSymbols.yStringProperty, staticOptions );
     const equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.signLineSize
@@ -134,7 +134,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       }, staticOptions ) );
     }
     const slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const xNode = new RichText( GLSymbols.x, staticOptions );
+    const xNode = new RichText( GLSymbols.xStringProperty, staticOptions );
     const plusNode = new PlusNode( combineOptions<PlusNodeOptions>( {
       size: this.operatorLineSize
     }, staticOptions ) );
@@ -192,11 +192,11 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        //TODO https://github.com/phetsims/graphing-lines/issues/140 use GraphingLinesStrings.slopeUndefinedStringProperty
+        //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
-                                    StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
+                                    StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
-                                      x: GLSymbols.x,
+                                      x: GLSymbols.xStringProperty,
                                       value: line.x1
                                     } );
         return;
@@ -486,11 +486,12 @@ export default class SlopeInterceptEquationNode extends EquationNode {
   public static createGeneralFormNode(): Node {
 
     // y = mx + b
+    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
     const string = StringUtils.fillIn( `{{y}} ${MathSymbols.EQUAL_TO} {{m}}{{x}} ${MathSymbols.PLUS} {{b}}`, {
-      y: GLSymbols.y,
-      m: GLSymbols.m,
-      x: GLSymbols.x,
-      b: GLSymbols.b
+      y: GLSymbols.yStringProperty.value,
+      m: GLSymbols.mStringProperty.value,
+      x: GLSymbols.xStringProperty.value,
+      b: GLSymbols.bStringProperty.value
     } );
 
     return new RichText( string, {

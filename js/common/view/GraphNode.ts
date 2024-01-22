@@ -55,8 +55,8 @@ export default class GraphNode extends Node {
 
   public constructor( graph: Graph,
                       modelViewTransform: ModelViewTransform2,
-                      xAxisLabelString: TReadOnlyProperty<string> | string,
-                      yAxisLabelString: TReadOnlyProperty<string> | string ) {
+                      xAxisLabelString: TReadOnlyProperty<string>,
+                      yAxisLabelString: TReadOnlyProperty<string> ) {
 
     // (0,0) and quadrant 1 is visible
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) );

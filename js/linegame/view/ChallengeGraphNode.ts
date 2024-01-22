@@ -61,7 +61,7 @@ export default class ChallengeGraphNode extends GraphNode {
       slopeToolEnabled: true
     }, providedOptions );
 
-    super( challenge.graph, challenge.modelViewTransform, GLSymbols.x, GLSymbols.y );
+    super( challenge.graph, challenge.modelViewTransform, GLSymbols.xStringProperty, GLSymbols.yStringProperty );
 
     // To reduce brain damage during development, show the answer as a translucent gray line.
     if ( phet.chipper.queryParameters.showAnswers ) {

@@ -120,7 +120,7 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     const yLeftParenNode = new Text( '(', staticOptions );
-    const yNode = new RichText( GLSymbols.y, staticOptions );
+    const yNode = new RichText( GLSymbols.yStringProperty, staticOptions );
     const yPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const yMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     let y1Node: NumberPicker | DynamicValueNode;
@@ -150,7 +150,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     }
     const fractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const xLeftParenNode = new Text( '(', staticOptions );
-    const xNode = new RichText( GLSymbols.x, staticOptions );
+    const xNode = new RichText( GLSymbols.xStringProperty, staticOptions );
     const xPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const xMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     let x1Node: NumberPicker | DynamicValueNode;
@@ -191,17 +191,19 @@ export default class PointSlopeEquationNode extends EquationNode {
         this.children[ i ].visible = false;
         this.children[ i ].x = 0;
       }
-      slopeUndefinedNode.string = ''; // workaround for #114 and #117
+
+      // Workaround for https://github.com/phetsims/graphing-lines/issues/#114 and https://github.com/phetsims/graphing-lines/issues/#117
+      slopeUndefinedNode.string = '';
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
         slopeUndefinedNode.visible = true;
         slopeUndefinedNode.fill = lineColor;
-        //TODO https://github.com/phetsims/graphing-lines/issues/140 use GraphingLinesStrings.slopeUndefinedStringProperty
+        //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
         slopeUndefinedNode.string = ( options.slopeUndefinedVisible ) ?
-                                    StringUtils.format( GraphingLinesStrings.slopeUndefined, GLSymbols.x, line.x1 ) :
+                                    StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty.value, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
-                                      x: GLSymbols.x,
+                                      x: GLSymbols.xStringProperty.value,
                                       value: line.x1
                                     } );
         return;
@@ -524,11 +526,12 @@ export default class PointSlopeEquationNode extends EquationNode {
   public static createGeneralFormNode(): Node {
 
     // (y - y1) = m(x - x1)
+    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
     const string = StringUtils.fillIn(
       `({{y}} ${MathSymbols.MINUS} {{y}}<sub>1</sub>) ${MathSymbols.EQUAL_TO} {{m}}({{x}} ${MathSymbols.MINUS} {{x}}<sub>1</sub>)`, {
-        y: GLSymbols.y,
-        m: GLSymbols.m,
-        x: GLSymbols.x
+        y: GLSymbols.yStringProperty.value,
+        m: GLSymbols.mStringProperty.value,
+        x: GLSymbols.xStringProperty.value
       } );
 
     return new RichText( string, {

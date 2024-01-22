@@ -10,12 +10,11 @@ import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
 import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 
-//TODO https://github.com/phetsims/graphing-lines/issues/140 use StringProperty for each symbol
 const GLSymbols = {
-  b: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.intercept ),
-  m: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.slope ),
-  x: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.x ),
-  y: MathSymbolFont.getRichTextMarkup( GraphingLinesStrings.symbol.y )
+  bStringProperty: MathSymbolFont.createDerivedProperty( GraphingLinesStrings.symbol.interceptStringProperty ), // b
+  mStringProperty: MathSymbolFont.createDerivedProperty( GraphingLinesStrings.symbol.slopeStringProperty ), // m
+  xStringProperty: MathSymbolFont.createDerivedProperty( GraphingLinesStrings.symbol.xStringProperty ), // x
+  yStringProperty: MathSymbolFont.createDerivedProperty( GraphingLinesStrings.symbol.yStringProperty ) // y
 };
 
 graphingLines.register( 'GLSymbols', GLSymbols );

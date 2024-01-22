@@ -25,9 +25,11 @@ import GLIconFactory from './GLIconFactory.js';
 
 // constants
 // y = x
-const Y_EQUALS_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${GLSymbols.x}`;
+//TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
+const Y_EQUALS_X = `${GLSymbols.yStringProperty.value} ${MathSymbols.EQUAL_TO} ${GLSymbols.xStringProperty.value}`;
 // y = -x
-const Y_EQUALS_NEGATIVE_X = `${GLSymbols.y} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${GLSymbols.x}`;
+//TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
+const Y_EQUALS_NEGATIVE_X = `${GLSymbols.yStringProperty.value} ${MathSymbols.EQUAL_TO} ${MathSymbols.UNARY_MINUS}${GLSymbols.xStringProperty.value}`;
 
 type SelfOptions = {
   includeStandardLines?: boolean; // if true, includes visibility controls for 'y = x' and 'y = -x'

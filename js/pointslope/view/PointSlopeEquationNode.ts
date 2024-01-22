@@ -36,6 +36,7 @@ import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import NotALine from '../../linegame/model/NotALine.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = {
 
@@ -526,15 +527,13 @@ export default class PointSlopeEquationNode extends EquationNode {
   public static createGeneralFormNode(): Node {
 
     // (y - y1) = m(x - x1)
-    //TODO https://github.com/phetsims/graphing-lines/issues/140 use PatternStringProperty
-    const string = StringUtils.fillIn(
-      `({{y}} ${MathSymbols.MINUS} {{y}}<sub>1</sub>) ${MathSymbols.EQUAL_TO} {{m}}({{x}} ${MathSymbols.MINUS} {{x}}<sub>1</sub>)`, {
-        y: GLSymbols.yStringProperty.value,
-        m: GLSymbols.mStringProperty.value,
-        x: GLSymbols.xStringProperty.value
-      } );
+    const stringProperty = new DerivedStringProperty(
+      [ GLSymbols.yStringProperty, GLSymbols.mStringProperty, GLSymbols.xStringProperty ],
+      ( y, m, x ) =>
+        `(${y} ${MathSymbols.MINUS} ${y}<sub>1</sub>) ${MathSymbols.EQUAL_TO} ${m}(${x} ${MathSymbols.MINUS} ${x}<sub>1</sub>)`
+    );
 
-    return new RichText( string, {
+    return new RichText( stringProperty, {
       pickable: false,
       font: new PhetFont( { size: 20, weight: GLConstants.EQUATION_FONT_WEIGHT } ),
       maxWidth: 300

@@ -326,8 +326,8 @@ export default class SlopeEquationNode extends EquationNode {
       lineWidth: 0.06 * options.fontSize
     } );
     Multilink.multilink( [ numeratorNode.boundsProperty, denominatorNode.boundsProperty ],
-      () => {
-        const length = Math.max( numeratorNode.width, denominatorNode.width );
+      ( numeratorBounds, denominatorBounds ) => {
+        const length = 1.1 * Math.max( numeratorBounds.width, denominatorBounds.width );
         fractionLineNode.setLine( 0, 0, length, 0 );
         numeratorNode.centerX = fractionLineNode.centerX;
         numeratorNode.bottom = fractionLineNode.top - 5;

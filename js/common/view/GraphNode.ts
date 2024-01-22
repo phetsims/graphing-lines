@@ -55,8 +55,8 @@ export default class GraphNode extends Node {
 
   public constructor( graph: Graph,
                       modelViewTransform: ModelViewTransform2,
-                      xAxisLabelString: TReadOnlyProperty<string>,
-                      yAxisLabelString: TReadOnlyProperty<string> ) {
+                      xAxisLabelStringProperty: TReadOnlyProperty<string>,
+                      yAxisLabelStringProperty: TReadOnlyProperty<string> ) {
 
     // (0,0) and quadrant 1 is visible
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) );
@@ -66,8 +66,8 @@ export default class GraphNode extends Node {
     super( {
       children: [
         gridNode,
-        new XAxisNode( graph, xAxisLabelString, modelViewTransform ),
-        new YAxisNode( graph, yAxisLabelString, modelViewTransform )
+        new XAxisNode( graph, xAxisLabelStringProperty, modelViewTransform ),
+        new YAxisNode( graph, yAxisLabelStringProperty, modelViewTransform )
       ]
     } );
 
@@ -152,7 +152,7 @@ class MinorTickNode extends Path {
  */
 class XAxisNode extends Node {
 
-  public constructor( graph: Graph, xAxisLabelString: TReadOnlyProperty<string> | string, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph, xAxisLabelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -170,7 +170,7 @@ class XAxisNode extends Node {
     this.addChild( lineNode );
 
     // label at positive (right) end
-    const labelNode = new RichText( xAxisLabelString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    const labelNode = new RichText( xAxisLabelStringProperty, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.boundsProperty.link( () => {
       labelNode.left = lineNode.right + AXIS_LABEL_SPACING;
@@ -202,7 +202,7 @@ class XAxisNode extends Node {
  */
 class YAxisNode extends Node {
 
-  public constructor( graph: Graph, yAxisLabelString: TReadOnlyProperty<string> | string, modelViewTransform: ModelViewTransform2 ) {
+  public constructor( graph: Graph, yAxisLabelStringProperty: TReadOnlyProperty<string>, modelViewTransform: ModelViewTransform2 ) {
 
     super();
 
@@ -220,7 +220,7 @@ class YAxisNode extends Node {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    const labelNode = new RichText( yAxisLabelString, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    const labelNode = new RichText( yAxisLabelStringProperty, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
     this.addChild( labelNode );
     labelNode.boundsProperty.link( () => {
       labelNode.centerX = lineNode.centerX;

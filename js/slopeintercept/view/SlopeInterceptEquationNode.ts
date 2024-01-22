@@ -447,8 +447,8 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    // If dynamic strings change, update the layout. The boundsProperty dependencies are RichText that
-    // are observing a StringProperty. The StringProperty dependencies are used in this.updateLayout.
+    // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
+    // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
     //TODO https://github.com/phetsims/graphing-lines/issues/140 Fails with 'stack size exceeded'
     // const dynamicStringMultilink = Multilink.lazyMultilink(
     //   [ xNode.boundsProperty, yNode.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],

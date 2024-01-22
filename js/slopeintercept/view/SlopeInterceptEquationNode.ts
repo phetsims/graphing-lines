@@ -24,7 +24,7 @@ import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PlusNode, { PlusNodeOptions } from '../../../../scenery-phet/js/PlusNode.js';
-import { Line as SceneryLine, Node, RichText, TColor } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node, RichText, RichTextOptions, TColor } from '../../../../scenery/js/imports.js';
 import NumberPicker, { NumberPickerOptions } from '../../../../sun/js/NumberPicker.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
@@ -115,7 +115,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       options.runRangeProperty, interactiveFont, this.decimalPlaces );
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
-    const yNode = new RichText( GLSymbols.yStringProperty, staticOptions );
+    const yNode = new RichText( GLSymbols.yStringProperty, combineOptions<RichTextOptions>( {
+      maxWidth: 85
+    }, staticOptions ) );
     const equalsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( {
       size: this.signLineSize
@@ -135,7 +137,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       }, staticOptions ) );
     }
     const slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
-    const xNode = new RichText( GLSymbols.xStringProperty, staticOptions );
+    const xNode = new RichText( GLSymbols.xStringProperty, combineOptions<RichTextOptions>( {
+      maxWidth: 85
+    }, staticOptions ) );
     const plusNode = new PlusNode( combineOptions<PlusNodeOptions>( {
       size: this.operatorLineSize
     }, staticOptions ) );

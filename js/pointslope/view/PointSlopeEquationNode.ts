@@ -489,10 +489,16 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
     // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
+    let isUpdatingLayout = false; // to prevent stack overflow
     const dynamicStringMultilink = Multilink.lazyMultilink(
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 Adding xText.boundsProperty and yText.boundsProperty to dependencies fails with 'stack size exceeded'
-      [ GraphingLinesStrings.slopeUndefinedStringProperty ],
-      () => updateLayout( lineProperty.value )
+      [ xText.boundsProperty, yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
+      () => {
+        if ( !isUpdatingLayout ) {
+          isUpdatingLayout = true;
+          updateLayout( lineProperty.value );
+          isUpdatingLayout = false;
+        }
+      }
     );
 
     // For fully-interactive equations ...

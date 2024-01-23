@@ -419,6 +419,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       }
     );
 
+    // to prevent stack overflow, see https://github.com/phetsims/graphing-lines/issues/140#issuecomment-1904968755
+    let isUpdatingLayout = false;
+
     // sync the controls and layout with the model
     const lineObserver = ( line: Line ) => {
 
@@ -443,16 +446,22 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       updatingControls = false;
 
       // Fully-interactive equations have a constant form, no need to update layout when line changes.
-      if ( !fullyInteractive ) { updateLayout( line ); }
+      if ( !fullyInteractive && !isUpdatingLayout ) {
+        updateLayout( line );
+      }
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
     // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
     // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
     const dynamicStringMultilink = Multilink.lazyMultilink(
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 Adding xText.boundsProperty to dependencies fails with 'stack size exceeded'
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 Adding xText.boundsProperty to dependencies fails with 'stack size exceeded', despite isUpdatingLayout guards
       [ yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
-      () => updateLayout( lineProperty.value )
+      () => {
+        isUpdatingLayout = true;
+        updateLayout( lineProperty.value );
+        isUpdatingLayout = false;
+      }
     );
 
     // For fully-interactive equations ...
@@ -460,7 +469,11 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     if ( fullyInteractive ) {
 
       // update layout once
-      updateLayout( lineProperty.value );
+      if ( !isUpdatingLayout ) {
+        isUpdatingLayout = true;
+        updateLayout( lineProperty.value );
+        isUpdatingLayout = false;
+      }
 
       // add undefinedSlopeIndicator
       const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height );

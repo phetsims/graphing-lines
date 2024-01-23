@@ -198,9 +198,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
         slopeUndefinedText.visible = true;
         slopeUndefinedText.fill = lineColor;
         slopeUndefinedText.string = ( options.slopeUndefinedVisible ) ?
-                                    StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty, line.x1 ) :
+                                    StringUtils.format( GraphingLinesStrings.slopeUndefinedStringProperty.value, GLSymbols.xStringProperty.value, line.x1 ) :
                                     StringUtils.fillIn( `{{x}} ${MathSymbols.EQUAL_TO} {{value}}`, {
-                                      x: GLSymbols.xStringProperty,
+                                      x: GLSymbols.xStringProperty.value,
                                       value: line.x1
                                     } );
         return;

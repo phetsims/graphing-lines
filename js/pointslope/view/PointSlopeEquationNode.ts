@@ -469,6 +469,9 @@ export default class PointSlopeEquationNode extends EquationNode {
       }
     );
 
+    // to prevent stack overflow, see https://github.com/phetsims/graphing-lines/issues/140#issuecomment-1904968755
+    let isUpdatingLayout = false;
+
     // sync the controls and layout with the model
     const lineObserver = ( line: Line ) => {
 
@@ -483,13 +486,16 @@ export default class PointSlopeEquationNode extends EquationNode {
       updatingControls = false;
 
       // Fully-interactive equations have a constant form, no need to update layout when line changes.
-      if ( !fullyInteractive ) { updateLayout( line ); }
+      if ( !fullyInteractive && !isUpdatingLayout ) {
+        isUpdatingLayout = true;
+        updateLayout( line );
+        isUpdatingLayout = false;
+      }
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
     // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
     // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
-    let isUpdatingLayout = false; // to prevent stack overflow, see https://github.com/phetsims/graphing-lines/issues/140#issuecomment-1904968755
     const dynamicStringMultilink = Multilink.lazyMultilink(
       [ xText.boundsProperty, yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
       () => {
@@ -506,7 +512,11 @@ export default class PointSlopeEquationNode extends EquationNode {
     if ( fullyInteractive ) {
 
       // update layout once
-      updateLayout( lineProperty.value );
+      if ( !isUpdatingLayout ) {
+        isUpdatingLayout = true;
+        updateLayout( lineProperty.value );
+        isUpdatingLayout = false;
+      }
 
       // add undefinedSlopeIndicator
       const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height );

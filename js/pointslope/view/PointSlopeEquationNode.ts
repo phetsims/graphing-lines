@@ -469,9 +469,6 @@ export default class PointSlopeEquationNode extends EquationNode {
       }
     );
 
-    // to prevent stack overflow, see https://github.com/phetsims/graphing-lines/issues/140#issuecomment-1904968755
-    let isUpdatingLayout = false;
-
     // sync the controls and layout with the model
     const lineObserver = ( line: Line ) => {
 
@@ -486,10 +483,8 @@ export default class PointSlopeEquationNode extends EquationNode {
       updatingControls = false;
 
       // Fully-interactive equations have a constant form, no need to update layout when line changes.
-      if ( !fullyInteractive && !isUpdatingLayout ) {
-        isUpdatingLayout = true;
+      if ( !fullyInteractive ) {
         updateLayout( line );
-        isUpdatingLayout = false;
       }
     };
     lineProperty.link( lineObserver ); // unlink in dispose
@@ -497,14 +492,9 @@ export default class PointSlopeEquationNode extends EquationNode {
     // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
     // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
     const dynamicStringMultilink = Multilink.lazyMultilink(
-      [ xText.boundsProperty, yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
-      () => {
-        if ( !isUpdatingLayout ) {
-          isUpdatingLayout = true;
-          updateLayout( lineProperty.value );
-          isUpdatingLayout = false;
-        }
-      }
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 Adding xText.boundsProperty and yText.boundsProperty to dependencies fails with 'stack size exceeded'.
+      [ GraphingLinesStrings.slopeUndefinedStringProperty ],
+      () => updateLayout( lineProperty.value )
     );
 
     // For fully-interactive equations ...
@@ -512,11 +502,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     if ( fullyInteractive ) {
 
       // update layout once
-      if ( !isUpdatingLayout ) {
-        isUpdatingLayout = true;
-        updateLayout( lineProperty.value );
-        isUpdatingLayout = false;
-      }
+      updateLayout( lineProperty.value );
 
       // add undefinedSlopeIndicator
       const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height );

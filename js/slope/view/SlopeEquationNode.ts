@@ -116,7 +116,7 @@ export default class SlopeEquationNode extends EquationNode {
     // Nodes that could appear is all possible ways to write the equation
     // m =
     const mText = new RichText( GLSymbols.mStringProperty, combineOptions<RichTextOptions>( {
-      maxWidth: 85
+      maxWidth: 60
     }, staticOptions ) );
     const interactiveEqualsText = new Text( MathSymbols.EQUAL_TO, staticOptions );
     // y2 - y1

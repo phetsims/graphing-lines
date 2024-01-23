@@ -116,7 +116,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
     // Nodes that appear in all possible forms of the equation: y = -(rise/run)x + -b
     const yText = new RichText( GLSymbols.yStringProperty, combineOptions<RichTextOptions>( {
-      maxWidth: 85
+      maxWidth: 60
     }, staticOptions ) );
     const equalsText = new RichText( MathSymbols.EQUAL_TO, staticOptions );
     const slopeMinusSignNode = new MinusNode( combineOptions<MinusNodeOptions>( {
@@ -138,7 +138,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     }
     const slopeFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const xText = new RichText( GLSymbols.xStringProperty, combineOptions<RichTextOptions>( {
-      maxWidth: 85
+      maxWidth: 60
     }, staticOptions ) );
     const plusNode = new PlusNode( combineOptions<PlusNodeOptions>( {
       size: this.operatorLineSize
@@ -449,11 +449,11 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
     // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
     // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
-    //TODO https://github.com/phetsims/graphing-lines/issues/140 Fails with 'stack size exceeded'
-    // const dynamicStringMultilink = Multilink.lazyMultilink(
-    //   [ xText.boundsProperty, yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
-    //   ( xBounds, yBounds, slopeUndefinedString ) => updateLayout( lineProperty.value )
-    // );
+    const dynamicStringMultilink = Multilink.lazyMultilink(
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 Adding xText.boundsProperty to dependencies fails with 'stack size exceeded'
+      [ yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
+      () => updateLayout( lineProperty.value )
+    );
 
     // For fully-interactive equations ...
     let undefinedSlopeUpdater: ( line: Line ) => void;
@@ -486,7 +486,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       yInterceptDenominatorNode.dispose();
       controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 dynamicStringMultilink.dispose();
+      dynamicStringMultilink.dispose();
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };
   }

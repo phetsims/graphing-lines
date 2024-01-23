@@ -22,7 +22,7 @@ import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import PlusNode, { PlusNodeOptions } from '../../../../scenery-phet/js/PlusNode.js';
-import { Line as SceneryLine, Node, RichText, TColor, Text } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node, RichText, RichTextOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import NumberPicker, { NumberPickerOptions } from '../../../../sun/js/NumberPicker.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
@@ -121,7 +121,9 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     // Nodes that appear in all possible forms of the equation: (y-y1) = rise/run (x-x1)
     const yLeftParenText = new Text( '(', staticOptions );
-    const yText = new RichText( GLSymbols.yStringProperty, staticOptions );
+    const yText = new RichText( GLSymbols.yStringProperty, combineOptions<RichTextOptions>( {
+      maxWidth: 60
+    }, staticOptions ) );
     const yPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const yMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     let y1Node: NumberPicker | DynamicValueNode;
@@ -151,7 +153,9 @@ export default class PointSlopeEquationNode extends EquationNode {
     }
     const fractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const xLeftParentText = new Text( '(', staticOptions );
-    const xText = new RichText( GLSymbols.xStringProperty, staticOptions );
+    const xText = new RichText( GLSymbols.xStringProperty, combineOptions<RichTextOptions>( {
+      maxWidth: 60
+    }, staticOptions ) );
     const xPlusNode = new PlusNode( combineOptions<PlusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     const xMinusNode = new MinusNode( combineOptions<MinusNodeOptions>( { size: this.operatorLineSize }, staticOptions ) );
     let x1Node: NumberPicker | DynamicValueNode;
@@ -485,11 +489,11 @@ export default class PointSlopeEquationNode extends EquationNode {
 
     // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
     // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
-    //TODO https://github.com/phetsims/graphing-lines/issues/140 Fails with 'stack size exceeded'
-    // const dynamicStringMultilink = Multilink.lazyMultilink(
-    //   [ xText.boundsProperty, yText.boundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
-    //   ( xBounds, yBounds, slopeUndefinedString ) => updateLayout( lineProperty.value )
-    // );
+    const dynamicStringMultilink = Multilink.lazyMultilink(
+      //TODO https://github.com/phetsims/graphing-lines/issues/140 Adding xText.boundsProperty and yText.boundsProperty to dependencies fails with 'stack size exceeded'
+      [ GraphingLinesStrings.slopeUndefinedStringProperty ],
+      () => updateLayout( lineProperty.value )
+    );
 
     // For fully-interactive equations ...
     let undefinedSlopeUpdater: ( line: Line ) => void;
@@ -520,7 +524,7 @@ export default class PointSlopeEquationNode extends EquationNode {
       runNode.dispose();
       controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
-      //TODO https://github.com/phetsims/graphing-lines/issues/140 dynamicStringMultilink.dispose();
+      dynamicStringMultilink.dispose();
       undefinedSlopeUpdater && lineProperty.unlink( undefinedSlopeUpdater );
     };
   }

@@ -1,7 +1,7 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
 /**
- * Portion of the scenegraph that corresponds to the 'results' game phase. (See GamePhase.RESULTS)
+ * Portion of the scene graph that corresponds to the 'results' game phase. (See GamePhase.RESULTS)
  * Displays a panel with the game results.
  *
  * @author Chris Malley (PixelZoom, Inc.)

@@ -119,7 +119,7 @@ export default class ChallengeNode extends Node {
     const pointToolNode1 = new PointToolNode( challenge.pointTool1, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, pointToolOptions );
     const pointToolNode2 = new PointToolNode( challenge.pointTool2, challenge.modelViewTransform, challenge.graph, linesVisibleProperty, pointToolOptions );
 
-    // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scenegraph.
+    // Point tools moveToFront when dragged, so we give them a common parent to preserve rendering order of the reset of the scene graph.
     const pointToolParent = new Node();
     pointToolParent.addChild( pointToolNode1 );
     pointToolParent.addChild( pointToolNode2 );

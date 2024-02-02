@@ -8,8 +8,13 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import graphingLines from '../graphingLines.js';
+import getGameLevelsSchema from '../../../vegas/js/getGameLevelsSchema.js';
+import LineGameConstants from '../linegame/LineGameConstants.js';
 
 const GLQueryParameters = QueryStringMachine.getAll( {
+
+  // The levels to show in the game (Solve It!) screen.
+  gameLevels: getGameLevelsSchema( LineGameConstants.NUMBER_OF_GAME_LEVELS ),
 
   // Shows the game reward regardless of score.
   // For internal use only.

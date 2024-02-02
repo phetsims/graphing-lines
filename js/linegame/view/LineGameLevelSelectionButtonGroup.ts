@@ -18,6 +18,7 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import GLQueryParameters from '../../common/GLQueryParameters.js';
 
 type SelfOptions = EmptySelfOptions;
 
@@ -44,7 +45,8 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       groupButtonHeight: 210,
       flowBoxOptions: {
         spacing: 50
-      }
+      },
+      gameLevels: GLQueryParameters.gameLevels
     }, providedOptions );
 
     // To give all button icons the same effective size

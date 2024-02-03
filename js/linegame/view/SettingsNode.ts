@@ -25,9 +25,11 @@ export default class SettingsNode extends Node {
    * @param model
    * @param layoutBounds
    * @param levelImages - images for the level-selection buttons, ordered by level
+   * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: HTMLImageElement[], tandem: Tandem ) {
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: HTMLImageElement[],
+                      gameLevels: number[], tandem: Tandem ) {
 
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
@@ -38,7 +40,7 @@ export default class SettingsNode extends Node {
     } );
 
     // Group of LevelSelectionButtons
-    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImages,
+    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImages, gameLevels,
       tandem.createTandem( 'levelSelectionButtonGroup' ) );
 
     // title is centered on level-selection buttons

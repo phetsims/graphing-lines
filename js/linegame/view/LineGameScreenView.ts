@@ -13,6 +13,7 @@ import level3_svg from '../../../images/usa/level3_svg.js';
 import level4_svg from '../../../images/usa/level4_svg.js';
 import level5_svg from '../../../images/usa/level5_svg.js';
 import level6_svg from '../../../images/usa/level6_svg.js';
+import GLQueryParameters, { NUMBER_OF_GAME_LEVELS } from '../../common/GLQueryParameters.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameModel from '../model/LineGameModel.js';
 import BaseGameScreenView from './BaseGameScreenView.js';
@@ -24,6 +25,7 @@ export default class LineGameScreenView extends BaseGameScreenView {
 
     // Images for the level-selection buttons, ordered by level
     const levelImages = [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ];
+    assert && assert( levelImages.length === NUMBER_OF_GAME_LEVELS );
 
     // functions that create nodes for the game reward, ordered by level
     const rewardNodeFunctions = [
@@ -34,8 +36,9 @@ export default class LineGameScreenView extends BaseGameScreenView {
       GLRewardNode.createPaperAirplaneNodes,
       GLRewardNode.createAssortedNodes
     ];
+    assert && assert( rewardNodeFunctions.length === NUMBER_OF_GAME_LEVELS );
 
-    super( model, levelImages, rewardNodeFunctions, tandem );
+    super( model, GLQueryParameters.gameLevels, levelImages, rewardNodeFunctions, tandem );
   }
 }
 

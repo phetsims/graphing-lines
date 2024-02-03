@@ -15,8 +15,6 @@ const LineGameConstants = {
 
   ORIGIN_OFFSET: new Vector2( 790, 300 ), // graph (0,0) will be positioned at these view coordinates
 
-  NUMBER_OF_GAME_LEVELS: 6,
-
   // fonts
   TITLE_FONT: new PhetFont( { size: 40, weight: 'bold' } ),
   BUTTON_FONT: new PhetFont( { size: 30, weight: 'bold' } ),

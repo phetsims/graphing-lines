@@ -16,7 +16,6 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import GLQueryParameters from '../../common/GLQueryParameters.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
 const BUTTON_WIDTH = 175;
@@ -31,9 +30,10 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
   /**
    * @param model
    * @param levelImages - images for the level-selection buttons, ordered by level
+   * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, levelImages: HTMLImageElement[], tandem: Tandem ) {
+  public constructor( model: LineGameModel, levelImages: HTMLImageElement[], gameLevels: number[], tandem: Tandem ) {
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
     // To give all button icons the same effective size
@@ -59,7 +59,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       } );
     }
 
-    const buttonsPerRow = ( GLQueryParameters.gameLevels.length <= 4 ) ? 4 : 3;
+    const buttonsPerRow = ( gameLevels.length <= 4 ) ? 4 : 3;
 
     super( levelSelectionButtonItems, {
 
@@ -78,7 +78,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
         wrap: true, // start a new row when preferredWidth is reached
         justify: 'center' // horizontal justification
       },
-      gameLevels: GLQueryParameters.gameLevels,
+      gameLevels: gameLevels,
       tandem: tandem
     } );
   }

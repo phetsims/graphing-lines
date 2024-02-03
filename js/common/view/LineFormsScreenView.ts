@@ -66,12 +66,16 @@ export default class LineFormsScreenView extends ScreenView {
       align: 'center'
     } );
 
-    // rendering order
-    this.addChild( controlsParent );
-    this.addChild( graphContentsToggleButton );
-    this.addChild( graphNode );
-    this.addChild( pointToolParent );
-    this.addChild( resetAllButton );
+    const screenViewRootNode = new Node( {
+      children: [
+        controlsParent,
+        graphContentsToggleButton,
+        graphNode,
+        pointToolParent,
+        resetAllButton
+      ]
+    } );
+    this.addChild( screenViewRootNode );
 
     // layout - position of graphNode is determined by model
 

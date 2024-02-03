@@ -16,6 +16,7 @@ import GamePhase from '../model/GamePhase.js';
 import PlayNode from './PlayNode.js';
 import ResultsNode, { RewardNodeFunction } from './ResultsNode.js';
 import SettingsNode from './SettingsNode.js';
+import { Node } from '../../../../scenery/js/imports.js';
 
 export default class BaseGameScreenView extends ScreenView {
 
@@ -47,11 +48,6 @@ export default class BaseGameScreenView extends ScreenView {
     this.playNode = new PlayNode( model, this.layoutBounds, this.visibleBoundsProperty, audioPlayer );
     this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer, rewardNodeFunctions );
 
-    // rendering order
-    this.addChild( this.resultsNode );
-    this.addChild( this.playNode );
-    this.addChild( this.settingsNode );
-
     // game 'phase' changes
     // unlink unnecessary because BaseGameScreenView exists for the lifetime of the sim.
     model.gamePhaseProperty.link( gamePhase => {
@@ -59,6 +55,15 @@ export default class BaseGameScreenView extends ScreenView {
       this.playNode.visible = ( gamePhase === GamePhase.PLAY );
       this.resultsNode.visible = ( gamePhase === GamePhase.RESULTS );
     } );
+
+    const screenViewRootNode = new Node( {
+      children: [
+        this.resultsNode,
+        this.playNode,
+        this.settingsNode
+      ]
+    } );
+    this.addChild( screenViewRootNode );
   }
 
   public override step( dt: number ): void {

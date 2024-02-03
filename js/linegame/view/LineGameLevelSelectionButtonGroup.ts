@@ -20,6 +20,9 @@ import LineGameModel from '../model/LineGameModel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 
+const BUTTON_WIDTH = 175;
+const BUTTON_HEIGHT = 210;
+
 type SelfOptions = EmptySelfOptions;
 
 export type LineGameLevelSelectionButtonGroupOptions = SelfOptions &
@@ -41,8 +44,8 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       levelSelectionButtonOptions: {
         baseColor: 'rgb( 180, 205, 255 )'
       },
-      groupButtonWidth: 175,
-      groupButtonHeight: 210,
+      groupButtonWidth: BUTTON_WIDTH,
+      groupButtonHeight: BUTTON_HEIGHT,
       flowBoxOptions: {
         spacing: 50
       },

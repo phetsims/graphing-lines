@@ -8,24 +8,16 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../phet-core/js/types/PickRequired.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node, NodeOptions, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameModel from '../model/LineGameModel.js';
-import LineGameLevelSelectionButtonGroup, { LineGameLevelSelectionButtonGroupOptions } from './LineGameLevelSelectionButtonGroup.js';
-
-type SelfOptions = {
-  levelSelectionButtonGroupOptions?: StrictOmit<LineGameLevelSelectionButtonGroupOptions, 'tandem'>;
-};
-
-export type SettingsNodeOptions = SelfOptions & PickRequired<NodeOptions, 'tandem'>;
+import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 export default class SettingsNode extends Node {
 
@@ -33,17 +25,11 @@ export default class SettingsNode extends Node {
    * @param model
    * @param layoutBounds
    * @param levelImages - images for the level-selection buttons, ordered by level
-   * @param [providedOptions]
+   * @param tandem
    */
-  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: HTMLImageElement[], providedOptions?: SettingsNodeOptions ) {
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: HTMLImageElement[], tandem: Tandem ) {
 
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
-
-    const options = optionize<SettingsNodeOptions, SelfOptions, NodeOptions>()( {
-
-      // SelfOptions
-      levelSelectionButtonGroupOptions: {}
-    }, providedOptions );
 
     // Title
     const titleText = new Text( GraphingLinesStrings.chooseYourLevelStringProperty, {
@@ -53,9 +39,7 @@ export default class SettingsNode extends Node {
 
     // Group of LevelSelectionButtons
     const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImages,
-      combineOptions<LineGameLevelSelectionButtonGroupOptions>( {
-        tandem: options.tandem.createTandem( 'levelSelectionButtonGroup' )
-      }, options.levelSelectionButtonGroupOptions ) );
+      tandem.createTandem( 'levelSelectionButtonGroup' ) );
 
     // title is centered on level-selection buttons
     const vBox = new VBox( {
@@ -83,13 +67,10 @@ export default class SettingsNode extends Node {
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN
     } );
 
-    options.children = [
-      vBox,
-      timerToggleButton,
-      resetAllButton
-    ];
-
-    super( options );
+    super( {
+      children: [ vBox, timerToggleButton, resetAllButton ],
+      tandem: tandem
+    } );
   }
 }
 

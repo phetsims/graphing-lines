@@ -6,12 +6,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import optionize, { EmptySelfOptions } from '../../../../phet-core/js/optionize.js';
-import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
-import LevelSelectionButtonGroup, { LevelSelectionButtonGroupItem, LevelSelectionButtonGroupOptions } from '../../../../vegas/js/LevelSelectionButtonGroup.js';
+import LevelSelectionButtonGroup, { LevelSelectionButtonGroupItem } from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
@@ -19,38 +17,24 @@ import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 
 const BUTTON_WIDTH = 175;
 const BUTTON_HEIGHT = 210;
 
-type SelfOptions = EmptySelfOptions;
-
-export type LineGameLevelSelectionButtonGroupOptions = SelfOptions &
-  StrictOmit<LevelSelectionButtonGroupOptions, 'levelSelectionButtonOptions'>;
+// Layout of buttons
+const X_SPACING = 40;
+const Y_SPACING = 30;
 
 export default class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
 
   /**
    * @param model
    * @param levelImages - images for the level-selection buttons, ordered by level
-   * @param [providedOptions]
+   * @param tandem
    */
-  public constructor( model: LineGameModel, levelImages: HTMLImageElement[], providedOptions?: LineGameLevelSelectionButtonGroupOptions ) {
+  public constructor( model: LineGameModel, levelImages: HTMLImageElement[], tandem: Tandem ) {
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
-
-    const options = optionize<LineGameLevelSelectionButtonGroupOptions, SelfOptions, LevelSelectionButtonGroupOptions>()( {
-
-      // LevelSelectionButtonGroupOptions
-      levelSelectionButtonOptions: {
-        baseColor: 'rgb( 180, 205, 255 )'
-      },
-      groupButtonWidth: BUTTON_WIDTH,
-      groupButtonHeight: BUTTON_HEIGHT,
-      flowBoxOptions: {
-        spacing: 50
-      },
-      gameLevels: GLQueryParameters.gameLevels
-    }, providedOptions );
 
     // To give all button icons the same effective size
     const iconAlignGroup = new AlignGroup();
@@ -75,7 +59,28 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       } );
     }
 
-    super( levelSelectionButtonItems, options );
+    const buttonsPerRow = ( GLQueryParameters.gameLevels.length <= 4 ) ? 4 : 3;
+
+    super( levelSelectionButtonItems, {
+
+      // LevelSelectionButtonGroupOptions
+      levelSelectionButtonOptions: {
+        baseColor: 'rgb( 180, 205, 255 )'
+      },
+      groupButtonWidth: BUTTON_WIDTH,
+      groupButtonHeight: BUTTON_HEIGHT,
+
+      // A maximum number of buttons per row, wrapping to a new row
+      flowBoxOptions: {
+        spacing: X_SPACING, // horizontal spacing
+        lineSpacing: Y_SPACING, // vertical spacing
+        preferredWidth: buttonsPerRow * ( BUTTON_WIDTH + X_SPACING ),
+        wrap: true, // start a new row when preferredWidth is reached
+        justify: 'center' // horizontal justification
+      },
+      gameLevels: GLQueryParameters.gameLevels,
+      tandem: tandem
+    } );
   }
 }
 

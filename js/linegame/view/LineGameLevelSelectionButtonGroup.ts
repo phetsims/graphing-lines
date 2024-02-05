@@ -92,20 +92,21 @@ function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageEle
   // Level N
   const stringProperty = new DerivedStringProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
     pattern => StringUtils.format( pattern, level + 1 ) );
-
   const text = new Text( stringProperty, {
     font: new PhetFont( 40 ),
     maxWidth: 100
   } );
 
-  const image = new AlignBox( new Image( levelImage, { scale: 0.54 } ), {
+  const image = new Image( levelImage, { scale: 0.54 } );
+
+  const alignBox = new AlignBox( image, {
     group: iconAlignGroup
   } );
 
   // 'Level N' centered above image
   return new VBox( {
     spacing: 15,
-    children: [ text, image ]
+    children: [ text, alignBox ]
   } );
 }
 

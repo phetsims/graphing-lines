@@ -489,8 +489,8 @@ export default class PointSlopeEquationNode extends EquationNode {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    // If dynamic strings change, update the layout. xNode.boundsProperty and yNode.boundsProperty are RichText that
-    // are observing a StringProperty. slopeUndefinedStringProperty is used in this.updateLayout.
+    // If dynamic strings change, update the layout. xNode and yNode are RichText that are observing a StringProperty,
+    // observing localBoundsProperty to prevent 'stack size exceeded'. slopeUndefinedStringProperty is used in this.updateLayout.
     const dynamicStringMultilink = Multilink.lazyMultilink(
       [ xText.localBoundsProperty, yText.localBoundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
       () => updateLayout( lineProperty.value )

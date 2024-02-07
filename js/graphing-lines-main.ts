@@ -27,11 +27,14 @@ simLauncher.launch( () => {
     }
   } );
 
+  const regionAndCulturePortrayalProperty = preferencesModel.localizationModel.regionAndCulturePortrayalProperty!;
+  assert && assert( regionAndCulturePortrayalProperty, 'expected regionAndCulturePortrayalProperty to exist' );
+
   const screens = [
     new SlopeScreen( Tandem.ROOT.createTandem( 'slopeScreen' ) ),
     new SlopeInterceptScreen( Tandem.ROOT.createTandem( 'slopeInterceptScreen' ) ),
     new PointSlopeScreen( Tandem.ROOT.createTandem( 'pointSlopeScreen' ) ),
-    new LineGameScreen( preferencesModel, Tandem.ROOT.createTandem( 'lineGameScreen' ) )
+    new LineGameScreen( regionAndCulturePortrayalProperty, Tandem.ROOT.createTandem( 'lineGameScreen' ) )
   ];
 
   const options = {

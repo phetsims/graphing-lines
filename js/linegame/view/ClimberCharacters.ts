@@ -12,17 +12,18 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import { Image, Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
-import BaseGameModel from '../model/BaseGameModel.js';
 import ClimberPortrayal from './ClimberPortrayal.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import RegionAndCulturePortrayal from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 
 export default class ClimberCharacters {
 
   public climberNodes: Node[];
 
-  public constructor( sceneModel: BaseGameModel, climberImages: { CLIMBER_PORTRAYALS: ClimberPortrayal[] } ) {
+  public constructor( regionAndCulturePortrayalProperty: TReadOnlyProperty<RegionAndCulturePortrayal>,
+                      climberImages: { CLIMBER_PORTRAYALS: ClimberPortrayal[] } ) {
 
     const climberSets = climberImages.CLIMBER_PORTRAYALS;
-    const regionAndCulturePortrayalProperty = sceneModel.regionAndCulturePortrayalProperty;
 
     const createVisibleProperty = ( set: ClimberPortrayal ) => {
       return new DerivedProperty( [ regionAndCulturePortrayalProperty ], portrayal => {

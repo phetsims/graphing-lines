@@ -16,11 +16,10 @@ import ChallengeFactory4 from './ChallengeFactory4.js';
 import ChallengeFactory5 from './ChallengeFactory5.js';
 import ChallengeFactory6 from './ChallengeFactory6.js';
 import { NUMBER_OF_GAME_LEVELS } from '../../common/GLQueryParameters.js';
-import PreferencesModel from '../../../../joist/js/preferences/PreferencesModel.js';
 
 export default class LineGameModel extends BaseGameModel {
 
-  public constructor( preferencesModel: PreferencesModel, tandem: Tandem ) {
+  public constructor( tandem: Tandem ) {
 
     // a challenge factory for each level
     const challengeFactories = [
@@ -33,7 +32,7 @@ export default class LineGameModel extends BaseGameModel {
     ];
     assert && assert( challengeFactories.length === NUMBER_OF_GAME_LEVELS );
 
-    super( challengeFactories, preferencesModel, tandem );
+    super( challengeFactories, tandem );
   }
 }
 

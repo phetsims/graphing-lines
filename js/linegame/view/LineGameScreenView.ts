@@ -14,13 +14,17 @@ import BaseGameScreenView from './BaseGameScreenView.js';
 import GLRewardNode from './GLRewardNode.js';
 import ClimberCharacters from './ClimberCharacters.js';
 import ClimberImages from './ClimberImages.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import RegionAndCulturePortrayal from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 
 export default class LineGameScreenView extends BaseGameScreenView {
 
-  public constructor( model: LineGameModel, tandem: Tandem ) {
+  public constructor( model: LineGameModel,
+                      regionAndCulturePortrayalProperty: TReadOnlyProperty<RegionAndCulturePortrayal>,
+                      tandem: Tandem ) {
 
     // Images for the level-selection buttons, ordered by level
-    const climberCharacters = new ClimberCharacters( model, ClimberImages );
+    const climberCharacters = new ClimberCharacters( regionAndCulturePortrayalProperty, ClimberImages );
     const levelImages = climberCharacters.climberNodes;
     assert && assert( levelImages.length === NUMBER_OF_GAME_LEVELS );
 

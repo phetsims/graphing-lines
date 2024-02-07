@@ -21,6 +21,14 @@
     ],
     "simFeatures": {
       "supportsSound": true,
+      "supportedRegionsAndCultures": [
+        "usa",
+        "africa",
+        "africaModest",
+        "asia",
+        "latinAmerica",
+        "oceania"
+      ],
       "supportsDynamicLocale": true,
       "colorProfiles": [
         "default"

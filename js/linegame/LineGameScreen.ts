@@ -14,10 +14,11 @@ import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import LineGameModel from './model/LineGameModel.js';
 import LineGameScreenView from './view/LineGameScreenView.js';
+import PreferencesModel from '../../../joist/js/preferences/PreferencesModel.js';
 
 export default class LineGameScreen extends Screen<LineGameModel, LineGameScreenView> {
 
-  public constructor( tandem: Tandem ) {
+  public constructor( preferencesModel: PreferencesModel, tandem: Tandem ) {
 
     const options = {
       name: GraphingLinesStrings.screen.lineGameStringProperty,
@@ -27,7 +28,7 @@ export default class LineGameScreen extends Screen<LineGameModel, LineGameScreen
     };
 
     super(
-      () => new LineGameModel( tandem.createTandem( 'model' ) ),
+      () => new LineGameModel( preferencesModel, tandem.createTandem( 'model' ) ),
       model => new LineGameScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );

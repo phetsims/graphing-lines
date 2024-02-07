@@ -24,11 +24,11 @@ export default class SettingsNode extends Node {
   /**
    * @param model
    * @param layoutBounds
-   * @param levelImages - images for the level-selection buttons, ordered by level
+   * @param levelImages - Images for the level-selection buttons, ordered by level
    * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: HTMLImageElement[],
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: Node[],
                       gameLevels: number[], tandem: Tandem ) {
 
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );

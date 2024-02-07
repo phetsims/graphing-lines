@@ -28,13 +28,13 @@ export default class BaseGameScreenView extends ScreenView {
   /**
    * @param model
    * @param gameLevels - show buttons for these game levels
-   * @param levelImages - grid of images for the level-selection buttons, ordered by level
+   * @param levelImages - grid of Images for the level-selection buttons, ordered by level
    * @param rewardNodeFunctions - functions that create nodes for the game reward, ordered by level
    * @param tandem
    */
   public constructor( model: BaseGameModel,
                       gameLevels: number[],
-                      levelImages: HTMLImageElement[],
+                      levelImages: Node[],
                       rewardNodeFunctions: RewardNodeFunction[],
                       tandem: Tandem ) {
 

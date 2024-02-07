@@ -29,6 +29,8 @@ import GamePhase from './GamePhase.js';
 import GraphTheLine from './GraphTheLine.js';
 import ManipulationMode from './ManipulationMode.js';
 import PlayState from './PlayState.js';
+import PreferencesModel from '../../../../joist/js/preferences/PreferencesModel.js';
+import RegionAndCulturePortrayal from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 
 // constants
 const INITIAL_GAME_PHASE = GamePhase.SETTINGS;
@@ -56,8 +58,9 @@ export default class BaseGameModel {
   public readonly bestTimeProperties: Property<number | null>[]; // null if a level has no best time yet
   public isNewBestTime: boolean;
   public readonly gamePhaseProperty: EnumerationProperty<GamePhase>; // set this using setGamePhase
+  public regionAndCulturePortrayalProperty: Property<RegionAndCulturePortrayal>;
 
-  protected constructor( challengeFactories: BaseChallengeFactory[], tandem: Tandem ) {
+  protected constructor( challengeFactories: BaseChallengeFactory[], preferencesModel: PreferencesModel, tandem: Tandem ) {
 
     this.challengeFactories = challengeFactories;
 
@@ -144,6 +147,11 @@ export default class BaseGameModel {
     if ( GLQueryParameters.verifyChallenges ) {
       this.verifyChallenges();
     }
+
+    assert && assert( preferencesModel.localizationModel.regionAndCulturePortrayalProperty !== undefined,
+      'The preferencesModel needs portrayals so its regionAndCulturePortrayalProperty is defined. ' +
+      'Currently, regionAndCulturePortrayalProperty = ' + preferencesModel.localizationModel.regionAndCulturePortrayalProperty );
+    this.regionAndCulturePortrayalProperty = preferencesModel.localizationModel.regionAndCulturePortrayalProperty!;
   }
 
   /**

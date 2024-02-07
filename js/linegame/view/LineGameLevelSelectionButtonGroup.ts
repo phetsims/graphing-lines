@@ -8,7 +8,7 @@
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import LevelSelectionButtonGroup, { LevelSelectionButtonGroupItem } from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import graphingLines from '../../graphingLines.js';
@@ -29,11 +29,11 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 
   /**
    * @param model
-   * @param levelImages - images for the level-selection buttons, ordered by level
+   * @param levelImages - Images for the level-selection buttons, ordered by level
    * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, levelImages: HTMLImageElement[], gameLevels: number[], tandem: Tandem ) {
+  public constructor( model: LineGameModel, levelImages: Node[], gameLevels: number[], tandem: Tandem ) {
     assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
 
     // To give all button icons the same effective size
@@ -87,7 +87,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 /**
  * Creates an icon for a LevelSelectionButton.
  */
-function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageElement, iconAlignGroup: AlignGroup ): Node {
+function createLevelSelectionButtonIcon( level: number, levelImage: Node, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
   const stringProperty = new DerivedStringProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
@@ -97,9 +97,7 @@ function createLevelSelectionButtonIcon( level: number, levelImage: HTMLImageEle
     maxWidth: 100
   } );
 
-  const image = new Image( levelImage, { scale: 0.54 } );
-
-  const alignBox = new AlignBox( image, {
+  const alignBox = new AlignBox( levelImage, {
     group: iconAlignGroup
   } );
 

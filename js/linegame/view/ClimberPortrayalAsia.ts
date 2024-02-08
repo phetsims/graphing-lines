@@ -19,8 +19,8 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const asiaStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.asiaStringProperty;
 
 const ClimberPortrayalAsia = new ClimberPortrayal(
-  ASIA_REGION_AND_CULTURE_ID,
   asiaStringProperty,
+  ASIA_REGION_AND_CULTURE_ID,
   [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 

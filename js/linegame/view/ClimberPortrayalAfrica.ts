@@ -19,8 +19,8 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const africaStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.africaStringProperty;
 
 const ClimberPortrayalAfrica = new ClimberPortrayal(
-  AFRICA_REGION_AND_CULTURE_ID,
   africaStringProperty,
+  AFRICA_REGION_AND_CULTURE_ID,
   [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 

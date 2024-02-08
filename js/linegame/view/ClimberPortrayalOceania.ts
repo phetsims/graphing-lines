@@ -19,8 +19,8 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const oceaniaStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.oceaniaStringProperty;
 
 const ClimberPortrayalOceania = new ClimberPortrayal(
-  OCEANIA_REGION_AND_CULTURE_ID,
   oceaniaStringProperty,
+  OCEANIA_REGION_AND_CULTURE_ID,
   [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 

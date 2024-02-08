@@ -19,8 +19,8 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const latinAmericaStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.latinAmericaStringProperty;
 
 const ClimberPortrayalLatinAmerica = new ClimberPortrayal(
-  LATIN_AMERICA_REGION_AND_CULTURE_ID,
   latinAmericaStringProperty,
+  LATIN_AMERICA_REGION_AND_CULTURE_ID,
   [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 

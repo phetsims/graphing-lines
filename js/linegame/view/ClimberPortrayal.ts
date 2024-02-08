@@ -1,7 +1,8 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * The ClimberPortrayal defines what is needed for each portrayal in Graphing Lines and Graphing Slope Intercept.
+ * The ClimberPortrayal is the base class that defines what is needed for each portrayal used for the icons on the
+ * level-selection buttons for game screens in Graphing Lines and Graphing Slope Intercept.
  *
  * @author Luisa Vargas
  */
@@ -14,11 +15,11 @@ export default class ClimberPortrayal extends RegionAndCulturePortrayal {
 
   public readonly levelImages: HTMLImageElement[];
 
-  public constructor( regionAndCultureID: RegionAndCultureID,
-                      label: LocalizedStringProperty,
+  public constructor( labelProperty: LocalizedStringProperty,
+                      regionAndCultureID: RegionAndCultureID,
                       levelImages: HTMLImageElement[] ) {
 
-    super( label, regionAndCultureID, {} );
+    super( labelProperty, regionAndCultureID );
 
     this.levelImages = levelImages;
   }

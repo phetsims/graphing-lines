@@ -12,26 +12,15 @@ import LocalizedStringProperty from '../../../../chipper/js/LocalizedStringPrope
 
 export default class ClimberPortrayal extends RegionAndCulturePortrayal {
 
-  public readonly levelOne: HTMLImageElement;
-  public readonly levelTwo: HTMLImageElement;
-  public readonly levelThree: HTMLImageElement;
-  public readonly levelFour: HTMLImageElement;
-  public readonly levelFive?: HTMLImageElement;
-  public readonly levelSix?: HTMLImageElement;
+  public readonly levelImages: HTMLImageElement[];
 
   public constructor( regionAndCultureID: RegionAndCultureID,
                       label: LocalizedStringProperty,
-                      levelOne: HTMLImageElement, levelTwo: HTMLImageElement, levelThree: HTMLImageElement, levelFour: HTMLImageElement,
-                      levelFive?: HTMLImageElement, levelSix?: HTMLImageElement ) {
+                      levelImages: HTMLImageElement[] ) {
 
     super( label, regionAndCultureID, {} );
 
-    this.levelOne = levelOne;
-    this.levelTwo = levelTwo;
-    this.levelThree = levelThree;
-    this.levelFour = levelFour;
-    this.levelFive = levelFive;
-    this.levelSix = levelSix;
+    this.levelImages = levelImages;
   }
 }
 

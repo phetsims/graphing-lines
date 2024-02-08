@@ -21,12 +21,7 @@ const asiaStringProperty = JoistStrings.preferences.tabs.localization.regionAndC
 const ClimberPortrayalAsia = new ClimberPortrayal(
   ASIA_REGION_AND_CULTURE_ID,
   asiaStringProperty,
-  level1_svg,
-  level2_svg,
-  level3_svg,
-  level4_svg,
-  level5_svg,
-  level6_svg
+  [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 
 export default ClimberPortrayalAsia;

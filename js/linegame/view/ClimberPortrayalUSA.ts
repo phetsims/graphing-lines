@@ -21,12 +21,7 @@ const unitedStatesOfAmericaStringProperty = JoistStrings.preferences.tabs.locali
 const ClimberPortrayalUSA = new ClimberPortrayal(
   USA_REGION_AND_CULTURE_ID,
   unitedStatesOfAmericaStringProperty,
-  level1_svg,
-  level2_svg,
-  level3_svg,
-  level4_svg,
-  level5_svg,
-  level6_svg
+  [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 
 export default ClimberPortrayalUSA;

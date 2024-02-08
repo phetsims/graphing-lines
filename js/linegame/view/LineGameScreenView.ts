@@ -24,9 +24,8 @@ export default class LineGameScreenView extends BaseGameScreenView {
                       tandem: Tandem ) {
 
     // Images for the level-selection buttons, ordered by level
-    const climberCharacters = new ClimberCharacters( regionAndCulturePortrayalProperty, ClimberImages );
-    const levelImages = climberCharacters.climberNodes;
-    assert && assert( levelImages.length === NUMBER_OF_GAME_LEVELS );
+    const climberCharacters = new ClimberCharacters( regionAndCulturePortrayalProperty, ClimberImages.CLIMBER_PORTRAYALS );
+    assert && assert( climberCharacters.climberNodes.length === NUMBER_OF_GAME_LEVELS );
 
     // functions that create nodes for the game reward, ordered by level
     const rewardNodeFunctions = [
@@ -39,7 +38,7 @@ export default class LineGameScreenView extends BaseGameScreenView {
     ];
     assert && assert( rewardNodeFunctions.length === NUMBER_OF_GAME_LEVELS );
 
-    super( model, GLQueryParameters.gameLevels, levelImages, rewardNodeFunctions, tandem );
+    super( model, GLQueryParameters.gameLevels, climberCharacters.climberNodes, rewardNodeFunctions, tandem );
   }
 }
 

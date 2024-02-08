@@ -21,12 +21,7 @@ const africaModestStringProperty = JoistStrings.preferences.tabs.localization.re
 const ClimberPortrayalAfrica = new ClimberPortrayal(
   AFRICA_MODEST_REGION_AND_CULTURE_ID,
   africaModestStringProperty,
-  level1_svg,
-  level2_svg,
-  level3_svg,
-  level4_svg,
-  level5_svg,
-  level6_svg
+  [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 
 export default ClimberPortrayalAfrica;

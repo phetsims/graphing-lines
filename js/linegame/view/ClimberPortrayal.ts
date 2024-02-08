@@ -16,15 +16,16 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class ClimberPortrayal extends RegionAndCulturePortrayal {
 
-  public readonly levelImages: HTMLImageElement[];
+  // Images for the climbers, ordered by increasing game level number.
+  private readonly images: HTMLImageElement[];
 
   public constructor( labelProperty: LocalizedStringProperty,
                       regionAndCultureID: RegionAndCultureID,
-                      levelImages: HTMLImageElement[] ) {
+                      images: HTMLImageElement[] ) {
 
     super( labelProperty, regionAndCultureID );
 
-    this.levelImages = levelImages;
+    this.images = images;
   }
 
   /**
@@ -39,15 +40,15 @@ export default class ClimberPortrayal extends RegionAndCulturePortrayal {
     const icons: Node[] = [];
 
     assert && assert( climberPortrayals.length > 0, 'There must be at least 1 element in climberPortrayals.' );
-    const imagesPerPortrayal = climberPortrayals[ 0 ].levelImages.length;
-    assert && assert( _.every( climberPortrayals, climberPortrayal => climberPortrayal.levelImages.length === imagesPerPortrayal ),
+    const imagesPerPortrayal = climberPortrayals[ 0 ].images.length;
+    assert && assert( _.every( climberPortrayals, climberPortrayal => climberPortrayal.images.length === imagesPerPortrayal ),
       `Every element in climberPortrayals must have ${imagesPerPortrayal} levelImages` );
 
     // For each game level ...
     for ( let i = 0; i < imagesPerPortrayal; i++ ) {
 
       // Create a set of images for that game level, one of which will be visible based on regionAndCulturePortrayalProperty.
-      const levelImages = climberPortrayals.map( climberPortrayal => new Image( climberPortrayal.levelImages[ i ], {
+      const levelImages = climberPortrayals.map( climberPortrayal => new Image( climberPortrayal.images[ i ], {
         visibleProperty: new DerivedProperty( [ regionAndCulturePortrayalProperty ],
           regionAndCulturePortrayal => ( regionAndCulturePortrayal === climberPortrayal ) ),
         scale: 0.54

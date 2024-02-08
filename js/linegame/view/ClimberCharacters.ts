@@ -23,7 +23,10 @@ export default class ClimberCharacters {
 
     this.climberNodes = [];
 
+    assert && assert( climberPortrayals.length > 0, 'There must be at least 1 element in climberPortrayals.' );
     const imagesPerPortrayal = climberPortrayals[ 0 ].levelImages.length;
+    assert && assert( _.every( climberPortrayals, climberPortrayal => climberPortrayal.levelImages.length === imagesPerPortrayal ),
+      `Every element in climberPortrayals must have ${imagesPerPortrayal} levelImages` );
 
     // For each game level ...
     for ( let i = 0; i < imagesPerPortrayal; i++ ) {

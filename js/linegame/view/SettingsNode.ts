@@ -24,14 +24,14 @@ export default class SettingsNode extends Node {
   /**
    * @param model
    * @param layoutBounds
-   * @param levelImages - Images for the level-selection buttons, ordered by level
+   * @param climberNodes - Nodes that show 'climber' portrayals, for the level-selection buttons, ordered by level
    * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImages: Node[],
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, climberNodes: Node[],
                       gameLevels: number[], tandem: Tandem ) {
 
-    assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
+    assert && assert( climberNodes.length === model.numberOfLevels, 'one image is required for each game level' );
 
     // Title
     const titleText = new Text( GraphingLinesStrings.chooseYourLevelStringProperty, {
@@ -40,7 +40,7 @@ export default class SettingsNode extends Node {
     } );
 
     // Group of LevelSelectionButtons
-    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImages, gameLevels,
+    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, climberNodes, gameLevels,
       tandem.createTandem( 'levelSelectionButtonGroup' ) );
 
     // title is centered on level-selection buttons

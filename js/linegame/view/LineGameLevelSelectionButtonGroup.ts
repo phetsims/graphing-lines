@@ -29,12 +29,12 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 
   /**
    * @param model
-   * @param levelImages - Images for the level-selection buttons, ordered by level
+   * @param climberNodes - Nodes that show 'climber' portrayals, for the level-selection buttons, ordered by level
    * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, levelImages: Node[], gameLevels: number[], tandem: Tandem ) {
-    assert && assert( levelImages.length === model.numberOfLevels, 'one image is required for each game level' );
+  public constructor( model: LineGameModel, climberNodes: Node[], gameLevels: number[], tandem: Tandem ) {
+    assert && assert( climberNodes.length === model.numberOfLevels, 'one image is required for each game level' );
 
     // To give all button icons the same effective size
     const iconAlignGroup = new AlignGroup();
@@ -43,7 +43,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
     const levelSelectionButtonItems: LevelSelectionButtonGroupItem[] = [];
     for ( let level = 0; level < model.numberOfLevels; level++ ) {
       levelSelectionButtonItems.push( {
-        icon: createLevelSelectionButtonIcon( level, levelImages[ level ], iconAlignGroup ),
+        icon: createLevelSelectionButtonIcon( level, climberNodes[ level ], iconAlignGroup ),
         scoreProperty: model.bestScoreProperties[ level ],
         options: {
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
@@ -87,7 +87,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 /**
  * Creates an icon for a LevelSelectionButton.
  */
-function createLevelSelectionButtonIcon( level: number, levelImage: Node, iconAlignGroup: AlignGroup ): Node {
+function createLevelSelectionButtonIcon( level: number, climberNode: Node, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
   const stringProperty = new DerivedStringProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
@@ -97,7 +97,7 @@ function createLevelSelectionButtonIcon( level: number, levelImage: Node, iconAl
     maxWidth: 100
   } );
 
-  const alignBox = new AlignBox( levelImage, {
+  const alignBox = new AlignBox( climberNode, {
     group: iconAlignGroup
   } );
 

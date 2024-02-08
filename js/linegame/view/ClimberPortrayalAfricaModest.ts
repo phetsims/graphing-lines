@@ -4,7 +4,6 @@
  * This file instantiates the Africa modest region and culture portrayals.
  *
  * @author Luisa Vargas
- *
  */
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
@@ -20,12 +19,12 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const africaModestStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.africaModestStringProperty;
 
 const ClimberPortrayalAfrica = new ClimberPortrayal(
+  AFRICA_MODEST_REGION_AND_CULTURE_ID,
   africaModestStringProperty,
   level1_svg,
   level2_svg,
   level3_svg,
   level4_svg,
-  AFRICA_MODEST_REGION_AND_CULTURE_ID,
   level5_svg,
   level6_svg
 );

@@ -4,7 +4,6 @@
  * This file instantiates the Oceania region and culture portrayals.
  *
  * @author Luisa Vargas
- *
  */
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
@@ -20,12 +19,12 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const oceaniaStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.oceaniaStringProperty;
 
 const ClimberPortrayalOceania = new ClimberPortrayal(
+  OCEANIA_REGION_AND_CULTURE_ID,
   oceaniaStringProperty,
   level1_svg,
   level2_svg,
   level3_svg,
   level4_svg,
-  OCEANIA_REGION_AND_CULTURE_ID,
   level5_svg,
   level6_svg
 );

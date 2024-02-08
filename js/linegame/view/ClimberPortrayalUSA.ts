@@ -4,7 +4,6 @@
  * This file instantiates the USA region and culture portrayals.
  *
  * @author Luisa Vargas
- *
  */
 
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
@@ -20,12 +19,12 @@ import ClimberPortrayal from './ClimberPortrayal.js';
 const unitedStatesOfAmericaStringProperty = JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.unitedStatesOfAmericaStringProperty;
 
 const ClimberPortrayalUSA = new ClimberPortrayal(
+  USA_REGION_AND_CULTURE_ID,
   unitedStatesOfAmericaStringProperty,
   level1_svg,
   level2_svg,
   level3_svg,
   level4_svg,
-  USA_REGION_AND_CULTURE_ID,
   level5_svg,
   level6_svg
 );

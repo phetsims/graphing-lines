@@ -1,7 +1,7 @@
 // Copyright 2024, University of Colorado Boulder
 
 /**
- * The ClimberPortrayal is the base class that defines what is needed for each portrayal used for the icons on the
+ * The ClimberPortrayal is the class that defines what is needed for each portrayal used for the icons on the
  * level-selection buttons for game screens in Graphing Lines and Graphing Slope Intercept.
  *
  * @author Luisa Vargas

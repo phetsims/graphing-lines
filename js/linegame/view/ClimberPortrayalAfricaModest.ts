@@ -16,10 +16,10 @@ import level4_svg from '../../../images/africa-modest/level4_svg.js';
 import level5_svg from '../../../images/africa/level5_svg.js';
 import level6_svg from '../../../images/africa-modest/level6_svg.js';
 
-const ClimberPortrayalAfrica = new ClimberPortrayal(
+const ClimberPortrayalAfricaModest = new ClimberPortrayal(
   JoistStrings.preferences.tabs.localization.regionAndCulture.portrayalSets.africaModestStringProperty,
   AFRICA_MODEST_REGION_AND_CULTURE_ID,
   [ level1_svg, level2_svg, level3_svg, level4_svg, level5_svg, level6_svg ]
 );
 
-export default ClimberPortrayalAfrica;
+export default ClimberPortrayalAfricaModest;

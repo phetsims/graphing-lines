@@ -15,7 +15,7 @@ import PointSlopeScreen from './pointslope/PointSlopeScreen.js';
 import SlopeScreen from './slope/SlopeScreen.js';
 import SlopeInterceptScreen from './slopeintercept/SlopeInterceptScreen.js';
 import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
-import ClimberImages from './linegame/view/ClimberImages.js';
+import LineGameConstants from './linegame/LineGameConstants.js';
 
 simLauncher.launch( () => {
 
@@ -23,7 +23,7 @@ simLauncher.launch( () => {
 
   const preferencesModel = new PreferencesModel( {
     localizationOptions: {
-      portrayals: ClimberImages.CLIMBER_PORTRAYALS
+      portrayals: LineGameConstants.CLIMBER_PORTRAYALS
     }
   } );
 

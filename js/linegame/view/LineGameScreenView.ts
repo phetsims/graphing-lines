@@ -13,9 +13,9 @@ import LineGameModel from '../model/LineGameModel.js';
 import BaseGameScreenView from './BaseGameScreenView.js';
 import GLRewardNode from './GLRewardNode.js';
 import ClimberCharacters from './ClimberCharacters.js';
-import ClimberImages from './ClimberImages.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import RegionAndCulturePortrayal from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
+import LineGameConstants from '../LineGameConstants.js';
 
 export default class LineGameScreenView extends BaseGameScreenView {
 
@@ -24,7 +24,7 @@ export default class LineGameScreenView extends BaseGameScreenView {
                       tandem: Tandem ) {
 
     // Images for the level-selection buttons, ordered by level
-    const climberCharacters = new ClimberCharacters( regionAndCulturePortrayalProperty, ClimberImages.CLIMBER_PORTRAYALS );
+    const climberCharacters = new ClimberCharacters( regionAndCulturePortrayalProperty, LineGameConstants.CLIMBER_PORTRAYALS );
     assert && assert( climberCharacters.climberNodes.length === NUMBER_OF_GAME_LEVELS );
 
     // functions that create nodes for the game reward, ordered by level

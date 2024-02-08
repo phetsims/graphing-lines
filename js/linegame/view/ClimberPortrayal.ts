@@ -7,12 +7,12 @@
  * @author Luisa Vargas
  */
 
-import RegionAndCulturePortrayal, { RegionAndCultureID } from '../../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
-import graphingLines from '../../../graphingLines.js';
-import LocalizedStringProperty from '../../../../../chipper/js/LocalizedStringProperty.js';
-import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
-import { Image, Node } from '../../../../../scenery/js/imports.js';
-import DerivedProperty from '../../../../../axon/js/DerivedProperty.js';
+import RegionAndCulturePortrayal, { RegionAndCultureID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
+import graphingLines from '../../graphingLines.js';
+import LocalizedStringProperty from '../../../../chipper/js/LocalizedStringProperty.js';
+import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { Image, Node } from '../../../../scenery/js/imports.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 
 export default class ClimberPortrayal extends RegionAndCulturePortrayal {
 

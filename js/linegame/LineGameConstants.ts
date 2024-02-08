@@ -10,12 +10,12 @@ import Vector2 from '../../../dot/js/Vector2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import GLConstants from '../common/GLConstants.js';
 import graphingLines from '../graphingLines.js';
-import ClimberPortrayalAfrica from './view/ClimberPortrayalAfrica.js';
-import ClimberPortrayalAfricaModest from './view/ClimberPortrayalAfricaModest.js';
-import ClimberPortrayalAsia from './view/ClimberPortrayalAsia.js';
-import ClimberPortrayalLatinAmerica from './view/ClimberPortrayalLatinAmerica.js';
-import ClimberPortrayalOceania from './view/ClimberPortrayalOceania.js';
-import ClimberPortrayalUSA from './view/ClimberPortrayalUSA.js';
+import ClimberPortrayalAfrica from './view/portrayals/ClimberPortrayalAfrica.js';
+import ClimberPortrayalAfricaModest from './view/portrayals/ClimberPortrayalAfricaModest.js';
+import ClimberPortrayalAsia from './view/portrayals/ClimberPortrayalAsia.js';
+import ClimberPortrayalLatinAmerica from './view/portrayals/ClimberPortrayalLatinAmerica.js';
+import ClimberPortrayalOceania from './view/portrayals/ClimberPortrayalOceania.js';
+import ClimberPortrayalUSA from './view/portrayals/ClimberPortrayalUSA.js';
 
 const LineGameConstants = {
 

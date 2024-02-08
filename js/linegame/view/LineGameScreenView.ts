@@ -15,7 +15,7 @@ import GLRewardNode from './GLRewardNode.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import RegionAndCulturePortrayal from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import LineGameConstants from '../LineGameConstants.js';
-import ClimberPortrayal from './portrayals/ClimberPortrayal.js';
+import ClimberPortrayal from './ClimberPortrayal.js';
 
 export default class LineGameScreenView extends BaseGameScreenView {
 

@@ -6,7 +6,7 @@
  * @author Luisa Vargas
  */
 
-import ClimberPortrayal from './ClimberPortrayal.js';
+import ClimberPortrayal from './portrayals/ClimberPortrayal.js';
 import JoistStrings from '../../../../joist/js/JoistStrings.js';
 import { AFRICA_MODEST_REGION_AND_CULTURE_ID } from '../../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 import level1_svg from '../../../images/africa/level1_svg.js';

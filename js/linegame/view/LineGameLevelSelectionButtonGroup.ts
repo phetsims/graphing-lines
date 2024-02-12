@@ -18,12 +18,12 @@ import LineGameModel from '../model/LineGameModel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 
-const BUTTON_WIDTH = 175;
-const BUTTON_HEIGHT = 210;
+const BUTTON_WIDTH = 200;
+const BUTTON_HEIGHT = 250;
 
 // Layout of buttons
-const X_SPACING = 40;
-const Y_SPACING = 30;
+const X_SPACING = 25;
+const Y_SPACING = 25;
 
 export default class LineGameLevelSelectionButtonGroup extends LevelSelectionButtonGroup {
 
@@ -65,7 +65,8 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 
       // LevelSelectionButtonGroupOptions
       levelSelectionButtonOptions: {
-        baseColor: 'rgb( 180, 205, 255 )'
+        baseColor: 'rgb( 180, 205, 255 )',
+        iconToScoreDisplayYSpace: 5
       },
       groupButtonWidth: BUTTON_WIDTH,
       groupButtonHeight: BUTTON_HEIGHT,
@@ -103,7 +104,7 @@ function createLevelSelectionButtonIcon( level: number, climberNode: Node, iconA
 
   // 'Level N' centered above image
   return new VBox( {
-    spacing: 15,
+    spacing: 5,
     children: [ text, alignBox ]
   } );
 }

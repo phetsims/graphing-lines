@@ -18,20 +18,21 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameModel from '../model/LineGameModel.js';
 import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 
 export default class SettingsNode extends Node {
 
   /**
    * @param model
    * @param layoutBounds
-   * @param climberNodes - Nodes that show 'climber' portrayals, for the level-selection buttons, ordered by level
+   * @param levelImageProperties - images for the level-selection buttons, ordered by level
    * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, layoutBounds: Bounds2, climberNodes: Node[],
+  public constructor( model: LineGameModel, layoutBounds: Bounds2, levelImageProperties: LocalizedImageProperty[],
                       gameLevels: number[], tandem: Tandem ) {
 
-    assert && assert( climberNodes.length === model.numberOfLevels, 'one image is required for each game level' );
+    assert && assert( levelImageProperties.length === model.numberOfLevels, 'one image is required for each game level' );
 
     // Title
     const titleText = new Text( GraphingLinesStrings.chooseYourLevelStringProperty, {
@@ -40,7 +41,7 @@ export default class SettingsNode extends Node {
     } );
 
     // Group of LevelSelectionButtons
-    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, climberNodes, gameLevels,
+    const levelSelectionButtonGroup = new LineGameLevelSelectionButtonGroup( model, levelImageProperties, gameLevels,
       tandem.createTandem( 'levelSelectionButtonGroup' ) );
 
     // title is centered on level-selection buttons

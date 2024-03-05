@@ -10,12 +10,6 @@ import Vector2 from '../../../dot/js/Vector2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import GLConstants from '../common/GLConstants.js';
 import graphingLines from '../graphingLines.js';
-import ClimberPortrayalAfrica from './view/ClimberPortrayalAfrica.js';
-import ClimberPortrayalAfricaModest from './view/ClimberPortrayalAfricaModest.js';
-import ClimberPortrayalAsia from './view/ClimberPortrayalAsia.js';
-import ClimberPortrayalLatinAmerica from './view/ClimberPortrayalLatinAmerica.js';
-import ClimberPortrayalOceania from './view/ClimberPortrayalOceania.js';
-import ClimberPortrayalUSA from './view/ClimberPortrayalUSA.js';
 
 const LineGameConstants = {
 
@@ -40,17 +34,7 @@ const LineGameConstants = {
   FACE_DIAMETER: 120,
   MANIPULATOR_RADIUS: GLConstants.MANIPULATOR_RADIUS, // radius of the manipulators, in model units
   POINT_RADIUS: 0.25, // radius of plotted points, in model units
-  POINT_TOOL_SCALE: 0.95,
-
-  // Region and Culture: portrayals for the icons on level-selection buttons
-  CLIMBER_PORTRAYALS: [
-    ClimberPortrayalAfrica,
-    ClimberPortrayalAfricaModest,
-    ClimberPortrayalAsia,
-    ClimberPortrayalLatinAmerica,
-    ClimberPortrayalOceania,
-    ClimberPortrayalUSA
-  ]
+  POINT_TOOL_SCALE: 0.95
 };
 
 graphingLines.register( 'LineGameConstants', LineGameConstants );

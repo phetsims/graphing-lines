@@ -17,6 +17,7 @@ import PlayNode from './PlayNode.js';
 import ResultsNode, { RewardNodeFunction } from './ResultsNode.js';
 import SettingsNode from './SettingsNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 
 export default class BaseGameScreenView extends ScreenView {
 
@@ -28,13 +29,13 @@ export default class BaseGameScreenView extends ScreenView {
   /**
    * @param model
    * @param gameLevels - show buttons for these game levels
-   * @param climberNodes - Nodes that show 'climber' portrayals, for the level-selection buttons, ordered by level
+   * @param levelImageProperties - images for the level-selection buttons, ordered by level
    * @param rewardNodeFunctions - functions that create nodes for the game reward, ordered by level
    * @param tandem
    */
   public constructor( model: BaseGameModel,
                       gameLevels: number[],
-                      climberNodes: Node[],
+                      levelImageProperties: LocalizedImageProperty[],
                       rewardNodeFunctions: RewardNodeFunction[],
                       tandem: Tandem ) {
 
@@ -46,7 +47,7 @@ export default class BaseGameScreenView extends ScreenView {
     // sounds
     const audioPlayer = new GameAudioPlayer();
 
-    this.settingsNode = new SettingsNode( model, this.layoutBounds, climberNodes, gameLevels, tandem.createTandem( 'settingsNode' ) );
+    this.settingsNode = new SettingsNode( model, this.layoutBounds, levelImageProperties, gameLevels, tandem.createTandem( 'settingsNode' ) );
     this.playNode = new PlayNode( model, this.layoutBounds, this.visibleBoundsProperty, audioPlayer );
     this.resultsNode = new ResultsNode( model, this.layoutBounds, audioPlayer, rewardNodeFunctions );
 

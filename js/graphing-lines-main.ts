@@ -14,31 +14,19 @@ import LineGameScreen from './linegame/LineGameScreen.js';
 import PointSlopeScreen from './pointslope/PointSlopeScreen.js';
 import SlopeScreen from './slope/SlopeScreen.js';
 import SlopeInterceptScreen from './slopeintercept/SlopeInterceptScreen.js';
-import PreferencesModel from '../../joist/js/preferences/PreferencesModel.js';
-import LineGameConstants from './linegame/LineGameConstants.js';
 
 simLauncher.launch( () => {
 
   const titleStringProperty = GraphingLinesStrings[ 'graphing-lines' ].titleStringProperty;
 
-  const preferencesModel = new PreferencesModel( {
-    localizationOptions: {
-      portrayals: LineGameConstants.CLIMBER_PORTRAYALS
-    }
-  } );
-
-  const regionAndCulturePortrayalProperty = preferencesModel.localizationModel.regionAndCulturePortrayalProperty!;
-  assert && assert( regionAndCulturePortrayalProperty, 'expected regionAndCulturePortrayalProperty to exist' );
-
   const screens = [
     new SlopeScreen( Tandem.ROOT.createTandem( 'slopeScreen' ) ),
     new SlopeInterceptScreen( Tandem.ROOT.createTandem( 'slopeInterceptScreen' ) ),
     new PointSlopeScreen( Tandem.ROOT.createTandem( 'pointSlopeScreen' ) ),
-    new LineGameScreen( regionAndCulturePortrayalProperty, Tandem.ROOT.createTandem( 'lineGameScreen' ) )
+    new LineGameScreen( Tandem.ROOT.createTandem( 'lineGameScreen' ) )
   ];
 
   const options = {
-    preferencesModel: preferencesModel,
     credits: {
       leadDesign: 'Ariel Paul',
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',

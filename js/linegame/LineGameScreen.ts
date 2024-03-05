@@ -14,12 +14,10 @@ import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import LineGameModel from './model/LineGameModel.js';
 import LineGameScreenView from './view/LineGameScreenView.js';
-import TReadOnlyProperty from '../../../axon/js/TReadOnlyProperty.js';
-import RegionAndCulturePortrayal from '../../../joist/js/preferences/RegionAndCulturePortrayal.js';
 
 export default class LineGameScreen extends Screen<LineGameModel, LineGameScreenView> {
 
-  public constructor( regionAndCulturePortrayalProperty: TReadOnlyProperty<RegionAndCulturePortrayal>, tandem: Tandem ) {
+  public constructor( tandem: Tandem ) {
 
     const options = {
       name: GraphingLinesStrings.screen.lineGameStringProperty,
@@ -30,7 +28,7 @@ export default class LineGameScreen extends Screen<LineGameModel, LineGameScreen
 
     super(
       () => new LineGameModel( tandem.createTandem( 'model' ) ),
-      model => new LineGameScreenView( model, regionAndCulturePortrayalProperty, tandem.createTandem( 'view' ) ),
+      model => new LineGameScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );
   }

@@ -8,7 +8,7 @@
 
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { AlignBox, AlignGroup, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import { AlignBox, AlignGroup, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
 import LevelSelectionButtonGroup, { LevelSelectionButtonGroupItem } from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import graphingLines from '../../graphingLines.js';
@@ -17,6 +17,7 @@ import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 
 const BUTTON_WIDTH = 200;
 const BUTTON_HEIGHT = 250;
@@ -29,12 +30,12 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 
   /**
    * @param model
-   * @param climberNodes - Nodes that show 'climber' portrayals, for the level-selection buttons, ordered by level
+   * @param levelImageProperties - images for the level-selection buttons, ordered by level
    * @param gameLevels - show buttons for these game levels
    * @param tandem
    */
-  public constructor( model: LineGameModel, climberNodes: Node[], gameLevels: number[], tandem: Tandem ) {
-    assert && assert( climberNodes.length === model.numberOfLevels, 'one image is required for each game level' );
+  public constructor( model: LineGameModel, levelImageProperties: LocalizedImageProperty[], gameLevels: number[], tandem: Tandem ) {
+    assert && assert( levelImageProperties.length === model.numberOfLevels, 'one image is required for each game level' );
 
     // To give all button icons the same effective size
     const iconAlignGroup = new AlignGroup();
@@ -43,7 +44,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
     const levelSelectionButtonItems: LevelSelectionButtonGroupItem[] = [];
     for ( let level = 0; level < model.numberOfLevels; level++ ) {
       levelSelectionButtonItems.push( {
-        icon: createLevelSelectionButtonIcon( level, climberNodes[ level ], iconAlignGroup ),
+        icon: createLevelSelectionButtonIcon( level, levelImageProperties[ level ], iconAlignGroup ),
         scoreProperty: model.bestScoreProperties[ level ],
         options: {
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
@@ -88,7 +89,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
 /**
  * Creates an icon for a LevelSelectionButton.
  */
-function createLevelSelectionButtonIcon( level: number, climberNode: Node, iconAlignGroup: AlignGroup ): Node {
+function createLevelSelectionButtonIcon( level: number, imageProperty: LocalizedImageProperty, iconAlignGroup: AlignGroup ): Node {
 
   // Level N
   const stringProperty = new DerivedStringProperty( [ GraphingLinesStrings.pattern_Level_0StringProperty ],
@@ -98,7 +99,9 @@ function createLevelSelectionButtonIcon( level: number, climberNode: Node, iconA
     maxWidth: 100
   } );
 
-  const alignBox = new AlignBox( climberNode, {
+  const image = new Image( imageProperty, { scale: 0.54 } );
+
+  const alignBox = new AlignBox( image, {
     group: iconAlignGroup
   } );
 

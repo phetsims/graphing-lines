@@ -26,11 +26,11 @@
         "africaModest",
         "asia",
         "latinAmerica",
-        "multi",
         "oceania",
+        "random",
         "usa"
       ],
-      "defaultRegionAndCulture": "multi",
+      "defaultRegionAndCulture": "random",
       "supportsDynamicLocale": true,
       "colorProfiles": [
         "default"

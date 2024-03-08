@@ -22,13 +22,15 @@
     "simFeatures": {
       "supportsSound": true,
       "supportedRegionsAndCultures": [
-        "usa",
         "africa",
         "africaModest",
         "asia",
         "latinAmerica",
-        "oceania"
+        "multi",
+        "oceania",
+        "usa"
       ],
+      "defaultRegionAndCulture": "multi",
       "supportsDynamicLocale": true,
       "colorProfiles": [
         "default"

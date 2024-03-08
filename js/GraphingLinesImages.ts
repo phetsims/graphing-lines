@@ -37,52 +37,52 @@ import usaLevel6_svg from '../images/usaLevel6_svg.js';
 
 const GraphingLinesImages = {
   level1ImageProperty: new LocalizedImageProperty( 'level1', {
-    usa: usaLevel1_svg,
     africa: africaLevel1_svg,
     africaModest: africaLevel1_svg,
     asia: asiaLevel1_svg,
     latinAmerica: latinAmericaLevel1_svg,
-    oceania: asiaLevel1_svg
+    oceania: asiaLevel1_svg,
+    usa: usaLevel1_svg
   } ),
   level2ImageProperty: new LocalizedImageProperty( 'level2', {
-    usa: usaLevel2_svg,
     africa: africaLevel2_svg,
     africaModest: africaLevel2_svg,
     asia: asiaLevel2_svg,
     latinAmerica: latinAmericaLevel2_svg,
-    oceania: asiaLevel2_svg
+    oceania: asiaLevel2_svg,
+    usa: usaLevel2_svg
   } ),
   level3ImageProperty: new LocalizedImageProperty( 'level3', {
-    usa: usaLevel3_svg,
     africa: africaLevel3_svg,
     africaModest: africaLevel3_svg,
     asia: asiaLevel3_svg,
     latinAmerica: latinAmericaLevel3_svg,
-    oceania: oceaniaLevel3_svg
+    oceania: oceaniaLevel3_svg,
+    usa: usaLevel3_svg
   } ),
   level4ImageProperty: new LocalizedImageProperty( 'level4', {
-    usa: usaLevel4_svg,
     africa: africaLevel4_svg,
     africaModest: africaModestLevel4_svg,
     asia: asiaLevel4_svg,
     latinAmerica: latinAmericaLevel4_svg,
-    oceania: asiaLevel4_svg
+    oceania: asiaLevel4_svg,
+    usa: usaLevel4_svg
   } ),
   level5ImageProperty: new LocalizedImageProperty( 'level5', {
-    usa: usaLevel5_svg,
     africa: africaLevel5_svg,
     africaModest: africaLevel5_svg,
     asia: asiaLevel5_svg,
     latinAmerica: latinAmericaLevel5_svg,
-    oceania: oceaniaLevel5_svg
+    oceania: oceaniaLevel5_svg,
+    usa: usaLevel5_svg
   } ),
   level6ImageProperty: new LocalizedImageProperty( 'level6', {
-    usa: usaLevel6_svg,
     africa: africaLevel6_svg,
     africaModest: africaModestLevel6_svg,
     asia: asiaLevel6_svg,
     latinAmerica: latinAmericaLevel6_svg,
-    oceania: asiaLevel6_svg
+    oceania: asiaLevel6_svg,
+    usa: usaLevel6_svg
   } )
 };
 

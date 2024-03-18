@@ -50,7 +50,7 @@ export default class LineFormsGraphNode extends GraphNode {
     this.viewProperties = viewProperties;
     this.createDynamicLabel = createDynamicLabel;
 
-    // @ts-expect-error interactiveLineProperty is not Property<Line | NotALine>
+    // @ts-expect-error model.interactiveLineProperty is not Property<Line | NotALine>
     this.interactiveLineNode = new LineNode( model.interactiveLineProperty, model.graph, model.modelViewTransform, {
       createDynamicLabel: createDynamicLabel
     } );

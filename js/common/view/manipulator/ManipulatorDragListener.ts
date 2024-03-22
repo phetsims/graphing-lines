@@ -9,36 +9,23 @@
  */
 
 import graphingLines from '../../../graphingLines.js';
-import { DragListener, DragListenerOptions, PressedDragListener } from '../../../../../scenery/js/imports.js';
-import SoundClip from '../../../../../tambo/js/sound-generators/SoundClip.js';
-import grab_mp3 from '../../../../../tambo/sounds/grab_mp3.js';
-import release_mp3 from '../../../../../tambo/sounds/release_mp3.js';
-import soundManager from '../../../../../tambo/js/soundManager.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
-import GLConstants from '../../GLConstants.js';
+import RichDragListener, { RichDragListenerOptions } from '../../../../../scenery-phet/js/RichDragListener.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type ManipulatorDragListenerOptions = SelfOptions &
-  StrictOmit<DragListenerOptions<PressedDragListener>, 'allowTouchSnag' | 'press' | 'release'>;
+  StrictOmit<RichDragListenerOptions, 'allowTouchSnag'>;
 
-export default class ManipulatorDragListener extends DragListener {
+export default class ManipulatorDragListener extends RichDragListener {
 
   protected constructor( providedOptions: ManipulatorDragListenerOptions ) {
 
-    // Sounds clips associated with dragging a manipulator
-    const grabClip = new SoundClip( grab_mp3, GLConstants.GRAB_RELEASE_SOUND_CLIP_OPTIONS );
-    const releaseClip = new SoundClip( release_mp3, GLConstants.GRAB_RELEASE_SOUND_CLIP_OPTIONS );
-    soundManager.addSoundGenerator( grabClip );
-    soundManager.addSoundGenerator( releaseClip );
-
-    const options = optionize<ManipulatorDragListenerOptions, SelfOptions, DragListenerOptions<PressedDragListener>>()( {
+    const options = optionize<ManipulatorDragListenerOptions, SelfOptions, RichDragListenerOptions>()( {
 
       // DragListenerOptions
-      allowTouchSnag: true,
-      press: () => grabClip.play(),
-      release: () => releaseClip.play()
+      allowTouchSnag: true
     }, providedOptions );
 
     super( options );

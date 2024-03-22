@@ -12,7 +12,6 @@ import Range from '../../../dot/js/Range.js';
 import { FontWeight } from '../../../scenery/js/imports.js';
 import { NumberPickerOptions } from '../../../sun/js/NumberPicker.js';
 import graphingLines from '../graphingLines.js';
-import { SoundClipOptions } from '../../../tambo/js/sound-generators/SoundClip.js';
 
 // see https://github.com/phetsims/graphing-lines/issues/124
 const NUMBER_PICKER_OPTIONS: NumberPickerOptions = {
@@ -23,10 +22,6 @@ const NUMBER_PICKER_OPTIONS: NumberPickerOptions = {
 };
 
 const EQUATION_FONT_WEIGHT: FontWeight = 'bold';
-
-const GRAB_RELEASE_SOUND_CLIP_OPTIONS: SoundClipOptions = {
-  initialOutputLevel: 0.4
-};
 
 const GLConstants = {
 
@@ -42,8 +37,7 @@ const GLConstants = {
   SCREEN_Y_MARGIN: 20,
   RESET_ALL_BUTTON_SCALE: 1.32,
   EQUATION_FONT_WEIGHT: EQUATION_FONT_WEIGHT,
-  NUMBER_PICKER_OPTIONS: NUMBER_PICKER_OPTIONS,
-  GRAB_RELEASE_SOUND_CLIP_OPTIONS: GRAB_RELEASE_SOUND_CLIP_OPTIONS
+  NUMBER_PICKER_OPTIONS: NUMBER_PICKER_OPTIONS
 };
 
 graphingLines.register( 'GLConstants', GLConstants );

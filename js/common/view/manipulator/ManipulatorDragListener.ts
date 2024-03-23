@@ -1,4 +1,4 @@
-// Copyright 2023, University of Colorado Boulder
+// Copyright 2023-2024, University of Colorado Boulder
 
 /**
  * ManipulatorDragListener is the base class for DragListeners that are associated with Manipulators.

@@ -21,6 +21,7 @@ import Line from '../model/Line.js';
 
 // constants
 const BUTTON_FONT = new PhetFont( 18 );
+const SEPARATOR_OPTIONS = { stroke: 'rgb( 212, 212, 212 )' };
 
 export default class EquationAccordionBox extends AccordionBox {
 
@@ -72,15 +73,13 @@ export default class EquationAccordionBox extends AccordionBox {
       eraseLinesButton.enabled = ( length > 0 );
     } );
 
-    const separatorOptions = { stroke: 'rgb( 212, 212, 212 )' };
-
     const contentNode = new VBox( {
       align: 'center',
       spacing: 10,
       children: [
-        new HSeparator( separatorOptions ),
+        new HSeparator( SEPARATOR_OPTIONS ),
         interactiveEquationNode,
-        new HSeparator( separatorOptions ),
+        new HSeparator( SEPARATOR_OPTIONS ),
         buttonGroup
       ]
     } );

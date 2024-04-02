@@ -25,7 +25,6 @@ import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
 import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNode.js';
-import NumberBackgroundNode from '../../common/view/NumberBackgroundNode.js';
 import CoordinatePicker from '../../common/view/picker/CoordinatePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
@@ -33,6 +32,8 @@ import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import NotALine from '../../linegame/model/NotALine.js';
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import StringDisplay, { StringDisplayOptions } from '../../../../scenery-phet/js/StringDisplay.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 type SelfOptions = {
 
@@ -146,18 +147,24 @@ export default class SlopeEquationNode extends EquationNode {
       color: GLColors.pointX1Y1ColorProperty
     } );
     // = unsimplified value
-    const unsimplifiedSlopeOptions = {
-      font: staticFont,
-      decimalPlaces: 0,
-      backgroundFill: GLColors.slopeColorProperty,
-      minWidth: y2Picker.width,
-      minHeight: y2Picker.height - 20
-    };
     const unsimplifiedEqualsNode = new RichText( MathSymbols.EQUAL_TO, staticOptions );
-    const unsimplifiedRiseNode = new NumberBackgroundNode( riseProperty, unsimplifiedSlopeOptions );
-    const unsimplifiedRunNode = new NumberBackgroundNode( runProperty, unsimplifiedSlopeOptions );
-    const unsimplifiedFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
 
+    const stringDisplayOptions: StringDisplayOptions = {
+      size: new Dimension2( 55, 46 ),
+      xMargin: 5,
+      yMargin: 5,
+      alignX: 'center',
+      rectangleOptions: {
+        fill: GLColors.slopeColorProperty,
+        stroke: null
+      },
+      textOptions: {
+        font: staticFont
+      }
+    };
+    const unsimplifiedRiseNode = new StringDisplay( new DerivedStringProperty( [ riseProperty ], rise => Utils.toFixed( rise, 0 ) ), stringDisplayOptions );
+    const unsimplifiedRunNode = new StringDisplay( new DerivedStringProperty( [ runProperty ], run => Utils.toFixed( run, 0 ) ), stringDisplayOptions );
+    const unsimplifiedFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
     const undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
 
     // rendering order

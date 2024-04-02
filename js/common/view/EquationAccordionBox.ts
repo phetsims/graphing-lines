@@ -21,7 +21,7 @@ import Line from '../model/Line.js';
 
 // constants
 const BUTTON_FONT = new PhetFont( 18 );
-const SEPARATOR_OPTIONS = { stroke: 'rgb( 212, 212, 212 )' };
+const SEPARATOR_STROKE = 'rgb( 212, 212, 212 )';
 
 export default class EquationAccordionBox extends AccordionBox {
 
@@ -77,9 +77,21 @@ export default class EquationAccordionBox extends AccordionBox {
       align: 'center',
       spacing: 10,
       children: [
-        new HSeparator( SEPARATOR_OPTIONS ),
+
+        // VBox hides any separator that does not have a visible Node above and below it. We want a separator at the
+        // top of our content, with nothing above it, so we must tell VBox that it should not be treated as a separator.
+        // See https://github.com/phetsims/graphing-lines/issues/149.
+        new HSeparator( {
+          stroke: SEPARATOR_STROKE,
+          layoutOptions: {
+            isSeparator: false,
+            stretch: true
+          }
+        } ),
         interactiveEquationNode,
-        new HSeparator( SEPARATOR_OPTIONS ),
+        new HSeparator( {
+          stroke: SEPARATOR_STROKE
+        } ),
         buttonGroup
       ]
     } );

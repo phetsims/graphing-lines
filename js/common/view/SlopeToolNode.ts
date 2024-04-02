@@ -14,24 +14,30 @@ import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import { Node, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
-import NumberBackgroundNode from './NumberBackgroundNode.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import Utils from '../../../../dot/js/Utils.js';
+import BackgroundNode, { BackgroundNodeOptions } from '../../../../scenery-phet/js/BackgroundNode.js';
 
 // constants
 const VALUE_X_SPACING = 6;
 const VALUE_Y_SPACING = 6;
-const NUMBER_BACKGROUND_NODE_OPTIONS = {
+const TEXT_OPTIONS: TextOptions = {
   font: new PhetFont( { size: 16, weight: 'bold' } ),
-  decimalPlaces: 0,
-  textFill: 'black',
-  backgroundFill: GLColors.slopeColorProperty,
+  fill: 'black'
+};
+const BACKGROUND_NODE_OPTIONS: BackgroundNodeOptions = {
   xMargin: 6,
   yMargin: 6,
-  cornerRadius: 5
+  rectangleOptions: {
+    fill: GLColors.slopeColorProperty,
+    stroke: null,
+    cornerRadius: 5
+  }
 };
 
 export default class SlopeToolNode extends Node {
@@ -53,8 +59,13 @@ export default class SlopeToolNode extends Node {
     this.runProperty = new NumberProperty( lineProperty.value.run );
     this.riseProperty = new NumberProperty( lineProperty.value.rise );
 
-    this.riseValueNode = new NumberBackgroundNode( this.riseProperty, NUMBER_BACKGROUND_NODE_OPTIONS );
-    this.runValueNode = new NumberBackgroundNode( this.runProperty, NUMBER_BACKGROUND_NODE_OPTIONS );
+    const riseStringProperty = new DerivedStringProperty( [ this.riseProperty ], rise => Utils.toFixed( rise, 0 ) );
+    const riseText = new Text( riseStringProperty, TEXT_OPTIONS );
+    this.riseValueNode = new BackgroundNode( riseText, BACKGROUND_NODE_OPTIONS );
+
+    const runStringProperty = new DerivedStringProperty( [ this.runProperty ], run => Utils.toFixed( run, 0 ) );
+    const runText = new Text( runStringProperty, TEXT_OPTIONS );
+    this.runValueNode = new BackgroundNode( runText, BACKGROUND_NODE_OPTIONS );
 
     // Arrows
     const arrowNodeOptions = {

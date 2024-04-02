@@ -38,8 +38,8 @@ export default class SlopeToolNode extends Node {
 
   private readonly riseProperty: Property<number>;
   private readonly runProperty: Property<number>;
-  private readonly riseValueNode: NumberBackgroundNode;
-  private readonly runValueNode: NumberBackgroundNode;
+  private readonly riseValueNode: Node;
+  private readonly runValueNode: Node;
   private readonly riseArrowNode: DimensionalArrowNode;
   private readonly runArrowNode: DimensionalArrowNode;
   private readonly parentNode: Node;

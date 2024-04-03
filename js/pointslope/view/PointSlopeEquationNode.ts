@@ -172,12 +172,15 @@ export default class PointSlopeEquationNode extends EquationNode {
     const xRightParenText = new Text( ')', staticOptions );
     const slopeUndefinedText = new RichText( '?', staticOptions );
 
-    // add all nodes, we'll set which ones are visible bases on desired simplification
-    this.children = [
-      yLeftParenText, yText, yPlusNode, yMinusNode, y1Node, yRightParenText, y1MinusSignNode, equalsText,
-      slopeMinusSignNode, riseNode, runNode, fractionLineNode, xLeftParentText, xText, xPlusNode, xMinusNode, x1Node, xRightParenText,
-      slopeUndefinedText
-    ];
+    // Add all nodes. We'll set which ones are visible based on desired simplification
+    const parentNode = new Node( {
+      children: [
+        yLeftParenText, yText, yPlusNode, yMinusNode, y1Node, yRightParenText, y1MinusSignNode, equalsText,
+        slopeMinusSignNode, riseNode, runNode, fractionLineNode, xLeftParentText, xText, xPlusNode, xMinusNode, x1Node, xRightParenText,
+        slopeUndefinedText
+      ]
+    } );
+    this.addChild( parentNode );
 
     /*
      * Updates the layout to match the desired form of the equation.
@@ -189,12 +192,12 @@ export default class PointSlopeEquationNode extends EquationNode {
       const interactive = options.interactivePoint || options.interactiveSlope;
       const lineColor = line.color;
 
-      // Start with all children invisible and at x=0.
+      // Start with all elements invisible and at x=0.
       // See https://github.com/phetsims/graphing-lines/issues/120
-      const len = this.children.length;
+      const len = parentNode.children.length;
       for ( let i = 0; i < len; i++ ) {
-        this.children[ i ].visible = false;
-        this.children[ i ].x = 0;
+        parentNode.children[ i ].visible = false;
+        parentNode.children[ i ].x = 0;
       }
 
       // Workaround for https://github.com/phetsims/graphing-lines/issues/#114 and https://github.com/phetsims/graphing-lines/issues/#117
@@ -504,10 +507,14 @@ export default class PointSlopeEquationNode extends EquationNode {
       updateLayout( lineProperty.value );
 
       // add undefinedSlopeIndicator
-      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height );
+      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
       this.addChild( undefinedSlopeIndicator );
-      undefinedSlopeIndicator.centerX = this.centerX;
-      undefinedSlopeIndicator.centerY = fractionLineNode.centerY - this.undefinedSlopeYFudgeFactor;
+
+      parentNode.localBoundsProperty.link( localBounds => {
+        undefinedSlopeIndicator.setSize( localBounds.width, localBounds.height );
+        undefinedSlopeIndicator.centerX = parentNode.centerX;
+        undefinedSlopeIndicator.centerY = parentNode.centerY - this.undefinedSlopeYFudgeFactor;
+      } );
 
       undefinedSlopeUpdater = ( line: Line ) => {
         undefinedSlopeIndicator.visible = line.undefinedSlope();

@@ -50,7 +50,7 @@ export default class ResultsNode extends Node {
         }
 
         // game results
-        this.addChild( new LevelCompletedNode(
+        const levelCompletedNode = new LevelCompletedNode(
           model.levelProperty.value + 1,
           model.scoreProperty.value,
           model.getPerfectScore(),
@@ -62,9 +62,12 @@ export default class ResultsNode extends Node {
           () => model.setGamePhase( GamePhase.SETTINGS ),
           {
             starDiameter: 45,
-            centerX: layoutBounds.centerX,
-            centerY: layoutBounds.centerY
-          } ) );
+            contentMaxWidth: 500
+          } );
+        this.addChild( levelCompletedNode );
+        levelCompletedNode.boundsProperty.link( () => {
+          levelCompletedNode.center = layoutBounds.center;
+        } );
       }
       else {
         this.removeAllChildren();

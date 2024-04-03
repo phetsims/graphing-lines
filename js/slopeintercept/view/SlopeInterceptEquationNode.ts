@@ -170,7 +170,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     const yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const slopeUndefinedText = new RichText( '?', staticOptions );
 
-    // Add all nodes, we'll set which ones are visible bases on desired simplification.
+    // Add all nodes. We'll set which ones are visible based on desired simplification.
     const parentNode = new Node( {
       children: [ yText, equalsText, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xText, plusNode, minusNode,
         yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedText ]

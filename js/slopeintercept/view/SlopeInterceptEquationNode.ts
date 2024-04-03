@@ -170,9 +170,12 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     const yInterceptFractionLineNode = new SceneryLine( 0, 0, maxSlopePickerWidth, 0, fractionLineOptions );
     const slopeUndefinedText = new RichText( '?', staticOptions );
 
-    // add all nodes, we'll set which ones are visible bases on desired simplification
-    this.children = [ yText, equalsText, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xText, plusNode, minusNode,
-      yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedText ];
+    // Add all nodes, we'll set which ones are visible bases on desired simplification.
+    const parentNode = new Node( {
+      children: [ yText, equalsText, slopeMinusSignNode, riseNode, runNode, slopeFractionLineNode, xText, plusNode, minusNode,
+        yInterceptMinusSignNode, yInterceptNumeratorNode, yInterceptDenominatorNode, yInterceptFractionLineNode, slopeUndefinedText ]
+    } );
+    this.addChild( parentNode );
 
     /*
      * Updates the layout to match the desired form of the equation.
@@ -186,10 +189,10 @@ export default class SlopeInterceptEquationNode extends EquationNode {
 
       // Start with all children invisible and at x=0.
       // See https://github.com/phetsims/graphing-lines/issues/120
-      const len = this.children.length;
+      const len = parentNode.children.length;
       for ( let i = 0; i < len; i++ ) {
-        this.children[ i ].visible = false;
-        this.children[ i ].x = 0;
+        parentNode.children[ i ].visible = false;
+        parentNode.children[ i ].x = 0;
       }
       slopeUndefinedText.string = ''; // workaround for #114 and #117
 
@@ -464,10 +467,14 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       updateLayout( lineProperty.value );
 
       // add undefinedSlopeIndicator
-      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( this.width, this.height );
+      const undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
       this.addChild( undefinedSlopeIndicator );
-      undefinedSlopeIndicator.centerX = this.centerX;
-      undefinedSlopeIndicator.centerY = slopeFractionLineNode.centerY - this.undefinedSlopeYFudgeFactor;
+
+      parentNode.localBoundsProperty.link( localBounds => {
+        undefinedSlopeIndicator.setSize( localBounds.width, localBounds.height );
+        undefinedSlopeIndicator.centerX = parentNode.centerX;
+        undefinedSlopeIndicator.centerY = parentNode.centerY - this.undefinedSlopeYFudgeFactor;
+      } );
 
       undefinedSlopeUpdater = line => {
         undefinedSlopeIndicator.visible = line.undefinedSlope();

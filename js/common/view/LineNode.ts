@@ -72,6 +72,7 @@ export default class LineNode extends Node {
   private readonly modelViewTransform: ModelViewTransform2;
   private readonly xExtent: number;
   private readonly yExtent: number;
+  private isLineDirty: boolean; // true if the line has changed and we have not called update yet.
   private readonly parentNode: Node; // parent of all children
 
   // One of these will be instantiated, based on the value of SelfOptions.hasArrows.
@@ -102,7 +103,7 @@ export default class LineNode extends Node {
     this.modelViewTransform = modelViewTransform;
     this.xExtent = modelViewTransform.viewToModelDeltaX( LINE_EXTENT );
     this.yExtent = Math.abs( modelViewTransform.viewToModelDeltaY( LINE_EXTENT ) );
-
+    this.isLineDirty = false;
     this.parentNode = new Node();
 
     if ( options.hasArrows ) {
@@ -124,11 +125,24 @@ export default class LineNode extends Node {
         children: [ this.equationNode ]
       } );
       this.parentNode.addChild( this.equationParentNode );
+
+      // If the equation's bounds change because of dynamic strings, and not because the line has changed,
+      // then call update so that the equation gets re-positioned on the line.
+      // See https://github.com/phetsims/graphing-lines/issues/152
+      this.equationNode.localBoundsProperty.link( () => {
+        if ( !this.isLineDirty ) {
+          this.update( lineProperty.value );
+        }
+      } );
     }
 
     this.addChild( this.parentNode );
 
-    const lineObserver = ( line: Line | NotALine ) => this.update( line );
+    const lineObserver = ( line: Line | NotALine ) => {
+      this.isLineDirty = true;
+      this.update( line );
+      this.isLineDirty = false;
+    };
     lineProperty.link( lineObserver ); // unlink in dispose
 
     this.disposeLineNode = () => {

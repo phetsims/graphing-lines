@@ -30,7 +30,9 @@ export default class PlayNode extends Node {
   public constructor( model: LineGameModel, layoutBounds: Bounds2, visibleBoundsProperty: TReadOnlyProperty<Bounds2>,
                       audioPlayer: GameAudioPlayer ) {
 
-    super();
+    super( {
+      isDisposable: false
+    } );
 
     const statusBar = new FiniteStatusBar( layoutBounds, visibleBoundsProperty, model.scoreProperty, {
       createScoreDisplay: scoreProperty => new ScoreDisplayLabeledNumber( scoreProperty, {

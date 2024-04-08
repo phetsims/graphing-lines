@@ -525,6 +525,8 @@ export default class PointSlopeEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposePointSlopeEquationNode = () => {
+      xText.dispose();
+      yText.dispose();
       x1Node.dispose();
       y1Node.dispose();
       slopeUndefinedText.dispose();

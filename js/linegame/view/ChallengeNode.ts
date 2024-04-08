@@ -195,39 +195,45 @@ export default class ChallengeNode extends Node {
 
     // playStateProperty listener
     const playStateObserver = ( state: PlayState ) => {
+      if ( !this.isDisposed ) {
 
-      // visibility of face
-      this.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
-                                state === PlayState.SHOW_ANSWER ||
-                                ( state === PlayState.NEXT && challenge.isCorrect() ) );
+        // visibility of face
+        this.faceNode.visible = ( state === PlayState.TRY_AGAIN ||
+                                  state === PlayState.SHOW_ANSWER ||
+                                  ( state === PlayState.NEXT && challenge.isCorrect() ) );
 
-      // visibility of buttons
-      checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
-      tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
-      showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
-      nextButton.visible = ( state === PlayState.NEXT );
+        // visibility of buttons
+        checkButton.visible = ( state === PlayState.FIRST_CHECK || state === PlayState.SECOND_CHECK );
+        tryAgainButton.visible = ( state === PlayState.TRY_AGAIN );
+        showAnswerButton.visible = ( state === PlayState.SHOW_ANSWER );
+        nextButton.visible = ( state === PlayState.NEXT );
 
-      // dev buttons
-      if ( replayButton && skipButton ) {
-        replayButton.visible = ( state === PlayState.NEXT );
-        skipButton.visible = !replayButton.visible;
+        // dev buttons
+        if ( replayButton && skipButton ) {
+          replayButton.visible = ( state === PlayState.NEXT );
+          skipButton.visible = !replayButton.visible;
+        }
       }
     };
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
     // Move from "Try Again" to "Check" state when the user changes their guess, see graphing-lines#47.
     const guessObserver = ( guess: Line | NotALine ) => {
-      if ( model.playStateProperty.value === PlayState.TRY_AGAIN ) {
+      if ( !this.isDisposed && model.playStateProperty.value === PlayState.TRY_AGAIN ) {
         model.playStateProperty.value = PlayState.SECOND_CHECK;
       }
     };
     challenge.guessProperty.link( guessObserver ); // unlink in dispose
 
     this.disposeChallengeNode = () => {
-      pointToolNode1.dispose();
-      pointToolNode2.dispose();
       model.playStateProperty.unlink( playStateObserver );
       challenge.guessProperty.unlink( guessObserver );
+      checkButton.dispose();
+      tryAgainButton.dispose();
+      showAnswerButton.dispose();
+      nextButton.dispose();
+      pointToolNode1.dispose();
+      pointToolNode2.dispose();
     };
   }
 

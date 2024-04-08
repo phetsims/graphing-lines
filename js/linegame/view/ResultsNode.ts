@@ -26,7 +26,9 @@ export default class ResultsNode extends Node {
 
   public constructor( model: LineGameModel, layoutBounds: Bounds2, audioPlayer: GameAudioPlayer, rewardNodeFunctions: RewardNodeFunction[] ) {
 
-    super();
+    super( {
+      isDisposable: false
+    } );
 
     this.rewardNode = null;
 

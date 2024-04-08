@@ -29,6 +29,7 @@ export default class EquationAccordionBox extends AccordionBox {
                          savedLines: ObservableArray<Line>, expandedProperty: Property<boolean>, tandem: Tandem ) {
 
     const options: AccordionBoxOptions = {
+      isDisposable: false,
       titleNode: titleNode,
       expandedProperty: expandedProperty,
       fill: GLColors.controlPanelFillProperty,

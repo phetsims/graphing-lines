@@ -144,6 +144,9 @@ export default class MakeTheEquationNode extends ChallengeNode {
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
     this.disposeMakeTheEquationNode = () => {
+      titleText.dispose();
+      answerBoxNode.dispose();
+      guessBoxNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
       guessEquationNode.dispose();

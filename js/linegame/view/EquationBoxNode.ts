@@ -27,6 +27,8 @@ export default class EquationBoxNode extends Node {
   private readonly correctIconNode: Path;
   private readonly incorrectIconNode: Path;
 
+  private readonly disposeEquationBoxNode: () => void;
+
   public constructor( titleStringProperty: TReadOnlyProperty<string>, titleColor: TColor, boxSize: Dimension2, equationNode: Node ) {
 
     super();
@@ -78,6 +80,15 @@ export default class EquationBoxNode extends Node {
     // icons are initially hidden
     this.correctIconNode.visible = false;
     this.incorrectIconNode.visible = false;
+
+    this.disposeEquationBoxNode = () => {
+      titleText.dispose();
+    };
+  }
+
+  public override dispose(): void {
+    this.disposeEquationBoxNode();
+    super.dispose();
   }
 
   // Sets the visibility of the correct icon (green check mark).

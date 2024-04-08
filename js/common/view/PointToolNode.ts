@@ -125,6 +125,7 @@ export default class PointToolNode extends Node {
     this.disposePointToolNode = () => {
       updateMultilink.dispose();
       bodyNode.dispose();
+      probeNode.dispose();
       coordinatesProperty.dispose();
     };
   }

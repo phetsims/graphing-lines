@@ -19,12 +19,12 @@ Naming conventions:
 
 Terminology:
 
-- _manipulators_ are the spheres on the graph that the user drags to change some property of a line
+- _manipulators_ are the spheres on the graph that the user drags to change some Property of a line
 - _challenges_ are the individual problems that the user tries to solve
 - a _game_ is a collection of challenges
 
-`Property<T>` is used throughout the model and view for storage of properties and notification of changes. The sim has
-both model-specific properties (found throughout the model) and view-specific properties
+`Property<T>` is used throughout the model and view for storage of Properties and notification of changes. The sim has
+both model-specific Properties (found throughout the model) and view-specific Properties
 (encapsulated in `LineFormsViewProperties`).
 
 `Line` is the primary model type used in all modules. See JSdoc in Line.java and model.md for details.

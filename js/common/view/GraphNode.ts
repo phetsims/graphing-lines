@@ -52,6 +52,7 @@ const MINUS_SIGN_WIDTH = new Text( '-', { font: MAJOR_TICK_FONT } ).width;
 export default class GraphNode extends Node {
 
   private readonly gridNode: GridNode;
+  private readonly disposeGraphNode: () => void;
 
   public constructor( graph: Graph,
                       modelViewTransform: ModelViewTransform2,
@@ -62,16 +63,24 @@ export default class GraphNode extends Node {
     assert && assert( graph.contains( new Vector2( 0, 0 ) ) && graph.contains( new Vector2( 1, 1 ) ) );
 
     const gridNode = new GridNode( graph, modelViewTransform );
+    const xAxisNode = new XAxisNode( graph, modelViewTransform, xAxisLabelStringProperty );
+    const yAxisNode = new YAxisNode( graph, modelViewTransform, yAxisLabelStringProperty );
 
     super( {
-      children: [
-        gridNode,
-        new XAxisNode( graph, modelViewTransform, xAxisLabelStringProperty ),
-        new YAxisNode( graph, modelViewTransform, yAxisLabelStringProperty )
-      ]
+      children: [ gridNode, xAxisNode, yAxisNode ]
     } );
 
     this.gridNode = gridNode;
+
+    this.disposeGraphNode = () => {
+      xAxisNode.dispose();
+      yAxisNode.dispose();
+    };
+  }
+
+  public override dispose(): void {
+    this.disposeGraphNode();
+    super.dispose();
   }
 
   // Sets the visibility of the grid
@@ -176,6 +185,7 @@ class XAxisNode extends Node {
       labelText.left = lineNode.right + AXIS_LABEL_SPACING;
       labelText.centerY = lineNode.centerY;
     } );
+    this.disposeEmitter.addListener( () => labelText.dispose() );
 
     // ticks
     const numberOfTicks = graph.getWidth() + 1;
@@ -220,12 +230,13 @@ class YAxisNode extends Node {
     this.addChild( lineNode );
 
     // label at positive (top) end
-    const labelNode = new RichText( yAxisLabelStringProperty, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
-    this.addChild( labelNode );
-    labelNode.boundsProperty.link( () => {
-      labelNode.centerX = lineNode.centerX;
-      labelNode.bottom = lineNode.top - AXIS_LABEL_SPACING;
+    const labelText = new RichText( yAxisLabelStringProperty, { font: AXIS_LABEL_FONT, maxWidth: 30 } );
+    this.addChild( labelText );
+    labelText.boundsProperty.link( () => {
+      labelText.centerX = lineNode.centerX;
+      labelText.bottom = lineNode.top - AXIS_LABEL_SPACING;
     } );
+    this.disposeEmitter.addListener( () => labelText.dispose() );
 
     // ticks
     const numberOfTicks = graph.getHeight() + 1;

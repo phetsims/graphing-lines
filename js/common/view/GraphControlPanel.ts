@@ -58,6 +58,7 @@ export default class GraphControlPanel extends Panel {
       includeStandardLines: true,
 
       // PanelOptions
+      isDisposable: false,
       fill: GLColors.controlPanelFillProperty,
       stroke: 'black',
       lineWidth: 1,

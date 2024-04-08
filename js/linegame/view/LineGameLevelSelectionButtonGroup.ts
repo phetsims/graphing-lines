@@ -65,6 +65,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
     super( levelSelectionButtonItems, {
 
       // LevelSelectionButtonGroupOptions
+      isDisposable: false,
       levelSelectionButtonOptions: {
         baseColor: 'rgb( 180, 205, 255 )',
         iconToScoreDisplayYSpace: 5
@@ -107,6 +108,7 @@ function createLevelSelectionButtonIcon( level: number, imageProperty: Localized
 
   // 'Level N' centered above image
   return new VBox( {
+    isDisposable: false,
     spacing: 5,
     children: [ text, alignBox ]
   } );

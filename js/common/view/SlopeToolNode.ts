@@ -97,6 +97,8 @@ export default class SlopeToolNode extends Node {
     this.disposeSlopeToolNode = () => {
       this.riseValueNode.dispose();
       this.runValueNode.dispose();
+      this.riseArrowNode.dispose();
+      this.runArrowNode.dispose();
       lineProperty.unlink( lineObserver );
     };
   }

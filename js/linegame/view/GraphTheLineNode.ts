@@ -164,6 +164,10 @@ export default class GraphTheLineNode extends ChallengeNode {
     model.playStateProperty.link( playStateObserver ); // unlink in dispose
 
     this.disposeGraphTheLineNode = () => {
+      titleText.dispose();
+      answerBoxNode.dispose();
+      guessBoxNode.dispose();
+      this.notALineText.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
       guessEquationNode.dispose();

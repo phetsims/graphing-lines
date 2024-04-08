@@ -71,6 +71,7 @@ export default class SettingsNode extends Node {
     } );
 
     super( {
+      isDisposable: false,
       children: [ vBox, timerToggleButton, resetAllButton ],
       tandem: tandem
     } );

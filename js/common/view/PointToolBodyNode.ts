@@ -171,6 +171,7 @@ export default class PointToolBodyNode extends Node {
     } );
 
     this.disposePointToolBodyNode = () => {
+      bodyRectangle.dispose();
       coordinatesText.dispose();
     };
 

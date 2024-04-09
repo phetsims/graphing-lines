@@ -25,7 +25,7 @@ import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
 import PaperAirplaneNode from '../../../../scenery-phet/js/PaperAirplaneNode.js';
 import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
-import { Node, TColor } from '../../../../scenery/js/imports.js';
+import { Color, Node } from '../../../../scenery/js/imports.js';
 import RewardNode from '../../../../vegas/js/RewardNode.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
@@ -132,8 +132,8 @@ function getRandomNonZeroInteger( min: number, max: number ): number {
 // All of these function must have a {Color|String} color parameter.
 //-----------------------------------------------------------------------------------------------
 
-// Creates a random equation with the specified color.
-function createEquationNode( color: TColor ): Node {
+// Creates a random equation with the specified color. The returned Node must be disposed.
+function createEquationNode( color: Color | string ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = SlopeInterceptEquationNode.createDynamicLabel(
@@ -150,8 +150,8 @@ function createEquationNode( color: TColor ): Node {
   return node;
 }
 
-// Creates a random graph with the specified color.
-function createGraphNode( color: TColor ): Node {
+// Creates a random graph with the specified color. The returned Node must be disposed.
+function createGraphNode( color: Color | string ): Node {
   let node;
   if ( dotRandom.nextDouble() < 0.5 ) {
     node = GLIconFactory.createGraphIcon( GRAPH_WIDTH, color, -3, -3, 3, 3 ); // y = +x
@@ -163,10 +163,10 @@ function createGraphNode( color: TColor ): Node {
 }
 
 /**
- * Creates a random point tool with the specified color.
+ * Creates a random point tool with the specified color. The returned Node must be disposed.
  * This does not use PointToolNode because it has too many model dependencies.
  */
-function createPointToolNode( color: TColor ): Node {
+function createPointToolNode( color: Color | string ): Node {
   const coordinatesProperty = new Vector2Property( new Vector2( getRandomX(), getRandomY() ) );
   const bodyNode = new PointToolBodyNode( coordinatesProperty, {
     backgroundFill: color
@@ -175,24 +175,36 @@ function createPointToolNode( color: TColor ): Node {
     centerX: 0.25 * bodyNode.width,
     top: bodyNode.bottom - 2 // overlap
   } );
-  return new Node( { children: [ probeNode, bodyNode ] } );
+  const node = new Node( { children: [ probeNode, bodyNode ] } );
+
+  // Subcomponents link to LocalizedStringProperty and ProfileColorProperty, so must be disposed.
+  node.disposeEmitter.addListener( () => {
+    bodyNode.dispose();
+    probeNode.dispose();
+  } );
+  return node;
 }
 
 // Creates a smiley face with the specified color.
-function createFaceNode( color: TColor ): Node {
-  return new FaceNode( FACE_DIAMETER, { headFill: color } );
+function createFaceNode( color: Color | string ): Node {
+  return new FaceNode( FACE_DIAMETER, {
+    headFill: color
+  } );
 }
 
 // Creates a paper airplane with the specified color.
-function createPaperAirplaneNode( color: TColor ): Node {
-  return new PaperAirplaneNode( { fill: color, scale: AIRPLANE_SCALE } ); // width of around 60px
+function createPaperAirplaneNode( color: Color | string ): Node {
+  return new PaperAirplaneNode( {
+    fill: color,
+    scale: AIRPLANE_SCALE // width of around 60px
+  } );
 }
 
 /**
  * Creates an array of nodes for a specified array of colors.
  * The functions above serve as the creationFunction argument.
  */
-function createNodes( creationFunction: ( color: TColor ) => Node, colors: Array<TColor> ): Node[] {
+function createNodes( creationFunction: ( color: Color | string ) => Node, colors: Array<Color | string> ): Node[] {
   return colors.map( color => creationFunction( color ) );
 }
 

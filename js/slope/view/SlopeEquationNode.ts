@@ -500,7 +500,7 @@ class DynamicLabelNode extends EquationNode {
     );
 
     this.disposeDynamicLabelNode = () => {
-      slopeIsText.dispose();
+      this.children.forEach( child => child.dispose() );
       multilink.dispose();
     };
 

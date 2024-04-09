@@ -485,13 +485,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposeSlopeInterceptEquationNode = () => {
-      xText.dispose();
-      yText.dispose();
-      slopeUndefinedText.dispose();
-      riseNode.dispose();
-      runNode.dispose();
-      yInterceptNumeratorNode.dispose();
-      yInterceptDenominatorNode.dispose();
+      parentNode.children.forEach( child => child.dispose() );
       controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
       dynamicStringMultilink.dispose();

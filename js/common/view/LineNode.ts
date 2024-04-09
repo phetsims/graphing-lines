@@ -146,6 +146,8 @@ export default class LineNode extends Node {
     lineProperty.link( lineObserver ); // unlink in dispose
 
     this.disposeLineNode = () => {
+      this.lineNode && this.lineNode.dispose();
+      this.arrowNode && this.arrowNode.dispose();
       this.equationNode && this.equationNode.dispose();
       lineProperty.unlink( lineObserver );
     };

@@ -46,10 +46,11 @@ export default class MakeTheEquationNode extends ChallengeNode {
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.aCorrectEquationStringProperty, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
-        fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
-      } ) );
+    const answerEquationNode = ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
+      fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE
+    } );
+    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.aCorrectEquationStringProperty, challenge.answer.color,
+      boxSize, answerEquationNode );
     answerBoxNode.visible = false;
 
     // Guess
@@ -147,9 +148,10 @@ export default class MakeTheEquationNode extends ChallengeNode {
       titleText.dispose();
       answerBoxNode.dispose();
       guessBoxNode.dispose();
+      answerEquationNode.dispose();
+      guessEquationNode.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
-      guessEquationNode.dispose();
       graphNode.dispose();
     };
   }

@@ -115,8 +115,7 @@ export default class EquationNode extends Node {
     const minRiseNode = new SlopePicker( new Property( riseRangeProperty.value.min ),
       new Property( runRangeProperty.value.max ), riseRangeProperty, pickerOptions );
 
-    const maxRunNode = new SlopePicker(
-      new Property( runRangeProperty.value.max ),
+    const maxRunNode = new SlopePicker( new Property( runRangeProperty.value.max ),
       new Property( riseRangeProperty.value.max ), runRangeProperty, pickerOptions );
 
     const minRunNode = new SlopePicker( new Property( runRangeProperty.value.min ),
@@ -125,6 +124,13 @@ export default class EquationNode extends Node {
     // Compute the max width
     const maxRiseWidth = Math.max( maxRiseNode.width, minRiseNode.width );
     const maxRunWidth = Math.max( maxRunNode.width, minRunNode.width );
+
+    // Clean up the NumberPicker instances, because they link to a LocalizedStringProperty for PDOM.
+    maxRiseNode.dispose();
+    minRiseNode.dispose();
+    maxRunNode.dispose();
+    minRunNode.dispose();
+
     return Math.max( maxRiseWidth, maxRunWidth );
   }
 }

@@ -50,11 +50,12 @@ export default class GraphTheLineNode extends ChallengeNode {
     } );
 
     // Answer
-    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.lineToGraphStringProperty, challenge.answer.color, boxSize,
-      ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
-        fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
-        slopeUndefinedVisible: false
-      } ) );
+    const answerEquationNode = ChallengeNode.createEquationNode( new Property<Line | NotALine>( challenge.answer ), challenge.equationForm, {
+      fontSize: LineGameConstants.STATIC_EQUATION_FONT_SIZE,
+      slopeUndefinedVisible: false
+    } );
+    const answerBoxNode = new EquationBoxNode( GraphingLinesStrings.lineToGraphStringProperty, challenge.answer.color,
+      boxSize, answerEquationNode );
 
     const guessLineProperty = new Property<Line | NotALine>( Line.Y_EQUALS_X_LINE ); // start with any non-null line
     const guessEquationNode = ChallengeNode.createEquationNode( guessLineProperty, challenge.equationForm, {
@@ -165,12 +166,13 @@ export default class GraphTheLineNode extends ChallengeNode {
 
     this.disposeGraphTheLineNode = () => {
       titleText.dispose();
+      answerEquationNode.dispose();
+      guessEquationNode.dispose();
       answerBoxNode.dispose();
       guessBoxNode.dispose();
       this.notALineText.dispose();
       challenge.guessProperty.unlink( guessObserver );
       model.playStateProperty.unlink( playStateObserver );
-      guessEquationNode.dispose();
       this.graphNode.dispose();
     };
   }

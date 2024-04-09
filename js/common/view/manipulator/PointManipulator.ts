@@ -38,10 +38,12 @@ export default class PointManipulator extends Manipulator {
     };
     pointProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new PointDragListener( this, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform ) );
+    const dragListener = new PointDragListener( this, pointProperty, otherPointProperties, xRange, yRange, modelViewTransform );
+    this.addInputListener( dragListener );
 
     this.disposePointManipulator = () => {
       pointProperty.unlink( lineObserver );
+      dragListener.dispose();
     };
   }
 

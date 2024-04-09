@@ -37,10 +37,12 @@ export default class SlopeManipulator extends Manipulator {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new SlopeDragListener( this, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform ) );
+    const dragListener = new SlopeDragListener( this, lineProperty, riseRangeProperty, runRangeProperty, modelViewTransform );
+    this.addInputListener( dragListener );
 
     this.disposeSlopeManipulator = () => {
       lineProperty.unlink( lineObserver );
+      dragListener.dispose();
     };
   }
 

@@ -36,6 +36,7 @@ import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import NotALine from '../model/NotALine.js';
+import { RewardNodeFunction } from './ResultsNode.js';
 
 // constants
 const NUMBER_OF_NODES = 150;
@@ -47,8 +48,17 @@ const AIRPLANE_SCALE = 1.76;
 
 export default class GLRewardNode extends RewardNode {
 
-  public constructor( rewardNodes: Node[] ) {
-    super( { nodes: rewardNodes } );
+  public constructor( level: number, rewardNodeFunctions: RewardNodeFunction[] ) {
+
+    const rewardNodes = rewardNodeFunctions[ level ]();
+
+    super( {
+      nodes: rewardNodes
+    } );
+
+    // Dispose of rewardNodes because they may be linked to LocalizeStringProperty, ProfileColorProperty, etc.
+    // rewardNodes contains duplicates!
+    this.disposeEmitter.addListener( () => _.uniq( rewardNodes ).forEach( node => node.dispose() ) );
   }
 
   /**

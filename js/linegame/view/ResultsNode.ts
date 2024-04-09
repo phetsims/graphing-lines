@@ -39,12 +39,8 @@ export default class ResultsNode extends Node {
 
         // game reward, shown for perfect score (or with 'reward' query parameter)
         if ( model.isPerfectScore() || GLQueryParameters.showReward ) {
-
           audioPlayer.gameOverPerfectScore();
-
-          const level = model.levelProperty.value;
-          const rewardNodes = rewardNodeFunctions[ level ]();
-          this.rewardNode = new GLRewardNode( rewardNodes );
+          this.rewardNode = new GLRewardNode( model.levelProperty.value, rewardNodeFunctions );
           this.addChild( this.rewardNode );
         }
         else {

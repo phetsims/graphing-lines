@@ -46,10 +46,12 @@ export default class X1Y1Manipulator extends Manipulator {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new X1Y1DragListener( this, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope ) );
+    const dragListener = new X1Y1DragListener( this, lineProperty, x1RangeProperty, y1RangeProperty, modelViewTransform, constantSlope );
+    this.addInputListener( dragListener );
 
     this.disposeX1Y1Manipulator = () => {
       lineProperty.unlink( lineObserver );
+      dragListener.dispose();
     };
   }
 

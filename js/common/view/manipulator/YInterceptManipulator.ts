@@ -37,10 +37,12 @@ export default class YInterceptManipulator extends Manipulator {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new YInterceptDragListener( this, lineProperty, y1RangeProperty, modelViewTransform ) );
+    const dragListener = new YInterceptDragListener( this, lineProperty, y1RangeProperty, modelViewTransform );
+    this.addInputListener( dragListener );
 
     this.disposeYInterceptManipulator = () => {
       lineProperty.unlink( lineObserver );
+      dragListener.dispose();
     };
   }
 

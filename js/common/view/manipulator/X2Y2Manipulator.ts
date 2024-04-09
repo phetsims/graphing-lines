@@ -37,10 +37,12 @@ export default class X2Y2Manipulator extends Manipulator {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    this.addInputListener( new X2Y2DragListener( this, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform ) );
+    const dragListener = new X2Y2DragListener( this, lineProperty, x2RangeProperty, y2RangeProperty, modelViewTransform );
+    this.addInputListener( dragListener );
 
     this.disposeX2Y2Manipulator = () => {
       lineProperty.unlink( lineObserver );
+      dragListener.dispose();
     };
   }
 

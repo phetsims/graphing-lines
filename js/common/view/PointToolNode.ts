@@ -120,13 +120,15 @@ export default class PointToolNode extends Node {
       } );
 
     // interactivity
-    this.addInputListener( new PointToolDragListener( this, pointTool, modelViewTransform, graph ) );
+    const dragListener = new PointToolDragListener( this, pointTool, modelViewTransform, graph );
+    this.addInputListener( dragListener );
 
     this.disposePointToolNode = () => {
       updateMultilink.dispose();
       bodyNode.dispose();
       probeNode.dispose();
       coordinatesProperty.dispose();
+      dragListener.dispose();
     };
   }
 

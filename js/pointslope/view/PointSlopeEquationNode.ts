@@ -525,13 +525,7 @@ export default class PointSlopeEquationNode extends EquationNode {
     this.mutate( options );
 
     this.disposePointSlopeEquationNode = () => {
-      xText.dispose();
-      yText.dispose();
-      x1Node.dispose();
-      y1Node.dispose();
-      slopeUndefinedText.dispose();
-      riseNode.dispose();
-      runNode.dispose();
+      parentNode.children.forEach( child => child.dispose() );
       controlsMultilink.dispose();
       lineProperty.unlink( lineObserver );
       dynamicStringMultilink.dispose();

@@ -15,7 +15,7 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../phet-core/js/types/StrictOmit.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import { Line as SceneryLine, Node, NodeOptions } from '../../../../scenery/js/imports.js';
+import { Line as SceneryLine, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import NotALine from '../../linegame/model/NotALine.js';
 import Line from '../model/Line.js';
@@ -129,11 +129,20 @@ export default class LineNode extends Node {
       // If the equation's bounds change because of dynamic strings, and not because the line has changed,
       // then call update so that the equation gets re-positioned on the line.
       // See https://github.com/phetsims/graphing-lines/issues/152
-      this.equationNode.localBoundsProperty.link( () => {
+      this.equationParentNode.boundsProperty.link( () => {
         if ( !this.isLineDirty ) {
           this.update( lineProperty.value );
         }
       } );
+
+      // When running with ?dev, draw a red rectangle around the equation's bounds, to assist with debugging position.
+      if ( phet.chipper.queryParameters.dev ) {
+        const equationParentBoundsRectangle = new Rectangle( 0, 0, 1, 1, {
+          stroke: 'red'
+        } );
+        this.equationParentNode.boundsProperty.link( bounds => equationParentBoundsRectangle.setRectBounds( bounds ) );
+        this.parentNode.addChild( equationParentBoundsRectangle );
+      }
     }
 
     this.addChild( this.parentNode );

@@ -268,12 +268,12 @@ export default class LineNode extends Node {
       const topOffset = equationVisibleBounds.top - equationBounds.top;
       const bottomOffset = equationBounds.bottom - equationVisibleBounds.bottom;
 
-      // Put the equation where it won't interfere with slope tool or y-axis, at the end of the line that would have the slope manipulator.
+      // Put the equation where it won't interfere with slope tool or y-axis, at the end of the line that has the slope manipulator.
       const X_OFFSET = 60;
       const Y_OFFSET = 12;
       if ( line.undefinedSlope() ) {
 
-        // This puts the 'undefined slope' label to the right of the y-axis, at the same end of the line as the slope manipulator.
+        // 'Slope is undefined' to the right of the line, at the end where the slope manipulator appears.
         if ( line.rise < 0 ) {
           equationParentNode.translation = tipPosition;
           this.equationNode.right = -X_OFFSET + rightOffset;
@@ -288,14 +288,14 @@ export default class LineNode extends Node {
       else if ( line.rise <= 0 ) {
         if ( line.run >= 0 ) {
 
-          // quadrant 4: equation above the line, at tip (right)
+          // quadrant 4 (bottom right): equation above the line, at tip (right)
           equationParentNode.translation = tipPosition;
           this.equationNode.right = -X_OFFSET + rightOffset;
           this.equationNode.bottom = -Y_OFFSET + bottomOffset;
         }
         else {
 
-          // quadrant 3: equation above the line, at tail (left)
+          // quadrant 3 (bottom left): equation above the line, at tail (left)
           equationParentNode.translation = tailPosition;
           this.equationNode.left = X_OFFSET - leftOffset;
           this.equationNode.bottom = -Y_OFFSET + bottomOffset;
@@ -304,14 +304,14 @@ export default class LineNode extends Node {
       else {
         if ( line.run > 0 ) {
 
-          // quadrant 1: equation below the line, at tip (right)
+          // quadrant 1 (top right): equation below the line, at tip (right)
           equationParentNode.translation = tipPosition;
           this.equationNode.right = -X_OFFSET + rightOffset;
           this.equationNode.top = Y_OFFSET - topOffset;
         }
         else {
 
-          // quadrant 2: equation below the line, at tail (left)
+          // quadrant 2 (top left): equation below the line, at tail (left)
           equationParentNode.translation = tailPosition;
           this.equationNode.left = X_OFFSET - leftOffset;
           this.equationNode.top = Y_OFFSET - topOffset;

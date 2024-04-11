@@ -422,11 +422,12 @@ class DynamicLabelNode extends EquationNode {
 
       const lineColor = line.color;
 
-      // start with all children invisible
-      const len = this.children.length;
-      for ( let i = 0; i < len; i++ ) {
-        this.children[ i ].visible = false;
-      }
+      // Start with all elements invisible and at (0,0).
+      this.children.forEach( child => {
+        child.visible = false;
+        child.x = 0;
+        child.y = 0;
+      } );
 
       // 'Slope is'
       slopeIsText.visible = true;
@@ -491,11 +492,8 @@ class DynamicLabelNode extends EquationNode {
       }
     };
 
-    const multilink = new Multilink( [
-        lineProperty,
-        slopeIsText.boundsProperty, // links to a StringProperty, and layout is handled in this.update
-        GraphingLinesStrings.undefinedStringProperty // used in this.update
-      ],
+    // If the line changes, or any element that is listening to a LocalizedStringProperty changes, then update.
+    const multilink = new Multilink( [ lineProperty, slopeIsText.localBoundsProperty, riseText.localBoundsProperty ],
       line => update( line )
     );
 

@@ -187,14 +187,15 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       const interactive = ( options.interactiveSlope || options.interactiveIntercept );
       const lineColor = line.color;
 
-      // Start with all elements invisible and at x=0.
-      // See https://github.com/phetsims/graphing-lines/issues/120
-      const len = parentNode.children.length;
-      for ( let i = 0; i < len; i++ ) {
-        parentNode.children[ i ].visible = false;
-        parentNode.children[ i ].x = 0;
-      }
-      slopeUndefinedText.string = ''; // workaround for #114 and #117
+      // Start with all elements invisible and at (0,0).
+      parentNode.children.forEach( child => {
+        child.visible = false;
+        child.x = 0;
+        child.y = 0;
+      } );
+
+      // Workaround for https://github.com/phetsims/graphing-lines/issues/114 and https://github.com/phetsims/graphing-lines/issues/117
+      slopeUndefinedText.string = '';
 
       if ( line.undefinedSlope() && !interactive ) {
         // slope is undefined and nothing is interactive
@@ -452,10 +453,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     };
     lineProperty.link( lineObserver ); // unlink in dispose
 
-    // If dynamic strings change, update the layout. xNode and yNode are RichText that are observing a StringProperty,
-    // observing localBoundsProperty to prevent 'stack size exceeded'. slopeUndefinedStringProperty is used in this.updateLayout.
+    // If RichText that are observing a LocalizedStringProperty change size, then update the layout.
     const dynamicStringMultilink = Multilink.lazyMultilink(
-      [ xText.localBoundsProperty, yText.localBoundsProperty, GraphingLinesStrings.slopeUndefinedStringProperty ],
+      [ xText.localBoundsProperty, yText.localBoundsProperty, slopeUndefinedText.localBoundsProperty ],
       () => updateLayout( lineProperty.value )
     );
 

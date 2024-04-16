@@ -51,6 +51,7 @@ export default class LineFormsScreenView extends ScreenView {
     // Reset All button, at bottom-right
     const resetAllButton = new ResetAllButton( {
       listener: () => {
+        this.interruptSubtreeInput();
         model.reset();
         viewProperties.reset();
       },

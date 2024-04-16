@@ -64,7 +64,10 @@ export default class SettingsNode extends Node {
 
     // Reset All button, at rightBottom
     const resetAllButton = new ResetAllButton( {
-      listener: () => model.reset(),
+      listener: () => {
+        this.interruptSubtreeInput();
+        model.reset();
+      },
       scale: GLConstants.RESET_ALL_BUTTON_SCALE,
       right: layoutBounds.width - GLConstants.SCREEN_X_MARGIN,
       bottom: layoutBounds.height - GLConstants.SCREEN_Y_MARGIN

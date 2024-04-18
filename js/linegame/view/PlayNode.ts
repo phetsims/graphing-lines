@@ -56,6 +56,7 @@ export default class PlayNode extends Node {
         xMargin: 10,
         yMargin: 5,
         listener: () => {
+          this.interruptSubtreeInput();
           model.setGamePhase( GamePhase.SETTINGS );
         }
       }

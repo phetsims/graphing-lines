@@ -32,8 +32,19 @@ simLauncher.launch( () => {
       softwareDevelopment: 'Chris Malley (PixelZoom, Inc.)',
       team: 'Bryce Gruneich, Karina K. R. Hensberry, Patricia Loeblein, Amanda McGarry, Kathy Perkins',
       graphicArts: 'Megan Lai, Sharon Siman-Tov',
-      qualityAssurance: 'Steele Dalton, Bryce Griebenow, Elise Morgan, Liam Mulhall, Oliver Orejola, Laura Rea, ' +
-                        'Benjamin Roberts, Jacob Romero, Kathryn Woessner, Bryan Yoelin'
+      qualityAssurance: 'Steele Dalton, ' +
+                        'Jaron Droder, ' +
+                        'Bryce Griebenow, ' +
+                        'Clifford Hardin, ' +
+                        'Elise Morgan, ' +
+                        'Liam Mulhall, ' +
+                        'Oliver Orejola ' +
+                        'Laura Rea, ' +
+                        'Benjamin Roberts, ' +
+                        'Jacob Romero, ' +
+                        'Nancy Salpepi, ' +
+                        'Kathryn Woessner, ' +
+                        'Bryan Yoelin'
     }
   };
 

@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.4.0-rc.1 Thu Apr 18 2024 16:20:40 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# graphing-lines 1.4.0-rc.1 Fri Apr 19 2024 15:51:29 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "347e7eeac1424adb6023fb06a619d6ea01a0620f",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "f34b5d36df5dda075a3b8b0ce525a7f965dde0ae",
+    "sha": "03a7e3dba5224f1f6537c3c44fdb83db43123cdd",
     "branch": "1.4"
   },
   "joist": {
@@ -101,7 +101,7 @@
     "branch": "HEAD"
   },
   "vegas": {
-    "sha": "3780d8907843e19f26069873ea1fb8c254af0bcc",
+    "sha": "ee85cc38da90067500bc85a1a5079deea827123a",
     "branch": "graphing-lines-1.4"
   }
 }

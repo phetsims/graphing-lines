@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "5cab9e885ffa05d6b56ab7482ee269d5e799675e",
+    "sha": "4bbf182380d0b4017eb05d5fac5a5a9403a0348f",
     "branch": "1.4"
   },
   "joist": {
@@ -45,7 +45,7 @@
     "branch": "HEAD"
   },
   "phet-io-sim-specific": {
-    "sha": "1984cc8d4ba8306ea482b7eaf60e67a156930e5a",
+    "sha": "10167b2fdb6706ed4b14d161d88ab694ab9ae04d",
     "branch": "HEAD"
   },
   "phet-io-wrappers": {

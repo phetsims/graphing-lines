@@ -1,5 +1,5 @@
 {
-  "comment": "# graphing-lines 1.4.0 Tue Apr 23 2024 17:23:55 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# graphing-lines 1.4.1-rc.1 Thu May 16 2024 07:43:23 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "347e7eeac1424adb6023fb06a619d6ea01a0620f",
     "branch": "HEAD"
@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "c12c1eb2a9233fbdb2f7aef518f7f80dab4bc0bf",
+    "sha": "9265166305786a5d14aaf4383ddb65e0cc217564",
     "branch": "1.4"
   },
   "joist": {

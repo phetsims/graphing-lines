@@ -11,18 +11,18 @@
 import graphingLines from '../../../graphingLines.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
-import RichDragListener, { RichDragListenerOptions } from '../../../../../scenery-phet/js/RichDragListener.js';
+import RichPointerDragListener, { RichPointerDragListenerOptions } from '../../../../../scenery-phet/js/RichPointerDragListener.js';
 
 type SelfOptions = EmptySelfOptions;
 
 type ManipulatorDragListenerOptions = SelfOptions &
-  StrictOmit<RichDragListenerOptions, 'allowTouchSnag'>;
+  StrictOmit<RichPointerDragListenerOptions, 'allowTouchSnag'>;
 
-export default class ManipulatorDragListener extends RichDragListener {
+export default class ManipulatorDragListener extends RichPointerDragListener {
 
   protected constructor( providedOptions: ManipulatorDragListenerOptions ) {
 
-    const options = optionize<ManipulatorDragListenerOptions, SelfOptions, RichDragListenerOptions>()( {
+    const options = optionize<ManipulatorDragListenerOptions, SelfOptions, RichPointerDragListenerOptions>()( {
 
       // DragListenerOptions
       allowTouchSnag: true

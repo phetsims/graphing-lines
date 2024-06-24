@@ -23,7 +23,7 @@ import Graph from '../model/Graph.js';
 import PointTool from '../model/PointTool.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
 import PointToolProbeNode from './PointToolProbeNode.js';
-import RichPointerDragListener from '../../../../scenery-phet/js/RichPointerDragListener.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 
 type SelfOptions = {
   backgroundNormalColor?: TColor;
@@ -141,7 +141,7 @@ export default class PointToolNode extends Node {
 /**
  * Drag listener for the point tool.
  */
-class PointToolDragListener extends RichPointerDragListener {
+class PointToolDragListener extends SoundDragListener {
 
   public constructor( targetNode: Node, pointTool: PointTool, modelViewTransform: ModelViewTransform2, graph: Graph ) {
 

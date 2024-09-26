@@ -246,9 +246,9 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       else {
         // slope (rise/run) is not interactive, may be displayed as an integer or improper fraction
         const riseDynamicValueNode = riseNode as DynamicValueNode;
-        assert && assert( riseDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line no-simple-type-checking-assertions
+        assert && assert( riseDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line phet/no-simple-type-checking-assertions
         const runDynamicValueNode = runNode as DynamicValueNode;
-        assert && assert( runDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line no-simple-type-checking-assertions
+        assert && assert( runDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line phet/no-simple-type-checking-assertions
 
         // decide whether to include the slope minus sign
         let previousNode;
@@ -332,7 +332,7 @@ export default class SlopeInterceptEquationNode extends EquationNode {
       else {
         // intercept is not interactive and may be displayed as an integer or improper fraction
         const yInterceptNumeratorDynamicValueNode = yInterceptNumeratorNode as DynamicValueNode;
-        assert && assert( yInterceptNumeratorDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line no-simple-type-checking-assertions
+        assert && assert( yInterceptNumeratorDynamicValueNode instanceof DynamicValueNode ); // eslint-disable-line phet/no-simple-type-checking-assertions
 
         // y-intercept properties
         const fractionalIntercept = line.getYIntercept();

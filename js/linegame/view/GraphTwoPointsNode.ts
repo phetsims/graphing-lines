@@ -43,7 +43,7 @@ export default class GraphTwoPointsNode extends ChallengeGraphNode {
 
     // Sync with the guess by moving the manipulators.
     const guessObserver = ( line: Line | NotALine ) => {
-      assert && assert( line instanceof Line ); // eslint-disable-line no-simple-type-checking-assertions
+      assert && assert( line instanceof Line ); // eslint-disable-line phet/no-simple-type-checking-assertions
       if ( line instanceof Line ) {
         x1y1Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x1, line.y1 );
         x2y2Manipulator.translation = challenge.modelViewTransform.modelToViewXY( line.x2, line.y2 );

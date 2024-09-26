@@ -142,7 +142,7 @@ export default class LineFormsGraphNode extends GraphNode {
     let removed = false;
     for ( let i = 0; i < parentNode.getChildrenCount() && !removed; i++ ) {
       const node = parentNode.getChildAt( i ) as LineNode;
-      assert && assert( node instanceof LineNode ); // eslint-disable-line no-simple-type-checking-assertions
+      assert && assert( node instanceof LineNode ); // eslint-disable-line phet/no-simple-type-checking-assertions
       if ( line === node.lineProperty.value ) {
         parentNode.removeChild( node );
         node.dispose();

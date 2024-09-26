@@ -20,7 +20,7 @@ import PointTool from '../../common/model/PointTool.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
-import ChallengeNode from '../view/ChallengeNode.js'; // eslint-disable-line no-view-imported-from-model
+import ChallengeNode from '../view/ChallengeNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import EquationForm from './EquationForm.js';
 import LineGameModel from './LineGameModel.js';
 import ManipulationMode from './ManipulationMode.js';

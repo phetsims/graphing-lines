@@ -58,7 +58,7 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
 
     // Sync with the guess
     const guessObserver = ( line: Line | NotALine ) => {
-      assert && assert( line instanceof Line ); // eslint-disable-line no-simple-type-checking-assertions
+      assert && assert( line instanceof Line ); // eslint-disable-line phet/no-simple-type-checking-assertions
       if ( line instanceof Line ) {
 
         // move the manipulators

@@ -11,7 +11,7 @@ import Range from '../../../../dot/js/Range.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
-import GraphTheLineNode from '../view/GraphTheLineNode.js'; // eslint-disable-line no-view-imported-from-model
+import GraphTheLineNode from '../view/GraphTheLineNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
 import ManipulationMode from './ManipulationMode.js';

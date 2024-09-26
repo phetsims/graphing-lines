@@ -4,7 +4,9 @@
  * Auto-generated from modulify, DO NOT manually modify.
  */
 /* eslint-disable */
+/* @formatter:off */
 import LocalizedImageProperty from '../../joist/js/i18n/LocalizedImageProperty.js';
+import graphingLines from './graphingLines.js';
 import africaLevel1_svg from '../images/africa/africaLevel1_svg.js';
 import africaLevel2_svg from '../images/africa/africaLevel2_svg.js';
 import africaLevel3_svg from '../images/africa/africaLevel3_svg.js';
@@ -33,7 +35,6 @@ import usaLevel3_svg from '../images/usa/usaLevel3_svg.js';
 import usaLevel4_svg from '../images/usa/usaLevel4_svg.js';
 import usaLevel5_svg from '../images/usa/usaLevel5_svg.js';
 import usaLevel6_svg from '../images/usa/usaLevel6_svg.js';
-import graphingLines from './graphingLines.js';
 
 const GraphingLinesImages = {
   level1ImageProperty: new LocalizedImageProperty( 'level1', {

@@ -8,6 +8,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import GridCheckbox from '../../../../scenery-phet/js/GridCheckbox.js';
@@ -22,7 +23,6 @@ import GLColors from '../GLColors.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
 import GLIconFactory from './GLIconFactory.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 // y = x

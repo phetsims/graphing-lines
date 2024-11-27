@@ -11,28 +11,28 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Property from '../../../../axon/js/Property.js';
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
-import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
+import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import FaceWithPointsNode from '../../../../scenery-phet/js/FaceWithPointsNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
 import TextPushButton, { TextPushButtonOptions } from '../../../../sun/js/buttons/TextPushButton.js';
-import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import VegasStrings from '../../../../vegas/js/VegasStrings.js';
+import Line from '../../common/model/Line.js';
+import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import PointToolNode from '../../common/view/PointToolNode.js';
 import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import LineGameConstants from '../LineGameConstants.js';
-import EquationForm from '../model/EquationForm.js';
-import PlayState from '../model/PlayState.js';
 import Challenge from '../model/Challenge.js';
+import EquationForm from '../model/EquationForm.js';
 import LineGameModel from '../model/LineGameModel.js';
-import Line from '../../common/model/Line.js';
 import NotALine from '../model/NotALine.js';
-import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
-import { combineOptions } from '../../../../phet-core/js/optionize.js';
+import PlayState from '../model/PlayState.js';
 
 export default class ChallengeNode extends Node {
 

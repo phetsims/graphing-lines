@@ -9,22 +9,22 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Range from '../../../../dot/js/Range.js';
 import Multilink from '../../../../axon/js/Multilink.js';
+import Property from '../../../../axon/js/Property.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import PlaceThePointsNode from '../view/PlaceThePointsNode.js'; // eslint-disable-line phet/no-view-imported-from-model
+import EquationForm from './EquationForm.js';
 import GraphTheLine from './GraphTheLine.js';
+import LineGameModel from './LineGameModel.js';
 import ManipulationMode from './ManipulationMode.js';
 import NotALine from './NotALine.js';
-import EquationForm from './EquationForm.js';
-import LineGameModel from './LineGameModel.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
-import Property from '../../../../axon/js/Property.js';
 
 export default class PlaceThePoints extends GraphTheLine {
 

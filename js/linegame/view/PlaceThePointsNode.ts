@@ -8,15 +8,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import graphingLines from '../../graphingLines.js';
-import PlayState from '../model/PlayState.js';
-import GraphTheLineNode from './GraphTheLineNode.js';
-import GraphThreePointsNode from './GraphThreePointsNode.js';
-import LineGameModel from '../model/LineGameModel.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
-import ChallengeGraphNode from './ChallengeGraphNode.js';
+import graphingLines from '../../graphingLines.js';
+import LineGameModel from '../model/LineGameModel.js';
 import PlaceThePoints from '../model/PlaceThePoints.js';
+import PlayState from '../model/PlayState.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
+import GraphTheLineNode from './GraphTheLineNode.js';
+import GraphThreePointsNode from './GraphThreePointsNode.js';
 
 export default class PlaceThePointsNode extends GraphTheLineNode {
 

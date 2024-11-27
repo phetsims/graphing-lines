@@ -8,17 +8,17 @@
  */
 
 import Bounds2 from '../../../../dot/js/Bounds2.js';
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import TimerToggleButton from '../../../../scenery-phet/js/buttons/TimerToggleButton.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import GLConstants from '../../common/GLConstants.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameModel from '../model/LineGameModel.js';
 import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 
 export default class SettingsNode extends Node {
 

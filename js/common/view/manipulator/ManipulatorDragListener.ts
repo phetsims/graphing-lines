@@ -8,10 +8,10 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import graphingLines from '../../../graphingLines.js';
 import optionize, { EmptySelfOptions } from '../../../../../phet-core/js/optionize.js';
 import StrictOmit from '../../../../../phet-core/js/types/StrictOmit.js';
 import SoundDragListener, { SoundDragListenerOptions } from '../../../../../scenery-phet/js/SoundDragListener.js';
+import graphingLines from '../../../graphingLines.js';
 
 type SelfOptions = EmptySelfOptions;
 

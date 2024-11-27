@@ -18,8 +18,8 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import { Line as SceneryLine, Node, NodeOptions, Rectangle } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import NotALine from '../../linegame/model/NotALine.js';
-import Line from '../model/Line.js';
 import Graph from '../model/Graph.js';
+import Line from '../model/Line.js';
 
 // constants
 const HEAD_SIZE = new Dimension2( 10, 10 );

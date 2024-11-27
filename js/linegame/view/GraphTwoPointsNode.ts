@@ -8,14 +8,14 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import Line from '../../common/model/Line.js';
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import X2Y2Manipulator from '../../common/view/manipulator/X2Y2Manipulator.js';
-import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
-import ChallengeGraphNode from './ChallengeGraphNode.js';
-import NotALine from '../model/NotALine.js';
 import GraphTheLine from '../model/GraphTheLine.js';
+import NotALine from '../model/NotALine.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
 
 export default class GraphTwoPointsNode extends ChallengeGraphNode {
 

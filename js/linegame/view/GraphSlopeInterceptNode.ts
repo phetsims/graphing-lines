@@ -8,16 +8,16 @@
  */
 
 import Property from '../../../../axon/js/Property.js';
+import Line from '../../common/model/Line.js';
 import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js';
 import YInterceptManipulator from '../../common/view/manipulator/YInterceptManipulator.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeInterceptParameterRange from '../../slopeintercept/model/SlopeInterceptParameterRange.js';
 import LineGameConstants from '../LineGameConstants.js';
-import ManipulationMode from '../model/ManipulationMode.js';
-import ChallengeGraphNode from './ChallengeGraphNode.js';
 import GraphTheLine from '../model/GraphTheLine.js';
+import ManipulationMode from '../model/ManipulationMode.js';
 import NotALine from '../model/NotALine.js';
-import Line from '../../common/model/Line.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
 
 export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
 

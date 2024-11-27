@@ -6,7 +6,9 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import { Node } from '../../../../scenery/js/imports.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import GLConstants from '../../common/GLConstants.js';
@@ -16,8 +18,6 @@ import GamePhase from '../model/GamePhase.js';
 import PlayNode from './PlayNode.js';
 import ResultsNode, { RewardNodeFunction } from './ResultsNode.js';
 import SettingsNode from './SettingsNode.js';
-import { Node } from '../../../../scenery/js/imports.js';
-import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 
 export default class BaseGameScreenView extends ScreenView {
 

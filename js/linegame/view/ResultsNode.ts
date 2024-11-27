@@ -7,15 +7,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import { Node } from '../../../../scenery/js/imports.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 import graphingLines from '../../graphingLines.js';
 import GamePhase from '../model/GamePhase.js';
-import GLRewardNode from './GLRewardNode.js';
 import LineGameModel from '../model/LineGameModel.js';
-import Bounds2 from '../../../../dot/js/Bounds2.js';
-import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import GLRewardNode from './GLRewardNode.js';
 
 // Function that creates the Nodes that are passed to RewardNode.
 export type RewardNodeFunction = () => Node[];

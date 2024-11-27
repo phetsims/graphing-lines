@@ -12,8 +12,8 @@ import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
 import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
 import graphingLines from '../../graphingLines.js';
 import SlopeModel from '../model/SlopeModel.js';
-import SlopeGraphNode from './SlopeGraphNode.js';
 import SlopeEquationAccordionBox from './SlopeEquationAccordionBox.js';
+import SlopeGraphNode from './SlopeGraphNode.js';
 
 export default class SlopeScreenView extends LineFormsScreenView {
 

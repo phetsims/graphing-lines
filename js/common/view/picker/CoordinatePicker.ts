@@ -8,14 +8,14 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Range from '../../../../../dot/js/Range.js';
 import Property from '../../../../../axon/js/Property.js';
+import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
+import Range from '../../../../../dot/js/Range.js';
+import { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
+import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import NumberPicker, { NumberPickerOptions } from '../../../../../sun/js/NumberPicker.js';
 import graphingLines from '../../../graphingLines.js';
 import GLConstants from '../../GLConstants.js';
-import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
-import { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
-import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 
 type SelfOptions = EmptySelfOptions;
 

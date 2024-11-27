@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
+import EyeToggleButton from '../../../../scenery-phet/js/buttons/EyeToggleButton.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import { Node, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import LineFormsModel from '../model/LineFormsModel.js';
-import PointToolNode from './PointToolNode.js';
 import LineFormsViewProperties from './LineFormsViewProperties.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import EyeToggleButton from '../../../../scenery-phet/js/buttons/EyeToggleButton.js';
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
+import PointToolNode from './PointToolNode.js';
 
 export default class LineFormsScreenView extends ScreenView {
 

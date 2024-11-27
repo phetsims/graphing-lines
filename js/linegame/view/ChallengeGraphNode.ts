@@ -12,6 +12,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
+import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
 import GraphNode from '../../common/view/GraphNode.js';
 import LineNode from '../../common/view/LineNode.js';
@@ -21,7 +22,6 @@ import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import Challenge from '../model/Challenge.js';
 import NotALine from '../model/NotALine.js';
-import GLSymbols from '../../common/GLSymbols.js';
 
 type SelfOptions = {
   answerLineVisible?: boolean;

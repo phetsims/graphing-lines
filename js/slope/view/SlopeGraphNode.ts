@@ -12,8 +12,8 @@ import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.j
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import X2Y2Manipulator from '../../common/view/manipulator/X2Y2Manipulator.js';
 import graphingLines from '../../graphingLines.js';
-import SlopeEquationNode from './SlopeEquationNode.js';
 import SlopeModel from '../model/SlopeModel.js';
+import SlopeEquationNode from './SlopeEquationNode.js';
 
 export default class SlopeGraphNode extends LineFormsGraphNode {
 

@@ -10,24 +10,24 @@
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import { Node, TColor, Text } from '../../../../scenery/js/imports.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import GLConstants from '../../common/GLConstants.js';
+import Graph from '../../common/model/Graph.js';
+import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import LineGameConstants from '../LineGameConstants.js';
 import EquationForm from '../model/EquationForm.js';
+import LineGameModel from '../model/LineGameModel.js';
+import MakeTheEquation from '../model/MakeTheEquation.js';
 import ManipulationMode from '../model/ManipulationMode.js';
+import NotALine from '../model/NotALine.js';
 import PlayState from '../model/PlayState.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 import ChallengeNode from './ChallengeNode.js';
 import EquationBoxNode from './EquationBoxNode.js';
-import Line from '../../common/model/Line.js';
-import LineGameModel from '../model/LineGameModel.js';
-import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
-import Graph from '../../common/model/Graph.js';
-import MakeTheEquation from '../model/MakeTheEquation.js';
-import NotALine from '../model/NotALine.js';
 
 export default class MakeTheEquationNode extends ChallengeNode {
 

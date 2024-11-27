@@ -9,13 +9,13 @@
 
 import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
+import Challenge from './Challenge.js';
 import ChallengeFactory2 from './ChallengeFactory2.js';
 import EquationForm from './EquationForm.js';
 import GraphTheLine from './GraphTheLine.js';
 import MakeTheEquation from './MakeTheEquation.js';
 import ManipulationMode from './ManipulationMode.js';
 import ValuePool from './ValuePool.js';
-import Challenge from './Challenge.js';
 
 export default class ChallengeFactory3 extends ChallengeFactory2 {
 

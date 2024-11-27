@@ -7,17 +7,17 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import MakeTheEquationNode from '../view/MakeTheEquationNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import Challenge from './Challenge.js';
-import Line from '../../common/model/Line.js';
 import EquationForm from './EquationForm.js';
-import ManipulationMode from './ManipulationMode.js';
 import LineGameModel from './LineGameModel.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
+import ManipulationMode from './ManipulationMode.js';
 
 export default class MakeTheEquation extends Challenge {
 

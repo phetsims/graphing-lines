@@ -15,10 +15,12 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Range from '../../../../dot/js/Range.js';
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Range from '../../../../dot/js/Range.js';
+import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
@@ -32,14 +34,12 @@ import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
 import DynamicValueNode, { DynamicValueNodeOptions } from '../../common/view/DynamicValueNode.js';
 import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNode.js';
+import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import SlopePicker from '../../common/view/picker/SlopePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
-import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
-import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import NotALine from '../../linegame/model/NotALine.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 type SelfOptions = {
 

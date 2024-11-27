@@ -8,20 +8,20 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
+import Utils from '../../../../dot/js/Utils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import BackgroundNode, { BackgroundNodeOptions } from '../../../../scenery-phet/js/BackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text, TextOptions } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import Utils from '../../../../dot/js/Utils.js';
-import BackgroundNode, { BackgroundNodeOptions } from '../../../../scenery-phet/js/BackgroundNode.js';
 
 // constants
 const VALUE_X_SPACING = 6;

@@ -17,13 +17,13 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
+import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import { Node, NodeOptions, TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import Graph from '../model/Graph.js';
 import PointTool from '../model/PointTool.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
 import PointToolProbeNode from './PointToolProbeNode.js';
-import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 
 type SelfOptions = {
   backgroundNormalColor?: TColor;

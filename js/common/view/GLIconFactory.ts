@@ -19,13 +19,13 @@ import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Line as SceneryLine, Node, Path, TColor } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
+import GLSymbols from '../GLSymbols.js';
 import Graph from '../model/Graph.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
 import GraphNode from './GraphNode.js';
 import Manipulator from './manipulator/Manipulator.js';
 import SlopeToolNode from './SlopeToolNode.js';
-import GLSymbols from '../GLSymbols.js';
 
 // constants
 const scenery = {

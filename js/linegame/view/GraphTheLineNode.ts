@@ -11,22 +11,22 @@ import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { Node, Text } from '../../../../scenery/js/imports.js';
+import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
+import GraphTheLine from '../model/GraphTheLine.js';
+import LineGameModel from '../model/LineGameModel.js';
 import ManipulationMode from '../model/ManipulationMode.js';
+import NotALine from '../model/NotALine.js';
 import PlayState from '../model/PlayState.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
 import ChallengeNode from './ChallengeNode.js';
 import EquationBoxNode from './EquationBoxNode.js';
 import GraphPointSlopeNode from './GraphPointSlopeNode.js';
 import GraphSlopeInterceptNode from './GraphSlopeInterceptNode.js';
 import GraphTwoPointsNode from './GraphTwoPointsNode.js';
-import LineGameModel from '../model/LineGameModel.js';
-import GraphTheLine from '../model/GraphTheLine.js';
-import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
-import ChallengeGraphNode from './ChallengeGraphNode.js';
-import NotALine from '../model/NotALine.js';
 
 export default class GraphTheLineNode extends ChallengeNode {
 

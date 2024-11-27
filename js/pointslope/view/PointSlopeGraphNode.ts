@@ -8,12 +8,12 @@
  */
 
 import LineFormsGraphNode from '../../common/view/LineFormsGraphNode.js';
+import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
 import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js';
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import graphingLines from '../../graphingLines.js';
-import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 import PointSlopeModel from '../model/PointSlopeModel.js';
-import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
+import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 
 export default class PointSlopeGraphNode extends LineFormsGraphNode {
 

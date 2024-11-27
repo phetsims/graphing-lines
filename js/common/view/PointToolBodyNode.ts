@@ -6,6 +6,7 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Utils from '../../../../dot/js/Utils.js';
@@ -18,7 +19,6 @@ import { Color, LinearGradient, Node, NodeOptions, Rectangle, RichText, TColor, 
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 
 // constants
 const DEFAULT_FONT = new PhetFont( { size: 15, weight: 'bold' } );

@@ -18,14 +18,14 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import graphingLines from '../../graphingLines.js';
+import NotALine from '../../linegame/model/NotALine.js';
+import GLSymbols from '../GLSymbols.js';
+import Line from '../model/Line.js';
 import LineFormsModel from '../model/LineFormsModel.js';
 import GraphNode from './GraphNode.js';
+import LineFormsViewProperties from './LineFormsViewProperties.js';
 import LineNode, { CreateDynamicLabelFunction } from './LineNode.js';
 import SlopeToolNode from './SlopeToolNode.js';
-import LineFormsViewProperties from './LineFormsViewProperties.js';
-import Line from '../model/Line.js';
-import GLSymbols from '../GLSymbols.js';
-import NotALine from '../../linegame/model/NotALine.js';
 
 export default class LineFormsGraphNode extends GraphNode {
 

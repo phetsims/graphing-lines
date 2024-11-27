@@ -7,8 +7,8 @@
  */
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
-import graphingLines from '../graphingLines.js';
 import getGameLevelsSchema from '../../../vegas/js/getGameLevelsSchema.js';
+import graphingLines from '../graphingLines.js';
 
 const NUMBER_OF_GAME_LEVELS = 6;
 export { NUMBER_OF_GAME_LEVELS };

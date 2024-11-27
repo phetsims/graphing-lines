@@ -11,9 +11,9 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import graphingLines from '../../graphingLines.js';
-import Line from '../../common/model/Line.js';
 import Graph from '../../common/model/Graph.js';
+import Line from '../../common/model/Line.js';
+import graphingLines from '../../graphingLines.js';
 
 export default class PointSlopeParameterRange {
 

@@ -6,18 +6,18 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
+import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import { AlignBox, AlignGroup, Image, Node, Text, VBox } from '../../../../scenery/js/imports.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import LevelSelectionButtonGroup, { LevelSelectionButtonGroupItem } from '../../../../vegas/js/LevelSelectionButtonGroup.js';
 import ScoreDisplayStars from '../../../../vegas/js/ScoreDisplayStars.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import Tandem from '../../../../tandem/js/Tandem.js';
-import LocalizedImageProperty from '../../../../joist/js/i18n/LocalizedImageProperty.js';
 
 const BUTTON_WIDTH = 200;
 const BUTTON_HEIGHT = 250;

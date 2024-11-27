@@ -9,9 +9,11 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
+import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
+import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
 import Utils from '../../../../dot/js/Utils.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
@@ -19,21 +21,19 @@ import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
 import MinusNode, { MinusNodeOptions } from '../../../../scenery-phet/js/MinusNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
+import StringDisplay, { StringDisplayOptions } from '../../../../scenery-phet/js/StringDisplay.js';
 import { HBox, HStrut, Line as SceneryLine, Node, RichText, RichTextOptions, TColor, Text } from '../../../../scenery/js/imports.js';
 import GLColors from '../../common/GLColors.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLSymbols from '../../common/GLSymbols.js';
 import Line from '../../common/model/Line.js';
 import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNode.js';
+import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import CoordinatePicker from '../../common/view/picker/CoordinatePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
-import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import NotALine from '../../linegame/model/NotALine.js';
-import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
-import StringDisplay, { StringDisplayOptions } from '../../../../scenery-phet/js/StringDisplay.js';
-import Dimension2 from '../../../../dot/js/Dimension2.js';
 
 type SelfOptions = {
 

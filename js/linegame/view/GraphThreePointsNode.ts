@@ -11,8 +11,8 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import PointManipulator from '../../common/view/manipulator/PointManipulator.js';
 import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
-import ChallengeGraphNode from './ChallengeGraphNode.js';
 import PlaceThePoints from '../model/PlaceThePoints.js';
+import ChallengeGraphNode from './ChallengeGraphNode.js';
 
 export default class GraphThreePointsNode extends ChallengeGraphNode {
 

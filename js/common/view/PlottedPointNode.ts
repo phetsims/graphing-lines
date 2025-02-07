@@ -7,7 +7,8 @@
  */
 
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
-import { Color, TColor } from '../../../../scenery/js/imports.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import TColor from '../../../../scenery/js/util/TColor.js';
 import graphingLines from '../../graphingLines.js';
 
 export default class PlottedPointNode extends ShadedSphereNode {

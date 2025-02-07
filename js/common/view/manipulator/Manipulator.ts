@@ -7,11 +7,15 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Shape } from '../../../../../kite/js/imports.js';
+import Shape from '../../../../../kite/js/Shape.js';
 import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../../scenery-phet/js/ShadedSphereNode.js';
-import { Circle, Color, Node, NodeOptions, PressListener, TColor } from '../../../../../scenery/js/imports.js';
+import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
+import Circle from '../../../../../scenery/js/nodes/Circle.js';
+import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
+import Color from '../../../../../scenery/js/util/Color.js';
+import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
 

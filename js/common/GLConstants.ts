@@ -9,7 +9,7 @@
 
 import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
-import { FontWeight } from '../../../scenery/js/imports.js';
+import { FontWeight } from '../../../scenery/js/util/Font.js';
 import { NumberPickerOptions } from '../../../sun/js/NumberPicker.js';
 import graphingLines from '../graphingLines.js';
 

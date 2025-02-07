@@ -6,7 +6,8 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import { Color, ProfileColorProperty } from '../../../scenery/js/imports.js';
+import Color from '../../../scenery/js/util/Color.js';
+import ProfileColorProperty from '../../../scenery/js/util/ProfileColorProperty.js';
 import graphingLines from '../graphingLines.js';
 
 const GLColors = {

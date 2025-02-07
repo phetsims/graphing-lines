@@ -16,7 +16,7 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
-import { Node } from '../../../../scenery/js/imports.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import graphingLines from '../../graphingLines.js';
 import NotALine from '../../linegame/model/NotALine.js';
 import GLSymbols from '../GLSymbols.js';

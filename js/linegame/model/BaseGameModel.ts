@@ -247,7 +247,7 @@ export default class BaseGameModel {
 
   // Updates the best time for the current level, at the end of a timed game with a perfect score.
   private updateBestTime(): void {
-    assert && assert( !this.timer.isRunningProperty.value );
+    assert && assert( !this.timer.isRunning );
     this.isNewBestTime = false;
     if ( this.timerEnabledProperty.value && this.isPerfectScore() ) {
       const level = this.levelProperty.value;

@@ -36,4 +36,10 @@ For an exemplar, see https://github.com/phetsims/balancing-chemical-equations/bl
 * Dynamic locale: see _Preferences > Localization_
 * TypeScript implementation
 
+## 1.3 (2019-02-20)
+
+## 1.2 (2017-06-05)
+
+## 1.1 (2015-12-07)
+
 ## 1.0 (2014-07-21)

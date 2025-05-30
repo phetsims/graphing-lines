@@ -8,7 +8,7 @@
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
@@ -70,13 +70,13 @@ export default abstract class BaseChallengeFactory {
     // x
     const minX = ( run >= 0 ) ? graphXRange.min : graphXRange.min - run;
     const maxX = ( run >= 0 ) ? graphXRange.max - run : graphXRange.max;
-    const x = Utils.roundSymmetric( minX + ( dotRandom.nextDouble() * ( maxX - minX ) ) );
+    const x = roundSymmetric( minX + ( dotRandom.nextDouble() * ( maxX - minX ) ) );
     assert && assert( x >= minX && x <= maxX, `x out of range: ${x}` );
 
     // y
     const minY = ( rise >= 0 ) ? graphYRange.min : graphYRange.min - rise;
     const maxY = ( rise >= 0 ) ? graphYRange.max - rise : graphYRange.max;
-    const y = Utils.roundSymmetric( minY + ( dotRandom.nextDouble() * ( maxY - minY ) ) );
+    const y = roundSymmetric( minY + ( dotRandom.nextDouble() * ( maxY - minY ) ) );
     assert && assert( y >= minY && y <= maxY, `y out of range: ${y}` );
 
     return new Vector2( x, y );
@@ -94,13 +94,13 @@ export default abstract class BaseChallengeFactory {
     // x1 coordinates
     const minX1 = ( run >= 0 ) ? graphXRange.max - run + 1 : graphXRange.min;
     const maxX1 = ( run >= 0 ) ? graphXRange.max : graphXRange.min - run - 1;
-    const x1 = Utils.roundSymmetric( minX1 + ( dotRandom.nextDouble() * ( maxX1 - minX1 ) ) );
+    const x1 = roundSymmetric( minX1 + ( dotRandom.nextDouble() * ( maxX1 - minX1 ) ) );
     assert && assert( x1 >= minX1 && x1 <= maxX1, `x1 out of range: ${x1}` );
 
     // y1 coordinates
     const minY1 = ( rise >= 0 ) ? graphYRange.max - rise + 1 : graphYRange.min;
     const maxY1 = ( rise >= 0 ) ? graphYRange.max : graphYRange.min - rise - 1;
-    const y1 = Utils.roundSymmetric( minY1 + ( dotRandom.nextDouble() * ( maxY1 - minY1 ) ) );
+    const y1 = roundSymmetric( minY1 + ( dotRandom.nextDouble() * ( maxY1 - minY1 ) ) );
     assert && assert( y1 >= minY1 && y1 <= maxY1, `y1 out of range: ${y1}` );
 
     // compute (x2,y2) for validation

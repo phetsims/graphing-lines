@@ -9,7 +9,6 @@
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
-import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
@@ -18,6 +17,8 @@ import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
 import ManipulatorDragListener from './ManipulatorDragListener.js';
+import { roundSymmetric } from '../../../../../dot/js/util/roundSymmetric.js';
+import { clamp } from '../../../../../dot/js/util/clamp.js';
 
 export default class SlopeManipulator extends Manipulator {
 
@@ -79,8 +80,8 @@ class SlopeDragListener extends ManipulatorDragListener {
         const position = modelViewTransform.viewToModelPosition( parentPoint );
         // constrain to dynamic range, snap to grid
         const line = lineProperty.value;
-        const run = Utils.roundSymmetric( Utils.clamp( position.x - line.x1, runRangeProperty.value.min, runRangeProperty.value.max ) );
-        const rise = Utils.roundSymmetric( Utils.clamp( position.y - line.y1, riseRangeProperty.value.min, riseRangeProperty.value.max ) );
+        const run = roundSymmetric( clamp( position.x - line.x1, runRangeProperty.value.min, runRangeProperty.value.max ) );
+        const rise = roundSymmetric( clamp( position.y - line.y1, riseRangeProperty.value.min, riseRangeProperty.value.max ) );
         // don't allow slope=0/0, undefined line
         if ( rise !== 0 || run !== 0 ) {
           lineProperty.value = Line.createPointSlope( line.x1, line.y1, rise, run, line.color );

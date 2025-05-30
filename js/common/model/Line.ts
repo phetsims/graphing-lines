@@ -7,12 +7,13 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
+import { gcd } from '../../../../dot/js/util/gcd.js';
 
 export default class Line {
 
@@ -102,7 +103,7 @@ export default class Line {
   // Gets the simplified rise.
   public getSimplifiedRise(): number {
     if ( this.slopeIsSimplifiable() ) {
-      return Utils.roundSymmetric( this.rise / Utils.gcd( this.rise, this.run ) );
+      return roundSymmetric( this.rise / gcd( this.rise, this.run ) );
     }
     else {
       return this.rise;
@@ -112,7 +113,7 @@ export default class Line {
   // Gets the simplified run.
   public getSimplifiedRun(): number {
     if ( this.slopeIsSimplifiable() ) {
-      return Utils.roundSymmetric( this.run / Utils.gcd( this.rise, this.run ) );
+      return roundSymmetric( this.run / gcd( this.rise, this.run ) );
     }
     else {
       return this.run;
@@ -156,10 +157,10 @@ export default class Line {
     if ( this.rise === 0 || this.run === 0 ) {
       return new Fraction( this.y1, 1 ); // not technically correct for run===0, but gives the desired result in slope-intercept equations
     }
-    const numerator = Utils.roundSymmetric( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
+    const numerator = roundSymmetric( ( this.y1 * this.run ) - ( this.x1 * this.rise ) );
     const denominator = this.run;
-    const gcd = Utils.gcd( numerator, denominator );
-    return new Fraction( Utils.roundSymmetric( numerator / gcd ), Utils.roundSymmetric( denominator / gcd ) );
+    const gcdValue = gcd( numerator, denominator );
+    return new Fraction( roundSymmetric( numerator / gcdValue ), roundSymmetric( denominator / gcdValue ) );
   }
 
   /**

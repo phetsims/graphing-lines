@@ -12,7 +12,6 @@ import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Multilink from '../../../../axon/js/Multilink.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
@@ -25,6 +24,8 @@ import Graph from '../model/Graph.js';
 import PointTool from '../model/PointTool.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
 import PointToolProbeNode from './PointToolProbeNode.js';
+import { clamp } from '../../../../dot/js/util/clamp.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 type SelfOptions = {
   backgroundNormalColor?: TColor;
@@ -153,7 +154,7 @@ class PointToolDragListener extends SoundDragListener {
         return point;
       }
       else {
-        return new Vector2( Utils.clamp( point.x, bounds.minX, bounds.maxX ), Utils.clamp( point.y, bounds.minY, bounds.maxY ) );
+        return new Vector2( clamp( point.x, bounds.minX, bounds.maxX ), clamp( point.y, bounds.minY, bounds.maxY ) );
       }
     };
 
@@ -175,7 +176,7 @@ class PointToolDragListener extends SoundDragListener {
         position = constrainBounds( position, pointTool.dragBounds );
         if ( graph.contains( position ) ) {
           // snap to the graph's grid
-          position = new Vector2( Utils.toFixedNumber( position.x, 0 ), Utils.toFixedNumber( position.y, 0 ) );
+          position = new Vector2( toFixedNumber( position.x, 0 ), toFixedNumber( position.y, 0 ) );
         }
         pointTool.positionProperty.value = position;
       }

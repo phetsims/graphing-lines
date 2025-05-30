@@ -13,7 +13,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import BackgroundNode, { BackgroundNodeOptions } from '../../../../scenery-phet/js/BackgroundNode.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
@@ -23,6 +22,7 @@ import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 // constants
 const VALUE_X_SPACING = 6;
@@ -60,11 +60,11 @@ export default class SlopeToolNode extends Node {
     this.runProperty = new NumberProperty( lineProperty.value.run );
     this.riseProperty = new NumberProperty( lineProperty.value.rise );
 
-    const riseStringProperty = new DerivedStringProperty( [ this.riseProperty ], rise => Utils.toFixed( rise, 0 ) );
+    const riseStringProperty = new DerivedStringProperty( [ this.riseProperty ], rise => toFixed( rise, 0 ) );
     const riseText = new Text( riseStringProperty, TEXT_OPTIONS );
     this.riseValueNode = new BackgroundNode( riseText, BACKGROUND_NODE_OPTIONS );
 
-    const runStringProperty = new DerivedStringProperty( [ this.runProperty ], run => Utils.toFixed( run, 0 ) );
+    const runStringProperty = new DerivedStringProperty( [ this.runProperty ], run => toFixed( run, 0 ) );
     const runText = new Text( runStringProperty, TEXT_OPTIONS );
     this.runValueNode = new BackgroundNode( runText, BACKGROUND_NODE_OPTIONS );
 

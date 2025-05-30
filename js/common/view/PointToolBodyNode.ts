@@ -9,7 +9,6 @@
 import DerivedStringProperty from '../../../../axon/js/DerivedStringProperty.js';
 import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
@@ -25,6 +24,7 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
+import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 // constants
 const DEFAULT_FONT = new PhetFont( { size: 15, weight: 'bold' } );
@@ -118,8 +118,8 @@ export default class PointToolBodyNode extends Node {
         if ( coordinates ) {
 
           // Use toFixedNumber so that trailing zeros are removed.
-          const x = Utils.toFixedNumber( coordinates.x, options.decimals );
-          const y = Utils.toFixedNumber( coordinates.y, options.decimals );
+          const x = toFixedNumber( coordinates.x, options.decimals );
+          const y = toFixedNumber( coordinates.y, options.decimals );
           return StringUtils.format( XYString, x, y );
         }
         else {

@@ -9,7 +9,6 @@
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
-import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
@@ -18,6 +17,8 @@ import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
 import ManipulatorDragListener from './ManipulatorDragListener.js';
+import { roundSymmetric } from '../../../../../dot/js/util/roundSymmetric.js';
+import { clamp } from '../../../../../dot/js/util/clamp.js';
 
 export default class X2Y2Manipulator extends Manipulator {
 
@@ -81,8 +82,8 @@ class X2Y2DragListener extends ManipulatorDragListener {
         const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const x2 = Utils.roundSymmetric( Utils.clamp( position.x, x2RangeProperty.value.min, x2RangeProperty.value.max ) );
-        const y2 = Utils.roundSymmetric( Utils.clamp( position.y, y2RangeProperty.value.min, y2RangeProperty.value.max ) );
+        const x2 = roundSymmetric( clamp( position.x, x2RangeProperty.value.min, x2RangeProperty.value.max ) );
+        const y2 = roundSymmetric( clamp( position.y, y2RangeProperty.value.min, y2RangeProperty.value.max ) );
 
         if ( x2 !== line.x1 || y2 !== line.y1 ) {
           // Don't allow points to be the same, this would result in slope=0/0 (undefined line.)

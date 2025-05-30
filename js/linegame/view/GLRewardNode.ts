@@ -19,7 +19,6 @@
 
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
-import Utils from '../../../../dot/js/Utils.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import FaceNode from '../../../../scenery-phet/js/FaceNode.js';
@@ -38,6 +37,7 @@ import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import NotALine from '../model/NotALine.js';
 import { RewardNodeFunction } from './ResultsNode.js';
+import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 
 // constants
 const NUMBER_OF_NODES = 150;
@@ -123,7 +123,7 @@ function getRandomY(): number {
 }
 
 function getRandomNonZeroInteger( min: number, max: number ): number {
-  let i = Utils.roundSymmetric( min + ( dotRandom.nextDouble() * ( max - min ) ) );
+  let i = roundSymmetric( min + ( dotRandom.nextDouble() * ( max - min ) ) );
   if ( i === 0 ) { i = 1; }
   return i;
 }

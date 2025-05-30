@@ -15,7 +15,7 @@ import NumberProperty, { NumberPropertyOptions } from '../../../../axon/js/Numbe
 import Property from '../../../../axon/js/Property.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import Range from '../../../../dot/js/Range.js';
-import Utils from '../../../../dot/js/Utils.js';
+import { toFixed } from '../../../../dot/js/util/toFixed.js';
 import optionize, { combineOptions } from '../../../../phet-core/js/optionize.js';
 import StringUtils from '../../../../phetcommon/js/util/StringUtils.js';
 import MathSymbols from '../../../../scenery-phet/js/MathSymbols.js';
@@ -168,8 +168,8 @@ export default class SlopeEquationNode extends EquationNode {
         font: staticFont
       }
     };
-    const unsimplifiedRiseNode = new StringDisplay( new DerivedStringProperty( [ riseProperty ], rise => Utils.toFixed( rise, 0 ) ), stringDisplayOptions );
-    const unsimplifiedRunNode = new StringDisplay( new DerivedStringProperty( [ runProperty ], run => Utils.toFixed( run, 0 ) ), stringDisplayOptions );
+    const unsimplifiedRiseNode = new StringDisplay( new DerivedStringProperty( [ riseProperty ], rise => toFixed( rise, 0 ) ), stringDisplayOptions );
+    const unsimplifiedRunNode = new StringDisplay( new DerivedStringProperty( [ runProperty ], run => toFixed( run, 0 ) ), stringDisplayOptions );
     const unsimplifiedFractionLineNode = new SceneryLine( 0, 0, 1, 0, fractionLineOptions ); // correct length will be set later
     const undefinedSlopeIndicator = new UndefinedSlopeIndicator( 1, 1 );
 
@@ -473,7 +473,7 @@ class DynamicLabelNode extends EquationNode {
         if ( Number.isInteger( line.getSlope() ) ) {
           // integer slope (rise/1)
           riseText.visible = true;
-          riseText.string = Utils.toFixed( Math.abs( line.getSlope() ), 0 );
+          riseText.string = toFixed( Math.abs( line.getSlope() ), 0 );
           riseText.fill = lineColor;
           riseText.left = nextXOffset;
           riseText.y = slopeIsText.y;
@@ -482,8 +482,8 @@ class DynamicLabelNode extends EquationNode {
           // fractional slope
           riseText.visible = runText.visible = fractionLineNode.visible = true;
 
-          riseText.string = Utils.toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
-          runText.string = Utils.toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
+          riseText.string = toFixed( Math.abs( line.getSimplifiedRise() ), 0 );
+          runText.string = toFixed( Math.abs( line.getSimplifiedRun() ), 0 );
           fractionLineNode.setLine( 0, 0, Math.max( riseText.width, runText.width ), 0 );
           riseText.fill = runText.fill = fractionLineNode.stroke = lineColor;
 

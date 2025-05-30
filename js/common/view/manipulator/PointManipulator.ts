@@ -10,7 +10,6 @@
 import Property from '../../../../../axon/js/Property.js';
 import TReadOnlyProperty from '../../../../../axon/js/TReadOnlyProperty.js';
 import Range from '../../../../../dot/js/Range.js';
-import Utils from '../../../../../dot/js/Utils.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
@@ -18,6 +17,8 @@ import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Manipulator from './Manipulator.js';
 import ManipulatorDragListener from './ManipulatorDragListener.js';
+import { clamp } from '../../../../../dot/js/util/clamp.js';
+import { roundSymmetric } from '../../../../../dot/js/util/roundSymmetric.js';
 
 export default class PointManipulator extends Manipulator {
 
@@ -81,8 +82,8 @@ class PointDragListener extends ManipulatorDragListener {
         const position = modelViewTransform.viewToModelPosition( parentPoint );
 
         // constrain to range, snap to grid
-        const x = Utils.roundSymmetric( Utils.clamp( position.x, xRange.min, xRange.max ) );
-        const y = Utils.roundSymmetric( Utils.clamp( position.y, yRange.min, yRange.max ) );
+        const x = roundSymmetric( clamp( position.x, xRange.min, xRange.max ) );
+        const y = roundSymmetric( clamp( position.y, yRange.min, yRange.max ) );
         const p = new Vector2( x, y );
 
         // is this point the same as one of the others?

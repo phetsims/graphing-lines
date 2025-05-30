@@ -16,9 +16,9 @@ import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
-import ManipulatorDragListener from './ManipulatorDragListener.js';
 import { roundSymmetric } from '../../../../../dot/js/util/roundSymmetric.js';
 import { clamp } from '../../../../../dot/js/util/clamp.js';
+import SoundDragListener from '../../../../../scenery-phet/js/SoundDragListener.js';
 
 export default class X2Y2Manipulator extends Manipulator {
 
@@ -56,7 +56,7 @@ export default class X2Y2Manipulator extends Manipulator {
 /**
  * Drag listener for (x2,y2) manipulator.
  */
-class X2Y2DragListener extends ManipulatorDragListener {
+class X2Y2DragListener extends SoundDragListener {
 
   public constructor( targetNode: Node,
                       lineProperty: Property<Line>,

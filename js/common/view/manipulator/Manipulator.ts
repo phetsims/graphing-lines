@@ -61,7 +61,7 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
 
     super();
 
-    // add a halo only if alpha it will be visible, useful for creating non-interactive manipulator icons
+    // Add a halo only if it will be visible. This is useful for creating non-interactive manipulator icons.
     if ( options.haloAlpha !== 0 ) {
 
       const haloNode = new Circle( 1.75 * radius, {

@@ -52,7 +52,9 @@ export default class Manipulator extends Node {
       // NodeOptions
       cursor: 'pointer',
       mouseArea: Shape.circle( 0, 0, 1.5 * radius ),
-      touchArea: Shape.circle( 0, 0, 1.5 * radius )
+      touchArea: Shape.circle( 0, 0, 1.5 * radius ),
+      tagName: 'div',
+      focusable: true
 
     }, providedOptions );
 

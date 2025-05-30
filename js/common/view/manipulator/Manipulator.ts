@@ -18,6 +18,7 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
+import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 type SelfOptions = {
 
@@ -27,7 +28,7 @@ type SelfOptions = {
 
 export type ManipulatorOptions = SelfOptions & NodeOptions;
 
-export default class Manipulator extends Node {
+export default class Manipulator extends InteractiveHighlighting( Node ) {
 
   /**
    * @param radius radius of the sphere

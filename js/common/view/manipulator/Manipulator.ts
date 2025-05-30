@@ -64,21 +64,22 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
     // Add a halo only if it will be visible. This is useful for creating non-interactive manipulator icons.
     if ( options.haloAlpha !== 0 ) {
 
+      const haloNodeFill = mainColor.withAlpha( options.haloAlpha );
+
       const haloNode = new Circle( 1.75 * radius, {
-        fill: mainColor.withAlpha( options.haloAlpha ),
         pickable: false,
-        visible: false,
         renderer: 'canvas' // Workaround for Firefox graphics artifacts, see phetsims/graphing-lines/issues/119
       } );
       this.addChild( haloNode );
 
-      // halo visibility
+      // Use transparent fill to make the halo invisible so that interactive highlight does not resize.
+      // See https://github.com/phetsims/graphing-quadratics/issues/211
       const pressListener = new PressListener( {
         attach: false,
         tandem: Tandem.OPT_OUT
       } );
       pressListener.isHighlightedProperty.link( isHighlighted => {
-        haloNode.visible = isHighlighted;
+        haloNode.fill = isHighlighted ? haloNodeFill : 'transparent';
       } );
       this.addInputListener( pressListener );
     }

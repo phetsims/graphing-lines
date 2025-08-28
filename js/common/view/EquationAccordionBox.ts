@@ -8,7 +8,7 @@
 
 import { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Property from '../../../../axon/js/Property.js';
-import TReadOnlyProperty from '../../../../axon/js/TReadOnlyProperty.js';
+import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import HSeparator from '../../../../scenery/js/layout/nodes/HSeparator.js';

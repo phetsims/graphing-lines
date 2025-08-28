@@ -118,8 +118,9 @@ export default class PointToolBodyNode extends Node {
         if ( coordinates ) {
 
           // Use toFixedNumber so that trailing zeros are removed.
-          const x = toFixedNumber( coordinates.x, options.decimals );
-          const y = toFixedNumber( coordinates.y, options.decimals );
+          // Use StringUtils.wrapLTR so that the sign is always on the left for negative numbers.
+          const x = StringUtils.wrapLTR( '' + toFixedNumber( coordinates.x, options.decimals ) );
+          const y = StringUtils.wrapLTR( '' + toFixedNumber( coordinates.y, options.decimals ) );
           return StringUtils.format( XYString, x, y );
         }
         else {

@@ -24,7 +24,6 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
-import { toFixedNumber } from '../../../../dot/js/util/toFixedNumber.js';
 
 // constants
 const DEFAULT_FONT = new PhetFont( { size: 15, weight: 'bold' } );
@@ -117,10 +116,10 @@ export default class PointToolBodyNode extends Node {
       ( coordinates, unknownString, XYString ) => {
         if ( coordinates ) {
 
-          // Use toFixedNumber so that trailing zeros are removed.
-          // Use StringUtils.wrapLTR so that the sign is always on the left for negative numbers.
-          const x = StringUtils.wrapLTR( '' + toFixedNumber( coordinates.x, options.decimals ) );
-          const y = StringUtils.wrapLTR( '' + toFixedNumber( coordinates.y, options.decimals ) );
+          // Use StringUtils.toFixedNumberLTR so that the sign is always on the left for negative numbers,
+          // and trailing zeros are removed.
+          const x = StringUtils.toFixedNumberLTR( coordinates.x, options.decimals );
+          const y = StringUtils.toFixedNumberLTR( coordinates.y, options.decimals );
           return StringUtils.format( XYString, x, y );
         }
         else {

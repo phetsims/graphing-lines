@@ -1,27 +1,24 @@
 // Copyright 2013-2023, University of Colorado Boulder
 
 /**
- * Model of a simple 2D graph.  Used in the icon as well as the sim screens.
+ * Graph is the base class for models of a simple 2D graph.
+ * Used in graphing-lines and graphing-quadratics.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import graphingLines from '../../graphingLines.js';
-import Line from './Line.js';
 
 export default class Graph {
 
   public readonly xRange: Range;
   public readonly yRange: Range;
-  public readonly lines: ObservableArray<Line>; // lines that the graph is currently displaying
 
-  public constructor( xRange: Range, yRange: Range ) {
+  protected constructor( xRange: Range, yRange: Range ) {
     this.xRange = xRange;
     this.yRange = yRange;
-    this.lines = createObservableArray();
   }
 
   public getWidth(): number { return this.xRange.getLength(); }

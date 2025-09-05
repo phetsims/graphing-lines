@@ -23,12 +23,12 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import GLSymbols from '../GLSymbols.js';
-import Graph from '../model/Graph.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
 import GraphNode from './GraphNode.js';
 import Manipulator from './manipulator/Manipulator.js';
 import SlopeToolNode from './SlopeToolNode.js';
+import GLGraph from '../model/GLGraph.js';
 
 // constants
 const scenery = {
@@ -139,7 +139,7 @@ const GLIconFactory = {
   // Creates an icon that shows a line on a graph.
   createGraphIcon( width: number, color: TColor, x1: number, y1: number, x2: number, y2: number ): Node {
     const axisRange = new Range( -3, 3 );
-    const graph = new Graph( axisRange, axisRange );
+    const graph = new GLGraph( axisRange, axisRange );
     const modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( new Vector2( 0, 0 ), 15, -15 );
     const graphNode = new GraphNode( graph, modelViewTransform, GLSymbols.xStringProperty, GLSymbols.yStringProperty );
     const p1 = modelViewTransform.modelToViewXY( x1, y1 );

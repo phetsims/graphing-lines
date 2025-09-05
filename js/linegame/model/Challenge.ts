@@ -15,7 +15,6 @@ import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
-import Graph from '../../common/model/Graph.js';
 import Line from '../../common/model/Line.js';
 import PointTool from '../../common/model/PointTool.js';
 import graphingLines from '../../graphingLines.js';
@@ -26,6 +25,7 @@ import EquationForm from './EquationForm.js';
 import LineGameModel from './LineGameModel.js';
 import ManipulationMode from './ManipulationMode.js';
 import NotALine from './NotALine.js';
+import GLGraph from '../../common/model/GLGraph.js';
 
 export default abstract class Challenge {
 
@@ -54,7 +54,7 @@ export default abstract class Challenge {
   // model-view transform, created in the model because each challenge subclass may have its own transform
   public readonly modelViewTransform: ModelViewTransform2;
 
-  public readonly graph: Graph;
+  public readonly graph: GLGraph;
   public readonly pointTool1: PointTool;
   public readonly pointTool2: PointTool;
 
@@ -75,7 +75,7 @@ export default abstract class Challenge {
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping(
       LineGameConstants.ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // graph on right, y inverted
 
-    this.graph = new Graph( xRange, yRange );
+    this.graph = new GLGraph( xRange, yRange );
 
     this.pointTool1 = new PointTool( new Vector2( 1.5, -10.5 ), 'up', this.graph.lines, new Bounds2( -15, -11, 11, 13 ) );
     this.pointTool2 = new PointTool( new Vector2( 7, -13 ), 'down', this.graph.lines, new Bounds2( -15, -14, 11, 11 ) );

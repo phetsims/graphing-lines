@@ -29,8 +29,12 @@ export default class GraphTheLine extends Challenge {
    * @param xRange - range of the graph's x-axis
    * @param yRange - range of the graph's y-axis
    */
-  public constructor( description: string, answer: Line, equationForm: EquationForm,
-                      manipulationMode: ManipulationMode, xRange: Range, yRange: Range ) {
+  public constructor( description: string,
+                      answer: Line,
+                      equationForm: EquationForm,
+                      manipulationMode: ManipulationMode,
+                      xRange: Range,
+                      yRange: Range ) {
     super(
       Challenge.getTitleStringProperty( GraphingLinesStrings.graphTheLineStringProperty, manipulationMode ),
       description,

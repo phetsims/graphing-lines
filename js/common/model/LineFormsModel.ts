@@ -16,9 +16,9 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import Tandem from '../../../../tandem/js/Tandem.js';
 import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
-import Graph from './Graph.js';
 import Line from './Line.js';
 import PointTool from './PointTool.js';
+import GLGraph from './GLGraph.js';
 
 // constants
 const GRID_VIEW_UNITS = 530; // max dimension (width or height) of the grid in view coordinates
@@ -32,7 +32,7 @@ export default class LineFormsModel implements TModel {
   // radius of the manipulators
   public readonly manipulatorRadius: number;
 
-  public readonly graph: Graph;
+  public readonly graph: GLGraph;
 
   // model-view transform, created in the model because it's dependent on graph axes ranges
   public readonly modelViewTransform: ModelViewTransform2;
@@ -51,7 +51,7 @@ export default class LineFormsModel implements TModel {
 
     this.manipulatorRadius = GLConstants.MANIPULATOR_RADIUS;
 
-    this.graph = new Graph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
+    this.graph = new GLGraph( GLConstants.X_AXIS_RANGE, GLConstants.Y_AXIS_RANGE );
 
     const modelViewTransformScale = GRID_VIEW_UNITS / Math.max( this.graph.xRange.getLength(), this.graph.yRange.getLength() ); // view units / model units
     this.modelViewTransform = ModelViewTransform2.createOffsetXYScaleMapping( ORIGIN_OFFSET, modelViewTransformScale, -modelViewTransformScale ); // y is inverted

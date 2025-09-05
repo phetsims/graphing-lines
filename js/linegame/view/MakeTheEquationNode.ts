@@ -14,7 +14,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import GLConstants from '../../common/GLConstants.js';
-import Graph from '../../common/model/Graph.js';
 import Line from '../../common/model/Line.js';
 import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
@@ -30,6 +29,7 @@ import PlayState from '../model/PlayState.js';
 import ChallengeGraphNode from './ChallengeGraphNode.js';
 import ChallengeNode from './ChallengeNode.js';
 import EquationBoxNode from './EquationBoxNode.js';
+import GLGraph from '../../common/model/GLGraph.js';
 
 export default class MakeTheEquationNode extends ChallengeNode {
 
@@ -169,7 +169,8 @@ export default class MakeTheEquationNode extends ChallengeNode {
  */
 function createInteractiveEquationNode( equationForm: EquationForm,
                                         manipulationMode: ManipulationMode,
-                                        lineProperty: Property<Line>, graph: Graph, fontSize: number,
+                                        lineProperty: Property<Line>, graph: GLGraph,
+                                        fontSize: number,
                                         staticColor: TColor ): Node {
   let interactivePoint;
   let interactiveSlope;

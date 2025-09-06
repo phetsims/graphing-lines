@@ -1,4 +1,4 @@
-// Copyright 2013-2023, University of Colorado Boulder
+// Copyright 2013-2025, University of Colorado Boulder
 
 /**
  * Graph is the base class for models of a simple 2D graph.

@@ -8,9 +8,11 @@
  */
 
 import Shape from '../../../../../kite/js/Shape.js';
-import optionize, { combineOptions } from '../../../../../phet-core/js/optionize.js';
+import { combineOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
+import AccessibleDraggableOptions from '../../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../../scenery-phet/js/ShadedSphereNode.js';
+import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../../scenery/js/nodes/Circle.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
@@ -18,7 +20,6 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
-import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 type SelfOptions = {
 
@@ -39,7 +40,7 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
 
     const mainColor = Color.toColor( color );
 
-    const options = optionize<ManipulatorOptions, SelfOptions, NodeOptions>()( {
+    const options = optionize4<ManipulatorOptions, SelfOptions, NodeOptions>()( {}, AccessibleDraggableOptions, {
 
       haloAlpha: 0.5,
 
@@ -53,10 +54,7 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
       // NodeOptions
       cursor: 'pointer',
       mouseArea: Shape.circle( 0, 0, 1.5 * radius ),
-      touchArea: Shape.circle( 0, 0, 1.5 * radius ),
-      tagName: 'div',
-      focusable: true
-
+      touchArea: Shape.circle( 0, 0, 1.5 * radius )
     }, providedOptions );
 
     super();

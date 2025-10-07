@@ -19,7 +19,6 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
-import HighlightPath from '../../../../../scenery/js/accessibility/HighlightPath.js';
 import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 type SelfOptions = {
@@ -62,13 +61,11 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
 
     const haloRadius = 1.75 * radius;
 
-    // Highlight the sphere only, with a circular highlight that matches the radius of the halo.
+    // Set focus highlight (and interactive highlight) to a circle that matches the radius of the halo.
     // Subclasses in graphing-quadratics add value labels, and with a default (rectangular) highlight,
     // the variable width of those labels causes the interactive highlight to resize constantly.
     // See https://github.com/phetsims/graphing-quadratics/issues/248.
-    const highlightShape = Shape.circle( 0, 0, haloRadius );
-    this.focusHighlight = highlightShape;
-    this.interactiveHighlight = new HighlightPath( highlightShape );
+    this.focusHighlight = Shape.circle( 0, 0, haloRadius );
 
     // Add a halo only if it will be visible. This is useful for creating non-interactive manipulator icons.
     if ( options.haloAlpha !== 0 ) {

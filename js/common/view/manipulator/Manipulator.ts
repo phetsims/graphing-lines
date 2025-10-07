@@ -12,7 +12,6 @@ import { combineOptions, optionize4 } from '../../../../../phet-core/js/optioniz
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
 import AccessibleDraggableOptions from '../../../../../scenery-phet/js/accessibility/grab-drag/AccessibleDraggableOptions.js';
 import ShadedSphereNode, { ShadedSphereNodeOptions } from '../../../../../scenery-phet/js/ShadedSphereNode.js';
-import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 import PressListener from '../../../../../scenery/js/listeners/PressListener.js';
 import Circle from '../../../../../scenery/js/nodes/Circle.js';
 import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
@@ -20,6 +19,8 @@ import Color from '../../../../../scenery/js/util/Color.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
 import graphingLines from '../../../graphingLines.js';
+import HighlightPath from '../../../../../scenery/js/accessibility/HighlightPath.js';
+import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 type SelfOptions = {
 
@@ -59,12 +60,20 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
 
     super();
 
+    const haloRadius = 1.75 * radius;
+
+    // Highlight the sphere only, with a circular highlight that matches the radius of the halo.
+    // Subclasses in graphing-quadratics add value labels, and with a default (rectangular) highlight,
+    // the variable width of those labels causes the interactive highlight to resize constantly.
+    // See https://github.com/phetsims/graphing-quadratics/issues/248.
+    this.interactiveHighlight = new HighlightPath( Shape.circle( 0, 0, haloRadius ) );
+
     // Add a halo only if it will be visible. This is useful for creating non-interactive manipulator icons.
     if ( options.haloAlpha !== 0 ) {
 
       const haloNodeFill = mainColor.withAlpha( options.haloAlpha );
 
-      const haloNode = new Circle( 1.75 * radius, {
+      const haloNode = new Circle( haloRadius, {
         pickable: false,
         renderer: 'canvas' // Workaround for Firefox graphics artifacts, see phetsims/graphing-lines/issues/119
       } );

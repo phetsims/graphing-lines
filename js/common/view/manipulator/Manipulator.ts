@@ -66,7 +66,9 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
     // Subclasses in graphing-quadratics add value labels, and with a default (rectangular) highlight,
     // the variable width of those labels causes the interactive highlight to resize constantly.
     // See https://github.com/phetsims/graphing-quadratics/issues/248.
-    this.interactiveHighlight = new HighlightPath( Shape.circle( 0, 0, haloRadius ) );
+    const highlightShape = Shape.circle( 0, 0, haloRadius );
+    this.focusHighlight = highlightShape;
+    this.interactiveHighlight = new HighlightPath( highlightShape );
 
     // Add a halo only if it will be visible. This is useful for creating non-interactive manipulator icons.
     if ( options.haloAlpha !== 0 ) {

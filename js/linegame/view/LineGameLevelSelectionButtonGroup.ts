@@ -51,15 +51,15 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       levelSelectionButtonItems.push( {
         icon: createLevelSelectionButtonIcon( level, levelImageProperties[ level ], iconAlignGroup ),
         scoreProperty: model.bestScoreProperties[ level ],
+        buttonListener: () => {
+          model.levelProperty.value = level;
+          model.setGamePhase( GamePhase.PLAY );
+        },
         options: {
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
             numberOfStars: model.challengesPerGameProperty.value,
             perfectScore: model.getPerfectScore()
           } ),
-          listener: () => {
-            model.levelProperty.value = level;
-            model.setGamePhase( GamePhase.PLAY );
-          },
           soundPlayerIndex: level
         }
       } );

@@ -56,6 +56,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
           model.setGamePhase( GamePhase.PLAY );
         },
         options: {
+          bestTimeForScoreProperty: model.bestTimeProperties[ level ],
           createScoreDisplay: scoreProperty => new ScoreDisplayStars( scoreProperty, {
             numberOfStars: model.challengesPerGameProperty.value,
             perfectScore: model.getPerfectScore()

@@ -16,8 +16,10 @@ import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import dotRandom from '../../../../dot/js/dotRandom.js';
+import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GameTimer from '../../../../vegas/js/GameTimer.js';
+import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 import Line from '../../common/model/Line.js';
@@ -116,18 +118,11 @@ export default class BaseGameModel {
         // game over, stop the timer
         this.timer.stop();
       }
-
       if ( playState === PlayState.FIRST_CHECK ) {
-
-        const level = this.levelProperty.value;
-        const score = this.scoreProperty.value;
-
         if ( isLastChallenge ) {
+
           // game has been completed
           this.setGamePhase( GamePhase.RESULTS );
-          if ( score > this.bestScoreProperties[ level ].value ) {
-            this.bestScoreProperties[ level ].value = score;
-          }
         }
         else {
           // next challenge
@@ -166,7 +161,14 @@ export default class BaseGameModel {
       }
       else if ( gamePhase === GamePhase.RESULTS ) {
         this.playStateProperty.value = PlayState.NONE;
-        this.updateBestTime();
+
+        // Update best score and best time to be displayed in results and level selection.
+        affirm( !this.timer.isRunning );
+        const level = this.levelProperty.value;
+        const score = this.scoreProperty.value;
+        const time = this.timer.elapsedTimeProperty.value;
+        this.isNewBestTime = LevelSelectionButton.tryUpdateScoreAndBestTime( score, time,
+          this.bestScoreProperties[ level ], this.bestTimeProperties[ level ] );
       }
       else {
         throw new Error( `unsupported game phase: ${gamePhase}` );
@@ -243,26 +245,6 @@ export default class BaseGameModel {
     this.challengeIndexProperty.value = this.challengeIndexProperty.value - 1;
     this.challengeProperty.value = DUMMY_CHALLENGE; // force an update
     this.playStateProperty.value = PlayState.FIRST_CHECK;
-  }
-
-  // Updates the best time for the current level, at the end of a timed game with a perfect score.
-  private updateBestTime(): void {
-    assert && assert( !this.timer.isRunning );
-    this.isNewBestTime = false;
-    if ( this.timerEnabledProperty.value && this.isPerfectScore() ) {
-      const level = this.levelProperty.value;
-      const time = this.timer.elapsedTimeProperty.value;
-      const bestTime = this.bestTimeProperties[ level ].value;
-      if ( !bestTime ) {
-        // There was no previous best time for this level.
-        this.bestTimeProperties[ level ].value = time;
-      }
-      else if ( time < bestTime ) {
-        // We have a new best time for this level.
-        this.bestTimeProperties[ level ].value = time;
-        this.isNewBestTime = true;
-      }
-    }
   }
 
   // Initializes a new set of challenges for the current level.

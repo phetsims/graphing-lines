@@ -74,7 +74,7 @@ export default class LineGameLevelSelectionButtonGroup extends LevelSelectionBut
       isDisposable: false,
       levelSelectionButtonOptions: {
         baseColor: 'rgb( 180, 205, 255 )',
-        contentVBoxOptions: { spacing: 5 }
+        vBoxOptions: { spacing: 5 }
       },
       groupButtonWidth: BUTTON_WIDTH,
       groupButtonHeight: BUTTON_HEIGHT,

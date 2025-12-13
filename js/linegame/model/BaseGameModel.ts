@@ -19,7 +19,7 @@ import dotRandom from '../../../../dot/js/dotRandom.js';
 import affirm from '../../../../perennial-alias/js/browser-and-node/affirm.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GameTimer from '../../../../vegas/js/GameTimer.js';
-import LevelSelectionButton from '../../../../vegas/js/LevelSelectionButton.js';
+import GameUtils from '../../../../vegas/js/GameUtils.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 import Line from '../../common/model/Line.js';
@@ -167,7 +167,7 @@ export default class BaseGameModel {
         const level = this.levelProperty.value;
         const score = this.scoreProperty.value;
         const time = this.timer.elapsedTimeProperty.value;
-        this.isNewBestTime = LevelSelectionButton.tryUpdateScoreAndBestTime( score, time,
+        this.isNewBestTime = GameUtils.updateScoreAndBestTime( score, time,
           this.bestScoreProperties[ level ], this.bestTimeProperties[ level ] );
       }
       else {

@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "94f20c34ccab8125aed277a4476fec99699eb6f1",
+    "sha": "3e2865fb06bcf1070eb9131d3d488f7ef0553a2c",
     "branch": "1.4"
   },
   "joist": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "78052d45b0a5649594ba9f2c799ce8d3171cca0c",
+    "sha": "20b341325d01fd107cf140ae9193a7c468189d7f",
     "branch": "HEAD"
   },
   "phetmarks": {

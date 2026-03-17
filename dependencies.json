@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "4c994e2608b411a210516eef587d0fe84d016516",
+    "sha": "4ee99173a5c869e217c9f820a0ab618f122dccf9",
     "branch": "1.4"
   },
   "joist": {
@@ -33,7 +33,7 @@
     "branch": "HEAD"
   },
   "perennial-alias": {
-    "sha": "89a59a976596404533605544ed5485aa4b4165e8",
+    "sha": "86e923c75d5c9fcffb2dcfd94bb708ebfca2f9fb",
     "branch": "HEAD"
   },
   "phet-core": {

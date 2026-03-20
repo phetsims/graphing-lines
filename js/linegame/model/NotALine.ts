@@ -1,4 +1,4 @@
-// Copyright 2015-2023, University of Colorado Boulder
+// Copyright 2015-2026, University of Colorado Boulder
 
 /**
  * Used to indicate that a guess in the game is not a line. Occurs when the guess involves more than 2 points.

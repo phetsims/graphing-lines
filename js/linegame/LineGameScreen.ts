@@ -1,4 +1,4 @@
-// Copyright 2013-2024, University of Colorado Boulder
+// Copyright 2013-2026, University of Colorado Boulder
 
 /**
  * The 'Line Game' screen. Conforms to the contract specified in joist/Screen.

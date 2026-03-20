@@ -1,4 +1,4 @@
-// Copyright 2013-2023, University of Colorado Boulder
+// Copyright 2013-2026, University of Colorado Boulder
 
 /**
  * Properties that are specific to subtypes of LineFormsView as well as graphing-quadratics

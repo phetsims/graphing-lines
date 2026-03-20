@@ -1,4 +1,4 @@
-// Copyright 2013-2025, University of Colorado Boulder
+// Copyright 2013-2026, University of Colorado Boulder
 
 /**
  * Creates game challenges for Level 6, as specified in the design document.

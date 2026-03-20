@@ -37,6 +37,6 @@ const GLQueryParameters = QueryStringMachine.getAll( {
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.graphingLines.GLQueryParameters' );
+phet.log && phet.log( `GLQueryParameters: ${JSON.stringify( GLQueryParameters, null, 2 )}` );
 
 export default GLQueryParameters;

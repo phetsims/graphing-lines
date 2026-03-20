@@ -20,7 +20,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel, { PanelOptions } from '../../../../sun/js/Panel.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 import GLSymbols from '../GLSymbols.js';
@@ -171,5 +170,3 @@ export default class GraphControlPanel extends Panel {
     } );
   }
 }
-
-graphingLines.register( 'GraphControlPanel', GraphControlPanel );

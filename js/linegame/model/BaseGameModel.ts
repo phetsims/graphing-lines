@@ -23,7 +23,6 @@ import GameUtils from '../../../../vegas/js/GameUtils.js';
 import GLConstants from '../../common/GLConstants.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
@@ -280,5 +279,3 @@ export default class BaseGameModel {
     console.log( 'end: verify creation of challenges' );
   }
 }
-
-graphingLines.register( 'BaseGameModel', BaseGameModel );

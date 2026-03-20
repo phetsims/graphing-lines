@@ -10,7 +10,6 @@ import Screen from '../../../joist/js/Screen.js';
 import Tandem from '../../../tandem/js/Tandem.js';
 import GLColors from '../common/GLColors.js';
 import GLIconFactory from '../common/view/GLIconFactory.js';
-import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 import SlopeModel from './model/SlopeModel.js';
 import SlopeScreenView from './view/SlopeScreenView.js';
@@ -33,5 +32,3 @@ export default class SlopeScreen extends Screen<SlopeModel, SlopeScreenView> {
     );
   }
 }
-
-graphingLines.register( 'SlopeScreen', SlopeScreen );

@@ -17,7 +17,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GLConstants from '../../common/GLConstants.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameModel from '../model/LineGameModel.js';
 import LineGameLevelSelectionButtonGroup from './LineGameLevelSelectionButtonGroup.js';
@@ -81,5 +80,3 @@ export default class SettingsNode extends Node {
     } );
   }
 }
-
-graphingLines.register( 'SettingsNode', SettingsNode );

@@ -19,7 +19,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import SoundDragListener from '../../../../scenery-phet/js/SoundDragListener.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import graphingLines from '../../graphingLines.js';
 import Graph from '../model/Graph.js';
 import PointTool from '../model/PointTool.js';
 import PointToolBodyNode from './PointToolBodyNode.js';
@@ -183,5 +182,3 @@ class PointToolDragListener extends SoundDragListener {
     } );
   }
 }
-
-graphingLines.register( 'PointToolNode', PointToolNode );

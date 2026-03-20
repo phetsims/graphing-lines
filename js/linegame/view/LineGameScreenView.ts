@@ -8,7 +8,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GLQueryParameters, { NUMBER_OF_GAME_LEVELS } from '../../common/GLQueryParameters.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesImages from '../../GraphingLinesImages.js';
 import LineGameModel from '../model/LineGameModel.js';
 import BaseGameScreenView from './BaseGameScreenView.js';
@@ -42,5 +41,3 @@ export default class LineGameScreenView extends BaseGameScreenView {
     super( model, GLQueryParameters.gameLevels, levelImageProperties, rewardNodeFunctions, tandem );
   }
 }
-
-graphingLines.register( 'LineGameScreenView', LineGameScreenView );

@@ -7,7 +7,6 @@
  */
 
 import MathSymbolFont from '../../../scenery-phet/js/MathSymbolFont.js';
-import graphingLines from '../graphingLines.js';
 import GraphingLinesStrings from '../GraphingLinesStrings.js';
 
 const GLSymbols = {
@@ -16,7 +15,5 @@ const GLSymbols = {
   xStringProperty: MathSymbolFont.createDerivedProperty( GraphingLinesStrings.symbol.xStringProperty ), // x
   yStringProperty: MathSymbolFont.createDerivedProperty( GraphingLinesStrings.symbol.yStringProperty ) // y
 };
-
-graphingLines.register( 'GLSymbols', GLSymbols );
 
 export default GLSymbols;

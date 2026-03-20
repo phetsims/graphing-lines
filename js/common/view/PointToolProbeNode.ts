@@ -14,7 +14,6 @@ import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import { NodeTranslationOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path, { PathOptions } from '../../../../scenery/js/nodes/Path.js';
 import Color from '../../../../scenery/js/util/Color.js';
-import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 
 type SelfOptions = {
@@ -46,5 +45,3 @@ export default class PointToolProbeNode extends Path {
     super( triangleShape, options );
   }
 }
-
-graphingLines.register( 'PointToolProbeNode', PointToolProbeNode );

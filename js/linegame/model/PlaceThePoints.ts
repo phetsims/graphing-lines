@@ -17,7 +17,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import PlaceThePointsNode from '../view/PlaceThePointsNode.js'; // eslint-disable-line phet/no-view-imported-from-model
 import EquationForm from './EquationForm.js';
@@ -80,5 +79,3 @@ export default class PlaceThePoints extends GraphTheLine {
     return new PlaceThePointsNode( this, model, challengeSize, audioPlayer );
   }
 }
-
-graphingLines.register( 'PlaceThePoints', PlaceThePoints );

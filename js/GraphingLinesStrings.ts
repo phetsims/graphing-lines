@@ -54,6 +54,4 @@ type StringsType = {
 
 const GraphingLinesStrings = getStringModule( 'GRAPHING_LINES' ) as StringsType;
 
-graphingLines.register( 'GraphingLinesStrings', GraphingLinesStrings );
-
 export default GraphingLinesStrings;

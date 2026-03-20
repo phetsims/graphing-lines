@@ -10,7 +10,6 @@ import Range from '../../../../dot/js/Range.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
@@ -225,5 +224,3 @@ export default class ChallengeFactory5 extends BaseChallengeFactory {
       EquationForm.POINT_SLOPE, xRange, yRange ) );
   }
 }
-
-graphingLines.register( 'ChallengeFactory5', ChallengeFactory5 );

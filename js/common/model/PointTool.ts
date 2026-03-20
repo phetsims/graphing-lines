@@ -12,7 +12,6 @@ import Property from '../../../../axon/js/Property.js';
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Vector2Property from '../../../../dot/js/Vector2Property.js';
-import graphingLines from '../../graphingLines.js';
 import Line from './Line.js';
 
 // direction that the tip points
@@ -74,5 +73,3 @@ export default class PointTool {
     return line.onLinePoint( this.positionProperty.value );
   }
 }
-
-graphingLines.register( 'PointTool', PointTool );

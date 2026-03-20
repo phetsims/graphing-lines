@@ -13,7 +13,6 @@ import Range from '../../../../../dot/js/Range.js';
 import { EmptySelfOptions, optionize4 } from '../../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../../phet-core/js/types/PickOptional.js';
 import NumberPicker, { NumberPickerOptions } from '../../../../../sun/js/NumberPicker.js';
-import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import GLConstants from '../../GLConstants.js';
 
@@ -53,5 +52,3 @@ export default class SlopePicker extends NumberPicker {
     super( variableComponentProperty, variableRangeProperty, options );
   }
 }
-
-graphingLines.register( 'SlopePicker', SlopePicker );

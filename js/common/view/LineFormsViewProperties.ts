@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import Property from '../../../../axon/js/Property.js';
-import graphingLines from '../../graphingLines.js';
 
 export default class LineFormsViewProperties {
 
@@ -38,5 +37,3 @@ export default class LineFormsViewProperties {
     this.slopeToolVisibleProperty.reset();
   }
 }
-
-graphingLines.register( 'LineFormsViewProperties', LineFormsViewProperties );

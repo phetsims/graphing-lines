@@ -14,7 +14,6 @@ import PhetColorScheme from '../../../../scenery-phet/js/PhetColorScheme.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import LineFormsModel from '../model/LineFormsModel.js';
 import LineFormsViewProperties from './LineFormsViewProperties.js';
@@ -106,5 +105,3 @@ export default class LineFormsScreenView extends ScreenView {
     graphContentsToggleButton.bottom = model.modelViewTransform.modelToViewY( model.graph.yRange.min );
   }
 }
-
-graphingLines.register( 'LineFormsScreenView', LineFormsScreenView );

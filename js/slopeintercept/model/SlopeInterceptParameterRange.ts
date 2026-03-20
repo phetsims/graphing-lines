@@ -8,7 +8,6 @@
  */
 
 import Range from '../../../../dot/js/Range.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from '../../pointslope/model/PointSlopeParameterRange.js';
 
 export default class SlopeInterceptParameterRange extends PointSlopeParameterRange {
@@ -22,5 +21,3 @@ export default class SlopeInterceptParameterRange extends PointSlopeParameterRan
     return new Range( 0, 0 );
   }
 }
-
-graphingLines.register( 'SlopeInterceptParameterRange', SlopeInterceptParameterRange );

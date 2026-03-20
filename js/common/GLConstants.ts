@@ -11,7 +11,6 @@ import Bounds2 from '../../../dot/js/Bounds2.js';
 import Range from '../../../dot/js/Range.js';
 import { FontWeight } from '../../../scenery/js/util/Font.js';
 import { NumberPickerOptions } from '../../../sun/js/NumberPicker.js';
-import graphingLines from '../graphingLines.js';
 
 // see https://github.com/phetsims/graphing-lines/issues/124
 const NUMBER_PICKER_OPTIONS: NumberPickerOptions = {
@@ -39,7 +38,5 @@ const GLConstants = {
   EQUATION_FONT_WEIGHT: EQUATION_FONT_WEIGHT,
   NUMBER_PICKER_OPTIONS: NUMBER_PICKER_OPTIONS
 };
-
-graphingLines.register( 'GLConstants', GLConstants );
 
 export default GLConstants;

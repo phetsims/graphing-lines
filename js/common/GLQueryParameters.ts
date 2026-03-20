@@ -9,7 +9,6 @@
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
 import getGameLevelsSchema from '../../../vegas/js/getGameLevelsSchema.js';
-import graphingLines from '../graphingLines.js';
 
 const NUMBER_OF_GAME_LEVELS = 6;
 export { NUMBER_OF_GAME_LEVELS };
@@ -34,8 +33,6 @@ const GLQueryParameters = QueryStringMachine.getAll( {
   // For internal use only.
   verifyChallenges: { type: 'flag' }
 } );
-
-graphingLines.register( 'GLQueryParameters', GLQueryParameters );
 
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );

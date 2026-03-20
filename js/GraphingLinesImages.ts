@@ -87,6 +87,4 @@ const GraphingLinesImages = {
   } )
 };
 
-graphingLines.register( 'GraphingLinesImages', GraphingLinesImages );
-
 export default GraphingLinesImages;

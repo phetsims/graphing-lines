@@ -10,7 +10,6 @@
 
 import dotRandom from '../../../../dot/js/dotRandom.js';
 import Range from '../../../../dot/js/Range.js';
-import graphingLines from '../../graphingLines.js';
 
 export default class ValuePool<T> {
 
@@ -83,5 +82,3 @@ export default class ValuePool<T> {
     return array;
   }
 }
-
-graphingLines.register( 'ValuePool', ValuePool );

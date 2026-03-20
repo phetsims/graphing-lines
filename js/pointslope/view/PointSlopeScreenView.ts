@@ -10,7 +10,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GraphControlPanel from '../../common/view/GraphControlPanel.js';
 import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
 import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeModel from '../model/PointSlopeModel.js';
 import PointSlopeEquationAccordionBox from './PointSlopeEquationAccordionBox.js';
 import PointSlopeGraphNode from './PointSlopeGraphNode.js';
@@ -32,5 +31,3 @@ export default class PointSlopeScreenView extends LineFormsScreenView {
     super( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox, tandem );
   }
 }
-
-graphingLines.register( 'PointSlopeScreenView', PointSlopeScreenView );

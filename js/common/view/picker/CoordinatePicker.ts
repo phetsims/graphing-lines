@@ -14,7 +14,6 @@ import Range from '../../../../../dot/js/Range.js';
 import { EmptySelfOptions, optionize3 } from '../../../../../phet-core/js/optionize.js';
 import PickRequired from '../../../../../phet-core/js/types/PickRequired.js';
 import NumberPicker, { NumberPickerOptions } from '../../../../../sun/js/NumberPicker.js';
-import graphingLines from '../../../graphingLines.js';
 import GLConstants from '../../GLConstants.js';
 
 type SelfOptions = EmptySelfOptions;
@@ -64,5 +63,3 @@ export default class CoordinatePicker extends NumberPicker {
     super( a1Property, rangeProperty, options );
   }
 }
-
-graphingLines.register( 'CoordinatePicker', CoordinatePicker );

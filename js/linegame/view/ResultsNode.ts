@@ -12,7 +12,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import LevelCompletedNode from '../../../../vegas/js/LevelCompletedNode.js';
 import GLQueryParameters from '../../common/GLQueryParameters.js';
-import graphingLines from '../../graphingLines.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
 import GLRewardNode from './GLRewardNode.js';
@@ -83,5 +82,3 @@ export default class ResultsNode extends Node {
     }
   }
 }
-
-graphingLines.register( 'ResultsNode', ResultsNode );

@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Line from '../../common/model/Line.js';
 import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js';
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from '../../pointslope/model/PointSlopeParameterRange.js';
 import LineGameConstants from '../LineGameConstants.js';
 import GraphTheLine from '../model/GraphTheLine.js';
@@ -88,5 +87,3 @@ export default class GraphPointSlopeNode extends ChallengeGraphNode {
     super.dispose();
   }
 }
-
-graphingLines.register( 'GraphPointSlopeNode', GraphPointSlopeNode );

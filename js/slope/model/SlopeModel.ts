@@ -12,7 +12,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GLColors from '../../common/GLColors.js';
 import Line from '../../common/model/Line.js';
 import LineFormsModel from '../../common/model/LineFormsModel.js';
-import graphingLines from '../../graphingLines.js';
 import SlopeParameterRange from './SlopeParameterRange.js';
 
 export default class SlopeModel extends LineFormsModel {
@@ -43,5 +42,3 @@ export default class SlopeModel extends LineFormsModel {
     } );
   }
 }
-
-graphingLines.register( 'SlopeModel', SlopeModel );

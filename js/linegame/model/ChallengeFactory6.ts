@@ -9,7 +9,6 @@
 import Range from '../../../../dot/js/Range.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import ChallengeFactory5 from './ChallengeFactory5.js';
@@ -102,5 +101,3 @@ export default class ChallengeFactory6 extends BaseChallengeFactory {
     return challenges;
   }
 }
-
-graphingLines.register( 'ChallengeFactory6', ChallengeFactory6 );

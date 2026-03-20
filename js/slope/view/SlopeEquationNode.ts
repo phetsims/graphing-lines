@@ -37,7 +37,6 @@ import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNod
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import CoordinatePicker from '../../common/view/picker/CoordinatePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import NotALine from '../../linegame/model/NotALine.js';
 
@@ -516,5 +515,3 @@ class DynamicLabelNode extends EquationNode {
     super.dispose();
   }
 }
-
-graphingLines.register( 'SlopeEquationNode', SlopeEquationNode );

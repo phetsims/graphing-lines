@@ -17,7 +17,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import AccordionBox, { AccordionBoxOptions } from '../../../../sun/js/AccordionBox.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 import Line from '../model/Line.js';
@@ -103,5 +102,3 @@ export default class EquationAccordionBox extends AccordionBox {
     super( contentNode, options );
   }
 }
-
-graphingLines.register( 'EquationAccordionBox', EquationAccordionBox );

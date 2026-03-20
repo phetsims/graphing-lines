@@ -9,7 +9,6 @@
 import ShadedSphereNode from '../../../../scenery-phet/js/ShadedSphereNode.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import graphingLines from '../../graphingLines.js';
 
 export default class PlottedPointNode extends ShadedSphereNode {
 
@@ -26,5 +25,3 @@ export default class PlottedPointNode extends ShadedSphereNode {
     } );
   }
 }
-
-graphingLines.register( 'PlottedPointNode', PlottedPointNode );

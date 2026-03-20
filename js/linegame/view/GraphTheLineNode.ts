@@ -14,7 +14,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import GraphTheLine from '../model/GraphTheLine.js';
@@ -202,5 +201,3 @@ export default class GraphTheLineNode extends ChallengeNode {
     }
   }
 }
-
-graphingLines.register( 'GraphTheLineNode', GraphTheLineNode );

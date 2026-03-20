@@ -21,7 +21,6 @@ import Line, { LineOptions } from '../../../../scenery/js/nodes/Line.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import graphingLines from '../../graphingLines.js';
 
 type SelfOptions = {
   stroke?: TColor;
@@ -138,5 +137,3 @@ export default class DimensionalArrowNode extends Node {
     this.tipNode.shape = tipShape;
   }
 }
-
-graphingLines.register( 'DimensionalArrowNode', DimensionalArrowNode );

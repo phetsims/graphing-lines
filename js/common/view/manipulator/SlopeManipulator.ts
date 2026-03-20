@@ -12,7 +12,6 @@ import Range from '../../../../../dot/js/Range.js';
 import Vector2 from '../../../../../dot/js/Vector2.js';
 import ModelViewTransform2 from '../../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Node from '../../../../../scenery/js/nodes/Node.js';
-import graphingLines from '../../../graphingLines.js';
 import GLColors from '../../GLColors.js';
 import Line from '../../model/Line.js';
 import Manipulator from './Manipulator.js';
@@ -90,5 +89,3 @@ class SlopeDragListener extends SoundDragListener {
     } );
   }
 }
-
-graphingLines.register( 'SlopeManipulator', SlopeManipulator );

@@ -18,7 +18,6 @@ import GraphNode from '../../common/view/GraphNode.js';
 import LineNode from '../../common/view/LineNode.js';
 import PlottedPointNode from '../../common/view/PlottedPointNode.js';
 import SlopeToolNode from '../../common/view/SlopeToolNode.js';
-import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import Challenge from '../model/Challenge.js';
 import NotALine from '../model/NotALine.js';
@@ -149,5 +148,3 @@ export default class ChallengeGraphNode extends GraphNode {
     }
   }
 }
-
-graphingLines.register( 'ChallengeGraphNode', ChallengeGraphNode );

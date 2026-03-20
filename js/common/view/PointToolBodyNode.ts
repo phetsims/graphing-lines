@@ -21,7 +21,6 @@ import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Color from '../../../../scenery/js/util/Color.js';
 import LinearGradient from '../../../../scenery/js/util/LinearGradient.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import GLColors from '../GLColors.js';
 
@@ -206,5 +205,3 @@ export default class PointToolBodyNode extends Node {
     this.background.fill = fill;
   }
 }
-
-graphingLines.register( 'PointToolBodyNode', PointToolBodyNode );

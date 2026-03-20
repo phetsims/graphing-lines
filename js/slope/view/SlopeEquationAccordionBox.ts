@@ -9,7 +9,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import EquationAccordionBox from '../../common/view/EquationAccordionBox.js';
-import graphingLines from '../../graphingLines.js';
 import SlopeModel from '../model/SlopeModel.js';
 import SlopeEquationNode from './SlopeEquationNode.js';
 
@@ -39,5 +38,3 @@ export default class SlopeEquationAccordionBox extends EquationAccordionBox {
     );
   }
 }
-
-graphingLines.register( 'SlopeEquationAccordionBox', SlopeEquationAccordionBox );

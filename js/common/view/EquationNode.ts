@@ -16,7 +16,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import PickOptional from '../../../../phet-core/js/types/PickOptional.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
-import graphingLines from '../../graphingLines.js';
 import SlopePicker from './picker/SlopePicker.js';
 
 type SelfOptions = {
@@ -134,5 +133,3 @@ export default class EquationNode extends Node {
     return Math.max( maxRiseWidth, maxRunWidth );
   }
 }
-
-graphingLines.register( 'EquationNode', EquationNode );

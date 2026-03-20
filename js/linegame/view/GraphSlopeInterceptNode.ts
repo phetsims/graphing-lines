@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Line from '../../common/model/Line.js';
 import SlopeManipulator from '../../common/view/manipulator/SlopeManipulator.js';
 import YInterceptManipulator from '../../common/view/manipulator/YInterceptManipulator.js';
-import graphingLines from '../../graphingLines.js';
 import SlopeInterceptParameterRange from '../../slopeintercept/model/SlopeInterceptParameterRange.js';
 import LineGameConstants from '../LineGameConstants.js';
 import GraphTheLine from '../model/GraphTheLine.js';
@@ -85,5 +84,3 @@ export default class GraphSlopeInterceptNode extends ChallengeGraphNode {
     super.dispose();
   }
 }
-
-graphingLines.register( 'GraphSlopeInterceptNode', GraphSlopeInterceptNode );

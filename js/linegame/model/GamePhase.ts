@@ -8,7 +8,6 @@
 
 import Enumeration from '../../../../phet-core/js/Enumeration.js';
 import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
-import graphingLines from '../../graphingLines.js';
 
 export default class GamePhase extends EnumerationValue {
 
@@ -18,5 +17,3 @@ export default class GamePhase extends EnumerationValue {
 
   public static readonly enumeration = new Enumeration( GamePhase );
 }
-
-graphingLines.register( 'GamePhase', GamePhase );

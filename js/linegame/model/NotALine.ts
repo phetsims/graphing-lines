@@ -8,8 +8,4 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import graphingLines from '../../graphingLines.js';
-
 export default class NotALine {}
-
-graphingLines.register( 'NotALine', NotALine );

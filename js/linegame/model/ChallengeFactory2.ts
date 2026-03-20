@@ -10,7 +10,6 @@
 
 import Range from '../../../../dot/js/Range.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
@@ -202,5 +201,3 @@ export default class ChallengeFactory2 extends BaseChallengeFactory {
     ];
   }
 }
-
-graphingLines.register( 'ChallengeFactory2', ChallengeFactory2 );

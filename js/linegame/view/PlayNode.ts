@@ -17,7 +17,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import FiniteStatusBar from '../../../../vegas/js/FiniteStatusBar.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import ScoreDisplayLabeledNumber from '../../../../vegas/js/ScoreDisplayLabeledNumber.js';
-import graphingLines from '../../graphingLines.js';
 import GamePhase from '../model/GamePhase.js';
 import LineGameModel from '../model/LineGameModel.js';
 import ChallengeNode from './ChallengeNode.js';
@@ -89,5 +88,3 @@ export default class PlayNode extends Node {
     } );
   }
 }
-
-graphingLines.register( 'PlayNode', PlayNode );

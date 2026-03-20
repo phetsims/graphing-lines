@@ -9,7 +9,6 @@
 import Vector2 from '../../../dot/js/Vector2.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import GLConstants from '../common/GLConstants.js';
-import graphingLines from '../graphingLines.js';
 
 const LineGameConstants = {
 
@@ -36,7 +35,5 @@ const LineGameConstants = {
   POINT_RADIUS: 0.25, // radius of plotted points, in model units
   POINT_TOOL_SCALE: 0.95
 };
-
-graphingLines.register( 'LineGameConstants', LineGameConstants );
 
 export default LineGameConstants;

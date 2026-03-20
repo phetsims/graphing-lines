@@ -32,7 +32,6 @@ import Line from '../../common/model/Line.js';
 import GLIconFactory from '../../common/view/GLIconFactory.js';
 import PointToolBodyNode from '../../common/view/PointToolBodyNode.js';
 import PointToolProbeNode from '../../common/view/PointToolProbeNode.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import NotALine from '../model/NotALine.js';
@@ -208,5 +207,3 @@ function createPaperAirplaneNode( color: Color | string ): Node {
 function createNodes( creationFunction: ( color: Color | string ) => Node, colors: Array<Color | string> ): Node[] {
   return colors.map( color => creationFunction( color ) );
 }
-
-graphingLines.register( 'GLRewardNode', GLRewardNode );

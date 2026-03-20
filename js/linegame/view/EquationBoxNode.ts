@@ -18,7 +18,6 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
 import checkSolidShape from '../../../../sherpa/js/fontawesome-5/checkSolidShape.js';
 import timesSolidShape from '../../../../sherpa/js/fontawesome-5/timesSolidShape.js';
-import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 
 // constants
@@ -105,5 +104,3 @@ export default class EquationBoxNode extends Node {
     this.incorrectIconNode.visible = visible;
   }
 }
-
-graphingLines.register( 'EquationBoxNode', EquationBoxNode );

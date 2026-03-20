@@ -8,7 +8,6 @@
 
 import createObservableArray, { ObservableArray } from '../../../../axon/js/createObservableArray.js';
 import Range from '../../../../dot/js/Range.js';
-import graphingLines from '../../graphingLines.js';
 import Line from './Line.js';
 import Graph from './Graph.js';
 
@@ -21,5 +20,3 @@ export default class GLGraph extends Graph {
     this.lines = createObservableArray();
   }
 }
-
-graphingLines.register( 'GLGraph', GLGraph );

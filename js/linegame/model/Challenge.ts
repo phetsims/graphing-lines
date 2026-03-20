@@ -17,7 +17,6 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import Line from '../../common/model/Line.js';
 import PointTool from '../../common/model/PointTool.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import LineGameConstants from '../LineGameConstants.js';
 import ChallengeNode from '../view/ChallengeNode.js'; // eslint-disable-line phet/no-view-imported-from-model
@@ -174,5 +173,3 @@ function createInitialGuess( answer: Line, manipulationMode: ManipulationMode, x
     return Line.Y_EQUALS_X_LINE.withColor( LineGameConstants.GUESS_COLOR );
   }
 }
-
-graphingLines.register( 'Challenge', Challenge );

@@ -15,7 +15,6 @@ import TColor from '../../../../scenery/js/util/TColor.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
@@ -206,5 +205,3 @@ function createInteractiveEquationNode( equationForm: EquationForm,
     throw new Error( `unsupported equation form: ${equationForm.name}` );
   }
 }
-
-graphingLines.register( 'MakeTheEquationNode', MakeTheEquationNode );

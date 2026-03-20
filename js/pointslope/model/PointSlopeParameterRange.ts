@@ -13,7 +13,6 @@
 import Range from '../../../../dot/js/Range.js';
 import Graph from '../../common/model/Graph.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 
 export default class PointSlopeParameterRange {
 
@@ -47,5 +46,3 @@ export default class PointSlopeParameterRange {
     return new Range( min, max );
   }
 }
-
-graphingLines.register( 'PointSlopeParameterRange', PointSlopeParameterRange );

@@ -20,7 +20,6 @@ import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disabl
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
@@ -151,7 +150,5 @@ const GLIconFactory = {
     return graphNode;
   }
 };
-
-graphingLines.register( 'GLIconFactory', GLIconFactory );
 
 export default GLIconFactory;

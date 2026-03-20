@@ -9,7 +9,6 @@
 import Property from '../../../../axon/js/Property.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import EquationAccordionBox from '../../common/view/EquationAccordionBox.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeModel from '../model/PointSlopeModel.js';
 import PointSlopeEquationNode from './PointSlopeEquationNode.js';
 
@@ -39,5 +38,3 @@ export default class PointSlopeEquationAccordionBox extends EquationAccordionBox
     );
   }
 }
-
-graphingLines.register( 'PointSlopeEquationAccordionBox', PointSlopeEquationAccordionBox );

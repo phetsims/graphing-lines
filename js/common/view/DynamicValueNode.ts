@@ -11,7 +11,6 @@ import { TReadOnlyProperty } from '../../../../axon/js/TReadOnlyProperty.js';
 import optionize from '../../../../phet-core/js/optionize.js';
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
-import graphingLines from '../../graphingLines.js';
 import { toFixed } from '../../../../dot/js/util/toFixed.js';
 
 type SelfOptions = {
@@ -55,5 +54,3 @@ export default class DynamicValueNode extends Text {
     super.dispose();
   }
 }
-
-graphingLines.register( 'DynamicValueNode', DynamicValueNode );

@@ -14,7 +14,6 @@ import optionize from '../../../../phet-core/js/optionize.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import GLConstants from '../../common/GLConstants.js';
 import Line from '../../common/model/Line.js';
-import graphingLines from '../../graphingLines.js';
 import Challenge from './Challenge.js';
 
 type SelfOptions = {
@@ -114,5 +113,3 @@ export default abstract class BaseChallengeFactory {
     return new Vector2( x1, y1 );
   }
 }
-
-graphingLines.register( 'BaseChallengeFactory', BaseChallengeFactory );

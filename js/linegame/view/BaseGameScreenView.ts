@@ -12,7 +12,6 @@ import Node from '../../../../scenery/js/nodes/Node.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
 import GLConstants from '../../common/GLConstants.js';
-import graphingLines from '../../graphingLines.js';
 import BaseGameModel from '../model/BaseGameModel.js';
 import GamePhase from '../model/GamePhase.js';
 import PlayNode from './PlayNode.js';
@@ -76,5 +75,3 @@ export default class BaseGameScreenView extends ScreenView {
     super.step( dt );
   }
 }
-
-graphingLines.register( 'BaseGameScreenView', BaseGameScreenView );

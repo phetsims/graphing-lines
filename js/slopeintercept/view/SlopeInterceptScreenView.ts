@@ -10,7 +10,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GraphControlPanel from '../../common/view/GraphControlPanel.js';
 import LineFormsScreenView from '../../common/view/LineFormsScreenView.js';
 import LineFormsViewProperties from '../../common/view/LineFormsViewProperties.js';
-import graphingLines from '../../graphingLines.js';
 import SlopeInterceptModel from '../model/SlopeInterceptModel.js';
 import SlopeInterceptEquationAccordionBox from './SlopeInterceptEquationAccordionBox.js';
 import SlopeInterceptGraphNode from './SlopeInterceptGraphNode.js';
@@ -32,5 +31,3 @@ export default class SlopeInterceptScreenView extends LineFormsScreenView {
     super( model, viewProperties, graphNode, graphControlPanel, equationAccordionBox, tandem );
   }
 }
-
-graphingLines.register( 'SlopeInterceptScreenView', SlopeInterceptScreenView );

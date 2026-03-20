@@ -10,7 +10,6 @@
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
 import TColor from '../../../../scenery/js/util/TColor.js';
-import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import { roundSymmetric } from '../../../../dot/js/util/roundSymmetric.js';
 import { gcd } from '../../../../dot/js/util/gcd.js';
@@ -183,5 +182,3 @@ export default class Line {
   // y = -x (a standard line)
   public static readonly Y_EQUALS_NEGATIVE_X_LINE = new Line( 0, 0, 1, -1, GLColors.yEqualsNegativeXLineColorProperty );
 }
-
-graphingLines.register( 'Line', Line );

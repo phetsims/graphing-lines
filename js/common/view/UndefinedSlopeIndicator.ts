@@ -8,7 +8,6 @@
 
 import Line from '../../../../scenery/js/nodes/Line.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import graphingLines from '../../graphingLines.js';
 
 const LINE_OPTIONS = {
   stroke: 'rgba( 255, 0, 0, 0.3 )',
@@ -42,5 +41,3 @@ export default class UndefinedSlopeIndicator extends Node {
     this.line2.setLine( 0, height, width, 0 );
   }
 }
-
-graphingLines.register( 'UndefinedSlopeIndicator', UndefinedSlopeIndicator );

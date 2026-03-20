@@ -8,7 +8,6 @@
  */
 
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import ChallengeFactory2 from './ChallengeFactory2.js';
@@ -141,5 +140,3 @@ export default class ChallengeFactory4 extends ChallengeFactory2 {
     return challenges;
   }
 }
-
-graphingLines.register( 'ChallengeFactory4', ChallengeFactory4 );

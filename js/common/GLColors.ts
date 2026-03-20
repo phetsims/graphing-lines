@@ -71,6 +71,4 @@ const GLColors = {
   }
 };
 
-graphingLines.register( 'GLColors', GLColors );
-
 export default GLColors;

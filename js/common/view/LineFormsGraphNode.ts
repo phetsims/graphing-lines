@@ -17,7 +17,6 @@
 import Multilink from '../../../../axon/js/Multilink.js';
 import Property from '../../../../axon/js/Property.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import graphingLines from '../../graphingLines.js';
 import NotALine from '../../linegame/model/NotALine.js';
 import GLSymbols from '../GLSymbols.js';
 import Line from '../model/Line.js';
@@ -152,5 +151,3 @@ export default class LineFormsGraphNode extends GraphNode {
     assert && assert( removed, `no Node found for line ${line.toString()}` );
   }
 }
-
-graphingLines.register( 'LineFormsGraphNode', LineFormsGraphNode );

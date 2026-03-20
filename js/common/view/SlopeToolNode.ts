@@ -18,7 +18,6 @@ import BackgroundNode, { BackgroundNodeOptions } from '../../../../scenery-phet/
 import PhetFont from '../../../../scenery-phet/js/PhetFont.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Text, { TextOptions } from '../../../../scenery/js/nodes/Text.js';
-import graphingLines from '../../graphingLines.js';
 import GLColors from '../GLColors.js';
 import Line from '../model/Line.js';
 import DimensionalArrowNode from './DimensionalArrowNode.js';
@@ -168,5 +167,3 @@ export default class SlopeToolNode extends Node {
     }
   }
 }
-
-graphingLines.register( 'SlopeToolNode', SlopeToolNode );

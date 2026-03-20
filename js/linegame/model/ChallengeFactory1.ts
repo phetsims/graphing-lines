@@ -10,7 +10,6 @@
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import Fraction from '../../../../phetcommon/js/model/Fraction.js';
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import EquationForm from './EquationForm.js';
@@ -184,5 +183,3 @@ export default class ChallengeFactory1 extends BaseChallengeFactory {
     return [ quadrant1Points, quadrant3Points ];
   }
 }
-
-graphingLines.register( 'ChallengeFactory1', ChallengeFactory1 );

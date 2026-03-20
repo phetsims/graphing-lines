@@ -10,7 +10,6 @@
 
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import GameAudioPlayer from '../../../../vegas/js/GameAudioPlayer.js';
-import graphingLines from '../../graphingLines.js';
 import LineGameModel from '../model/LineGameModel.js';
 import PlaceThePoints from '../model/PlaceThePoints.js';
 import PlayState from '../model/PlayState.js';
@@ -62,5 +61,3 @@ export default class PlaceThePointsNode extends GraphTheLineNode {
     return new GraphThreePointsNode( challenge );
   }
 }
-
-graphingLines.register( 'PlaceThePointsNode', PlaceThePointsNode );

@@ -40,7 +40,6 @@ import EquationNode, { EquationNodeOptions } from '../../common/view/EquationNod
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import SlopePicker from '../../common/view/picker/SlopePicker.js';
 import UndefinedSlopeIndicator from '../../common/view/UndefinedSlopeIndicator.js';
-import graphingLines from '../../graphingLines.js';
 import GraphingLinesStrings from '../../GraphingLinesStrings.js';
 import NotALine from '../../linegame/model/NotALine.js';
 
@@ -535,5 +534,3 @@ export default class SlopeInterceptEquationNode extends EquationNode {
     return new SlopeInterceptEquationNode( lineProperty, options );
   }
 }
-
-graphingLines.register( 'SlopeInterceptEquationNode', SlopeInterceptEquationNode );

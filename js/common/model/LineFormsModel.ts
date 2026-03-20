@@ -14,7 +14,6 @@ import Vector2 from '../../../../dot/js/Vector2.js';
 import TModel from '../../../../joist/js/TModel.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import graphingLines from '../../graphingLines.js';
 import GLConstants from '../GLConstants.js';
 import Line from './Line.js';
 import PointTool from './PointTool.js';
@@ -88,5 +87,3 @@ export default class LineFormsModel implements TModel {
     this.pointTool2.reset();
   }
 }
-
-graphingLines.register( 'LineFormsModel', LineFormsModel );

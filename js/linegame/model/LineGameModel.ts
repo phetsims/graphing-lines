@@ -8,7 +8,6 @@
 
 import Tandem from '../../../../tandem/js/Tandem.js';
 import { NUMBER_OF_GAME_LEVELS } from '../../common/GLQueryParameters.js';
-import graphingLines from '../../graphingLines.js';
 import BaseGameModel from './BaseGameModel.js';
 import ChallengeFactory1 from './ChallengeFactory1.js';
 import ChallengeFactory2 from './ChallengeFactory2.js';
@@ -35,5 +34,3 @@ export default class LineGameModel extends BaseGameModel {
     super( challengeFactories, tandem );
   }
 }
-
-graphingLines.register( 'LineGameModel', LineGameModel );

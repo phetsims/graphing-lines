@@ -7,7 +7,6 @@
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import graphingLines from '../../graphingLines.js';
 import BaseChallengeFactory from './BaseChallengeFactory.js';
 import Challenge from './Challenge.js';
 import ChallengeFactory2 from './ChallengeFactory2.js';
@@ -128,5 +127,3 @@ export default class ChallengeFactory3 extends ChallengeFactory2 {
     return challenges;
   }
 }
-
-graphingLines.register( 'ChallengeFactory3', ChallengeFactory3 );

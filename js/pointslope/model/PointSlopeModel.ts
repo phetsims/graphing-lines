@@ -12,7 +12,6 @@ import Tandem from '../../../../tandem/js/Tandem.js';
 import GLColors from '../../common/GLColors.js';
 import Line from '../../common/model/Line.js';
 import LineFormsModel from '../../common/model/LineFormsModel.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeParameterRange from './PointSlopeParameterRange.js';
 
 export default class PointSlopeModel extends LineFormsModel {
@@ -47,5 +46,3 @@ export default class PointSlopeModel extends LineFormsModel {
     } );
   }
 }
-
-graphingLines.register( 'PointSlopeModel', PointSlopeModel );

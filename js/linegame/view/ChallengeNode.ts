@@ -25,7 +25,6 @@ import VegasStrings from '../../../../vegas/js/VegasStrings.js';
 import Line from '../../common/model/Line.js';
 import { CreateDynamicLabelOptions } from '../../common/view/LineNode.js';
 import PointToolNode from '../../common/view/PointToolNode.js';
-import graphingLines from '../../graphingLines.js';
 import PointSlopeEquationNode from '../../pointslope/view/PointSlopeEquationNode.js';
 import SlopeInterceptEquationNode from '../../slopeintercept/view/SlopeInterceptEquationNode.js';
 import LineGameConstants from '../LineGameConstants.js';
@@ -266,5 +265,3 @@ export default class ChallengeNode extends Node {
     }
   }
 }
-
-graphingLines.register( 'ChallengeNode', ChallengeNode );

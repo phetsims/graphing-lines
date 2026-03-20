@@ -9,7 +9,6 @@
 
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
-import graphingLines from '../../graphingLines.js';
 
 export default class Graph {
 
@@ -46,5 +45,3 @@ export default class Graph {
     }
   }
 }
-
-graphingLines.register( 'Graph', Graph );

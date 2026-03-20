@@ -18,7 +18,6 @@ import Node, { NodeOptions } from '../../../../../scenery/js/nodes/Node.js';
 import Color from '../../../../../scenery/js/util/Color.js';
 import TColor from '../../../../../scenery/js/util/TColor.js';
 import Tandem from '../../../../../tandem/js/Tandem.js';
-import graphingLines from '../../../graphingLines.js';
 import InteractiveHighlighting from '../../../../../scenery/js/accessibility/voicing/InteractiveHighlighting.js';
 
 type SelfOptions = {
@@ -118,5 +117,3 @@ export default class Manipulator extends InteractiveHighlighting( Node ) {
     return new Manipulator( radius, color, options );
   }
 }
-
-graphingLines.register( 'Manipulator', Manipulator );

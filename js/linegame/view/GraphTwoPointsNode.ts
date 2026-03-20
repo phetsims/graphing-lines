@@ -11,7 +11,6 @@ import Property from '../../../../axon/js/Property.js';
 import Line from '../../common/model/Line.js';
 import X1Y1Manipulator from '../../common/view/manipulator/X1Y1Manipulator.js';
 import X2Y2Manipulator from '../../common/view/manipulator/X2Y2Manipulator.js';
-import graphingLines from '../../graphingLines.js';
 import LineGameConstants from '../LineGameConstants.js';
 import GraphTheLine from '../model/GraphTheLine.js';
 import NotALine from '../model/NotALine.js';
@@ -63,5 +62,3 @@ export default class GraphTwoPointsNode extends ChallengeGraphNode {
     super.dispose();
   }
 }
-
-graphingLines.register( 'GraphTwoPointsNode', GraphTwoPointsNode );

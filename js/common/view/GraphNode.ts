@@ -20,7 +20,6 @@ import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import RichText from '../../../../scenery/js/nodes/RichText.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
-import graphingLines from '../../graphingLines.js';
 import Graph from '../model/Graph.js';
 
 //----------------------------------------------------------------------------------------
@@ -320,5 +319,3 @@ class GridNode extends Node {
     this.horizontalGridLinesNode.visible = this.verticalGridLinesNode.visible = visible;
   }
 }
-
-graphingLines.register( 'GraphNode', GraphNode );

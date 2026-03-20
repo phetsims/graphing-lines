@@ -18,7 +18,6 @@ import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import SceneryLine from '../../../../scenery/js/nodes/Line.js'; // eslint-disable-line phet/default-import-match-filename
 import Node, { NodeOptions } from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import graphingLines from '../../graphingLines.js';
 import NotALine from '../../linegame/model/NotALine.js';
 import Graph from '../model/Graph.js';
 import Line from '../model/Line.js';
@@ -322,5 +321,3 @@ export default class LineNode extends Node {
     }
   }
 }
-
-graphingLines.register( 'LineNode', LineNode );

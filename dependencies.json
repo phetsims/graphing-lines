@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "graphing-lines": {
-    "sha": "14753a915a2984fb0ffbec06db85c22f2718f1e2",
+    "sha": "188d033ed72412227945120bbea53048019ebaa1",
     "branch": "1.4"
   },
   "joist": {
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "2cd23ceb0886de7c436548eba9a4b842c95b75f0",
+    "sha": "8f23a81e2a44d6d1fc1641675c1bcd0d6df1c191",
     "branch": "HEAD"
   },
   "scenery-phet": {
